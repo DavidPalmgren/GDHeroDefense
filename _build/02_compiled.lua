@@ -118,100 +118,19 @@ function stringEnsure(x)
 	return tostring(x)
 end
 
-Basics_ANIMATION_PERIOD = nil
-Colors_hexs = nil
-Colors_decs = nil
-Colors_COLOR_WHITE = nil
-Colors_COLOR_BLACK = nil
-Colors_COLOR_GOLD = nil
-GameTimer_currentTime = nil
-Player_localPlayer = nil
-Printing_DEBUG_MSG_DURATION = nil
-String_charset = nil
-String_numberset = nil
-Table_ht = nil
-TypeCasting_typecastdata = nil
-hashtable_compiletime = nil
 wurst_stack_depth = nil
-HashMap = ({})
-Table = ({})
 
-function HashMap:create() 
-	local new_inst = ({})
-	setmetatable(new_inst, ({__index=HashMap, }))
-	return new_inst
-end
-
-function HashMap_HashMap_init(this, __wurst_stackPos) 
+function initGlobals(__wurst_stackPos) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function HashMap_new_HashMap(__wurst_stackPos1) 
-	local this1 = nil
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	this1 = HashMap:create()
-	HashMap_construct_HashMap(this1, "when calling construct_HashMap in HashMap, line 7")
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return this1
-end
-
-function HashMap_construct_HashMap(this2, __wurst_stackPos2) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	Table_construct_Table(this2, "when calling construct_Table in HashMap, line 7")
-	HashMap_HashMap_init(this2, "when calling HashMap_init in HashMap, line 7")
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function Table:create1() 
-	local new_inst = ({})
-	setmetatable(new_inst, ({__index=Table, }))
-	return new_inst
-end
-
-function Table_Table_saveInt(this4, parentKey, value, __wurst_stackPos4) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	hashtable_saveInt(Table_ht, __wurst_objectToIndex(this4), parentKey, value, "when calling saveInt in Table, line 44")
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function Table_Table_saveString(this6, parentKey2, value2, __wurst_stackPos6) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	hashtable_saveString(Table_ht, __wurst_objectToIndex(this6), parentKey2, value2, "when calling saveString in Table, line 62")
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function Table_Table_init(this8, __wurst_stackPos8) 
+function InitGlobals(__wurst_stackPos1) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function Table_new_Table(__wurst_stackPos9) 
-	local this9 = nil
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	this9 = Table:create1()
-	Table_construct_Table(this9, "when calling construct_Table in Table, line 6")
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return this9
-end
-
-function Table_construct_Table(this3, __wurst_stackPos3) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	Table_Table_init(this3, "when calling Table_init in Table, line 6")
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function initGlobals(__wurst_stackPos10) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function InitGlobals(__wurst_stackPos11) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function CreateUnitsForPlayer0(__wurst_stackPos12) 
+function CreateUnitsForPlayer0(__wurst_stackPos2) 
 	local p = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	p = Player(0)
@@ -219,18 +138,18 @@ function CreateUnitsForPlayer0(__wurst_stackPos12)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function CreatePlayerBuildings(__wurst_stackPos13) 
+function CreatePlayerBuildings(__wurst_stackPos3) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function CreatePlayerUnits(__wurst_stackPos14) 
+function CreatePlayerUnits(__wurst_stackPos4) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	CreateUnitsForPlayer0("when calling CreateUnitsForPlayer0 in war3map, line 47")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function CreateAllUnits(__wurst_stackPos15) 
+function CreateAllUnits(__wurst_stackPos5) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	CreatePlayerBuildings("when calling CreatePlayerBuildings in war3map, line 52")
 	CreatePlayerUnits("when calling CreatePlayerUnits in war3map, line 53")
@@ -249,39 +168,8 @@ function main()
 	__wurst_objectIndexMap = ({counter=0, })
 	__wurst_number_wrapper_map = ({counter=0, })
 	__wurst_string_index_map = ({counter=0, byString=({}), byIndex=({}), })
-	Basics_ANIMATION_PERIOD = 0.
-	Colors_hexs = defaultArray(function () 
-			return ""
-		end)
-	Colors_decs = nil
-	Colors_COLOR_WHITE = ({0, 0, 0, 0, })
-	Colors_COLOR_BLACK = ({0, 0, 0, 0, })
-	Colors_COLOR_GOLD = ({0, 0, 0, 0, })
-	GameTimer_currentTime = 0.
-	Player_localPlayer = nil
-	Printing_DEBUG_MSG_DURATION = 0.
-	String_charset = ""
-	String_numberset = ""
-	Table_ht = nil
-	TypeCasting_typecastdata = nil
-	hashtable_compiletime = nil
 	wurst_stack_depth = 0
-	HashMap.HashMap_saveInt = Table_Table_saveInt
-	HashMap.HashMap_saveString = Table_Table_saveString
-	HashMap.Table_Table_saveInt = Table_Table_saveInt
-	HashMap.Table_Table_saveString = Table_Table_saveString
-	HashMap.Table_saveInt = Table_Table_saveInt
-	HashMap.Table_saveString = Table_Table_saveString
-	HashMap.__wurst_supertypes = ({[HashMap] = true, [Table] = true, })
-	HashMap.__typeId__ = 2
-	Table.Table_Table_saveInt = Table_Table_saveInt
-	Table.Table_Table_saveString = Table_Table_saveString
-	Table.Table_saveInt = Table_Table_saveInt
-	Table.Table_saveString = Table_Table_saveString
-	Table.__wurst_supertypes = ({[Table] = true, })
-	Table.__typeId__ = 1
 	initGlobals("when calling initGlobals")
-	initCompiletimeState("when calling initCompiletimeState in blizzard, line 1")
 	SetCameraBounds((-(3328.0) + GetCameraMargin(CAMERA_MARGIN_LEFT)), (-(3584.0) + GetCameraMargin(CAMERA_MARGIN_BOTTOM)), (3328.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT)), (3072.0 - GetCameraMargin(CAMERA_MARGIN_TOP)), (-(3328.0) + GetCameraMargin(CAMERA_MARGIN_LEFT)), (3072.0 - GetCameraMargin(CAMERA_MARGIN_TOP)), (3328.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT)), (-(3584.0) + GetCameraMargin(CAMERA_MARGIN_BOTTOM)))
 	SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
 	NewSoundEnvironment("Default")
@@ -291,174 +179,6 @@ function main()
 	CreateAllUnits("when calling CreateAllUnits in war3map, line 93")
 	InitBlizzard()
 	InitGlobals("when calling InitGlobals in war3map, line 95")
-	do
-	  local __wurst_init_ok = xpcall(init_AbilityIds, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package AbilityIds.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_Real, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package Real.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_Integer, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package Integer.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_Angle, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package Angle.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_Maths, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package Maths.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_String, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package String.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_Vectors, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package Vectors.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_Destructable, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package Destructable.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_Player, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package Player.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_Basics, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package Basics.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_MagicFunctions, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package MagicFunctions.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_Table, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package Table.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_Force, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package Force.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_Playercolor, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package Playercolor.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_Colors, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package Colors.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_Printing, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package Printing.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_GameTimer, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package GameTimer.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_ErrorHandling, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package ErrorHandling.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_HashList, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package HashList.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_Matrices, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package Matrices.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_Quaternion, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package Quaternion.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_Framehandle, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package Framehandle.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_Group, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package Group.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_Lightning, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package Lightning.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_WeatherEffects, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package WeatherEffects.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_TypeCasting, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package TypeCasting.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_EventHelper, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package EventHelper.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_Hello, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package Hello.")
-	  end
-	end
 end
 
 function config() 
@@ -471,348 +191,6 @@ function config()
 	InitCustomPlayerSlots()
 	__wurst_safe_SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 	InitGenericPlayerSlots()
-end
-
-function init_AbilityIds(__wurst_stackPos17) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function init_Angle(__wurst_stackPos20) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function init_Basics(__wurst_stackPos26) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	Basics_ANIMATION_PERIOD = 0.030
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function init_Colors(__wurst_stackPos31) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	Colors_hexs[0] = "0"
-	Colors_hexs[1] = "1"
-	Colors_hexs[2] = "2"
-	Colors_hexs[3] = "3"
-	Colors_hexs[4] = "4"
-	Colors_hexs[5] = "5"
-	Colors_hexs[6] = "6"
-	Colors_hexs[7] = "7"
-	Colors_hexs[8] = "8"
-	Colors_hexs[9] = "9"
-	Colors_hexs[10] = "A"
-	Colors_hexs[11] = "B"
-	Colors_hexs[12] = "C"
-	Colors_hexs[13] = "D"
-	Colors_hexs[14] = "E"
-	Colors_hexs[15] = "F"
-	Colors_decs = Table_new_Table("when calling new_Table in Colors, line 15")
-	Colors_COLOR_WHITE = ({255, 255, 255, 255, })
-	Colors_COLOR_BLACK = ({0, 0, 0, 0, })
-	Colors_COLOR_GOLD = ({255, 204, 0, 255, })
-	colorA_toColorString(Colors_COLOR_WHITE, "when calling toColorString in Colors, line 21")
-	colorA_toColorString(Colors_COLOR_BLACK, "when calling toColorString in Colors, line 22")
-	colorA_toColorString(Colors_COLOR_GOLD, "when calling toColorString in Colors, line 23")
-	initializeTable("when calling initializeTable in Colors, line 282")
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function colorA_toColorString(this10, __wurst_stackPos45) 
-	local stackTrace_tempReturn = nil
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn = stringConcat(stringConcat(stringConcat(stringConcat("|c", toHex(this10[4], "when calling toHex in Colors, line 194")), toHex(this10[1], "when calling toHex in Colors, line 194")), toHex(this10[2], "when calling toHex in Colors, line 194")), toHex(this10[3], "when calling toHex in Colors, line 194"))
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn
-end
-
-function toHex(number, __wurst_stackPos47) 
-	local firstpart = nil
-	local secondpart = nil
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	firstpart = (number // 16)
-	secondpart = (number - (firstpart * 16))
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stringConcat(stringEnsure(Colors_hexs[firstpart]), stringEnsure(Colors_hexs[secondpart]))
-end
-
-function initializeTable(__wurst_stackPos46) 
-	local i = nil
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	i = 0
-	while true do
-		if (i > 15) then
-			break
-		end
-		Table_Table_saveInt(Colors_decs, string_getHash(stringEnsure(Colors_hexs[i]), "when calling getHash in Colors, line 279"), i, "when calling saveInt in Colors, line 279")
-		i = (i + 1)
-	end
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function init_Destructable(__wurst_stackPos24) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function init_ErrorHandling(__wurst_stackPos34) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function init_EventHelper(__wurst_stackPos43) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	HashMap_new_HashMap("when calling new_HashMap in EventHelper, line 6")
-	HashMap_new_HashMap("when calling new_HashMap in EventHelper, line 7")
-	Table_new_Table("when calling new_Table in EventHelper, line 8")
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function init_Force(__wurst_stackPos29) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function init_Framehandle(__wurst_stackPos38) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function init_GameTimer(__wurst_stackPos33) 
-	local receiver = nil
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	receiver = CreateTimer()
-	timer_start(receiver, 100000., nil, "when calling start in GameTimer, line 7")
-	timer_startPeriodic(CreateTimer(), Basics_ANIMATION_PERIOD, function (...) 
-			xpcall(function (...) 
-					bridge_code__startPeriodic_GameTimer(...)
-				end, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua callback error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) BJDebugMsg("while reporting: " .. tostring(err))  end) end, ...)
-		end, "when calling startPeriodic in GameTimer, line 15")
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function code__startPeriodic_GameTimer(__wurst_stackPos51) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	GameTimer_currentTime = (GameTimer_currentTime + Basics_ANIMATION_PERIOD)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function init_Group(__wurst_stackPos39) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	CreateGroup()
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function init_HashList(__wurst_stackPos35) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function hashtable_saveInt(this5, parentKey1, childKey, value1, __wurst_stackPos5) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_SaveInteger(this5, parentKey1, childKey, value1)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function hashtable_saveString(this7, parentKey3, childKey1, value3, __wurst_stackPos7) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_SaveStr(this7, parentKey3, childKey1, value3)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function init_Hello(__wurst_stackPos44) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	print1("Hello World", "when calling print in Hello, line 9")
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function init_Integer(__wurst_stackPos19) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function init_Lightning(__wurst_stackPos40) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function init_MagicFunctions(__wurst_stackPos27) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function init_Maths(__wurst_stackPos21) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function init_Matrices(__wurst_stackPos36) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function init_Player(__wurst_stackPos25) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	Player_localPlayer = GetLocalPlayer()
-	initPlayerArray("when calling initPlayerArray in Player, line 12")
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function initPlayerArray(__wurst_stackPos53) 
-	local i1 = nil
-	local temp = nil
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	i1 = 0
-	temp = (bj_MAX_PLAYER_SLOTS - 1)
-	while true do
-		if (i1 > temp) then
-			break
-		end
-		i1 = (i1 + 1)
-	end
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function init_Playercolor(__wurst_stackPos30) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function init_Printing(__wurst_stackPos32) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	Printing_DEBUG_MSG_DURATION = 45.
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function print1(msg, __wurst_stackPos52) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_safe_DisplayTimedTextToPlayer(Player_localPlayer, 0., 0., Printing_DEBUG_MSG_DURATION, msg)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function init_Quaternion(__wurst_stackPos37) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function init_Real(__wurst_stackPos18) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function init_String(__wurst_stackPos22) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	String_charset = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	String_numberset = "0123456789"
-	string_length(String_numberset, "when calling length in String, line 11")
-	string_length(String_charset, "when calling length in String, line 12")
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function string_length(this14, __wurst_stackPos54) 
-	local stackTrace_tempReturn1 = nil
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn1 = StringLength(this14)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn1
-end
-
-function string_getHash(this11, __wurst_stackPos48) 
-	local stackTrace_tempReturn2 = nil
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn2 = StringHash(this11)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn2
-end
-
-function init_Table(__wurst_stackPos28) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	Table_ht = hashtable_compiletime
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function timer_start(this12, time, timerCallBack, __wurst_stackPos49) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_safe_TimerStart(this12, time, false, timerCallBack)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function timer_startPeriodic(this13, time1, timerCallBack1, __wurst_stackPos50) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_safe_TimerStart(this13, time1, true, timerCallBack1)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function init_TypeCasting(__wurst_stackPos42) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	TypeCasting_typecastdata = Table_new_Table("when calling new_Table in TypeCasting, line 7")
-	__wurst_InitHashtable()
-	initTypecastData("when calling initTypecastData in TypeCasting, line 21")
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function initTypecastData(__wurst_stackPos55) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	Table_Table_saveString(TypeCasting_typecastdata, 0, "", "when calling saveString in TypeCasting, line 12")
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function init_Vectors(__wurst_stackPos23) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	Location(0., 0.)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function init_WeatherEffects(__wurst_stackPos41) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function initCompiletimeState(__wurst_stackPos16) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	bridge_initCompiletimeState_0()
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function initCompiletimeState_0(__wurst_stackPos56) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_InitHashtable()
-	__wurst_InitHashtable()
-	hashtable_compiletime = __wurst_InitHashtable()
-	__wurst_InitHashtable()
-	__wurst_SaveInteger(hashtable_compiletime, 1, -242600650, 0)
-	__wurst_SaveInteger(hashtable_compiletime, 1, 1132341824, 1)
-	__wurst_SaveInteger(hashtable_compiletime, 1, -647782241, 2)
-	__wurst_SaveInteger(hashtable_compiletime, 1, -854572045, 3)
-	__wurst_SaveInteger(hashtable_compiletime, 1, -680649701, 4)
-	__wurst_SaveInteger(hashtable_compiletime, 1, -943650483, 5)
-	__wurst_SaveInteger(hashtable_compiletime, 1, -671760605, 6)
-	__wurst_SaveInteger(hashtable_compiletime, 1, 349230650, 7)
-	__wurst_SaveInteger(hashtable_compiletime, 1, -1894922563, 8)
-	__wurst_SaveInteger(hashtable_compiletime, 1, -1474492777, 9)
-	__wurst_SaveInteger(hashtable_compiletime, 1, -1587459251, 10)
-	__wurst_SaveInteger(hashtable_compiletime, 1, -1676716706, 11)
-	__wurst_SaveInteger(hashtable_compiletime, 1, -1559655710, 12)
-	__wurst_SaveInteger(hashtable_compiletime, 1, -1663695754, 13)
-	__wurst_SaveInteger(hashtable_compiletime, 1, 597637742, 14)
-	__wurst_SaveInteger(hashtable_compiletime, 1, 789744696, 15)
-	__wurst_SaveStr(hashtable_compiletime, 2, 0, "")
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function bridge_code__startPeriodic_GameTimer() 
-	code__startPeriodic_GameTimer("via function reference GameTimer, line 15")
-end
-
-function bridge_initCompiletimeState_0() 
-	initCompiletimeState_0("via ExecuteFunc in function initCompiletimeState")
-end
-
-function __wurst_safe_DisplayTimedTextToPlayer(toPlayer, x2, y2, duration, message) 
-	if (toPlayer == nil) then
-		return nil
-	end
-	DisplayTimedTextToPlayer(toPlayer, x2, y2, duration, message)
 end
 
 function __wurst_safe_GetLocationY(whichLocation) 
@@ -959,11 +337,11 @@ function __wurst_safe_StopSound(soundHandle1, killWhenDone, fadeOut)
 	StopSound(soundHandle1, killWhenDone, fadeOut)
 end
 
-function __wurst_safe_GetItemTypeId(i2) 
-	if (i2 == nil) then
+function __wurst_safe_GetItemTypeId(i) 
+	if (i == nil) then
 		return 0
 	end
-	return GetItemTypeId(i2)
+	return GetItemTypeId(i)
 end
 
 function __wurst_safe_ChooseRandomItemEx(whichType, level) 
@@ -1067,14 +445,14 @@ function __wurst_safe_GetUnitTypeId(whichUnit8)
 	return GetUnitTypeId(whichUnit8)
 end
 
-function __wurst_safe_SetPlayerState(whichPlayer7, whichPlayerState, value7) 
+function __wurst_safe_SetPlayerState(whichPlayer7, whichPlayerState, value1) 
 	if (whichPlayer7 == nil) then
 		return nil
 	end
 	if (whichPlayerState == nil) then
 		return nil
 	end
-	SetPlayerState(whichPlayer7, whichPlayerState, value7)
+	SetPlayerState(whichPlayer7, whichPlayerState, value1)
 end
 
 function __wurst_safe_GetPlayerController(whichPlayer8) 
@@ -1157,7 +535,7 @@ function __wurst_safe_IsUnitAliveBJ(whichUnit12)
 	return IsUnitAliveBJ(whichUnit12)
 end
 
-function __wurst_safe_SetPlayerAlliance(sourcePlayer, otherPlayer, whichAllianceSetting, value8) 
+function __wurst_safe_SetPlayerAlliance(sourcePlayer, otherPlayer, whichAllianceSetting, value2) 
 	if (sourcePlayer == nil) then
 		return nil
 	end
@@ -1167,7 +545,7 @@ function __wurst_safe_SetPlayerAlliance(sourcePlayer, otherPlayer, whichAlliance
 	if (whichAllianceSetting == nil) then
 		return nil
 	end
-	SetPlayerAlliance(sourcePlayer, otherPlayer, whichAllianceSetting, value8)
+	SetPlayerAlliance(sourcePlayer, otherPlayer, whichAllianceSetting, value2)
 end
 
 function __wurst_safe_SetUnitOwner(whichUnit13, whichPlayer10, changeColor) 
@@ -1180,11 +558,11 @@ function __wurst_safe_SetUnitOwner(whichUnit13, whichPlayer10, changeColor)
 	SetUnitOwner(whichUnit13, whichPlayer10, changeColor)
 end
 
-function __wurst_safe_PingMinimapForPlayer(whichPlayer11, x3, y3, duration1) 
+function __wurst_safe_PingMinimapForPlayer(whichPlayer11, x1, y1, duration) 
 	if (whichPlayer11 == nil) then
 		return nil
 	end
-	PingMinimapForPlayer(whichPlayer11, x3, y3, duration1)
+	PingMinimapForPlayer(whichPlayer11, x1, y1, duration)
 end
 
 function __wurst_safe_UnitAddIndicator(whichUnit14, red, green, blue, alpha) 
@@ -1209,22 +587,6 @@ function __wurst_safe_SetPlayerTechMaxAllowed(whichPlayer12, techid, maximum)
 		return nil
 	end
 	SetPlayerTechMaxAllowed(whichPlayer12, techid, maximum)
-end
-
-function __wurst_InitHashtable() 
-	return { __wurst_ht_int = {}, __wurst_ht_bool = {}, __wurst_ht_real = {}, __wurst_ht_str = {}, __wurst_ht_handle = {} }
-end
-
-function __wurst_SaveInteger(h, p, c, i) 
-	local t = h.__wurst_ht_int
-	if t == nil then t = {}; h.__wurst_ht_int = t end
-	if not t[p] then t[p] = {} end t[p][c] = i
-end
-
-function __wurst_SaveStr(h, p, c, i) 
-	local t = h.__wurst_ht_str
-	if t == nil then t = {}; h.__wurst_ht_str = t end
-	if not t[p] then t[p] = {} end t[p][c] = i
 end
 
 function __wurst_safe_GetPlayerSlotState(whichPlayer13) 
@@ -1300,11 +662,11 @@ function __wurst_safe_SetPlayerRacePreference(whichPlayer2, whichRacePreference)
 	SetPlayerRacePreference(whichPlayer2, whichRacePreference)
 end
 
-function __wurst_safe_SetPlayerRaceSelectable(whichPlayer3, value4) 
+function __wurst_safe_SetPlayerRaceSelectable(whichPlayer3, value) 
 	if (whichPlayer3 == nil) then
 		return nil
 	end
-	SetPlayerRaceSelectable(whichPlayer3, value4)
+	SetPlayerRaceSelectable(whichPlayer3, value)
 end
 
 function __wurst_safe_SetPlayerController(whichPlayer4, controlType) 
