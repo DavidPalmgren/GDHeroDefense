@@ -1,0 +1,21 @@
+package WurstExportedObjects_w3u
+import ObjEditingNatives
+import UnitObjEditing
+
+// Modified Table (contains all custom objects)
+
+@compiletime function create_w3u_hchs()
+	new UnitDefinition('hchs', 'ewsp')
+	..setName("Hero Chooser")
+
+
+@compiletime function create_w3u_E000()
+	new HeroDefinition('E000', 'Ewar')
+	..setTeamColor(0)
+	..setNormalAbilities("AInv,Ault")
+	..setAbilitySkinList("AInv,Ault")
+
+
+// Original Table (contains all modified default/melee objects)
+// These are emitted when createObjectDefinition uses the same base/new id.
+
