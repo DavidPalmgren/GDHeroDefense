@@ -1,0 +1,39 @@
+package BasicWaves
+
+/* Hello and welcome to Wurst!
+This is just a demo package. 
+You can modify it to tests things out 
+and then later delete it and create your own, new packages.
+Enjoy WurstScript? Consider starring our repo https://github.com/wurstscript/WurstScript */ 
+
+unit selectedTarget = null
+group footmen = CreateGroup()
+
+function createPlayerUnit(player p, int unitID, int number, group unitGroup)
+    for i=0 to number-1
+        let u = createUnit(p,unitID,vec2(0.,0.), angle(0.))
+        unitGroup.add(u)
+
+function spawnWave()
+    createPlayerUnit(players[1],'hfoo',5, footmen)
+
+function setupWaveSpawn()
+    CreateTrigger()
+        ..registerPlayerChatEvent(players[0], "-spawn", true)
+        ..addAction() ->
+        spawnWave()
+
+function setupAttackPlayer()
+    CreateTrigger()
+        ..registerPlayerUnitEvent(players[0], EVENT_PLAYER_UNIT_SELECTED, null)
+        ..addAction() ->
+        selectedTarget = GetTriggerUnit()
+
+    CreateTrigger()
+        ..registerPlayerChatEvent(players[0], "-attack", true)
+        ..addAction()->
+        footmen.targetOrder("attack", selectedTarget)
+
+init
+    setupWaveSpawn()
+    setupAttackPlayer()
