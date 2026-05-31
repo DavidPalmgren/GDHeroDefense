@@ -1,6 +1,6 @@
 ---
 projectName: Bratwurst
 dependencies:
-- https://github.com/wurstscript/wurstStdlib2
+- https://github.com/wurstscript/WurstStdlib2
 scriptMode: LUA
 wc3Patch: v1.36
