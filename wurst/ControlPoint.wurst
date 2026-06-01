@@ -1,0 +1,30 @@
+package ControlPoint
+public group controlPoints = CreateGroup()
+int controlPointValue = 30
+
+public function incomeTimer()
+    let countdown = CreateTimer()
+    let d = countdown.createTimerDialog()
+    d.setTitle("Next Income:")
+    d.display(true)
+    TimerStart(countdown,10.,true,function income)
+
+public function income()
+    let p = players[0]
+    let points = controlPoints.size()
+    p.addGold(points * controlPointValue)
+
+function setupKillOwnership(unit u)
+    CreateTrigger()
+        ..registerUnitEvent(u, EVENT_UNIT_DEATH)
+        ..addAction() ->
+            let killer = GetKillingUnit()
+            let dead = GetTriggerUnit()
+            if killer != null
+                createUnit(killer.getOwner(),'cp00',vec2(dead.getPos().x,dead.getPos().y), angle(0.))
+                controlPoints.add(dead)
+                SetUnitOwner(dead, killer.getOwner(), true)
+
+init
+    setupKillOwnership(gg_unit_cp00_0008)
+    incomeTimer()

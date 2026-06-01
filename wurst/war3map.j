@@ -19,20 +19,23 @@ globals
     unit                    udg_townHall               = null
     unit                    udg_watchTower             = null
     unit                    udg_heroSelector           = null
+    unit                    udg_controlPoint_001       = null
 
     // Generated
     rect                    gg_rct_Region_000          = null
-    trigger                 gg_trg_Untitled_Trigger_001 = null
-    unit                    gg_unit_htow_0001          = null
     rect                    gg_rct_Region_001          = null
     rect                    gg_rct_Region_002          = null
-    unit                    gg_unit_hwtw_0003          = null
+    trigger                 gg_trg_init                = null
+    unit                    gg_unit_htow_0001          = null
     unit                    gg_unit_hchs_0006          = null
+    unit                    gg_unit_hwtw_0003          = null
+    unit                    gg_unit_cp00_0008          = null
 endglobals
 
 function InitGlobals takes nothing returns nothing
     set udg_townHall = null
     set udg_watchTower = null
+    set udg_controlPoint_001 = null
 endfunction
 
 //***************************************************************************
@@ -83,6 +86,17 @@ function CreateBuildingsForPlayer1 takes nothing returns nothing
 endfunction
 
 //===========================================================================
+function CreateNeutralHostileBuildings takes nothing returns nothing
+    local player p = Player(PLAYER_NEUTRAL_AGGRESSIVE)
+    local unit u
+    local integer unitID
+    local trigger t
+    local real life
+
+    set gg_unit_cp00_0008 = BlzCreateUnitWithSkin( p, 'cp00', 192.0, 704.0, 270.000, 'cp00' )
+endfunction
+
+//===========================================================================
 function CreateNeutralPassiveBuildings takes nothing returns nothing
     local player p = Player(PLAYER_NEUTRAL_PASSIVE)
     local unit u
@@ -118,6 +132,7 @@ endfunction
 
 //===========================================================================
 function CreateAllUnits takes nothing returns nothing
+    call CreateNeutralHostileBuildings(  )
     call CreateNeutralPassiveBuildings(  )
     call CreatePlayerBuildings(  )
     call CreateNeutralPassive(  )
@@ -145,28 +160,29 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
-// Trigger: Untitled Trigger 001
+// Trigger: init
 //===========================================================================
-function Trig_Untitled_Trigger_001_Actions takes nothing returns nothing
+function Trig_init_Actions takes nothing returns nothing
+    set udg_controlPoint_001 = gg_unit_cp00_0008
     set udg_heroSelector = gg_unit_hchs_0006
     set udg_townHall = gg_unit_hwtw_0003
     set udg_townHall = gg_unit_htow_0001
 endfunction
 
 //===========================================================================
-function InitTrig_Untitled_Trigger_001 takes nothing returns nothing
-    set gg_trg_Untitled_Trigger_001 = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_Untitled_Trigger_001, function Trig_Untitled_Trigger_001_Actions )
+function InitTrig_init takes nothing returns nothing
+    set gg_trg_init = CreateTrigger(  )
+    call TriggerAddAction( gg_trg_init, function Trig_init_Actions )
 endfunction
 
 //===========================================================================
 function InitCustomTriggers takes nothing returns nothing
-    call InitTrig_Untitled_Trigger_001(  )
+    call InitTrig_init(  )
 endfunction
 
 //===========================================================================
 function RunInitializationTriggers takes nothing returns nothing
-    call ConditionalTriggerExecute( gg_trg_Untitled_Trigger_001 )
+    call ConditionalTriggerExecute( gg_trg_init )
 endfunction
 
 //***************************************************************************
