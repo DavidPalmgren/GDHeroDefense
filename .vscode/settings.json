@@ -4,7 +4,7 @@
     "wurst.build" : "yaml"
   },
   "search.useIgnoreFiles" : false,
-  "wurst.wurstJar" : "C:\\Users\\elema\\.wurst\\wurst-compiler\\wurstscript.jar",
+  "wurst.wurstJar" : "C:\\Users\\David\\.wurst\\wurst-compiler\\wurstscript.jar",
   "yaml.schemas" : {
     "./.vscode/wbschema.json" : "/wurst.build"
   }
