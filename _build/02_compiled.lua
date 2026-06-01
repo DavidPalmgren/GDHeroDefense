@@ -118,6 +118,10 @@ function stringEnsure(x)
 	return tostring(x)
 end
 
+udg_townHall = nil
+udg_watchTower = nil
+udg_heroSelector = nil
+udg_controlPoint_001 = nil
 gg_rct_Region_000 = nil
 gg_rct_Region_001 = nil
 gg_rct_Region_002 = nil
@@ -140,6 +144,8 @@ ControlPoint_controlPoints = nil
 ControlPoint_controlPointValue = nil
 GameTimer_currentTime = nil
 Player_players = nil
+Player_localPlayer = nil
+Printing_DEBUG_MSG_DURATION = nil
 String_charset = nil
 String_numberset = nil
 Table_ht = nil
@@ -284,6 +290,10 @@ end
 
 function initGlobals(__wurst_stackPos23) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
+	udg_townHall = nil
+	udg_watchTower = nil
+	udg_heroSelector = nil
+	udg_controlPoint_001 = nil
 	gg_rct_Region_000 = nil
 	gg_rct_Region_001 = nil
 	gg_rct_Region_002 = nil
@@ -297,6 +307,9 @@ end
 
 function InitGlobals(__wurst_stackPos24) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
+	udg_townHall = nil
+	udg_watchTower = nil
+	udg_controlPoint_001 = nil
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -386,6 +399,10 @@ end
 
 function Trig_init_Actions(__wurst_stackPos35) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
+	udg_controlPoint_001 = gg_unit_cp00_0008
+	udg_heroSelector = gg_unit_hchs_0006
+	udg_watchTower = gg_unit_hwtw_0003
+	udg_townHall = gg_unit_htow_0001
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -424,6 +441,10 @@ function main()
 	__wurst_objectIndexMap = ({counter=0, })
 	__wurst_number_wrapper_map = ({counter=0, })
 	__wurst_string_index_map = ({counter=0, byString=({}), byIndex=({}), })
+	udg_townHall = nil
+	udg_watchTower = nil
+	udg_heroSelector = nil
+	udg_controlPoint_001 = nil
 	gg_rct_Region_000 = nil
 	gg_rct_Region_001 = nil
 	gg_rct_Region_002 = nil
@@ -450,6 +471,8 @@ function main()
 	Player_players = defaultArray(function () 
 			return nil
 		end)
+	Player_localPlayer = nil
+	Printing_DEBUG_MSG_DURATION = 0.
 	String_charset = ""
 	String_numberset = ""
 	Table_ht = nil
@@ -515,18 +538,6 @@ function main()
 	  end
 	end
 	do
-	  local __wurst_init_ok = xpcall(init_MagicFunctions, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package MagicFunctions.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_Table, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package Table.")
-	  end
-	end
-	do
 	  local __wurst_init_ok = xpcall(init_Maths, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
 	  if not __wurst_init_ok then
 	    BJDebugMsg("Could not initialize package Maths.")
@@ -536,12 +547,6 @@ function main()
 	  local __wurst_init_ok = xpcall(init_String, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
 	  if not __wurst_init_ok then
 	    BJDebugMsg("Could not initialize package String.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_Force, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package Force.")
 	  end
 	end
 	do
@@ -563,21 +568,15 @@ function main()
 	  end
 	end
 	do
-	  local __wurst_init_ok = xpcall(init_Playercolor, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package Playercolor.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_Colors, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package Colors.")
-	  end
-	end
-	do
 	  local __wurst_init_ok = xpcall(init_Printing, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
 	  if not __wurst_init_ok then
 	    BJDebugMsg("Could not initialize package Printing.")
+	  end
+	end
+	do
+	  local __wurst_init_ok = xpcall(init_MagicFunctions, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
+	  if not __wurst_init_ok then
+	    BJDebugMsg("Could not initialize package MagicFunctions.")
 	  end
 	end
 	do
@@ -599,12 +598,6 @@ function main()
 	  end
 	end
 	do
-	  local __wurst_init_ok = xpcall(init_HashList, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package HashList.")
-	  end
-	end
-	do
 	  local __wurst_init_ok = xpcall(init_Matrices, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
 	  if not __wurst_init_ok then
 	    BJDebugMsg("Could not initialize package Matrices.")
@@ -614,6 +607,30 @@ function main()
 	  local __wurst_init_ok = xpcall(init_Quaternion, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
 	  if not __wurst_init_ok then
 	    BJDebugMsg("Could not initialize package Quaternion.")
+	  end
+	end
+	do
+	  local __wurst_init_ok = xpcall(init_Table, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
+	  if not __wurst_init_ok then
+	    BJDebugMsg("Could not initialize package Table.")
+	  end
+	end
+	do
+	  local __wurst_init_ok = xpcall(init_Force, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
+	  if not __wurst_init_ok then
+	    BJDebugMsg("Could not initialize package Force.")
+	  end
+	end
+	do
+	  local __wurst_init_ok = xpcall(init_Playercolor, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
+	  if not __wurst_init_ok then
+	    BJDebugMsg("Could not initialize package Playercolor.")
+	  end
+	end
+	do
+	  local __wurst_init_ok = xpcall(init_Colors, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
+	  if not __wurst_init_ok then
+	    BJDebugMsg("Could not initialize package Colors.")
 	  end
 	end
 	do
@@ -647,15 +664,9 @@ function main()
 	  end
 	end
 	do
-	  local __wurst_init_ok = xpcall(init_TimerUtils, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
+	  local __wurst_init_ok = xpcall(init_HashList, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
 	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package TimerUtils.")
-	  end
-	end
-	do
-	  local __wurst_init_ok = xpcall(init_ClosureTimers, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
-	  if not __wurst_init_ok then
-	    BJDebugMsg("Could not initialize package ClosureTimers.")
+	    BJDebugMsg("Could not initialize package HashList.")
 	  end
 	end
 	do
@@ -713,7 +724,7 @@ function init_Angle(__wurst_stackPos43)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function angle_degrees(this23, __wurst_stackPos73) 
+function angle_degrees(this23, __wurst_stackPos71) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return (this23[1] * Angle_RADTODEG)
@@ -723,19 +734,19 @@ function tupleCopy(t)
 	return ({t[1], t[2], })
 end
 
-function init_BasicWaves(__wurst_stackPos69) 
+function init_BasicWaves(__wurst_stackPos67) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	BasicWaves_selectedTarget = nil
 	BasicWaves_footmen = CreateGroup()
-	BasicWaves_spawn1 = tupleCopy(rect_getCenter(gg_rct_Region_000, "when calling getCenter in BasicWaves, line 12"))
-	startingCameraPosition("when calling startingCameraPosition in BasicWaves, line 56")
-	setupWaveSpawn("when calling setupWaveSpawn in BasicWaves, line 57")
-	setupAttackPlayer("when calling setupAttackPlayer in BasicWaves, line 58")
-	setupBuildingDeathTrigger("when calling setupBuildingDeathTrigger in BasicWaves, line 59")
+	BasicWaves_spawn1 = tupleCopy(rect_getCenter(gg_rct_Region_000, "when calling getCenter in BasicWaves, line 11"))
+	startingCameraPosition("when calling startingCameraPosition in BasicWaves, line 55")
+	setupWaveSpawn("when calling setupWaveSpawn in BasicWaves, line 56")
+	setupAttackPlayer("when calling setupAttackPlayer in BasicWaves, line 57")
+	setupBuildingDeathTrigger("when calling setupBuildingDeathTrigger in BasicWaves, line 58")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function createPlayerUnit(p6, unitID, number, unitGroup, __wurst_stackPos79) 
+function createPlayerUnit(p6, unitID, number, unitGroup, __wurst_stackPos77) 
 	local i = nil
 	local temp = nil
 	local u2 = nil
@@ -746,69 +757,70 @@ function createPlayerUnit(p6, unitID, number, unitGroup, __wurst_stackPos79)
 		if (i > temp) then
 			break
 		end
-		u2 = createUnit(p6, unitID, BasicWaves_spawn1, ({0., }), "when calling createUnit in BasicWaves, line 16")
-		group_add1(unitGroup, "when calling add in BasicWaves, line 17", u2)
+		u2 = createUnit(p6, unitID, BasicWaves_spawn1, ({0., }), "when calling createUnit in BasicWaves, line 15")
+		group_add1(unitGroup, "when calling add in BasicWaves, line 16", u2)
 		i = (i + 1)
 	end
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function spawnWave(__wurst_stackPos82) 
+function spawnWave(__wurst_stackPos80) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	createPlayerUnit(Player_players[1], 1751543663, 5, BasicWaves_footmen, "when calling createPlayerUnit in BasicWaves, line 20")
+	createPlayerUnit(Player_players[1], 1751543663, 1, BasicWaves_footmen, "when calling createPlayerUnit in BasicWaves, line 19")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function setupWaveSpawn(__wurst_stackPos76) 
+function setupWaveSpawn(__wurst_stackPos74) 
 	local receiver = nil
 	local receiver1 = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	receiver = CreateTrigger()
-	trigger_registerPlayerChatEvent(receiver, Player_players[0], "-spawn", true, "when calling registerPlayerChatEvent in BasicWaves, line 24")
+	trigger_registerPlayerChatEvent(receiver, Player_players[0], "-spawn", true, "when calling registerPlayerChatEvent in BasicWaves, line 23")
 	receiver1 = receiver
 	trigger_addAction(receiver1, function (...) 
 			xpcall(function (...) 
 					bridge_code__addAction_BasicWaves(...)
 				end, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua callback error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) BJDebugMsg("while reporting: " .. tostring(err))  end) end, ...)
-		end, "when calling addAction in BasicWaves, line 25")
+		end, "when calling addAction in BasicWaves, line 24")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function code__addAction_BasicWaves(__wurst_stackPos85) 
+function code__addAction_BasicWaves(__wurst_stackPos83) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	spawnWave("when calling spawnWave in BasicWaves, line 26")
+	spawnWave("when calling spawnWave in BasicWaves, line 25")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function setupAttackPlayer(__wurst_stackPos77) 
+function setupAttackPlayer(__wurst_stackPos75) 
 	local receiver2 = nil
 	local receiver3 = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	BasicWaves_selectedTarget = gg_unit_htow_0001
+	BasicWaves_selectedTarget = udg_townHall
 	receiver2 = CreateTrigger()
-	trigger_registerPlayerChatEvent(receiver2, Player_players[0], "-attack", true, "when calling registerPlayerChatEvent in BasicWaves, line 32")
+	trigger_registerPlayerChatEvent(receiver2, Player_players[0], "-attack", true, "when calling registerPlayerChatEvent in BasicWaves, line 30")
 	receiver3 = receiver2
 	trigger_addAction(receiver3, function (...) 
 			xpcall(function (...) 
 					bridge_code__addAction_BasicWaves1(...)
 				end, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua callback error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) BJDebugMsg("while reporting: " .. tostring(err))  end) end, ...)
-		end, "when calling addAction in BasicWaves, line 33")
+		end, "when calling addAction in BasicWaves, line 31")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function code__addAction_BasicWaves1(__wurst_stackPos86) 
+function code__addAction_BasicWaves1(__wurst_stackPos84) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	group_targetOrder(BasicWaves_footmen, "attack", BasicWaves_selectedTarget, "when calling targetOrder in BasicWaves, line 34")
+	group_targetOrder(BasicWaves_footmen, "attack", BasicWaves_selectedTarget, "when calling targetOrder in BasicWaves, line 32")
+	print1(group_size(BasicWaves_footmen, "when calling size in BasicWaves, line 33"), "when calling print in BasicWaves, line 33")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function setupBuildingDeathTrigger(__wurst_stackPos78) 
+function setupBuildingDeathTrigger(__wurst_stackPos76) 
 	local receiver4 = nil
 	local receiver5 = nil
 	local receiver6 = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	receiver4 = CreateTrigger()
-	trigger_registerPlayerUnitEvent(receiver4, Player_players[1], EVENT_PLAYER_UNIT_DEATH, nil, "when calling registerPlayerUnitEvent in BasicWaves, line 38")
+	trigger_registerPlayerUnitEvent(receiver4, Player_players[1], EVENT_PLAYER_UNIT_DEATH, nil, "when calling registerPlayerUnitEvent in BasicWaves, line 37")
 	receiver5 = receiver4
 	trigger_addCondition(receiver5, __wurst_safe_Condition(function (...) 
 			local tempRes = nil
@@ -816,47 +828,47 @@ function setupBuildingDeathTrigger(__wurst_stackPos78)
 					tempRes = bridge_code__Condition_addCondition_addAction_BasicWaves(...)
 				end, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua callback error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) BJDebugMsg("while reporting: " .. tostring(err))  end) end, ...)
 			return tempRes
-		end), "when calling addCondition in BasicWaves, line 39")
+		end), "when calling addCondition in BasicWaves, line 38")
 	receiver6 = receiver5
 	trigger_addAction(receiver6, function (...) 
 			xpcall(function (...) 
 					bridge_code__addAction_BasicWaves2(...)
 				end, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua callback error: " .. tostring(err)) xpcall(function() BJDebugMsg(tostring(err)) end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) BJDebugMsg("while reporting: " .. tostring(err))  end) end, ...)
-		end, "when calling addAction in BasicWaves, line 40")
+		end, "when calling addAction in BasicWaves, line 39")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function code__Condition_addCondition_addAction_BasicWaves(__wurst_stackPos90) 
+function code__Condition_addCondition_addAction_BasicWaves(__wurst_stackPos89) 
 	local stackTrace_tempReturn = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn = (GetTriggerUnit() == gg_unit_hwtw_0003)
+	stackTrace_tempReturn = (GetTriggerUnit() == udg_watchTower)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn
 end
 
-function code__addAction_BasicWaves2(__wurst_stackPos91) 
+function code__addAction_BasicWaves2(__wurst_stackPos90) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	spawnWave("when calling spawnWave in BasicWaves, line 41")
-	group_targetOrder(BasicWaves_footmen, "attack", BasicWaves_selectedTarget, "when calling targetOrder in BasicWaves, line 42")
+	spawnWave("when calling spawnWave in BasicWaves, line 40")
+	group_targetOrder(BasicWaves_footmen, "attack", BasicWaves_selectedTarget, "when calling targetOrder in BasicWaves, line 41")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function startingCameraPosition(__wurst_stackPos75) 
+function startingCameraPosition(__wurst_stackPos73) 
 	local u3 = ({0., 0., })
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	u3 = ({__wurst_safe_GetUnitX(gg_unit_hchs_0006), __wurst_safe_GetUnitY(gg_unit_hchs_0006), })
+	u3 = ({__wurst_safe_GetUnitX(udg_heroSelector), __wurst_safe_GetUnitY(udg_heroSelector), })
 	__wurst_safe_SetCameraPositionForPlayer(Player_players[0], u3[1], u3[2])
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function waveTimer(__wurst_stackPos92) 
+function waveTimer(__wurst_stackPos91) 
 	local countdown = nil
 	local d = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	countdown = CreateTimer()
-	d = timer_createTimerDialog(countdown, "when calling createTimerDialog in BasicWaves, line 50")
-	timerdialog_setTitle(d, "Next Wave:", "when calling setTitle in BasicWaves, line 51")
-	timerdialog_display(d, true, "when calling display in BasicWaves, line 52")
+	d = timer_createTimerDialog(countdown, "when calling createTimerDialog in BasicWaves, line 49")
+	timerdialog_setTitle(d, "Next Wave:", "when calling setTitle in BasicWaves, line 50")
+	timerdialog_display(d, true, "when calling display in BasicWaves, line 51")
 	__wurst_safe_TimerStart(countdown, 10., true, function (...) 
 			xpcall(function (...) 
 					bridge_spawnWave(...)
@@ -865,18 +877,13 @@ function waveTimer(__wurst_stackPos92)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Basics(__wurst_stackPos55) 
+function init_Basics(__wurst_stackPos51) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Basics_ANIMATION_PERIOD = 0.030
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_ClosureTimers(__wurst_stackPos67) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function init_Colors(__wurst_stackPos53) 
+function init_Colors(__wurst_stackPos59) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Colors_hexs[0] = "0"
 	Colors_hexs[1] = "1"
@@ -905,7 +912,7 @@ function init_Colors(__wurst_stackPos53)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function colorA_toColorString(this34, __wurst_stackPos96) 
+function colorA_toColorString(this34, __wurst_stackPos95) 
 	local stackTrace_tempReturn1 = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	stackTrace_tempReturn1 = stringConcat(stringConcat(stringConcat(stringConcat("|c", toHex(this34[4], "when calling toHex in Colors, line 194")), toHex(this34[1], "when calling toHex in Colors, line 194")), toHex(this34[2], "when calling toHex in Colors, line 194")), toHex(this34[3], "when calling toHex in Colors, line 194"))
@@ -913,7 +920,7 @@ function colorA_toColorString(this34, __wurst_stackPos96)
 	return stackTrace_tempReturn1
 end
 
-function toHex(number1, __wurst_stackPos98) 
+function toHex(number1, __wurst_stackPos97) 
 	local firstpart = nil
 	local secondpart = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
@@ -923,7 +930,7 @@ function toHex(number1, __wurst_stackPos98)
 	return stringConcat(stringEnsure(Colors_hexs[firstpart]), stringEnsure(Colors_hexs[secondpart]))
 end
 
-function initializeTable(__wurst_stackPos97) 
+function initializeTable(__wurst_stackPos96) 
 	local i1 = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	i1 = 0
@@ -937,16 +944,16 @@ function initializeTable(__wurst_stackPos97)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_ControlPoint(__wurst_stackPos70) 
+function init_ControlPoint(__wurst_stackPos68) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	ControlPoint_controlPoints = CreateGroup()
 	ControlPoint_controlPointValue = 30
-	setupCaptureOnHalf(gg_unit_cp00_0008, "when calling setupCaptureOnHalf in ControlPoint, line 33")
+	setupCaptureOnHalf(udg_controlPoint_001, "when calling setupCaptureOnHalf in ControlPoint, line 33")
 	incomeTimer("when calling incomeTimer in ControlPoint, line 34")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function incomeTimer(__wurst_stackPos101) 
+function incomeTimer(__wurst_stackPos100) 
 	local countdown1 = nil
 	local d1 = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
@@ -962,7 +969,7 @@ function incomeTimer(__wurst_stackPos101)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function income(__wurst_stackPos102) 
+function income(__wurst_stackPos101) 
 	local iterator = nil
 	local u4 = nil
 	local p8 = nil
@@ -980,7 +987,7 @@ function income(__wurst_stackPos102)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function setupCaptureOnHalf(target, __wurst_stackPos100) 
+function setupCaptureOnHalf(target, __wurst_stackPos99) 
 	local receiver7 = nil
 	local receiver8 = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
@@ -995,7 +1002,7 @@ function setupCaptureOnHalf(target, __wurst_stackPos100)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function code__addAction_ControlPoint(__wurst_stackPos107) 
+function code__addAction_ControlPoint(__wurst_stackPos106) 
 	local u5 = nil
 	local attacker = nil
 	local hp = nil
@@ -1014,17 +1021,17 @@ function code__addAction_ControlPoint(__wurst_stackPos107)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Destructable(__wurst_stackPos50) 
+function init_Destructable(__wurst_stackPos47) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_ErrorHandling(__wurst_stackPos57) 
+function init_ErrorHandling(__wurst_stackPos53) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_EventHelper(__wurst_stackPos68) 
+function init_EventHelper(__wurst_stackPos66) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	HashMap_new_HashMap("when calling new_HashMap in EventHelper, line 6")
 	HashMap_new_HashMap("when calling new_HashMap in EventHelper, line 7")
@@ -1032,17 +1039,17 @@ function init_EventHelper(__wurst_stackPos68)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Force(__wurst_stackPos48) 
+function init_Force(__wurst_stackPos57) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Framehandle(__wurst_stackPos61) 
+function init_Framehandle(__wurst_stackPos60) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_GameTimer(__wurst_stackPos56) 
+function init_GameTimer(__wurst_stackPos52) 
 	local receiver9 = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	receiver9 = CreateTimer()
@@ -1055,13 +1062,13 @@ function init_GameTimer(__wurst_stackPos56)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function code__startPeriodic_GameTimer(__wurst_stackPos111) 
+function code__startPeriodic_GameTimer(__wurst_stackPos110) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	GameTimer_currentTime = (GameTimer_currentTime + Basics_ANIMATION_PERIOD)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Group(__wurst_stackPos62) 
+function init_Group(__wurst_stackPos61) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	CreateGroup()
 	wurst_stack_depth = (wurst_stack_depth - 1)
@@ -1087,7 +1094,7 @@ function group_clear(this11, __wurst_stackPos11)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function group_add1(this25, __wurst_stackPos81, ...) 
+function group_add1(this25, __wurst_stackPos79, ...) 
 	local i4 = nil
 	local u6 = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
@@ -1103,7 +1110,7 @@ function group_add1(this25, __wurst_stackPos81, ...)
 	return i4
 end
 
-function group_remove(this40, __wurst_stackPos108, ...) 
+function group_remove(this40, __wurst_stackPos107, ...) 
 	local i6 = nil
 	local u7 = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
@@ -1133,7 +1140,7 @@ function group_size(this10, __wurst_stackPos10)
 	return stackTrace_tempReturn2
 end
 
-function group_isEmpty(this43, __wurst_stackPos112) 
+function group_isEmpty(this43, __wurst_stackPos111) 
 	local stackTrace_tempReturn3 = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	stackTrace_tempReturn3 = not(group_hasNext(this43, "when calling hasNext in Group, line 70"))
@@ -1141,7 +1148,7 @@ function group_isEmpty(this43, __wurst_stackPos112)
 	return stackTrace_tempReturn3
 end
 
-function group_hasNext(this44, __wurst_stackPos113) 
+function group_hasNext(this44, __wurst_stackPos112) 
 	local stackTrace_tempReturn4 = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	stackTrace_tempReturn4 = not((__wurst_safe_FirstOfGroup(this44) == nil))
@@ -1157,7 +1164,7 @@ function group_get(this2, index, __wurst_stackPos2)
 	return stackTrace_tempReturn5
 end
 
-function group_targetOrder(this28, order, targetWidget, __wurst_stackPos87) 
+function group_targetOrder(this28, order, targetWidget, __wurst_stackPos85) 
 	local stackTrace_tempReturn6 = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	stackTrace_tempReturn6 = __wurst_safe_GroupTargetOrder(this28, order, targetWidget)
@@ -1165,7 +1172,7 @@ function group_targetOrder(this28, order, targetWidget, __wurst_stackPos87)
 	return stackTrace_tempReturn6
 end
 
-function group_iterator(this36, __wurst_stackPos103) 
+function group_iterator(this36, __wurst_stackPos102) 
 	local stackTrace_tempReturn7 = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	stackTrace_tempReturn7 = GroupIterator_new_GroupIterator(this36, "when calling new_GroupIterator in Group, line 141")
@@ -1173,7 +1180,7 @@ function group_iterator(this36, __wurst_stackPos103)
 	return stackTrace_tempReturn7
 end
 
-function init_HashList(__wurst_stackPos58) 
+function init_HashList(__wurst_stackPos65) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
@@ -1195,34 +1202,34 @@ function init_Integer(__wurst_stackPos42)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Lightning(__wurst_stackPos63) 
+function init_Lightning(__wurst_stackPos62) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_MagicFunctions(__wurst_stackPos44) 
+function init_MagicFunctions(__wurst_stackPos50) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Maths(__wurst_stackPos46) 
+function init_Maths(__wurst_stackPos44) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Matrices(__wurst_stackPos59) 
+function init_Matrices(__wurst_stackPos54) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Player(__wurst_stackPos51) 
+function init_Player(__wurst_stackPos48) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	GetLocalPlayer()
+	Player_localPlayer = GetLocalPlayer()
 	initPlayerArray("when calling initPlayerArray in Player, line 12")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function initPlayerArray(__wurst_stackPos114) 
+function initPlayerArray(__wurst_stackPos113) 
 	local i8 = nil
 	local temp1 = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
@@ -1238,37 +1245,37 @@ function initPlayerArray(__wurst_stackPos114)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function player_setGold(this45, val1, __wurst_stackPos115) 
+function player_setGold(this45, val1, __wurst_stackPos114) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	player_setState(this45, PLAYER_STATE_RESOURCE_GOLD, val1, "when calling setState in Player, line 19")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function player_setState(this46, state, val2, __wurst_stackPos116) 
+function player_setState(this46, state, val2, __wurst_stackPos115) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	__wurst_safe_SetPlayerState(this46, state, val2)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function player_addGold(this38, val, __wurst_stackPos105) 
+function player_addGold(this38, val, __wurst_stackPos104) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	player_addState(this38, PLAYER_STATE_RESOURCE_GOLD, val, "when calling addState in Player, line 22")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function player_addState(this47, state1, val3, __wurst_stackPos117) 
+function player_addState(this47, state1, val3, __wurst_stackPos116) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	__wurst_safe_SetPlayerState(this47, state1, (player_getState(this47, state1, "when calling getState in Player, line 31") + val3))
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function player_setLumber(this49, val4, __wurst_stackPos119) 
+function player_setLumber(this49, val4, __wurst_stackPos118) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	player_setState(this49, PLAYER_STATE_RESOURCE_LUMBER, val4, "when calling setState in Player, line 25")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function player_getState(this48, state2, __wurst_stackPos118) 
+function player_getState(this48, state2, __wurst_stackPos117) 
 	local stackTrace_tempReturn8 = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	stackTrace_tempReturn8 = __wurst_safe_GetPlayerState(this48, state2)
@@ -1276,17 +1283,30 @@ function player_getState(this48, state2, __wurst_stackPos118)
 	return stackTrace_tempReturn8
 end
 
-function init_Playercolor(__wurst_stackPos52) 
+function init_Playercolor(__wurst_stackPos58) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Printing(__wurst_stackPos54) 
+function init_Printing(__wurst_stackPos49) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
+	Printing_DEBUG_MSG_DURATION = 45.
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Quaternion(__wurst_stackPos60) 
+function print2(msg1, __wurst_stackPos119) 
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	__wurst_safe_DisplayTimedTextToPlayer(Player_localPlayer, 0., 0., Printing_DEBUG_MSG_DURATION, msg1)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function print1(msg, __wurst_stackPos86) 
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	print2(tostring(msg), "when calling print in Printing, line 62")
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function init_Quaternion(__wurst_stackPos55) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
@@ -1296,7 +1316,7 @@ function init_Real(__wurst_stackPos41)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function rect_getCenter(this24, __wurst_stackPos74) 
+function rect_getCenter(this24, __wurst_stackPos72) 
 	local stackTrace_tempReturn9 = ({0., 0., })
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	stackTrace_tempReturn9 = ({rect_getCenterX(this24, "when calling getCenterX in Rect, line 16"), rect_getCenterY(this24, "when calling getCenterY in Rect, line 16"), })
@@ -1320,7 +1340,7 @@ function rect_getCenterY(this51, __wurst_stackPos121)
 	return stackTrace_tempReturn11
 end
 
-function init_String(__wurst_stackPos47) 
+function init_String(__wurst_stackPos45) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	String_charset = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	String_numberset = "0123456789"
@@ -1337,7 +1357,7 @@ function string_length(this52, __wurst_stackPos122)
 	return stackTrace_tempReturn12
 end
 
-function string_getHash(this35, __wurst_stackPos99) 
+function string_getHash(this35, __wurst_stackPos98) 
 	local stackTrace_tempReturn13 = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	stackTrace_tempReturn13 = StringHash(this35)
@@ -1345,13 +1365,13 @@ function string_getHash(this35, __wurst_stackPos99)
 	return stackTrace_tempReturn13
 end
 
-function init_Table(__wurst_stackPos45) 
+function init_Table(__wurst_stackPos56) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Table_ht = hashtable_compiletime
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function timer_createTimerDialog(this31, __wurst_stackPos93) 
+function timer_createTimerDialog(this31, __wurst_stackPos92) 
 	local stackTrace_tempReturn14 = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	stackTrace_tempReturn14 = __wurst_safe_CreateTimerDialog(this31)
@@ -1359,38 +1379,31 @@ function timer_createTimerDialog(this31, __wurst_stackPos93)
 	return stackTrace_tempReturn14
 end
 
-function timerdialog_setTitle(this32, title, __wurst_stackPos94) 
+function timerdialog_setTitle(this32, title, __wurst_stackPos93) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	__wurst_safe_TimerDialogSetTitle(this32, title)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function timerdialog_display(this33, display, __wurst_stackPos95) 
+function timerdialog_display(this33, display, __wurst_stackPos94) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	__wurst_safe_TimerDialogDisplay(this33, display)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_TimerUtils(__wurst_stackPos66) 
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	Table_new_Table("when calling new_Table in TimerUtils, line 13")
-	HashMap_new_HashMap("when calling new_HashMap in TimerUtils, line 59")
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function timer_start(this41, time, timerCallBack, __wurst_stackPos109) 
+function timer_start(this41, time, timerCallBack, __wurst_stackPos108) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	__wurst_safe_TimerStart(this41, time, false, timerCallBack)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function timer_startPeriodic(this42, time1, timerCallBack1, __wurst_stackPos110) 
+function timer_startPeriodic(this42, time1, timerCallBack1, __wurst_stackPos109) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	__wurst_safe_TimerStart(this42, time1, true, timerCallBack1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function trigger_addAction(this27, actionFunc1, __wurst_stackPos84) 
+function trigger_addAction(this27, actionFunc1, __wurst_stackPos82) 
 	local stackTrace_tempReturn15 = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	stackTrace_tempReturn15 = __wurst_safe_TriggerAddAction(this27, actionFunc1)
@@ -1398,7 +1411,7 @@ function trigger_addAction(this27, actionFunc1, __wurst_stackPos84)
 	return stackTrace_tempReturn15
 end
 
-function trigger_addCondition(this30, condition, __wurst_stackPos89) 
+function trigger_addCondition(this30, condition, __wurst_stackPos88) 
 	local stackTrace_tempReturn16 = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	stackTrace_tempReturn16 = __wurst_safe_TriggerAddCondition(this30, condition)
@@ -1414,7 +1427,7 @@ function trigger_registerEnterRegion(this53, whichRegion, filter1, __wurst_stack
 	return stackTrace_tempReturn17
 end
 
-function trigger_registerPlayerChatEvent(this26, whichPlayer6, chatMessageToDetect, exactMatchOnly, __wurst_stackPos83) 
+function trigger_registerPlayerChatEvent(this26, whichPlayer6, chatMessageToDetect, exactMatchOnly, __wurst_stackPos81) 
 	local stackTrace_tempReturn18 = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	stackTrace_tempReturn18 = __wurst_safe_TriggerRegisterPlayerChatEvent(this26, whichPlayer6, chatMessageToDetect, exactMatchOnly)
@@ -1422,7 +1435,7 @@ function trigger_registerPlayerChatEvent(this26, whichPlayer6, chatMessageToDete
 	return stackTrace_tempReturn18
 end
 
-function trigger_registerPlayerUnitEvent(this29, whichPlayer7, whichPlayerUnitEvent, filter, __wurst_stackPos88) 
+function trigger_registerPlayerUnitEvent(this29, whichPlayer7, whichPlayerUnitEvent, filter, __wurst_stackPos87) 
 	local stackTrace_tempReturn19 = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	stackTrace_tempReturn19 = __wurst_safe_TriggerRegisterPlayerUnitEvent(this29, whichPlayer7, whichPlayerUnitEvent, filter)
@@ -1430,7 +1443,7 @@ function trigger_registerPlayerUnitEvent(this29, whichPlayer7, whichPlayerUnitEv
 	return stackTrace_tempReturn19
 end
 
-function trigger_registerUnitEvent(this39, whichUnit3, whichEvent, __wurst_stackPos106) 
+function trigger_registerUnitEvent(this39, whichUnit3, whichEvent, __wurst_stackPos105) 
 	local stackTrace_tempReturn20 = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	stackTrace_tempReturn20 = __wurst_safe_TriggerRegisterUnitEvent(this39, whichUnit3, whichEvent)
@@ -1438,7 +1451,7 @@ function trigger_registerUnitEvent(this39, whichUnit3, whichEvent, __wurst_stack
 	return stackTrace_tempReturn20
 end
 
-function init_TypeCasting(__wurst_stackPos65) 
+function init_TypeCasting(__wurst_stackPos64) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	TypeCasting_typecastdata = Table_new_Table("when calling new_Table in TypeCasting, line 7")
 	__wurst_InitHashtable()
@@ -1460,7 +1473,7 @@ function unit_getTypeId(this54, __wurst_stackPos125)
 	return stackTrace_tempReturn21
 end
 
-function createUnit(p7, unitId, pos, facing, __wurst_stackPos80) 
+function createUnit(p7, unitId, pos, facing, __wurst_stackPos78) 
 	local stackTrace_tempReturn22 = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	stackTrace_tempReturn22 = __wurst_safe_CreateUnit(p7, unitId, pos[1], pos[2], angle_degrees(facing, "when calling degrees in Unit, line 57"))
@@ -1468,7 +1481,7 @@ function createUnit(p7, unitId, pos, facing, __wurst_stackPos80)
 	return stackTrace_tempReturn22
 end
 
-function unit_getOwner(this37, __wurst_stackPos104) 
+function unit_getOwner(this37, __wurst_stackPos103) 
 	local stackTrace_tempReturn23 = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	stackTrace_tempReturn23 = __wurst_safe_GetOwningPlayer(this37)
@@ -1482,18 +1495,18 @@ function unit_remove(this55, __wurst_stackPos126)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Vectors(__wurst_stackPos49) 
+function init_Vectors(__wurst_stackPos46) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Location(0., 0.)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_WeatherEffects(__wurst_stackPos64) 
+function init_WeatherEffects(__wurst_stackPos63) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_heroSelect(__wurst_stackPos71) 
+function init_heroSelect(__wurst_stackPos69) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	heroSelect_hero1Region = gg_rct_Region_001
 	heroSelect_heroSpawnRegion = gg_rct_Region_002
@@ -1541,22 +1554,22 @@ function code__addAction_heroSelect(__wurst_stackPos129)
 	local u8 = nil
 	local temp_tuple = ({0., 0., })
 	local temp_tuple1 = ({0., 0., })
-	local temp93 = nil
-	local temp94 = nil
+	local temp3 = nil
+	local temp4 = nil
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	u8 = GetTriggerUnit()
 	unit_remove(u8, "when calling remove in heroSelect, line 16")
 	createUnit(Player_players[0], 1160785968, rect_getCenter(heroSelect_heroSpawnRegion, "when calling getCenter in heroSelect, line 17"), ({0., }), "when calling createUnit in heroSelect, line 17")
-	temp93 = Player_players[0]
+	temp3 = Player_players[0]
 	temp_tuple = tupleCopy(rect_getCenter(heroSelect_heroSpawnRegion, "when calling getCenter in heroSelect, line 18"))
-	temp94 = temp_tuple[1]
+	temp4 = temp_tuple[1]
 	temp_tuple1 = tupleCopy(rect_getCenter(heroSelect_heroSpawnRegion, "when calling getCenter in heroSelect, line 18"))
-	__wurst_safe_SetCameraPositionForPlayer(temp93, temp94, temp_tuple1[2])
+	__wurst_safe_SetCameraPositionForPlayer(temp3, temp4, temp_tuple1[2])
 	waveTimer("when calling waveTimer in heroSelect, line 19")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_winLoss(__wurst_stackPos72) 
+function init_winLoss(__wurst_stackPos70) 
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	setupDefeatCondition("when calling setupDefeatCondition in winLoss, line 26")
 	setupVictoryCondition("when calling setupVictoryCondition in winLoss, line 27")
@@ -1622,8 +1635,8 @@ function initCompiletimeState_0(__wurst_stackPos134)
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	__wurst_InitHashtable()
 	__wurst_InitHashtable()
-	__wurst_InitHashtable()
 	hashtable_compiletime = __wurst_InitHashtable()
+	__wurst_InitHashtable()
 	__wurst_SaveInteger(hashtable_compiletime, 1, -242600650, 0)
 	__wurst_SaveInteger(hashtable_compiletime, 1, 1132341824, 1)
 	__wurst_SaveInteger(hashtable_compiletime, 1, -647782241, 2)
@@ -1649,25 +1662,25 @@ function bridge_Trig_init_Actions()
 end
 
 function bridge_code__addAction_BasicWaves() 
-	code__addAction_BasicWaves("via function reference BasicWaves, line 25")
+	code__addAction_BasicWaves("via function reference BasicWaves, line 24")
 end
 
 function bridge_code__addAction_BasicWaves1() 
-	code__addAction_BasicWaves1("via function reference BasicWaves, line 33")
+	code__addAction_BasicWaves1("via function reference BasicWaves, line 31")
 end
 
 function bridge_code__Condition_addCondition_addAction_BasicWaves() 
 	local bridge_return = nil
-	bridge_return = code__Condition_addCondition_addAction_BasicWaves("via function reference BasicWaves, line 39")
+	bridge_return = code__Condition_addCondition_addAction_BasicWaves("via function reference BasicWaves, line 38")
 	return bridge_return
 end
 
 function bridge_code__addAction_BasicWaves2() 
-	code__addAction_BasicWaves2("via function reference BasicWaves, line 40")
+	code__addAction_BasicWaves2("via function reference BasicWaves, line 39")
 end
 
 function bridge_spawnWave() 
-	spawnWave("via function reference BasicWaves, line 53")
+	spawnWave("via function reference BasicWaves, line 52")
 end
 
 function bridge_income() 
@@ -1702,6 +1715,13 @@ end
 
 function bridge_initCompiletimeState_0() 
 	initCompiletimeState_0("via ExecuteFunc in function initCompiletimeState")
+end
+
+function __wurst_safe_DisplayTimedTextToPlayer(toPlayer, x3, y3, duration, message) 
+	if (toPlayer == nil) then
+		return nil
+	end
+	DisplayTimedTextToPlayer(toPlayer, x3, y3, duration, message)
 end
 
 function __wurst_safe_GetLocationY(whichLocation) 
@@ -2055,11 +2075,11 @@ function __wurst_safe_GetOwningPlayer(whichUnit11)
 	return GetOwningPlayer(whichUnit11)
 end
 
-function __wurst_safe_CreateUnit(id1, unitid1, x3, y3, face1) 
+function __wurst_safe_CreateUnit(id1, unitid1, x4, y4, face1) 
 	if (id1 == nil) then
 		return nil
 	end
-	return CreateUnit(id1, unitid1, x3, y3, face1)
+	return CreateUnit(id1, unitid1, x4, y4, face1)
 end
 
 function __wurst_safe_RemoveUnit(whichUnit12) 
@@ -2185,11 +2205,11 @@ function __wurst_safe_SetUnitOwner(whichUnit5, whichPlayer9, changeColor)
 	SetUnitOwner(whichUnit5, whichPlayer9, changeColor)
 end
 
-function __wurst_safe_DisplayTimedTextFromPlayer(toPlayer, x4, y4, duration, message1) 
-	if (toPlayer == nil) then
+function __wurst_safe_DisplayTimedTextFromPlayer(toPlayer1, x5, y5, duration1, message2) 
+	if (toPlayer1 == nil) then
 		return nil
 	end
-	DisplayTimedTextFromPlayer(toPlayer, x4, y4, duration, message1)
+	DisplayTimedTextFromPlayer(toPlayer1, x5, y5, duration1, message2)
 end
 
 function __wurst_safe_TriggerRegisterDialogButtonEvent(whichTrigger10, whichButton) 
@@ -2260,11 +2280,11 @@ function __wurst_safe_CustomVictorySkipBJ(whichPlayer23)
 	CustomVictorySkipBJ(whichPlayer23)
 end
 
-function __wurst_safe_CustomDefeatDialogBJ(whichPlayer24, message2) 
+function __wurst_safe_CustomDefeatDialogBJ(whichPlayer24, message3) 
 	if (whichPlayer24 == nil) then
 		return nil
 	end
-	CustomDefeatDialogBJ(whichPlayer24, message2)
+	CustomDefeatDialogBJ(whichPlayer24, message3)
 end
 
 function __wurst_safe_CreateTimerDialog(t) 
@@ -2288,11 +2308,11 @@ function __wurst_safe_TimerDialogDisplay(whichDialog1, display1)
 	TimerDialogDisplay(whichDialog1, display1)
 end
 
-function __wurst_safe_PingMinimapForPlayer(whichPlayer25, x5, y5, duration1) 
+function __wurst_safe_PingMinimapForPlayer(whichPlayer25, x6, y6, duration2) 
 	if (whichPlayer25 == nil) then
 		return nil
 	end
-	PingMinimapForPlayer(whichPlayer25, x5, y5, duration1)
+	PingMinimapForPlayer(whichPlayer25, x6, y6, duration2)
 end
 
 function __wurst_safe_UnitAddIndicator(whichUnit21, red, green, blue, alpha) 
@@ -2558,10 +2578,10 @@ function __wurst_safe_CustomVictoryBJ(whichPlayer14, showDialog, showScores)
 	CustomVictoryBJ(whichPlayer14, showDialog, showScores)
 end
 
-function __wurst_safe_CustomDefeatBJ(whichPlayer15, message) 
+function __wurst_safe_CustomDefeatBJ(whichPlayer15, message1) 
 	if (whichPlayer15 == nil) then
 		return nil
 	end
-	CustomDefeatBJ(whichPlayer15, message)
+	CustomDefeatBJ(whichPlayer15, message1)
 end
 

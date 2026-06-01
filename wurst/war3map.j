@@ -165,7 +165,7 @@ endfunction
 function Trig_init_Actions takes nothing returns nothing
     set udg_controlPoint_001 = gg_unit_cp00_0008
     set udg_heroSelector = gg_unit_hchs_0006
-    set udg_townHall = gg_unit_hwtw_0003
+    set udg_watchTower = gg_unit_hwtw_0003
     set udg_townHall = gg_unit_htow_0001
 endfunction
 

@@ -30,5 +30,5 @@ function setupCaptureOnHalf(unit target)
                 controlPoints.add(u)
 
 init
-    setupCaptureOnHalf(gg_unit_cp00_0008)
+    setupCaptureOnHalf(udg_controlPoint_001)
     incomeTimer()
