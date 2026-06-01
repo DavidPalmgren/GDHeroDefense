@@ -1,5 +1,6 @@
 package ControlPoint
 public group controlPoints = CreateGroup()
+public unit target = null
 int controlPointValue = 30
 
 public function incomeTimer()
@@ -10,21 +11,24 @@ public function incomeTimer()
     TimerStart(countdown,10.,true,function income)
 
 public function income()
-    let p = players[0]
-    let points = controlPoints.size()
-    p.addGold(points * controlPointValue)
+    for u in controlPoints
+        let p = u.getOwner()
+        p.addGold(controlPointValue)
 
-function setupKillOwnership(unit u)
+function setupCaptureOnHalf(unit target)
     CreateTrigger()
-        ..registerUnitEvent(u, EVENT_UNIT_DEATH)
+        ..registerUnitEvent(target, EVENT_UNIT_DAMAGED)
         ..addAction() ->
-            let killer = GetKillingUnit()
-            let dead = GetTriggerUnit()
-            if killer != null
-                createUnit(killer.getOwner(),'cp00',vec2(dead.getPos().x,dead.getPos().y), angle(0.))
-                controlPoints.add(dead)
-                SetUnitOwner(dead, killer.getOwner(), true)
+            let u = GetTriggerUnit()
+            let attacker = GetEventDamageSource()
+            let hp = GetUnitState(u, UNIT_STATE_LIFE)
+            let maxHp = GetUnitState(u, UNIT_STATE_MAX_LIFE)
+            if hp / maxHp <= 0.5
+                controlPoints.remove(u)
+                SetUnitOwner(u, attacker.getOwner(), true)
+                SetUnitState(u, UNIT_STATE_LIFE, maxHp)
+                controlPoints.add(u)
 
 init
-    setupKillOwnership(gg_unit_cp00_0008)
+    setupCaptureOnHalf(gg_unit_cp00_0008)
     incomeTimer()
