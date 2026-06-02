@@ -4,6 +4,7 @@ import ObjectIdGenerator
 import BuffObjEditing
 import Icons
 import DamageEvent
+import UnitIds
 
 // Known issue: Retaliation damage is not tracked to the unit meaning exp and gold is forfeit on last hit.
 
@@ -80,6 +81,11 @@ init
         onDamageTaken()
 
     ENUM_GROUP.enumUnitsOfType('hkni', null)
+    for u in ENUM_GROUP
+        UnitAddAbility(u, MY_ABILITY_ID)
+        UnitAddAbility(u, MY_ICON_ABILITY_ID)
+
+    ENUM_GROUP.enumUnitsOfType(UnitIds.huntress, null)
     for u in ENUM_GROUP
         UnitAddAbility(u, MY_ABILITY_ID)
         UnitAddAbility(u, MY_ICON_ABILITY_ID)

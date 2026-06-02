@@ -40,22 +40,22 @@ globals
     // Generated
     rect                    gg_rct_Region_000          = null
     trigger                 gg_trg_init                = null
-    unit                    gg_unit_hwtw_0003          = null
     unit                    gg_unit_cp00_0008          = null
-    unit                    gg_unit_cp00_0016          = null
-    unit                    gg_unit_cp00_0017          = null
-    unit                    gg_unit_cp00_0005          = null
-    unit                    gg_unit_cp00_0018          = null
-    unit                    gg_unit_cp00_0006          = null
-    unit                    gg_unit_cp00_0019          = null
-    unit                    gg_unit_cp00_0007          = null
-    unit                    gg_unit_cp00_0015          = null
+    unit                    gg_unit_hwtw_0003          = null
     unit                    gg_unit_cp00_0011          = null
+    unit                    gg_unit_cp00_0006          = null
+    unit                    gg_unit_cp00_0007          = null
     unit                    gg_unit_cp00_0014          = null
-    unit                    gg_unit_cp00_0009          = null
-    unit                    gg_unit_cp00_0012          = null
-    unit                    gg_unit_cp00_0010          = null
+    unit                    gg_unit_cp00_0005          = null
     unit                    gg_unit_cp00_0013          = null
+    unit                    gg_unit_cp00_0018          = null
+    unit                    gg_unit_cp00_0010          = null
+    unit                    gg_unit_cp00_0009          = null
+    unit                    gg_unit_cp00_0015          = null
+    unit                    gg_unit_cp00_0019          = null
+    unit                    gg_unit_cp00_0012          = null
+    unit                    gg_unit_cp00_0017          = null
+    unit                    gg_unit_cp00_0016          = null
     unit                    gg_unit_etol_0001          = null
 endglobals
 
@@ -116,6 +116,8 @@ function CreateUnitsForPlayer0 takes nothing returns nothing
 
     set u = BlzCreateUnitWithSkin( p, 'hkni', 1316.0, -786.8, 90.000, 'hkni' )
     set u = BlzCreateUnitWithSkin( p, 'hkni', 858.8, -778.3, 90.000, 'hkni' )
+    set u = BlzCreateUnitWithSkin( p, 'esen', 957.7, -387.4, 69.117, 'esen' )
+    set u = BlzCreateUnitWithSkin( p, 'esen', 1066.0, -511.7, 192.530, 'esen' )
 endfunction
 
 //===========================================================================

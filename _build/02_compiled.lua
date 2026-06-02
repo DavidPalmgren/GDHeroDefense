@@ -138,22 +138,22 @@ udg_controlPoint_007 = nil
 udg_controlPoint_008 = nil
 gg_rct_Region_000 = nil
 gg_trg_init = nil
-gg_unit_hwtw_0003 = nil
 gg_unit_cp00_0008 = nil
-gg_unit_cp00_0016 = nil
-gg_unit_cp00_0017 = nil
-gg_unit_cp00_0005 = nil
-gg_unit_cp00_0018 = nil
-gg_unit_cp00_0006 = nil
-gg_unit_cp00_0019 = nil
-gg_unit_cp00_0007 = nil
-gg_unit_cp00_0015 = nil
+gg_unit_hwtw_0003 = nil
 gg_unit_cp00_0011 = nil
+gg_unit_cp00_0006 = nil
+gg_unit_cp00_0007 = nil
 gg_unit_cp00_0014 = nil
-gg_unit_cp00_0009 = nil
-gg_unit_cp00_0012 = nil
-gg_unit_cp00_0010 = nil
+gg_unit_cp00_0005 = nil
 gg_unit_cp00_0013 = nil
+gg_unit_cp00_0018 = nil
+gg_unit_cp00_0010 = nil
+gg_unit_cp00_0009 = nil
+gg_unit_cp00_0015 = nil
+gg_unit_cp00_0019 = nil
+gg_unit_cp00_0012 = nil
+gg_unit_cp00_0017 = nil
+gg_unit_cp00_0016 = nil
 gg_unit_etol_0001 = nil
 Angle_RADTODEG = nil
 BasicWaves_selectedTarget = nil
@@ -249,6 +249,7 @@ TimerUtils_timerData = nil
 TimerUtils_HELD = nil
 TypeCasting_typecastdata = nil
 TypeCasting_R2I_PRECISION = nil
+UnitIds_huntress = nil
 UnitIds_shade = nil
 UnitIndexer_onIndexTrigger = nil
 UnitIndexer_onDeindexTrigger = nil
@@ -943,7 +944,7 @@ end
 function DamageListener_addListener_ShieldBash_onEvent_addListener_ShieldBash(this73, __wurst_stackPos80) 
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos80
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	onDamageTaken("when calling onDamageTaken in ShieldBash, line 80")
+	onDamageTaken("when calling onDamageTaken in ShieldBash, line 81")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -1105,22 +1106,22 @@ function initGlobals(__wurst_stackPos102)
 	udg_controlPoint_008 = nil
 	gg_rct_Region_000 = nil
 	gg_trg_init = nil
-	gg_unit_hwtw_0003 = nil
 	gg_unit_cp00_0008 = nil
-	gg_unit_cp00_0016 = nil
-	gg_unit_cp00_0017 = nil
-	gg_unit_cp00_0005 = nil
-	gg_unit_cp00_0018 = nil
-	gg_unit_cp00_0006 = nil
-	gg_unit_cp00_0019 = nil
-	gg_unit_cp00_0007 = nil
-	gg_unit_cp00_0015 = nil
+	gg_unit_hwtw_0003 = nil
 	gg_unit_cp00_0011 = nil
+	gg_unit_cp00_0006 = nil
+	gg_unit_cp00_0007 = nil
 	gg_unit_cp00_0014 = nil
-	gg_unit_cp00_0009 = nil
-	gg_unit_cp00_0012 = nil
-	gg_unit_cp00_0010 = nil
+	gg_unit_cp00_0005 = nil
 	gg_unit_cp00_0013 = nil
+	gg_unit_cp00_0018 = nil
+	gg_unit_cp00_0010 = nil
+	gg_unit_cp00_0009 = nil
+	gg_unit_cp00_0015 = nil
+	gg_unit_cp00_0019 = nil
+	gg_unit_cp00_0012 = nil
+	gg_unit_cp00_0017 = nil
+	gg_unit_cp00_0016 = nil
 	gg_unit_etol_0001 = nil
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
@@ -1167,6 +1168,8 @@ function CreateUnitsForPlayer0(__wurst_stackPos105)
 	p3 = Player(0)
 	__wurst_safe_BlzCreateUnitWithSkin(p3, 1751871081, 1316.0, -(786.8), 90.000, 1751871081)
 	__wurst_safe_BlzCreateUnitWithSkin(p3, 1751871081, 858.8, -(778.3), 90.000, 1751871081)
+	__wurst_safe_BlzCreateUnitWithSkin(p3, 1702061422, 957.7, -(387.4), 69.117, 1702061422)
+	__wurst_safe_BlzCreateUnitWithSkin(p3, 1702061422, 1066.0, -(511.7), 192.530, 1702061422)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -1250,26 +1253,26 @@ end
 function CreatePlayerBuildings(__wurst_stackPos110) 
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos110
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	CreateBuildingsForPlayer0("when calling CreateBuildingsForPlayer0 in war3map, line 208")
-	CreateBuildingsForPlayer1("when calling CreateBuildingsForPlayer1 in war3map, line 209")
+	CreateBuildingsForPlayer0("when calling CreateBuildingsForPlayer0 in war3map, line 210")
+	CreateBuildingsForPlayer1("when calling CreateBuildingsForPlayer1 in war3map, line 211")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
 function CreatePlayerUnits(__wurst_stackPos111) 
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos111
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	CreateUnitsForPlayer0("when calling CreateUnitsForPlayer0 in war3map, line 214")
+	CreateUnitsForPlayer0("when calling CreateUnitsForPlayer0 in war3map, line 216")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
 function CreateAllUnits(__wurst_stackPos112) 
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos112
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	CreateNeutralHostileBuildings("when calling CreateNeutralHostileBuildings in war3map, line 219")
-	CreateNeutralPassiveBuildings("when calling CreateNeutralPassiveBuildings in war3map, line 220")
-	CreatePlayerBuildings("when calling CreatePlayerBuildings in war3map, line 221")
-	CreateNeutralHostile("when calling CreateNeutralHostile in war3map, line 222")
-	CreatePlayerUnits("when calling CreatePlayerUnits in war3map, line 223")
+	CreateNeutralHostileBuildings("when calling CreateNeutralHostileBuildings in war3map, line 221")
+	CreateNeutralPassiveBuildings("when calling CreateNeutralPassiveBuildings in war3map, line 222")
+	CreatePlayerBuildings("when calling CreatePlayerBuildings in war3map, line 223")
+	CreateNeutralHostile("when calling CreateNeutralHostile in war3map, line 224")
+	CreatePlayerUnits("when calling CreatePlayerUnits in war3map, line 225")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -1318,7 +1321,7 @@ end
 function InitCustomTriggers(__wurst_stackPos116) 
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos116
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	InitTrig_init("when calling InitTrig_init in war3map, line 275")
+	InitTrig_init("when calling InitTrig_init in war3map, line 277")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -1361,22 +1364,22 @@ function main()
 	udg_controlPoint_008 = nil
 	gg_rct_Region_000 = nil
 	gg_trg_init = nil
-	gg_unit_hwtw_0003 = nil
 	gg_unit_cp00_0008 = nil
-	gg_unit_cp00_0016 = nil
-	gg_unit_cp00_0017 = nil
-	gg_unit_cp00_0005 = nil
-	gg_unit_cp00_0018 = nil
-	gg_unit_cp00_0006 = nil
-	gg_unit_cp00_0019 = nil
-	gg_unit_cp00_0007 = nil
-	gg_unit_cp00_0015 = nil
+	gg_unit_hwtw_0003 = nil
 	gg_unit_cp00_0011 = nil
+	gg_unit_cp00_0006 = nil
+	gg_unit_cp00_0007 = nil
 	gg_unit_cp00_0014 = nil
-	gg_unit_cp00_0009 = nil
-	gg_unit_cp00_0012 = nil
-	gg_unit_cp00_0010 = nil
+	gg_unit_cp00_0005 = nil
 	gg_unit_cp00_0013 = nil
+	gg_unit_cp00_0018 = nil
+	gg_unit_cp00_0010 = nil
+	gg_unit_cp00_0009 = nil
+	gg_unit_cp00_0015 = nil
+	gg_unit_cp00_0019 = nil
+	gg_unit_cp00_0012 = nil
+	gg_unit_cp00_0017 = nil
+	gg_unit_cp00_0016 = nil
 	gg_unit_etol_0001 = nil
 	Angle_RADTODEG = 0.
 	BasicWaves_selectedTarget = nil
@@ -1510,6 +1513,7 @@ function main()
 	TimerUtils_HELD = 0
 	TypeCasting_typecastdata = nil
 	TypeCasting_R2I_PRECISION = 0.
+	UnitIds_huntress = 0
 	UnitIds_shade = 0
 	UnitIndexer_onIndexTrigger = nil
 	UnitIndexer_onDeindexTrigger = nil
@@ -1698,12 +1702,12 @@ function main()
 	SetAmbientDaySound("AshenvaleDay")
 	SetAmbientNightSound("AshenvaleNight")
 	SetMapMusic("Music", true, 0)
-	CreateRegions("when calling CreateRegions in war3map, line 320")
-	CreateAllUnits("when calling CreateAllUnits in war3map, line 321")
+	CreateRegions("when calling CreateRegions in war3map, line 322")
+	CreateAllUnits("when calling CreateAllUnits in war3map, line 323")
 	InitBlizzard()
-	InitGlobals("when calling InitGlobals in war3map, line 323")
-	InitCustomTriggers("when calling InitCustomTriggers in war3map, line 324")
-	RunInitializationTriggers("when calling RunInitializationTriggers in war3map, line 325")
+	InitGlobals("when calling InitGlobals in war3map, line 325")
+	InitCustomTriggers("when calling InitCustomTriggers in war3map, line 326")
+	RunInitializationTriggers("when calling RunInitializationTriggers in war3map, line 327")
 	do
 	  local __wurst_init_ok = xpcall(init_AbilityIds, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() error1(tostring(err), "<lua error>") end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
 	  if not __wurst_init_ok then
@@ -2800,8 +2804,8 @@ end
 function init_DamageEvent(__wurst_stackPos165) 
 	local clVar1 = nil
 	local clVar2 = nil
-	local temp31 = nil
-	local temp41 = nil
+	local temp67 = nil
+	local temp68 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos165
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	DamageEvent_DETECT_NATIVE_ABILITIES = true
@@ -2814,14 +2818,14 @@ function init_DamageEvent(__wurst_stackPos165)
 	DamageEvent_abort = false
 	DamageEvent_maxPriority = 0
 	DamageEvent_maxUnreducedPriority = 0
-	temp31 = EVENT_PLAYER_UNIT_DAMAGING
+	temp67 = EVENT_PLAYER_UNIT_DAMAGING
 	clVar1 = EventListener_add_DamageEvent:create6()
 	EventListener_construct_EventListener(clVar1, "when calling construct_EventListener in DamageEvent, line 476")
-	EventListener_add(temp31, clVar1, "when calling add in DamageEvent, line 476")
-	temp41 = EVENT_PLAYER_UNIT_DAMAGED
+	EventListener_add(temp67, clVar1, "when calling add in DamageEvent, line 476")
+	temp68 = EVENT_PLAYER_UNIT_DAMAGED
 	clVar2 = EventListener_add_DamageEvent1:create7()
 	EventListener_construct_EventListener(clVar2, "when calling construct_EventListener in DamageEvent, line 477")
-	EventListener_add(temp41, clVar2, "when calling add in DamageEvent, line 477")
+	EventListener_add(temp68, clVar2, "when calling add in DamageEvent, line 477")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -3015,8 +3019,8 @@ function error1(msg, __wurst_stackPos2)
 	local stacktraceStr1 = nil
 	local stacktraceIndex1 = nil
 	local stacktraceLimit1 = nil
-	local temp51 = nil
-	local temp61 = nil
+	local temp69 = nil
+	local temp70 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos2
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	if MagicFunctions_compiletime then
@@ -3027,7 +3031,7 @@ function error1(msg, __wurst_stackPos2)
 			hash = string_getHash(msg, "when calling getHash in ErrorHandling, line 53")
 			if hashtable_hasInt(ErrorHandling_HT, ErrorHandling_PRIMARY_ERROR_KEY, hash, "when calling hasInt in ErrorHandling, line 54") then
 				if ((hashtable_loadInt(ErrorHandling_HT, ErrorHandling_PRIMARY_ERROR_KEY, hash, "when calling loadInt in ErrorHandling, line 56") + ErrorHandling_MUTE_ERROR_DURATION) < GameTimer_currentTime) then
-					temp51 = msg
+					temp69 = msg
 					stacktraceStr = " Stacktrace:"
 					stacktraceIndex = wurst_stack_depth
 					stacktraceLimit = 0
@@ -3045,7 +3049,7 @@ function error1(msg, __wurst_stackPos2)
 					if (stacktraceStr == " Stacktrace:") then
 						stacktraceStr = " Stacktrace: <none>"
 					end
-					Log_error(stringConcat(temp51, stacktraceStr), "when calling error in ErrorHandling, line 58")
+					Log_error(stringConcat(temp69, stacktraceStr), "when calling error in ErrorHandling, line 58")
 					hashtable_saveInt(ErrorHandling_HT, ErrorHandling_PRIMARY_ERROR_KEY, hash, real_toInt(GameTimer_currentTime, "when calling toInt in ErrorHandling, line 59"), "when calling saveInt in ErrorHandling, line 59")
 					hashtable_saveBoolean(ErrorHandling_HT, ErrorHandling_PRIMARY_ERROR_KEY, hash, false, "when calling saveBoolean in ErrorHandling, line 60")
 				elseif hashtable_hasBoolean(ErrorHandling_HT, ErrorHandling_PRIMARY_ERROR_KEY, hash, "when calling hasBoolean in ErrorHandling, line 61") then
@@ -3059,7 +3063,7 @@ function error1(msg, __wurst_stackPos2)
 				end
 			else
 				hashtable_saveInt(ErrorHandling_HT, ErrorHandling_PRIMARY_ERROR_KEY, hash, real_toInt(GameTimer_currentTime, "when calling toInt in ErrorHandling, line 69"), "when calling saveInt in ErrorHandling, line 69")
-				temp61 = stringConcat("Message: ", msg)
+				temp70 = stringConcat("Message: ", msg)
 				stacktraceStr1 = " Stacktrace:"
 				stacktraceIndex1 = wurst_stack_depth
 				stacktraceLimit1 = 0
@@ -3077,7 +3081,7 @@ function error1(msg, __wurst_stackPos2)
 				if (stacktraceStr1 == " Stacktrace:") then
 					stacktraceStr1 = " Stacktrace: <none>"
 				end
-				Log_error(stringConcat(temp61, stacktraceStr1), "when calling error in ErrorHandling, line 70")
+				Log_error(stringConcat(temp70, stacktraceStr1), "when calling error in ErrorHandling, line 70")
 			end
 		end
 		error("__wurst_abort_thread", 0)
@@ -3735,13 +3739,13 @@ end
 
 function finishPreload(__wurst_stackPos79) 
 	local clVar5 = nil
-	local temp81 = nil
+	local temp72 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos79
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	unit_remove(Preloader_dum, "when calling remove in Preloader, line 47")
-	temp81 = Preloader_dumg
+	temp72 = Preloader_dumg
 	clVar5 = ForGroupCallback_forEachFrom_Preloader:create15()
-	group_forEachFrom(temp81, clVar5, "when calling forEachFrom in Preloader, line 48")
+	group_forEachFrom(temp72, clVar5, "when calling forEachFrom in Preloader, line 48")
 	group_destr(Preloader_dumg, "when calling destr in Preloader, line 49")
 	Preloader_dumg = nil
 	wurst_stack_depth = (wurst_stack_depth - 1)
@@ -3933,9 +3937,9 @@ function registerPlayerUnitEvent(p, filter, condition, action, __wurst_stackPos5
 	local hid = nil
 	local k = nil
 	local cond_result2 = nil
-	local temp91 = nil
-	local temp101 = nil
-	local temp11 = nil
+	local temp73 = nil
+	local temp74 = nil
+	local temp75 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos5
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	hid = handle_getHandleId(p, "when calling getHandleId in RegisterEvents, line 17")
@@ -3946,15 +3950,15 @@ function registerPlayerUnitEvent(p, filter, condition, action, __wurst_stackPos5
 			if (k < 0) then
 				break
 			end
-			temp91 = RegisterEvents_t[hid]
-			temp101 = Player_players[k]
-			temp11 = p
+			temp73 = RegisterEvents_t[hid]
+			temp74 = Player_players[k]
+			temp75 = p
 			if not((filter == nil)) then
 				cond_result2 = __wurst_safe_Filter(filter)
 			else
 				cond_result2 = nil
 			end
-			trigger_registerPlayerUnitEvent(temp91, temp101, temp11, cond_result2, "when calling registerPlayerUnitEvent in RegisterEvents, line 21")
+			trigger_registerPlayerUnitEvent(temp73, temp74, temp75, cond_result2, "when calling registerPlayerUnitEvent in RegisterEvents, line 21")
 			k = (k - 1)
 		end
 	end
@@ -3980,6 +3984,8 @@ function init_ShieldBash(__wurst_stackPos167)
 	local clVar6 = nil
 	local iterator2 = nil
 	local u16 = nil
+	local iterator3 = nil
+	local u17 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos167
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	intEnsure(1112354865)
@@ -3989,21 +3995,32 @@ function init_ShieldBash(__wurst_stackPos167)
 	ShieldBash_REFLECT_CHANCE = 0.25
 	ShieldBash_REFLECT_DAMAGE = 40.
 	ShieldBash_REFLECT_SFX = "Abilities\\Spells\\Human\\Defend\\DefendCaster.mdl"
-	stringConcat(stringConcat(stringConcat(stringConcat("Increases armor by ", int_toString(ShieldBash_ARMOR_BONUS, "when calling toString in ShieldBash, line 20")), " and has a "), int_toString(real_toInt((ShieldBash_REFLECT_CHANCE * 100.), "when calling toInt in ShieldBash, line 20"), "when calling toString in ShieldBash, line 20")), "% chance to retaliate.")
+	stringConcat(stringConcat(stringConcat(stringConcat("Increases armor by ", int_toString(ShieldBash_ARMOR_BONUS, "when calling toString in ShieldBash, line 21")), " and has a "), int_toString(real_toInt((ShieldBash_REFLECT_CHANCE * 100.), "when calling toInt in ShieldBash, line 21"), "when calling toString in ShieldBash, line 21")), "% chance to retaliate.")
 	clVar6 = DamageListener_addListener_ShieldBash:create17()
-	DamageListener_construct_DamageListener(clVar6, "when calling construct_DamageListener in ShieldBash, line 79")
-	DamageEvent_addListener(clVar6, "when calling addListener in ShieldBash, line 79")
-	group_enumUnitsOfType(Group_ENUM_GROUP, 1751871081, nil, "when calling enumUnitsOfType in ShieldBash, line 82")
-	iterator2 = group_iterator(Group_ENUM_GROUP, "when calling iterator in ShieldBash, line 83")
+	DamageListener_construct_DamageListener(clVar6, "when calling construct_DamageListener in ShieldBash, line 80")
+	DamageEvent_addListener(clVar6, "when calling addListener in ShieldBash, line 80")
+	group_enumUnitsOfType(Group_ENUM_GROUP, 1751871081, nil, "when calling enumUnitsOfType in ShieldBash, line 83")
+	iterator2 = group_iterator(Group_ENUM_GROUP, "when calling iterator in ShieldBash, line 84")
 	while true do
-		if not(GroupIterator_GroupIterator_hasNext(iterator2, "when calling hasNext in ShieldBash, line 83")) then
+		if not(GroupIterator_GroupIterator_hasNext(iterator2, "when calling hasNext in ShieldBash, line 84")) then
 			break
 		end
-		u16 = GroupIterator_GroupIterator_next(iterator2, "when calling next in ShieldBash, line 83")
+		u16 = GroupIterator_GroupIterator_next(iterator2, "when calling next in ShieldBash, line 84")
 		__wurst_safe_UnitAddAbility(u16, ShieldBash_MY_ABILITY_ID)
 		__wurst_safe_UnitAddAbility(u16, ShieldBash_MY_ICON_ABILITY_ID)
 	end
-	GroupIterator_GroupIterator_close(iterator2, "when calling close in ShieldBash, line 83")
+	GroupIterator_GroupIterator_close(iterator2, "when calling close in ShieldBash, line 84")
+	group_enumUnitsOfType(Group_ENUM_GROUP, UnitIds_huntress, nil, "when calling enumUnitsOfType in ShieldBash, line 88")
+	iterator3 = group_iterator(Group_ENUM_GROUP, "when calling iterator in ShieldBash, line 89")
+	while true do
+		if not(GroupIterator_GroupIterator_hasNext(iterator3, "when calling hasNext in ShieldBash, line 89")) then
+			break
+		end
+		u17 = GroupIterator_GroupIterator_next(iterator3, "when calling next in ShieldBash, line 89")
+		__wurst_safe_UnitAddAbility(u17, ShieldBash_MY_ABILITY_ID)
+		__wurst_safe_UnitAddAbility(u17, ShieldBash_MY_ICON_ABILITY_ID)
+	end
+	GroupIterator_GroupIterator_close(iterator3, "when calling close in ShieldBash, line 89")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -4012,13 +4029,13 @@ function onDamageTaken(__wurst_stackPos81)
 	local attacker1 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos81
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	victim = DamageEvent_getTarget("when calling getTarget in ShieldBash, line 55")
-	attacker1 = DamageEvent_getSource("when calling getSource in ShieldBash, line 56")
-	if not(unit_hasAbility(victim, ShieldBash_MY_ABILITY_ID, "when calling hasAbility in ShieldBash, line 58")) then
+	victim = DamageEvent_getTarget("when calling getTarget in ShieldBash, line 56")
+	attacker1 = DamageEvent_getSource("when calling getSource in ShieldBash, line 57")
+	if not(unit_hasAbility(victim, ShieldBash_MY_ABILITY_ID, "when calling hasAbility in ShieldBash, line 59")) then
 		wurst_stack_depth = (wurst_stack_depth - 1)
 		return 
 	end
-	if ((attacker1 == nil) or not(unit_isAlive(attacker1, "when calling isAlive in ShieldBash, line 61"))) then
+	if ((attacker1 == nil) or not(unit_isAlive(attacker1, "when calling isAlive in ShieldBash, line 62"))) then
 		wurst_stack_depth = (wurst_stack_depth - 1)
 		return 
 	end
@@ -4026,8 +4043,8 @@ function onDamageTaken(__wurst_stackPos81)
 		wurst_stack_depth = (wurst_stack_depth - 1)
 		return 
 	end
-	unit_damageTarget(victim, attacker1, ShieldBash_REFLECT_DAMAGE, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS, "when calling damageTarget in ShieldBash, line 67")
-	flashEffect(ShieldBash_REFLECT_SFX, attacker1, "origin", "when calling flashEffect in ShieldBash, line 76")
+	unit_damageTarget(victim, attacker1, ShieldBash_REFLECT_DAMAGE, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS, "when calling damageTarget in ShieldBash, line 68")
+	flashEffect(ShieldBash_REFLECT_SFX, attacker1, "origin", "when calling flashEffect in ShieldBash, line 77")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -4302,6 +4319,7 @@ end
 function init_UnitIds(__wurst_stackPos156) 
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos156
 	wurst_stack_depth = (wurst_stack_depth + 1)
+	UnitIds_huntress = 1702061422
 	UnitIds_shade = 1970497636
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
@@ -4656,7 +4674,7 @@ function initCompiletimeState_0(__wurst_stackPos311)
 end
 
 function bridge_Trig_init_Actions() 
-	Trig_init_Actions("via function reference war3map, line 270")
+	Trig_init_Actions("via function reference war3map, line 272")
 end
 
 function bridge_code__addAction_BasicWaves() 
