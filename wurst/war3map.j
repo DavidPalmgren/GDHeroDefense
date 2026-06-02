@@ -23,11 +23,8 @@ globals
 
     // Generated
     rect                    gg_rct_Region_000          = null
-    rect                    gg_rct_Region_001          = null
-    rect                    gg_rct_Region_002          = null
     trigger                 gg_trg_init                = null
     unit                    gg_unit_htow_0001          = null
-    unit                    gg_unit_hchs_0006          = null
     unit                    gg_unit_hwtw_0003          = null
     unit                    gg_unit_cp00_0008          = null
 endglobals
@@ -58,7 +55,21 @@ function CreateBuildingsForPlayer0 takes nothing returns nothing
     local trigger t
     local real life
 
-    set gg_unit_htow_0001 = BlzCreateUnitWithSkin( p, 'htow', 192.0, 0.0, 270.000, 'htow' )
+    set gg_unit_htow_0001 = BlzCreateUnitWithSkin( p, 'htow', 1344.0, 0.0, 270.000, 'htow' )
+    set u = BlzCreateUnitWithSkin( p, 'cp00', 960.0, -3584.0, 270.000, 'cp00' )
+    set u = BlzCreateUnitWithSkin( p, 'cp00', 5440.0, -896.0, 270.000, 'cp00' )
+    set u = BlzCreateUnitWithSkin( p, 'cp00', 3904.0, 3840.0, 270.000, 'cp00' )
+    set u = BlzCreateUnitWithSkin( p, 'cp00', -5760.0, 3328.0, 270.000, 'cp00' )
+    set u = BlzCreateUnitWithSkin( p, 'cp00', -6016.0, -2496.0, 270.000, 'cp00' )
+    set u = BlzCreateUnitWithSkin( p, 'cp00', -2688.0, 3072.0, 270.000, 'cp00' )
+    set u = BlzCreateUnitWithSkin( p, 'cp00', -4544.0, 320.0, 270.000, 'cp00' )
+    set u = BlzCreateUnitWithSkin( p, 'cp00', -3392.0, -3200.0, 270.000, 'cp00' )
+    set u = BlzCreateUnitWithSkin( p, 'cp00', -2240.0, 5376.0, 270.000, 'cp00' )
+    set u = BlzCreateUnitWithSkin( p, 'cp00', 1472.0, 3840.0, 270.000, 'cp00' )
+    set u = BlzCreateUnitWithSkin( p, 'cp00', -1408.0, -384.0, 270.000, 'cp00' )
+    set u = BlzCreateUnitWithSkin( p, 'cp00', -1280.0, -3136.0, 270.000, 'cp00' )
+    set u = BlzCreateUnitWithSkin( p, 'cp00', 3264.0, -1216.0, 270.000, 'cp00' )
+    set u = BlzCreateUnitWithSkin( p, 'cp00', 2944.0, 1344.0, 270.000, 'cp00' )
 endfunction
 
 //===========================================================================
@@ -69,9 +80,8 @@ function CreateUnitsForPlayer0 takes nothing returns nothing
     local trigger t
     local real life
 
-    set u = BlzCreateUnitWithSkin( p, 'hkni', 291.0, 497.7, 90.000, 'hkni' )
-    set u = BlzCreateUnitWithSkin( p, 'hkni', 86.2, 491.1, 90.000, 'hkni' )
-    set gg_unit_hchs_0006 = BlzCreateUnitWithSkin( p, 'hchs', 128.2, -2886.6, 181.708, 'hchs' )
+    set u = BlzCreateUnitWithSkin( p, 'hkni', 1316.0, -786.8, 90.000, 'hkni' )
+    set u = BlzCreateUnitWithSkin( p, 'hkni', 858.8, -778.3, 90.000, 'hkni' )
 endfunction
 
 //===========================================================================
@@ -82,7 +92,7 @@ function CreateBuildingsForPlayer1 takes nothing returns nothing
     local trigger t
     local real life
 
-    set gg_unit_hwtw_0003 = BlzCreateUnitWithSkin( p, 'hwtw', 192.0, 1152.0, 270.000, 'hwtw' )
+    set gg_unit_hwtw_0003 = BlzCreateUnitWithSkin( p, 'hwtw', 960.0, -3904.0, 270.000, 'hwtw' )
 endfunction
 
 //===========================================================================
@@ -93,30 +103,7 @@ function CreateNeutralHostileBuildings takes nothing returns nothing
     local trigger t
     local real life
 
-    set gg_unit_cp00_0008 = BlzCreateUnitWithSkin( p, 'cp00', 192.0, 704.0, 270.000, 'cp00' )
-endfunction
-
-//===========================================================================
-function CreateNeutralPassiveBuildings takes nothing returns nothing
-    local player p = Player(PLAYER_NEUTRAL_PASSIVE)
-    local unit u
-    local integer unitID
-    local trigger t
-    local real life
-
-    set u = BlzCreateUnitWithSkin( p, 'ncop', 128.0, -3072.0, 270.000, 'ncop' )
-endfunction
-
-//===========================================================================
-function CreateNeutralPassive takes nothing returns nothing
-    local player p = Player(PLAYER_NEUTRAL_PASSIVE)
-    local unit u
-    local integer unitID
-    local trigger t
-    local real life
-
-    set u = BlzCreateUnitWithSkin( p, 'E000', 132.7, -3209.0, 90.000, 'E000' )
-    call SetUnitColor( u, ConvertPlayerColor(0) )
+    set gg_unit_cp00_0008 = BlzCreateUnitWithSkin( p, 'cp00', 1152.0, -320.0, 270.000, 'cp00' )
 endfunction
 
 //===========================================================================
@@ -133,9 +120,7 @@ endfunction
 //===========================================================================
 function CreateAllUnits takes nothing returns nothing
     call CreateNeutralHostileBuildings(  )
-    call CreateNeutralPassiveBuildings(  )
     call CreatePlayerBuildings(  )
-    call CreateNeutralPassive(  )
     call CreatePlayerUnits(  )
 endfunction
 
@@ -148,9 +133,7 @@ endfunction
 function CreateRegions takes nothing returns nothing
     local weathereffect we
 
-    set gg_rct_Region_000 = Rect( -192.0, 2272.0, 256.0, 2624.0 )
-    set gg_rct_Region_001 = Rect( 32.0, -3168.0, 224.0, -2976.0 )
-    set gg_rct_Region_002 = Rect( 0.0, 128.0, 384.0, 448.0 )
+    set gg_rct_Region_000 = Rect( 736.0, -4480.0, 1184.0, -4128.0 )
 endfunction
 
 //***************************************************************************
@@ -164,7 +147,6 @@ endfunction
 //===========================================================================
 function Trig_init_Actions takes nothing returns nothing
     set udg_controlPoint_001 = gg_unit_cp00_0008
-    set udg_heroSelector = gg_unit_hchs_0006
     set udg_watchTower = gg_unit_hwtw_0003
     set udg_townHall = gg_unit_htow_0001
 endfunction
@@ -216,11 +198,11 @@ endfunction
 
 //===========================================================================
 function main takes nothing returns nothing
-    call SetCameraBounds( -3328.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -3584.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 3328.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 3072.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -3328.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 3072.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 3328.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -3584.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM) )
-    call SetDayNightModels( "Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl" )
+    call SetCameraBounds( -7424.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -7680.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 7424.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 7168.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -7424.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 7168.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 7424.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -7680.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM) )
+    call SetDayNightModels( "Environment\\DNC\\DNCAshenvale\\DNCAshenvaleTerrain\\DNCAshenvaleTerrain.mdl", "Environment\\DNC\\DNCAshenvale\\DNCAshenvaleUnit\\DNCAshenvaleUnit.mdl" )
     call NewSoundEnvironment( "Default" )
-    call SetAmbientDaySound( "LordaeronSummerDay" )
-    call SetAmbientNightSound( "LordaeronSummerNight" )
+    call SetAmbientDaySound( "AshenvaleDay" )
+    call SetAmbientNightSound( "AshenvaleNight" )
     call SetMapMusic( "Music", true, 0 )
     call CreateRegions(  )
     call CreateAllUnits(  )
@@ -244,7 +226,7 @@ function config takes nothing returns nothing
     call SetTeams( 1 )
     call SetGamePlacement( MAP_PLACEMENT_USE_MAP_SETTINGS )
 
-    call DefineStartLocation( 0, 192.0, 0.0 )
+    call DefineStartLocation( 0, 1344.0, -64.0 )
 
     // Player setup
     call InitCustomPlayerSlots(  )

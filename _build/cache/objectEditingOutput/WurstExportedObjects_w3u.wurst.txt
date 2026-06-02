@@ -23,6 +23,7 @@ import UnitObjEditing
 	..setModelFile("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
 	..setArtSpecial("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
 	..setUseClickHelper(true)
+	..setGroundTexture("")
 
 
 // Original Table (contains all modified default/melee objects)
