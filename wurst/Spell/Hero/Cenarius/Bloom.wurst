@@ -1,0 +1,82 @@
+package Bloom
+
+import AbilityObjEditing
+import Icons
+import ObjectIdGenerator
+import ClosureEvents
+import ClosureTimers
+import GroupUtils
+import Invigorate
+import BuffIds
+import Effect
+import EffectUtils
+import UI
+import Abilities
+
+public constant HEALING_CLOUD_ID = compiletime(ABIL_ID_GEN.next())
+
+constant int CLOUD_UNIT_ID = 'efon'
+constant real CLOUD_RADIUS = 256.
+constant real CLOUD_HEAL = 30.
+constant real CLOUD_DURATION = 10.
+constant real HEAL_INTERVAL = 1.
+
+@compiletime function genAbility()
+    new AbilityDefinitionTaurenChieftainWarStomp(HEALING_CLOUD_ID)
+        ..setName("Healing Cloud")
+        ..setTooltipNormal(1, "Healing Cloud")
+        ..setTooltipNormalExtended(1, "Spawns a healing cloud on each invigorated unit, healing nearby friendly units for " + CLOUD_HEAL.toInt().toString() + " HP/s for " + CLOUD_DURATION.toInt().toString() + " seconds.")
+        ..setIconNormal(Icons.bTNHealingWave)
+        ..setButtonPositionNormalX(3)
+        ..setButtonPositionNormalY(1)
+        ..setCooldown(1, 0.)
+        ..setManaCost(1, 0)
+        ..setAreaofEffect(1, 0.)
+        ..setDurationNormal(1, 0.)
+        ..setDurationHero(1, 0.)
+        ..setDamage(1, 0)
+        ..setBuffs(1, "")
+        ..setRequirements("")
+        ..setRequirementsLevels("")
+        ..setHeroAbility(false)
+        ..setItemAbility(false)
+
+function spawnCloud(player owner, vec2 pos)
+    let cloud = createUnit(owner, CLOUD_UNIT_ID, pos, angle(0.))
+    cloud.setInvulnerable(true)
+    cloud.pause()
+    cloud.setVertexColor(0, 0, 0, 0)
+    cloud.addAbility('Aloc')           
+    cloud.setPathing(false)
+    // rm shadow in editor later
+
+    let sfx = cloud.addEffect(Abilities.cloudOfFog, "origin")
+    sfx.setScale(1.5)
+    sfx.setColor(0, 255, 0)
+    // might change to healing ward type with an ent channeling will see
+
+    let healTimer = doPeriodically(HEAL_INTERVAL) cb ->
+        ENUM_GROUP.enumUnitsInRange(pos, CLOUD_RADIUS, null)
+        for u in ENUM_GROUP
+            if u.isAlive() and u.getOwner().isAllyOf(owner)
+                u.addHP(CLOUD_HEAL)
+                flashEffect("Abilities\\Spells\\Items\\AIhe\\AIheTarget.mdl", u, "origin")
+
+    doAfter(CLOUD_DURATION) ->
+        destroy healTimer
+        cloud.kill()
+        sfx.destr()
+
+init
+
+    EventListener.onCast(HEALING_CLOUD_ID) (caster) ->
+        print("Healing Cloud cast!")
+        ENUM_GROUP.enumUnitsInRect(bj_mapInitialPlayableArea, null)
+        for u in ENUM_GROUP
+            if u.hasAbility('Brej') // Brej is rejuv btw
+                print("Spawning cloud on " + u.getName())
+                spawnCloud(caster.getOwner(), u.getPos())
+
+    ENUM_GROUP.enumUnitsOfType('Ekee', null)
+    for u in ENUM_GROUP
+        UnitAddAbility(u, HEALING_CLOUD_ID)

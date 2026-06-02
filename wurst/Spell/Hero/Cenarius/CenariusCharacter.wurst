@@ -7,7 +7,7 @@ import UnitIds
 import ClosureEvents
 import ClosureTimers
 
-public constant CENARIUS_CHARACTER_ID = UnitIds.keeperofthegrove
+public constant CENARIUS_CHARACTER_ID = UnitIds.keeperofthegrove // "Ekee"
 
 init
     ENUM_GROUP.enumUnitsOfType(CENARIUS_CHARACTER_ID, null)
