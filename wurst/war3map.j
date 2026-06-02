@@ -114,10 +114,12 @@ function CreateUnitsForPlayer0 takes nothing returns nothing
     local trigger t
     local real life
 
-    set u = BlzCreateUnitWithSkin( p, 'hkni', 1316.0, -786.8, 90.000, 'hkni' )
-    set u = BlzCreateUnitWithSkin( p, 'hkni', 858.8, -778.3, 90.000, 'hkni' )
+    set u = BlzCreateUnitWithSkin( p, 'hkni', 1179.1, -783.8, 90.000, 'hkni' )
+    set u = BlzCreateUnitWithSkin( p, 'hkni', 1052.9, -792.5, 90.000, 'hkni' )
     set u = BlzCreateUnitWithSkin( p, 'esen', 957.7, -387.4, 69.117, 'esen' )
     set u = BlzCreateUnitWithSkin( p, 'esen', 1066.0, -511.7, 192.530, 'esen' )
+    set u = BlzCreateUnitWithSkin( p, 'E001', 713.0, -408.7, 159.098, 'E001' )
+    set u = BlzCreateUnitWithSkin( p, 'Ekee', 611.6, -730.9, 152.000, 'Ekee' )
 endfunction
 
 //===========================================================================
@@ -191,6 +193,7 @@ function CreateNeutralHostile takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'ngh1', 1397.8, -3429.9, 179.640, 'ngh1' )
     set u = BlzCreateUnitWithSkin( p, 'ngh1', 1033.7, -3799.2, 110.286, 'ngh1' )
     set u = BlzCreateUnitWithSkin( p, 'ngh1', 1335.9, -3694.9, 153.903, 'ngh1' )
+    set u = BlzCreateUnitWithSkin( p, 'n000', 422.5, -52.9, 184.565, 'n000' )
 endfunction
 
 //===========================================================================

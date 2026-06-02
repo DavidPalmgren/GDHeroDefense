@@ -26,6 +26,41 @@ import UnitObjEditing
 	..setGroundTexture("")
 
 
+@compiletime function create_w3u_n000()
+	new UnitDefinition('n000', 'nkob')
+	..setAttack1AnimationBackswingPoint(0.0)
+	..setAttack1AnimationDamagePoint(0.0)
+	..setAttack1CooldownTime(0.0)
+	..setAttack1DamageBase(0)
+	..setAttack1DamageNumberofDice(0)
+	..setAttack1DamageSidesperDie(0)
+	..setAttack1MaximumNumberofTargets(0)
+	..setAttack1Range(0)
+	..setAttack1RangeMotionBuffer(0.0)
+	..setAttack2MaximumNumberofTargets(0)
+	..setAttacksEnabled(0)
+	..setSpeedBase(0)
+	..setHitPointsMaximumBase(20000)
+	..setHitPointsRegenerationRate(300.0)
+	..setName("KoboldThemedTargetDummy")
+
+
+@compiletime function create_w3u_n001()
+	new UnitDefinition('n001', 'nech')
+	..setSpeedBase(0)
+	..setSpeedMinimum(0)
+	..setHitPointsRegenerationRate(500.0)
+	..setHitPointsMaximumBase(20000)
+	..setName("ChickenThemedTargetDummy")
+
+
+@compiletime function create_w3u_E001()
+	new HeroDefinition('E001', 'Ecen')
+	..setHeroAbilities("")
+	..setName("Cenarius")
+	// TODO no wrapper: 	..setString("uhas", "")
+
+
 // Original Table (contains all modified default/melee objects)
 // These are emitted when createObjectDefinition uses the same base/new id.
 

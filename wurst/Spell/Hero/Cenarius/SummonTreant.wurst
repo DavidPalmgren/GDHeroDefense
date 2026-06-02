@@ -1,0 +1,58 @@
+package SummonTreant
+
+import AbilityObjEditing
+import Icons
+import ObjectIdGenerator
+import ClosureEvents
+import ClosureTimers
+import Invigorate
+
+public constant SUMMON_TREANT_ID = compiletime(ABIL_ID_GEN.next())
+
+public constant int TREANT_UNIT_ID = 'efon'
+public constant real TREANT_DURATION = 15.
+
+@compiletime function genAbility()
+    new AbilityDefinitionRoar(SUMMON_TREANT_ID)
+        ..setName("Summon Treant")
+        ..setTooltipNormal(1, "Summon Treant")
+        ..setTooltipNormalExtended(1, "Summons one Treant for each active seedling stack for 15 seconds.")
+        ..setIconNormal(Icons.bTNEntanglingRoots)
+        ..setButtonPositionNormalX(2)
+        ..setButtonPositionNormalY(1)
+        ..setCooldown(1, 0.)
+        ..setManaCost(1, 40)     
+        ..setDamageIncrease(1, 0)
+        ..setAreaofEffect(1, 0.)     
+        ..setDurationNormal(1, 0.)
+        ..setDurationHero(1, 0.)
+        ..setRequirements("")
+        ..setRequirementsLevels("")
+        ..setHeroAbility(false)
+        ..setItemAbility(false)
+        ..setBuffs(1, "")
+init
+
+    EventListener.onCast(SUMMON_TREANT_ID) (caster) ->
+        print("Cast fired!")
+        print("Seedling count: " + getSeedlingCount().toString())
+        
+        if getSeedlingCount() <= 0
+            print("No seedling stacks available!")
+            return
+
+        let pos = caster.getPos()
+        let stacks = getSeedlingCount()
+        print("Attempting to spawn " + stacks.toString() + " treants at " + pos.toString())
+
+        for i = 1 to stacks
+            print("Spawning treant " + i.toString())
+            let treant = createUnit(caster.getOwner(), TREANT_UNIT_ID, pos, angle(0.))
+            print("Treant created: " + treant.getName())
+            doAfter(TREANT_DURATION) ->
+                if treant.isAlive()
+                    treant.kill()
+
+        seedlingCount = 0
+        print("Done. Seedling stacks reset to 0.")
+
