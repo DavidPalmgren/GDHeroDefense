@@ -1,5 +1,6 @@
 {
   "wurst.javaOpts" : [ "-XX:+UseStringDeduplication", "-Xmx1G" ],
+  "wurst.wc3path": "D:\\Warcraft III\\_retail_\\x86_64",
   "files.associations" : {
     "wurst.build" : "yaml"
   },

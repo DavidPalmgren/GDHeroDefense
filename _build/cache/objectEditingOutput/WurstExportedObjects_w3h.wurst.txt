@@ -1,0 +1,17 @@
+package WurstExportedObjects_w3h
+import ObjEditingNatives
+import BuffObjEditing
+
+// Modified Table (contains all custom objects)
+
+@compiletime function create_w3h_BM01()
+	new BuffDefinition('BM01', 'Basl')
+	..setName(1, "Iron Skin")
+	..setTooltipNormal(1, "Iron Skin")
+	..setTooltipNormalExtended(1, "Increases armor by 4 and has a 25% chance to retaliate.")
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\UI\\Cursor\\BTNAcorn.blp")
+
+
+// Original Table (contains all modified default/melee objects)
+// These are emitted when createObjectDefinition uses the same base/new id.
+

@@ -5,6 +5,8 @@ import BuffObjEditing
 import Icons
 import DamageEvent
 
+// Known issue: Retaliation damage is not tracked to the unit meaning exp and gold is forfeit on last hit.
+
 public constant MY_BUFF_ID = compiletime(BUFF_ID_GEN.next())
 public constant MY_ABILITY_ID = compiletime(ABIL_ID_GEN.next())
 public constant MY_ICON_ABILITY_ID = compiletime(ABIL_ID_GEN.next())
@@ -62,7 +64,7 @@ function onDamageTaken()
     if GetRandomReal(0., 1.) > REFLECT_CHANCE
         return
 
-    attacker.damageTarget(
+    victim.damageTarget(
         attacker,
         REFLECT_DAMAGE,
         false,
@@ -80,3 +82,4 @@ init
     ENUM_GROUP.enumUnitsOfType('hkni', null)
     for u in ENUM_GROUP
         UnitAddAbility(u, MY_ABILITY_ID)
+        UnitAddAbility(u, MY_ICON_ABILITY_ID)
