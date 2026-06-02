@@ -29,6 +29,27 @@ function setupCaptureOnHalf(unit target)
             SetUnitState(u, UNIT_STATE_LIFE, maxHp)
             controlPoints.add(u)
 
+function setupAllControlPoints()
+    let u = CreateGroup()
+    u.add(
+        udg_controlPoint_001,
+        udg_controlPoint_002,
+        udg_controlPoint_003,
+        udg_controlPoint_004,
+        udg_controlPoint_005, 
+        udg_controlPoint_006,
+        udg_controlPoint_007,
+        udg_controlPoint_008,
+        udg_controlPoint_009,
+        udg_controlPoint_010,
+        udg_controlPoint_011,
+        udg_controlPoint_012,
+        udg_controlPoint_013,
+        udg_controlPoint_014,
+        udg_controlPoint_015)
+    for cp in u
+        setupCaptureOnHalf(cp)
+
 init
-    setupCaptureOnHalf(udg_controlPoint_001)
+    setupAllControlPoints()
     incomeTimer()
