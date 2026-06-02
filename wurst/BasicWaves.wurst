@@ -22,23 +22,23 @@ function setupWaveSpawn()
     CreateTrigger()
         ..registerPlayerChatEvent(players[0], "-spawn", true)
         ..addAction() ->
-            spawnWave()
+        spawnWave()
 
 function setupAttackPlayer()
     selectedTarget = udg_townHall
     CreateTrigger()
         ..registerPlayerChatEvent(players[0], "-attack", true)
         ..addAction()->
-            footmen.targetOrder("attack", selectedTarget)
-            print(footmen.size())
+        footmen.targetOrder("attack", selectedTarget)
+        print(footmen.size())
 
 function setupBuildingDeathTrigger()
     CreateTrigger()
         ..registerPlayerUnitEvent(players[1], EVENT_PLAYER_UNIT_DEATH, null)
         ..addCondition(Condition(-> GetTriggerUnit() == udg_watchTower))
         ..addAction() ->
-            spawnWave()
-            footmen.targetOrder("attack", selectedTarget)
+        spawnWave()
+        footmen.targetOrder("attack", selectedTarget)
 
 function startingCameraPosition()
     let u = vec2(GetUnitX(udg_heroSelector),GetUnitY(udg_heroSelector))

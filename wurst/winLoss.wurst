@@ -11,16 +11,21 @@ function setupVictoryCondition()
     CreateTrigger()
         ..registerPlayerUnitEvent(players[1], EVENT_PLAYER_UNIT_DEATH, null)
         ..addAction() ->
-            footmen.remove(GetTriggerUnit())
-            if footmen.isEmpty()
-                CustomVictoryBJ(players[0], true, true)
+        footmen.remove(GetTriggerUnit())
+        if footmen.isEmpty()
+            CustomVictoryBJ(players[0], true, true)
 
 function setupDefeatCondition()
     CreateTrigger()
         ..registerPlayerUnitEvent(players[0], EVENT_PLAYER_UNIT_DEATH, null)
         ..addAction() ->
+<<<<<<< HEAD
             if GetTriggerUnit() == udg_townHall
                 CustomDefeatBJ(players[0], "You have been defeated!")
+=======
+        if GetTriggerUnit() == gg_unit_htow_0001
+            CustomDefeatBJ(players[0], "You have been defeated!")
+>>>>>>> 5ac065c2956063918dabffc1fdfec3eda172de15
 
 init
     setupDefeatCondition()

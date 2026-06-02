@@ -19,15 +19,15 @@ function setupCaptureOnHalf(unit target)
     CreateTrigger()
         ..registerUnitEvent(target, EVENT_UNIT_DAMAGED)
         ..addAction() ->
-            let u = GetTriggerUnit()
-            let attacker = GetEventDamageSource()
-            let hp = GetUnitState(u, UNIT_STATE_LIFE)
-            let maxHp = GetUnitState(u, UNIT_STATE_MAX_LIFE)
-            if hp / maxHp <= 0.5
-                controlPoints.remove(u)
-                SetUnitOwner(u, attacker.getOwner(), true)
-                SetUnitState(u, UNIT_STATE_LIFE, maxHp)
-                controlPoints.add(u)
+        let u = GetTriggerUnit()
+        let attacker = GetEventDamageSource()
+        let hp = GetUnitState(u, UNIT_STATE_LIFE)
+        let maxHp = GetUnitState(u, UNIT_STATE_MAX_LIFE)
+        if hp / maxHp <= 0.5
+            controlPoints.remove(u)
+            SetUnitOwner(u, attacker.getOwner(), true)
+            SetUnitState(u, UNIT_STATE_LIFE, maxHp)
+            controlPoints.add(u)
 
 init
     setupCaptureOnHalf(udg_controlPoint_001)
