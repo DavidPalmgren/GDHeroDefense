@@ -20,22 +20,65 @@ globals
     unit                    udg_watchTower             = null
     unit                    udg_heroSelector           = null
     unit                    udg_controlPoint_001       = null
+    unit                    udg_controlPoint_002       = null
+    unit                    udg_controlPoint_009       = null
+    unit                    udg_controlPoint_010       = null
+    unit                    udg_controlPoint_011       = null
+    unit                    udg_controlPoint_012       = null
+    unit                    udg_controlPoint_013       = null
+    unit                    udg_controlPoint_014       = null
+    unit                    udg_controlPoint_015       = null
+    unit                    udg_controlPoint_016       = null
+    unit                    udg_controlPoint_003       = null
+    unit                    udg_controlPoint_004       = null
+    unit                    udg_controlPoint_005       = null
+    unit                    udg_controlPoint_006       = null
+    unit                    udg_controlPoint_007       = null
+    unit                    udg_controlPoint_008       = null
+    group                   udg_AllControlPoints       = null
 
     // Generated
     rect                    gg_rct_Region_000          = null
-    rect                    gg_rct_Region_001          = null
-    rect                    gg_rct_Region_002          = null
     trigger                 gg_trg_init                = null
-    unit                    gg_unit_htow_0001          = null
-    unit                    gg_unit_hchs_0006          = null
     unit                    gg_unit_hwtw_0003          = null
     unit                    gg_unit_cp00_0008          = null
+    unit                    gg_unit_cp00_0016          = null
+    unit                    gg_unit_cp00_0017          = null
+    unit                    gg_unit_cp00_0005          = null
+    unit                    gg_unit_cp00_0018          = null
+    unit                    gg_unit_cp00_0006          = null
+    unit                    gg_unit_cp00_0019          = null
+    unit                    gg_unit_cp00_0007          = null
+    unit                    gg_unit_cp00_0015          = null
+    unit                    gg_unit_cp00_0011          = null
+    unit                    gg_unit_cp00_0014          = null
+    unit                    gg_unit_cp00_0009          = null
+    unit                    gg_unit_cp00_0012          = null
+    unit                    gg_unit_cp00_0010          = null
+    unit                    gg_unit_cp00_0013          = null
+    unit                    gg_unit_etol_0001          = null
 endglobals
 
 function InitGlobals takes nothing returns nothing
     set udg_townHall = null
     set udg_watchTower = null
     set udg_controlPoint_001 = null
+    set udg_controlPoint_002 = null
+    set udg_controlPoint_009 = null
+    set udg_controlPoint_010 = null
+    set udg_controlPoint_011 = null
+    set udg_controlPoint_012 = null
+    set udg_controlPoint_013 = null
+    set udg_controlPoint_014 = null
+    set udg_controlPoint_015 = null
+    set udg_controlPoint_016 = null
+    set udg_controlPoint_003 = null
+    set udg_controlPoint_004 = null
+    set udg_controlPoint_005 = null
+    set udg_controlPoint_006 = null
+    set udg_controlPoint_007 = null
+    set udg_controlPoint_008 = null
+    set udg_AllControlPoints = CreateGroup()
 endfunction
 
 //***************************************************************************
@@ -58,7 +101,9 @@ function CreateBuildingsForPlayer0 takes nothing returns nothing
     local trigger t
     local real life
 
-    set gg_unit_htow_0001 = BlzCreateUnitWithSkin( p, 'htow', 192.0, 0.0, 270.000, 'htow' )
+    set gg_unit_etol_0001 = BlzCreateUnitWithSkin( p, 'etol', 1472.0, -128.0, 270.000, 'etol' )
+    set u = BlzCreateUnitWithSkin( p, 'emow', 992.0, 32.0, 270.000, 'emow' )
+    set u = BlzCreateUnitWithSkin( p, 'eaom', 1664.0, -704.0, 270.000, 'eaom' )
 endfunction
 
 //===========================================================================
@@ -69,9 +114,8 @@ function CreateUnitsForPlayer0 takes nothing returns nothing
     local trigger t
     local real life
 
-    set u = BlzCreateUnitWithSkin( p, 'hkni', 291.0, 497.7, 90.000, 'hkni' )
-    set u = BlzCreateUnitWithSkin( p, 'hkni', 86.2, 491.1, 90.000, 'hkni' )
-    set gg_unit_hchs_0006 = BlzCreateUnitWithSkin( p, 'hchs', 128.2, -2886.6, 181.708, 'hchs' )
+    set u = BlzCreateUnitWithSkin( p, 'hkni', 1316.0, -786.8, 90.000, 'hkni' )
+    set u = BlzCreateUnitWithSkin( p, 'hkni', 858.8, -778.3, 90.000, 'hkni' )
 endfunction
 
 //===========================================================================
@@ -82,7 +126,7 @@ function CreateBuildingsForPlayer1 takes nothing returns nothing
     local trigger t
     local real life
 
-    set gg_unit_hwtw_0003 = BlzCreateUnitWithSkin( p, 'hwtw', 192.0, 1152.0, 270.000, 'hwtw' )
+    set gg_unit_hwtw_0003 = BlzCreateUnitWithSkin( p, 'hwtw', -4736.0, -5760.0, 270.000, 'hwtw' )
 endfunction
 
 //===========================================================================
@@ -93,7 +137,58 @@ function CreateNeutralHostileBuildings takes nothing returns nothing
     local trigger t
     local real life
 
-    set gg_unit_cp00_0008 = BlzCreateUnitWithSkin( p, 'cp00', 192.0, 704.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0005 = BlzCreateUnitWithSkin( p, 'cp00', 1088.0, -3584.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0006 = BlzCreateUnitWithSkin( p, 'cp00', 5376.0, -896.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0007 = BlzCreateUnitWithSkin( p, 'cp00', 3904.0, 3840.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0008 = BlzCreateUnitWithSkin( p, 'cp00', 1216.0, -448.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0009 = BlzCreateUnitWithSkin( p, 'cp00', -5760.0, 3328.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0010 = BlzCreateUnitWithSkin( p, 'cp00', -6016.0, -2496.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0011 = BlzCreateUnitWithSkin( p, 'cp00', -2688.0, 3072.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0012 = BlzCreateUnitWithSkin( p, 'cp00', -4544.0, 320.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0013 = BlzCreateUnitWithSkin( p, 'cp00', -3392.0, -3200.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0014 = BlzCreateUnitWithSkin( p, 'cp00', -2240.0, 5376.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0015 = BlzCreateUnitWithSkin( p, 'cp00', -320.0, 4352.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0016 = BlzCreateUnitWithSkin( p, 'cp00', -1408.0, -384.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0017 = BlzCreateUnitWithSkin( p, 'cp00', -1280.0, -3328.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0018 = BlzCreateUnitWithSkin( p, 'cp00', 3264.0, -1216.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0019 = BlzCreateUnitWithSkin( p, 'cp00', 1664.0, 3776.0, 270.000, 'cp00' )
+endfunction
+
+//===========================================================================
+function CreateNeutralHostile takes nothing returns nothing
+    local player p = Player(PLAYER_NEUTRAL_AGGRESSIVE)
+    local unit u
+    local integer unitID
+    local trigger t
+    local real life
+
+    set u = BlzCreateUnitWithSkin( p, 'nfrl', 3231.4, -876.6, 78.335, 'nfrl' )
+    set u = BlzCreateUnitWithSkin( p, 'nfrl', 3365.2, -918.6, 34.883, 'nfrl' )
+    set u = BlzCreateUnitWithSkin( p, 'nfrs', 3240.0, -1013.5, 213.724, 'nfrs' )
+    set u = BlzCreateUnitWithSkin( p, 'nspr', -1049.9, -3101.3, 45.652, 'nspr' )
+    set u = BlzCreateUnitWithSkin( p, 'nspr', -889.8, -3235.0, 37.961, 'nspr' )
+    set u = BlzCreateUnitWithSkin( p, 'nssp', -1108.3, -3467.5, 68.554, 'nssp' )
+    set u = BlzCreateUnitWithSkin( p, 'ntrt', 262.1, -3852.5, 54.470, 'ntrt' )
+    set u = BlzCreateUnitWithSkin( p, 'nsth', -5759.6, -2337.7, 41.299, 'nsth' )
+    set u = BlzCreateUnitWithSkin( p, 'nstl', -5605.5, -2353.4, 117.876, 'nstl' )
+    set u = BlzCreateUnitWithSkin( p, 'nstl', -5633.8, -2157.0, 200.770, 'nstl' )
+    set u = BlzCreateUnitWithSkin( p, 'nstl', -5835.2, -2095.7, 75.566, 'nstl' )
+    set u = BlzCreateUnitWithSkin( p, 'nsts', -5460.5, -2277.5, 187.268, 'nsts' )
+    set u = BlzCreateUnitWithSkin( p, 'nsts', -5453.3, -2092.9, 280.742, 'nsts' )
+    set u = BlzCreateUnitWithSkin( p, 'nsts', -5603.0, -1981.1, 109.405, 'nsts' )
+    set u = BlzCreateUnitWithSkin( p, 'nsts', -5849.6, -2004.7, 145.079, 'nsts' )
+    set u = BlzCreateUnitWithSkin( p, 'nwlg', -1483.1, -688.7, 34.308, 'nwlg' )
+    set u = BlzCreateUnitWithSkin( p, 'nwlt', -1592.8, -632.4, 30.080, 'nwlt' )
+    set u = BlzCreateUnitWithSkin( p, 'nwlt', -1454.7, -780.7, 19.573, 'nwlt' )
+    set u = BlzCreateUnitWithSkin( p, 'nfra', 5541.8, -926.4, 164.432, 'nfra' )
+    set u = BlzCreateUnitWithSkin( p, 'nfrl', 5187.4, -1075.3, 165.269, 'nfrl' )
+    set u = BlzCreateUnitWithSkin( p, 'nfrl', 5125.9, -880.8, 181.638, 'nfrl' )
+    set u = BlzCreateUnitWithSkin( p, 'nfrl', 5135.2, -682.5, 253.285, 'nfrl' )
+    set u = BlzCreateUnitWithSkin( p, 'nfre', 5312.7, -723.8, 264.573, 'nfre' )
+    set u = BlzCreateUnitWithSkin( p, 'ngh2', 1184.2, -3594.4, 143.208, 'ngh2' )
+    set u = BlzCreateUnitWithSkin( p, 'ngh1', 1397.8, -3429.9, 179.640, 'ngh1' )
+    set u = BlzCreateUnitWithSkin( p, 'ngh1', 1033.7, -3799.2, 110.286, 'ngh1' )
+    set u = BlzCreateUnitWithSkin( p, 'ngh1', 1335.9, -3694.9, 153.903, 'ngh1' )
 endfunction
 
 //===========================================================================
@@ -104,19 +199,8 @@ function CreateNeutralPassiveBuildings takes nothing returns nothing
     local trigger t
     local real life
 
-    set u = BlzCreateUnitWithSkin( p, 'ncop', 128.0, -3072.0, 270.000, 'ncop' )
-endfunction
-
-//===========================================================================
-function CreateNeutralPassive takes nothing returns nothing
-    local player p = Player(PLAYER_NEUTRAL_PASSIVE)
-    local unit u
-    local integer unitID
-    local trigger t
-    local real life
-
-    set u = BlzCreateUnitWithSkin( p, 'E000', 132.7, -3209.0, 90.000, 'E000' )
-    call SetUnitColor( u, ConvertPlayerColor(0) )
+    set u = BlzCreateUnitWithSkin( p, 'nfr1', 5312.0, -512.0, 270.000, 'nfr1' )
+    set u = BlzCreateUnitWithSkin( p, 'nfr2', 5632.0, -512.0, 270.000, 'nfr2' )
 endfunction
 
 //===========================================================================
@@ -135,7 +219,7 @@ function CreateAllUnits takes nothing returns nothing
     call CreateNeutralHostileBuildings(  )
     call CreateNeutralPassiveBuildings(  )
     call CreatePlayerBuildings(  )
-    call CreateNeutralPassive(  )
+    call CreateNeutralHostile(  )
     call CreatePlayerUnits(  )
 endfunction
 
@@ -148,9 +232,7 @@ endfunction
 function CreateRegions takes nothing returns nothing
     local weathereffect we
 
-    set gg_rct_Region_000 = Rect( -192.0, 2272.0, 256.0, 2624.0 )
-    set gg_rct_Region_001 = Rect( 32.0, -3168.0, 224.0, -2976.0 )
-    set gg_rct_Region_002 = Rect( 0.0, 128.0, 384.0, 448.0 )
+    set gg_rct_Region_000 = Rect( -4960.0, -6336.0, -4512.0, -5984.0 )
 endfunction
 
 //***************************************************************************
@@ -164,9 +246,22 @@ endfunction
 //===========================================================================
 function Trig_init_Actions takes nothing returns nothing
     set udg_controlPoint_001 = gg_unit_cp00_0008
-    set udg_heroSelector = gg_unit_hchs_0006
+    set udg_controlPoint_002 = gg_unit_cp00_0016
+    set udg_controlPoint_003 = gg_unit_cp00_0017
+    set udg_controlPoint_004 = gg_unit_cp00_0005
+    set udg_controlPoint_005 = gg_unit_cp00_0018
+    set udg_controlPoint_006 = gg_unit_cp00_0006
+    set udg_controlPoint_007 = gg_unit_cp00_0019
+    set udg_controlPoint_008 = gg_unit_cp00_0007
+    set udg_controlPoint_009 = gg_unit_cp00_0015
+    set udg_controlPoint_010 = gg_unit_cp00_0011
+    set udg_controlPoint_011 = gg_unit_cp00_0014
+    set udg_controlPoint_012 = gg_unit_cp00_0009
+    set udg_controlPoint_013 = gg_unit_cp00_0012
+    set udg_controlPoint_014 = gg_unit_cp00_0010
+    set udg_controlPoint_015 = gg_unit_cp00_0013
     set udg_watchTower = gg_unit_hwtw_0003
-    set udg_townHall = gg_unit_htow_0001
+    set udg_townHall = gg_unit_etol_0001
 endfunction
 
 //===========================================================================
@@ -216,11 +311,11 @@ endfunction
 
 //===========================================================================
 function main takes nothing returns nothing
-    call SetCameraBounds( -3328.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -3584.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 3328.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 3072.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -3328.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 3072.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 3328.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -3584.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM) )
-    call SetDayNightModels( "Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl" )
+    call SetCameraBounds( -7424.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -7680.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 7424.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 7168.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -7424.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 7168.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 7424.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -7680.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM) )
+    call SetDayNightModels( "Environment\\DNC\\DNCAshenvale\\DNCAshenvaleTerrain\\DNCAshenvaleTerrain.mdl", "Environment\\DNC\\DNCAshenvale\\DNCAshenvaleUnit\\DNCAshenvaleUnit.mdl" )
     call NewSoundEnvironment( "Default" )
-    call SetAmbientDaySound( "LordaeronSummerDay" )
-    call SetAmbientNightSound( "LordaeronSummerNight" )
+    call SetAmbientDaySound( "AshenvaleDay" )
+    call SetAmbientNightSound( "AshenvaleNight" )
     call SetMapMusic( "Music", true, 0 )
     call CreateRegions(  )
     call CreateAllUnits(  )
@@ -244,7 +339,7 @@ function config takes nothing returns nothing
     call SetTeams( 1 )
     call SetGamePlacement( MAP_PLACEMENT_USE_MAP_SETTINGS )
 
-    call DefineStartLocation( 0, 192.0, 0.0 )
+    call DefineStartLocation( 0, 1472.0, -128.0 )
 
     // Player setup
     call InitCustomPlayerSlots(  )
