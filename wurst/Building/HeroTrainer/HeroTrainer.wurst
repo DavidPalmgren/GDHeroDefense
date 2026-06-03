@@ -1,0 +1,15 @@
+package HeroTrainer
+
+import ClosureEvents
+import GroupUtils
+
+public constant TAVERN_ID = 'n003'
+
+init
+    EventListener.add(EVENT_PLAYER_UNIT_TRAIN_FINISH) ->
+        let building = EventData.getTrainedUnit()
+        let trained = EventData.getTrainedUnit()
+
+        if building.getTypeId() == TAVERN_ID
+            building.remove()
+            print("Hero chosen: " + trained.getName())
