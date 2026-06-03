@@ -1,16 +1,18 @@
 package ShieldBash
 import AbilityObjEditing
 import ObjectIdGenerator
+
 import BuffObjEditing
 import Icons
 import DamageEvent
-import UnitIds
+
 
 // Known issue: Retaliation damage is not tracked to the unit meaning exp and gold is forfeit on last hit.
 
 public constant MY_BUFF_ID = compiletime(BUFF_ID_GEN.next())
 public constant MY_ABILITY_ID = compiletime(ABIL_ID_GEN.next())
 public constant MY_ICON_ABILITY_ID = compiletime(ABIL_ID_GEN.next())
+public constant HUNTRESS_NEW = compiletime(UNIT_ID_GEN.next()) // just a random unused id for the new unit definition
 
 constant integer ARMOR_BONUS = 4
 constant real REFLECT_CHANCE = 0.25
@@ -45,12 +47,15 @@ let tooltip = "Increases armor by " + ARMOR_BONUS.toString() + " and has a " + (
         ..setName("Iron Skin")
         ..setTooltipNormal(1, "Iron Skin")
         ..setTooltipNormalExtended(1, tooltip)
-        ..setIconNormal(Icons.bTNAcidBomb)
+        ..setIconNormal(Icons.bTNEntangleMine)
         ..setButtonPositionNormalX(3)
         ..setButtonPositionNormalY(2)
         ..setHeroAbility(false)
         ..setItemAbility(false)
 
+// @compiletime function addSpells()
+//     new UnitOrBuildingOrHeroDefinition(HUNTRESS_NEW,UnitIds.huntress)
+//         ..setNormalAbilities('BM01')
 
 function onDamageTaken()
     let victim = DamageEvent.getTarget()
@@ -80,12 +85,7 @@ init
     DamageEvent.addListener() ->
         onDamageTaken()
 
-    ENUM_GROUP.enumUnitsOfType('hkni', null)
-    for u in ENUM_GROUP
-        UnitAddAbility(u, MY_ABILITY_ID)
-        UnitAddAbility(u, MY_ICON_ABILITY_ID)
-
-    ENUM_GROUP.enumUnitsOfType(UnitIds.huntress, null)
-    for u in ENUM_GROUP
-        UnitAddAbility(u, MY_ABILITY_ID)
-        UnitAddAbility(u, MY_ICON_ABILITY_ID)
+    // ENUM_GROUP.enumUnitsOfType(UnitIds.huntress, null)
+    // for u in ENUM_GROUP
+    //     UnitAddAbility(u, MY_ABILITY_ID)
+    //     UnitAddAbility(u, MY_ICON_ABILITY_ID)

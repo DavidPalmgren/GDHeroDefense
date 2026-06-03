@@ -1,0 +1,32 @@
+package WurstExportedObjects_w3q
+import ObjEditingNatives
+
+// Modified Table (contains all custom objects)
+
+@compiletime function create_w3q_R000()
+	let def = createObjectDefinition("w3q", 'R000', 'Rehs')
+	..setLvlDataString("greq", 1, 0, "")
+	..setLvlDataInt("gtib", 0, 0, 30)
+	..setLvlDataString("gnam", 1, 0, "Thicker Bark")
+	..setLvlDataString("gar1", 1, 0, "ReplaceableTextures\\CommandButtons\\BTNEatTree.blp")
+	..setLvlDataString("gtp1", 1, 0, "Research Thicker Bark")
+	..setLvlDataString("gub1", 1, 0, "Gives Treants increased resistance to attack damage.")
+
+
+@compiletime function create_w3q_RM01()
+	let def = createObjectDefinition("w3q", 'RM01', 'Rhse')
+	..setLvlDataString("ghk1", 1, 0, "")
+	..setLvlDataInt("gbpx", 0, 0, 0)
+	..setLvlDataInt("gbpy", 0, 0, 0)
+	..setLvlDataInt("gglb", 0, 0, 0)
+	..setLvlDataInt("glmb", 0, 0, 0)
+	..setLvlDataString("gnam", 1, 0, "Thick Bark")
+	..setLvlDataString("gtp1", 1, 0, "Thick Bark")
+	..setLvlDataString("gub1", 1, 0, "Researching this upgrade grants all Treants the Thick Bark passive, reducing incoming damage.")
+	..setLvlDataString("gar1", 1, 0, "ReplaceableTextures\\CommandButtons\\BTNEatTree.blp")
+	..setLvlDataInt("glvl", 0, 0, 1)
+
+
+// Original Table (contains all modified default/melee objects)
+// These are emitted when createObjectDefinition uses the same base/new id.
+

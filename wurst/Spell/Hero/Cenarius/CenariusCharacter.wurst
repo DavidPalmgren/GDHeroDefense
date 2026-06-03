@@ -2,28 +2,37 @@ package CenariusCharacter
 
 import Invigorate
 import SummonTreant
+import Bloom
+import SeedBurst
+
 
 import UnitIds
 import ClosureEvents
 import ClosureTimers
+import UnitObjEditing
+import ObjectIds
 
 public constant CENARIUS_CHARACTER_ID = UnitIds.keeperofthegrove // "Ekee"
 
+@compiletime function addSpells()
+    new UnitOrHeroDefinition('Ekee', 'Ekee')
+        ..setNormalAbilities(commaList(INVIGORATE_ID))
+
+@compiletime function addHeroSpells()
+    new HeroDefinition('Ekee', 'Ekee')
+        ..setHeroAbilities(commaList(SUMMON_TREANT_ID, SEED_BURST_ID, HEALING_CLOUD_ID))
+
+
 init
-    ENUM_GROUP.enumUnitsOfType(CENARIUS_CHARACTER_ID, null)
-    for u in ENUM_GROUP
-        UnitAddAbility(u, INVIGORATE_ID)
-        UnitAddAbility(u, SUMMON_TREANT_ID)
 
     EventListener.onCast(INVIGORATE_ID) (caster) ->
         EventData.getSpellTargetUnit()
         addSeedlingStack()
 
     EventListener.onCast(SUMMON_TREANT_ID) (caster) ->
-        print("Seedling count: " + getSeedlingCount().toString())
+
         
         if getSeedlingCount() <= 0
-            print("No seedling stacks available!")
             return
 
         let pos = caster.getPos()
@@ -36,4 +45,3 @@ init
                     treant.kill()
 
         seedlingCount = 0
-        print("Done. Seedling stacks set to 0.")

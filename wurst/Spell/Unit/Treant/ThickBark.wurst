@@ -1,0 +1,34 @@
+package ThickBark
+import AbilityObjEditing
+import ObjectIdGenerator
+import Icons
+import UpgradeObjEditing
+
+public constant THICK_BARK_ID = compiletime(ABIL_ID_GEN.next())
+public constant THICK_BARK_UPGRADE_ID = compiletime(UPGD_ID_GEN.next())
+
+constant real MIN_DAMAGE_REDUCTION = 5
+constant real BASE_DAMAGE_REDUCTION = 10
+constant real DAMAGE_REDUCTION_PCT = 1
+
+@compiletime function genAbility()
+    new AbilityDefinitionHardenedSkin(THICK_BARK_ID)
+        ..setName("Thick Bark")
+        ..setTooltipNormal(1, "Thick Bark")
+        ..setTooltipNormalExtended(1, "Reduces each attack's damage by " + BASE_DAMAGE_REDUCTION.toString() + " minimum damage taken off " + MIN_DAMAGE_REDUCTION.toString() + "% per hit.")
+        ..setIconNormal(Icons.bTNEatTree)
+        ..setMinimumDamage(1, MIN_DAMAGE_REDUCTION)
+        ..setChancetoReduceDamage(1, DAMAGE_REDUCTION_PCT)
+        ..setIgnoredDamage(1, BASE_DAMAGE_REDUCTION)
+        ..setButtonPositionNormalX(3)
+        ..setButtonPositionNormalY(2)
+        ..setHeroAbility(false)
+        ..setItemAbility(false)
+
+@compiletime function genUpgrade()
+    new UpgradeDefinition(THICK_BARK_UPGRADE_ID)
+        ..setName(1, "Thick Bark")
+        ..setTooltip(1, "Thick Bark")
+        ..setTooltipExtended(1, "Researching this upgrade grants all Treants the Thick Bark passive, reducing incoming damage.")
+        ..setIcon(1,Icons.bTNEatTree)
+        ..setLevels(1)

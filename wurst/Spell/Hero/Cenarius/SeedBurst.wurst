@@ -1,0 +1,76 @@
+package SeedBurst
+
+import AbilityObjEditing
+import Icons
+import ObjectIdGenerator
+import ClosureEvents
+import ClosureTimers
+import LinkedList
+
+public constant SEED_BURST_ID = compiletime(ABIL_ID_GEN.next())
+
+constant real BURST_DAMAGE = 75.
+constant real BURST_RADIUS = 256.
+constant real BURST_DELAY = 0.15
+constant string BURST_SFX = "Abilities\\Spells\\Other\\Entangle\\EntangledTarget.mdl"
+constant string EXPLOSION_SFX = "Abilities\\Weapons\\GryphonRider\\GryphonRiderMissileArt.mdl"
+constant int INVIGORATE_BUFF_ID = 'Brej'     // Brej is rejuv this will need to be removed after testing
+
+class Vec2Wrapper
+    vec2 pos
+    construct(vec2 p)
+        pos = p
+
+@compiletime function genAbility()
+    new AbilityDefinitionMountainKingThunderClap(SEED_BURST_ID)
+        ..setName("Seed Burst")
+        ..setTooltipNormal(1, "Seed Burst")
+        ..setTooltipNormalExtended(1, "Consumes all seedling stacks and invigorated units, detonating each one for " + BURST_DAMAGE.toInt().toString() + " damage to nearby enemies.")
+        ..setTooltipLearn("Learn Seed Burst")
+        ..setTooltipLearnExtended("Consumes all seedling stacks and invigorated units, detonating each one for " + BURST_DAMAGE.toInt().toString() + " damage to nearby enemies.")
+        ..setIconNormal(Icons.bTNEntanglingRoots)
+        ..setIconResearch(Icons.bTNEntanglingRoots)
+        ..setButtonPositionNormalX(0)
+        ..setButtonPositionNormalY(1)
+        ..setCooldown(1, 5.)
+        ..setManaCost(1, 50)
+        ..setAreaofEffect(1, 0.)
+        ..setAOEDamage(1, 0)
+        ..setAttackSpeedReduction(1, 0.)
+        ..setMovementSpeedReduction(1, 0.)
+        ..setDurationNormal(1, 0.)
+        ..setDurationHero(1, 0.)
+        ..setBuffs(1, "")
+        ..setRequirements("")
+        ..setRequirementsLevels("")
+        ..setRequiredLevel(1)
+        ..setLevelSkipRequirement(2)
+        ..setHeroAbility(true)
+        ..setItemAbility(false)
+
+init
+    EventListener.onCast(SEED_BURST_ID) (caster) ->
+        let targets = new LinkedList<Vec2Wrapper>()
+
+        ENUM_GROUP.enumUnitsInRect(bj_mapInitialPlayableArea, null)
+        for u in ENUM_GROUP
+            if u.hasAbility(INVIGORATE_BUFF_ID)
+                targets.add(new Vec2Wrapper(u.getPos()))
+                u.removeAbility(INVIGORATE_BUFF_ID)
+
+        var delay = 0.
+        for wrapper in targets
+            let explodePos = wrapper.pos
+            doAfter(delay) ->
+                flashEffect(BURST_SFX, explodePos)
+                flashEffect(EXPLOSION_SFX, explodePos)
+                ENUM_GROUP.enumUnitsInRange(explodePos, BURST_RADIUS, null)
+                for u in ENUM_GROUP
+                    if u.isAlive() and u.getOwner().isEnemyOf(caster.getOwner())
+                        caster.damageTarget(u, BURST_DAMAGE, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+            delay += BURST_DELAY
+
+        // Clean up wrappers
+        for wrapper in targets
+            destroy wrapper
+        destroy targets

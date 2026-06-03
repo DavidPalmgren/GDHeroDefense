@@ -1,0 +1,57 @@
+package Recycle
+import AbilityObjEditing
+import ObjectIdGenerator
+import Icons
+import ClosureEvents
+
+import Invigorate
+import InstantDummyCaster
+import Orders
+
+
+
+import ObjectIds
+
+import public ObjEditingCommons
+
+
+public constant RECYCLE_ID = compiletime(ABIL_ID_GEN.next())
+
+@compiletime function genAbility()
+    new AbilityDefinitionPassiveSimple(RECYCLE_ID)
+        ..setName("Recycle")
+        ..setTooltipNormal(1, "Recycle")
+        ..setTooltipNormalExtended(1, "On death, applies Invigorate to the nearest friendly unit.")
+        ..setIconNormal(Icons.bTNAnkh)
+        ..setButtonPositionNormalX(0)
+        ..setButtonPositionNormalY(2)
+        ..setHeroAbility(false)
+        ..setItemAbility(false)
+
+@compiletime function addToTreant()
+    new UnitDefinition('e002', 'e002')
+        ..setNormalAbilities(commaList(RECYCLE_ID))
+
+init
+    ENUM_GROUP.enumUnitsOfType('e002', null)
+    for u in ENUM_GROUP
+        UnitAddAbility(u, RECYCLE_ID)
+
+
+    EventListener.add(EVENT_PLAYER_UNIT_DEATH) ->
+        let dying = EventData.getDyingUnit()
+        if dying.hasAbility(RECYCLE_ID)
+            let pos = dying.getPos()
+            unit closest = null
+            real closestDist = 99999.
+
+            ENUM_GROUP.enumUnitsInRange(pos, 99999., null)
+            for u in ENUM_GROUP
+                if u != dying and u.isAlive() and u.getOwner().isAllyOf(dying.getOwner())
+                    let dist = pos.distanceTo(u.getPos())
+                    if dist < closestDist
+                        closestDist = dist
+                        closest = u
+
+            if closest != null
+                let result = InstantDummyCaster.castTarget(dying.getOwner(), INVIGORATE_ID, 1, Orders.rejuvination, closest)

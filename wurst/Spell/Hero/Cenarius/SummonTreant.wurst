@@ -6,7 +6,7 @@ import ObjectIdGenerator
 
 public constant SUMMON_TREANT_ID = compiletime(ABIL_ID_GEN.next())
 
-public constant int TREANT_UNIT_ID = 'efon'
+public constant int TREANT_UNIT_ID = 'e002' // efon is treant lets try the custom one for now
 public constant real TREANT_DURATION = 15.
 
 @compiletime function genAbility()
@@ -14,17 +14,22 @@ public constant real TREANT_DURATION = 15.
         ..setName("Summon Treant")
         ..setTooltipNormal(1, "Summon Treant")
         ..setTooltipNormalExtended(1, "Summons one Treant for each active seedling stack for 15 seconds.")
-        ..setIconNormal(Icons.bTNEntanglingRoots)
+        ..setTooltipLearn("Learn Summon Treant")
+        ..setTooltipLearnExtended("Summons one Treant for each active seedling stack for 15 seconds.")
+        ..setIconNormal(Icons.bTNEnt)
+        ..setIconResearch(Icons.bTNEnt)
         ..setButtonPositionNormalX(2)
         ..setButtonPositionNormalY(1)
         ..setCooldown(1, 0.)
-        ..setManaCost(1, 40)     
+        ..setManaCost(1, 40)
         ..setDamageIncrease(1, 0)
-        ..setAreaofEffect(1, 0.)     
+        ..setAreaofEffect(1, 0.)
         ..setDurationNormal(1, 0.)
         ..setDurationHero(1, 0.)
         ..setRequirements("")
         ..setRequirementsLevels("")
-        ..setHeroAbility(false)
+        ..setRequiredLevel(1)
+        ..setLevelSkipRequirement(2)
+        ..setHeroAbility(true)
         ..setItemAbility(false)
         ..setBuffs(1, "")
