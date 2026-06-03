@@ -18,6 +18,8 @@ import UnitObjEditing
 
 @compiletime function create_w3u_cp00()
 	new BuildingDefinition('cp00', 'hhou')
+	..setPlacementRequires("")
+	..setPathingMap("")
 	..setName("ControlPoint")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCOP.blp")
 	..setModelFile("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
@@ -59,6 +61,11 @@ import UnitObjEditing
 	..setHeroAbilities("")
 	..setName("Cenarius")
 	// TODO no wrapper: 	..setString("uhas", "")
+
+
+@compiletime function create_w3u_n002()
+	new UnitDefinition('n002', 'nfac')
+	..setName("Goblin Factory")
 
 
 // Original Table (contains all modified default/melee objects)

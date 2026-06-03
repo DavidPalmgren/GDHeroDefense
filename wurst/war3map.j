@@ -89,6 +89,258 @@ endfunction
 
 //***************************************************************************
 //*
+//*  Unit Item Tables
+//*
+//***************************************************************************
+
+function Unit000038_DropItems takes nothing returns nothing
+    local widget  trigWidget = null
+    local unit    trigUnit   = null
+    local integer itemID     = 0
+    local boolean canDrop    = true
+
+    set trigWidget = bj_lastDyingWidget
+    if (trigWidget == null) then
+        set trigUnit = GetTriggerUnit()
+    endif
+
+    if (trigUnit != null) then
+        set canDrop = not IsUnitHidden(trigUnit)
+        if (canDrop and GetChangingUnit() != null) then
+            set canDrop = (GetChangingUnitPrevOwner() == Player(PLAYER_NEUTRAL_AGGRESSIVE))
+        endif
+    endif
+
+    if (canDrop) then
+        // Item set 0
+        call RandomDistReset(  )
+        call RandomDistAddItem( 'ram3', 100 )
+        set itemID = RandomDistChoose(  )
+        if (trigUnit != null) then
+            call UnitDropItem( trigUnit, itemID )
+        else
+            call WidgetDropItem( trigWidget, itemID )
+        endif
+
+    endif
+
+    set bj_lastDyingWidget = null
+    call DestroyTrigger(GetTriggeringTrigger())
+endfunction
+
+function Unit000043_DropItems takes nothing returns nothing
+    local widget  trigWidget = null
+    local unit    trigUnit   = null
+    local integer itemID     = 0
+    local boolean canDrop    = true
+
+    set trigWidget = bj_lastDyingWidget
+    if (trigWidget == null) then
+        set trigUnit = GetTriggerUnit()
+    endif
+
+    if (trigUnit != null) then
+        set canDrop = not IsUnitHidden(trigUnit)
+        if (canDrop and GetChangingUnit() != null) then
+            set canDrop = (GetChangingUnitPrevOwner() == Player(PLAYER_NEUTRAL_AGGRESSIVE))
+        endif
+    endif
+
+    if (canDrop) then
+        // Item set 0
+        call RandomDistReset(  )
+        call RandomDistAddItem( 'sman', 100 )
+        set itemID = RandomDistChoose(  )
+        if (trigUnit != null) then
+            call UnitDropItem( trigUnit, itemID )
+        else
+            call WidgetDropItem( trigWidget, itemID )
+        endif
+
+    endif
+
+    set bj_lastDyingWidget = null
+    call DestroyTrigger(GetTriggeringTrigger())
+endfunction
+
+function Unit000077_DropItems takes nothing returns nothing
+    local widget  trigWidget = null
+    local unit    trigUnit   = null
+    local integer itemID     = 0
+    local boolean canDrop    = true
+
+    set trigWidget = bj_lastDyingWidget
+    if (trigWidget == null) then
+        set trigUnit = GetTriggerUnit()
+    endif
+
+    if (trigUnit != null) then
+        set canDrop = not IsUnitHidden(trigUnit)
+        if (canDrop and GetChangingUnit() != null) then
+            set canDrop = (GetChangingUnitPrevOwner() == Player(PLAYER_NEUTRAL_AGGRESSIVE))
+        endif
+    endif
+
+    if (canDrop) then
+        // Item set 0
+        call RandomDistReset(  )
+        call RandomDistAddItem( 'sror', 100 )
+        set itemID = RandomDistChoose(  )
+        if (trigUnit != null) then
+            call UnitDropItem( trigUnit, itemID )
+        else
+            call WidgetDropItem( trigWidget, itemID )
+        endif
+
+    endif
+
+    set bj_lastDyingWidget = null
+    call DestroyTrigger(GetTriggeringTrigger())
+endfunction
+
+function Unit000080_DropItems takes nothing returns nothing
+    local widget  trigWidget = null
+    local unit    trigUnit   = null
+    local integer itemID     = 0
+    local boolean canDrop    = true
+
+    set trigWidget = bj_lastDyingWidget
+    if (trigWidget == null) then
+        set trigUnit = GetTriggerUnit()
+    endif
+
+    if (trigUnit != null) then
+        set canDrop = not IsUnitHidden(trigUnit)
+        if (canDrop and GetChangingUnit() != null) then
+            set canDrop = (GetChangingUnitPrevOwner() == Player(PLAYER_NEUTRAL_AGGRESSIVE))
+        endif
+    endif
+
+    if (canDrop) then
+        // Item set 0
+        call RandomDistReset(  )
+        call RandomDistAddItem( 'penr', 100 )
+        set itemID = RandomDistChoose(  )
+        if (trigUnit != null) then
+            call UnitDropItem( trigUnit, itemID )
+        else
+            call WidgetDropItem( trigWidget, itemID )
+        endif
+
+    endif
+
+    set bj_lastDyingWidget = null
+    call DestroyTrigger(GetTriggeringTrigger())
+endfunction
+
+function Unit000090_DropItems takes nothing returns nothing
+    local widget  trigWidget = null
+    local unit    trigUnit   = null
+    local integer itemID     = 0
+    local boolean canDrop    = true
+
+    set trigWidget = bj_lastDyingWidget
+    if (trigWidget == null) then
+        set trigUnit = GetTriggerUnit()
+    endif
+
+    if (trigUnit != null) then
+        set canDrop = not IsUnitHidden(trigUnit)
+        if (canDrop and GetChangingUnit() != null) then
+            set canDrop = (GetChangingUnitPrevOwner() == Player(PLAYER_NEUTRAL_AGGRESSIVE))
+        endif
+    endif
+
+    if (canDrop) then
+        // Item set 0
+        call RandomDistReset(  )
+        call RandomDistAddItem( 'shea', 100 )
+        set itemID = RandomDistChoose(  )
+        if (trigUnit != null) then
+            call UnitDropItem( trigUnit, itemID )
+        else
+            call WidgetDropItem( trigWidget, itemID )
+        endif
+
+    endif
+
+    set bj_lastDyingWidget = null
+    call DestroyTrigger(GetTriggeringTrigger())
+endfunction
+
+function Unit000097_DropItems takes nothing returns nothing
+    local widget  trigWidget = null
+    local unit    trigUnit   = null
+    local integer itemID     = 0
+    local boolean canDrop    = true
+
+    set trigWidget = bj_lastDyingWidget
+    if (trigWidget == null) then
+        set trigUnit = GetTriggerUnit()
+    endif
+
+    if (trigUnit != null) then
+        set canDrop = not IsUnitHidden(trigUnit)
+        if (canDrop and GetChangingUnit() != null) then
+            set canDrop = (GetChangingUnitPrevOwner() == Player(PLAYER_NEUTRAL_AGGRESSIVE))
+        endif
+    endif
+
+    if (canDrop) then
+        // Item set 0
+        call RandomDistReset(  )
+        call RandomDistAddItem( 'ofro', 100 )
+        set itemID = RandomDistChoose(  )
+        if (trigUnit != null) then
+            call UnitDropItem( trigUnit, itemID )
+        else
+            call WidgetDropItem( trigWidget, itemID )
+        endif
+
+    endif
+
+    set bj_lastDyingWidget = null
+    call DestroyTrigger(GetTriggeringTrigger())
+endfunction
+
+function Unit000107_DropItems takes nothing returns nothing
+    local widget  trigWidget = null
+    local unit    trigUnit   = null
+    local integer itemID     = 0
+    local boolean canDrop    = true
+
+    set trigWidget = bj_lastDyingWidget
+    if (trigWidget == null) then
+        set trigUnit = GetTriggerUnit()
+    endif
+
+    if (trigUnit != null) then
+        set canDrop = not IsUnitHidden(trigUnit)
+        if (canDrop and GetChangingUnit() != null) then
+            set canDrop = (GetChangingUnitPrevOwner() == Player(PLAYER_NEUTRAL_AGGRESSIVE))
+        endif
+    endif
+
+    if (canDrop) then
+        // Item set 0
+        call RandomDistReset(  )
+        call RandomDistAddItem( 'sneg', 100 )
+        set itemID = RandomDistChoose(  )
+        if (trigUnit != null) then
+            call UnitDropItem( trigUnit, itemID )
+        else
+            call WidgetDropItem( trigWidget, itemID )
+        endif
+
+    endif
+
+    set bj_lastDyingWidget = null
+    call DestroyTrigger(GetTriggeringTrigger())
+endfunction
+
+
+//***************************************************************************
+//*
 //*  Unit Creation
 //*
 //***************************************************************************
@@ -120,7 +372,7 @@ function CreateUnitsForPlayer0 takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'esen', 1066.0, -511.7, 192.530, 'esen' )
     set u = BlzCreateUnitWithSkin( p, 'E001', 713.0, -408.7, 159.098, 'E001' )
     set u = BlzCreateUnitWithSkin( p, 'Ekee', 611.6, -730.9, 152.000, 'Ekee' )
-    set u = BlzCreateUnitWithSkin( p, 'hpea', 137.5, -977.8, 341.340, 'xdum' )
+    set u = BlzCreateUnitWithSkin( p, 'hpea', 167.9, -950.8, 341.340, 'xdum' )
 endfunction
 
 //===========================================================================
@@ -142,21 +394,21 @@ function CreateNeutralHostileBuildings takes nothing returns nothing
     local trigger t
     local real life
 
-    set gg_unit_cp00_0005 = BlzCreateUnitWithSkin( p, 'cp00', 1088.0, -3584.0, 270.000, 'cp00' )
-    set gg_unit_cp00_0006 = BlzCreateUnitWithSkin( p, 'cp00', 5376.0, -896.0, 270.000, 'cp00' )
-    set gg_unit_cp00_0007 = BlzCreateUnitWithSkin( p, 'cp00', 3904.0, 3840.0, 270.000, 'cp00' )
-    set gg_unit_cp00_0008 = BlzCreateUnitWithSkin( p, 'cp00', 1216.0, -448.0, 270.000, 'cp00' )
-    set gg_unit_cp00_0009 = BlzCreateUnitWithSkin( p, 'cp00', -5760.0, 3328.0, 270.000, 'cp00' )
-    set gg_unit_cp00_0010 = BlzCreateUnitWithSkin( p, 'cp00', -6016.0, -2496.0, 270.000, 'cp00' )
-    set gg_unit_cp00_0011 = BlzCreateUnitWithSkin( p, 'cp00', -2688.0, 3072.0, 270.000, 'cp00' )
-    set gg_unit_cp00_0012 = BlzCreateUnitWithSkin( p, 'cp00', -4544.0, 320.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0005 = BlzCreateUnitWithSkin( p, 'cp00', 1600.0, -2816.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0006 = BlzCreateUnitWithSkin( p, 'cp00', 5248.0, -960.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0007 = BlzCreateUnitWithSkin( p, 'cp00', 4800.0, 2624.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0008 = BlzCreateUnitWithSkin( p, 'cp00', 1216.0, -512.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0009 = BlzCreateUnitWithSkin( p, 'cp00', -5696.0, 3520.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0010 = BlzCreateUnitWithSkin( p, 'cp00', -5568.0, -960.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0011 = BlzCreateUnitWithSkin( p, 'cp00', -2880.0, 3392.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0012 = BlzCreateUnitWithSkin( p, 'cp00', -6400.0, 704.0, 270.000, 'cp00' )
     set gg_unit_cp00_0013 = BlzCreateUnitWithSkin( p, 'cp00', -3392.0, -3200.0, 270.000, 'cp00' )
-    set gg_unit_cp00_0014 = BlzCreateUnitWithSkin( p, 'cp00', -2240.0, 5376.0, 270.000, 'cp00' )
-    set gg_unit_cp00_0015 = BlzCreateUnitWithSkin( p, 'cp00', -320.0, 4352.0, 270.000, 'cp00' )
-    set gg_unit_cp00_0016 = BlzCreateUnitWithSkin( p, 'cp00', -1408.0, -384.0, 270.000, 'cp00' )
-    set gg_unit_cp00_0017 = BlzCreateUnitWithSkin( p, 'cp00', -1280.0, -3328.0, 270.000, 'cp00' )
-    set gg_unit_cp00_0018 = BlzCreateUnitWithSkin( p, 'cp00', 3264.0, -1216.0, 270.000, 'cp00' )
-    set gg_unit_cp00_0019 = BlzCreateUnitWithSkin( p, 'cp00', 1664.0, 3776.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0014 = BlzCreateUnitWithSkin( p, 'cp00', -2240.0, 5312.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0015 = BlzCreateUnitWithSkin( p, 'cp00', 2752.0, 2112.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0016 = BlzCreateUnitWithSkin( p, 'cp00', -1344.0, -448.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0017 = BlzCreateUnitWithSkin( p, 'cp00', -1216.0, -3264.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0018 = BlzCreateUnitWithSkin( p, 'cp00', 3264.0, -1152.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0019 = BlzCreateUnitWithSkin( p, 'cp00', 1600.0, 4672.0, 270.000, 'cp00' )
 endfunction
 
 //===========================================================================
@@ -167,13 +419,13 @@ function CreateNeutralHostile takes nothing returns nothing
     local trigger t
     local real life
 
-    set u = BlzCreateUnitWithSkin( p, 'nfrl', 3231.4, -876.6, 78.335, 'nfrl' )
-    set u = BlzCreateUnitWithSkin( p, 'nfrl', 3365.2, -918.6, 34.883, 'nfrl' )
-    set u = BlzCreateUnitWithSkin( p, 'nfrs', 3240.0, -1013.5, 213.724, 'nfrs' )
+    set u = BlzCreateUnitWithSkin( p, 'nfrl', 3227.0, -953.6, -83.063, 'nfrl' )
+    set u = BlzCreateUnitWithSkin( p, 'nfrl', 2851.4, -1207.6, -14.114, 'nfrl' )
+    set u = BlzCreateUnitWithSkin( p, 'nfrs', 3141.6, -1200.9, 123.208, 'nfrs' )
     set u = BlzCreateUnitWithSkin( p, 'nspr', -1049.9, -3101.3, 45.652, 'nspr' )
     set u = BlzCreateUnitWithSkin( p, 'nspr', -889.8, -3235.0, 37.961, 'nspr' )
     set u = BlzCreateUnitWithSkin( p, 'nssp', -1108.3, -3467.5, 68.554, 'nssp' )
-    set u = BlzCreateUnitWithSkin( p, 'ntrt', 262.1, -3852.5, 54.470, 'ntrt' )
+    set u = BlzCreateUnitWithSkin( p, 'ntrt', 420.0, -3574.2, 54.470, 'ntrt' )
     set u = BlzCreateUnitWithSkin( p, 'nsth', -5759.6, -2337.7, 41.299, 'nsth' )
     set u = BlzCreateUnitWithSkin( p, 'nstl', -5605.5, -2353.4, 117.876, 'nstl' )
     set u = BlzCreateUnitWithSkin( p, 'nstl', -5633.8, -2157.0, 200.770, 'nstl' )
@@ -185,16 +437,80 @@ function CreateNeutralHostile takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'nwlg', -1483.1, -688.7, 34.308, 'nwlg' )
     set u = BlzCreateUnitWithSkin( p, 'nwlt', -1592.8, -632.4, 30.080, 'nwlt' )
     set u = BlzCreateUnitWithSkin( p, 'nwlt', -1454.7, -780.7, 19.573, 'nwlt' )
-    set u = BlzCreateUnitWithSkin( p, 'nfra', 5541.8, -926.4, 164.432, 'nfra' )
+    set u = BlzCreateUnitWithSkin( p, 'nfra', 5541.8, -926.4, 164.430, 'nfra' )
+    set t = CreateTrigger(  )
+    call TriggerRegisterUnitEvent( t, u, EVENT_UNIT_DEATH )
+    call TriggerRegisterUnitEvent( t, u, EVENT_UNIT_CHANGE_OWNER )
+    call TriggerAddAction( t, function Unit000038_DropItems )
     set u = BlzCreateUnitWithSkin( p, 'nfrl', 5187.4, -1075.3, 165.269, 'nfrl' )
     set u = BlzCreateUnitWithSkin( p, 'nfrl', 5125.9, -880.8, 181.638, 'nfrl' )
     set u = BlzCreateUnitWithSkin( p, 'nfrl', 5135.2, -682.5, 253.285, 'nfrl' )
     set u = BlzCreateUnitWithSkin( p, 'nfre', 5312.7, -723.8, 264.573, 'nfre' )
-    set u = BlzCreateUnitWithSkin( p, 'ngh2', 1184.2, -3594.4, 143.208, 'ngh2' )
-    set u = BlzCreateUnitWithSkin( p, 'ngh1', 1397.8, -3429.9, 179.640, 'ngh1' )
-    set u = BlzCreateUnitWithSkin( p, 'ngh1', 1033.7, -3799.2, 110.286, 'ngh1' )
-    set u = BlzCreateUnitWithSkin( p, 'ngh1', 1335.9, -3694.9, 153.903, 'ngh1' )
+    set u = BlzCreateUnitWithSkin( p, 'ngh2', 1724.6, -3089.6, 143.210, 'ngh2' )
+    set t = CreateTrigger(  )
+    call TriggerRegisterUnitEvent( t, u, EVENT_UNIT_DEATH )
+    call TriggerRegisterUnitEvent( t, u, EVENT_UNIT_CHANGE_OWNER )
+    call TriggerAddAction( t, function Unit000043_DropItems )
+    set u = BlzCreateUnitWithSkin( p, 'ngh1', 1603.3, -3194.6, 179.640, 'ngh1' )
+    set u = BlzCreateUnitWithSkin( p, 'ngh1', 1598.3, -2950.3, 110.286, 'ngh1' )
+    set u = BlzCreateUnitWithSkin( p, 'ngh1', 1807.2, -2935.5, 153.903, 'ngh1' )
     set u = BlzCreateUnitWithSkin( p, 'n000', 422.5, -52.9, 184.565, 'n000' )
+    set u = BlzCreateUnitWithSkin( p, 'ntrs', 1.1, -3547.9, 13.702, 'ntrs' )
+    set u = BlzCreateUnitWithSkin( p, 'ntrs', 375.4, -3911.5, 79.127, 'ntrs' )
+    set u = BlzCreateUnitWithSkin( p, 'ntrs', 181.5, -3818.1, 40.610, 'ntrs' )
+    set u = BlzCreateUnitWithSkin( p, 'nmbg', -5539.1, 3515.8, 64.932, 'nmbg' )
+    set u = BlzCreateUnitWithSkin( p, 'nmbg', -5358.7, 3494.4, 121.334, 'nmbg' )
+    set u = BlzCreateUnitWithSkin( p, 'nmbg', -5669.5, 3668.6, -45.016, 'nmbg' )
+    set u = BlzCreateUnitWithSkin( p, 'nmbg', -5609.3, 3856.7, -50.083, 'nmbg' )
+    set u = BlzCreateUnitWithSkin( p, 'nmbg', -5230.2, 3588.8, 154.000, 'nmbg' )
+    set u = BlzCreateUnitWithSkin( p, 'nmbg', -5294.9, 3916.0, 238.030, 'nmbg' )
+    set u = BlzCreateUnitWithSkin( p, 'nmbg', -5473.0, 3924.5, 257.251, 'nmbg' )
+    set u = BlzCreateUnitWithSkin( p, 'nhyd', -2112.4, 5419.3, 251.560, 'nhyd' )
+    set t = CreateTrigger(  )
+    call TriggerRegisterUnitEvent( t, u, EVENT_UNIT_DEATH )
+    call TriggerRegisterUnitEvent( t, u, EVENT_UNIT_CHANGE_OWNER )
+    call TriggerAddAction( t, function Unit000080_DropItems )
+    set u = BlzCreateUnitWithSkin( p, 'nmtw', -5168.7, 3663.1, 186.648, 'nmtw' )
+    set u = BlzCreateUnitWithSkin( p, 'nmtw', -5196.7, 3831.2, 205.128, 'nmtw' )
+    set u = BlzCreateUnitWithSkin( p, 'nmsc', -5093.4, 3747.2, 184.270, 'nmsc' )
+    set t = CreateTrigger(  )
+    call TriggerRegisterUnitEvent( t, u, EVENT_UNIT_DEATH )
+    call TriggerRegisterUnitEvent( t, u, EVENT_UNIT_CHANGE_OWNER )
+    call TriggerAddAction( t, function Unit000077_DropItems )
+    set u = BlzCreateUnitWithSkin( p, 'nsgh', -2006.6, 5280.4, 179.915, 'nsgh' )
+    set u = BlzCreateUnitWithSkin( p, 'nsgh', -2326.7, 5511.4, -66.171, 'nsgh' )
+    set u = BlzCreateUnitWithSkin( p, 'nwen', 2544.2, 3906.1, 242.161, 'nwen' )
+    set u = BlzCreateUnitWithSkin( p, 'nfrp', 2680.5, 3623.6, 164.835, 'nfrp' )
+    set u = BlzCreateUnitWithSkin( p, 'nfrp', 2365.2, 3526.7, 96.867, 'nfrp' )
+    set u = BlzCreateUnitWithSkin( p, 'nfpc', 1622.8, 4798.9, 260.600, 'nfpc' )
+    set t = CreateTrigger(  )
+    call TriggerRegisterUnitEvent( t, u, EVENT_UNIT_DEATH )
+    call TriggerRegisterUnitEvent( t, u, EVENT_UNIT_CHANGE_OWNER )
+    call TriggerAddAction( t, function Unit000090_DropItems )
+    set u = BlzCreateUnitWithSkin( p, 'nfpt', 1029.9, 4738.7, -84.020, 'nfpt' )
+    set u = BlzCreateUnitWithSkin( p, 'nfpt', 1823.9, 4424.7, 151.836, 'nfpt' )
+    set u = BlzCreateUnitWithSkin( p, 'nfps', 1508.5, 4500.8, 65.068, 'nfps' )
+    set u = BlzCreateUnitWithSkin( p, 'nfps', 1461.4, 4819.3, -83.037, 'nfps' )
+    set u = BlzCreateUnitWithSkin( p, 'nwna', 2495.3, 3495.6, 125.320, 'nwna' )
+    set t = CreateTrigger(  )
+    call TriggerRegisterUnitEvent( t, u, EVENT_UNIT_DEATH )
+    call TriggerRegisterUnitEvent( t, u, EVENT_UNIT_CHANGE_OWNER )
+    call TriggerAddAction( t, function Unit000097_DropItems )
+    set u = BlzCreateUnitWithSkin( p, 'ncg2', 4469.8, 2688.4, 284.950, 'ncg2' )
+    set u = BlzCreateUnitWithSkin( p, 'ncg2', 4516.4, 2635.5, 133.894, 'ncg2' )
+    set u = BlzCreateUnitWithSkin( p, 'ncg2', 4560.2, 2690.5, 341.619, 'ncg2' )
+    set u = BlzCreateUnitWithSkin( p, 'ncg2', 4594.7, 2749.5, 38.442, 'ncg2' )
+    set u = BlzCreateUnitWithSkin( p, 'ncg2', 4493.2, 2780.5, 280.654, 'ncg2' )
+    set u = BlzCreateUnitWithSkin( p, 'ncg2', 4647.0, 2407.6, 266.196, 'ncg2' )
+    set u = BlzCreateUnitWithSkin( p, 'ncg2', 4725.3, 2380.5, 332.973, 'ncg2' )
+    set u = BlzCreateUnitWithSkin( p, 'ncg2', 4702.3, 2479.4, 347.146, 'ncg2' )
+    set u = BlzCreateUnitWithSkin( p, 'ncg2', 4784.7, 2487.5, 297.460, 'ncg2' )
+    set u = BlzCreateUnitWithSkin( p, 'Ntin', 4649.3, 2599.3, 18.400, 'Ntin' )
+    call SetUnitState( u, UNIT_STATE_MANA, 0 )
+    set t = CreateTrigger(  )
+    call TriggerRegisterUnitEvent( t, u, EVENT_UNIT_DEATH )
+    call TriggerRegisterUnitEvent( t, u, EVENT_UNIT_CHANGE_OWNER )
+    call TriggerAddAction( t, function Unit000107_DropItems )
 endfunction
 
 //===========================================================================
@@ -207,6 +523,33 @@ function CreateNeutralPassiveBuildings takes nothing returns nothing
 
     set u = BlzCreateUnitWithSkin( p, 'nfr1', 5312.0, -512.0, 270.000, 'nfr1' )
     set u = BlzCreateUnitWithSkin( p, 'nfr2', 5632.0, -512.0, 270.000, 'nfr2' )
+    set u = BlzCreateUnitWithSkin( p, 'nfr1', 3008.0, -896.0, 270.000, 'nfr1' )
+    set u = BlzCreateUnitWithSkin( p, 'nmg1', -5792.0, 4000.0, 270.000, 'nmg1' )
+    set u = BlzCreateUnitWithSkin( p, 'nmg1', -5920.0, 3808.0, 270.000, 'nmg1' )
+    set u = BlzCreateUnitWithSkin( p, 'nmg1', -5984.0, 4064.0, 270.000, 'nmg1' )
+    set u = BlzCreateUnitWithSkin( p, 'nfoh', -1984.0, 5632.0, 270.000, 'nfoh' )
+    set u = BlzCreateUnitWithSkin( p, 'nmg0', -5472.0, 3296.0, 270.000, 'nmg0' )
+    set u = BlzCreateUnitWithSkin( p, 'nmg0', -5216.0, 3296.0, 270.000, 'nmg0' )
+    set u = BlzCreateUnitWithSkin( p, 'nmg0', -5920.0, 3488.0, 270.000, 'nmg0' )
+    set u = BlzCreateUnitWithSkin( p, 'nmg0', -5664.0, 3232.0, 270.000, 'nmg0' )
+    set u = BlzCreateUnitWithSkin( p, 'nmg0', -5408.0, 3040.0, 270.000, 'nmg0' )
+    set u = BlzCreateUnitWithSkin( p, 'nmg1', -2272.0, 5728.0, 270.000, 'nmg1' )
+    set u = BlzCreateUnitWithSkin( p, 'nmg0', -2208.0, 5024.0, 270.000, 'nmg0' )
+    set u = BlzCreateUnitWithSkin( p, 'nmg0', -2400.0, 5024.0, 270.000, 'nmg0' )
+    set u = BlzCreateUnitWithSkin( p, 'nmg0', -2016.0, 5088.0, 270.000, 'nmg0' )
+    set u = BlzCreateUnitWithSkin( p, 'nth0', 1280.0, 4736.0, 270.000, 'nth0' )
+    set u = BlzCreateUnitWithSkin( p, 'nth0', 1856.0, 4608.0, 270.000, 'nth0' )
+endfunction
+
+//===========================================================================
+function CreateNeutralPassive takes nothing returns nothing
+    local player p = Player(PLAYER_NEUTRAL_PASSIVE)
+    local unit u
+    local integer unitID
+    local trigger t
+    local real life
+
+    set u = BlzCreateUnitWithSkin( p, 'n002', 4493.7, 2500.9, 280.654, 'n002' )
 endfunction
 
 //===========================================================================
@@ -226,6 +569,7 @@ function CreateAllUnits takes nothing returns nothing
     call CreateNeutralPassiveBuildings(  )
     call CreatePlayerBuildings(  )
     call CreateNeutralHostile(  )
+    call CreateNeutralPassive(  )
     call CreatePlayerUnits(  )
 endfunction
 
