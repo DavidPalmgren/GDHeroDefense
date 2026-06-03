@@ -1,0 +1,83 @@
+package UrsocCharge
+
+import AbilityObjEditing
+import ObjectIdGenerator
+import Icons
+import ClosureEvents
+import InstantDummyCaster
+import Orders
+import BuffObjEditing
+import ObjectIds
+
+public constant URSOC_CHARGE_ID = compiletime(ABIL_ID_GEN.next())
+public constant CHARGE_STUN_ID = compiletime(ABIL_ID_GEN.next())
+public constant CHARGE_STUN_BUFF_ID = compiletime(BUFF_ID_GEN.next())
+
+constant real CHARGE_DAMAGE = 100.
+constant real CHARGE_STUN_DURATION = 1.
+constant real CHARGE_SPEED = 900.
+constant string CHARGE_SFX = "Abilities\\Spells\\Human\\Charge\\ChargeTarget.mdl"
+constant string IMPACT_SFX = "Abilities\\Spells\\Human\\Thunderclap\\ThunderClapCaster.mdl"
+
+@compiletime function genBuff()
+    new BuffDefinition(CHARGE_STUN_BUFF_ID, 'BNso')
+        ..setName(1, "Mauled")
+        ..setTooltipNormal(1, "Mauled")
+        ..setTooltipNormalExtended(1, "This unit has been charged by Ursoc and is stunned.")
+        ..setIcon(Icons.bTNStun)
+
+// @compiletime function genStunAbility()
+//     new AbilityDefinitionStunCreep(CHARGE_STUN_ID)
+//         ..setDurationNormal(1, CHARGE_STUN_DURATION)
+//         ..setDurationHero(1, CHARGE_STUN_DURATION * 0.5)
+//         ..setBuffs(1, toRawCode(CHARGE_STUN_BUFF_ID))
+//         ..setHeroAbility(false)
+//         ..setItemAbility(false)
+
+@compiletime function genAbility()
+    new AbilityDefinitionMountainKingThunderBolt(URSOC_CHARGE_ID)
+        ..setName("Mauling Charge")
+        ..setTooltipNormal(1, "Mauling Charge")
+        ..setTooltipNormalExtended(1, "Ursoc charges at the target enemy dealing " + CHARGE_DAMAGE.toInt().toString() + " damage and stunning for " + CHARGE_STUN_DURATION.toInt().toString() + " second.")
+        ..setTooltipLearn("Learn Mauling Charge")
+        ..setTooltipLearnExtended("Ursoc charges at the target enemy dealing " + CHARGE_DAMAGE.toInt().toString() + " damage and stunning for " + CHARGE_STUN_DURATION.toInt().toString() + " second.")
+        ..setIconNormal(Icons.bTNCharm)
+        ..setIconResearch(Icons.bTNCharm)
+        ..setButtonPositionNormalX(0)
+        ..setButtonPositionNormalY(0)
+        ..setCooldown(1, 10.)
+        ..setManaCost(1, 60)
+        ..setDamage(1, 0)
+        ..setDurationNormal(1, 2.)
+        ..setDurationHero(1, 1.)
+        ..setBuffs(1, toRawCode(CHARGE_STUN_BUFF_ID))
+        ..setRequirements("")
+        ..setRequirementsLevels("")
+        ..setRequiredLevel(1)
+        ..setLevelSkipRequirement(2)
+        ..setHeroAbility(true)
+        ..setItemAbility(false)
+
+init
+    EventListener.onCast(URSOC_CHARGE_ID) (caster) ->
+        let target = EventData.getSpellTargetUnit()
+        let targetPos = target.getPos()
+
+        // Move caster instantly, subject to change
+        caster.setXY(targetPos)
+
+        flashEffect(CHARGE_SFX, targetPos)
+        flashEffect(IMPACT_SFX, targetPos)
+
+        caster.damageTarget(
+            target,
+            CHARGE_DAMAGE,
+            false,
+            false,
+            ATTACK_TYPE_NORMAL,
+            DAMAGE_TYPE_MAGIC,
+            WEAPON_TYPE_WHOKNOWS
+        )
+
+        // Stun via dummy cast
+        InstantDummyCaster.castTarget(caster.getOwner(), CHARGE_STUN_ID, 1, Orders.thunderbolt, target)

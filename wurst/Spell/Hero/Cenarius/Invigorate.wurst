@@ -19,13 +19,11 @@ public function addSeedlingStack()
         return
 
     seedlingCount++
-    print("Seedling stacks: " + seedlingCount.toString())
 
     // After 12s remove this stack
     doAfter(12.) ->
         if seedlingCount > 0
             seedlingCount--
-            print("Seedling stack expired. Remaining: " + seedlingCount.toString())
 
 @compiletime function genAbility()
     new AbilityDefinitionRejuvination(INVIGORATE_ID)

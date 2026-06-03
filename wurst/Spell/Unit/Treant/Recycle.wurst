@@ -54,4 +54,4 @@ init
                         closest = u
 
             if closest != null
-                let result = InstantDummyCaster.castTarget(dying.getOwner(), INVIGORATE_ID, 1, Orders.rejuvination, closest)
+                let _result = InstantDummyCaster.castTarget(dying.getOwner(), INVIGORATE_ID, 1, Orders.rejuvination, closest)

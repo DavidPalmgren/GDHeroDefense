@@ -11,12 +11,13 @@ import ClosureEvents
 import ClosureTimers
 import UnitObjEditing
 import ObjectIds
+import AbilityIds
 
 public constant CENARIUS_CHARACTER_ID = UnitIds.keeperofthegrove // "Ekee"
 
 @compiletime function addSpells()
     new UnitOrHeroDefinition('Ekee', 'Ekee')
-        ..setNormalAbilities(commaList(INVIGORATE_ID))
+        ..setNormalAbilities(commaList(INVIGORATE_ID,AbilityIds.inventory, AbilityIds.ultravision))
 
 @compiletime function addHeroSpells()
     new HeroDefinition('Ekee', 'Ekee')

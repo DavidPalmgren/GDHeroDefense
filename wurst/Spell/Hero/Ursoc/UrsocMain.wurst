@@ -1,0 +1,31 @@
+package UrsocMain
+
+import UnitObjEditing
+import ObjectIds
+import AbilityIds
+
+
+import UrsocCharge
+import Hibernate
+
+public constant URSOC_CHARACTER_ID = 'E003'
+public constant URSOCS_WRATH_ID = 'A001'
+public constant GROUND_SLAM = 'A002'
+
+@compiletime function addSpells()
+    new UnitOrHeroDefinition(URSOC_CHARACTER_ID, URSOC_CHARACTER_ID)
+        ..setNormalAbilities(commaList(
+          URSOCS_WRATH_ID,
+          AbilityIds.inventory,
+          AbilityIds.ultravision
+        ))
+
+@compiletime function addHeroSpells()
+    new HeroDefinition(URSOC_CHARACTER_ID, URSOC_CHARACTER_ID)
+        ..setHeroAbilities(commaList(
+          URSOC_CHARGE_ID,
+          GROUND_SLAM,
+          HIBERNATE_ID,
+          AbilityIds.avatar
+          ))
+

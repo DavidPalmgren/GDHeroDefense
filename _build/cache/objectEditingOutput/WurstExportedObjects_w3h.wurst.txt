@@ -4,12 +4,35 @@ import BuffObjEditing
 
 // Modified Table (contains all custom objects)
 
+@compiletime function create_w3h_B000()
+	new BuffDefinition('B000', 'BHtc')
+	..setName("Ground Slam")
+	..setTooltipNormal("Ground Slam")
+	..setTooltipNormalExtended("This unit has been hit by Ground Slam, its movement speed and attack rate are reduced.")
+
+
 @compiletime function create_w3h_BM01()
 	new BuffDefinition('BM01', 'Basl')
 	..setName(1, "Iron Skin")
 	..setTooltipNormal(1, "Iron Skin")
 	..setTooltipNormalExtended(1, "Increases armor by 4 and has a 25% chance to retaliate.")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\UI\\Cursor\\BTNAcorn.blp")
+
+
+@compiletime function create_w3h_BM02()
+	new BuffDefinition('BM02', 'BNso')
+	..setName(1, "Mauled")
+	..setTooltipNormal(1, "Mauled")
+	..setTooltipNormalExtended(1, "This unit has been charged by Ursoc and is stunned.")
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNStun.blp")
+
+
+@compiletime function create_w3h_BM03()
+	new BuffDefinition('BM03', 'Basl')
+	..setName(1, "Hibernate")
+	..setTooltipNormal(1, "Hibernate")
+	..setTooltipNormalExtended(1, "This unit is hibernating, rapidly regenerating health but unable to act.")
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNSleep.blp")
 
 
 // Original Table (contains all modified default/melee objects)
