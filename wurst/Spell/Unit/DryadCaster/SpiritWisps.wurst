@@ -1,0 +1,102 @@
+package SpiritWisps
+import AbilityObjEditing
+import ObjectIdGenerator
+import BuffObjEditing
+import Icons
+import ClosureEvents
+import ClosureTimers
+import GroupUtils
+import StringUtils
+import LinkedList
+
+public constant SPIRIT_WISPS_ID = compiletime(ABIL_ID_GEN.next())
+public constant WISP_BUFF_ID = compiletime(BUFF_ID_GEN.next())
+
+// Dummy unit for wisps — use an invisible locust unit from your map
+constant int WISP_UNIT_ID = 'h000'  // replace with your dummy unit ID
+
+constant int WISP_COUNT = 3
+constant real WISP_DURATION = 10.
+constant real WISP_HEAL = 15.
+constant real WISP_RADIUS = 400.     // how far wisps heal around caster
+constant real HEAL_INTERVAL = 1.
+constant real ORBIT_RADIUS = 150.    // how far wisps orbit from caster
+constant real ORBIT_SPEED = 1.5      // radians per second
+constant real UPDATE_INTERVAL = 0.05 // how often wisps reposition
+
+@compiletime function genBuff()
+    new BuffDefinition(WISP_BUFF_ID, 'Basl')
+        ..setName(1, "Spirit Wisps")
+        ..setTooltipNormal(1, "Spirit Wisps")
+        ..setTooltipNormalExtended(1, "This unit is accompanied by healing spirit wisps.")
+        ..setIcon(Icons.bTNWisp)
+
+@compiletime function genAbility()
+    new AbilityDefinitionRoar(SPIRIT_WISPS_ID)
+        ..setName("Spirit Wisps")
+        ..setTooltipNormal(1, "Spirit Wisps")
+        ..setTooltipNormalExtended(1, "Summons 3 spirit wisps that orbit the caster for " + WISP_DURATION.toInt().toString() + " seconds, healing nearby damaged friendly units for " + WISP_HEAL.toInt().toString() + " HP/s.")
+        ..setTooltipLearn("Learn Spirit Wisps")
+        ..setTooltipLearnExtended("Summons 3 spirit wisps that orbit the caster, healing nearby damaged friendly units.")
+        ..setIconNormal(Icons.bTNWisp)
+        ..setButtonPositionNormalX(2)
+        ..setButtonPositionNormalY(0)
+        ..setCooldown(1, 20.)
+        ..setManaCost(1, 70)
+        ..setDamageIncrease(1, 0.)
+        ..setAreaofEffect(1, 0.)
+        ..setDurationNormal(1, 0.)
+        ..setDurationHero(1, 0.)
+        ..setBuffs(1, "")
+        ..setRequirements("")
+        ..setRequirementsLevels("")
+        ..setRequiredLevel(1)
+        ..setLevelSkipRequirement(2)
+        ..setHeroAbility(true)
+        ..setItemAbility(false)
+
+init
+    EventListener.onCast(SPIRIT_WISPS_ID) (caster) ->
+        // Add buff icon to caster
+        UnitAddAbility(caster, WISP_BUFF_ID)
+
+        // Spawn 3 wisps evenly spaced around caster
+        let wisps = new LinkedList<unit>()
+        for i = 0 to WISP_COUNT - 1
+            let startAngle = (2. * bj_PI * i.toReal()) / WISP_COUNT.toReal()
+            let spawnPos = caster.getPos().polarOffset(angle(startAngle), ORBIT_RADIUS)
+            let wisp = createUnit(caster.getOwner(), WISP_UNIT_ID, spawnPos, angle(0.))
+            wisp.addAbility('Aloc')
+            wisp.setVertexColor(100, 200, 255, 200)  // light blue tint
+            wisp.setScale(0.4)
+            let sfx = wisp.addEffect("Doodads\\Cinematic\\GlowingRunes\\GlowingRunes2.mdl", "origin")
+            wisps.add(wisp)
+
+        // Orbit timer — moves wisps around caster
+        var orbitAngle = 0.
+        let orbitTimer = doPeriodically(UPDATE_INTERVAL) cb ->
+            orbitAngle += ORBIT_SPEED * UPDATE_INTERVAL
+            var i = 0
+            for wisp in wisps
+                let wispAngle = orbitAngle + (2. * bj_PI * i.toReal()) / WISP_COUNT.toReal()
+                let newPos = caster.getPos().polarOffset(angle(wispAngle), ORBIT_RADIUS)
+                wisp.setXY(newPos)
+                i++
+
+        // Heal timer — heals damaged friendlies in range every second
+        let healTimer = doPeriodically(HEAL_INTERVAL) cb ->
+            ENUM_GROUP.enumUnitsInRange(caster.getPos(), WISP_RADIUS, null)
+            for u in ENUM_GROUP
+                if u.isAlive() and u.getOwner().isAllyOf(caster.getOwner()) and u.getHP() < u.getMaxHP()
+                    u.addHP(WISP_HEAL)
+                    flashEffect("Abilities\\Spells\\Items\\AIhe\\AIheTarget.mdl", u, "origin")
+
+        // After duration clean everything up
+        doAfter(WISP_DURATION) ->
+            destroy orbitTimer
+            destroy healTimer
+            for wisp in wisps
+                wisp.kill()
+            destroy wisps
+            UnitRemoveAbility(caster, WISP_BUFF_ID)
+            print("Spirit Wisps expired.")
