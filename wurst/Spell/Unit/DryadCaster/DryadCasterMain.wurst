@@ -1,0 +1,20 @@
+package DryadCasterMain
+
+import SpiritWisps
+import UnitObjEditing
+import ObjectIds
+import AbilityIds
+
+public constant DRYAD_CASTER_ID = 'e004'
+
+@compiletime function addSpells()
+    new UnitOrHeroDefinition(DRYAD_CASTER_ID, DRYAD_CASTER_ID)
+        ..setNormalAbilities(commaList(
+          SPIRIT_WISPS_ID,
+          AbilityIds.inventory,
+          AbilityIds.ultravision,
+          AbilityIds.spellImmunity,
+          AbilityIds.inventory2SlotUnitNightElf,
+          AbilityIds.abolishMagic,
+          AbilityIds.slowPoison
+          ))

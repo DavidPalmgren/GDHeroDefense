@@ -20,19 +20,27 @@ import BuffObjEditing
 
 
 @compiletime function create_w3h_BM02()
-	new BuffDefinition('BM02', 'Basl')
+	new BuffDefinition('BM02', 'BNso')
+	..setName(1, "Mauled")
+	..setTooltipNormal(1, "Mauled")
+	..setTooltipNormalExtended(1, "This unit has been charged by Ursoc and is stunned.")
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNStun.blp")
+
+
+@compiletime function create_w3h_BM03()
+	new BuffDefinition('BM03', 'Basl')
 	..setName(1, "Hibernate")
 	..setTooltipNormal(1, "Hibernate")
 	..setTooltipNormalExtended(1, "This unit is hibernating, rapidly regenerating health but unable to act.")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNSleep.blp")
 
 
-@compiletime function create_w3h_BM03()
-	new BuffDefinition('BM03', 'BNso')
-	..setName(1, "Mauled")
-	..setTooltipNormal(1, "Mauled")
-	..setTooltipNormalExtended(1, "This unit has been charged by Ursoc and is stunned.")
-	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNStun.blp")
+@compiletime function create_w3h_BM04()
+	new BuffDefinition('BM04', 'Basl')
+	..setName(1, "Spirit Wisps")
+	..setTooltipNormal(1, "Spirit Wisps")
+	..setTooltipNormalExtended(1, "This unit is accompanied by healing spirit wisps.")
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNWisp.blp")
 
 
 // Original Table (contains all modified default/melee objects)
