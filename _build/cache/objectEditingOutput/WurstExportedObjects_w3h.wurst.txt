@@ -13,10 +13,10 @@ import BuffObjEditing
 
 @compiletime function create_w3h_BM01()
 	new BuffDefinition('BM01', 'Basl')
-	..setName(1, "Iron Skin")
-	..setTooltipNormal(1, "Iron Skin")
-	..setTooltipNormalExtended(1, "Increases armor by 4 and has a 25% chance to retaliate.")
-	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\UI\\Cursor\\BTNAcorn.blp")
+	..setName(1, "Hibernate")
+	..setTooltipNormal(1, "Hibernate")
+	..setTooltipNormalExtended(1, "This unit is hibernating, rapidly regenerating health but unable to act.")
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNSleep.blp")
 
 
 @compiletime function create_w3h_BM02()
@@ -29,18 +29,18 @@ import BuffObjEditing
 
 @compiletime function create_w3h_BM03()
 	new BuffDefinition('BM03', 'Basl')
-	..setName(1, "Hibernate")
-	..setTooltipNormal(1, "Hibernate")
-	..setTooltipNormalExtended(1, "This unit is hibernating, rapidly regenerating health but unable to act.")
-	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNSleep.blp")
-
-
-@compiletime function create_w3h_BM04()
-	new BuffDefinition('BM04', 'Basl')
 	..setName(1, "Spirit Wisps")
 	..setTooltipNormal(1, "Spirit Wisps")
 	..setTooltipNormalExtended(1, "This unit is accompanied by healing spirit wisps.")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNWisp.blp")
+
+
+@compiletime function create_w3h_BM04()
+	new BuffDefinition('BM04', 'Basl')
+	..setName(1, "Iron Skin")
+	..setTooltipNormal(1, "Iron Skin")
+	..setTooltipNormalExtended(1, "Increases armor by 4 and has a 25% chance to retaliate.")
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\UI\\Cursor\\BTNAcorn.blp")
 
 
 // Original Table (contains all modified default/melee objects)

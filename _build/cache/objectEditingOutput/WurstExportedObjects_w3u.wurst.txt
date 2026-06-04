@@ -82,7 +82,7 @@ import UnitObjEditing
 	..setTooltipBasic("Train Treant")
 	..setTooltipExtended("Basic frontline unit. Can learn Thicker Bark to resist some damage and Recycle to invigorate a nearby unit on death. |n|n|cffffcc00Attacks land units.|r")
 	..setHotkey("Q")
-	..setNormalAbilities("AM0a")
+	..setNormalAbilities("AM0d")
 
 
 @compiletime function create_w3u_E003()
@@ -110,7 +110,7 @@ import UnitObjEditing
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNGrizzlyBear.blp")
 	..setProperNamesUsed(1)
 	..setNormalAbilities("A001,AInv,Ault")
-	..setHeroAbilities("AM0b,A002,AM0d,AHav")
+	..setHeroAbilities("AM08,A002,AM06,AHav")
 
 
 @compiletime function create_w3u_e004()
@@ -118,12 +118,11 @@ import UnitObjEditing
 	..setManaInitialAmount(150)
 	..setName("DryadCaster")
 	..setModelFile("war3mapImported\\SylvanEnchantress.mdl")
-	..setIconGameInterface("war3mapImported\\BTNSylvanEnchantress.blp")
-	..setNormalAbilities("AM0e,AInv,Ault,ACm2,Aien,Aadm,Aspo")
+	..setNormalAbilities("AM0a,AInv,Ault,ACm2,Aien,Aadm,Aspo")
 
 
-@compiletime function create_w3u_x002()
-	new UnitDefinition('x002', 'ewsp')
+@compiletime function create_w3u_x001()
+	new UnitDefinition('x001', 'ewsp')
 	..setName("Dummy Caster")
 	..setManaMaximum(1000000)
 	..setMovementType("fly")

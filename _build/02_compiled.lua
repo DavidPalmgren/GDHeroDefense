@@ -475,7 +475,7 @@ function OnCastListener_onCast_CenariusCharacter_fire_onCast_CenariusCharacter1(
 	local temp = nil
 	local treant = nil
 	local clVar = nil
-	local temp7 = nil
+	local temp26 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos23
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	if (getSeedlingCount("when calling getSeedlingCount in CenariusCharacter, line 36") <= 0) then
@@ -491,11 +491,11 @@ function OnCastListener_onCast_CenariusCharacter_fire_onCast_CenariusCharacter1(
 			break
 		end
 		treant = createUnit(unit_getOwner(caster2, "when calling getOwner in CenariusCharacter, line 43"), SummonTreant_TREANT_UNIT_ID, pos2, ({0., }), "when calling createUnit in CenariusCharacter, line 43")
-		temp7 = SummonTreant_TREANT_DURATION
+		temp26 = SummonTreant_TREANT_DURATION
 		clVar = CallbackSingle_doAfter_onCast_CenariusCharacter:create5()
 		CallbackSingle_construct_CallbackSingle(clVar, "when calling construct_CallbackSingle in CenariusCharacter, line 44")
 		clVar.treant = treant
-		doAfter(temp7, clVar, "when calling doAfter in CenariusCharacter, line 44")
+		doAfter(temp26, clVar, "when calling doAfter in CenariusCharacter, line 44")
 		i = (i + 1)
 	end
 	Invigorate_seedlingCount = 0
@@ -1219,8 +1219,8 @@ function OnCastListener_onCast_Hibernate_fire_onCast_Hibernate(this97, caster4, 
 	local healTimer = nil
 	local clVar1 = nil
 	local clVar2 = nil
-	local temp8 = nil
-	local temp9 = nil
+	local temp27 = nil
+	local temp28 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos111
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	level = (unit_getAbilityLevel(caster4, Hibernate_HIBERNATE_ID, "when calling getAbilityLevel in Hibernate, line 67") - 1)
@@ -1231,19 +1231,19 @@ function OnCastListener_onCast_Hibernate_fire_onCast_Hibernate(this97, caster4, 
 	unit_setPathing(caster4, false, "when calling setPathing in Hibernate, line 74")
 	__wurst_safe_UnitAddAbility(caster4, Hibernate_HIBERNATE_BUFF_ID)
 	sfx = addEffect("Abilities\\Spells\\NightElf\\Rejuvenation\\RejuvenationTarget.mdl", caster4, "origin", "when calling addEffect in Hibernate, line 78")
-	temp8 = Hibernate_HEAL_INTERVAL
+	temp27 = Hibernate_HEAL_INTERVAL
 	clVar1 = CallbackPeriodic_doPeriodically_onCast_Hibernate:create24()
 	CallbackPeriodic_construct_CallbackPeriodic(clVar1, "when calling construct_CallbackPeriodic in Hibernate, line 80")
 	clVar1.caster = caster4
 	clVar1.healPerTick = healPerTick
-	healTimer = doPeriodically(temp8, clVar1, "when calling doPeriodically in Hibernate, line 80")
-	temp9 = Hibernate_HIBERNATE_DURATION
+	healTimer = doPeriodically(temp27, clVar1, "when calling doPeriodically in Hibernate, line 80")
+	temp28 = Hibernate_HIBERNATE_DURATION
 	clVar2 = CallbackSingle_doAfter_onCast_Hibernate:create25()
 	CallbackSingle_construct_CallbackSingle(clVar2, "when calling construct_CallbackSingle in Hibernate, line 85")
 	clVar2.healTimer = healTimer
 	clVar2.caster = caster4
 	clVar2.sfx = sfx
-	doAfter(temp9, clVar2, "when calling doAfter in Hibernate, line 85")
+	doAfter(temp28, clVar2, "when calling doAfter in Hibernate, line 85")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -1709,7 +1709,7 @@ function OnCastListener_onCast_SeedBurst_fire_onCast_SeedBurst(this145, caster5,
 	local clVar3 = nil
 	local iterator5 = nil
 	local wrapper1 = nil
-	local temp11 = nil
+	local temp30 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos166
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	targets = LinkedList_new_LinkedList("when calling new_LinkedList in SeedBurst, line 53")
@@ -1734,12 +1734,12 @@ function OnCastListener_onCast_SeedBurst_fire_onCast_SeedBurst(this145, caster5,
 		end
 		wrapper = LLIterator_LLIterator_next(iterator4, "when calling next in SeedBurst, line 62")
 		explodePos = tupleCopy(wrapper.Vec2Wrapper_pos)
-		temp11 = delay
+		temp30 = delay
 		clVar3 = CallbackSingle_doAfter_onCast_SeedBurst:create38()
 		CallbackSingle_construct_CallbackSingle(clVar3, "when calling construct_CallbackSingle in SeedBurst, line 64")
 		clVar3.explodePos = tupleCopy(explodePos)
 		clVar3.caster = caster5
-		doAfter(temp11, clVar3, "when calling doAfter in SeedBurst, line 64")
+		doAfter(temp30, clVar3, "when calling doAfter in SeedBurst, line 64")
 		delay = (delay + SeedBurst_BURST_DELAY)
 	end
 	LLIterator_LLIterator_close(iterator4, "when calling close in SeedBurst, line 62")
@@ -1858,9 +1858,9 @@ function OnCastListener_onCast_SpiritWisps_fire_onCast_SpiritWisps(this156, cast
 	local healTimer1 = nil
 	local clVar5 = nil
 	local clVar6 = nil
-	local temp12 = nil
-	local temp13 = nil
-	local temp14 = nil
+	local temp31 = nil
+	local temp32 = nil
+	local temp33 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos179
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wisps = LinkedList_new_LinkedList("when calling new_LinkedList in SpiritWisps, line 66")
@@ -1879,25 +1879,25 @@ function OnCastListener_onCast_SpiritWisps_fire_onCast_SpiritWisps(this156, cast
 		LinkedList_LinkedList_add(wisps, "when calling add in SpiritWisps, line 75", __wurst_objectToIndex(wisp))
 		i5 = (i5 + 1)
 	end
-	temp12 = SpiritWisps_UPDATE_INTERVAL
+	temp31 = SpiritWisps_UPDATE_INTERVAL
 	clVar4 = CallbackPeriodic_doPeriodically_onCast_SpiritWisps:create42()
 	CallbackPeriodic_construct_CallbackPeriodic(clVar4, "when calling construct_CallbackPeriodic in SpiritWisps, line 78")
 	clVar4.wisps = wisps
 	clVar4.caster = caster6
-	moveTimer = doPeriodically(temp12, clVar4, "when calling doPeriodically in SpiritWisps, line 78")
-	temp13 = SpiritWisps_HEAL_INTERVAL
+	moveTimer = doPeriodically(temp31, clVar4, "when calling doPeriodically in SpiritWisps, line 78")
+	temp32 = SpiritWisps_HEAL_INTERVAL
 	clVar5 = CallbackPeriodic_doPeriodically_onCast_SpiritWisps1:create43()
 	CallbackPeriodic_construct_CallbackPeriodic(clVar5, "when calling construct_CallbackPeriodic in SpiritWisps, line 118")
 	clVar5.caster = caster6
-	healTimer1 = doPeriodically(temp13, clVar5, "when calling doPeriodically in SpiritWisps, line 118")
-	temp14 = SpiritWisps_WISP_DURATION
+	healTimer1 = doPeriodically(temp32, clVar5, "when calling doPeriodically in SpiritWisps, line 118")
+	temp33 = SpiritWisps_WISP_DURATION
 	clVar6 = CallbackSingle_doAfter_onCast_SpiritWisps:create44()
 	CallbackSingle_construct_CallbackSingle(clVar6, "when calling construct_CallbackSingle in SpiritWisps, line 126")
 	clVar6.moveTimer = moveTimer
 	clVar6.healTimer = healTimer1
 	clVar6.wisps = wisps
 	clVar6.caster = caster6
-	doAfter(temp14, clVar6, "when calling doAfter in SpiritWisps, line 126")
+	doAfter(temp33, clVar6, "when calling doAfter in SpiritWisps, line 126")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -2200,13 +2200,13 @@ function OnCastListener_onCast_UrsocCharge_fire_onCast_UrsocCharge(this192, cast
 	local targetPos1 = ({0., 0., })
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos217
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	target6 = EventData_getSpellTargetUnit("when calling getSpellTargetUnit in UrsocCharge, line 65")
-	targetPos1 = tupleCopy(unit_getPos(target6, "when calling getPos in UrsocCharge, line 66"))
-	unit_setXY(caster7, targetPos1, "when calling setXY in UrsocCharge, line 69")
-	flashEffect1(UrsocCharge_CHARGE_SFX, targetPos1, "when calling flashEffect in UrsocCharge, line 71")
-	flashEffect1(UrsocCharge_IMPACT_SFX, targetPos1, "when calling flashEffect in UrsocCharge, line 72")
-	unit_damageTarget(caster7, target6, UrsocCharge_CHARGE_DAMAGE, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS, "when calling damageTarget in UrsocCharge, line 74")
-	InstantDummyCaster_castTarget(unit_getOwner(caster7, "when calling getOwner in UrsocCharge, line 85"), UrsocCharge_CHARGE_STUN_ID, 1, OrderIds_thunderbolt, target6, "when calling castTarget in UrsocCharge, line 85")
+	target6 = EventData_getSpellTargetUnit("when calling getSpellTargetUnit in UrsocCharge, line 64")
+	targetPos1 = tupleCopy(unit_getPos(target6, "when calling getPos in UrsocCharge, line 65"))
+	unit_setXY(caster7, targetPos1, "when calling setXY in UrsocCharge, line 68")
+	flashEffect1(UrsocCharge_CHARGE_SFX, targetPos1, "when calling flashEffect in UrsocCharge, line 70")
+	flashEffect1(UrsocCharge_IMPACT_SFX, targetPos1, "when calling flashEffect in UrsocCharge, line 71")
+	unit_damageTarget(caster7, target6, UrsocCharge_CHARGE_DAMAGE, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS, "when calling damageTarget in UrsocCharge, line 73")
+	InstantDummyCaster_castTarget(unit_getOwner(caster7, "when calling getOwner in UrsocCharge, line 84"), UrsocCharge_CHARGE_STUN_ID, 1, OrderIds_thunderbolt, target6, "when calling castTarget in UrsocCharge, line 84")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -2596,7 +2596,7 @@ function CreateUnitsForPlayer0(__wurst_stackPos229)
 	__wurst_safe_BlzCreateUnitWithSkin(p8, 1164666213, 513.8, 18478.7, 152.000, 1164666213)
 	__wurst_safe_BlzCreateUnitWithSkin(p8, 1697656882, 608.8, 18306.6, 76.335, 1697656882)
 	__wurst_safe_BlzCreateUnitWithSkin(p8, 1697656882, 571.0, 18062.6, 40.706, 1697656882)
-	__wurst_safe_BlzCreateUnitWithSkin(p8, 1697656884, 1286.5, 18023.9, 235.137, 1697656884)
+	__wurst_safe_BlzCreateUnitWithSkin(p8, 1697656884, 1249.3, 18054.5, 235.137, 1697656884)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -4436,7 +4436,7 @@ function initPows(__wurst_stackPos334)
 	local i7 = nil
 	local temp6 = nil
 	local i8 = nil
-	local temp10 = nil
+	local temp7 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos334
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	BitSet_pows[0] = 1
@@ -4452,9 +4452,9 @@ function initPows(__wurst_stackPos334)
 		i7 = (i7 + 1)
 	end
 	i8 = 0
-	temp10 = (BitSet_BITSET_SIZE - 1)
+	temp7 = (BitSet_BITSET_SIZE - 1)
 	while true do
-		if (i8 > temp10) then
+		if (i8 > temp7) then
 			break
 		end
 		int_bitXor(allPows, intEnsure(BitSet_pows[i8]), "when calling bitXor in BitSet, line 19")
@@ -4465,7 +4465,7 @@ end
 
 function init_Bloom(__wurst_stackPos291) 
 	local clVar7 = nil
-	local temp182 = nil
+	local temp11 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos291
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Bloom_HEALING_CLOUD_ID = intEnsure(1095577650)
@@ -4474,10 +4474,10 @@ function init_Bloom(__wurst_stackPos291)
 	Bloom_CLOUD_HEAL = 20.
 	Bloom_CLOUD_DURATION = 10.
 	Bloom_HEAL_INTERVAL = 1.
-	temp182 = Bloom_HEALING_CLOUD_ID
+	temp11 = Bloom_HEALING_CLOUD_ID
 	clVar7 = OnCastListener_onCast_Bloom:create2()
 	OnCastListener_construct_OnCastListener(clVar7, "when calling construct_OnCastListener in Bloom, line 73")
-	EventListener_onCast(temp182, clVar7, "when calling onCast in Bloom, line 73")
+	EventListener_onCast(temp11, clVar7, "when calling onCast in Bloom, line 73")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -4487,8 +4487,8 @@ function spawnCloud(owner, pos1, __wurst_stackPos18)
 	local healTimer2 = nil
 	local clVar8 = nil
 	local clVar9 = nil
-	local temp183 = nil
-	local temp184 = nil
+	local temp21 = nil
+	local temp34 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos18
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	cloud = createUnit(owner, Bloom_CLOUD_UNIT_ID, pos1, ({0., }), "when calling createUnit in Bloom, line 44")
@@ -4500,37 +4500,37 @@ function spawnCloud(owner, pos1, __wurst_stackPos18)
 	sfx1 = widget_addEffect(cloud, Abilities_tranquility, "origin", "when calling addEffect in Bloom, line 53")
 	effect_setScale(sfx1, 1., "when calling setScale in Bloom, line 54")
 	effect_setColor(sfx1, 0, 255, 0, "when calling setColor in Bloom, line 55")
-	temp183 = Bloom_HEAL_INTERVAL
+	temp21 = Bloom_HEAL_INTERVAL
 	clVar8 = CallbackPeriodic_doPeriodically_Bloom:create()
 	CallbackPeriodic_construct_CallbackPeriodic(clVar8, "when calling construct_CallbackPeriodic in Bloom, line 58")
 	clVar8.pos = tupleCopy(pos1)
 	clVar8.owner = owner
-	healTimer2 = doPeriodically(temp183, clVar8, "when calling doPeriodically in Bloom, line 58")
-	temp184 = Bloom_CLOUD_DURATION
+	healTimer2 = doPeriodically(temp21, clVar8, "when calling doPeriodically in Bloom, line 58")
+	temp34 = Bloom_CLOUD_DURATION
 	clVar9 = CallbackSingle_doAfter_Bloom:create1()
 	CallbackSingle_construct_CallbackSingle(clVar9, "when calling construct_CallbackSingle in Bloom, line 66")
 	clVar9.healTimer = healTimer2
 	clVar9.cloud = cloud
 	clVar9.sfx = sfx1
-	doAfter(temp184, clVar9, "when calling doAfter in Bloom, line 66")
+	doAfter(temp34, clVar9, "when calling doAfter in Bloom, line 66")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
 function init_CenariusCharacter(__wurst_stackPos295) 
 	local clVar10 = nil
 	local clVar11 = nil
-	local temp185 = nil
-	local temp186 = nil
+	local temp41 = nil
+	local temp51 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos295
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	temp185 = Invigorate_INVIGORATE_ID
+	temp41 = Invigorate_INVIGORATE_ID
 	clVar10 = OnCastListener_onCast_CenariusCharacter:create3()
 	OnCastListener_construct_OnCastListener(clVar10, "when calling construct_OnCastListener in CenariusCharacter, line 29")
-	EventListener_onCast(temp185, clVar10, "when calling onCast in CenariusCharacter, line 29")
-	temp186 = SummonTreant_SUMMON_TREANT_ID
+	EventListener_onCast(temp41, clVar10, "when calling onCast in CenariusCharacter, line 29")
+	temp51 = SummonTreant_SUMMON_TREANT_ID
 	clVar11 = OnCastListener_onCast_CenariusCharacter1:create4()
 	OnCastListener_construct_OnCastListener(clVar11, "when calling construct_OnCastListener in CenariusCharacter, line 33")
-	EventListener_onCast(temp186, clVar11, "when calling onCast in CenariusCharacter, line 33")
+	EventListener_onCast(temp51, clVar11, "when calling onCast in CenariusCharacter, line 33")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -4577,7 +4577,7 @@ end
 function registerEventId(evnt, __wurst_stackPos347) 
 	local eventId = nil
 	local i9 = nil
-	local temp15 = nil
+	local temp8 = nil
 	local receiver24 = nil
 	local receiver25 = nil
 	local receiver26 = nil
@@ -4612,9 +4612,9 @@ function registerEventId(evnt, __wurst_stackPos347)
 	if (eventid_isMouseEvent(evnt, "when calling isMouseEvent in ClosureEvents, line 270") and not(EventListener_useMouseEvents)) then
 		EventListener_useMouseEvents = true
 		i9 = 0
-		temp15 = (bj_MAX_PLAYERS - 1)
+		temp8 = (bj_MAX_PLAYERS - 1)
 		while true do
-			if (i9 > temp15) then
+			if (i9 > temp8) then
 				break
 			end
 			receiver24 = ClosureEvents_keyTrig
@@ -5161,8 +5161,8 @@ end
 function init_DamageEvent(__wurst_stackPos297) 
 	local clVar13 = nil
 	local clVar14 = nil
-	local temp189 = nil
-	local temp190 = nil
+	local temp81 = nil
+	local temp9 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos297
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	DamageEvent_DETECT_NATIVE_ABILITIES = true
@@ -5175,14 +5175,14 @@ function init_DamageEvent(__wurst_stackPos297)
 	DamageEvent_abort = false
 	DamageEvent_maxPriority = 0
 	DamageEvent_maxUnreducedPriority = 0
-	temp189 = EVENT_PLAYER_UNIT_DAMAGING
+	temp81 = EVENT_PLAYER_UNIT_DAMAGING
 	clVar13 = EventListener_add_DamageEvent:create13()
 	EventListener_construct_EventListener(clVar13, "when calling construct_EventListener in DamageEvent, line 476")
-	EventListener_add(temp189, clVar13, "when calling add in DamageEvent, line 476")
-	temp190 = EVENT_PLAYER_UNIT_DAMAGED
+	EventListener_add(temp81, clVar13, "when calling add in DamageEvent, line 476")
+	temp9 = EVENT_PLAYER_UNIT_DAMAGED
 	clVar14 = EventListener_add_DamageEvent1:create14()
 	EventListener_construct_EventListener(clVar14, "when calling construct_EventListener in DamageEvent, line 477")
-	EventListener_add(temp190, clVar14, "when calling add in DamageEvent, line 477")
+	EventListener_add(temp9, clVar14, "when calling add in DamageEvent, line 477")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -5191,7 +5191,7 @@ function DamageEvent_onUnreducedDamage(__wurst_stackPos67)
 	local attackType1 = nil
 	local dmg = nil
 	local i11 = nil
-	local temp16 = nil
+	local temp10 = nil
 	local listener11 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos67
 	wurst_stack_depth = (wurst_stack_depth + 1)
@@ -5210,9 +5210,9 @@ function DamageEvent_onUnreducedDamage(__wurst_stackPos67)
 	DamageEvent_nextDamageType = 4
 	DamageEvent_nextDamageElement = nil
 	i11 = 0
-	temp16 = DamageEvent_maxUnreducedPriority
+	temp10 = DamageEvent_maxUnreducedPriority
 	while true do
-		if (i11 > temp16) then
+		if (i11 > temp10) then
 			break
 		end
 		listener11 = DamageEvent_firstUnreducedListeners[i11]
@@ -5247,7 +5247,7 @@ end
 function DamageEvent_onDamage(__wurst_stackPos69) 
 	local dmg1 = nil
 	local i12 = nil
-	local temp17 = nil
+	local temp12 = nil
 	local listener12 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos69
 	wurst_stack_depth = (wurst_stack_depth + 1)
@@ -5255,9 +5255,9 @@ function DamageEvent_onDamage(__wurst_stackPos69)
 	if not(DamageEvent_abort) then
 		DamageInstance_DamageInstance_setReducedAmount(dmg1, GetEventDamage(), "when calling setReducedAmount in DamageEvent, line 222")
 		i12 = 0
-		temp17 = DamageEvent_maxPriority
+		temp12 = DamageEvent_maxPriority
 		while true do
-			if (i12 > temp17) then
+			if (i12 > temp12) then
 				break
 			end
 			listener12 = DamageEvent_firstListeners[i12]
@@ -5435,8 +5435,8 @@ function error1(msg, __wurst_stackPos31)
 	local stacktraceStr1 = nil
 	local stacktraceIndex1 = nil
 	local stacktraceLimit1 = nil
-	local temp191 = nil
-	local temp192 = nil
+	local temp101 = nil
+	local temp111 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos31
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	if MagicFunctions_compiletime then
@@ -5448,7 +5448,7 @@ function error1(msg, __wurst_stackPos31)
 			hash = string_getHash(msg, "when calling getHash in ErrorHandling, line 53")
 			if hashtable_hasInt(ErrorHandling_HT, ErrorHandling_PRIMARY_ERROR_KEY, hash, "when calling hasInt in ErrorHandling, line 54") then
 				if ((hashtable_loadInt(ErrorHandling_HT, ErrorHandling_PRIMARY_ERROR_KEY, hash, "when calling loadInt in ErrorHandling, line 56") + ErrorHandling_MUTE_ERROR_DURATION) < GameTimer_currentTime) then
-					temp191 = msg
+					temp101 = msg
 					stacktraceStr = " Stacktrace:"
 					stacktraceIndex = wurst_stack_depth
 					stacktraceLimit = 0
@@ -5466,7 +5466,7 @@ function error1(msg, __wurst_stackPos31)
 					if (stacktraceStr == " Stacktrace:") then
 						stacktraceStr = " Stacktrace: <none>"
 					end
-					Log_error(stringConcat(temp191, stacktraceStr), "when calling error in ErrorHandling, line 58")
+					Log_error(stringConcat(temp101, stacktraceStr), "when calling error in ErrorHandling, line 58")
 					hashtable_saveInt(ErrorHandling_HT, ErrorHandling_PRIMARY_ERROR_KEY, hash, real_toInt(GameTimer_currentTime, "when calling toInt in ErrorHandling, line 59"), "when calling saveInt in ErrorHandling, line 59")
 					hashtable_saveBoolean(ErrorHandling_HT, ErrorHandling_PRIMARY_ERROR_KEY, hash, false, "when calling saveBoolean in ErrorHandling, line 60")
 				elseif hashtable_hasBoolean(ErrorHandling_HT, ErrorHandling_PRIMARY_ERROR_KEY, hash, "when calling hasBoolean in ErrorHandling, line 61") then
@@ -5480,7 +5480,7 @@ function error1(msg, __wurst_stackPos31)
 				end
 			else
 				hashtable_saveInt(ErrorHandling_HT, ErrorHandling_PRIMARY_ERROR_KEY, hash, real_toInt(GameTimer_currentTime, "when calling toInt in ErrorHandling, line 69"), "when calling saveInt in ErrorHandling, line 69")
-				temp192 = stringConcat("Message: ", msg)
+				temp111 = stringConcat("Message: ", msg)
 				stacktraceStr1 = " Stacktrace:"
 				stacktraceIndex1 = wurst_stack_depth
 				stacktraceLimit1 = 0
@@ -5498,7 +5498,7 @@ function error1(msg, __wurst_stackPos31)
 				if (stacktraceStr1 == " Stacktrace:") then
 					stacktraceStr1 = " Stacktrace: <none>"
 				end
-				Log_error(stringConcat(temp192, stacktraceStr1), "when calling error in ErrorHandling, line 70")
+				Log_error(stringConcat(temp111, stacktraceStr1), "when calling error in ErrorHandling, line 70")
 			end
 		end
 		ErrorHandling_lastError = msg
@@ -6035,24 +6035,24 @@ end
 
 function init_HeroTrainer(__wurst_stackPos303) 
 	local clVar16 = nil
-	local temp193 = nil
+	local temp121 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos303
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	HeroTrainer_TAVERN_ID = 1848651827
-	temp193 = EVENT_PLAYER_UNIT_TRAIN_FINISH
+	temp121 = EVENT_PLAYER_UNIT_TRAIN_FINISH
 	clVar16 = EventListener_add_HeroTrainer:create22()
 	EventListener_construct_EventListener(clVar16, "when calling construct_EventListener in HeroTrainer, line 9")
-	EventListener_add(temp193, clVar16, "when calling add in HeroTrainer, line 9")
+	EventListener_add(temp121, clVar16, "when calling add in HeroTrainer, line 9")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
 function init_Hibernate(__wurst_stackPos304) 
 	local clVar17 = nil
-	local temp194 = nil
+	local temp13 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos304
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	Hibernate_HIBERNATE_ID = intEnsure(1095577700)
-	Hibernate_HIBERNATE_BUFF_ID = intEnsure(1112354867)
+	Hibernate_HIBERNATE_ID = intEnsure(1095577654)
+	Hibernate_HIBERNATE_BUFF_ID = intEnsure(1112354865)
 	Hibernate_HIBERNATE_DURATION = 4.
 	Hibernate_HEAL_INTERVAL = 0.1
 	Hibernate_ARMOR_BONUS = 20.
@@ -6062,10 +6062,10 @@ function init_Hibernate(__wurst_stackPos304)
 	Hibernate_HP_FLAT[0] = 125.
 	Hibernate_HP_FLAT[1] = 175.
 	Hibernate_HP_FLAT[2] = 250.
-	temp194 = Hibernate_HIBERNATE_ID
+	temp13 = Hibernate_HIBERNATE_ID
 	clVar17 = OnCastListener_onCast_Hibernate:create23()
 	OnCastListener_construct_OnCastListener(clVar17, "when calling construct_OnCastListener in Hibernate, line 65")
-	EventListener_onCast(temp194, clVar17, "when calling onCast in Hibernate, line 65")
+	EventListener_onCast(temp13, clVar17, "when calling onCast in Hibernate, line 65")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -6093,8 +6093,8 @@ function init_InstantDummyCaster(__wurst_stackPos306)
 	local receiver37 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos306
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	InstantDummyCaster_DUMMY_CASTER_UNIT_ID = intEnsure(2016423986)
-	InstantDummyCaster_DUMMY_ROOT_ABIL_ID = intEnsure(1095577657)
+	InstantDummyCaster_DUMMY_CASTER_UNIT_ID = intEnsure(2016423985)
+	InstantDummyCaster_DUMMY_ROOT_ABIL_ID = intEnsure(1095577655)
 	receiver33 = createUnit(Basics_DUMMY_PLAYER, InstantDummyCaster_DUMMY_CASTER_UNIT_ID, MapBounds_boundMax, ({0., }), "when calling createUnit in InstantDummyCaster, line 97")
 	unit_setPathing(receiver33, false, "when calling setPathing in InstantDummyCaster, line 98")
 	receiver34 = receiver33
@@ -6389,7 +6389,7 @@ end
 
 function init_OnUnitEnterLeave(__wurst_stackPos288) 
 	local i21 = nil
-	local temp18 = nil
+	local temp14 = nil
 	local clVar20 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos288
 	wurst_stack_depth = (wurst_stack_depth + 1)
@@ -6398,9 +6398,9 @@ function init_OnUnitEnterLeave(__wurst_stackPos288)
 	OnUnitEnterLeave_tempUnitsCount = 0
 	OnUnitEnterLeave_ABILITY_ID = intEnsure(1095577649)
 	i21 = 0
-	temp18 = (bj_MAX_PLAYER_SLOTS - 1)
+	temp14 = (bj_MAX_PLAYER_SLOTS - 1)
 	while true do
-		if (i21 > temp18) then
+		if (i21 > temp14) then
 			break
 		end
 		player_setAbilityAvailable(Player_players[i21], OnUnitEnterLeave_ABILITY_ID, false, "when calling setAbilityAvailable in OnUnitEnterLeave, line 64")
@@ -6506,13 +6506,13 @@ end
 
 function initPlayerArray(__wurst_stackPos458) 
 	local i22 = nil
-	local temp19 = nil
+	local temp15 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos458
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	i22 = 0
-	temp19 = (bj_MAX_PLAYER_SLOTS - 1)
+	temp15 = (bj_MAX_PLAYER_SLOTS - 1)
 	while true do
-		if (i22 > temp19) then
+		if (i22 > temp15) then
 			break
 		end
 		Player_players[i22] = Player(i22)
@@ -6617,13 +6617,13 @@ end
 
 function finishPreload(__wurst_stackPos161) 
 	local clVar22 = nil
-	local temp196 = nil
+	local temp151 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos161
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	unit_remove(Preloader_dum, "when calling remove in Preloader, line 47")
-	temp196 = Preloader_dumg
+	temp151 = Preloader_dumg
 	clVar22 = ForGroupCallback_forEachFrom_Preloader:create34()
-	group_forEachFrom(temp196, clVar22, "when calling forEachFrom in Preloader, line 48")
+	group_forEachFrom(temp151, clVar22, "when calling forEachFrom in Preloader, line 48")
 	group_destr(Preloader_dumg, "when calling destr in Preloader, line 49")
 	Preloader_dumg = nil
 	wurst_stack_depth = (wurst_stack_depth - 1)
@@ -6638,20 +6638,20 @@ function init_Printing(__wurst_stackPos255)
 end
 
 function Loglevel_getTag(this262, __wurst_stackPos464) 
-	local temp20 = nil
+	local temp16 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos464
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	temp20 = this262
-	if (temp20 == 0) then
+	temp16 = this262
+	if (temp16 == 0) then
 		wurst_stack_depth = (wurst_stack_depth - 1)
 		return "|cffADADADtrace|r"
-	elseif (temp20 == 1) then
+	elseif (temp16 == 1) then
 		wurst_stack_depth = (wurst_stack_depth - 1)
 		return "|cff2685DCdebug|r"
-	elseif (temp20 == 2) then
+	elseif (temp16 == 2) then
 		wurst_stack_depth = (wurst_stack_depth - 1)
 		return "|cffFFCC00info|r"
-	elseif (temp20 == 3) then
+	elseif (temp16 == 3) then
 		wurst_stack_depth = (wurst_stack_depth - 1)
 		return "|cffF47E3Ewarning|r"
 	else
@@ -6801,10 +6801,10 @@ function init_Recycle(__wurst_stackPos307)
 	local iterator13 = nil
 	local u26 = nil
 	local clVar23 = nil
-	local temp197 = nil
+	local temp161 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos307
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	Recycle_RECYCLE_ID = intEnsure(1095577697)
+	Recycle_RECYCLE_ID = intEnsure(1095577700)
 	group_enumUnitsOfType(Group_ENUM_GROUP, 1697656882, nil, "when calling enumUnitsOfType in Recycle, line 36")
 	iterator13 = group_iterator(Group_ENUM_GROUP, "when calling iterator in Recycle, line 37")
 	while true do
@@ -6815,10 +6815,10 @@ function init_Recycle(__wurst_stackPos307)
 		__wurst_safe_UnitAddAbility(u26, Recycle_RECYCLE_ID)
 	end
 	GroupIterator_GroupIterator_close(iterator13, "when calling close in Recycle, line 37")
-	temp197 = EVENT_PLAYER_UNIT_DEATH
+	temp161 = EVENT_PLAYER_UNIT_DEATH
 	clVar23 = EventListener_add_Recycle:create36()
 	EventListener_construct_EventListener(clVar23, "when calling construct_EventListener in Recycle, line 41")
-	EventListener_add(temp197, clVar23, "when calling add in Recycle, line 41")
+	EventListener_add(temp161, clVar23, "when calling add in Recycle, line 41")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -6854,9 +6854,9 @@ function registerPlayerUnitEvent(p2, filter2, condition, action, __wurst_stackPo
 	local hid = nil
 	local k = nil
 	local cond_result4 = nil
-	local temp198 = nil
-	local temp199 = nil
-	local temp0 = nil
+	local temp17 = nil
+	local temp18 = nil
+	local temp19 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos34
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	hid = handle_getHandleId(p2, "when calling getHandleId in RegisterEvents, line 17")
@@ -6867,15 +6867,15 @@ function registerPlayerUnitEvent(p2, filter2, condition, action, __wurst_stackPo
 			if (k < 0) then
 				break
 			end
-			temp198 = RegisterEvents_t[hid]
-			temp199 = Player_players[k]
-			temp0 = p2
+			temp17 = RegisterEvents_t[hid]
+			temp18 = Player_players[k]
+			temp19 = p2
 			if not((filter2 == nil)) then
 				cond_result4 = __wurst_safe_Filter(filter2)
 			else
 				cond_result4 = nil
 			end
-			trigger_registerPlayerUnitEvent(temp198, temp199, temp0, cond_result4, "when calling registerPlayerUnitEvent in RegisterEvents, line 21")
+			trigger_registerPlayerUnitEvent(temp17, temp18, temp19, cond_result4, "when calling registerPlayerUnitEvent in RegisterEvents, line 21")
 			k = (k - 1)
 		end
 	end
@@ -6899,7 +6899,7 @@ end
 
 function init_SeedBurst(__wurst_stackPos294) 
 	local clVar24 = nil
-	local temp110 = nil
+	local temp20 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos294
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	SeedBurst_SEED_BURST_ID = intEnsure(1095577653)
@@ -6909,10 +6909,10 @@ function init_SeedBurst(__wurst_stackPos294)
 	SeedBurst_BURST_SFX = "Abilities\\Spells\\Other\\Entangle\\EntangledTarget.mdl"
 	SeedBurst_EXPLOSION_SFX = "Abilities\\Weapons\\GryphonRider\\GryphonRiderMissileArt.mdl"
 	SeedBurst_INVIGORATE_BUFF_ID = 1114793322
-	temp110 = SeedBurst_SEED_BURST_ID
+	temp20 = SeedBurst_SEED_BURST_ID
 	clVar24 = OnCastListener_onCast_SeedBurst:create37()
 	OnCastListener_construct_OnCastListener(clVar24, "when calling construct_OnCastListener in SeedBurst, line 52")
-	EventListener_onCast(temp110, clVar24, "when calling onCast in SeedBurst, line 52")
+	EventListener_onCast(temp20, clVar24, "when calling onCast in SeedBurst, line 52")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -6920,10 +6920,10 @@ function init_ShieldBash(__wurst_stackPos308)
 	local clVar25 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos308
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	intEnsure(1112354865)
-	ShieldBash_MY_ABILITY_ID = intEnsure(1095577654)
-	intEnsure(1095577655)
-	intEnsure(2016423985)
+	intEnsure(1112354868)
+	ShieldBash_MY_ABILITY_ID = intEnsure(1095577698)
+	intEnsure(1095577699)
+	intEnsure(2016423986)
 	ShieldBash_ARMOR_BONUS = 4
 	ShieldBash_REFLECT_CHANCE = 0.25
 	ShieldBash_REFLECT_DAMAGE = 40.
@@ -6961,11 +6961,11 @@ end
 
 function init_SpiritWisps(__wurst_stackPos301) 
 	local clVar26 = nil
-	local temp21 = nil
+	local temp211 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos301
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	SpiritWisps_SPIRIT_WISPS_ID = intEnsure(1095577701)
-	SpiritWisps_WISP_BUFF_ID = intEnsure(1112354868)
+	SpiritWisps_SPIRIT_WISPS_ID = intEnsure(1095577697)
+	SpiritWisps_WISP_BUFF_ID = intEnsure(1112354867)
 	SpiritWisps_WISP_UNIT_ID = UnitIds_wisp
 	SpiritWisps_WISP_COUNT = 3
 	SpiritWisps_WISP_DURATION = 10.
@@ -6974,10 +6974,10 @@ function init_SpiritWisps(__wurst_stackPos301)
 	SpiritWisps_HEAL_INTERVAL = 1.
 	SpiritWisps_ORBIT_RADIUS = 150.
 	SpiritWisps_UPDATE_INTERVAL = 0.05
-	temp21 = SpiritWisps_SPIRIT_WISPS_ID
+	temp211 = SpiritWisps_SPIRIT_WISPS_ID
 	clVar26 = OnCastListener_onCast_SpiritWisps:create41()
 	OnCastListener_construct_OnCastListener(clVar26, "when calling construct_OnCastListener in SpiritWisps, line 61")
-	EventListener_onCast(temp21, clVar26, "when calling onCast in SpiritWisps, line 61")
+	EventListener_onCast(temp211, clVar26, "when calling onCast in SpiritWisps, line 61")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -7219,7 +7219,7 @@ end
 function init_ThickBark(__wurst_stackPos310) 
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos310
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	intEnsure(1095577656)
+	intEnsure(1095577701)
 	intEnsure(1380790321)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
@@ -7975,19 +7975,19 @@ end
 
 function init_UrsocCharge(__wurst_stackPos311) 
 	local clVar27 = nil
-	local temp31 = nil
+	local temp221 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos311
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	UrsocCharge_URSOC_CHARGE_ID = intEnsure(1095577698)
-	UrsocCharge_CHARGE_STUN_ID = intEnsure(1095577699)
+	UrsocCharge_URSOC_CHARGE_ID = intEnsure(1095577656)
+	UrsocCharge_CHARGE_STUN_ID = intEnsure(1095577657)
 	intEnsure(1112354866)
 	UrsocCharge_CHARGE_DAMAGE = 100.
 	UrsocCharge_CHARGE_SFX = "Abilities\\Spells\\Human\\Charge\\ChargeTarget.mdl"
 	UrsocCharge_IMPACT_SFX = "Abilities\\Spells\\Human\\Thunderclap\\ThunderClapCaster.mdl"
-	temp31 = UrsocCharge_URSOC_CHARGE_ID
+	temp221 = UrsocCharge_URSOC_CHARGE_ID
 	clVar27 = OnCastListener_onCast_UrsocCharge:create47()
-	OnCastListener_construct_OnCastListener(clVar27, "when calling construct_OnCastListener in UrsocCharge, line 64")
-	EventListener_onCast(temp31, clVar27, "when calling onCast in UrsocCharge, line 64")
+	OnCastListener_construct_OnCastListener(clVar27, "when calling construct_OnCastListener in UrsocCharge, line 63")
+	EventListener_onCast(temp221, clVar27, "when calling onCast in UrsocCharge, line 63")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -8195,20 +8195,6 @@ function initCompiletimeState_0(__wurst_stackPos503)
 	__wurst_SaveInteger(hashtable_compiletime1, 1, 597637742, 14)
 	__wurst_SaveInteger(hashtable_compiletime1, 1, 789744696, 15)
 	__wurst_SaveStr(hashtable_compiletime1, 2, 0, "")
-	__wurst_SaveStr(hashtable_compiletime1, 2, -263269125, "AM03")
-	__wurst_SaveStr(hashtable_compiletime1, 2, -540326714, "AInv")
-	__wurst_SaveStr(hashtable_compiletime1, 2, 1032637, "Ault")
-	__wurst_SaveStr(hashtable_compiletime1, 2, -644213493, "AM04")
-	__wurst_SaveStr(hashtable_compiletime1, 2, -2032846969, "AM05")
-	__wurst_SaveStr(hashtable_compiletime1, 2, -844489484, "AM02")
-	__wurst_SaveStr(hashtable_compiletime1, 2, 1282521876, "Aloc")
-	__wurst_SaveStr(hashtable_compiletime1, 2, 512215473, "Agho")
-	__wurst_SaveStr(hashtable_compiletime1, 2, -1945487672, "AM0a")
-	__wurst_SaveStr(hashtable_compiletime1, 2, -809044371, "A001")
-	__wurst_SaveStr(hashtable_compiletime1, 2, 500847566, "AM0b")
-	__wurst_SaveStr(hashtable_compiletime1, 2, 16258522, "A002")
-	__wurst_SaveStr(hashtable_compiletime1, 2, 960411499, "AM0d")
-	__wurst_SaveStr(hashtable_compiletime1, 2, -1432153523, "AHav")
 	__wurst_SaveInteger(hashtable_compiletime1, 3, 0, 0)
 	__wurst_SaveInteger(hashtable_compiletime1, 3, 1, 0)
 	__wurst_SaveInteger(hashtable_compiletime1, 3, 2, 0)
@@ -8273,11 +8259,25 @@ function initCompiletimeState_0(__wurst_stackPos503)
 	__wurst_SaveInteger(hashtable_compiletime1, 3, 61, 0)
 	__wurst_SaveInteger(hashtable_compiletime1, 3, 62, 0)
 	__wurst_SaveInteger(hashtable_compiletime1, 3, 63, 0)
-	__wurst_SaveStr(hashtable_compiletime1, 2, -1343687314, "AM0e")
+	__wurst_SaveStr(hashtable_compiletime1, 2, -263269125, "AM03")
+	__wurst_SaveStr(hashtable_compiletime1, 2, -540326714, "AInv")
+	__wurst_SaveStr(hashtable_compiletime1, 2, 1032637, "Ault")
+	__wurst_SaveStr(hashtable_compiletime1, 2, -644213493, "AM04")
+	__wurst_SaveStr(hashtable_compiletime1, 2, -2032846969, "AM05")
+	__wurst_SaveStr(hashtable_compiletime1, 2, -844489484, "AM02")
+	__wurst_SaveStr(hashtable_compiletime1, 2, 1282521876, "Aloc")
+	__wurst_SaveStr(hashtable_compiletime1, 2, 512215473, "Agho")
+	__wurst_SaveStr(hashtable_compiletime1, 2, -809044371, "A001")
+	__wurst_SaveStr(hashtable_compiletime1, 2, 264091612, "AM08")
+	__wurst_SaveStr(hashtable_compiletime1, 2, 16258522, "A002")
+	__wurst_SaveStr(hashtable_compiletime1, 2, -1194720164, "AM06")
+	__wurst_SaveStr(hashtable_compiletime1, 2, -1432153523, "AHav")
+	__wurst_SaveStr(hashtable_compiletime1, 2, -1945487672, "AM0a")
 	__wurst_SaveStr(hashtable_compiletime1, 2, 79905753, "ACm2")
 	__wurst_SaveStr(hashtable_compiletime1, 2, -849326328, "Aien")
 	__wurst_SaveStr(hashtable_compiletime1, 2, -690706802, "Aadm")
 	__wurst_SaveStr(hashtable_compiletime1, 2, 860156185, "Aspo")
+	__wurst_SaveStr(hashtable_compiletime1, 2, 960411499, "AM0d")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
