@@ -18,6 +18,7 @@ constant real CHARGE_STUN_DURATION = 1.
 constant real CHARGE_SPEED = 900.
 constant string CHARGE_SFX = "Abilities\\Spells\\Human\\Charge\\ChargeTarget.mdl"
 constant string IMPACT_SFX = "Abilities\\Spells\\Human\\Thunderclap\\ThunderClapCaster.mdl"
+constant string CHARGE_CUSTOM_ICON = "war3mapImported\\BTNCharge.blp"
 
 @compiletime function genBuff()
     new BuffDefinition(CHARGE_STUN_BUFF_ID, 'BNso')
@@ -41,8 +42,8 @@ constant string IMPACT_SFX = "Abilities\\Spells\\Human\\Thunderclap\\ThunderClap
         ..setTooltipNormalExtended(1, "Ursoc charges at the target enemy dealing " + CHARGE_DAMAGE.toInt().toString() + " damage and stunning for " + CHARGE_STUN_DURATION.toInt().toString() + " second.")
         ..setTooltipLearn("Learn Mauling Charge")
         ..setTooltipLearnExtended("Ursoc charges at the target enemy dealing " + CHARGE_DAMAGE.toInt().toString() + " damage and stunning for " + CHARGE_STUN_DURATION.toInt().toString() + " second.")
-        ..setIconNormal(Icons.bTNCharm)
-        ..setIconResearch(Icons.bTNCharm)
+        ..setIconNormal(CHARGE_CUSTOM_ICON)
+        ..setIconResearch(CHARGE_CUSTOM_ICON)
         ..setButtonPositionNormalX(0)
         ..setButtonPositionNormalY(0)
         ..setCooldown(1, 10.)

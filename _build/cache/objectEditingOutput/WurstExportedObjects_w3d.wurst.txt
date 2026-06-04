@@ -1,0 +1,28 @@
+package WurstExportedObjects_w3d
+import ObjEditingNatives
+import DoodadObjEditing
+
+// Modified Table (contains all custom objects)
+
+@compiletime function create_w3d_D000()
+	new DoodadDefinition('D000', 'LWw0')
+	..setName(0, "Fel Waterfall")
+	// TODO no wrapper: 	..setLvlDataInt("dvb1", 1, 0, 50)
+	// TODO no wrapper: 	..setLvlDataInt("dvg1", 1, 0, 200)
+	// TODO no wrapper: 	..setLvlDataInt("dvr1", 1, 0, 50)
+	..setModel(0, "war3mapImported\\Prop_WaterfallNOSPLASH.mdl")
+
+
+// Original Table (contains all modified default/melee objects)
+// These are emitted when createObjectDefinition uses the same base/new id.
+
+@compiletime function create_w3d_CRrs()
+	new DoodadDefinition('CRrs', 'CRrs')
+	..setPathTexture(0, "")
+
+
+@compiletime function create_w3d_CRrk()
+	new DoodadDefinition('CRrk', 'CRrk')
+	..setPathTexture(0, "")
+
+

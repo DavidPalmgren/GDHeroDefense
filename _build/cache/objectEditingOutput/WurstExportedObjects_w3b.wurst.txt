@@ -1,0 +1,14 @@
+package WurstExportedObjects_w3b
+import ObjEditingNatives
+import DestructableObjEditing
+
+// Modified Table (contains all custom objects)
+
+// Original Table (contains all modified default/melee objects)
+// These are emitted when createObjectDefinition uses the same base/new id.
+
+@compiletime function create_w3b_CTtc()
+	new DestructableDefinition('CTtc', 'CTtc')
+	..setPath("")
+
+
