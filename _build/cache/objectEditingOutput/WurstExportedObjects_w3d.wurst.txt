@@ -4,8 +4,8 @@ import DoodadObjEditing
 
 // Modified Table (contains all custom objects)
 
-@compiletime function create_w3d_D000()
-	new DoodadDefinition('D000', 'LWw0')
+@compiletime function create_w3d_D001()
+	new DoodadDefinition('D001', 'LWw0')
 	..setName(0, "Fel Waterfall")
 	// TODO no wrapper: 	..setLvlDataInt("dvb1", 1, 0, 50)
 	// TODO no wrapper: 	..setLvlDataInt("dvg1", 1, 0, 200)
@@ -23,6 +23,11 @@ import DoodadObjEditing
 
 @compiletime function create_w3d_CRrk()
 	new DoodadDefinition('CRrk', 'CRrk')
+	..setPathTexture(0, "")
+
+
+@compiletime function create_w3d_CRfs()
+	new DoodadDefinition('CRfs', 'CRfs')
 	..setPathTexture(0, "")
 
 
