@@ -84,6 +84,9 @@ import UnitObjEditing
 	..setHotkey("Q")
 	..setNormalAbilities("AM0a")
 	..setNormalAbilities("AM0a")
+	..setNormalAbilities("AM0a")
+	..setNormalAbilities("AM0a")
+	..setNormalAbilities("AM0a")
 
 
 @compiletime function create_w3u_E003()
@@ -114,6 +117,12 @@ import UnitObjEditing
 	..setHeroAbilities("AM0b,A002,AM0d,AHav")
 	..setNormalAbilities("A001,AInv,Ault")
 	..setHeroAbilities("AM0b,A002,AM0d,AHav")
+	..setNormalAbilities("A001,AInv,Ault")
+	..setHeroAbilities("AM0b,A002,AM0d,AHav")
+	..setNormalAbilities("A001,AInv,Ault")
+	..setHeroAbilities("AM0b,A002,AM0d,AHav")
+	..setNormalAbilities("A001,AInv,Ault")
+	..setHeroAbilities("AM0b,A002,AM0d,AHav")
 
 
 @compiletime function create_w3u_e004()
@@ -121,6 +130,9 @@ import UnitObjEditing
 	..setManaInitialAmount(150)
 	..setName("DryadCaster")
 	..setModelFile("war3mapImported\\SylvanEnchantress.mdl")
+	..setNormalAbilities("AM0e,AInv,Ault,ACm2,Aien,Aadm,Aspo")
+	..setNormalAbilities("AM0e,AInv,Ault,ACm2,Aien,Aadm,Aspo")
+	..setNormalAbilities("AM0e,AInv,Ault,ACm2,Aien,Aadm,Aspo")
 	..setNormalAbilities("AM0e,AInv,Ault,ACm2,Aien,Aadm,Aspo")
 	..setNormalAbilities("AM0e,AInv,Ault,ACm2,Aien,Aadm,Aspo")
 
@@ -187,6 +199,12 @@ import UnitObjEditing
 
 @compiletime function create_w3u_Ekee()
 	new HeroDefinition('Ekee', 'Ekee')
+	..setNormalAbilities("AM03,AInv,Ault")
+	..setHeroAbilities("AM04,AM05,AM02")
+	..setNormalAbilities("AM03,AInv,Ault")
+	..setHeroAbilities("AM04,AM05,AM02")
+	..setNormalAbilities("AM03,AInv,Ault")
+	..setHeroAbilities("AM04,AM05,AM02")
 	..setNormalAbilities("AM03,AInv,Ault")
 	..setHeroAbilities("AM04,AM05,AM02")
 	..setNormalAbilities("AM03,AInv,Ault")

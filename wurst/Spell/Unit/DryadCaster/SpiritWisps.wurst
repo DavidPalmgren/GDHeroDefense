@@ -8,6 +8,7 @@ import ClosureTimers
 import GroupUtils
 import StringUtils
 import LinkedList
+import ObjectIds
 
 public constant SPIRIT_WISPS_ID = compiletime(ABIL_ID_GEN.next())
 public constant WISP_BUFF_ID = compiletime(BUFF_ID_GEN.next())
@@ -45,20 +46,20 @@ constant real UPDATE_INTERVAL = 0.05 // how often wisps reposition
         ..setManaCost(1, 70)
         ..setDamageIncrease(1, 0.)
         ..setAreaofEffect(1, 0.)
-        ..setDurationNormal(1, 0.)
+        ..setDurationNormal(1, 10.)
         ..setDurationHero(1, 0.)
-        ..setBuffs(1, "")
+        ..setBuffs(1, toRawCode(WISP_BUFF_ID))
         ..setRequirements("")
         ..setRequirementsLevels("")
         ..setRequiredLevel(1)
         ..setLevelSkipRequirement(2)
-        ..setHeroAbility(true)
+        ..setHeroAbility(false)
         ..setItemAbility(false)
 
 init
     EventListener.onCast(SPIRIT_WISPS_ID) (caster) ->
         // Add buff icon to caster
-        UnitAddAbility(caster, WISP_BUFF_ID)
+        //UnitAddAbility(caster, WISP_BUFF_ID)
 
         // Spawn 3 wisps evenly spaced around caster
         let wisps = new LinkedList<unit>()
@@ -67,8 +68,8 @@ init
             let spawnPos = caster.getPos().polarOffset(angle(startAngle), ORBIT_RADIUS)
             let wisp = createUnit(caster.getOwner(), WISP_UNIT_ID, spawnPos, angle(0.))
             wisp.addAbility('Aloc')
-            wisp.setVertexColor(100, 200, 255, 200)  // light blue tint
-            wisp.setScale(0.4)
+            //wisp.setVertexColor(100, 200, 255, 200)  // light blue tint
+            //wisp.setScale(1)
             let sfx = wisp.addEffect("Doodads\\Cinematic\\GlowingRunes\\GlowingRunes2.mdl", "origin")
             wisps.add(wisp)
 

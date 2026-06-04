@@ -290,14 +290,14 @@ import AbilityObjEditing
 	..setManaCost(1, 70)
 	..setDamageIncrease(1, 0.0)
 	..setAreaofEffect(1, 0.0)
-	..setDurationNormal(1, 0.0)
+	..setDurationNormal(1, 10.0)
 	..setDurationHero(1, 0.0)
-	..setBuffs(1, "")
+	..setBuffs(1, "BM04")
 	..setRequirements("")
 	..setRequirementsLevels("")
 	..setRequiredLevel(1)
 	..setLevelSkipRequirement(2)
-	..setHeroAbility(true)
+	..setHeroAbility(false)
 	..setItemAbility(false)
 
 
