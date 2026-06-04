@@ -370,8 +370,6 @@ function CreateUnitsForPlayer0 takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'e002', 928.4, -947.9, 202.847, 'e002' )
     set u = BlzCreateUnitWithSkin( p, 'esen', 892.6, -400.2, 69.117, 'esen' )
     set u = BlzCreateUnitWithSkin( p, 'esen', 1066.0, -511.7, 192.530, 'esen' )
-    set u = BlzCreateUnitWithSkin( p, 'E003', 660.2, -513.6, 73.677, 'E003' )
-    set u = BlzCreateUnitWithSkin( p, 'Ekee', 611.6, -730.9, 152.000, 'Ekee' )
     set u = BlzCreateUnitWithSkin( p, 'e002', 706.7, -902.9, 76.335, 'e002' )
     set u = BlzCreateUnitWithSkin( p, 'e002', 668.8, -1147.0, 40.706, 'e002' )
 endfunction
@@ -523,6 +521,8 @@ function CreateNeutralPassiveBuildings takes nothing returns nothing
 
     set u = BlzCreateUnitWithSkin( p, 'nfr1', 5312.0, -512.0, 270.000, 'nfr1' )
     set u = BlzCreateUnitWithSkin( p, 'nfr2', 5632.0, -512.0, 270.000, 'nfr2' )
+    set u = BlzCreateUnitWithSkin( p, 'n003', 1280.0, -960.0, 270.000, 'n003' )
+    call SetUnitColor( u, ConvertPlayerColor(0) )
     set u = BlzCreateUnitWithSkin( p, 'nfr1', 3008.0, -896.0, 270.000, 'nfr1' )
     set u = BlzCreateUnitWithSkin( p, 'nmg1', -5792.0, 4000.0, 270.000, 'nmg1' )
     set u = BlzCreateUnitWithSkin( p, 'nmg1', -5920.0, 3808.0, 270.000, 'nmg1' )
