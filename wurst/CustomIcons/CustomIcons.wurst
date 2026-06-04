@@ -1,0 +1,6 @@
+package CustomIcons
+
+public class CustomIcons
+  static constant BTNCHARGE_ICON = "war3mapImported\\BTNCharge.blp"
+  static constant DISBTN_CHARGE_ICON = "war3mapImported\\DISBTNCharge.blp"
+

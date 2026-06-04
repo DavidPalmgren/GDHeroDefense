@@ -8,6 +8,7 @@ import InstantDummyCaster
 import Orders
 import BuffObjEditing
 import ObjectIds
+import CustomIcons
 
 public constant URSOC_CHARGE_ID = compiletime(ABIL_ID_GEN.next())
 public constant CHARGE_STUN_ID = compiletime(ABIL_ID_GEN.next())
@@ -18,7 +19,12 @@ constant real CHARGE_STUN_DURATION = 1.
 constant real CHARGE_SPEED = 900.
 constant string CHARGE_SFX = "Abilities\\Spells\\Human\\Charge\\ChargeTarget.mdl"
 constant string IMPACT_SFX = "Abilities\\Spells\\Human\\Thunderclap\\ThunderClapCaster.mdl"
-constant string CHARGE_CUSTOM_ICON = "war3mapImported\\BTNCharge.blp"
+constant string CHARGE_CUSTOM_ICON = "ReplaceableTextures\\CommandButtons\\BTNCharge.blp"
+constant string DISABLED_CUSTOM_ICON = "ReplaceableTextures\\CommandButtonsDisabled\\DISBTNCharge.blp"
+
+
+
+
 
 @compiletime function genBuff()
     new BuffDefinition(CHARGE_STUN_BUFF_ID, 'BNso')
@@ -37,21 +43,45 @@ constant string CHARGE_CUSTOM_ICON = "war3mapImported\\BTNCharge.blp"
 
 @compiletime function genAbility()
     new AbilityDefinitionMountainKingThunderBolt(URSOC_CHARGE_ID)
+        ..setLevels(3)
         ..setName("Mauling Charge")
         ..setTooltipNormal(1, "Mauling Charge")
-        ..setTooltipNormalExtended(1, "Ursoc charges at the target enemy dealing " + CHARGE_DAMAGE.toInt().toString() + " damage and stunning for " + CHARGE_STUN_DURATION.toInt().toString() + " second.")
-        ..setTooltipLearn("Learn Mauling Charge")
-        ..setTooltipLearnExtended("Ursoc charges at the target enemy dealing " + CHARGE_DAMAGE.toInt().toString() + " damage and stunning for " + CHARGE_STUN_DURATION.toInt().toString() + " second.")
+        ..setTooltipNormal(2, "Mauling Charge")
+        ..setTooltipNormal(3, "Mauling Charge")
+        ..setTooltipNormalExtended(1, "Ursoc charges at the target enemy dealing 100 damage and stunning for 2 seconds, half on heroes.")
+        ..setTooltipNormalExtended(2, "Ursoc charges at the target enemy dealing 175 damage and stunning for 3 seconds, half on heroes.")
+        ..setTooltipNormalExtended(3, "Ursoc charges at the target enemy dealing 250 damage and stunning for 4 seconds, half on heroes.")
+        ..setTooltipLearn("Learn Mauling Charge - [|cffffcc00Level %d|r]")
+        ..setTooltipLearnExtended("Ursoc charges at the target enemy dealing damage and stunning them. |n|n|cffffcc00Level 1|r - <AHtb,DataA1> damage, <AHtb,Dur1> second stun. |n|cffffcc00Level 2|r - <AHtb,DataA2> damage, <AHtb,Dur2> second stun. |n|cffffcc00Level 3|r - <AHtb,DataA3> damage, <AHtb,Dur3> second stun.")
         ..setIconNormal(CHARGE_CUSTOM_ICON)
         ..setIconResearch(CHARGE_CUSTOM_ICON)
+        ..setIconTurnOff(DISABLED_CUSTOM_ICON)
         ..setButtonPositionNormalX(0)
         ..setButtonPositionNormalY(0)
-        ..setCooldown(1, 10.)
+        // Level 1
+        ..setCooldown(1, 12.)
         ..setManaCost(1, 60)
-        ..setDamage(1, 0)
+        ..setDamage(1, 100)
         ..setDurationNormal(1, 2.)
         ..setDurationHero(1, 1.)
+        ..setCastRange(1, 700.)
+        // Level 2
+        ..setCooldown(2, 10.)
+        ..setManaCost(2, 70)
+        ..setDamage(2, 175)
+        ..setDurationNormal(2, 3.)
+        ..setDurationHero(2, 1.5)
+        ..setCastRange(2, 800.)
+        // Level 3
+        ..setCooldown(3, 8.)
+        ..setManaCost(3, 80)
+        ..setDamage(3, 250)
+        ..setDurationNormal(3, 4.)
+        ..setDurationHero(3, 2.)
+        ..setCastRange(3, 900.)
         ..setBuffs(1, toRawCode(CHARGE_STUN_BUFF_ID))
+        ..setBuffs(2, toRawCode(CHARGE_STUN_BUFF_ID))
+        ..setBuffs(3, toRawCode(CHARGE_STUN_BUFF_ID))
         ..setRequirements("")
         ..setRequirementsLevels("")
         ..setRequiredLevel(1)
