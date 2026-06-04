@@ -82,7 +82,8 @@ import UnitObjEditing
 	..setTooltipBasic("Train Treant")
 	..setTooltipExtended("Basic frontline unit. Can learn Thicker Bark to resist some damage and Recycle to invigorate a nearby unit on death. |n|n|cffffcc00Attacks land units.|r")
 	..setHotkey("Q")
-	..setNormalAbilities("AM0c")
+	..setNormalAbilities("AM0a")
+	..setNormalAbilities("AM0a")
 
 
 @compiletime function create_w3u_E003()
@@ -110,7 +111,18 @@ import UnitObjEditing
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNGrizzlyBear.blp")
 	..setProperNamesUsed(1)
 	..setNormalAbilities("A001,AInv,Ault")
-	..setHeroAbilities("AM0a,A002,AM08,AHav")
+	..setHeroAbilities("AM0b,A002,AM0d,AHav")
+	..setNormalAbilities("A001,AInv,Ault")
+	..setHeroAbilities("AM0b,A002,AM0d,AHav")
+
+
+@compiletime function create_w3u_e004()
+	new UnitDefinition('e004', 'edry')
+	..setManaInitialAmount(150)
+	..setName("DryadCaster")
+	..setModelFile("war3mapImported\\SylvanEnchantress.mdl")
+	..setNormalAbilities("AM0e,AInv,Ault,ACm2,Aien,Aadm,Aspo")
+	..setNormalAbilities("AM0e,AInv,Ault,ACm2,Aien,Aadm,Aspo")
 
 
 @compiletime function create_w3u_x002()
@@ -155,7 +167,7 @@ import UnitObjEditing
 @compiletime function create_w3u_eaom()
 	new BuildingDefinition('eaom', 'eaom')
 	..setResearchesAvailable("R000,Resc,Reib,Remk,Remg,Repb")
-	..setUnitsTrained("esen,e002,ebal")
+	..setUnitsTrained("e002,e004,edry")
 
 
 @compiletime function create_w3u_ndru()
@@ -175,6 +187,8 @@ import UnitObjEditing
 
 @compiletime function create_w3u_Ekee()
 	new HeroDefinition('Ekee', 'Ekee')
+	..setNormalAbilities("AM03,AInv,Ault")
+	..setHeroAbilities("AM04,AM05,AM02")
 	..setNormalAbilities("AM03,AInv,Ault")
 	..setHeroAbilities("AM04,AM05,AM02")
 
