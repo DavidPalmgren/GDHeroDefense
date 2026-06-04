@@ -82,7 +82,7 @@ import UnitObjEditing
 	..setTooltipBasic("Train Treant")
 	..setTooltipExtended("Basic frontline unit. Can learn Thicker Bark to resist some damage and Recycle to invigorate a nearby unit on death. |n|n|cffffcc00Attacks land units.|r")
 	..setHotkey("Q")
-	..setNormalAbilities("AM0a")
+	..setNormalAbilities("AM0c")
 
 
 @compiletime function create_w3u_E003()
@@ -96,12 +96,6 @@ import UnitObjEditing
 	..setIntelligencePerLevel(1.7)
 	..setAgilityPerLevel(2.0)
 	..setStartingAgility(18)
-	..setStockStartDelay(0)
-	..setRepairGoldCost(0)
-	..setRepairLumberCost(0)
-	..setStockMaximum(1)
-	..setLumberCost(0)
-	..setGoldCost(0)
 	..setName("Ursoc")
 	..setModelFile("units\\creeps\\GrizzlyBear\\GrizzlyBear.mdl")
 	..setTintingColorRed(120)
@@ -116,14 +110,7 @@ import UnitObjEditing
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNGrizzlyBear.blp")
 	..setProperNamesUsed(1)
 	..setNormalAbilities("A001,AInv,Ault")
-	..setHeroAbilities("AM0b,A002,AM0d,AHav")
-
-
-@compiletime function create_w3u_n003()
-	new BuildingDefinition('n003', 'ntav')
-	..setNormalAbilities("Aneu,Ane2,Avul,Aawa")
-	..setUnitsSold("E003,Ekee")
-	..setName("NelfTavern")
+	..setHeroAbilities("AM0a,A002,AM08,AHav")
 
 
 @compiletime function create_w3u_x002()
@@ -171,12 +158,23 @@ import UnitObjEditing
 	..setUnitsTrained("esen,e002,ebal")
 
 
+@compiletime function create_w3u_ndru()
+	new BuildingDefinition('ndru', 'ndru')
+	..setGroundTexture("")
+
+
+@compiletime function create_w3u_nmoo()
+	new BuildingDefinition('nmoo', 'nmoo')
+	..setGroundTexture("")
+
+
+@compiletime function create_w3u_nfoh()
+	new BuildingDefinition('nfoh', 'nfoh')
+	..setGroundTexture("")
+
+
 @compiletime function create_w3u_Ekee()
 	new HeroDefinition('Ekee', 'Ekee')
-	..setStockMaximum(1)
-	..setLumberCost(0)
-	..setGoldCost(0)
-	..setProperNames("Cenarius")
 	..setNormalAbilities("AM03,AInv,Ault")
 	..setHeroAbilities("AM04,AM05,AM02")
 
