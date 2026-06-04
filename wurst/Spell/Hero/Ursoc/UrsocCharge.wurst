@@ -19,6 +19,7 @@ constant real CHARGE_SPEED = 900.
 constant string CHARGE_SFX = "Abilities\\Spells\\Human\\Charge\\ChargeTarget.mdl"
 constant string IMPACT_SFX = "Abilities\\Spells\\Human\\Thunderclap\\ThunderClapCaster.mdl"
 constant string CHARGE_CUSTOM_ICON = "war3mapImported\\BTNCharge.blp"
+constant string _abc = "Abilities\\Spells"
 
 @compiletime function genBuff()
     new BuffDefinition(CHARGE_STUN_BUFF_ID, 'BNso')
