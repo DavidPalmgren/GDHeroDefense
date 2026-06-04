@@ -8,12 +8,14 @@ import ClosureTimers
 import GroupUtils
 import StringUtils
 import LinkedList
+import ObjectIds
+import UnitIds
 
 public constant SPIRIT_WISPS_ID = compiletime(ABIL_ID_GEN.next())
 public constant WISP_BUFF_ID = compiletime(BUFF_ID_GEN.next())
 
 // Dummy unit for wisps — use an invisible locust unit from your map
-constant int WISP_UNIT_ID = 'h000'  // replace with your dummy unit ID
+constant int WISP_UNIT_ID = UnitIds.wisp  // replace with your dummy unit ID
 
 constant int WISP_COUNT = 3
 constant real WISP_DURATION = 10.
@@ -45,20 +47,20 @@ constant real UPDATE_INTERVAL = 0.05 // how often wisps reposition
         ..setManaCost(1, 70)
         ..setDamageIncrease(1, 0.)
         ..setAreaofEffect(1, 0.)
-        ..setDurationNormal(1, 0.)
+        ..setDurationNormal(1, 10.)
         ..setDurationHero(1, 0.)
-        ..setBuffs(1, "")
+        ..setBuffs(1, toRawCode(WISP_BUFF_ID))
         ..setRequirements("")
         ..setRequirementsLevels("")
         ..setRequiredLevel(1)
         ..setLevelSkipRequirement(2)
-        ..setHeroAbility(true)
+        ..setHeroAbility(false)
         ..setItemAbility(false)
 
 init
     EventListener.onCast(SPIRIT_WISPS_ID) (caster) ->
         // Add buff icon to caster
-        UnitAddAbility(caster, WISP_BUFF_ID)
+        //UnitAddAbility(caster, WISP_BUFF_ID)
 
         // Spawn 3 wisps evenly spaced around caster
         let wisps = new LinkedList<unit>()
@@ -67,21 +69,50 @@ init
             let spawnPos = caster.getPos().polarOffset(angle(startAngle), ORBIT_RADIUS)
             let wisp = createUnit(caster.getOwner(), WISP_UNIT_ID, spawnPos, angle(0.))
             wisp.addAbility('Aloc')
-            wisp.setVertexColor(100, 200, 255, 200)  // light blue tint
-            wisp.setScale(0.4)
+            wisp.setVertexColor(50, 255, 50, 255) // light blue tint
+            //wisp.setScale(1)
             let sfx = wisp.addEffect("Doodads\\Cinematic\\GlowingRunes\\GlowingRunes2.mdl", "origin")
             wisps.add(wisp)
 
         // Orbit timer — moves wisps around caster
-        var orbitAngle = 0.
-        let orbitTimer = doPeriodically(UPDATE_INTERVAL) cb ->
-            orbitAngle += ORBIT_SPEED * UPDATE_INTERVAL
-            var i = 0
+        let moveTimer = doPeriodically(UPDATE_INTERVAL) cb ->
             for wisp in wisps
-                let wispAngle = orbitAngle + (2. * bj_PI * i.toReal()) / WISP_COUNT.toReal()
-                let newPos = caster.getPos().polarOffset(angle(wispAngle), ORBIT_RADIUS)
-                wisp.setXY(newPos)
-                i++
+                let casterPos = caster.getPos()
+                unit nearestInjured = null
+                real nearestDist = 99999.
+
+                // Find nearest injured friendly within radius
+                ENUM_GROUP.enumUnitsInRange(casterPos, WISP_RADIUS, null)
+                for u in ENUM_GROUP
+                    if u.isAlive() and u.getOwner().isAllyOf(caster.getOwner()) and u.getHP() < u.getMaxHP()
+                        let dist = wisp.getPos().distanceTo(u.getPos())
+                        if dist < nearestDist
+                            nearestDist = dist
+                            nearestInjured = u
+
+                vec2 targetPos
+                if nearestInjured != null
+                    // Drift toward injured unit but not all the way — stop nearby
+                    targetPos = nearestInjured.getPos().polarOffset(
+                        wisp.getPos().angleTo(nearestInjured.getPos()),
+                        -50.  // hover just outside the unit
+                    )
+                else
+                    // No injured units — wander randomly near caster
+                    let randomAngle = angle(GetRandomReal(0., 2. * bj_PI))
+                    let randomDist = GetRandomReal(50., ORBIT_RADIUS)
+                    targetPos = casterPos.polarOffset(randomAngle, randomDist)
+
+                // Move wisp smoothly toward target
+                let moveDir = wisp.getPos().angleTo(targetPos)
+                let moveSpeed = 200. * UPDATE_INTERVAL
+                let newPos = wisp.getPos().polarOffset(moveDir, moveSpeed)
+
+                // Keep wisps tethered to caster — dont let them stray too far
+                if newPos.distanceTo(casterPos) > WISP_RADIUS
+                    wisp.setXY(casterPos.polarOffset(newPos.angleTo(casterPos), -WISP_RADIUS + 20.))
+                else
+                    wisp.setXY(newPos)
 
         // Heal timer — heals damaged friendlies in range every second
         let healTimer = doPeriodically(HEAL_INTERVAL) cb ->
@@ -93,10 +124,9 @@ init
 
         // After duration clean everything up
         doAfter(WISP_DURATION) ->
-            destroy orbitTimer
+            destroy moveTimer  // was orbitTimer
             destroy healTimer
             for wisp in wisps
                 wisp.kill()
             destroy wisps
             UnitRemoveAbility(caster, WISP_BUFF_ID)
-            print("Spirit Wisps expired.")

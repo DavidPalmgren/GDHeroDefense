@@ -391,6 +391,13 @@ function CreateBuildingsForPlayer0 takes nothing returns nothing
     set gg_unit_etol_0001 = BlzCreateUnitWithSkin( p, 'etol', 1536.0, 18816.0, 270.000, 'etol' )
     set u = BlzCreateUnitWithSkin( p, 'emow', 1056.0, 18848.0, 270.000, 'emow' )
     set u = BlzCreateUnitWithSkin( p, 'eaom', 960.0, 18496.0, 270.000, 'eaom' )
+    set u = BlzCreateUnitWithSkin( p, 'ncap', -4960.0, 15264.0, 270.000, 'ncap' )
+    set u = BlzCreateUnitWithSkin( p, 'ncap', -4768.0, 14624.0, 270.000, 'ncap' )
+    set u = BlzCreateUnitWithSkin( p, 'ncaw', -3712.0, 15424.0, 270.000, 'ncaw' )
+    set u = BlzCreateUnitWithSkin( p, 'nctl', -5056.0, 14784.0, 270.000, 'nctl' )
+    set u = BlzCreateUnitWithSkin( p, 'ngob', -3648.0, 12224.0, 270.000, 'ngob' )
+    set u = BlzCreateUnitWithSkin( p, 'ngob', -2752.0, 12288.0, 270.000, 'ngob' )
+    set u = BlzCreateUnitWithSkin( p, 'nhcn', -1408.0, 24512.0, 270.000, 'nhcn' )
 endfunction
 
 //===========================================================================
@@ -409,7 +416,7 @@ function CreateUnitsForPlayer0 takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'Ekee', 513.8, 18478.7, 152.000, 'Ekee' )
     set u = BlzCreateUnitWithSkin( p, 'e002', 608.8, 18306.6, 76.335, 'e002' )
     set u = BlzCreateUnitWithSkin( p, 'e002', 571.0, 18062.6, 40.706, 'e002' )
-    set u = BlzCreateUnitWithSkin( p, 'e004', 1219.7, 17883.0, 155.176, 'e004' )
+    set u = BlzCreateUnitWithSkin( p, 'e004', 1249.3, 18054.5, 235.137, 'e004' )
 endfunction
 
 //===========================================================================
@@ -439,7 +446,7 @@ function CreateNeutralHostileBuildings takes nothing returns nothing
     set gg_unit_cp00_0010 = BlzCreateUnitWithSkin( p, 'cp00', -2560.0, 15808.0, 270.000, 'cp00' )
     set gg_unit_cp00_0011 = BlzCreateUnitWithSkin( p, 'cp00', 3776.0, 24064.0, 270.000, 'cp00' )
     set gg_unit_cp00_0012 = BlzCreateUnitWithSkin( p, 'cp00', -2368.0, 15872.0, 270.000, 'cp00' )
-    set gg_unit_cp00_0013 = BlzCreateUnitWithSkin( p, 'cp00', -2368.0, 15680.0, 270.000, 'cp00' )
+    set gg_unit_cp00_0013 = BlzCreateUnitWithSkin( p, 'cp00', -4672.0, 15104.0, 270.000, 'cp00' )
     set gg_unit_cp00_0014 = BlzCreateUnitWithSkin( p, 'cp00', 1216.0, 25408.0, 270.000, 'cp00' )
     set gg_unit_cp00_0015 = BlzCreateUnitWithSkin( p, 'cp00', 3136.0, 21056.0, 270.000, 'cp00' )
     set gg_unit_cp00_0016 = BlzCreateUnitWithSkin( p, 'cp00', -1984.0, 17600.0, 270.000, 'cp00' )

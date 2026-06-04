@@ -1,0 +1,10 @@
+package InitFocusCamera
+
+import ClosureTimers
+
+init
+    doAfter(0.0) ->
+        let tree = gg_unit_etol_0001
+
+        if GetLocalPlayer() == Player(0)
+            PanCameraToTimed(tree.getX(), tree.getY(), 0.)
