@@ -392,13 +392,10 @@ function CreateBuildingsForPlayer0 takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'emow', 1056.0, 18848.0, 270.000, 'emow' )
     set u = BlzCreateUnitWithSkin( p, 'eaom', 960.0, 18496.0, 270.000, 'eaom' )
     set u = BlzCreateUnitWithSkin( p, 'nhcn', -1408.0, 24512.0, 270.000, 'nhcn' )
-    set u = BlzCreateUnitWithSkin( p, 'eate', -8352.0, 7456.0, 270.000, 'eate' )
-    set u = BlzCreateUnitWithSkin( p, 'e005', -7232.0, 8512.0, 270.000, 'e005' )
-    set u = BlzCreateUnitWithSkin( p, 'emow', -8160.0, 8544.0, 270.000, 'emow' )
-    set u = BlzCreateUnitWithSkin( p, 'emow', -8160.0, 8288.0, 270.000, 'emow' )
     set u = BlzCreateUnitWithSkin( p, 'nbfl', 1536.0, 7360.0, 270.000, 'nbfl' )
-    set u = BlzCreateUnitWithSkin( p, 'etrp', -7200.0, 8096.0, 270.000, 'etrp' )
-    set u = BlzCreateUnitWithSkin( p, 'etrp', -7136.0, 7584.0, 270.000, 'etrp' )
+    set u = BlzCreateUnitWithSkin( p, 'eate', -2144.0, 11232.0, 270.000, 'eate' )
+    set u = BlzCreateUnitWithSkin( p, 'eaow', -2496.0, 10560.0, 270.000, 'eaow' )
+    set u = BlzCreateUnitWithSkin( p, 'owtw', 512.0, 9472.0, 270.000, 'owtw' )
 endfunction
 
 //===========================================================================
@@ -429,6 +426,33 @@ function CreateBuildingsForPlayer1 takes nothing returns nothing
     local real life
 
     set gg_unit_hwtw_0003 = BlzCreateUnitWithSkin( p, 'hwtw', 5248.0, 6080.0, 270.000, 'hwtw' )
+endfunction
+
+//===========================================================================
+function CreateBuildingsForPlayer5 takes nothing returns nothing
+    local player p = Player(5)
+    local unit u
+    local integer unitID
+    local trigger t
+    local real life
+
+    set u = BlzCreateUnitWithSkin( p, 'ofor', 2720.0, 9504.0, 270.000, 'ofor' )
+endfunction
+
+//===========================================================================
+function CreateBuildingsForPlayer18 takes nothing returns nothing
+    local player p = Player(18)
+    local unit u
+    local integer unitID
+    local trigger t
+    local real life
+
+    set u = BlzCreateUnitWithSkin( p, 'eate', -8352.0, 7456.0, 270.000, 'eate' )
+    set u = BlzCreateUnitWithSkin( p, 'e005', -7232.0, 8512.0, 270.000, 'e005' )
+    set u = BlzCreateUnitWithSkin( p, 'emow', -8160.0, 8544.0, 270.000, 'emow' )
+    set u = BlzCreateUnitWithSkin( p, 'emow', -8160.0, 8288.0, 270.000, 'emow' )
+    set u = BlzCreateUnitWithSkin( p, 'etrp', -7200.0, 8096.0, 270.000, 'etrp' )
+    set u = BlzCreateUnitWithSkin( p, 'etrp', -7136.0, 7584.0, 270.000, 'etrp' )
 endfunction
 
 //===========================================================================
@@ -467,14 +491,16 @@ function CreateNeutralHostileBuildings takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'ncap', -3488.0, 14880.0, 270.000, 'ncap' )
     set u = BlzCreateUnitWithSkin( p, 'cp00', -7168.0, 13376.0, 167.578, 'cp00' )
     set u = BlzCreateUnitWithSkin( p, 'cp00', -7744.0, 7808.0, 167.578, 'cp00' )
-    set u = BlzCreateUnitWithSkin( p, 'cp00', 1536.0, 10304.0, 167.578, 'cp00' )
+    set u = BlzCreateUnitWithSkin( p, 'cp00', 192.0, 10112.0, 167.578, 'cp00' )
     set u = BlzCreateUnitWithSkin( p, 'cp00', -4800.0, 9664.0, 167.578, 'cp00' )
     set u = BlzCreateUnitWithSkin( p, 'cp00', -10048.0, 9664.0, 167.578, 'cp00' )
-    set u = BlzCreateUnitWithSkin( p, 'cp00', -1344.0, 13312.0, 167.578, 'cp00' )
+    set u = BlzCreateUnitWithSkin( p, 'cp00', -1536.0, 13632.0, 167.578, 'cp00' )
     set u = BlzCreateUnitWithSkin( p, 'cp00', 1216.0, 7104.0, 167.578, 'cp00' )
-    set u = BlzCreateUnitWithSkin( p, 'cp00', -3648.0, 11712.0, 167.578, 'cp00' )
+    set u = BlzCreateUnitWithSkin( p, 'cp00', -2240.0, 10944.0, 167.578, 'cp00' )
     set u = BlzCreateUnitWithSkin( p, 'cp00', -8064.0, 10112.0, 167.578, 'cp00' )
     set u = BlzCreateUnitWithSkin( p, 'cp00', -11712.0, 9536.0, 167.578, 'cp00' )
+    set u = BlzCreateUnitWithSkin( p, 'cp00', -256.0, 12480.0, 167.578, 'cp00' )
+    set u = BlzCreateUnitWithSkin( p, 'cp00', 2560.0, 11392.0, 167.578, 'cp00' )
 endfunction
 
 //===========================================================================
@@ -784,6 +810,8 @@ endfunction
 function CreatePlayerBuildings takes nothing returns nothing
     call CreateBuildingsForPlayer0(  )
     call CreateBuildingsForPlayer1(  )
+    call CreateBuildingsForPlayer5(  )
+    call CreateBuildingsForPlayer18(  )
 endfunction
 
 //===========================================================================
