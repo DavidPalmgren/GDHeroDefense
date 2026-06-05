@@ -6,33 +6,59 @@ import ObjectIdGenerator
 import ClosureEvents
 import ClosureTimers
 import Abilities
+import GroupUtils
 
 public constant HEALING_CLOUD_ID = compiletime(ABIL_ID_GEN.next())
 
 constant int CLOUD_UNIT_ID = 'efon'
-constant real CLOUD_RADIUS = 256.
-constant real CLOUD_HEAL = 20.
-constant real CLOUD_DURATION = 10.
 constant real HEAL_INTERVAL = 1.
+
+// Per level values
+constant real array CLOUD_RADIUS = [256., 320., 384.]
+constant real array CLOUD_HEAL = [20., 35., 50.]
+constant real array CLOUD_DURATION = [10., 13., 16.]
+constant real array CLOUD_COOLDOWN = [16., 13., 10.]
+constant real array CLOUD_MANA = [0., 0., 0.]
 
 @compiletime function genAbility()
     new AbilityDefinitionTaurenChieftainWarStomp(HEALING_CLOUD_ID)
-        ..setName("Healing Cloud")
-        ..setTooltipNormal(1, "Healing Cloud")
-        ..setTooltipNormalExtended(1, "Spawns a healing cloud on each invigorated unit, healing nearby friendly units for " + CLOUD_HEAL.toInt().toString() + " HP/s for " + CLOUD_DURATION.toInt().toString() + " seconds.")
-        ..setTooltipLearn("Learn Healing Cloud")
-        ..setTooltipLearnExtended("Spawns a healing cloud on each invigorated unit, healing nearby friendly units for " + CLOUD_HEAL.toInt().toString() + " HP/s for " + CLOUD_DURATION.toInt().toString() + " seconds.")
+        ..setName("Bloom")
+        ..setTooltipNormal(1, "Bloom")
+        ..setTooltipNormal(2, "Bloom")
+        ..setTooltipNormal(3, "Bloom")
+        ..setTooltipNormalExtended(1, "Spawns a healing cloud on each invigorated unit, healing nearby friendly units for " + CLOUD_HEAL[0].toInt().toString() + " HP/s for " + CLOUD_DURATION[0].toInt().toString() + " seconds in " + CLOUD_RADIUS[0].toInt().toString() + " radius.")
+        ..setTooltipNormalExtended(2, "Spawns a healing cloud on each invigorated unit, healing nearby friendly units for " + CLOUD_HEAL[1].toInt().toString() + " HP/s for " + CLOUD_DURATION[1].toInt().toString() + " seconds in " + CLOUD_RADIUS[1].toInt().toString() + " radius.")
+        ..setTooltipNormalExtended(3, "Spawns a healing cloud on each invigorated unit, healing nearby friendly units for " + CLOUD_HEAL[2].toInt().toString() + " HP/s for " + CLOUD_DURATION[2].toInt().toString() + " seconds in " + CLOUD_RADIUS[2].toInt().toString() + " radius.")
+        ..setTooltipLearn("Learn Bloom - [|cffffcc00Level %d|r]")
+        ..setTooltipLearnExtended("Spawns healing clouds on invigorated units. Higher levels increase healing, duration and radius.")
         ..setIconNormal(Icons.bTNHealingWave)
         ..setIconResearch(Icons.bTNHealingWave)
         ..setButtonPositionNormalX(3)
         ..setButtonPositionNormalY(1)
-        ..setCooldown(1, 0.)
-        ..setManaCost(1, 0)
+        // Level 1
+        ..setCooldown(1, CLOUD_COOLDOWN[0])
+        ..setManaCost(1, CLOUD_MANA[0].toInt())
         ..setAreaofEffect(1, 0.)
         ..setDurationNormal(1, 0.)
         ..setDurationHero(1, 0.)
         ..setDamage(1, 0)
         ..setBuffs(1, "")
+        // Level 2
+        ..setCooldown(2, CLOUD_COOLDOWN[1])
+        ..setManaCost(2, CLOUD_MANA[1].toInt())
+        ..setAreaofEffect(2, 0.)
+        ..setDurationNormal(2, 0.)
+        ..setDurationHero(2, 0.)
+        ..setDamage(2, 0)
+        ..setBuffs(2, "")
+        // Level 3
+        ..setCooldown(3, CLOUD_COOLDOWN[2])
+        ..setManaCost(3, CLOUD_MANA[2].toInt())
+        ..setAreaofEffect(3, 0.)
+        ..setDurationNormal(3, 0.)
+        ..setDurationHero(3, 0.)
+        ..setDamage(3, 0)
+        ..setBuffs(3, "")
         ..setRequirements("")
         ..setRequirementsLevels("")
         ..setRequiredLevel(1)
@@ -40,38 +66,38 @@ constant real HEAL_INTERVAL = 1.
         ..setHeroAbility(true)
         ..setItemAbility(false)
 
-function spawnCloud(player owner, vec2 pos)
+function spawnCloud(player owner, vec2 pos, real heal, real radius, real duration)
     let cloud = createUnit(owner, CLOUD_UNIT_ID, pos, angle(0.))
     cloud.setInvulnerable(true)
-    //cloud.setVertexColor(0, 0, 0, 0)
-    cloud.addAbility('Aloc')           
+    cloud.addAbility('Aloc')
     cloud.setPathing(false)
     cloud.setAnimation("stand 4")
     cloud.pause()
-    // rm shadow in editor later
 
     let sfx = cloud.addEffect(Abilities.tranquility, "origin")
     sfx.setScale(1)
     sfx.setColor(0, 255, 0)
-    // might change to healing ward type with an ent channeling will see
 
     let healTimer = doPeriodically(HEAL_INTERVAL) cb ->
-        ENUM_GROUP.enumUnitsInRange(pos, CLOUD_RADIUS, null)
+        ENUM_GROUP.enumUnitsInRange(pos, radius, null)
         for u in ENUM_GROUP
             if u.isAlive() and u.getOwner().isAllyOf(owner)
-                u.addHP(CLOUD_HEAL)
+                u.addHP(heal)
                 flashEffect("Abilities\\Spells\\Items\\AIhe\\AIheTarget.mdl", u, "origin")
-                
 
-    doAfter(CLOUD_DURATION) ->
+    doAfter(duration) ->
         destroy healTimer
         cloud.kill()
         sfx.destr()
 
 init
-
     EventListener.onCast(HEALING_CLOUD_ID) (caster) ->
+        let level = caster.getAbilityLevel(HEALING_CLOUD_ID) - 1
+        let heal = CLOUD_HEAL[level]
+        let radius = CLOUD_RADIUS[level]
+        let duration = CLOUD_DURATION[level]
+
         ENUM_GROUP.enumUnitsInRect(bj_mapInitialPlayableArea, null)
         for u in ENUM_GROUP
-            if u.hasAbility('Brej') // Brej is rejuv btw
-                spawnCloud(caster.getOwner(), u.getPos())
+            if u.hasAbility('Brej')
+                spawnCloud(caster.getOwner(), u.getPos(), heal, radius, duration)

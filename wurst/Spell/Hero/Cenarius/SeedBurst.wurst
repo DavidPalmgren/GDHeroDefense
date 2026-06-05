@@ -9,6 +9,7 @@ import LinkedList
 
 public constant SEED_BURST_ID = compiletime(ABIL_ID_GEN.next())
 
+// Per level values
 constant real array BURST_DAMAGE = [75., 125., 200.]
 constant real array BURST_RADIUS = [256., 320., 384.]
 constant real array BURST_COOLDOWN = [12., 10., 8.]

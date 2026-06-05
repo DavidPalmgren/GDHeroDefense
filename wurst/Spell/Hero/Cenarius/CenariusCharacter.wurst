@@ -30,19 +30,3 @@ init
         EventData.getSpellTargetUnit()
         addSeedlingStack()
 
-    EventListener.onCast(SUMMON_TREANT_ID) (caster) ->
-
-        
-        if getSeedlingCount() <= 0
-            return
-
-        let pos = caster.getPos()
-        let stacks = getSeedlingCount()
-
-        for i = 1 to stacks
-            let treant = createUnit(caster.getOwner(), TREANT_UNIT_ID, pos, angle(0.))
-            doAfter(TREANT_DURATION) ->
-                if treant.isAlive()
-                    treant.kill()
-
-        seedlingCount = 0
