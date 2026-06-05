@@ -380,6 +380,24 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
+@compiletime function create_w3a_AM0f()
+	new AbilityDefinitionBloodMageFlameStrike('AM0f')
+	..setName("Nightmare")
+	..setTooltipNormal(1, "Nightmare")
+	..setTooltipNormalExtended(1, "Pulls all units in the target area into the emerald nightmare, putting them to sleep for 5 seconds. Non-hero units that are not woken will turn against their allies.")
+	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNSleep.blp")
+	..setBuffs(1, "BM05")
+	..setEffects(1, "BM05")
+	..setAreaofEffect(1, 400.0)
+	..setDurationNormal(1, 5.0)
+	..setDurationHero(1, 2.5)
+	..setFullDamageDealt(1, 0.0)
+	..setHalfDamageDealt(1, 0.0)
+	..setRequirements("")
+	..setHeroAbility(false)
+	..setItemAbility(false)
+
+
 // Original Table (contains all modified default/melee objects)
 // These are emitted when createObjectDefinition uses the same base/new id.
 
