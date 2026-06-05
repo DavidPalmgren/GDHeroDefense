@@ -10,6 +10,8 @@ import StringUtils
 import LinkedList
 import ObjectIds
 import UnitIds
+import UnitObjEditing
+
 
 public constant SPIRIT_WISPS_ID = compiletime(ABIL_ID_GEN.next())
 public constant WISP_BUFF_ID = compiletime(BUFF_ID_GEN.next())
@@ -64,6 +66,7 @@ init
 
         // Spawn 3 wisps evenly spaced around caster
         let wisps = new LinkedList<unit>()
+        
         for i = 0 to WISP_COUNT - 1
             let startAngle = (2. * bj_PI * i.toReal()) / WISP_COUNT.toReal()
             let spawnPos = caster.getPos().polarOffset(angle(startAngle), ORBIT_RADIUS)
@@ -76,6 +79,7 @@ init
 
         // Orbit timer — moves wisps around caster
         let moveTimer = doPeriodically(UPDATE_INTERVAL) cb ->
+            let wispTargets = new LinkedList<unit>()
             for wisp in wisps
                 let casterPos = caster.getPos()
                 unit nearestInjured = null
@@ -83,12 +87,14 @@ init
 
                 // Find nearest injured friendly within radius
                 ENUM_GROUP.enumUnitsInRange(casterPos, WISP_RADIUS, null)
+
                 for u in ENUM_GROUP
                     if u.isAlive() and u.getOwner().isAllyOf(caster.getOwner()) and u.getHP() < u.getMaxHP()
                         let dist = wisp.getPos().distanceTo(u.getPos())
-                        if dist < nearestDist
+                        if dist < nearestDist and not wispTargets.has(u)
                             nearestDist = dist
                             nearestInjured = u
+                            wispTargets.add(u)
 
                 vec2 targetPos
                 if nearestInjured != null
