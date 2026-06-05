@@ -43,6 +43,14 @@ import BuffObjEditing
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNWisp.blp")
 
 
+@compiletime function create_w3h_BM05()
+	new BuffDefinition('BM05', 'BNso')
+	..setName(1, "Nightmare")
+	..setTooltipNormal(1, "Experiencing a Nightmare")
+	..setTooltipNormalExtended(1, "This unit has been pulled into the emerald nightmare. Wake it before time runs out or it will turn!")
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNSleep.blp")
+
+
 // Original Table (contains all modified default/melee objects)
 // These are emitted when createObjectDefinition uses the same base/new id.
 

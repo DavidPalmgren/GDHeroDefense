@@ -23,10 +23,7 @@ public constant CENARIUS_CHARACTER_ID = UnitIds.keeperofthegrove // "Ekee"
     new HeroDefinition('Ekee', 'Ekee')
         ..setHeroAbilities(commaList(SUMMON_TREANT_ID, SEED_BURST_ID, HEALING_CLOUD_ID))
 
-
 init
-
     EventListener.onCast(INVIGORATE_ID) (caster) ->
         EventData.getSpellTargetUnit()
         addSeedlingStack()
-
