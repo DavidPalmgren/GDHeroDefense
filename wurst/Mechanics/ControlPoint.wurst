@@ -1,22 +1,28 @@
 package ControlPoint
+import Scoreboard
 import HashMap
 import ClosureTimers
 
-//Create Variables and Hashmaps
+// create Variables and Hashmaps
 public unit target = null
 public group controlPoints = CreateGroup()
-let cpOwners = new HashMap<unit, player>()
-let cpValues = new HashMap<unit, int>()
+public let cpOwners = new HashMap<unit, player>()
+public let cpValues = new HashMap<unit, int>()
+public int array playerIncome
+public int array playerCpCount
+int count = 0
 
 //Functions
-//add gold to each player based on the control points they own
+
+// add gold to each player based on the control points they own
 public function income()
     for cp in controlPoints
         let owner = cpOwners.get(cp)
         let value = cpValues.get(cp)
         owner.addGold(value)
+        updateMultiboard()
 
-//Create a timer that calls the income function on a set cadence
+// create a timer that calls the income function on a set cadence
 public function incomeTimer()
     let countdown = CreateTimer()
     let d = countdown.createTimerDialog()
@@ -24,7 +30,7 @@ public function incomeTimer()
     TimerDialogDisplay(d, true)
     TimerStart(countdown,10.,true,function income)
 
-//Set up a trigger for each control point that allows it to be captured when it is damaged to half health
+// set up a trigger for each control point that allows it to be captured when it is damaged to half health
 function setupCaptureOnHalf(unit target)
     CreateTrigger()
         ..registerUnitEvent(target, EVENT_UNIT_DAMAGED)
@@ -37,15 +43,16 @@ function setupCaptureOnHalf(unit target)
             cpOwners.put(u, attacker.getOwner())
             SetUnitOwner(u, attacker.getOwner(), true)
             SetUnitState(u, UNIT_STATE_LIFE, maxHp)
+            updateMultiboard()
 
-//Helper function to add control points to the map, set their value, and set up the trigger for capturing them
+// helper function to add control points to the map, set their value, and set up the trigger for capturing them
 function addControlPoint(unit cp, int value)
     cpValues.put(cp, value)
     cpOwners.put(cp, cp.getOwner())
     controlPoints.add(cp)
     setupCaptureOnHalf(cp)
 
-//Set up all control points on the map with their respective values
+// set up all control points on the map with their respective values
 function setupAllControlPoints()
     addControlPoint(udg_mountHyjal, 30)
     addControlPoint(udg_mountHyjalGrove, 10)
@@ -82,5 +89,7 @@ function setupAllControlPoints()
 
 init
     setupAllControlPoints()
-    CreateTimer().doAfter(0.) ->     
+    doAfter(0.) ->     
         incomeTimer()
+        setupMultiboard()
+        updateMultiboard()
