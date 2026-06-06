@@ -623,6 +623,10 @@ import UnitObjEditing
 	..setName("Xavius")
 	// TODO no wrapper: 	..setString("uhas", "")
 	..setModelFile("xavius2.mdl")
+	..setProperNames("Xavius")
+	..setNormalAbilities("AM04,AM05,AM02")
+	..setLevel(6)
+	..setName("Xavius")
 
 
 @compiletime function create_w3u_x001()
@@ -683,13 +687,6 @@ import UnitObjEditing
 @compiletime function create_w3u_nfoh()
 	new BuildingDefinition('nfoh', 'nfoh')
 	..setGroundTexture("")
-
-
-@compiletime function create_w3u_N004()
-	new HeroDefinition('N004', 'N004')
-	..setNormalAbilities("AM04,AM05,AM02")
-	..setLevel(6)
-	..setName("Xavius")
 
 
 @compiletime function create_w3u_Ekee()

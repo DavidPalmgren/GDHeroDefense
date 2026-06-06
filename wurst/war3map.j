@@ -939,7 +939,7 @@ function CreateNeutralHostile takes nothing returns nothing
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nspr', -419.1, 15726.6, 37.961, 'nspr' )
     call SetUnitAcquireRange( u, 200.0 )
-    set u = BlzCreateUnitWithSkin( p, 'N006', 820.3, 16223.1, 88.520, 'N006' )
+    set u = BlzCreateUnitWithSkin( p, 'N006', 707.6, 16329.2, 88.520, 'N006' )
     set u = BlzCreateUnitWithSkin( p, 'ntrd', -5169.7, 15689.2, 61.793, 'ntrd' )
     set u = BlzCreateUnitWithSkin( p, 'ntrt', -4928.7, 15707.0, 108.749, 'ntrt' )
     set u = BlzCreateUnitWithSkin( p, 'ntrt', -5350.9, 15866.7, 34.049, 'ntrt' )
