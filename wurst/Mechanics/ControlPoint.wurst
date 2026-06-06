@@ -1,5 +1,6 @@
 package ControlPoint
 import HashMap
+import ClosureTimers
 
 //Create Variables and Hashmaps
 public unit target = null
@@ -18,8 +19,8 @@ public function income()
 //Create a timer that calls the income function on a set cadence
 public function incomeTimer()
     let countdown = CreateTimer()
-    let d = CreateTimerDialog(countdown)
-    TimerDialogSetTitle(d, "Control Point Income")
+    let d = countdown.createTimerDialog()
+    TimerDialogSetTitle(d, "Income")
     TimerDialogDisplay(d, true)
     TimerStart(countdown,10.,true,function income)
 
@@ -81,4 +82,5 @@ function setupAllControlPoints()
 
 init
     setupAllControlPoints()
-    incomeTimer()
+    CreateTimer().doAfter(0.) ->     
+        incomeTimer()

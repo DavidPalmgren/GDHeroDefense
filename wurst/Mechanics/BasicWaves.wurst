@@ -44,12 +44,12 @@ function startingCameraPosition()
     let u = vec2(GetUnitX(udg_heroSelector),GetUnitY(udg_heroSelector))
     SetCameraPositionForPlayer(players[0], u.x, u.y)
 
-public function waveTimer()
-    let countdown = CreateTimer()
-    let d = countdown.createTimerDialog()
-    d.setTitle("Next Wave:")
-    d.display(true)
-    TimerStart(countdown,10.,true,function spawnWave)
+// public function waveTimer()
+//     let countdown = CreateTimer()
+//     let d = countdown.createTimerDialog()
+//     d.setTitle("Next Wave:")
+//     d.display(true)
+//     TimerStart(countdown,10.,true,function spawnWave)
 
 init
     startingCameraPosition()
