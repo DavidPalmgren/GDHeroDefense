@@ -28,7 +28,7 @@ public function incomeTimer()
     let d = countdown.createTimerDialog()
     TimerDialogSetTitle(d, "Income")
     TimerDialogDisplay(d, true)
-    TimerStart(countdown,10.,true,function income)
+    TimerStart(countdown,60.,true,function income)
 
 // set up a trigger for each control point that allows it to be captured when it is damaged to half health
 function setupCaptureOnHalf(unit target)

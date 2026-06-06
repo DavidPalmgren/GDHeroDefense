@@ -228,3 +228,14 @@ import DoodadObjEditing
 	..setPathTexture(0, "")
 
 
+@compiletime function create_w3d_NRwr()
+	new DoodadDefinition('NRwr', 'NRwr')
+	..setTilesets(0, "N,G")
+	..setPathTexture(0, "")
+
+
+@compiletime function create_w3d_NRic()
+	new DoodadDefinition('NRic', 'NRic')
+	..setPathTexture(0, "")
+
+

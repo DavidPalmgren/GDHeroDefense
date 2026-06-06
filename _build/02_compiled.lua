@@ -154,21 +154,16 @@ udg_ashenvaleWarsongCenter = nil
 gg_trg_Other = nil
 gg_trg_ControlPointInitialVariables = nil
 gg_unit_h00O_0019 = nil
-gg_unit_h007_0018 = nil
-gg_unit_h002_0005 = nil
 gg_unit_h006_0015 = nil
 gg_unit_h008_0011 = nil
 gg_unit_h003_0016 = nil
-gg_unit_h00B_0012 = nil
-gg_unit_h004_0006 = nil
 gg_unit_h00E_0013 = nil
 gg_unit_h009_0014 = nil
-gg_unit_h005_0017 = nil
-gg_unit_h00T_0007 = nil
 gg_unit_h00A_0009 = nil
 gg_unit_h001_0008 = nil
 gg_unit_h000_0407 = nil
 gg_unit_etol_0001 = nil
+gg_unit_h00K_0176 = nil
 gg_unit_cp00_0425 = nil
 gg_unit_h00L_0184 = nil
 gg_unit_h00G_0185 = nil
@@ -185,7 +180,6 @@ gg_unit_h00C_0174 = nil
 gg_unit_h00U_0175 = nil
 gg_unit_h00R_0196 = nil
 gg_unit_h00S_0179 = nil
-gg_unit_h00K_0176 = nil
 Abilities_tranquility = nil
 Angle_DEGTORAD = nil
 Angle_RADTODEG = nil
@@ -2858,21 +2852,16 @@ function initGlobals(__wurst_stackPos263)
 	gg_trg_Other = nil
 	gg_trg_ControlPointInitialVariables = nil
 	gg_unit_h00O_0019 = nil
-	gg_unit_h007_0018 = nil
-	gg_unit_h002_0005 = nil
 	gg_unit_h006_0015 = nil
 	gg_unit_h008_0011 = nil
 	gg_unit_h003_0016 = nil
-	gg_unit_h00B_0012 = nil
-	gg_unit_h004_0006 = nil
 	gg_unit_h00E_0013 = nil
 	gg_unit_h009_0014 = nil
-	gg_unit_h005_0017 = nil
-	gg_unit_h00T_0007 = nil
 	gg_unit_h00A_0009 = nil
 	gg_unit_h001_0008 = nil
 	gg_unit_h000_0407 = nil
 	gg_unit_etol_0001 = nil
+	gg_unit_h00K_0176 = nil
 	gg_unit_cp00_0425 = nil
 	gg_unit_h00L_0184 = nil
 	gg_unit_h00G_0185 = nil
@@ -2889,7 +2878,6 @@ function initGlobals(__wurst_stackPos263)
 	gg_unit_h00U_0175 = nil
 	gg_unit_h00R_0196 = nil
 	gg_unit_h00S_0179 = nil
-	gg_unit_h00K_0176 = nil
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -3197,6 +3185,8 @@ function CreateBuildingsForPlayer0(__wurst_stackPos273)
 	gg_unit_etol_0001 = __wurst_safe_BlzCreateUnitWithSkin(p8, 1702129516, 1536.0, 18816.0, 270.000, 1702129516)
 	__wurst_safe_BlzCreateUnitWithSkin(p8, 1701670775, 1056.0, 18848.0, 270.000, 1701670775)
 	__wurst_safe_BlzCreateUnitWithSkin(p8, 1700884333, 960.0, 18496.0, 270.000, 1700884333)
+	__wurst_safe_BlzCreateUnitWithSkin(p8, 1700885605, 608.0, 19040.0, 270.000, 1700885605)
+	__wurst_safe_BlzCreateUnitWithSkin(p8, 1701670775, 1888.0, 18784.0, 270.000, 1701670775)
 	__wurst_safe_BlzCreateUnitWithSkin(p8, 1852334958, -(1408.0), 24512.0, 270.000, 1852334958)
 	__wurst_safe_BlzCreateUnitWithSkin(p8, 1700885605, -(2144.0), 11232.0, 270.000, 1700885605)
 	__wurst_safe_BlzCreateUnitWithSkin(p8, 1700884343, -(2496.0), 10560.0, 270.000, 1700884343)
@@ -3211,10 +3201,8 @@ function CreateUnitsForPlayer0(__wurst_stackPos274)
 	p9 = Player(0)
 	__wurst_safe_BlzCreateUnitWithSkin(p9, 1697656882, 784.9, 18019.4, 16.183, 1697656882)
 	__wurst_safe_BlzCreateUnitWithSkin(p9, 1697656882, 830.5, 18261.7, 202.847, 1697656882)
-	__wurst_safe_BlzCreateUnitWithSkin(p9, 1702061422, 1253.8, 18323.4, 69.117, 1702061422)
-	__wurst_safe_BlzCreateUnitWithSkin(p9, 1702061422, 1452.6, 18261.5, 192.530, 1702061422)
-	__wurst_safe_BlzCreateUnitWithSkin(p9, 1160785971, 562.3, 18696.0, 73.677, 1160785971)
-	__wurst_safe_BlzCreateUnitWithSkin(p9, 1164666213, 996.9, 17784.5, 152.000, 1164666213)
+	__wurst_safe_BlzCreateUnitWithSkin(p9, 1701081721, 1053.8, 18200.4, 335.588, 1701081721)
+	__wurst_safe_BlzCreateUnitWithSkin(p9, 1701081721, 1075.1, 18052.2, 180.917, 1701081721)
 	__wurst_safe_BlzCreateUnitWithSkin(p9, 1697656882, 608.8, 18306.6, 76.335, 1697656882)
 	__wurst_safe_BlzCreateUnitWithSkin(p9, 1697656882, 571.0, 18062.6, 40.706, 1697656882)
 	__wurst_safe_BlzCreateUnitWithSkin(p9, 1697656884, 1249.3, 18054.5, 235.137, 1697656884)
@@ -3386,24 +3374,17 @@ function CreateNeutralHostileBuildings(__wurst_stackPos279)
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos279
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	p14 = Player(PLAYER_NEUTRAL_AGGRESSIVE)
-	gg_unit_h002_0005 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988530, 2043.1, 16049.5, 270.000, 1747988530)
-	gg_unit_h004_0006 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988532, 3790.1, 16592.5, 270.000, 1747988532)
-	gg_unit_h00T_0007 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988564, 5201.0, 21647.2, 270.000, 1747988564)
-	gg_unit_h001_0008 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988529, -(2054.5), 17548.8, 270.000, 1747988529)
+	gg_unit_h001_0008 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988529, -(1798.5), 17804.8, 270.000, 1747988529)
 	gg_unit_h00A_0009 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988545, -(1627.2), 24241.2, 270.000, 1747988545)
-	gg_unit_h00D_0010 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988548, -(3666.6), 14393.4, 270.000, 1747988548)
+	gg_unit_h00D_0010 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988548, -(3538.6), 13625.4, 270.000, 1747988548)
 	gg_unit_h008_0011 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988536, 3767.3, 24074.8, 270.000, 1747988536)
-	gg_unit_h00B_0012 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988546, -(2764.2), 21793.9, 270.000, 1747988546)
 	gg_unit_h00E_0013 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988549, -(5198.1), 17582.0, 270.000, 1747988549)
 	gg_unit_h009_0014 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988537, 1238.7, 25400.3, 270.000, 1747988537)
 	gg_unit_h006_0015 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988534, 3134.0, 21074.3, 270.000, 1747988534)
-	gg_unit_h003_0016 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988531, -(785.8), 15707.1, 270.000, 1747988531)
-	gg_unit_h005_0017 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988533, 4807.8, 19519.2, 270.000, 1747988533)
-	gg_unit_h007_0018 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988535, 1957.2, 23602.8, 270.000, 1747988535)
+	gg_unit_h003_0016 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988531, -(1297.8), 15771.1, 270.000, 1747988531)
 	gg_unit_h00O_0019 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988559, -(2242.8), 10951.6, 270.000, 1747988559)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852207665, 3328.0, 16576.0, 270.000, 1852207665)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852207665, 3328.0, 16192.0, 270.000, 1852207665)
 	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852207666, 4224.0, 16704.0, 270.000, 1852207666)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852207665, 3328.0, 18048.0, 270.000, 1852207665)
 	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852663601, -(864.0), 24224.0, 270.000, 1852663601)
 	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852663601, -(2208.0), 24288.0, 270.000, 1852663601)
 	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852663601, -(2336.0), 24096.0, 270.000, 1852663601)
@@ -3413,21 +3394,20 @@ function CreateNeutralHostileBuildings(__wurst_stackPos279)
 	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852663600, -(2592.0), 23968.0, 270.000, 1852663600)
 	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852663600, -(2144.0), 23392.0, 270.000, 1852663600)
 	__wurst_safe_BlzCreateUnitWithSkin(p14, 1853122608, 1536.0, 23680.0, 270.000, 1853122608)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1853122608, 2176.0, 23552.0, 270.000, 1853122608)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1853122608, 2304.0, 23744.0, 270.000, 1853122608)
 	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852076661, 4096.0, 24448.0, 270.000, 1852076661)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852006768, -(5536.0), 18080.0, 270.000, 1852006768)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852006768, -(5408.0), 17120.0, 270.000, 1852006768)
 	__wurst_safe_BlzCreateUnitWithSkin(p14, 1853122609, 5024.0, 20064.0, 270.000, 1853122609)
 	__wurst_safe_BlzCreateUnitWithSkin(p14, 1853122608, 4544.0, 20096.0, 270.000, 1853122608)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852006768, -(4896.0), 18208.0, 270.000, 1852006768)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852006775, -(3200.0), 14528.0, 270.000, 1852006775)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852011628, -(4096.0), 14208.0, 270.000, 1852011628)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852006775, -(3200.0), 14336.0, 270.000, 1852006775)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852011628, -(4032.0), 13568.0, 270.000, 1852011628)
 	gg_unit_h00I_0135 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988553, -(2423.8), 7874.8, 270.000, 1747988553)
 	gg_unit_h00M_0136 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988557, -(5708.5), 11743.7, 270.000, 1747988557)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852009847, -(4128.0), 13792.0, 270.000, 1852009847)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852009847, -(3040.0), 13984.0, 270.000, 1852009847)
 	gg_unit_h00F_0163 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988550, -(10812.8), 10843.1, 270.000, 1747988550)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852009847, -(4448.0), 14304.0, 270.000, 1852009847)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852006768, -(4384.0), 14560.0, 270.000, 1852006768)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852006768, -(3488.0), 14880.0, 270.000, 1852006768)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852009847, -(4320.0), 13984.0, 270.000, 1852009847)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852006768, -(4384.0), 14240.0, 270.000, 1852006768)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852006768, -(3232.0), 14752.0, 270.000, 1852006768)
 	gg_unit_h00C_0174 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988547, -(7778.2), 7822.0, 270.000, 1747988547)
 	gg_unit_h00U_0175 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988565, 1720.8, 10287.2, 270.000, 1747988565)
 	gg_unit_h00K_0176 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988555, -(5186.3), 9785.8, 270.000, 1747988555)
@@ -3460,28 +3440,21 @@ function CreateNeutralHostile(__wurst_stackPos280)
 	p15 = Player(PLAYER_NEUTRAL_AGGRESSIVE)
 	u18 = nil
 	t = nil
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207724, 3547.0, 17990.4, 276.937, 1852207724)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853059186, -(1075.0), 15970.7, 45.652, 1853059186)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207724, 3171.4, 17736.4, 345.886, 1852207724)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853059186, -(1022.8), 15875.7, 37.961, 1853059186)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207731, 3461.6, 17743.1, 123.208, 1852207731)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853056884, -(1217.2), 15962.4, 20.181, 1853056884)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853059186, -(698.1), 15809.5, 45.652, 1853059186)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060200, -(3939.2), 14287.8, 105.934, 1853060200)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853059186, -(630.9), 15745.7, 37.961, 1853059186)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853056884, -(724.8), 15948.8, 20.181, 1853056884)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853125236, 752.7, 15437.6, 54.470, 1853125236)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060200, -(3951.2), 14793.2, 105.934, 1853060200)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060204, -(5326.9), 17685.1, 70.295, 1853060204)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060204, -(5499.6), 17496.7, 70.295, 1853060204)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
 	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060204, -(3837.3), 19729.3, 166.584, 1853060204)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
 	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060204, -(3987.5), 19573.8, 137.695, 1853060204)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(4996.6), 17507.0, 99.296, 1853060211)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(4913.6), 17331.0, 99.296, 1853060211)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
 	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(4123.8), 19532.3, 104.475, 1853060211)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
@@ -3489,11 +3462,9 @@ function CreateNeutralHostile(__wurst_stackPos280)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
 	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(4010.1), 19729.0, 148.868, 1853060211)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853320295, -(2215.5), 17326.7, 30.504, 1853320295)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853320295, -(2296.4), 17184.2, 30.504, 1853320295)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853320308, -(862.5), 18846.5, 221.719, 1853320308)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853320308, -(797.1), 18750.3, 215.273, 1853320308)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853320308, -(2083.9), 17385.9, 25.441, 1853320308)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
 	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207713, 3607.2, 16191.4, 84.573, 1852207713)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
@@ -3505,15 +3476,15 @@ function CreateNeutralHostile(__wurst_stackPos280)
 					bridge_Unit000038_DropItems(...)
 				end, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua callback error: " .. tostring(err)) xpcall(function() error1(tostring(err), "<lua error>") end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) BJDebugMsg("while reporting: " .. tostring(err))  end) end, ...)
 		end)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207724, 3726.7, 16407.2, 82.999, 1852207724)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207724, 3668.4, 16419.3, 82.999, 1852207724)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207724, 3576.1, 16479.6, 42.384, 1852207724)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207724, 3465.3, 16447.0, 42.384, 1852207724)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207724, 3943.7, 16433.0, 147.349, 1852207724)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207724, 3897.1, 16450.9, 147.349, 1852207724)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207717, 4047.8, 16575.1, 195.989, 1852207717)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207717, 4021.7, 16636.5, 195.989, 1852207717)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852270642, 2121.8, 15996.0, 143.210, 1852270642)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852270642, 1463.0, 15379.0, 132.066, 1852270642)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
 	t = CreateTrigger()
 	__wurst_safe_TriggerRegisterUnitEvent(t, u18, EVENT_UNIT_DEATH)
@@ -3523,18 +3494,15 @@ function CreateNeutralHostile(__wurst_stackPos280)
 					bridge_Unit000043_DropItems(...)
 				end, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua callback error: " .. tostring(err)) xpcall(function() error1(tostring(err), "<lua error>") end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) BJDebugMsg("while reporting: " .. tostring(err))  end) end, ...)
 		end)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852270641, 1888.5, 16089.0, 179.640, 1852270641)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852270641, 1655.0, 15488.2, 120.553, 1852270641)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852270641, 1925.2, 15856.2, 110.290, 1852270641)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852270641, 1278.8, 15412.4, 135.758, 1852270641)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852270641, 2188.1, 16254.1, 153.900, 1852270641)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852270641, 1438.6, 15561.8, 138.055, 1852270641)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
 	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1848651824, 422.5, -(52.9), 184.565, 1848651824)
 	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1848651826, 5154.2, 21381.0, 326.520, 1848651826)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853125235, 524.2, 15166.0, 31.928, 1853125235)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853125235, 626.6, 15115.1, 79.127, 1853125235)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853125235, 843.3, 15349.5, 40.610, 1853125235)
 	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852662375, -(1933.6), 23799.9, 64.932, 1852662375)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
 	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852662375, -(1753.1), 23778.5, 121.334, 1852662375)
@@ -3601,11 +3569,11 @@ function CreateNeutralHostile(__wurst_stackPos280)
 					bridge_Unit000090_DropItems(...)
 				end, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua callback error: " .. tostring(err)) xpcall(function() error1(tostring(err), "<lua error>") end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) BJDebugMsg("while reporting: " .. tostring(err))  end) end, ...)
 		end)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207220, 1764.0, 23330.2, 88.849, 1852207220)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207220, 2103.1, 23582.4, 211.507, 1852207220)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
 	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207220, 1789.6, 23579.7, 261.892, 1852207220)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207219, 2058.1, 23408.4, 175.542, 1852207219)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207219, 1328.0, 23512.7, -(18.783), 1852207219)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
 	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207219, 1557.9, 23541.6, 352.364, 1852207219)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
@@ -3649,8 +3617,6 @@ function CreateNeutralHostile(__wurst_stackPos280)
 		end)
 	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1848651826, 4749.7, 21508.9, 280.650, 1848651826)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1848651826, 5010.6, 21875.8, 325.120, 1848651826)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
 	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1851876471, 3648.4, 24134.3, 223.727, 1851876471)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
 	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1851876471, 3532.9, 24270.9, 240.700, 1851876471)
@@ -3671,88 +3637,65 @@ function CreateNeutralHostile(__wurst_stackPos280)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
 	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1851876459, 3699.7, 24421.6, 256.144, 1851876459)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853320292, -(1022.1), 18915.0, 248.167, 1853320292)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853320292, -(2227.9), 17428.5, 23.784, 1853320292)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853320295, -(2226.6), 17160.2, 74.291, 1853320295)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853320308, -(2384.9), 17282.9, 36.400, 1853320308)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853320308, -(1282.8), 18852.5, 295.913, 1853320308)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853320308, -(2300.4), 17593.5, 22.273, 1853320308)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853320308, -(1218.6), 18939.2, 293.176, 1853320308)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853320295, -(2407.3), 17351.3, 2.949, 1853320295)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853320295, -(2420.5), 17505.7, 2.949, 1853320295)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
 	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852404840, 4621.8, 19915.2, 265.540, 1852404840)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852404855, 4808.5, 20103.9, 264.118, 1852404855)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852404855, 5017.7, 19526.7, 220.147, 1852404855)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852404852, 4626.4, 19796.2, 271.836, 1852404852)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852404852, 4949.6, 19360.0, 271.836, 1852404852)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852404852, 4969.3, 19861.1, 266.265, 1852404852)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852404852, 4693.9, 19729.1, 266.265, 1852404852)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852404852, 4802.8, 19770.0, 261.087, 1852404852)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852404852, 4963.7, 19785.5, 261.087, 1852404852)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853058158, -(3035.1), 22030.3, 246.640, 1853058158)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060204, -(3699.8), 14255.5, 101.876, 1853060204)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853058150, -(3232.3), 22093.6, 160.043, 1853058150)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060204, -(4834.3), 17598.8, 94.733, 1853060204)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853058150, -(3055.9), 22218.3, 354.759, 1853058150)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(5169.0), 17475.6, 93.685, 1853060211)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853058150, -(2822.1), 22161.4, 337.313, 1853058150)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(5089.8), 17110.1, 96.945, 1853060211)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853058150, -(3225.3), 21926.2, 253.418, 1853058150)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(4035.2), 14066.9, 94.506, 1853060211)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853058150, -(2797.6), 22031.2, 180.379, 1853058150)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(3604.3), 14467.3, 87.511, 1853060211)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060204, -(3833.0), 14638.6, 101.876, 1853060204)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(5390.8), 17343.4, 44.658, 1853060211)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060204, -(5057.3), 17701.7, 94.733, 1853060204)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055348, -(5034.9), 17663.6, 256.692, 1853055348)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(5190.9), 17783.4, 93.685, 1853060211)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055348, -(4050.9), 14454.2, 140.684, 1853055348)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(5263.7), 17415.5, 96.945, 1853060211)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055348, -(5288.4), 17707.1, 147.386, 1853055348)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(4059.3), 14649.0, 94.506, 1853060211)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055348, -(3821.6), 14496.8, 35.519, 1853055348)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(3732.5), 14798.5, 87.511, 1853060211)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055348, -(3860.9), 14138.9, 116.712, 1853055348)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(5471.7), 17520.1, 44.658, 1853060211)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055348, -(3527.7), 14356.7, 103.805, 1853055348)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055348, -(5025.3), 18031.8, 256.692, 1853055348)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055348, -(5151.8), 17712.7, 310.082, 1853055348)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055348, -(4179.1), 14785.4, 140.684, 1853055348)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055348, -(5399.6), 17594.4, 72.787, 1853055348)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055348, -(5278.8), 18075.3, 147.386, 1853055348)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853056884, -(1107.4), 15740.7, 38.455, 1853056884)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055348, -(3931.4), 14948.8, 35.519, 1853055348)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853059186, -(925.9), 15843.8, 37.961, 1853059186)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055348, -(3948.7), 14524.9, 116.712, 1853055348)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853059186, -(1127.1), 16121.3, 18.959, 1853059186)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055348, -(3655.9), 14687.9, 103.805, 1853055348)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853059186, -(1040.3), 16057.0, -(12.431), 1853059186)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055348, -(5142.2), 18080.9, 310.082, 1853055348)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853059186, -(1009.9), 15739.0, 37.961, 1853059186)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055348, -(5390.0), 17962.6, 72.787, 1853055348)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852270642, -(4274.7), 20728.0, 286.753, 1852270642)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852270642, -(4493.1), 20655.4, 306.762, 1852270642)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852270642, -(4548.8), 20504.4, 343.566, 1852270642)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853056884, -(593.5), 15615.8, 38.455, 1853056884)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853059186, -(533.1), 15792.1, 37.961, 1853059186)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853059186, -(597.4), 15858.4, 45.652, 1853059186)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853059186, -(548.4), 16013.9, 45.652, 1853059186)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853059186, -(419.1), 15726.6, 37.961, 1853059186)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1311780918, 707.6, 16329.2, 88.520, 1311780918)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853125220, -(5169.7), 15689.2, 61.793, 1853125220)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853125236, -(4928.7), 15707.0, 108.749, 1853125236)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853125236, -(5350.9), 15866.7, 34.049, 1853125236)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1311780918, -(3486.0), 13467.2, 88.520, 1311780918)
 	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852666723, -(11935.3), 9716.7, 318.489, 1852666723)
 	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
 	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852666486, -(11876.1), 9943.2, 296.661, 1852666486)
@@ -3962,29 +3905,29 @@ end
 function CreatePlayerBuildings(__wurst_stackPos282) 
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos282
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	CreateBuildingsForPlayer0("when calling CreateBuildingsForPlayer0 in war3map, line 1155")
-	CreateBuildingsForPlayer1("when calling CreateBuildingsForPlayer1 in war3map, line 1156")
-	CreateBuildingsForPlayer5("when calling CreateBuildingsForPlayer5 in war3map, line 1157")
-	CreateBuildingsForPlayer18("when calling CreateBuildingsForPlayer18 in war3map, line 1158")
+	CreateBuildingsForPlayer0("when calling CreateBuildingsForPlayer0 in war3map, line 1104")
+	CreateBuildingsForPlayer1("when calling CreateBuildingsForPlayer1 in war3map, line 1105")
+	CreateBuildingsForPlayer5("when calling CreateBuildingsForPlayer5 in war3map, line 1106")
+	CreateBuildingsForPlayer18("when calling CreateBuildingsForPlayer18 in war3map, line 1107")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
 function CreatePlayerUnits(__wurst_stackPos283) 
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos283
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	CreateUnitsForPlayer0("when calling CreateUnitsForPlayer0 in war3map, line 1163")
-	CreateUnitsForPlayer5("when calling CreateUnitsForPlayer5 in war3map, line 1164")
+	CreateUnitsForPlayer0("when calling CreateUnitsForPlayer0 in war3map, line 1112")
+	CreateUnitsForPlayer5("when calling CreateUnitsForPlayer5 in war3map, line 1113")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
 function CreateAllUnits(__wurst_stackPos284) 
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos284
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	CreateNeutralHostileBuildings("when calling CreateNeutralHostileBuildings in war3map, line 1169")
-	CreateNeutralPassiveBuildings("when calling CreateNeutralPassiveBuildings in war3map, line 1170")
-	CreatePlayerBuildings("when calling CreatePlayerBuildings in war3map, line 1171")
-	CreateNeutralHostile("when calling CreateNeutralHostile in war3map, line 1172")
-	CreatePlayerUnits("when calling CreatePlayerUnits in war3map, line 1173")
+	CreateNeutralHostileBuildings("when calling CreateNeutralHostileBuildings in war3map, line 1118")
+	CreateNeutralPassiveBuildings("when calling CreateNeutralPassiveBuildings in war3map, line 1119")
+	CreatePlayerBuildings("when calling CreatePlayerBuildings in war3map, line 1120")
+	CreateNeutralHostile("when calling CreateNeutralHostile in war3map, line 1121")
+	CreatePlayerUnits("when calling CreatePlayerUnits in war3map, line 1122")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -4019,17 +3962,11 @@ function Trig_ControlPointInitialVariables_Actions(__wurst_stackPos288)
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	udg_mountHyjal = gg_unit_h000_0407
 	udg_mountHyjalGrove = gg_unit_h001_0008
-	udg_mountHyjalCrypt = gg_unit_h002_0005
 	udg_mountHyjalTown = gg_unit_h003_0016
-	udg_winterspringSouth = gg_unit_h004_0006
-	udg_winterspringCenter = gg_unit_h005_0017
 	udg_winterspringNorth = gg_unit_h006_0015
-	udg_winterspringFactory = gg_unit_h00T_0007
-	udg_winterspringDen = gg_unit_h007_0018
 	udg_winterspringRoost = gg_unit_h008_0011
 	udg_moongladeEast = gg_unit_h009_0014
 	udg_moongladeWest = gg_unit_h00A_0009
-	udg_felwoodNorth = gg_unit_h00B_0012
 	udg_felwoodCenter = gg_unit_h00E_0013
 	udg_felwoodSouth = gg_unit_h00D_0010
 	udg_ashenvaleAstranaar = gg_unit_h00C_0174
@@ -4067,8 +4004,8 @@ end
 function InitCustomTriggers(__wurst_stackPos290) 
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos290
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	InitTrig_Other("when calling InitTrig_Other in war3map, line 1254")
-	InitTrig_ControlPointInitialVariables("when calling InitTrig_ControlPointInitialVariables in war3map, line 1255")
+	InitTrig_Other("when calling InitTrig_Other in war3map, line 1197")
+	InitTrig_ControlPointInitialVariables("when calling InitTrig_ControlPointInitialVariables in war3map, line 1198")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -4128,21 +4065,16 @@ function main()
 	gg_trg_Other = nil
 	gg_trg_ControlPointInitialVariables = nil
 	gg_unit_h00O_0019 = nil
-	gg_unit_h007_0018 = nil
-	gg_unit_h002_0005 = nil
 	gg_unit_h006_0015 = nil
 	gg_unit_h008_0011 = nil
 	gg_unit_h003_0016 = nil
-	gg_unit_h00B_0012 = nil
-	gg_unit_h004_0006 = nil
 	gg_unit_h00E_0013 = nil
 	gg_unit_h009_0014 = nil
-	gg_unit_h005_0017 = nil
-	gg_unit_h00T_0007 = nil
 	gg_unit_h00A_0009 = nil
 	gg_unit_h001_0008 = nil
 	gg_unit_h000_0407 = nil
 	gg_unit_etol_0001 = nil
+	gg_unit_h00K_0176 = nil
 	gg_unit_cp00_0425 = nil
 	gg_unit_h00L_0184 = nil
 	gg_unit_h00G_0185 = nil
@@ -4159,7 +4091,6 @@ function main()
 	gg_unit_h00U_0175 = nil
 	gg_unit_h00R_0196 = nil
 	gg_unit_h00S_0179 = nil
-	gg_unit_h00K_0176 = nil
 	Abilities_tranquility = ""
 	Angle_DEGTORAD = 0.
 	Angle_RADTODEG = 0.
@@ -5437,12 +5368,12 @@ function main()
 	SetAmbientDaySound("AshenvaleDay")
 	SetAmbientNightSound("AshenvaleNight")
 	SetMapMusic("Music", true, 0)
-	CreateRegions("when calling CreateRegions in war3map, line 1301")
-	CreateAllUnits("when calling CreateAllUnits in war3map, line 1302")
+	CreateRegions("when calling CreateRegions in war3map, line 1244")
+	CreateAllUnits("when calling CreateAllUnits in war3map, line 1245")
 	InitBlizzard()
-	InitGlobals("when calling InitGlobals in war3map, line 1304")
-	InitCustomTriggers("when calling InitCustomTriggers in war3map, line 1305")
-	RunInitializationTriggers("when calling RunInitializationTriggers in war3map, line 1306")
+	InitGlobals("when calling InitGlobals in war3map, line 1247")
+	InitCustomTriggers("when calling InitCustomTriggers in war3map, line 1248")
+	RunInitializationTriggers("when calling RunInitializationTriggers in war3map, line 1249")
 	do
 	  local __wurst_init_ok = xpcall(init_Abilities, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() error1(tostring(err), "<lua error>") end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
 	  if not __wurst_init_ok then
@@ -8583,7 +8514,7 @@ function init_Recycle(__wurst_stackPos361)
 	local temp199 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos361
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	Recycle_RECYCLE_ID = intEnsure(1095577703)
+	Recycle_RECYCLE_ID = intEnsure(1095577704)
 	group_enumUnitsOfType(Group_ENUM_GROUP, 1697656882, nil, "when calling enumUnitsOfType in Recycle, line 36")
 	iterator15 = group_iterator(Group_ENUM_GROUP, "when calling iterator in Recycle, line 37")
 	while true do
@@ -8872,8 +8803,8 @@ function init_ShieldBash(__wurst_stackPos362)
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos362
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	intEnsure(1112354870)
-	ShieldBash_MY_ABILITY_ID = intEnsure(1095577701)
-	intEnsure(1095577702)
+	ShieldBash_MY_ABILITY_ID = intEnsure(1095577702)
+	intEnsure(1095577703)
 	intEnsure(2016423986)
 	ShieldBash_ARMOR_BONUS = 4
 	ShieldBash_REFLECT_CHANCE = 0.25
@@ -9213,7 +9144,7 @@ end
 function init_ThickBark(__wurst_stackPos364) 
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos364
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	intEnsure(1095577704)
+	intEnsure(1095577705)
 	intEnsure(1380790321)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
@@ -9223,7 +9154,7 @@ function init_ThrowExplosives(__wurst_stackPos365)
 	local temp61 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos365
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	ThrowExplosives_THROW_EXPLOSIVES_ID = intEnsure(1095577705)
+	ThrowExplosives_THROW_EXPLOSIVES_ID = intEnsure(1095577701)
 	ThrowExplosives_BARREL_UNIT_ID = 1697656886
 	ThrowExplosives_FUSE_DURATION = 3.
 	ThrowExplosives_EXPLODE_RADIUS = 350.
@@ -10327,49 +10258,49 @@ function initCompiletimeState_0(__wurst_stackPos548)
 	__wurst_SaveStr(hashtable_compiletime3, 2, -849326328, "Aien")
 	__wurst_SaveStr(hashtable_compiletime3, 2, -690706802, "Aadm")
 	__wurst_SaveStr(hashtable_compiletime3, 2, 860156185, "Aspo")
-	__wurst_SaveStr(hashtable_compiletime3, 2, 1783581612, "AM0g")
-	__wurst_SaveStr(hashtable_compiletime3, 2, -1169939221, "AM0i")
+	__wurst_SaveStr(hashtable_compiletime3, 2, -1343687314, "AM0e")
+	__wurst_SaveStr(hashtable_compiletime3, 2, -1882885242, "AM0h")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
 function bridge_Unit000038_DropItems() 
-	Unit000038_DropItems("via function reference war3map, line 725")
+	Unit000038_DropItems("via function reference war3map, line 702")
 end
 
 function bridge_Unit000043_DropItems() 
-	Unit000043_DropItems("via function reference war3map, line 739")
+	Unit000043_DropItems("via function reference war3map, line 716")
 end
 
 function bridge_Unit000080_DropItems() 
-	Unit000080_DropItems("via function reference war3map, line 771")
+	Unit000080_DropItems("via function reference war3map, line 745")
 end
 
 function bridge_Unit000077_DropItems() 
-	Unit000077_DropItems("via function reference war3map, line 781")
+	Unit000077_DropItems("via function reference war3map, line 755")
 end
 
 function bridge_Unit000090_DropItems() 
-	Unit000090_DropItems("via function reference war3map, line 805")
+	Unit000090_DropItems("via function reference war3map, line 779")
 end
 
 function bridge_Unit000097_DropItems() 
-	Unit000097_DropItems("via function reference war3map, line 819")
+	Unit000097_DropItems("via function reference war3map, line 793")
 end
 
 function bridge_Unit000003_DropItems() 
-	Unit000003_DropItems("via function reference war3map, line 843")
+	Unit000003_DropItems("via function reference war3map, line 817")
 end
 
 function bridge_Unit000116_DropItems() 
-	Unit000116_DropItems("via function reference war3map, line 859")
+	Unit000116_DropItems("via function reference war3map, line 831")
 end
 
 function bridge_Trig_Other_Actions() 
-	Trig_Other_Actions("via function reference war3map, line 1205")
+	Trig_Other_Actions("via function reference war3map, line 1154")
 end
 
 function bridge_Trig_ControlPointInitialVariables_Actions() 
-	Trig_ControlPointInitialVariables_Actions("via function reference war3map, line 1249")
+	Trig_ControlPointInitialVariables_Actions("via function reference war3map, line 1192")
 end
 
 function bridge_code__onUnitDeindex_ClosureEvents() 
