@@ -59,11 +59,34 @@ import AbilityObjEditing
 
 
 @compiletime function create_w3a_AM02()
-	new AbilityDefinitionRootAncients('AM02')
+	new AbilityDefinitionFireBolt('AM02')
+	..setName("Corrupted Blood")
+	..setTooltipNormal(1, "Corrupted Blood")
+	..setTooltipNormalExtended(1, "Hurls a bolt of corrupted blood at an enemy, spawning a slime on impact that chases the target. If the target stays within 150 range for 3 seconds the slime explodes for 500 damage.")
+	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNPoisonSting.blp")
+	..setButtonPositionNormalX(1)
+	..setButtonPositionNormalY(0)
+	..setCastRange(1, 800.0)
+	..setCooldown(1, 15.0)
+	..setManaCost(1, 80)
+	..setDamage(1, 0.0)
+	..setDurationNormal(1, 0.0)
+	..setDurationHero(1, 0.0)
+	..setBuffs(1, "")
+	..setMissileArt("")
+	..setMissileSpeed(1)
+	..setRequirements("")
+	..setRequirementsLevels("")
+	..setHeroAbility(false)
+	..setItemAbility(false)
 
 
 @compiletime function create_w3a_AM03()
-	new AbilityDefinitionBloodMageFlameStrike('AM03')
+	new AbilityDefinitionRootAncients('AM03')
+
+
+@compiletime function create_w3a_AM04()
+	new AbilityDefinitionBloodMageFlameStrike('AM04')
 	..setName("Nightmare")
 	..setTooltipNormal(1, "Nightmare")
 	..setTooltipNormalExtended(1, "Pulls all units in the target area into the emerald nightmare, putting them to sleep for 10 seconds. Non-hero units that are not woken will turn against their allies.")
@@ -80,8 +103,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM04()
-	new AbilityDefinitionTaurenChieftainEnduranceAura('AM04')
+@compiletime function create_w3a_AM05()
+	new AbilityDefinitionTaurenChieftainEnduranceAura('AM05')
 	..setName("Isolation")
 	..setTooltipNormal(1, "Isolation")
 	..setTooltipNormalExtended(1, "Applies the Isolation debuff to all nearby enemies within 1800 range.")
@@ -97,8 +120,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM05()
-	new AbilityDefinitionTaurenChieftainWarStomp('AM05')
+@compiletime function create_w3a_AM06()
+	new AbilityDefinitionTaurenChieftainWarStomp('AM06')
 	..setName("Bloom")
 	..setTooltipNormal(1, "Bloom")
 	..setTooltipNormal(2, "Bloom")
@@ -141,8 +164,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM06()
-	new AbilityDefinitionRejuvination('AM06')
+@compiletime function create_w3a_AM07()
+	new AbilityDefinitionRejuvination('AM07')
 	..setName("Invigorate")
 	..setTooltipNormal(1, "Invigorate")
 	..setTooltipNormalExtended(1, "Increases health regeneration by 5 and mana regeneration by 1 for 10 seconds. Adds 1 seedling stack (max 5 active stacks).")
@@ -159,8 +182,8 @@ import AbilityObjEditing
 	..setManaCost(1, 25)
 
 
-@compiletime function create_w3a_AM07()
-	new AbilityDefinitionRoar('AM07')
+@compiletime function create_w3a_AM08()
+	new AbilityDefinitionRoar('AM08')
 	..setName("Summon Treant")
 	..setTooltipNormal(1, "Summon Treant")
 	..setTooltipNormal(2, "Summon Treant")
@@ -203,8 +226,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM08()
-	new AbilityDefinitionMountainKingThunderClap('AM08')
+@compiletime function create_w3a_AM09()
+	new AbilityDefinitionMountainKingThunderClap('AM09')
 	..setName("Seed Burst")
 	..setTooltipNormal(1, "Seed Burst")
 	..setTooltipNormal(2, "Seed Burst")
@@ -253,8 +276,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM09()
-	new AbilityDefinitionRoar('AM09')
+@compiletime function create_w3a_AM0a()
+	new AbilityDefinitionRoar('AM0a')
 	..setName("Hibernate")
 	..setTooltipNormal(1, "Hibernate")
 	..setTooltipNormal(2, "Hibernate")
@@ -291,8 +314,8 @@ import AbilityObjEditing
 	..setHotkeyLearn("R")
 
 
-@compiletime function create_w3a_AM0a()
-	new AbilityDefinitionMountainKingThunderBolt('AM0a')
+@compiletime function create_w3a_AM0b()
+	new AbilityDefinitionMountainKingThunderBolt('AM0b')
 	..setLevels(3)
 	..setName("Mauling Charge")
 	..setTooltipNormal(1, "Mauling Charge")
@@ -337,8 +360,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM0c()
-	new AbilityDefinitionRoar('AM0c')
+@compiletime function create_w3a_AM0d()
+	new AbilityDefinitionRoar('AM0d')
 	..setName("Spirit Wisps")
 	..setTooltipNormal(1, "Spirit Wisps")
 	..setTooltipNormalExtended(1, "Summons 3 spirit wisps that orbit the caster for 10 seconds, healing nearby damaged friendly units for 15 HP/s.")
@@ -362,8 +385,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM0d()
-	new AbilityDefinitionDefenseBonusPlus1('AM0d')
+@compiletime function create_w3a_AM0e()
+	new AbilityDefinitionDefenseBonusPlus1('AM0e')
 	..setName("Iron Skin")
 	..setDefenseBonus(1, 4)
 	..setBuffs(1, "BM01")
@@ -376,8 +399,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM0e()
-	new AbilityDefinitionPassiveSimple('AM0e')
+@compiletime function create_w3a_AM0f()
+	new AbilityDefinitionPassiveSimple('AM0f')
 	..setName("Iron Skin")
 	..setTooltipNormal(1, "Iron Skin")
 	..setTooltipNormalExtended(1, "Increases armor by 4 and has a 25% chance to retaliate.")
@@ -388,8 +411,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM0f()
-	new AbilityDefinitionPassiveSimple('AM0f')
+@compiletime function create_w3a_AM0g()
+	new AbilityDefinitionPassiveSimple('AM0g')
 	..setName("Recycle")
 	..setTooltipNormal(1, "Recycle")
 	..setTooltipNormalExtended(1, "On death, applies Invigorate to the nearest friendly unit.")
@@ -400,8 +423,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM0g()
-	new AbilityDefinitionHardenedSkin('AM0g')
+@compiletime function create_w3a_AM0h()
+	new AbilityDefinitionHardenedSkin('AM0h')
 	..setName("Thick Bark")
 	..setTooltipNormal(1, "Thick Bark")
 	..setTooltipNormalExtended(1, "Reduces each attack's damage by 10.0 minimum damage taken off 5.0% per hit.")
