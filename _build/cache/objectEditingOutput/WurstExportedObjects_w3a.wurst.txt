@@ -398,6 +398,23 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
+@compiletime function create_w3a_AM0g()
+	new AbilityDefinitionTaurenChieftainEnduranceAura('AM0g')
+	..setName("Isolation")
+	..setTooltipNormal(1, "Isolation")
+	..setTooltipNormalExtended(1, "Applies the Isolation debuff to all nearby enemies within 1800 range.")
+	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNPossession.blp")
+	..setAreaofEffect(1, 1800.0)
+	..setBuffs(1, "BM06")
+	..setTargetsAllowed(1, "enemy,ground,air,organic")
+	..setAttackSpeedIncrease(1, 0.0)
+	..setMovementSpeedIncrease(1, 0.0)
+	..setButtonPositionNormalX(0)
+	..setButtonPositionNormalY(2)
+	..setHeroAbility(false)
+	..setItemAbility(false)
+
+
 // Original Table (contains all modified default/melee objects)
 // These are emitted when createObjectDefinition uses the same base/new id.
 

@@ -44,11 +44,20 @@ import BuffObjEditing
 
 
 @compiletime function create_w3h_BM05()
-	new BuffDefinition('BM05', 'BNso')
+	new BuffDefinition('BM05', 'BUsl')
 	..setName(1, "Nightmare")
 	..setTooltipNormal(1, "Experiencing a Nightmare")
 	..setTooltipNormalExtended(1, "This unit has been pulled into the emerald nightmare. Wake it before time runs out or it will turn!")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNSleep.blp")
+
+
+@compiletime function create_w3h_BM06()
+	new BuffDefinition('BM06', 'Basl')
+	..setName(1, "Isolation")
+	..setTooltipNormal(1, "Isolation")
+	..setTooltipNormalExtended(1, "This unit is being isolated by the emerald nightmare, keep your friends close.")
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNPossession.blp")
+	..setEffect(1, "")
 
 
 // Original Table (contains all modified default/melee objects)

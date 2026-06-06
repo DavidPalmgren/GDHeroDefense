@@ -1,0 +1,92 @@
+package Isolation
+
+import AbilityObjEditing
+import BuffObjEditing
+import ObjectIdGenerator
+import Icons
+import ObjectIds
+import StringUtils
+import ClosureEvents
+import ClosureTimers
+import EventHelper
+import Trigger
+import Printing
+import UnitObjEditing
+import Unit
+import HashMap
+import BuffIds
+
+import Nightmare
+
+
+public constant ISOLATION_ID = compiletime(ABIL_ID_GEN.next())
+public constant ISOLATION_BUFF_ID = compiletime(BUFF_ID_GEN.next())
+
+constant real ISOLATION_RADIUS = 1800.
+constant real ISOLATION_DAMAGE = 15.
+constant real ISOLATION_PERIOD = 1.
+
+@compiletime function generateBuff()
+    new BuffDefinition(ISOLATION_BUFF_ID, 'Basl')
+        ..setName(1, "Isolation")
+        ..setTooltipNormal(1, "Isolation")
+        ..setTooltipNormalExtended(1, "This unit is being isolated by the emerald nightmare, keep your friends close.")
+        ..setIcon(Icons.bTNPossession)
+        ..setEffect("")
+
+
+@compiletime function generateAbility()
+    new AbilityDefinitionTaurenChieftainEnduranceAura(ISOLATION_ID)
+        ..setName("Isolation")
+        ..setTooltipNormal(1, "Isolation")
+        ..setTooltipNormalExtended(1, "Applies the Isolation debuff to all nearby enemies within " + ISOLATION_RADIUS.toInt().toString() + " range.")
+        ..setIconNormal(Icons.bTNPossession)
+        ..setAreaofEffect(1, ISOLATION_RADIUS)
+        ..setBuffs(1, toRawCode(ISOLATION_BUFF_ID))
+        ..setTargetsAllowed(1, "enemy,ground,air,organic")
+        ..setAttackSpeedIncrease(1, 0.)
+        ..setMovementSpeedIncrease(1, 0.)
+        ..setButtonPositionNormalX(0)
+        ..setButtonPositionNormalY(2)
+        ..setHeroAbility(false)
+        ..setItemAbility(false)
+
+
+
+// public constant ISOLATION_MAP_X = new HashMap<unit, real>()
+// public constant ISOLATION_MAP_Y = new HashMap<unit, real>()
+
+// function savePosition(unit u, vec2 pos)
+//     ISOLATION_MAP_X.put(u, pos.x)
+//     ISOLATION_MAP_Y.put(u, pos.y)
+
+// function getPosition(unit u) returns vec2
+//     return vec2(ISOLATION_MAP_X.get(u), ISOLATION_MAP_Y.get(u))
+
+// function getComparison(u)
+//     let pos = getPosition(u)
+//     for i in ISOLATION_MAP_X
+//         if pos[0] > i + 100
+//             print("so far away")
+
+
+
+
+init
+    // kill after xavius dies?
+    doPeriodically(ISOLATION_PERIOD) cb ->
+        // Create a temporary group of all units on the map
+        let g = CreateGroup()
+        g.enumUnitsInRect(bj_mapInitialPlayableArea)
+        
+        for u from g
+            if u.hasAbility(ISOLATION_BUFF_ID) and not u.hasAbility(NIGHTMARE_BUFF_ID)
+                ENUM_GROUP.enumUnitsInRange(u.getPos(), 300, null)
+                if not ENUM_GROUP.size() > 1
+                    print("print size is: " + ENUM_GROUP.size().toString())
+                    u.damageTarget(u, ISOLATION_DAMAGE, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+                //ENUM_GROUP.destr()
+
+        // Clean up the group to prevent memory leaks
+        doAfter(5.) -> 
+            g.destr()
