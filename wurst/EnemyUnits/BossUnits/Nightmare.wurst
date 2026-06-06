@@ -52,6 +52,8 @@ let sleepingUnits = new HashMap<unit, bool>()
         ..setRequirements("")
         ..setHeroAbility(false)
         ..setItemAbility(false)
+        ..setArtEffect("") // find good alt later
+
 
 init
     EventListener.onCast(NIGHTMARE_ID) (caster) ->

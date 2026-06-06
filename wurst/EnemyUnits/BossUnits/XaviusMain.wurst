@@ -7,14 +7,15 @@ import ObjectIds
 import Nightmare
 import Isolation
 import CorruptedBlood
+import ThrowExplosives
 
 
 public constant XAVIUS_ID = 'N004'
 
 let abc = new UnitDefinition(XAVIUS_ID, XAVIUS_ID)
-
+// , CORRUPTED_BLOOD_ID, NIGHTMARE_ID, ISOLATION_ID
 @compiletime function setupXavius()
     new UnitDefinition(XAVIUS_ID, XAVIUS_ID)
-        ..setNormalAbilities(commaList(CORRUPTED_BLOOD_ID))
+        ..setNormalAbilities(commaList(THROW_EXPLOSIVES_ID))
         ..setLevel(6)
         ..setName("Xavius")

@@ -1,0 +1,92 @@
+package ThrowExplosives
+
+import AbilityObjEditing
+import ObjectIdGenerator
+import Icons
+import ClosureEvents
+import ClosureTimers
+import GroupUtils
+import ObjectIds
+
+public constant THROW_EXPLOSIVES_ID = compiletime(ABIL_ID_GEN.next())
+
+// Replace with a barrel unit ID from your Object Editor
+constant int BARREL_UNIT_ID = 'e006'
+constant real FUSE_DURATION = 3.
+constant real EXPLODE_RADIUS = 350.
+constant real EXPLODE_DAMAGE = 400.
+constant string FUSE_SFX = "Abilities\\Spells\\Human\\FlameStrike\\FlameStrikeEmbers.mdl"
+constant string EXPLODE_SFX = "Abilities\\Spells\\Human\\Thunderclap\\ThunderClapCaster.mdl"
+
+// Units\OtherTNTBarrel\TNTBarrel
+
+
+@compiletime function genAbility()
+    new AbilityDefinitionBloodMageFlameStrike(THROW_EXPLOSIVES_ID)
+        ..setName("Throw Explosives")
+        ..setTooltipNormal(1, "Throw Explosives")
+        ..setTooltipNormalExtended(1, "Throws an explosive barrel to the target location. Explodes after " + FUSE_DURATION.toInt().toString() + " seconds dealing " + EXPLODE_DAMAGE.toInt().toString() + " damage to all nearby enemies.")
+        ..setIconNormal(Icons.bTNSteelMelee)
+        ..setButtonPositionNormalX(2)
+        ..setButtonPositionNormalY(0)
+        ..setCastRange(1, 900.)
+        ..setCooldown(1, 12.)
+        ..setManaCost(1, 60)
+        ..setAreaofEffect(1,EXPLODE_RADIUS)
+        ..setDurationNormal(1, 0.)
+        ..setDurationHero(1, 0.)
+        ..setFullDamageDealt(1, 0)
+        ..setHalfDamageDealt(1, 0)
+        ..setRequirements("")
+        ..setHeroAbility(false)
+        ..setItemAbility(false)
+        ..setArtSpecial("")
+        ..setAreaEffect("")
+        ..setBuffs(1, "")
+        ..setBuffs(2, "")
+        ..setBuffs(3, "")
+        ..setEffects(1, "")
+        ..setEffects(2, "")
+        ..setEffects(3, "")
+        ..setArtEffect("")
+
+@compiletime function setupBloodMage()
+    new UnitOrHeroDefinition('Hblm', 'Hblm')
+        ..setNormalAbilities(commaList(THROW_EXPLOSIVES_ID))
+        ..setLevel(6)
+        ..setName("Ligga")
+
+init
+    EventListener.onCast(THROW_EXPLOSIVES_ID) (caster) ->
+        let targetPos = EventData.getSpellTargetPos()
+        print("cast spell")
+
+        // Spawn barrel at target location
+        let barrel = createUnit(caster.getOwner(), BARREL_UNIT_ID, targetPos, angle(0.))
+        barrel.addAbility('Aloc')
+        barrel.setInvulnerable(true)
+        barrel.pause()
+
+        // Fuse effect — flickering fire on the barrel
+        let fuseSfx = barrel.addEffect(FUSE_SFX, "origin")
+        fuseSfx.setScale(1.)
+
+        var barrelScale = 1.
+        barrel.setScale(barrelScale)
+
+        let pulseTimer = doPeriodically(0.5) cb ->
+            barrelScale += 0.05
+            barrel.setScale(barrelScale)
+
+        doAfter(FUSE_DURATION) ->
+            destroy pulseTimer
+            fuseSfx.destr()
+            flashEffect(EXPLODE_SFX, targetPos)
+            flashEffect("Objects\\Spawnmodels\\Other\\NeutralBuildingExplosion\\NeutralBuildingExplosion.mdl", targetPos)
+
+            ENUM_GROUP.enumUnitsInRange(targetPos, EXPLODE_RADIUS, null)
+            for u in ENUM_GROUP
+                if u.isAlive() and u.getOwner().isEnemyOf(caster.getOwner())
+                    caster.damageTarget(u, EXPLODE_DAMAGE, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+
+            barrel.kill()

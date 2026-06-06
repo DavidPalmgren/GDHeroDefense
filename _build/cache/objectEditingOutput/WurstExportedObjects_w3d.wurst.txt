@@ -13,6 +13,174 @@ import DoodadObjEditing
 	..setModel(0, "war3mapImported\\Prop_WaterfallNOSPLASH.mdl")
 
 
+@compiletime function create_w3d_D000()
+	new DoodadDefinition('D000', 'ASv4')
+	..setName(0, "Sentinel Shrine")
+	..setModel(0, "war3mapImported\\SentinelShrine_ByxYours Trulyx.mdl")
+	..setTilesets(0, "*")
+
+
+@compiletime function create_w3d_D002()
+	new DoodadDefinition('D002', 'APct')
+	..setName(0, "Arched Window 3 Bay")
+	..setModel(0, "war3mapImported\\3kArchedWindow.mdl")
+	..setTilesets(0, "*")
+
+
+@compiletime function create_w3d_D003()
+	new DoodadDefinition('D003', 'APct')
+	..setName(0, "Arched Window")
+	..setModel(0, "war3mapImported\\ArchedWindow.mdl")
+	..setTilesets(0, "*")
+
+
+@compiletime function create_w3d_D004()
+	new DoodadDefinition('D004', 'APct')
+	..setName(0, "Archway 1")
+	..setModel(0, "war3mapImported\\Archway1.mdl")
+	..setTilesets(0, "*")
+
+
+@compiletime function create_w3d_D006()
+	new DoodadDefinition('D006', 'APct')
+	..setName(0, "City Column Double")
+	..setModel(0, "war3mapImported\\City_ColumnDouble.mdl")
+	..setTilesets(0, "*")
+
+
+@compiletime function create_w3d_D007()
+	new DoodadDefinition('D007', 'APct')
+	..setName(0, "City Column Half Circle")
+	..setModel(0, "war3mapImported\\City_ColumnSemiCircle.mdl")
+	..setTilesets(0, "*")
+
+
+@compiletime function create_w3d_D005()
+	new DoodadDefinition('D005', 'APct')
+	..setName(0, "City Column Half Circle Ruin")
+	..setModel(0, "war3mapImported\\City_ColumnSemiCircle_Ruined.mdl")
+	..setTilesets(0, "*")
+
+
+@compiletime function create_w3d_D008()
+	new DoodadDefinition('D008', 'APct')
+	..setName(0, "City Column Single")
+	..setModel(0, "war3mapImported\\City_ColumnSingle.mdl")
+	..setTilesets(0, "*")
+
+
+@compiletime function create_w3d_D009()
+	new DoodadDefinition('D009', 'APct')
+	..setName(0, "City Column Single Ruin")
+	..setModel(0, "war3mapImported\\City_ColumnSingle1_Ruined.mdl")
+	..setTilesets(0, "*")
+
+
+@compiletime function create_w3d_D00A()
+	new DoodadDefinition('D00A', 'APct')
+	..setName(0, "City Fountain")
+	..setModel(0, "war3mapImported\\City_Fountain.mdl")
+	..setTilesets(0, "*")
+
+
+@compiletime function create_w3d_D00B()
+	new DoodadDefinition('D00B', 'APct')
+	..setName(0, "Wall Endcap Tall")
+	..setModel(0, "war3mapImported\\City_LowWall_TallEndCap.mdl")
+	..setTilesets(0, "*")
+
+
+@compiletime function create_w3d_D00C()
+	new DoodadDefinition('D00C', 'APct')
+	..setName(0, "Wall Endcap Short")
+	..setModel(0, "war3mapImported\\City_LowWall_ShortEndCap.mdl")
+	..setTilesets(0, "*")
+
+
+@compiletime function create_w3d_D00D()
+	new DoodadDefinition('D00D', 'APct')
+	..setName(0, "Fountain Statue")
+	..setModel(0, "war3mapImported\\FountainStatue.mdl")
+	..setTilesets(0, "*")
+
+
+@compiletime function create_w3d_D00E()
+	new DoodadDefinition('D00E', 'APct')
+	..setName(0, "High Elf Altar")
+	..setModel(0, "war3mapImported\\HighElfAltar.mdl")
+	..setTilesets(0, "*")
+
+
+@compiletime function create_w3d_D00F()
+	new DoodadDefinition('D00F', 'APct')
+	..setName(0, "Mossy Log Bridge")
+	..setModel(0, "war3mapImported\\Mossy_Log_Bridge_002.mdl")
+	..setTilesets(0, "*")
+
+
+@compiletime function create_w3d_D00G()
+	new DoodadDefinition('D00G', 'APct')
+	..setName(0, "Mini Shrine")
+	..setModel(0, "war3mapImported\\RuinsDoodad4Ashenvale.mdl")
+	..setTilesets(0, "*")
+
+
+@compiletime function create_w3d_D00H()
+	new DoodadDefinition('D00H', 'APct')
+	..setName(0, "Mini Shrine Stairs Right")
+	..setModel(0, "war3mapImported\\RuinsDoodad6Ashenvale.mdl")
+	..setTilesets(0, "*")
+
+
+@compiletime function create_w3d_D00I()
+	new DoodadDefinition('D00I', 'APct')
+	..setName(0, "Mini Shrine Stairs Left")
+	..setModel(0, "war3mapImported\\RuinsDoodad8Ashenvale.mdl")
+	..setTilesets(0, "*")
+
+
+@compiletime function create_w3d_D00J()
+	new DoodadDefinition('D00J', 'APct')
+	..setName(0, "Mini Shrine Stairs Both")
+	..setModel(0, "war3mapImported\\RuinsDoodad9Ashenvale.mdl")
+	..setTilesets(0, "*")
+
+
+@compiletime function create_w3d_D00K()
+	new DoodadDefinition('D00K', 'ASv4')
+	..setName(0, "Ruined Elf House")
+	..setModel(0, "war3mapImported\\RuinedElfHouse.mdl")
+	..setTilesets(0, "*")
+
+
+@compiletime function create_w3d_D00L()
+	new DoodadDefinition('D00L', 'ASv4')
+	..setName(0, "Ruined Elf House (Grey)")
+	..setModel(0, "war3mapImported\\RuinedElfHouseGrey.mdl")
+	..setTilesets(0, "*")
+
+
+@compiletime function create_w3d_D00M()
+	new DoodadDefinition('D00M', 'ASv4')
+	..setName(0, "Ruined Elf Tower")
+	..setModel(0, "war3mapImported\\RuinedElfTower.mdl")
+	..setTilesets(0, "*")
+
+
+@compiletime function create_w3d_D00N()
+	new DoodadDefinition('D00N', 'ASv4')
+	..setName(0, "Ruined Elf Tower (Grey)")
+	..setModel(0, "war3mapImported\\RuinedElfTowerGrey.mdl")
+	..setTilesets(0, "*")
+
+
+@compiletime function create_w3d_D00O()
+	new DoodadDefinition('D00O', 'APct')
+	..setName(0, "Hippogriff Statue")
+	..setModel(0, "war3mapImported\\RuinsHyppoStat.mdl")
+	..setTilesets(0, "*")
+
+
 // Original Table (contains all modified default/melee objects)
 // These are emitted when createObjectDefinition uses the same base/new id.
 
