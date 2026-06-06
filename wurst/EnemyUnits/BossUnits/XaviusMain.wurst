@@ -9,7 +9,7 @@ import Isolation
 import CorruptedBlood
 
 
-public constant XAVIUS_ID = 'N004'
+public constant XAVIUS_ID = 'N006'
 
 let abc = new UnitDefinition(XAVIUS_ID, XAVIUS_ID)
 // , CORRUPTED_BLOOD_ID, NIGHTMARE_ID, ISOLATION_ID
