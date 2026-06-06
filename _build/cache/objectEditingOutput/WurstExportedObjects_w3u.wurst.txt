@@ -82,8 +82,7 @@ import UnitObjEditing
 	..setTooltipBasic("Train Treant")
 	..setTooltipExtended("Basic frontline unit. Can learn Thicker Bark to resist some damage and Recycle to invigorate a nearby unit on death. |n|n|cffffcc00Attacks land units.|r")
 	..setHotkey("Q")
-	..setNormalAbilities("AM0f")
-	..setNormalAbilities("AM0h")
+	..setNormalAbilities("AM0g")
 
 
 @compiletime function create_w3u_E003()
@@ -111,9 +110,7 @@ import UnitObjEditing
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNGrizzlyBear.blp")
 	..setProperNamesUsed(1)
 	..setNormalAbilities("A001,AInv,Ault")
-	..setHeroAbilities("AM0a,A002,AM09,AHav")
-	..setNormalAbilities("A001,AInv,Ault")
-	..setHeroAbilities("AM0c,A002,AM0b,AHav")
+	..setHeroAbilities("AM0b,A002,AM0a,AHav")
 
 
 @compiletime function create_w3u_e004()
@@ -121,8 +118,7 @@ import UnitObjEditing
 	..setManaInitialAmount(150)
 	..setName("DryadCaster")
 	..setModelFile("war3mapImported\\SylvanEnchantress.mdl")
-	..setNormalAbilities("AM0c,AInv,Ault,ACm2,Aien,Aadm,Aspo")
-	..setNormalAbilities("AM0e,AInv,Ault,ACm2,Aien,Aadm,Aspo")
+	..setNormalAbilities("AM0d,AInv,Ault,ACm2,Aien,Aadm,Aspo")
 
 
 @compiletime function create_w3u_e005()
@@ -528,20 +524,105 @@ import UnitObjEditing
 	..setGroundTexture("")
 
 
-@compiletime function create_w3u_N004()
-	new HeroDefinition('N004', 'Nmsr')
+@compiletime function create_w3u_n005()
+	new BuildingDefinition('n005', 'ndru')
+	..setName("Dragon Nexus")
+	..setModelFile("war3mapImported\\BlueDragonNexus.mdl")
+
+
+@compiletime function create_w3u_e006()
+	new BuildingDefinition('e006', 'edob')
+	..setName("Lodge")
+	..setModelFile("war3mapImported\\NightElf_Lodge.mdl")
+
+
+@compiletime function create_w3u_e007()
+	new BuildingDefinition('e007', 'edob')
+	..setName("Refuge")
+	..setModelFile("war3mapImported\\NightElf_Refuge.mdl")
+
+
+@compiletime function create_w3u_e009()
+	new BuildingDefinition('e009', 'edob')
+	..setName("Sanctuary1")
+	..setModelFile("war3mapImported\\NightElf_SanctuaryV1.mdl")
+
+
+@compiletime function create_w3u_e00C()
+	new BuildingDefinition('e00C', 'edob')
+	..setName("Haven")
+	..setModelFile("war3mapImported\\NightElf_Haven.mdl")
+
+
+@compiletime function create_w3u_e00G()
+	new BuildingDefinition('e00G', 'edob')
+	..setName("Sanctuary2")
+	..setModelFile("war3mapImported\\NightElf_SanctuaryV2.mdl")
+
+
+@compiletime function create_w3u_e00H()
+	new BuildingDefinition('e00H', 'edob')
+	..setName("Sanctuary")
+	..setModelFile("war3mapImported\\NightElf_Sanctuary.mdl")
+
+
+@compiletime function create_w3u_e00A()
+	new BuildingDefinition('e00A', 'emow')
+	..setName("Tower1")
+	..setModelFile("war3mapImported\\NightElf_TowerV1.mdl")
+
+
+@compiletime function create_w3u_e00D()
+	new BuildingDefinition('e00D', 'eate')
+	..setName("Altar")
+	..setModelFile("war3mapImported\\HighElfAltar.mdl")
+
+
+@compiletime function create_w3u_e008()
+	new BuildingDefinition('e008', 'etrp')
+	..setName("Sentinel Watchtower")
+	..setModelFile("war3mapImported\\NETByQ1.mdl")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNHumanWatchTower.blp")
+
+
+@compiletime function create_w3u_e00B()
+	new BuildingDefinition('e00B', 'etol')
+	..setUpgradesTo("e00I")
+	..setName("TowerTest")
+	..setModelFile("war3mapImported\\NETByQ1.mdl")
+
+
+@compiletime function create_w3u_e00I()
+	new BuildingDefinition('e00I', 'etol')
+	..setUpgradesTo("e00F")
+	..setName("TowerTest1")
+	..setModelFile("war3mapImported\\NETByQ1.mdl")
+	..setRequiredAnimationNames("upgrade,first")
+
+
+@compiletime function create_w3u_e00F()
+	new BuildingDefinition('e00F', 'etol')
+	..setUpgradesTo("")
+	..setName("TowerTest2")
+	..setModelFile("war3mapImported\\NETByQ1.mdl")
+	..setRequiredAnimationNames("upgrade,second")
+
+
+@compiletime function create_w3u_e00E()
+	new UnitDefinition('e00E', 'ewsp')
+	..setName("Explosives")
+	..setModelFile("Units\\Other\\TNTBarrel\\TNTBarrel.mdl")
+
+
+@compiletime function create_w3u_N006()
+	new HeroDefinition('N006', 'Nmsr')
 	..setHeroAbilities("")
 	..setHitPointsMaximumBase(5000)
 	..setHitPointsRegenerationRate(3.0)
 	..setManaRegeneration(7.0)
 	..setName("Xavius")
 	// TODO no wrapper: 	..setString("uhas", "")
-	..setNormalAbilities("AM03,AM04")
-	..setLevel(6)
-	..setName("Xavius")
-	..setNormalAbilities("AM06")
-	..setLevel(6)
-	..setName("Xavius")
+	..setModelFile("xavius2.mdl")
 
 
 @compiletime function create_w3u_x001()
@@ -604,17 +685,22 @@ import UnitObjEditing
 	..setGroundTexture("")
 
 
+@compiletime function create_w3u_N004()
+	new HeroDefinition('N004', 'N004')
+	..setNormalAbilities("AM04,AM05,AM02")
+	..setLevel(6)
+	..setName("Xavius")
+
+
 @compiletime function create_w3u_Ekee()
 	new HeroDefinition('Ekee', 'Ekee')
-	..setNormalAbilities("AM06,AInv,Ault")
-	..setHeroAbilities("AM07,AM08,AM05")
-	..setNormalAbilities("AM08,AInv,Ault")
-	..setHeroAbilities("AM09,AM0a,AM07")
+	..setNormalAbilities("AM07,AInv,Ault")
+	..setHeroAbilities("AM08,AM09,AM06")
 
 
 @compiletime function create_w3u_Hblm()
 	new HeroDefinition('Hblm', 'Hblm')
-	..setNormalAbilities("AM06")
+	..setNormalAbilities("AM0i")
 	..setLevel(6)
 	..setName("Ligga")
 

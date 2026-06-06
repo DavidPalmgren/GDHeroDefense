@@ -181,6 +181,35 @@ import DoodadObjEditing
 	..setTilesets(0, "*")
 
 
+@compiletime function create_w3d_D00P()
+	new DoodadDefinition('D00P', 'APct')
+	..setName(0, "Roots")
+	..setModel(0, "war3mapImported\\BrownRoots.mdl")
+	..setTilesets(0, "*")
+
+
+@compiletime function create_w3d_D00Q()
+	new DoodadDefinition('D00Q', 'APct')
+	..setName(0, "Stump (big)")
+	..setModel(0, "Doodads\\Felwood\\Props\\FelwoodHollowStump\\FelwoodHollowStump.mdl")
+	..setTilesets(0, "*")
+	..setMaximumScale(0, 10.0)
+	// TODO no wrapper: 	..setLvlDataInt("dvr1", 1, 0, 109)
+	// TODO no wrapper: 	..setLvlDataInt("dvg1", 1, 0, 79)
+	// TODO no wrapper: 	..setLvlDataInt("dvb1", 1, 0, 54)
+
+
+@compiletime function create_w3d_D00R()
+	new DoodadDefinition('D00R', 'APct')
+	..setName(0, "Teldrassil Root")
+	..setModel(0, "war3mapImported\\TeldrassilRoot.mdl")
+	..setTilesets(0, "*")
+	..setMaximumScale(0, 4.0)
+	// TODO no wrapper: 	..setLvlDataInt("dvr1", 1, 0, 89)
+	// TODO no wrapper: 	..setLvlDataInt("dvg1", 1, 0, 59)
+	// TODO no wrapper: 	..setLvlDataInt("dvb1", 1, 0, 34)
+
+
 // Original Table (contains all modified default/melee objects)
 // These are emitted when createObjectDefinition uses the same base/new id.
 
