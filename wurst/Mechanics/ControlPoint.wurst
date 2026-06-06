@@ -1,0 +1,84 @@
+package ControlPoint
+import HashMap
+
+//Create Variables and Hashmaps
+public unit target = null
+public group controlPoints = CreateGroup()
+let cpOwners = new HashMap<unit, player>()
+let cpValues = new HashMap<unit, int>()
+
+//Functions
+//add gold to each player based on the control points they own
+public function income()
+    for cp in controlPoints
+        let owner = cpOwners.get(cp)
+        let value = cpValues.get(cp)
+        owner.addGold(value)
+
+//Create a timer that calls the income function on a set cadence
+public function incomeTimer()
+    let countdown = CreateTimer()
+    let d = CreateTimerDialog(countdown)
+    TimerDialogSetTitle(d, "Control Point Income")
+    TimerDialogDisplay(d, true)
+    TimerStart(countdown,10.,true,function income)
+
+//Set up a trigger for each control point that allows it to be captured when it is damaged to half health
+function setupCaptureOnHalf(unit target)
+    CreateTrigger()
+        ..registerUnitEvent(target, EVENT_UNIT_DAMAGED)
+        ..addAction() ->
+        let u = GetTriggerUnit()
+        let attacker = GetEventDamageSource()
+        let hp = GetUnitState(u, UNIT_STATE_LIFE)
+        let maxHp = GetUnitState(u, UNIT_STATE_MAX_LIFE)
+        if hp / maxHp <= 0.5
+            cpOwners.put(u, attacker.getOwner())
+            SetUnitOwner(u, attacker.getOwner(), true)
+            SetUnitState(u, UNIT_STATE_LIFE, maxHp)
+
+//Helper function to add control points to the map, set their value, and set up the trigger for capturing them
+function addControlPoint(unit cp, int value)
+    cpValues.put(cp, value)
+    cpOwners.put(cp, cp.getOwner())
+    controlPoints.add(cp)
+    setupCaptureOnHalf(cp)
+
+//Set up all control points on the map with their respective values
+function setupAllControlPoints()
+    addControlPoint(udg_mountHyjal, 30)
+    addControlPoint(udg_mountHyjalGrove, 10)
+    addControlPoint(udg_mountHyjalTown, 10)
+    addControlPoint(udg_mountHyjalCrypt, 10)
+    addControlPoint(udg_winterspringCenter, 10)
+    addControlPoint(udg_winterspringNorth, 10)
+    addControlPoint(udg_winterspringSouth, 10)
+    addControlPoint(udg_winterspringDen, 10)
+    addControlPoint(udg_winterspringRoost, 10)
+    addControlPoint(udg_moongladeWest, 10)
+    addControlPoint(udg_moongladeEast, 10)
+    addControlPoint(udg_felwoodNorth, 10)
+    addControlPoint(udg_felwoodCenter, 10)
+    addControlPoint(udg_felwoodSouth, 10)
+    addControlPoint(udg_ashenvaleChimaerasFall, 10)
+    addControlPoint(udg_ashenvaleAstranaar, 10)
+    addControlPoint(udg_ashenvaleForestEast, 10)
+    addControlPoint(udg_ashenvaleCrossing, 10)
+    addControlPoint(udg_ashenvaleChimaerasRest, 10)
+    addControlPoint(udg_ashenvaleBeachNorth, 10)
+    addControlPoint(udg_ashenvaleForestWest, 10)
+    addControlPoint(udg_ashenvaleForestCenter, 10)
+    addControlPoint(udg_ashenvaleGraniteDen, 10)
+    addControlPoint(udg_ashenvaleWarsongSouth, 10)
+    addControlPoint(udg_ashenvaleWarsongNorth, 10)
+    addControlPoint(udg_ashenvaleVentureCo, 10)
+    addControlPoint(udg_ashenvaleRoost, 10)
+    addControlPoint(udg_ashenvaleBeachSouth, 10)
+    addControlPoint(udg_ashenvaleForestNorth, 10)
+    addControlPoint(udg_winterspringFactory, 10)
+    addControlPoint(udg_ashenvaleForestSouth, 10)
+    addControlPoint(udg_ashenvaleWarsongCenter, 10)
+
+init
+    setupAllControlPoints()
+    incomeTimer()
