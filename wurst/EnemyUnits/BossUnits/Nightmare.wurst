@@ -1,35 +1,36 @@
 package Nightmare
 
-import UnitObjEditing
+
 import BuffObjEditing
 import ObjectIds
 import ObjectIdGenerator
 import AbilityObjEditing
-import AbilityIds
 import Icons
-import StringUtils
 import ClosureEvents
 import ClosureTimers
-import GroupUtils
-import InstantDummyCaster
-import Orders
-import Effect
-import EffectUtils
+import Abilities
+import BuffIds
 import HashMap
+
+import InstantDummyCaster
+
+import Orders
 
 public constant NIGHTMARE_ID = compiletime(ABIL_ID_GEN.next())
 public constant NIGHTMARE_BUFF_ID = compiletime(BUFF_ID_GEN.next())
 
 constant real NIGHTMARE_RADIUS = 400.
-constant real NIGHTMARE_DURATION = 7.
-constant string NIGHTMARE_SFX = "Abilities\\Spells\\Undead\\Sleep\\SleepSpecialArt.mdl"
+constant real NIGHTMARE_DURATION = 10.
+//constant string NIGHTMARE_SFX = Abilities.sleepTarget
 constant string CORRUPT_SFX = "Abilities\\Spells\\Undead\\UndeadDismember\\UndeadDismemberTarget.mdl"
+constant string NIGHTMARE_SFX = "Abilities\\Spells\\Undead\\Sleep\\SleepSpecialArt.mdl"
+// constant string CORRUPT_SFX = "Abilities\\Spells\\Undead\\UndeadDismember\\UndeadDismemberTarget.mdl"
 
 // Tracks which units are currently sleeping so we can check if they were woken
 let sleepingUnits = new HashMap<unit, bool>()
 
 @compiletime function generateEffect()
-    new BuffDefinition(NIGHTMARE_BUFF_ID, 'BNso')
+    new BuffDefinition(NIGHTMARE_BUFF_ID, BuffIds.sleep)
         ..setName(1, "Nightmare")
         ..setTooltipNormal(1, "Experiencing a Nightmare")
         ..setTooltipNormalExtended(1, "This unit has been pulled into the emerald nightmare. Wake it before time runs out or it will turn!")
@@ -60,12 +61,14 @@ init
         ENUM_GROUP.enumUnitsInRange(targetPos, NIGHTMARE_RADIUS, null)
         for u in ENUM_GROUP
             if u.isAlive() and u.getOwner().isEnemyOf(caster.getOwner()) and not u.isType(UNIT_TYPE_HERO)
+            and not u.isType(UNIT_TYPE_MAGIC_IMMUNE)
                 let target = u
                 let originalOwner = u.getOwner()
 
                 // Put to sleep
-                target.pause()
-                UnitAddAbility(target, NIGHTMARE_BUFF_ID)
+                // target.pause()
+                print("Has buff: " + target.hasAbility('Ausl').toString())
+                let _result = InstantDummyCaster.castTarget(players[PLAYER_NEUTRAL_AGGRESSIVE], 'AUsl', 1, Orders.sleep, u)
                 flashEffect(NIGHTMARE_SFX, target, "origin")
                 sleepingUnits.put(target, true)
                 flashEffect(NIGHTMARE_SFX, target, "origin")
@@ -74,22 +77,24 @@ init
                 doAfter(NIGHTMARE_DURATION) ->
                     if sleepingUnits.has(target) and sleepingUnits.get(target)
                         // Still asleep — turn them to Xavius's team
-                        target.unpause()
-                        target.removeAbility('ANsi')
+                        //target.unpause()
                         target.setOwner(caster.getOwner(), true)
+                        UnitRemoveAbility(target, 'BUsl')
+                        UnitRemoveAbility(target, 'BUsp')
+                        UnitRemoveAbility(target, 'Bust')
+                            
                         sleepingUnits.remove(target)
                         flashEffect(CORRUPT_SFX, target, "origin")
-                        print(target.getName() + " has been corrupted by the Nightmare!")
                     else
-                        // Was woken — just clean up
+                        // Was woken — clean up
                         sleepingUnits.remove(target)
 
     // Detect when a sleeping unit gets damaged (woken up)
     EventListener.add(EVENT_PLAYER_UNIT_DAMAGED) ->
         let damaged = EventData.getTriggerUnit()
         if sleepingUnits.has(damaged) and sleepingUnits.get(damaged)
+
             damaged.unpause()
-            damaged.removeAbility('ANsi')
             sleepingUnits.put(damaged, false)  // mark as woken
             flashEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt.mdl", damaged, "origin")
             print(damaged.getName() + " has been woken from the Nightmare!")

@@ -2,12 +2,17 @@ package XaviusMain
 
 import UnitObjEditing
 import ObjectIdGenerator
-import Nightmare
 import ObjectIds
 
-public constant XAVIUS_ID = 'N004'  // single quotes for raw codes, not double quotes
+import Nightmare
+import Isolation
+
+public constant XAVIUS_ID = 'N004'
+
+let abc = new UnitDefinition(XAVIUS_ID, XAVIUS_ID)
 
 @compiletime function setupXavius()
     new UnitDefinition(XAVIUS_ID, XAVIUS_ID)
-        ..setNormalAbilities(commaList(NIGHTMARE_ID))
+        ..setNormalAbilities(commaList(NIGHTMARE_ID, ISOLATION_ID))
         ..setLevel(6)
+        ..setName("Xavius")
