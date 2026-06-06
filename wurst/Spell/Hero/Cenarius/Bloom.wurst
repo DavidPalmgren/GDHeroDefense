@@ -14,10 +14,10 @@ constant int CLOUD_UNIT_ID = 'efon'
 constant real HEAL_INTERVAL = 1.
 
 // Per level values
-constant real array CLOUD_RADIUS = [256., 320., 384.]
-constant real array CLOUD_HEAL = [20., 35., 50.]
-constant real array CLOUD_DURATION = [10., 13., 16.]
-constant real array CLOUD_COOLDOWN = [16., 13., 10.]
+constant real array CLOUD_RADIUS = [256., 270., 300.]
+constant real array CLOUD_HEAL = [20., 30., 35.]
+constant real array CLOUD_DURATION = [10., 10., 10.]
+constant real array CLOUD_COOLDOWN = [30., 25., 20.]
 constant real array CLOUD_MANA = [0., 0., 0.]
 
 @compiletime function genAbility()
