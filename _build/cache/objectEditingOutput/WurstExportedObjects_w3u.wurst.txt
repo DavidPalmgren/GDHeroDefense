@@ -537,6 +537,90 @@ import UnitObjEditing
 	..setName("Xavius")
 
 
+@compiletime function create_w3u_n005()
+	new BuildingDefinition('n005', 'ndru')
+	..setName("Dragon Nexus")
+	..setModelFile("war3mapImported\\BlueDragonNexus.mdl")
+
+
+@compiletime function create_w3u_e006()
+	new BuildingDefinition('e006', 'edob')
+	..setName("Lodge")
+	..setModelFile("war3mapImported\\NightElf_Lodge.mdl")
+
+
+@compiletime function create_w3u_e007()
+	new BuildingDefinition('e007', 'edob')
+	..setName("Refuge")
+	..setModelFile("war3mapImported\\NightElf_Refuge.mdl")
+
+
+@compiletime function create_w3u_e009()
+	new BuildingDefinition('e009', 'edob')
+	..setName("Sanctuary1")
+	..setModelFile("war3mapImported\\NightElf_SanctuaryV1.mdl")
+
+
+@compiletime function create_w3u_e00C()
+	new BuildingDefinition('e00C', 'edob')
+	..setName("Haven")
+	..setModelFile("war3mapImported\\NightElf_Haven.mdl")
+
+
+@compiletime function create_w3u_e00G()
+	new BuildingDefinition('e00G', 'edob')
+	..setName("Sanctuary2")
+	..setModelFile("war3mapImported\\NightElf_SanctuaryV2.mdl")
+
+
+@compiletime function create_w3u_e00H()
+	new BuildingDefinition('e00H', 'edob')
+	..setName("Sanctuary")
+	..setModelFile("war3mapImported\\NightElf_Sanctuary.mdl")
+
+
+@compiletime function create_w3u_e00A()
+	new BuildingDefinition('e00A', 'emow')
+	..setName("Tower1")
+	..setModelFile("war3mapImported\\NightElf_TowerV1.mdl")
+
+
+@compiletime function create_w3u_e00D()
+	new BuildingDefinition('e00D', 'eate')
+	..setName("Altar")
+	..setModelFile("war3mapImported\\HighElfAltar.mdl")
+
+
+@compiletime function create_w3u_e008()
+	new BuildingDefinition('e008', 'etrp')
+	..setName("Sentinel Watchtower")
+	..setModelFile("war3mapImported\\NETByQ1.mdl")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNHumanWatchTower.blp")
+
+
+@compiletime function create_w3u_e00B()
+	new BuildingDefinition('e00B', 'etol')
+	..setUpgradesTo("e00I")
+	..setName("TowerTest")
+	..setModelFile("war3mapImported\\NETByQ1.mdl")
+
+
+@compiletime function create_w3u_e00I()
+	new BuildingDefinition('e00I', 'etol')
+	..setUpgradesTo("e00F")
+	..setName("TowerTest1")
+	..setModelFile("war3mapImported\\NETByQ1.mdl")
+	..setRequiredAnimationNames("upgrade,first")
+
+
+@compiletime function create_w3u_e00F()
+	new BuildingDefinition('e00F', 'etol')
+	..setUpgradesTo("")
+	..setName("TowerTest2")
+	..setModelFile("war3mapImported\\NETByQ1.mdl")
+	..setRequiredAnimationNames("upgrade,second")
+
+
 @compiletime function create_w3u_x001()
 	new UnitDefinition('x001', 'ewsp')
 	..setName("Dummy Caster")

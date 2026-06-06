@@ -413,6 +413,9 @@ function CreateBuildingsForPlayer0 takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'eate', -2144.0, 11232.0, 270.000, 'eate' )
     set u = BlzCreateUnitWithSkin( p, 'eaow', -2496.0, 10560.0, 270.000, 'eaow' )
     set u = BlzCreateUnitWithSkin( p, 'eaoe', -4096.0, 12288.0, 270.000, 'eaoe' )
+    set u = BlzCreateUnitWithSkin( p, 'e008', -8800.0, 26208.0, 270.000, 'e008' )
+    set u = BlzCreateUnitWithSkin( p, 'e00B', -11187.8, 25838.9, 270.000, 'e00B' )
+    call IssueImmediateOrder( u, "unroot" )
 endfunction
 
 //===========================================================================
@@ -939,7 +942,7 @@ function CreateNeutralHostile takes nothing returns nothing
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nspr', -419.1, 15726.6, 37.961, 'nspr' )
     call SetUnitAcquireRange( u, 200.0 )
-    set u = BlzCreateUnitWithSkin( p, 'N004', 212.4, 18245.2, 118.447, 'N004' )
+    set u = BlzCreateUnitWithSkin( p, 'N004', -3716.3, 14514.8, 118.447, 'N004' )
     set u = BlzCreateUnitWithSkin( p, 'ntrd', -5169.7, 15689.2, 61.793, 'ntrd' )
     set u = BlzCreateUnitWithSkin( p, 'ntrt', -4928.7, 15707.0, 108.749, 'ntrt' )
     set u = BlzCreateUnitWithSkin( p, 'ntrt', -5350.9, 15866.7, 34.049, 'ntrt' )
