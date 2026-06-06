@@ -413,9 +413,6 @@ function CreateBuildingsForPlayer0 takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'eate', -2144.0, 11232.0, 270.000, 'eate' )
     set u = BlzCreateUnitWithSkin( p, 'eaow', -2496.0, 10560.0, 270.000, 'eaow' )
     set u = BlzCreateUnitWithSkin( p, 'eaoe', -4096.0, 12288.0, 270.000, 'eaoe' )
-    set u = BlzCreateUnitWithSkin( p, 'e008', -8800.0, 26208.0, 270.000, 'e008' )
-    set u = BlzCreateUnitWithSkin( p, 'e00B', -11187.8, 25838.9, 270.000, 'e00B' )
-    call IssueImmediateOrder( u, "unroot" )
 endfunction
 
 //===========================================================================
