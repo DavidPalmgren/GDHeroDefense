@@ -1,0 +1,58 @@
+package AssignBuildings
+import HashMap
+
+// get variables set in world editor from war3map.j
+let astranaar = udg_ashenvaleAstranaarBuildings
+let chimaerasFall = udg_ashenvaleChimaeraFallBuilding
+let auberdine = udg_darkshoreAuberdineBuildings
+let darnassus = udg_darnassusBuildings
+let teldrassil = udg_darnassusTeldrassilBuildings
+
+//create group with neutral building cps
+public group neutralBuildingCps = CreateGroup()
+
+// create a Hashmap
+public HashMap<unit, group> cpBuildingGroups = new HashMap<unit, group>()
+public HashMap<player, bool> neutralBuildingPlayers = new HashMap<player, bool>()
+
+//Functions
+
+// setup groups and hashmaps for assigning neutral units on cp capture
+function setupTables()
+// add to group all cps that have neutral units
+    neutralBuildingCps.add(
+        udg_ashenvaleAstranaar,
+        udg_ashenvaleChimaerasFall,
+        udg_darkshoreAuberdine,
+        udg_darnassus,
+        udg_darnassusTeldrassil)
+// add to hashmap which cps correspond to which neutral unit groups   
+    cpBuildingGroups.put(udg_ashenvaleAstranaar, astranaar)
+    cpBuildingGroups.put(udg_ashenvaleChimaerasFall, chimaerasFall)
+    cpBuildingGroups.put(udg_darkshoreAuberdine, auberdine)
+    cpBuildingGroups.put(udg_darnassus, darnassus)
+    cpBuildingGroups.put(udg_darnassusTeldrassil, teldrassil)
+// add to hashmap which player slots have possible neutral units to assign
+    for i = 0 to 23
+        neutralBuildingPlayers.put(players[i], false) // set all to false
+    neutralBuildingPlayers.put(players[0], true) // player slots with neutral units set to true
+    neutralBuildingPlayers.put(players[18], true)
+
+function neutralTrigger()
+    let t = CreateTrigger()
+        ..registerUnitEvent(udg_ashenvaleChimaerasFall, EVENT_UNIT_CHANGE_OWNER)
+        ..addAction()->
+        let u = GetTriggerUnit()
+        let newOwner = u.getOwner()
+        if neutralBuildingCps.has(u) and neutralBuildingPlayers.get(newOwner) == true
+            assignBuilding(cpBuildingGroups.get(u), newOwner)
+
+// helper function to assign a building to a player and set its health to max
+
+public function assignBuilding(group g, player p)
+    for u in g
+        SetUnitOwner(u, p, true)
+
+init
+    setupTables()
+    neutralTrigger()

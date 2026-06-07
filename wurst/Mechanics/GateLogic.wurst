@@ -1,0 +1,57 @@
+package GateLogic
+import LinkedList
+import HashMap
+import ControlPoint
+
+// get variables for each gate from war3map.j
+let darnassusGate = udg_darnassusGate
+let testGate = udg_testGate
+
+// create variables for functions
+group cpsWithGates = CreateGroup()
+destructable targetGate = null
+player targetOwner = null
+
+// create lists and hashmaps
+public let cpsWithGatesMap = new HashMap<destructable, unit>()
+public LinkedList<destructable> gateList = new LinkedList<destructable>()
+
+
+// function to initialize all the gates and link gates to control points
+function addGates()
+    gateList.add(udg_darnassusGate)
+    gateList.add(udg_testGate)
+
+    cpsWithGates.add(udg_darnassusTeldrassil)
+    cpsWithGatesMap.put(darnassusGate, udg_darnassusTeldrassil)
+    cpsWithGates.add(udg_mountHyjalGrove)
+    cpsWithGatesMap.put(testGate, udg_mountHyjalGrove)
+
+// function to open gate if the triggering player is the owner
+function onOpenGate()
+    let p = GetTriggerPlayer()
+    for d in gateList
+        if cpsWithGatesMap.has(d) and cpOwners.get(cpsWithGatesMap.get(d)) == p
+            ModifyGateBJ(bj_GATEOPERATION_OPEN, d)
+
+// function to close gate if the triggering player is the owner
+function onCloseGate()
+    let p = GetTriggerPlayer()
+    for d in gateList
+        if cpsWithGatesMap.has(d) and cpOwners.get(cpsWithGatesMap.get(d)) == p
+            ModifyGateBJ(bj_GATEOPERATION_CLOSE, d)
+
+// function to set up triggers for all 24 slots to use gates
+function initGates()
+    addGates()
+    let openTrig = CreateTrigger()
+    let closeTrig = CreateTrigger()
+    for i = 0 to 23
+        openTrig.registerPlayerChatEvent(players[i], "-open", true)
+        closeTrig.registerPlayerChatEvent(players[i], "-close", true)
+    openTrig.addAction(function onOpenGate)
+    closeTrig.addAction(function onCloseGate)
+
+init
+    initGates()
+    

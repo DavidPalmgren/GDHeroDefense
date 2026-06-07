@@ -1,6 +1,5 @@
 package Scoreboard
 import HashMap
-import Colors
 import initlater ControlPoint
 
 colorA array playerColors = []

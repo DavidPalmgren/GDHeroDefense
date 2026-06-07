@@ -122,67 +122,92 @@ udg_townHall = nil
 udg_mountHyjal = nil
 udg_mountHyjalGrove = nil
 udg_mountHyjalTown = nil
-udg_mountHyjalCrypt = nil
-udg_winterspringCenter = nil
-udg_winterspringNorth = nil
-udg_winterspringSouth = nil
-udg_winterspringDen = nil
 udg_winterspringRoost = nil
-udg_moongladeWest = nil
-udg_moongladeEast = nil
-udg_felwoodNorth = nil
 udg_felwoodCenter = nil
 udg_felwoodSouth = nil
 udg_ashenvaleChimaerasFall = nil
 udg_ashenvaleAstranaar = nil
-udg_ashenvaleForestEast = nil
 udg_ashenvaleCrossing = nil
-udg_ashenvaleChimaerasRest = nil
 udg_ashenvaleBeachNorth = nil
-udg_ashenvaleForestWest = nil
 udg_ashenvaleForestCenter = nil
-udg_ashenvaleGraniteDen = nil
 udg_ashenvaleWarsongSouth = nil
-udg_ashenvaleWarsongNorth = nil
 udg_ashenvaleVentureCo = nil
 udg_ashenvaleRoost = nil
 udg_ashenvaleBeachSouth = nil
-udg_ashenvaleForestNorth = nil
-udg_winterspringFactory = nil
-udg_ashenvaleForestSouth = nil
 udg_ashenvaleWarsongCenter = nil
+udg_darkshoreAuberdine = nil
+udg_darnassus = nil
+udg_darnassusTeldrassil = nil
+udg_darkshoreAuberdineBuildings = nil
+udg_darnassusBuildings = nil
+udg_darnassusTeldrassilBuildings = nil
+udg_darnassusGate = nil
+udg_ashenvaleAstranaarBuildings = nil
+udg_ashenvaleChimaeraFallBuilding = nil
+udg_testGate = nil
 gg_trg_Other = nil
 gg_trg_ControlPointInitialVariables = nil
 gg_unit_h00O_0019 = nil
-gg_unit_h006_0015 = nil
-gg_unit_h008_0011 = nil
 gg_unit_h003_0016 = nil
 gg_unit_h00E_0013 = nil
-gg_unit_h009_0014 = nil
-gg_unit_h00A_0009 = nil
 gg_unit_h001_0008 = nil
 gg_unit_h000_0407 = nil
 gg_unit_etol_0001 = nil
-gg_unit_h00K_0176 = nil
-gg_unit_cp00_0425 = nil
 gg_unit_h00L_0184 = nil
 gg_unit_h00G_0185 = nil
 gg_unit_h00P_0178 = nil
-gg_unit_h00H_0183 = nil
-gg_unit_h00N_0200 = nil
-gg_unit_h00M_0136 = nil
 gg_unit_h00F_0163 = nil
 gg_unit_h00Q_0197 = nil
 gg_unit_h00I_0135 = nil
 gg_unit_h00D_0010 = nil
-gg_unit_h00J_0177 = nil
 gg_unit_h00C_0174 = nil
 gg_unit_h00U_0175 = nil
-gg_unit_h00R_0196 = nil
 gg_unit_h00S_0179 = nil
+gg_unit_h00H_0077 = nil
+gg_unit_h00B_0076 = nil
+gg_unit_h00R_0078 = nil
+gg_unit_h007_0011 = nil
+gg_trg_auberdine = nil
+gg_unit_e00J_0074 = nil
+gg_unit_e008_0080 = nil
+gg_unit_e008_0081 = nil
+gg_unit_e007_0079 = nil
+gg_trg_darnassus = nil
+gg_unit_edos_0075 = nil
+gg_unit_emow_0072 = nil
+gg_unit_eate_0066 = nil
+gg_unit_emow_0073 = nil
+gg_unit_e007_0064 = nil
+gg_unit_eshy_0065 = nil
+gg_unit_e008_0067 = nil
+gg_unit_e008_0070 = nil
+gg_unit_e008_0071 = nil
+gg_unit_e00G_0068 = nil
+gg_dest_LTe2_0270 = nil
+gg_trg_astranaar = nil
+gg_unit_e005_0187 = nil
+gg_unit_emow_0188 = nil
+gg_unit_emow_0189 = nil
+gg_unit_eate_0186 = nil
+gg_unit_etrp_0192 = nil
+gg_unit_etrp_0191 = nil
+gg_unit_edos_0342 = nil
+gg_trg_ashenvaleChimaeraFall = nil
+gg_unit_eate_0194 = nil
+gg_unit_eaow_0195 = nil
+gg_trg_testGate = nil
+gg_dest_ZTg3_0761 = nil
 Abilities_tranquility = nil
 Angle_DEGTORAD = nil
 Angle_RADTODEG = nil
+AssignBuildings_astranaar = nil
+AssignBuildings_chimaerasFall = nil
+AssignBuildings_auberdine = nil
+AssignBuildings_darnassus = nil
+AssignBuildings_teldrassil = nil
+AssignBuildings_neutralBuildingCps = nil
+AssignBuildings_cpBuildingGroups = nil
+AssignBuildings_neutralBuildingPlayers = nil
 Basics_ANIMATION_PERIOD = nil
 Basics_HEIGHT_ENABLER = nil
 Basics_DUMMY_PLAYER = nil
@@ -258,6 +283,11 @@ Execute_tempCallbacksSuccess = nil
 Execute_tempCallbacks = nil
 Execute_tempCallbacksCount = nil
 GameTimer_currentTime = nil
+GateLogic_darnassusGate = nil
+GateLogic_testGate = nil
+GateLogic_cpsWithGates = nil
+GateLogic_cpsWithGatesMap = nil
+GateLogic_gateList = nil
 GroupUtils_GROUP_NUMBER_LIMIT = nil
 GroupUtils_START_CREATE_GROUPS = nil
 GroupUtils_used = nil
@@ -898,9 +928,9 @@ end
 function CallbackSingle_doAfter_ControlPoint_call_doAfter_ControlPoint(this56, __wurst_stackPos62) 
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos62
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	incomeTimer("when calling incomeTimer in ControlPoint, line 93")
-	setupMultiboard("when calling setupMultiboard in ControlPoint, line 94")
-	updateMultiboard("when calling updateMultiboard in ControlPoint, line 95")
+	incomeTimer("when calling incomeTimer in ControlPoint, line 77")
+	setupMultiboard("when calling setupMultiboard in ControlPoint, line 78")
+	updateMultiboard("when calling updateMultiboard in ControlPoint, line 79")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -948,8 +978,8 @@ function OnCastListener_onCast_CorruptedBlood_fire_onCast_CorruptedBlood(this60,
 	local exploded = nil
 	local clVar = nil
 	local clVar1 = nil
-	local temp191 = nil
-	local temp192 = nil
+	local temp36 = nil
+	local temp37 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos70
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	target2 = EventData_getSpellTargetUnit("when calling getSpellTargetUnit in CorruptedBlood, line 63")
@@ -970,7 +1000,7 @@ function OnCastListener_onCast_CorruptedBlood_fire_onCast_CorruptedBlood(this60,
 	effect_setScale(sfx, 1., "when calling setScale in CorruptedBlood, line 84")
 	proximityTime = 0.
 	exploded = false
-	temp191 = CorruptedBlood_UPDATE_INTERVAL
+	temp36 = CorruptedBlood_UPDATE_INTERVAL
 	clVar = CallbackPeriodic_doPeriodically_onCast_CorruptedBlood:create14()
 	CallbackPeriodic_construct_CallbackPeriodic(clVar, "when calling construct_CallbackPeriodic in CorruptedBlood, line 89")
 	clVar.exploded = exploded
@@ -980,15 +1010,15 @@ function OnCastListener_onCast_CorruptedBlood_fire_onCast_CorruptedBlood(this60,
 	clVar.sfx = sfx
 	clVar.proximityTime = proximityTime
 	clVar.caster = caster3
-	doPeriodically(temp191, clVar, "when calling doPeriodically in CorruptedBlood, line 89")
-	temp192 = CorruptedBlood_SLIME_LIFETIME
+	doPeriodically(temp36, clVar, "when calling doPeriodically in CorruptedBlood, line 89")
+	temp37 = CorruptedBlood_SLIME_LIFETIME
 	clVar1 = CallbackSingle_doAfter_onCast_CorruptedBlood:create15()
 	CallbackSingle_construct_CallbackSingle(clVar1, "when calling construct_CallbackSingle in CorruptedBlood, line 120")
 	clVar1.exploded = exploded
 	clVar1.slime = slime
 	clVar1.sfx = sfx
 	clVar1.targetSfx = targetSfx
-	doAfter(temp192, clVar1, "when calling doAfter in CorruptedBlood, line 120")
+	doAfter(temp37, clVar1, "when calling doAfter in CorruptedBlood, line 120")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -1420,8 +1450,8 @@ function OnCastListener_onCast_Hibernate_fire_onCast_Hibernate(this115, caster5,
 	local healTimer = nil
 	local clVar2 = nil
 	local clVar3 = nil
-	local temp193 = nil
-	local temp194 = nil
+	local temp38 = nil
+	local temp39 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos135
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	level1 = (unit_getAbilityLevel(caster5, Hibernate_HIBERNATE_ID, "when calling getAbilityLevel in Hibernate, line 67") - 1)
@@ -1432,19 +1462,19 @@ function OnCastListener_onCast_Hibernate_fire_onCast_Hibernate(this115, caster5,
 	unit_setPathing(caster5, false, "when calling setPathing in Hibernate, line 74")
 	__wurst_safe_UnitAddAbility(caster5, Hibernate_HIBERNATE_BUFF_ID)
 	sfx1 = addEffect1("Abilities\\Spells\\NightElf\\Rejuvenation\\RejuvenationTarget.mdl", caster5, "origin", "when calling addEffect in Hibernate, line 78")
-	temp193 = Hibernate_HEAL_INTERVAL
+	temp38 = Hibernate_HEAL_INTERVAL
 	clVar2 = CallbackPeriodic_doPeriodically_onCast_Hibernate:create27()
 	CallbackPeriodic_construct_CallbackPeriodic(clVar2, "when calling construct_CallbackPeriodic in Hibernate, line 80")
 	clVar2.caster = caster5
 	clVar2.healPerTick = healPerTick
-	healTimer = doPeriodically(temp193, clVar2, "when calling doPeriodically in Hibernate, line 80")
-	temp194 = Hibernate_HIBERNATE_DURATION
+	healTimer = doPeriodically(temp38, clVar2, "when calling doPeriodically in Hibernate, line 80")
+	temp39 = Hibernate_HIBERNATE_DURATION
 	clVar3 = CallbackSingle_doAfter_onCast_Hibernate:create28()
 	CallbackSingle_construct_CallbackSingle(clVar3, "when calling construct_CallbackSingle in Hibernate, line 85")
 	clVar3.healTimer = healTimer
 	clVar3.caster = caster5
 	clVar3.sfx = sfx1
-	doAfter(temp194, clVar3, "when calling doAfter in Hibernate, line 85")
+	doAfter(temp39, clVar3, "when calling doAfter in Hibernate, line 85")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -1830,7 +1860,7 @@ function OnCastListener_onCast_Nightmare_fire_onCast_Nightmare(this159, caster6,
 	local u7 = nil
 	local target6 = nil
 	local clVar5 = nil
-	local temp196 = nil
+	local temp41 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos180
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	targetPos1 = tupleCopy(EventData_getSpellTargetPos("when calling getSpellTargetPos in Nightmare, line 60"))
@@ -1851,12 +1881,12 @@ function OnCastListener_onCast_Nightmare_fire_onCast_Nightmare(this159, caster6,
 			HashMap_HashMap_put(Nightmare_sleepingUnits, __wurst_objectToIndex(target6), booleanToIndex(true, "when calling booleanToIndex in Nightmare, line 75"), "when calling put in Nightmare, line 75")
 			flashEffect(Nightmare_NIGHTMARE_SFX, target6, "origin", "when calling flashEffect in Nightmare, line 76")
 			print1(stringConcat(unit_getName(target6, "when calling getName in Nightmare, line 77"), " falls into the Nightmare!"), "when calling print in Nightmare, line 77")
-			temp196 = Nightmare_NIGHTMARE_DURATION
+			temp41 = Nightmare_NIGHTMARE_DURATION
 			clVar5 = CallbackSingle_doAfter_onCast_Nightmare:create38()
 			CallbackSingle_construct_CallbackSingle(clVar5, "when calling construct_CallbackSingle in Nightmare, line 79")
 			clVar5.target = target6
 			clVar5.caster = caster6
-			doAfter(temp196, clVar5, "when calling doAfter in Nightmare, line 79")
+			doAfter(temp41, clVar5, "when calling doAfter in Nightmare, line 79")
 		end
 	end
 	GroupIterator_GroupIterator_close(iterator3, "when calling close in Nightmare, line 64")
@@ -2068,7 +2098,7 @@ function OnCastListener_onCast_SeedBurst_fire_onCast_SeedBurst(this173, caster7,
 	local clVar6 = nil
 	local iterator7 = nil
 	local wrapper1 = nil
-	local temp197 = nil
+	local temp42 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos203
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	level2 = (unit_getAbilityLevel(caster7, SeedBurst_SEED_BURST_ID, "when calling getAbilityLevel in SeedBurst, line 82") - 1)
@@ -2096,14 +2126,14 @@ function OnCastListener_onCast_SeedBurst_fire_onCast_SeedBurst(this173, caster7,
 		explodePos = tupleCopy(wrapper.Vec2Wrapper_pos)
 		damage = realEnsure(SeedBurst_BURST_DAMAGE[level2])
 		radius2 = realEnsure(SeedBurst_BURST_RADIUS[level2])
-		temp197 = delay
+		temp42 = delay
 		clVar6 = CallbackSingle_doAfter_onCast_SeedBurst:create46()
 		CallbackSingle_construct_CallbackSingle(clVar6, "when calling construct_CallbackSingle in SeedBurst, line 96")
 		clVar6.explodePos = tupleCopy(explodePos)
 		clVar6.radius = radius2
 		clVar6.caster = caster7
 		clVar6.damage = damage
-		doAfter(temp197, clVar6, "when calling doAfter in SeedBurst, line 96")
+		doAfter(temp42, clVar6, "when calling doAfter in SeedBurst, line 96")
 		delay = (delay + SeedBurst_BURST_DELAY)
 	end
 	LLIterator_LLIterator_close(iterator6, "when calling close in SeedBurst, line 92")
@@ -2222,9 +2252,9 @@ function OnCastListener_onCast_SpiritWisps_fire_onCast_SpiritWisps(this182, cast
 	local healTimer1 = nil
 	local clVar8 = nil
 	local clVar9 = nil
-	local temp198 = nil
-	local temp199 = nil
-	local temp0 = nil
+	local temp43 = nil
+	local temp44 = nil
+	local temp45 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos213
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wisps = LinkedList_new_LinkedList("when calling new_LinkedList in SpiritWisps, line 60")
@@ -2243,25 +2273,25 @@ function OnCastListener_onCast_SpiritWisps_fire_onCast_SpiritWisps(this182, cast
 		LinkedList_LinkedList_add(wisps, "when calling add in SpiritWisps, line 70", __wurst_objectToIndex(wisp))
 		i4 = (i4 + 1)
 	end
-	temp198 = SpiritWisps_UPDATE_INTERVAL
+	temp43 = SpiritWisps_UPDATE_INTERVAL
 	clVar7 = CallbackPeriodic_doPeriodically_onCast_SpiritWisps:create50()
 	CallbackPeriodic_construct_CallbackPeriodic(clVar7, "when calling construct_CallbackPeriodic in SpiritWisps, line 72")
 	clVar7.wisps = wisps
 	clVar7.caster = caster8
-	moveTimer = doPeriodically(temp198, clVar7, "when calling doPeriodically in SpiritWisps, line 72")
-	temp199 = SpiritWisps_HEAL_INTERVAL
+	moveTimer = doPeriodically(temp43, clVar7, "when calling doPeriodically in SpiritWisps, line 72")
+	temp44 = SpiritWisps_HEAL_INTERVAL
 	clVar8 = CallbackPeriodic_doPeriodically_onCast_SpiritWisps1:create51()
 	CallbackPeriodic_construct_CallbackPeriodic(clVar8, "when calling construct_CallbackPeriodic in SpiritWisps, line 114")
 	clVar8.caster = caster8
-	healTimer1 = doPeriodically(temp199, clVar8, "when calling doPeriodically in SpiritWisps, line 114")
-	temp0 = SpiritWisps_WISP_DURATION
+	healTimer1 = doPeriodically(temp44, clVar8, "when calling doPeriodically in SpiritWisps, line 114")
+	temp45 = SpiritWisps_WISP_DURATION
 	clVar9 = CallbackSingle_doAfter_onCast_SpiritWisps:create52()
 	CallbackSingle_construct_CallbackSingle(clVar9, "when calling construct_CallbackSingle in SpiritWisps, line 122")
 	clVar9.moveTimer = moveTimer
 	clVar9.healTimer = healTimer1
 	clVar9.wisps = wisps
 	clVar9.caster = caster8
-	doAfter(temp0, clVar9, "when calling doAfter in SpiritWisps, line 122")
+	doAfter(temp45, clVar9, "when calling doAfter in SpiritWisps, line 122")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -2405,7 +2435,7 @@ function OnCastListener_onCast_SummonTreant_fire_onCast_SummonTreant(this188, ca
 	local temp4 = nil
 	local treant = nil
 	local clVar10 = nil
-	local temp11 = nil
+	local temp46 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos219
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	if (getSeedlingCount("when calling getSeedlingCount in SummonTreant, line 70") <= 0) then
@@ -2426,11 +2456,11 @@ function OnCastListener_onCast_SummonTreant_fire_onCast_SummonTreant(this188, ca
 			break
 		end
 		treant = createUnit(unit_getOwner(caster9, "when calling getOwner in SummonTreant, line 83"), SummonTreant_TREANT_UNIT_ID, pos8, ({0., }), "when calling createUnit in SummonTreant, line 83")
-		temp11 = duration2
+		temp46 = duration2
 		clVar10 = CallbackSingle_doAfter_onCast_SummonTreant:create54()
 		CallbackSingle_construct_CallbackSingle(clVar10, "when calling construct_CallbackSingle in SummonTreant, line 84")
 		clVar10.treant = treant
-		doAfter(temp11, clVar10, "when calling doAfter in SummonTreant, line 84")
+		doAfter(temp46, clVar10, "when calling doAfter in SummonTreant, line 84")
 		i5 = (i5 + 1)
 	end
 	wurst_stack_depth = (wurst_stack_depth - 1)
@@ -2523,36 +2553,54 @@ function Table_Table_loadUnit(this200, parentKey14, __wurst_stackPos232)
 	return stackTrace_tempReturn5
 end
 
-function Table_Table_loadTrigger(this202, parentKey16, __wurst_stackPos234) 
+function Table_Table_loadDestructable(this202, parentKey16, __wurst_stackPos234) 
 	local stackTrace_tempReturn6 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos234
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn6 = hashtable_loadTriggerHandle(Table_ht, __wurst_objectToIndex(this202), parentKey16, "when calling loadTriggerHandle in Table, line 113")
+	stackTrace_tempReturn6 = hashtable_loadDestructableHandle(Table_ht, __wurst_objectToIndex(this202), parentKey16, "when calling loadDestructableHandle in Table, line 83")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn6
 end
 
-function Table_Table_saveFogState(this204, parentKey18, value6, __wurst_stackPos236) 
+function Table_Table_loadGroup(this204, parentKey18, __wurst_stackPos236) 
+	local stackTrace_tempReturn7 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos236
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	hashtable_saveFogStateHandle(Table_ht, __wurst_objectToIndex(this204), parentKey18, value6, "when calling saveFogStateHandle in Table, line 170")
+	stackTrace_tempReturn7 = hashtable_loadGroupHandle(Table_ht, __wurst_objectToIndex(this204), parentKey18, "when calling loadGroupHandle in Table, line 107")
 	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn7
 end
 
-function Table_Table_init(this206, __wurst_stackPos238) 
+function Table_Table_loadTrigger(this206, parentKey20, __wurst_stackPos238) 
+	local stackTrace_tempReturn8 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos238
 	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn8 = hashtable_loadTriggerHandle(Table_ht, __wurst_objectToIndex(this206), parentKey20, "when calling loadTriggerHandle in Table, line 113")
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn8
+end
+
+function Table_Table_saveFogState(this208, parentKey22, value6, __wurst_stackPos240) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos240
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	hashtable_saveFogStateHandle(Table_ht, __wurst_objectToIndex(this208), parentKey22, value6, "when calling saveFogStateHandle in Table, line 170")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function Table_new_Table(__wurst_stackPos239) 
-	local this207 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos239
+function Table_Table_init(this210, __wurst_stackPos242) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos242
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	this207 = Table:create55()
-	Table_construct_Table(this207, "when calling construct_Table in Table, line 6")
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return this207
+end
+
+function Table_new_Table(__wurst_stackPos243) 
+	local this211 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos243
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	this211 = Table:create55()
+	Table_construct_Table(this211, "when calling construct_Table in Table, line 6")
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return this211
 end
 
 function Table_construct_Table(this111, __wurst_stackPos130) 
@@ -2568,7 +2616,7 @@ function OnCastListener_onCast_ThrowExplosives:create56()
 	return new_inst
 end
 
-function OnCastListener_onCast_ThrowExplosives_fire_onCast_ThrowExplosives(this208, caster10, __wurst_stackPos240) 
+function OnCastListener_onCast_ThrowExplosives_fire_onCast_ThrowExplosives(this212, caster10, __wurst_stackPos244) 
 	local targetPos3 = ({0., 0., })
 	local barrel = nil
 	local fuseSfx = nil
@@ -2576,8 +2624,8 @@ function OnCastListener_onCast_ThrowExplosives_fire_onCast_ThrowExplosives(this2
 	local pulseTimer = nil
 	local clVar11 = nil
 	local clVar12 = nil
-	local temp21 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos240
+	local temp47 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos244
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	targetPos3 = tupleCopy(EventData_getSpellTargetPos("when calling getSpellTargetPos in ThrowExplosives, line 61"))
 	print1("cast spell", "when calling print in ThrowExplosives, line 62")
@@ -2594,7 +2642,7 @@ function OnCastListener_onCast_ThrowExplosives_fire_onCast_ThrowExplosives(this2
 	clVar11.barrelScale = barrelScale
 	clVar11.barrel = barrel
 	pulseTimer = doPeriodically(0.5, clVar11, "when calling doPeriodically in ThrowExplosives, line 77")
-	temp21 = ThrowExplosives_FUSE_DURATION
+	temp47 = ThrowExplosives_FUSE_DURATION
 	clVar12 = CallbackSingle_doAfter_onCast_ThrowExplosives:create58()
 	CallbackSingle_construct_CallbackSingle(clVar12, "when calling construct_CallbackSingle in ThrowExplosives, line 81")
 	clVar12.pulseTimer = pulseTimer
@@ -2602,7 +2650,7 @@ function OnCastListener_onCast_ThrowExplosives_fire_onCast_ThrowExplosives(this2
 	clVar12.targetPos = tupleCopy(targetPos3)
 	clVar12.caster = caster10
 	clVar12.barrel = barrel
-	doAfter(temp21, clVar12, "when calling doAfter in ThrowExplosives, line 81")
+	doAfter(temp47, clVar12, "when calling doAfter in ThrowExplosives, line 81")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -2612,11 +2660,11 @@ function CallbackPeriodic_doPeriodically_onCast_ThrowExplosives:create57()
 	return new_inst
 end
 
-function CallbackPeriodic_doPeriodically_onCast_ThrowExplosives_call_doPeriodically_onCast_ThrowExplosives(this209, cb9, __wurst_stackPos241) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos241
+function CallbackPeriodic_doPeriodically_onCast_ThrowExplosives_call_doPeriodically_onCast_ThrowExplosives(this213, cb9, __wurst_stackPos245) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos245
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	this209.barrelScale = (this209.barrelScale + 0.05)
-	unit_setScale(this209.barrel, this209.barrelScale, "when calling setScale in ThrowExplosives, line 79")
+	this213.barrelScale = (this213.barrelScale + 0.05)
+	unit_setScale(this213.barrel, this213.barrelScale, "when calling setScale in ThrowExplosives, line 79")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -2626,28 +2674,28 @@ function CallbackSingle_doAfter_onCast_ThrowExplosives:create58()
 	return new_inst
 end
 
-function CallbackSingle_doAfter_onCast_ThrowExplosives_call_doAfter_onCast_ThrowExplosives(this210, __wurst_stackPos242) 
+function CallbackSingle_doAfter_onCast_ThrowExplosives_call_doAfter_onCast_ThrowExplosives(this214, __wurst_stackPos246) 
 	local iterator13 = nil
 	local u16 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos242
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos246
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	CallbackPeriodic_destroyCallbackPeriodic(this210.pulseTimer, "when calling destroyCallbackPeriodic in ThrowExplosives, line 82")
-	effect_destr(this210.fuseSfx, "when calling destr in ThrowExplosives, line 83")
-	flashEffect1(ThrowExplosives_EXPLODE_SFX, this210.targetPos, "when calling flashEffect in ThrowExplosives, line 84")
-	flashEffect1("Objects\\Spawnmodels\\Other\\NeutralBuildingExplosion\\NeutralBuildingExplosion.mdl", this210.targetPos, "when calling flashEffect in ThrowExplosives, line 85")
-	group_enumUnitsInRange(Group_ENUM_GROUP, this210.targetPos, ThrowExplosives_EXPLODE_RADIUS, nil, "when calling enumUnitsInRange in ThrowExplosives, line 87")
+	CallbackPeriodic_destroyCallbackPeriodic(this214.pulseTimer, "when calling destroyCallbackPeriodic in ThrowExplosives, line 82")
+	effect_destr(this214.fuseSfx, "when calling destr in ThrowExplosives, line 83")
+	flashEffect1(ThrowExplosives_EXPLODE_SFX, this214.targetPos, "when calling flashEffect in ThrowExplosives, line 84")
+	flashEffect1("Objects\\Spawnmodels\\Other\\NeutralBuildingExplosion\\NeutralBuildingExplosion.mdl", this214.targetPos, "when calling flashEffect in ThrowExplosives, line 85")
+	group_enumUnitsInRange(Group_ENUM_GROUP, this214.targetPos, ThrowExplosives_EXPLODE_RADIUS, nil, "when calling enumUnitsInRange in ThrowExplosives, line 87")
 	iterator13 = group_iterator(Group_ENUM_GROUP, "when calling iterator in ThrowExplosives, line 88")
 	while true do
 		if not(GroupIterator_GroupIterator_hasNext(iterator13, "when calling hasNext in ThrowExplosives, line 88")) then
 			break
 		end
 		u16 = GroupIterator_GroupIterator_next(iterator13, "when calling next in ThrowExplosives, line 88")
-		if (unit_isAlive(u16, "when calling isAlive in ThrowExplosives, line 89") and player_isEnemyOf(unit_getOwner(u16, "when calling getOwner in ThrowExplosives, line 89"), unit_getOwner(this210.caster, "when calling getOwner in ThrowExplosives, line 89"), "when calling isEnemyOf in ThrowExplosives, line 89")) then
-			unit_damageTarget(this210.caster, u16, ThrowExplosives_EXPLODE_DAMAGE, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS, "when calling damageTarget in ThrowExplosives, line 90")
+		if (unit_isAlive(u16, "when calling isAlive in ThrowExplosives, line 89") and player_isEnemyOf(unit_getOwner(u16, "when calling getOwner in ThrowExplosives, line 89"), unit_getOwner(this214.caster, "when calling getOwner in ThrowExplosives, line 89"), "when calling isEnemyOf in ThrowExplosives, line 89")) then
+			unit_damageTarget(this214.caster, u16, ThrowExplosives_EXPLODE_DAMAGE, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS, "when calling damageTarget in ThrowExplosives, line 90")
 		end
 	end
 	GroupIterator_GroupIterator_close(iterator13, "when calling close in ThrowExplosives, line 88")
-	unit_kill(this210.barrel, "when calling kill in ThrowExplosives, line 92")
+	unit_kill(this214.barrel, "when calling kill in ThrowExplosives, line 92")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -2657,48 +2705,48 @@ function UnitIndex:create59()
 	return new_inst
 end
 
-function UnitIndex_new_UnitIndex(whichUnit2, __wurst_stackPos243) 
-	local this211 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos243
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	this211 = UnitIndex:create59()
-	UnitIndex_construct_UnitIndex(this211, whichUnit2, "when calling construct_UnitIndex in UnitIndexer, line 175")
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return this211
-end
-
-function UnitIndex_destroyUnitIndex(this213, __wurst_stackPos245) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos245
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	UnitIndex_UnitIndex_onDestroy(this213, "when calling UnitIndex_onDestroy in UnitIndexer, line 182")
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function UnitIndex_UnitIndex_init(this215, __wurst_stackPos247) 
+function UnitIndex_new_UnitIndex(whichUnit2, __wurst_stackPos247) 
+	local this215 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos247
 	wurst_stack_depth = (wurst_stack_depth + 1)
+	this215 = UnitIndex:create59()
+	UnitIndex_construct_UnitIndex(this215, whichUnit2, "when calling construct_UnitIndex in UnitIndexer, line 175")
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return this215
+end
+
+function UnitIndex_destroyUnitIndex(this217, __wurst_stackPos249) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos249
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	UnitIndex_UnitIndex_onDestroy(this217, "when calling UnitIndex_onDestroy in UnitIndexer, line 182")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function UnitIndex_construct_UnitIndex(this212, whichUnit3, __wurst_stackPos244) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos244
+function UnitIndex_UnitIndex_init(this219, __wurst_stackPos251) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos251
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	UnitIndex_UnitIndex_init(this212, "when calling UnitIndex_init in UnitIndexer, line 175")
-	this212.UnitIndex__unit = whichUnit3
-	unit_setUserData(this212.UnitIndex__unit, __wurst_objectToIndex(this212), "when calling setUserData in UnitIndexer, line 177")
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function UnitIndex_construct_UnitIndex(this216, whichUnit3, __wurst_stackPos248) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos248
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	UnitIndex_UnitIndex_init(this216, "when calling UnitIndex_init in UnitIndexer, line 175")
+	this216.UnitIndex__unit = whichUnit3
+	unit_setUserData(this216.UnitIndex__unit, __wurst_objectToIndex(this216), "when calling setUserData in UnitIndexer, line 177")
 	pushUnit(whichUnit3, "when calling pushUnit in UnitIndexer, line 178")
 	trigger_evaluate(UnitIndexer_onIndexTrigger, "when calling evaluate in UnitIndexer, line 179")
 	popUnit("when calling popUnit in UnitIndexer, line 180")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function UnitIndex_UnitIndex_onDestroy(this214, __wurst_stackPos246) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos246
+function UnitIndex_UnitIndex_onDestroy(this218, __wurst_stackPos250) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos250
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	pushUnit(this214.UnitIndex__unit, "when calling pushUnit in UnitIndexer, line 183")
+	pushUnit(this218.UnitIndex__unit, "when calling pushUnit in UnitIndexer, line 183")
 	trigger_evaluate(UnitIndexer_onDeindexTrigger, "when calling evaluate in UnitIndexer, line 184")
 	popUnit("when calling popUnit in UnitIndexer, line 185")
-	unit_setUserData(this214.UnitIndex__unit, 0, "when calling setUserData in UnitIndexer, line 186")
+	unit_setUserData(this218.UnitIndex__unit, 0, "when calling setUserData in UnitIndexer, line 186")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -2708,27 +2756,27 @@ function UnitDefinition:create60()
 	return new_inst
 end
 
-function UnitDefinition_UnitDefinition_init(this218, __wurst_stackPos252) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos252
+function UnitDefinition_UnitDefinition_init(this222, __wurst_stackPos256) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos256
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function UnitDefinition_new_UnitDefinition(newId, origId, __wurst_stackPos253) 
-	local this219 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos253
+function UnitDefinition_new_UnitDefinition(newId, origId, __wurst_stackPos257) 
+	local this223 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos257
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	this219 = UnitDefinition:create60()
-	UnitDefinition_construct_UnitDefinition(this219, newId, origId, "when calling construct_UnitDefinition in UnitObjEditing, line 707")
+	this223 = UnitDefinition:create60()
+	UnitDefinition_construct_UnitDefinition(this223, newId, origId, "when calling construct_UnitDefinition in UnitObjEditing, line 707")
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return this219
+	return this223
 end
 
-function UnitDefinition_construct_UnitDefinition(this220, newId1, origId1, __wurst_stackPos254) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos254
+function UnitDefinition_construct_UnitDefinition(this224, newId1, origId1, __wurst_stackPos258) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos258
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	UnitOrHeroDefinition_construct_UnitOrHeroDefinition(this220, newId1, origId1, "when calling construct_UnitOrHeroDefinition in UnitObjEditing, line 707")
-	UnitDefinition_UnitDefinition_init(this220, "when calling UnitDefinition_init in UnitObjEditing, line 707")
+	UnitOrHeroDefinition_construct_UnitOrHeroDefinition(this224, newId1, origId1, "when calling construct_UnitOrHeroDefinition in UnitObjEditing, line 707")
+	UnitDefinition_UnitDefinition_init(this224, "when calling UnitDefinition_init in UnitObjEditing, line 707")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -2738,17 +2786,17 @@ function UnitOrBuildingOrHeroDefinition:create61()
 	return new_inst
 end
 
-function UnitOrBuildingOrHeroDefinition_UnitOrBuildingOrHeroDefinition_init(this222, __wurst_stackPos256) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos256
+function UnitOrBuildingOrHeroDefinition_UnitOrBuildingOrHeroDefinition_init(this226, __wurst_stackPos260) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos260
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function UnitOrBuildingOrHeroDefinition_construct_UnitOrBuildingOrHeroDefinition(this223, newUnitId, origUnitId, __wurst_stackPos257) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos257
+function UnitOrBuildingOrHeroDefinition_construct_UnitOrBuildingOrHeroDefinition(this227, newUnitId, origUnitId, __wurst_stackPos261) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos261
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	W3UDefinition_construct_W3UDefinition(this223, newUnitId, origUnitId, "when calling construct_W3UDefinition in UnitObjEditing, line 56")
-	UnitOrBuildingOrHeroDefinition_UnitOrBuildingOrHeroDefinition_init(this223, "when calling UnitOrBuildingOrHeroDefinition_init in UnitObjEditing, line 56")
+	W3UDefinition_construct_W3UDefinition(this227, newUnitId, origUnitId, "when calling construct_W3UDefinition in UnitObjEditing, line 56")
+	UnitOrBuildingOrHeroDefinition_UnitOrBuildingOrHeroDefinition_init(this227, "when calling UnitOrBuildingOrHeroDefinition_init in UnitObjEditing, line 56")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -2758,17 +2806,17 @@ function UnitOrHeroDefinition:create62()
 	return new_inst
 end
 
-function UnitOrHeroDefinition_UnitOrHeroDefinition_init(this225, __wurst_stackPos259) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos259
+function UnitOrHeroDefinition_UnitOrHeroDefinition_init(this229, __wurst_stackPos263) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos263
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function UnitOrHeroDefinition_construct_UnitOrHeroDefinition(this221, newId2, origId2, __wurst_stackPos255) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos255
+function UnitOrHeroDefinition_construct_UnitOrHeroDefinition(this225, newId2, origId2, __wurst_stackPos259) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos259
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	UnitOrBuildingOrHeroDefinition_construct_UnitOrBuildingOrHeroDefinition(this221, newId2, origId2, "when calling construct_UnitOrBuildingOrHeroDefinition in UnitObjEditing, line 604")
-	UnitOrHeroDefinition_UnitOrHeroDefinition_init(this221, "when calling UnitOrHeroDefinition_init in UnitObjEditing, line 604")
+	UnitOrBuildingOrHeroDefinition_construct_UnitOrBuildingOrHeroDefinition(this225, newId2, origId2, "when calling construct_UnitOrBuildingOrHeroDefinition in UnitObjEditing, line 604")
+	UnitOrHeroDefinition_UnitOrHeroDefinition_init(this225, "when calling UnitOrHeroDefinition_init in UnitObjEditing, line 604")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -2778,16 +2826,16 @@ function W3UDefinition:create63()
 	return new_inst
 end
 
-function W3UDefinition_W3UDefinition_init(this226, __wurst_stackPos260) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos260
+function W3UDefinition_W3UDefinition_init(this230, __wurst_stackPos264) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos264
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function W3UDefinition_construct_W3UDefinition(this224, newId3, baseId, __wurst_stackPos258) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos258
+function W3UDefinition_construct_W3UDefinition(this228, newId3, baseId, __wurst_stackPos262) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos262
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	W3UDefinition_W3UDefinition_init(this224, "when calling W3UDefinition_init in UnitObjEditing, line 21")
+	W3UDefinition_W3UDefinition_init(this228, "when calling W3UDefinition_init in UnitObjEditing, line 21")
 	createObjectDefinition("w3u", newId3, baseId, "when calling createObjectDefinition in UnitObjEditing, line 24")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
@@ -2798,10 +2846,10 @@ function OnCastListener_onCast_UrsocCharge:create64()
 	return new_inst
 end
 
-function OnCastListener_onCast_UrsocCharge_fire_onCast_UrsocCharge(this227, caster11, __wurst_stackPos262) 
+function OnCastListener_onCast_UrsocCharge_fire_onCast_UrsocCharge(this231, caster11, __wurst_stackPos266) 
 	local target8 = nil
 	local targetPos4 = ({0., 0., })
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos262
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos266
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	target8 = EventData_getSpellTargetUnit("when calling getSpellTargetUnit in UrsocCharge, line 94")
 	targetPos4 = tupleCopy(unit_getPos(target8, "when calling getPos in UrsocCharge, line 95"))
@@ -2813,88 +2861,110 @@ function OnCastListener_onCast_UrsocCharge_fire_onCast_UrsocCharge(this227, cast
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function initGlobals(__wurst_stackPos263) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos263
+function initGlobals(__wurst_stackPos267) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos267
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	udg_townHall = nil
 	udg_mountHyjal = nil
 	udg_mountHyjalGrove = nil
 	udg_mountHyjalTown = nil
-	udg_mountHyjalCrypt = nil
-	udg_winterspringCenter = nil
-	udg_winterspringNorth = nil
-	udg_winterspringSouth = nil
-	udg_winterspringDen = nil
 	udg_winterspringRoost = nil
-	udg_moongladeWest = nil
-	udg_moongladeEast = nil
-	udg_felwoodNorth = nil
 	udg_felwoodCenter = nil
 	udg_felwoodSouth = nil
 	udg_ashenvaleChimaerasFall = nil
 	udg_ashenvaleAstranaar = nil
-	udg_ashenvaleForestEast = nil
 	udg_ashenvaleCrossing = nil
-	udg_ashenvaleChimaerasRest = nil
 	udg_ashenvaleBeachNorth = nil
-	udg_ashenvaleForestWest = nil
 	udg_ashenvaleForestCenter = nil
-	udg_ashenvaleGraniteDen = nil
 	udg_ashenvaleWarsongSouth = nil
-	udg_ashenvaleWarsongNorth = nil
 	udg_ashenvaleVentureCo = nil
 	udg_ashenvaleRoost = nil
 	udg_ashenvaleBeachSouth = nil
-	udg_ashenvaleForestNorth = nil
-	udg_winterspringFactory = nil
-	udg_ashenvaleForestSouth = nil
 	udg_ashenvaleWarsongCenter = nil
+	udg_darkshoreAuberdine = nil
+	udg_darnassus = nil
+	udg_darnassusTeldrassil = nil
+	udg_darkshoreAuberdineBuildings = nil
+	udg_darnassusBuildings = nil
+	udg_darnassusTeldrassilBuildings = nil
+	udg_darnassusGate = nil
+	udg_ashenvaleAstranaarBuildings = nil
+	udg_ashenvaleChimaeraFallBuilding = nil
+	udg_testGate = nil
 	gg_trg_Other = nil
 	gg_trg_ControlPointInitialVariables = nil
 	gg_unit_h00O_0019 = nil
-	gg_unit_h006_0015 = nil
-	gg_unit_h008_0011 = nil
 	gg_unit_h003_0016 = nil
 	gg_unit_h00E_0013 = nil
-	gg_unit_h009_0014 = nil
-	gg_unit_h00A_0009 = nil
 	gg_unit_h001_0008 = nil
 	gg_unit_h000_0407 = nil
 	gg_unit_etol_0001 = nil
-	gg_unit_h00K_0176 = nil
-	gg_unit_cp00_0425 = nil
 	gg_unit_h00L_0184 = nil
 	gg_unit_h00G_0185 = nil
 	gg_unit_h00P_0178 = nil
-	gg_unit_h00H_0183 = nil
-	gg_unit_h00N_0200 = nil
-	gg_unit_h00M_0136 = nil
 	gg_unit_h00F_0163 = nil
 	gg_unit_h00Q_0197 = nil
 	gg_unit_h00I_0135 = nil
 	gg_unit_h00D_0010 = nil
-	gg_unit_h00J_0177 = nil
 	gg_unit_h00C_0174 = nil
 	gg_unit_h00U_0175 = nil
-	gg_unit_h00R_0196 = nil
 	gg_unit_h00S_0179 = nil
+	gg_unit_h00H_0077 = nil
+	gg_unit_h00B_0076 = nil
+	gg_unit_h00R_0078 = nil
+	gg_unit_h007_0011 = nil
+	gg_trg_auberdine = nil
+	gg_unit_e00J_0074 = nil
+	gg_unit_e008_0080 = nil
+	gg_unit_e008_0081 = nil
+	gg_unit_e007_0079 = nil
+	gg_trg_darnassus = nil
+	gg_unit_edos_0075 = nil
+	gg_unit_emow_0072 = nil
+	gg_unit_eate_0066 = nil
+	gg_unit_emow_0073 = nil
+	gg_unit_e007_0064 = nil
+	gg_unit_eshy_0065 = nil
+	gg_unit_e008_0067 = nil
+	gg_unit_e008_0070 = nil
+	gg_unit_e008_0071 = nil
+	gg_unit_e00G_0068 = nil
+	gg_dest_LTe2_0270 = nil
+	gg_trg_astranaar = nil
+	gg_unit_e005_0187 = nil
+	gg_unit_emow_0188 = nil
+	gg_unit_emow_0189 = nil
+	gg_unit_eate_0186 = nil
+	gg_unit_etrp_0192 = nil
+	gg_unit_etrp_0191 = nil
+	gg_unit_edos_0342 = nil
+	gg_trg_ashenvaleChimaeraFall = nil
+	gg_unit_eate_0194 = nil
+	gg_unit_eaow_0195 = nil
+	gg_trg_testGate = nil
+	gg_dest_ZTg3_0761 = nil
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function InitGlobals(__wurst_stackPos264) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos264
+function InitGlobals(__wurst_stackPos268) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos268
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	udg_townHall = nil
 	CreateGroup()
+	udg_darkshoreAuberdineBuildings = CreateGroup()
+	udg_darnassusBuildings = CreateGroup()
+	udg_darnassusTeldrassilBuildings = CreateGroup()
+	udg_ashenvaleAstranaarBuildings = CreateGroup()
+	udg_ashenvaleChimaeraFallBuilding = CreateGroup()
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function Unit000003_DropItems(__wurst_stackPos265) 
+function Unit000003_DropItems(__wurst_stackPos269) 
 	local trigWidget = nil
 	local trigUnit = nil
 	local itemID = nil
 	local canDrop = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos265
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos269
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	trigWidget = nil
 	trigUnit = nil
@@ -2925,12 +2995,12 @@ function Unit000003_DropItems(__wurst_stackPos265)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function Unit000038_DropItems(__wurst_stackPos266) 
+function Unit000038_DropItems(__wurst_stackPos270) 
 	local trigWidget1 = nil
 	local trigUnit1 = nil
 	local itemID1 = nil
 	local canDrop1 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos266
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos270
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	trigWidget1 = nil
 	trigUnit1 = nil
@@ -2961,12 +3031,12 @@ function Unit000038_DropItems(__wurst_stackPos266)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function Unit000043_DropItems(__wurst_stackPos267) 
+function Unit000043_DropItems(__wurst_stackPos271) 
 	local trigWidget2 = nil
 	local trigUnit2 = nil
 	local itemID2 = nil
 	local canDrop2 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos267
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos271
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	trigWidget2 = nil
 	trigUnit2 = nil
@@ -2997,12 +3067,12 @@ function Unit000043_DropItems(__wurst_stackPos267)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function Unit000090_DropItems(__wurst_stackPos268) 
+function Unit000090_DropItems(__wurst_stackPos272) 
 	local trigWidget3 = nil
 	local trigUnit3 = nil
 	local itemID3 = nil
 	local canDrop3 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos268
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos272
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	trigWidget3 = nil
 	trigUnit3 = nil
@@ -3033,12 +3103,12 @@ function Unit000090_DropItems(__wurst_stackPos268)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function Unit000097_DropItems(__wurst_stackPos269) 
+function Unit000097_DropItems(__wurst_stackPos273) 
 	local trigWidget4 = nil
 	local trigUnit4 = nil
 	local itemID4 = nil
 	local canDrop4 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos269
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos273
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	trigWidget4 = nil
 	trigUnit4 = nil
@@ -3069,12 +3139,12 @@ function Unit000097_DropItems(__wurst_stackPos269)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function Unit000116_DropItems(__wurst_stackPos270) 
+function Unit000116_DropItems(__wurst_stackPos274) 
 	local trigWidget5 = nil
 	local trigUnit5 = nil
 	local itemID5 = nil
 	local canDrop5 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos270
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos274
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	trigWidget5 = nil
 	trigUnit5 = nil
@@ -3105,28 +3175,31 @@ function Unit000116_DropItems(__wurst_stackPos270)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function CreateBuildingsForPlayer0(__wurst_stackPos271) 
+function CreateAllDestructables(__wurst_stackPos275) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos275
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	gg_dest_LTe2_0270 = BlzCreateDestructableWithSkin(1280599346, -(11360.0), 25632.0, 270.000, 1.000, 0, 1280599346)
+	gg_dest_ZTg3_0761 = BlzCreateDestructableWithSkin(1515480883, -(64.0), 18432.0, 0.000, 0.900, 0, 1515480883)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function CreateBuildingsForPlayer0(__wurst_stackPos276) 
 	local p8 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos271
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos276
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	p8 = Player(0)
 	gg_unit_etol_0001 = __wurst_safe_BlzCreateUnitWithSkin(p8, 1702129516, 1536.0, 18816.0, 270.000, 1702129516)
-	__wurst_safe_BlzCreateUnitWithSkin(p8, 1851946852, 448.0, 26496.0, 270.000, 1851946852)
-	__wurst_safe_BlzCreateUnitWithSkin(p8, 1852334958, 3584.0, 26112.0, 270.000, 1852334958)
 	__wurst_safe_BlzCreateUnitWithSkin(p8, 1701670775, 1056.0, 18848.0, 270.000, 1701670775)
 	__wurst_safe_BlzCreateUnitWithSkin(p8, 1700884333, 960.0, 18496.0, 270.000, 1700884333)
 	__wurst_safe_BlzCreateUnitWithSkin(p8, 1700885605, 608.0, 19040.0, 270.000, 1700885605)
 	__wurst_safe_BlzCreateUnitWithSkin(p8, 1701670775, 1888.0, 18784.0, 270.000, 1701670775)
-	__wurst_safe_BlzCreateUnitWithSkin(p8, 1700885605, -(2144.0), 11232.0, 270.000, 1700885605)
-	__wurst_safe_BlzCreateUnitWithSkin(p8, 1700884343, -(2496.0), 10560.0, 270.000, 1700884343)
-	__wurst_safe_BlzCreateUnitWithSkin(p8, 1700884325, -(4096.0), 12288.0, 270.000, 1700884325)
 	gg_unit_h000_0407 = __wurst_safe_BlzCreateUnitWithSkin(p8, 1747988528, 1546.5, 18490.7, 270.000, 1747988528)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function CreateUnitsForPlayer0(__wurst_stackPos272) 
+function CreateUnitsForPlayer0(__wurst_stackPos277) 
 	local p9 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos272
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos277
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	p9 = Player(0)
 	__wurst_safe_BlzCreateUnitWithSkin(p9, 1697656882, 784.9, 18019.4, 16.183, 1697656882)
@@ -3139,704 +3212,982 @@ function CreateUnitsForPlayer0(__wurst_stackPos272)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function CreateBuildingsForPlayer1(__wurst_stackPos273) 
+function CreateBuildingsForPlayer1(__wurst_stackPos278) 
 	local p10 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos273
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos278
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	p10 = Player(1)
 	__wurst_safe_BlzCreateUnitWithSkin(p10, 1752659063, 5248.0, 6080.0, 270.000, 1752659063)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function CreateBuildingsForPlayer5(__wurst_stackPos274) 
+function CreateBuildingsForPlayer3(__wurst_stackPos279) 
 	local p11 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos274
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos279
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	p11 = Player(5)
-	__wurst_safe_BlzCreateUnitWithSkin(p11, 1868718450, 1920.0, 11008.0, 270.000, 1868718450)
-	__wurst_safe_BlzCreateUnitWithSkin(p11, 1870099575, 704.0, 9280.0, 270.000, 1870099575)
-	__wurst_safe_BlzCreateUnitWithSkin(p11, 1869050469, 2112.0, 10432.0, 270.000, 1869050469)
-	__wurst_safe_BlzCreateUnitWithSkin(p11, 1869902434, 2528.0, 9952.0, 270.000, 1869902434)
-	__wurst_safe_BlzCreateUnitWithSkin(p11, 1868719457, 2752.0, 11648.0, 270.000, 1868719457)
-	__wurst_safe_BlzCreateUnitWithSkin(p11, 1868984178, 992.0, 10080.0, 270.000, 1868984178)
-	__wurst_safe_BlzCreateUnitWithSkin(p11, 1868984178, 2528.0, 9184.0, 270.000, 1868984178)
-	__wurst_safe_BlzCreateUnitWithSkin(p11, 1868655732, 1696.0, 9888.0, 270.000, 1868655732)
-	__wurst_safe_BlzCreateUnitWithSkin(p11, 1870099575, 1344.0, 8640.0, 270.000, 1870099575)
-	__wurst_safe_BlzCreateUnitWithSkin(p11, 1865429042, 1920.0, 13504.0, 270.000, 1865429042)
-	__wurst_safe_BlzCreateUnitWithSkin(p11, 1865429041, 2816.0, 12928.0, 270.000, 1865429041)
-	__wurst_safe_BlzCreateUnitWithSkin(p11, 1852860262, 1504.0, 10464.0, 270.000, 1852860262)
-	__wurst_safe_BlzCreateUnitWithSkin(p11, 1865429040, 1408.0, 12928.0, 270.000, 1865429040)
-	__wurst_safe_BlzCreateUnitWithSkin(p11, 1865429040, 2368.0, 12800.0, 270.000, 1865429040)
-	__wurst_safe_BlzCreateUnitWithSkin(p11, 1870099575, 320.0, 11392.0, 270.000, 1870099575)
-	__wurst_safe_BlzCreateUnitWithSkin(p11, 1870099575, 1600.0, 11968.0, 270.000, 1870099575)
-	__wurst_safe_BlzCreateUnitWithSkin(p11, 1870099575, 2112.0, 11712.0, 270.000, 1870099575)
-	__wurst_safe_BlzCreateUnitWithSkin(p11, 1870099575, 3136.0, 11648.0, 270.000, 1870099575)
-	__wurst_safe_BlzCreateUnitWithSkin(p11, 1868784247, 2784.0, 12000.0, 270.000, 1868784247)
-	__wurst_safe_BlzCreateUnitWithSkin(p11, 1852076651, 2752.0, 10496.0, 270.000, 1852076651)
+	p11 = Player(3)
+	__wurst_safe_BlzCreateUnitWithSkin(p11, 1852732263, -(13440.0), 19520.0, 270.000, 1852732263)
+	__wurst_safe_BlzCreateUnitWithSkin(p11, 1852732519, -(11072.0), 19200.0, 270.000, 1852732519)
+	__wurst_safe_BlzCreateUnitWithSkin(p11, 1852732519, -(12608.0), 18112.0, 270.000, 1852732519)
+	__wurst_safe_BlzCreateUnitWithSkin(p11, 1852727652, -(14816.0), 19040.0, 270.000, 1852727652)
+	__wurst_safe_BlzCreateUnitWithSkin(p11, 1852732532, -(13952.0), 18048.0, 270.000, 1852732532)
+	__wurst_safe_BlzCreateUnitWithSkin(p11, 1852732257, -(13312.0), 18112.0, 270.000, 1852732257)
+	__wurst_safe_BlzCreateUnitWithSkin(p11, 1852728941, -(14496.0), 17952.0, 270.000, 1852728941)
+	__wurst_safe_BlzCreateUnitWithSkin(p11, 1852728941, -(13024.0), 19424.0, 270.000, 1852728941)
+	__wurst_safe_BlzCreateUnitWithSkin(p11, 1852732519, -(10944.0), 18304.0, 270.000, 1852732519)
+	__wurst_safe_BlzCreateUnitWithSkin(p11, 1852732519, -(12608.0), 19200.0, 270.000, 1852732519)
+	__wurst_safe_BlzCreateUnitWithSkin(p11, 1747988536, -(13840.5), 18604.0, 270.000, 1747988536)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function CreateUnitsForPlayer5(__wurst_stackPos275) 
+function CreateUnitsForPlayer3(__wurst_stackPos280) 
 	local p12 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos275
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	p12 = Player(5)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, -(6978.2), 8024.8, 295.347, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, -(6990.9), 7837.8, 357.942, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, -(8053.7), 7983.8, 246.909, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, -(8056.4), 7802.6, 195.494, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, -(8050.1), 7622.7, 120.138, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, -(6981.3), 7699.2, 55.314, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, -(8043.2), 8096.9, 252.900, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008562, -(7574.4), 8243.7, 211.446, 1852008562)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008562, -(7414.0), 8117.0, 226.992, 1852008562)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008562, -(7370.0), 7734.9, 148.287, 1852008562)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008562, -(7933.6), 7529.4, 129.703, 1852008562)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008562, -(7455.0), 7536.4, 148.814, 1852008562)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852009314, -(7416.6), 7891.4, 189.599, 1852009314)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1853305463, -(7854.9), 7918.6, 205.984, 1853305463)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1853305463, -(7843.4), 8090.1, 226.256, 1853305463)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1853305463, -(7651.4), 8073.4, 211.014, 1853305463)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1853305463, -(7663.4), 7900.1, 194.212, 1853305463)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1853305463, -(7647.1), 7721.4, 173.328, 1853305463)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1853305463, -(7863.3), 7684.2, 161.111, 1853305463)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1868852084, -(7932.4), 7796.5, 184.764, 1868852084)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1869834349, -(2689.3), 8137.8, 304.177, 1869834349)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1869834349, -(2781.4), 8005.1, 160.889, 1869834349)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1869834349, -(2867.4), 7893.6, 183.510, 1869834349)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1869311844, -(3081.3), 8154.1, 159.842, 1869311844)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1869050485, -(3374.3), 8113.4, 76.017, 1869050485)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1869050485, -(3251.2), 8212.4, 96.825, 1869050485)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1869050485, -(3103.9), 8324.5, 183.159, 1869050485)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1869050485, -(3455.8), 8189.3, 283.950, 1869050485)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1869050485, -(3312.6), 8292.6, 345.772, 1869050485)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1869050485, -(3211.5), 8386.7, 84.246, 1869050485)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1853305463, -(3021.0), 7940.7, 302.485, 1853305463)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1853305463, -(2916.7), 8044.7, 147.397, 1853305463)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1853305463, -(2835.5), 8150.0, 92.793, 1853305463)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852009314, 1190.4, 9542.6, 233.547, 1852009314)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852009314, 2083.2, 8892.6, 213.364, 1852009314)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008567, 1238.0, 9333.8, 40.390, 1852008567)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008567, 1539.6, 9150.8, 111.921, 1852008567)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008567, 749.7, 9517.8, 298.618, 1852008567)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008567, 1923.4, 9224.1, 234.664, 1852008567)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008567, 2021.8, 9117.4, 274.689, 1852008567)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008567, 2120.7, 9048.6, 197.375, 1852008567)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008567, 1367.6, 9276.5, 324.359, 1852008567)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008567, 881.6, 9539.9, 193.201, 1852008567)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008567, 1056.4, 9734.2, 163.723, 1852008567)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008567, 2124.6, 9239.4, 111.690, 1852008567)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008562, 1406.8, 9629.0, 222.625, 1852008562)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008562, 1109.6, 9223.7, 228.885, 1852008562)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008562, 1300.8, 9116.2, 238.839, 1852008562)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008562, 1445.7, 9019.7, 234.214, 1852008562)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008562, 1675.6, 9404.8, 225.647, 1852008562)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008562, 1841.7, 9380.7, 239.185, 1852008562)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008562, 1212.1, 9794.3, 236.439, 1852008562)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008562, 1529.0, 8841.5, 196.280, 1852008562)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008562, 897.9, 9775.0, 303.241, 1852008562)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008562, 695.3, 9717.1, 100.858, 1852008562)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, 1898.1, 9027.2, 223.805, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, 1006.9, 9600.6, 288.604, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, 861.7, 9053.0, 145.562, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, 1163.7, 9000.7, 92.991, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, 46.1, 8141.7, 257.044, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, -(27.6), 8053.2, 276.271, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, 1009.5, 9076.0, 15.425, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, 1295.0, 8904.4, 289.366, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, 986.0, 9416.3, 304.886, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, 1880.4, 8785.9, 190.191, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, 1807.2, 8865.5, 211.455, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, 1713.4, 9027.8, 247.650, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, 1693.4, 8847.5, 228.371, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, 807.7, 9405.5, 327.096, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, 911.3, 9301.3, 333.946, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, 972.3, 8928.5, 136.938, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, 1080.4, 8856.3, 117.414, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, 1188.9, 8789.9, 225.007, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, 123.5, 7944.9, 111.998, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, 180.0, 8056.2, 260.164, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008551, 1758.9, 9149.5, 248.183, 1852008551)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852269164, 2179.0, 12909.6, 212.471, 1852269164)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852269164, 1616.3, 12967.4, 164.954, 1852269164)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852269164, 1863.4, 12883.6, 325.304, 1852269164)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852139386, 2253.1, 13126.7, 339.136, 1852139386)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852139386, 2078.7, 13165.9, 114.712, 1852139386)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852139386, 1742.0, 13166.3, 300.123, 1852139386)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852139386, 1578.9, 13238.5, 86.179, 1852139386)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1851946861, 2537.5, 10957.5, 276.381, 1851946861)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1315070563, -(8197.8), 7856.1, 279.270, 1315070563)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1332766568, 1450.9, 9420.6, 273.909, 1332766568)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008562, 863.3, 11339.1, 239.185, 1852008562)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008562, 640.8, 11575.5, 239.185, 1852008562)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008562, 617.0, 11820.6, 239.185, 1852008562)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008562, 764.4, 11772.9, 239.185, 1852008562)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008562, 1096.2, 12071.2, 233.685, 1852008562)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008562, 1294.8, 11918.9, 159.824, 1852008562)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008562, 995.3, 11351.8, 200.309, 1852008562)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008562, 840.4, 11483.9, 9.844, 1852008562)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008562, 1147.2, 11906.1, 133.353, 1852008562)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008562, 1273.4, 12065.6, 206.786, 1852008562)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008562, 529.2, 11697.5, 349.200, 1852008562)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1852008562, 1032.3, 11510.9, 166.195, 1852008562)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1851941995, 2326.1, 10879.9, 94.364, 1851941995)
-	__wurst_safe_BlzCreateUnitWithSkin(p12, 1851941995, 2790.7, 10919.0, 319.437, 1851941995)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function CreateBuildingsForPlayer18(__wurst_stackPos276) 
-	local p13 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos276
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	p13 = Player(18)
-	__wurst_safe_BlzCreateUnitWithSkin(p13, 1700885605, -(8352.0), 7456.0, 270.000, 1700885605)
-	__wurst_safe_BlzCreateUnitWithSkin(p13, 1697656885, -(7232.0), 8512.0, 270.000, 1697656885)
-	__wurst_safe_BlzCreateUnitWithSkin(p13, 1701670775, -(8160.0), 8544.0, 270.000, 1701670775)
-	__wurst_safe_BlzCreateUnitWithSkin(p13, 1701670775, -(8160.0), 8288.0, 270.000, 1701670775)
-	__wurst_safe_BlzCreateUnitWithSkin(p13, 1702130288, -(7200.0), 8096.0, 270.000, 1702130288)
-	__wurst_safe_BlzCreateUnitWithSkin(p13, 1702130288, -(7136.0), 7584.0, 270.000, 1702130288)
-	__wurst_safe_BlzCreateUnitWithSkin(p13, 1701080947, -(6848.0), 9536.0, 270.000, 1701080947)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function CreateNeutralHostileBuildings(__wurst_stackPos277) 
-	local p14 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos277
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	p14 = Player(PLAYER_NEUTRAL_AGGRESSIVE)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852207666, -(3264.0), 25856.0, 270.000, 1852207666)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852207665, -(4160.0), 25792.0, 270.000, 1852207665)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852207665, -(4224.0), 25472.0, 270.000, 1852207665)
-	gg_unit_h001_0008 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988529, -(1798.5), 17804.8, 270.000, 1747988529)
-	gg_unit_h00A_0009 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988545, -(3675.2), 25585.2, 270.000, 1747988545)
-	gg_unit_h00D_0010 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988548, -(3538.6), 13625.4, 270.000, 1747988548)
-	gg_unit_h008_0011 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988536, 3767.3, 24074.8, 270.000, 1747988536)
-	gg_unit_h00E_0013 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988549, -(5198.1), 17582.0, 270.000, 1747988549)
-	gg_unit_h009_0014 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988537, 1942.7, 25784.3, 270.000, 1747988537)
-	gg_unit_h006_0015 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988534, 4286.0, 18898.3, 270.000, 1747988534)
-	gg_unit_h003_0016 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988531, -(1297.8), 15771.1, 270.000, 1747988531)
-	gg_unit_h00O_0019 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988559, -(2242.8), 10951.6, 270.000, 1747988559)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852207665, 3328.0, 16192.0, 270.000, 1852207665)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852207666, 4224.0, 16704.0, 270.000, 1852207666)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1853122608, 1536.0, 23680.0, 270.000, 1853122608)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1853122608, 2304.0, 23744.0, 270.000, 1853122608)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852076661, 4096.0, 24448.0, 270.000, 1852076661)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852006768, -(5408.0), 17120.0, 270.000, 1852006768)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1853122609, 5024.0, 20064.0, 270.000, 1853122609)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1853122608, 4544.0, 20096.0, 270.000, 1853122608)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852006775, -(3200.0), 14336.0, 270.000, 1852006775)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852011628, -(4032.0), 13568.0, 270.000, 1852011628)
-	gg_unit_h00I_0135 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988553, -(2423.8), 7874.8, 270.000, 1747988553)
-	gg_unit_h00M_0136 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988557, -(5708.5), 11743.7, 270.000, 1747988557)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852009847, -(3040.0), 13984.0, 270.000, 1852009847)
-	gg_unit_h00F_0163 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988550, -(10812.8), 10843.1, 270.000, 1747988550)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852009847, -(4320.0), 13984.0, 270.000, 1852009847)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852006768, -(4384.0), 14240.0, 270.000, 1852006768)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852006768, -(3232.0), 14752.0, 270.000, 1852006768)
-	gg_unit_h00C_0174 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988547, -(7778.2), 7822.0, 270.000, 1747988547)
-	gg_unit_h00U_0175 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988565, 1720.8, 10287.2, 270.000, 1747988565)
-	gg_unit_h00K_0176 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988555, -(5186.3), 9785.8, 270.000, 1747988555)
-	gg_unit_h00J_0177 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988554, -(9994.0), 9485.2, 270.000, 1747988554)
-	gg_unit_h00P_0178 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988560, -(1461.7), 13433.8, 270.000, 1747988560)
-	gg_unit_h00S_0179 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988563, 1183.1, 7094.8, 270.000, 1747988563)
-	gg_unit_h00H_0183 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988552, -(6601.3), 9382.6, 270.000, 1747988552)
-	gg_unit_h00L_0184 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988556, -(8085.1), 10076.2, 270.000, 1747988556)
-	gg_unit_h00G_0185 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988551, -(11701.8), 9545.5, 270.000, 1747988551)
-	gg_unit_h00R_0196 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988562, 1069.2, 11646.9, 270.000, 1747988562)
-	gg_unit_h00Q_0197 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988561, 1917.4, 13090.1, 270.000, 1747988561)
-	gg_unit_h00N_0200 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1747988558, 54.1, 10226.1, 270.000, 1747988558)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852009847, -(7392.0), 10656.0, 270.000, 1852009847)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852006768, -(6816.0), 10080.0, 270.000, 1852006768)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852011628, -(5120.0), 11520.0, 270.000, 1852011628)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852006768, -(5408.0), 11232.0, 270.000, 1852006768)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852207666, -(512.0), 8896.0, 270.000, 1852207666)
-	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852207665, -(896.0), 9024.0, 270.000, 1852207665)
-	gg_unit_cp00_0425 = __wurst_safe_BlzCreateUnitWithSkin(p14, 1668296752, -(6226.7), 6887.4, 270.000, 1668296752)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function CreateNeutralHostile(__wurst_stackPos278) 
-	local p15 = nil
 	local u18 = nil
-	local t = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos278
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos280
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	p15 = Player(PLAYER_NEUTRAL_AGGRESSIVE)
+	p12 = Player(3)
 	u18 = nil
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852730727, -(11081.6), 18587.9, 41.385, 1852730727)
+	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852730727, -(11051.2), 18732.7, 2.874, 1852730727)
+	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852730727, -(11038.0), 18847.9, -(40.030), 1852730727)
+	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852666734, -(11221.7), 18791.9, -(9.474), 1852666734)
+	__wurst_safe_SetUnitState(u18, UNIT_STATE_MANA, 0.)
+	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852666486, -(11207.9), 18674.2, 12.390, 1852666486)
+	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852666999, -(10918.7), 18630.3, 38.427, 1852666999)
+	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852666999, -(10909.9), 18786.3, -(21.783), 1852666999)
+	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852732019, -(13353.7), 18662.6, 10.428, 1852732019)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852732019, -(13951.1), 19510.6, 96.872, 1852732019)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1853058672, -(13604.9), 18337.1, 20.478, 1853058672)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1853058672, -(13655.4), 18540.2, 18.264, 1853058672)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1853058672, -(14152.0), 19277.3, 28.049, 1853058672)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1853058672, -(13724.5), 19338.4, 128.235, 1853058672)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1853058672, -(13911.0), 18968.7, -(42.603), 1853058672)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1853058672, -(14003.4), 18732.7, 351.090, 1853058672)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852732279, -(13502.7), 18489.7, 20.717, 1852732279)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852732279, -(13624.0), 19049.9, -(30.190), 1852732279)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852732279, -(13951.9), 19243.9, 87.001, 1852732279)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852340579, -(14157.6), 18916.3, 2.072, 1852340579)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852668274, -(13134.3), 18729.7, 9.683, 1852668274)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852668274, -(13083.1), 18531.0, 17.645, 1852668274)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852668274, -(14153.9), 19713.0, 119.849, 1852668274)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852668274, -(13838.4), 19723.1, 84.183, 1852668274)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852730727, -(13293.2), 18424.5, 2.826, 1852730727)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852730727, -(12983.0), 18647.7, 5.668, 1852730727)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852730727, -(13352.2), 18845.5, 37.783, 1852730727)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852730727, -(14256.8), 19582.6, 118.865, 1852730727)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852730727, -(13661.6), 19687.5, 125.731, 1852730727)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852730727, -(14007.8), 19931.0, 170.898, 1852730727)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1215722344, -(13618.0), 18801.3, 182.115, 1215722344)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852732007, -(13987.9), 21700.8, 265.893, 1852732007)
+	__wurst_safe_SetUnitState(u18, UNIT_STATE_MANA, 0.)
+	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1853058672, -(14180.7), 21813.7, -(79.418), 1853058672)
+	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1853058672, -(13818.1), 21830.2, 243.783, 1853058672)
+	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852732279, -(14016.3), 21932.0, -(59.708), 1852732279)
+	__wurst_safe_SetUnitState(u18, UNIT_STATE_MANA, 0.)
+	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1853125220, -(14038.7), 21332.1, -(86.917), 1853125220)
+	__wurst_safe_SetUnitState(u18, UNIT_STATE_MANA, 0.)
+	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852340579, -(11100.8), 25153.9, 146.505, 1852340579)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852340579, -(10922.2), 25312.7, 131.130, 1852340579)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1853056866, -(11182.1), 25387.0, 112.914, 1853056866)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852732007, -(10734.3), 24971.8, 105.022, 1852732007)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852730727, -(10675.0), 24672.9, 81.367, 1852730727)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852730727, -(10514.9), 24834.3, 67.304, 1852730727)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852730727, -(10325.6), 24971.6, 193.783, 1852730727)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852730727, -(10970.3), 24740.1, 48.166, 1852730727)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852730727, -(10539.6), 25164.4, 250.013, 1852730727)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852730727, -(10439.7), 24697.3, 321.766, 1852730727)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852730727, -(11707.3), 23917.7, -(70.924), 1852730727)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852730727, -(11600.8), 23686.0, 121.942, 1852730727)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852730727, -(11322.7), 23737.4, 172.651, 1852730727)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852730727, -(11616.9), 24061.3, 261.256, 1852730727)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1853056878, -(11522.5), 23881.6, 216.226, 1853056878)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852666723, -(11379.7), 23989.4, 216.649, 1852666723)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852668274, -(9312.1), 26725.0, -(57.425), 1852668274)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852668274, -(8851.9), 26804.5, 247.610, 1852668274)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852730727, -(9164.3), 26590.8, -(67.631), 1852730727)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852730727, -(9027.0), 26507.8, 262.421, 1852730727)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852730727, -(8881.1), 26611.1, 239.702, 1852730727)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852662375, -(9273.4), 26918.5, -(69.766), 1852662375)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852662375, -(9109.4), 27043.9, -(82.476), 1852662375)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1852662375, -(8919.6), 27003.4, 259.044, 1852662375)
+	u18 = __wurst_safe_BlzCreateUnitWithSkin(p12, 1853055795, -(7769.7), 13329.3, 109.087, 1853055795)
+	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function CreateBuildingsForPlayer5(__wurst_stackPos281) 
+	local p13 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos281
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	p13 = Player(5)
+	__wurst_safe_BlzCreateUnitWithSkin(p13, 1868718450, 1920.0, 11008.0, 270.000, 1868718450)
+	__wurst_safe_BlzCreateUnitWithSkin(p13, 1870099575, 704.0, 9280.0, 270.000, 1870099575)
+	__wurst_safe_BlzCreateUnitWithSkin(p13, 1869050469, 2112.0, 10432.0, 270.000, 1869050469)
+	__wurst_safe_BlzCreateUnitWithSkin(p13, 1869902434, 2528.0, 9952.0, 270.000, 1869902434)
+	__wurst_safe_BlzCreateUnitWithSkin(p13, 1868719457, 2752.0, 11648.0, 270.000, 1868719457)
+	__wurst_safe_BlzCreateUnitWithSkin(p13, 1868984178, 992.0, 10080.0, 270.000, 1868984178)
+	__wurst_safe_BlzCreateUnitWithSkin(p13, 1868984178, 2528.0, 9184.0, 270.000, 1868984178)
+	__wurst_safe_BlzCreateUnitWithSkin(p13, 1868655732, 1696.0, 9888.0, 270.000, 1868655732)
+	__wurst_safe_BlzCreateUnitWithSkin(p13, 1870099575, 1344.0, 8640.0, 270.000, 1870099575)
+	__wurst_safe_BlzCreateUnitWithSkin(p13, 1865429042, 1920.0, 13504.0, 270.000, 1865429042)
+	__wurst_safe_BlzCreateUnitWithSkin(p13, 1865429041, 2816.0, 12928.0, 270.000, 1865429041)
+	__wurst_safe_BlzCreateUnitWithSkin(p13, 1852860262, 1504.0, 10464.0, 270.000, 1852860262)
+	__wurst_safe_BlzCreateUnitWithSkin(p13, 1865429040, 1408.0, 12928.0, 270.000, 1865429040)
+	__wurst_safe_BlzCreateUnitWithSkin(p13, 1865429040, 2368.0, 12800.0, 270.000, 1865429040)
+	__wurst_safe_BlzCreateUnitWithSkin(p13, 1870099575, 320.0, 11392.0, 270.000, 1870099575)
+	__wurst_safe_BlzCreateUnitWithSkin(p13, 1870099575, 1600.0, 11968.0, 270.000, 1870099575)
+	__wurst_safe_BlzCreateUnitWithSkin(p13, 1870099575, 2112.0, 11712.0, 270.000, 1870099575)
+	__wurst_safe_BlzCreateUnitWithSkin(p13, 1870099575, 3136.0, 11648.0, 270.000, 1870099575)
+	__wurst_safe_BlzCreateUnitWithSkin(p13, 1868784247, 2784.0, 12000.0, 270.000, 1868784247)
+	__wurst_safe_BlzCreateUnitWithSkin(p13, 1852076651, 2752.0, 10496.0, 270.000, 1852076651)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function CreateUnitsForPlayer5(__wurst_stackPos282) 
+	local p14 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos282
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	p14 = Player(5)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, -(6978.2), 8024.8, 295.347, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, -(6990.9), 7837.8, 357.942, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, -(8053.7), 7983.8, 246.909, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, -(8056.4), 7802.6, 195.494, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, -(8050.1), 7622.7, 120.138, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, -(6981.3), 7699.2, 55.314, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, -(8043.2), 8096.9, 252.900, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008562, -(7574.4), 8243.7, 211.446, 1852008562)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008562, -(7414.0), 8117.0, 226.992, 1852008562)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008562, -(7370.0), 7734.9, 148.287, 1852008562)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008562, -(7933.6), 7529.4, 129.703, 1852008562)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008562, -(7455.0), 7536.4, 148.814, 1852008562)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852009314, -(7416.6), 7891.4, 189.599, 1852009314)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1853305463, -(7854.9), 7918.6, 205.984, 1853305463)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1853305463, -(7843.4), 8090.1, 226.256, 1853305463)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1853305463, -(7651.4), 8073.4, 211.014, 1853305463)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1853305463, -(7663.4), 7900.1, 194.212, 1853305463)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1853305463, -(7647.1), 7721.4, 173.328, 1853305463)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1853305463, -(7863.3), 7684.2, 161.111, 1853305463)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1868852084, -(7932.4), 7796.5, 184.764, 1868852084)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1869834349, -(3252.5), 8546.5, 304.177, 1869834349)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1869834349, -(3344.5), 8413.8, 160.889, 1869834349)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1869834349, -(3430.6), 8302.3, 183.510, 1869834349)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1869311844, -(3653.1), 8629.9, 159.842, 1869311844)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1869050485, -(3946.0), 8589.2, 76.017, 1869050485)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1869050485, -(3823.0), 8688.2, 96.825, 1869050485)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1869050485, -(3675.7), 8800.3, 183.159, 1869050485)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1869050485, -(4027.6), 8665.1, 283.950, 1869050485)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1869050485, -(3884.4), 8768.4, 345.772, 1869050485)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1869050485, -(3783.3), 8862.5, 84.246, 1869050485)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1853305463, -(3584.2), 8349.4, 302.485, 1853305463)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1853305463, -(3479.9), 8453.3, 147.397, 1853305463)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1853305463, -(3398.6), 8558.7, 92.793, 1853305463)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852009314, 1190.4, 9542.6, 233.547, 1852009314)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852009314, 2083.2, 8892.6, 213.364, 1852009314)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008567, 1238.0, 9333.8, 40.390, 1852008567)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008567, 1539.6, 9150.8, 111.921, 1852008567)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008567, 749.7, 9517.8, 298.618, 1852008567)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008567, 1923.4, 9224.1, 234.664, 1852008567)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008567, 2021.8, 9117.4, 274.689, 1852008567)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008567, 2120.7, 9048.6, 197.375, 1852008567)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008567, 1367.6, 9276.5, 324.359, 1852008567)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008567, 881.6, 9539.9, 193.201, 1852008567)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008567, 1056.4, 9734.2, 163.723, 1852008567)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008567, 2124.6, 9239.4, 111.690, 1852008567)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008562, 1406.8, 9629.0, 222.625, 1852008562)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008562, 1109.6, 9223.7, 228.885, 1852008562)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008562, 1300.8, 9116.2, 238.839, 1852008562)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008562, 1445.7, 9019.7, 234.214, 1852008562)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008562, 1675.6, 9404.8, 225.647, 1852008562)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008562, 1841.7, 9380.7, 239.185, 1852008562)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008562, 1212.1, 9794.3, 236.439, 1852008562)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008562, 1529.0, 8841.5, 196.280, 1852008562)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008562, 897.9, 9775.0, 303.241, 1852008562)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008562, 695.3, 9717.1, 100.858, 1852008562)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, 1898.1, 9027.2, 223.805, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, 1006.9, 9600.6, 288.604, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, 861.7, 9053.0, 145.562, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, 1163.7, 9000.7, 92.991, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, 46.1, 8141.7, 257.044, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, -(27.6), 8053.2, 276.271, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, 1009.5, 9076.0, 15.425, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, 1295.0, 8904.4, 289.366, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, 986.0, 9416.3, 304.886, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, 1880.4, 8785.9, 190.191, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, 1807.2, 8865.5, 211.455, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, 1713.4, 9027.8, 247.650, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, 1693.4, 8847.5, 228.371, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, 807.7, 9405.5, 327.096, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, 911.3, 9301.3, 333.946, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, 972.3, 8928.5, 136.938, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, 1080.4, 8856.3, 117.414, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, 1188.9, 8789.9, 225.007, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, 123.5, 7944.9, 111.998, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, 180.0, 8056.2, 260.164, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008551, 1758.9, 9149.5, 248.183, 1852008551)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852269164, 2179.0, 12909.6, 212.471, 1852269164)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852269164, 1616.3, 12967.4, 164.954, 1852269164)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852269164, 1863.4, 12883.6, 325.304, 1852269164)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852139386, 2253.1, 13126.7, 339.136, 1852139386)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852139386, 2078.7, 13165.9, 114.712, 1852139386)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852139386, 1742.0, 13166.3, 300.123, 1852139386)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852139386, 1578.9, 13238.5, 86.179, 1852139386)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1851946861, 2537.5, 10957.5, 276.381, 1851946861)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1315070563, -(8197.8), 7856.1, 279.270, 1315070563)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1332766568, 1450.9, 9420.6, 273.909, 1332766568)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008562, 863.3, 11339.1, 239.185, 1852008562)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008562, 640.8, 11575.5, 239.185, 1852008562)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008562, 617.0, 11820.6, 239.185, 1852008562)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008562, 764.4, 11772.9, 239.185, 1852008562)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008562, 1096.2, 12071.2, 233.685, 1852008562)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008562, 1294.8, 11918.9, 159.824, 1852008562)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008562, 995.3, 11351.8, 200.309, 1852008562)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008562, 840.4, 11483.9, 9.844, 1852008562)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008562, 1147.2, 11906.1, 133.353, 1852008562)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008562, 1273.4, 12065.6, 206.786, 1852008562)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008562, 529.2, 11697.5, 349.200, 1852008562)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1852008562, 1032.3, 11510.9, 166.195, 1852008562)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1851941995, 2326.1, 10879.9, 94.364, 1851941995)
+	__wurst_safe_BlzCreateUnitWithSkin(p14, 1851941995, 2790.7, 10919.0, 319.437, 1851941995)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function CreateBuildingsForPlayer18(__wurst_stackPos283) 
+	local p15 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos283
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	p15 = Player(18)
+	gg_unit_e008_0080 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1697656888, -(6752.0), 23776.0, 270.000, 1697656888)
+	gg_unit_e008_0081 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1697656888, -(6880.0), 23072.0, 270.000, 1697656888)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function CreateUnitsForPlayer23(__wurst_stackPos284) 
+	local p16 = nil
+	local u19 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos284
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	p16 = Player(23)
+	u19 = nil
+	u19 = __wurst_safe_BlzCreateUnitWithSkin(p16, 1853060200, 454.8, 26919.5, 278.523, 1853060200)
+	__wurst_safe_SetUnitState(u19, UNIT_STATE_MANA, 0.)
+	__wurst_safe_SetUnitAcquireRange(u19, 200.0)
+	u19 = __wurst_safe_BlzCreateUnitWithSkin(p16, 1853060204, 642.9, 26893.5, 326.853, 1853060204)
+	__wurst_safe_SetUnitState(u19, UNIT_STATE_MANA, 0.)
+	__wurst_safe_SetUnitAcquireRange(u19, 200.0)
+	u19 = __wurst_safe_BlzCreateUnitWithSkin(p16, 1853060204, 313.1, 26766.3, 60.262, 1853060204)
+	__wurst_safe_SetUnitState(u19, UNIT_STATE_MANA, 0.)
+	__wurst_safe_SetUnitAcquireRange(u19, 200.0)
+	u19 = __wurst_safe_BlzCreateUnitWithSkin(p16, 1853060211, 504.9, 26747.9, 329.940, 1853060211)
+	__wurst_safe_SetUnitState(u19, UNIT_STATE_MANA, 0.)
+	__wurst_safe_SetUnitAcquireRange(u19, 200.0)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function CreateNeutralHostileBuildings(__wurst_stackPos285) 
+	local p17 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos285
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	p17 = Player(PLAYER_NEUTRAL_AGGRESSIVE)
+	__wurst_safe_BlzCreateUnitWithSkin(p17, 1852207666, -(3264.0), 25856.0, 270.000, 1852207666)
+	__wurst_safe_BlzCreateUnitWithSkin(p17, 1852207665, -(4160.0), 25792.0, 270.000, 1852207665)
+	__wurst_safe_BlzCreateUnitWithSkin(p17, 1852207665, -(4224.0), 25472.0, 270.000, 1852207665)
+	gg_unit_h001_0008 = __wurst_safe_BlzCreateUnitWithSkin(p17, 1747988529, 761.5, 18188.8, 270.000, 1747988529)
+	__wurst_safe_BlzCreateUnitWithSkin(p17, 1747988545, -(3547.2), 25265.2, 270.000, 1747988545)
+	gg_unit_h00D_0010 = __wurst_safe_BlzCreateUnitWithSkin(p17, 1747988548, -(3538.6), 13625.4, 270.000, 1747988548)
+	gg_unit_h007_0011 = __wurst_safe_BlzCreateUnitWithSkin(p17, 1747988535, 3767.1, 24073.2, 270.000, 1747988535)
+	gg_unit_h00E_0013 = __wurst_safe_BlzCreateUnitWithSkin(p17, 1747988549, -(5198.1), 17582.0, 270.000, 1747988549)
+	__wurst_safe_BlzCreateUnitWithSkin(p17, 1747988537, 726.7, 26424.3, 270.000, 1747988537)
+	__wurst_safe_BlzCreateUnitWithSkin(p17, 1747988534, 4286.0, 18898.3, 270.000, 1747988534)
+	gg_unit_h003_0016 = __wurst_safe_BlzCreateUnitWithSkin(p17, 1747988531, -(1297.8), 15771.1, 270.000, 1747988531)
+	__wurst_safe_BlzCreateUnitWithSkin(p17, 1852334958, 3584.0, 26112.0, 270.000, 1852334958)
+	gg_unit_h00O_0019 = __wurst_safe_BlzCreateUnitWithSkin(p17, 1747988559, -(2242.8), 10951.6, 270.000, 1747988559)
+	__wurst_safe_BlzCreateUnitWithSkin(p17, 1852207665, 3328.0, 16192.0, 270.000, 1852207665)
+	__wurst_safe_BlzCreateUnitWithSkin(p17, 1852207666, 4224.0, 16704.0, 270.000, 1852207666)
+	gg_unit_h00B_0076 = __wurst_safe_BlzCreateUnitWithSkin(p17, 1747988546, -(12453.6), 26925.3, 270.000, 1747988546)
+	gg_unit_h00H_0077 = __wurst_safe_BlzCreateUnitWithSkin(p17, 1747988552, -(9097.2), 26865.2, -(85.297), 1747988552)
+	gg_unit_h00R_0078 = __wurst_safe_BlzCreateUnitWithSkin(p17, 1747988562, -(5118.7), 22871.3, 270.000, 1747988562)
+	__wurst_safe_BlzCreateUnitWithSkin(p17, 1853122608, 1536.0, 23680.0, 270.000, 1853122608)
+	__wurst_safe_BlzCreateUnitWithSkin(p17, 1853122608, 2304.0, 23744.0, 270.000, 1853122608)
+	__wurst_safe_BlzCreateUnitWithSkin(p17, 1852076661, 4096.0, 24448.0, 270.000, 1852076661)
+	__wurst_safe_BlzCreateUnitWithSkin(p17, 1852006768, -(5408.0), 17120.0, 270.000, 1852006768)
+	__wurst_safe_BlzCreateUnitWithSkin(p17, 1853122609, 5024.0, 20064.0, 270.000, 1853122609)
+	__wurst_safe_BlzCreateUnitWithSkin(p17, 1853122608, 4544.0, 20096.0, 270.000, 1853122608)
+	__wurst_safe_BlzCreateUnitWithSkin(p17, 1852006775, -(3200.0), 14336.0, 270.000, 1852006775)
+	__wurst_safe_BlzCreateUnitWithSkin(p17, 1852011628, -(4032.0), 13568.0, 270.000, 1852011628)
+	gg_unit_h00I_0135 = __wurst_safe_BlzCreateUnitWithSkin(p17, 1747988553, -(3767.8), 8514.8, 270.000, 1747988553)
+	__wurst_safe_BlzCreateUnitWithSkin(p17, 1852009847, -(3040.0), 13984.0, 270.000, 1852009847)
+	__wurst_safe_BlzCreateUnitWithSkin(p17, 1747988532, -(14002.8), 21555.6, 270.000, 1747988532)
+	__wurst_safe_BlzCreateUnitWithSkin(p17, 1747988564, -(7158.9), 14567.9, 270.000, 1747988564)
+	gg_unit_h00F_0163 = __wurst_safe_BlzCreateUnitWithSkin(p17, 1747988550, -(10812.8), 10843.1, 270.000, 1747988550)
+	__wurst_safe_BlzCreateUnitWithSkin(p17, 1852009847, -(4320.0), 13984.0, 270.000, 1852009847)
+	__wurst_safe_BlzCreateUnitWithSkin(p17, 1852006768, -(4384.0), 14240.0, 270.000, 1852006768)
+	__wurst_safe_BlzCreateUnitWithSkin(p17, 1852006768, -(3232.0), 14752.0, 270.000, 1852006768)
+	gg_unit_h00C_0174 = __wurst_safe_BlzCreateUnitWithSkin(p17, 1747988547, -(7778.2), 7822.0, 270.000, 1747988547)
+	gg_unit_h00U_0175 = __wurst_safe_BlzCreateUnitWithSkin(p17, 1747988565, 1720.8, 10287.2, 270.000, 1747988565)
+	gg_unit_h00P_0178 = __wurst_safe_BlzCreateUnitWithSkin(p17, 1747988560, -(1461.7), 13433.8, 270.000, 1747988560)
+	gg_unit_h00S_0179 = __wurst_safe_BlzCreateUnitWithSkin(p17, 1747988563, -(672.9), 7222.8, 270.000, 1747988563)
+	gg_unit_h00L_0184 = __wurst_safe_BlzCreateUnitWithSkin(p17, 1747988556, -(6933.1), 10844.2, 270.000, 1747988556)
+	gg_unit_h00G_0185 = __wurst_safe_BlzCreateUnitWithSkin(p17, 1747988551, -(11701.8), 9545.5, 270.000, 1747988551)
+	gg_unit_etrp_0191 = __wurst_safe_BlzCreateUnitWithSkin(p17, 1702130288, -(7200.0), 8096.0, 270.000, 1702130288)
+	gg_unit_h00Q_0197 = __wurst_safe_BlzCreateUnitWithSkin(p17, 1747988561, 1917.4, 13090.1, 270.000, 1747988561)
+	__wurst_safe_BlzCreateUnitWithSkin(p17, 1852009847, -(5344.0), 11424.0, 270.000, 1852009847)
+	__wurst_safe_BlzCreateUnitWithSkin(p17, 1852207666, -(512.0), 8896.0, 270.000, 1852207666)
+	__wurst_safe_BlzCreateUnitWithSkin(p17, 1852207665, -(896.0), 9024.0, 270.000, 1852207665)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function CreateNeutralHostile(__wurst_stackPos286) 
+	local p18 = nil
+	local u20 = nil
+	local t = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos286
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	p18 = Player(PLAYER_NEUTRAL_AGGRESSIVE)
+	u20 = nil
 	t = nil
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207713, -(3515.8), 25753.8, 242.454, 1852207713)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207713, -(3963.5), 25543.4, 5.383, 1852207713)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207719, -(3282.9), 25568.3, 221.678, 1852207719)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207719, -(3986.9), 25262.9, -(14.804), 1852207719)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853059186, -(1075.0), 15970.7, 45.652, 1853059186)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853059186, -(1022.8), 15875.7, 37.961, 1853059186)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853056884, -(1217.2), 15962.4, 20.181, 1853056884)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207717, -(3774.5), 25756.7, 302.869, 1852207717)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060200, -(3939.2), 14287.8, 105.934, 1853060200)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060204, -(5499.6), 17496.7, 70.295, 1853060204)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060204, -(3837.3), 19729.3, 166.584, 1853060204)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060204, -(3987.5), 19573.8, 137.695, 1853060204)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(4913.6), 17331.0, 99.296, 1853060211)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(4123.8), 19532.3, 104.475, 1853060211)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(3882.2), 19867.3, 191.766, 1853060211)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(4010.1), 19729.0, 148.868, 1853060211)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853320295, -(2296.4), 17184.2, 30.504, 1853320295)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055597, 335.4, 24479.6, 107.237, 1853055597)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853320308, -(2083.9), 17385.9, 25.441, 1853320308)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207713, 3607.2, 16191.4, 84.573, 1852207713)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852207713, -(3515.8), 25753.8, 242.454, 1852207713)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852207713, -(3963.5), 25543.4, 5.383, 1852207713)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852207719, -(3282.9), 25568.3, 221.678, 1852207719)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852207719, -(3986.9), 25262.9, 345.196, 1852207719)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853059186, -(1075.0), 15970.7, 45.652, 1853059186)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853059186, -(1022.8), 15875.7, 37.961, 1853059186)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853056884, -(1217.2), 15962.4, 20.181, 1853056884)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852207717, -(3774.5), 25756.7, 302.869, 1852207717)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060200, -(3939.2), 14287.8, 105.934, 1853060200)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060204, -(5499.6), 17496.7, 70.295, 1853060204)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060204, -(3837.3), 19729.3, 166.584, 1853060204)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060204, -(3987.5), 19573.8, 137.695, 1853060204)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060211, -(4913.6), 17331.0, 99.296, 1853060211)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060211, -(4123.8), 19532.3, 104.475, 1853060211)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060211, -(3882.2), 19867.3, 191.766, 1853060211)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060211, -(4010.1), 19729.0, 148.868, 1853060211)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853320295, -(2296.4), 17184.2, 30.504, 1853320295)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853055597, 335.4, 24479.6, 107.237, 1853055597)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853320308, -(2083.9), 17385.9, 25.441, 1853320308)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852207713, 3607.2, 16191.4, 84.573, 1852207713)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
 	t = CreateTrigger()
-	__wurst_safe_TriggerRegisterUnitEvent(t, u18, EVENT_UNIT_DEATH)
-	__wurst_safe_TriggerRegisterUnitEvent(t, u18, EVENT_UNIT_CHANGE_OWNER)
+	__wurst_safe_TriggerRegisterUnitEvent(t, u20, EVENT_UNIT_DEATH)
+	__wurst_safe_TriggerRegisterUnitEvent(t, u20, EVENT_UNIT_CHANGE_OWNER)
 	__wurst_safe_TriggerAddAction(t, function (...) 
 			xpcall(function (...) 
 					bridge_Unit000038_DropItems(...)
 				end, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua callback error: " .. tostring(err)) xpcall(function() error1(tostring(err), "<lua error>") end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) BJDebugMsg("while reporting: " .. tostring(err))  end) end, ...)
 		end)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207724, 3668.4, 16419.3, 82.999, 1852207724)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207724, 3465.3, 16447.0, 42.384, 1852207724)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207724, 3897.1, 16450.9, 147.349, 1852207724)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207717, 4021.7, 16636.5, 195.989, 1852207717)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852270642, 1463.0, 15379.0, 132.066, 1852270642)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852207724, 3712.4, 16464.9, 82.999, 1852207724)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852207724, 3465.3, 16447.0, 42.380, 1852207724)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852207724, 3940.8, 16563.7, 147.349, 1852207724)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852270642, 1463.0, 15379.0, 132.066, 1852270642)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
 	t = CreateTrigger()
-	__wurst_safe_TriggerRegisterUnitEvent(t, u18, EVENT_UNIT_DEATH)
-	__wurst_safe_TriggerRegisterUnitEvent(t, u18, EVENT_UNIT_CHANGE_OWNER)
+	__wurst_safe_TriggerRegisterUnitEvent(t, u20, EVENT_UNIT_DEATH)
+	__wurst_safe_TriggerRegisterUnitEvent(t, u20, EVENT_UNIT_CHANGE_OWNER)
 	__wurst_safe_TriggerAddAction(t, function (...) 
 			xpcall(function (...) 
 					bridge_Unit000043_DropItems(...)
 				end, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua callback error: " .. tostring(err)) xpcall(function() error1(tostring(err), "<lua error>") end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) BJDebugMsg("while reporting: " .. tostring(err))  end) end, ...)
 		end)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852270641, 1655.0, 15488.2, 120.553, 1852270641)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852270641, 1278.8, 15412.4, 135.758, 1852270641)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852270641, 1438.6, 15561.8, 138.055, 1852270641)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1848651824, 422.5, -(52.9), 184.565, 1848651824)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1848651826, 5154.2, 21381.0, 326.520, 1848651826)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055597, 697.4, 24504.1, 72.949, 1853055597)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853059952, 585.6, 24210.6, 84.498, 1853059952)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853059952, 794.0, 24283.4, 114.657, 1853059952)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853059952, 454.6, 24296.3, 95.477, 1853059952)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853059952, 240.5, 24222.3, 114.597, 1853059952)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853059952, 455.1, 24149.9, 69.867, 1853059952)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1164666727, 3427.7, 25975.3, 220.020, 1164666727)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852599148, -(10529.4), 8084.6, 92.035, 1852599148)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852601198, -(10293.0), 8172.0, 153.416, 1852601198)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853318510, 2758.1, 22874.2, 242.161, 1853318510)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207728, 2802.6, 22698.5, 164.835, 1852207728)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207728, 2707.6, 22558.6, 96.867, 1852207728)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207203, 1818.5, 23747.5, 260.600, 1852207203)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852270641, 1655.0, 15488.2, 120.553, 1852270641)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852270641, 1278.8, 15412.4, 135.758, 1852270641)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852270641, 1438.6, 15561.8, 138.055, 1852270641)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1848651824, 422.5, -(52.9), 184.565, 1848651824)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1848651826, 5154.2, 21381.0, 326.520, 1848651826)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853055597, 697.4, 24504.1, 72.949, 1853055597)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853059952, 585.6, 24210.6, 84.498, 1853059952)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853059952, 454.6, 24296.3, 95.477, 1853059952)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853059952, 240.5, 24222.3, 114.597, 1853059952)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853059952, 455.1, 24149.9, 69.867, 1853059952)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1164666727, 3427.7, 25975.3, 220.020, 1164666727)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852599148, -(10529.4), 8084.6, 92.035, 1852599148)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852601198, -(10293.0), 8172.0, 153.416, 1852601198)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853318510, 2758.1, 22874.2, 242.161, 1853318510)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852207728, 2802.6, 22698.5, 164.835, 1852207728)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852207728, 2707.6, 22558.6, 96.867, 1852207728)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852207203, 1818.5, 23747.5, 260.600, 1852207203)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
 	t = CreateTrigger()
-	__wurst_safe_TriggerRegisterUnitEvent(t, u18, EVENT_UNIT_DEATH)
-	__wurst_safe_TriggerRegisterUnitEvent(t, u18, EVENT_UNIT_CHANGE_OWNER)
+	__wurst_safe_TriggerRegisterUnitEvent(t, u20, EVENT_UNIT_DEATH)
+	__wurst_safe_TriggerRegisterUnitEvent(t, u20, EVENT_UNIT_CHANGE_OWNER)
 	__wurst_safe_TriggerAddAction(t, function (...) 
 			xpcall(function (...) 
 					bridge_Unit000090_DropItems(...)
 				end, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua callback error: " .. tostring(err)) xpcall(function() error1(tostring(err), "<lua error>") end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) BJDebugMsg("while reporting: " .. tostring(err))  end) end, ...)
 		end)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207220, 2103.1, 23582.4, 211.507, 1852207220)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207220, 1789.6, 23579.7, 261.892, 1852207220)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207219, 1328.0, 23512.7, -(18.783), 1852207219)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207219, 1557.9, 23541.6, 352.364, 1852207219)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853320801, 2885.7, 22493.5, 125.320, 1853320801)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852207220, 2103.1, 23582.4, 211.507, 1852207220)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852207220, 1789.6, 23579.7, 261.892, 1852207220)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852207219, 1516.7, 23532.0, 352.364, 1852207219)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853320801, 2885.7, 22493.5, 125.320, 1853320801)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
 	t = CreateTrigger()
-	__wurst_safe_TriggerRegisterUnitEvent(t, u18, EVENT_UNIT_DEATH)
-	__wurst_safe_TriggerRegisterUnitEvent(t, u18, EVENT_UNIT_CHANGE_OWNER)
+	__wurst_safe_TriggerRegisterUnitEvent(t, u20, EVENT_UNIT_DEATH)
+	__wurst_safe_TriggerRegisterUnitEvent(t, u20, EVENT_UNIT_CHANGE_OWNER)
 	__wurst_safe_TriggerAddAction(t, function (...) 
 			xpcall(function (...) 
 					bridge_Unit000097_DropItems(...)
 				end, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua callback error: " .. tostring(err)) xpcall(function() error1(tostring(err), "<lua error>") end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) BJDebugMsg("while reporting: " .. tostring(err))  end) end, ...)
 		end)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852008242, 4900.5, 21637.4, 284.950, 1852008242)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852008242, 4947.2, 21584.4, 133.894, 1852008242)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852008242, 4991.0, 21639.5, 341.619, 1852008242)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852008242, 5025.5, 21698.5, 38.442, 1852008242)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852008242, 4923.9, 21729.4, 280.654, 1852008242)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852008242, 5261.6, 21483.7, 266.196, 1852008242)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852008242, 5339.8, 21456.6, 332.973, 1852008242)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852008242, 5316.8, 21555.5, 347.146, 1852008242)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852008242, 5399.3, 21563.6, 297.460, 1852008242)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1316252014, 5024.0, 21516.2, 18.400, 1316252014)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852008242, 4900.5, 21637.4, 284.950, 1852008242)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852008242, 4947.2, 21584.4, 133.894, 1852008242)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852008242, 4991.0, 21639.5, 341.619, 1852008242)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852008242, 5025.5, 21698.5, 38.442, 1852008242)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852008242, 4923.9, 21729.4, 280.654, 1852008242)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852008242, 5261.6, 21483.7, 266.196, 1852008242)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852008242, 5339.8, 21456.6, 332.973, 1852008242)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852008242, 5316.8, 21555.5, 347.146, 1852008242)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852008242, 5399.3, 21563.6, 297.460, 1852008242)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1316252014, 5024.0, 21516.2, 18.400, 1316252014)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
 	t = CreateTrigger()
-	__wurst_safe_TriggerRegisterUnitEvent(t, u18, EVENT_UNIT_DEATH)
-	__wurst_safe_TriggerRegisterUnitEvent(t, u18, EVENT_UNIT_CHANGE_OWNER)
+	__wurst_safe_TriggerRegisterUnitEvent(t, u20, EVENT_UNIT_DEATH)
+	__wurst_safe_TriggerRegisterUnitEvent(t, u20, EVENT_UNIT_CHANGE_OWNER)
 	__wurst_safe_TriggerAddAction(t, function (...) 
 			xpcall(function (...) 
 					bridge_Unit000003_DropItems(...)
 				end, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua callback error: " .. tostring(err)) xpcall(function() error1(tostring(err), "<lua error>") end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) BJDebugMsg("while reporting: " .. tostring(err))  end) end, ...)
 		end)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1848651826, 4749.7, 21508.9, 280.650, 1848651826)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1851876471, 3648.4, 24134.3, 223.727, 1851876471)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1851876471, 3532.9, 24270.9, 240.700, 1851876471)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1851876471, 3777.2, 24005.4, 202.447, 1851876471)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1851876466, 3844.8, 24200.3, 232.760, 1851876466)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1848651826, 4749.7, 21508.9, 280.650, 1848651826)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1851876471, 3648.4, 24134.3, 223.727, 1851876471)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1851876471, 3532.9, 24270.9, 240.700, 1851876471)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1851876471, 3777.2, 24005.4, 202.447, 1851876471)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1851876466, 3844.8, 24200.3, 232.760, 1851876466)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
 	t = CreateTrigger()
-	__wurst_safe_TriggerRegisterUnitEvent(t, u18, EVENT_UNIT_DEATH)
-	__wurst_safe_TriggerRegisterUnitEvent(t, u18, EVENT_UNIT_CHANGE_OWNER)
+	__wurst_safe_TriggerRegisterUnitEvent(t, u20, EVENT_UNIT_DEATH)
+	__wurst_safe_TriggerRegisterUnitEvent(t, u20, EVENT_UNIT_CHANGE_OWNER)
 	__wurst_safe_TriggerAddAction(t, function (...) 
 			xpcall(function (...) 
 					bridge_Unit000116_DropItems(...)
 				end, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua callback error: " .. tostring(err)) xpcall(function() error1(tostring(err), "<lua error>") end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) BJDebugMsg("while reporting: " .. tostring(err))  end) end, ...)
 		end)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1851876459, 3970.0, 24084.2, 193.369, 1851876459)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1851876459, 3699.7, 24421.6, 256.144, 1851876459)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853320292, -(2227.9), 17428.5, 23.784, 1853320292)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853320308, -(2384.9), 17282.9, 36.400, 1853320308)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853320308, -(2300.4), 17593.5, 22.273, 1853320308)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853320295, -(2420.5), 17505.7, 2.949, 1853320295)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852404840, 4621.8, 19915.2, 265.540, 1852404840)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852404855, 5017.7, 19526.7, 220.147, 1852404855)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852404852, 4949.6, 19360.0, 271.836, 1852404852)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852404852, 4693.9, 19729.1, 266.265, 1852404852)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852404852, 4963.7, 19785.5, 261.087, 1852404852)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060204, -(3699.8), 14255.5, 101.876, 1853060204)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060204, -(4834.3), 17598.8, 94.733, 1853060204)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(5169.0), 17475.6, 93.685, 1853060211)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(5089.8), 17110.1, 96.945, 1853060211)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(4035.2), 14066.9, 94.506, 1853060211)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(3604.3), 14467.3, 87.511, 1853060211)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(5390.8), 17343.4, 44.658, 1853060211)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055348, -(5034.9), 17663.6, 256.692, 1853055348)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055348, -(4050.9), 14454.2, 140.684, 1853055348)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055348, -(5288.4), 17707.1, 147.386, 1853055348)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055348, -(3821.6), 14496.8, 35.519, 1853055348)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055348, -(3860.9), 14138.9, 116.712, 1853055348)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055348, -(3527.7), 14356.7, 103.805, 1853055348)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055348, -(5151.8), 17712.7, 310.082, 1853055348)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055348, -(5399.6), 17594.4, 72.787, 1853055348)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853056884, -(1107.4), 15740.7, 38.455, 1853056884)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853059186, -(925.9), 15843.8, 37.961, 1853059186)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853059186, -(1127.1), 16121.3, 18.959, 1853059186)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853059186, -(1040.3), 16057.0, -(12.431), 1853059186)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853059186, -(1009.9), 15739.0, 37.961, 1853059186)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1311780918, -(3486.0), 13467.2, 88.520, 1311780918)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852666723, -(11935.3), 9716.7, 318.489, 1852666723)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852666486, -(11876.1), 9943.2, 296.661, 1852666486)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852666486, -(12037.8), 9887.2, 311.319, 1852666486)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852666486, -(12167.1), 9714.1, 337.297, 1852666486)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852666486, -(12173.2), 9587.3, 352.502, 1852666486)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852666486, -(12028.2), 9489.9, 7.068, 1852666486)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852666734, -(11786.5), 9791.0, 283.788, 1852666734)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852666734, -(11900.1), 9573.4, 345.672, 1852666734)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852666999, -(11790.3), 9654.0, 298.452, 1852666999)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852666999, -(11629.4), 9726.6, 245.035, 1852666999)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852666999, -(11850.8), 9469.5, 24.356, 1852666999)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852666999, -(11869.8), 9318.0, 54.830, 1852666999)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852666999, -(11439.8), 9736.5, 216.482, 1852666999)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853125220, -(11560.4), 8954.5, 53.920, 1853125220)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852467042, -(10298.9), 9814.3, 303.919, 1852467042)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852467042, -(10036.4), 9933.3, 278.130, 1852467042)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852466993, -(10248.2), 9691.0, 330.954, 1852466993)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852466993, -(10073.8), 9781.7, 312.043, 1852466993)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852466993, -(9851.3), 9770.5, 260.418, 1852466993)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852600950, -(10710.9), 10687.9, 151.012, 1852600950)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852076662, -(11024.4), 10814.4, 359.121, 1852076662)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852076662, -(10577.6), 10877.6, 127.665, 1852076662)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853059702, -(10783.0), 11005.9, 141.882, 1853059702)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853059702, -(10508.2), 11027.5, 311.032, 1853059702)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853059702, -(11019.9), 10983.4, 145.540, 1853059702)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852601198, -(10718.0), 8115.6, 74.173, 1852601198)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852597363, -(10376.6), 7799.8, 114.988, 1852597363)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852597363, -(10556.9), 7817.7, 86.108, 1852597363)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852597363, -(10224.8), 7943.2, 151.870, 1852597363)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852666477, -(9739.1), 11871.6, 261.759, 1852666477)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852666477, -(9916.1), 11840.3, 286.329, 1852666477)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852666477, -(10072.3), 11810.3, 306.749, 1852666477)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852666477, -(9949.4), 11713.4, 299.124, 1852666477)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852666477, -(9799.5), 11758.7, 269.768, 1852666477)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853320292, -(8814.1), 8901.5, 169.496, 1853320292)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853320292, -(8756.6), 9067.6, 179.402, 1853320292)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853320295, -(8854.2), 8765.3, 154.633, 1853320295)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207713, -(936.5), 8794.8, 324.424, 1852207713)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060215, -(3325.0), 9599.6, 273.158, 1853060215)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853122668, -(3560.4), 9462.5, 297.033, 1853122668)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853122668, -(3161.4), 9386.0, 206.902, 1853122668)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060200, -(5503.0), 11603.3, 230.714, 1853060200)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060200, -(5835.3), 11435.1, 241.856, 1853060200)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060204, -(5858.1), 11655.2, 253.218, 1853060204)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060204, -(5701.3), 11561.8, 239.774, 1853060204)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060204, -(5563.7), 11406.0, 246.106, 1853060204)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(5852.3), 11814.4, 251.068, 1853060211)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(5605.8), 11863.2, 243.740, 1853060211)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(5394.9), 11748.6, 214.145, 1853060211)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060204, -(7247.7), 10088.4, 30.273, 1853060204)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060204, -(7050.3), 10135.0, 47.477, 1853060204)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060204, -(7356.8), 10241.5, 8.636, 1853060204)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(7330.0), 10433.0, 6.534, 1853060211)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(7146.8), 10332.4, 20.556, 1853060211)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853060211, -(6908.7), 10257.1, 38.241, 1853060211)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852272246, -(5144.6), 7654.7, 321.361, 1852272246)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852272247, -(5345.7), 7666.5, 334.423, 1852272247)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852272247, -(5284.6), 7828.5, 316.372, 1852272247)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852272247, -(5094.7), 7868.0, 296.714, 1852272247)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852272226, -(5227.7), 7554.3, 342.382, 1852272226)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852272226, -(5002.6), 7741.3, 292.185, 1852272226)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852798827, 1251.6, 7315.2, 225.237, 1852798827)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852798827, 1550.6, 7094.4, 223.608, 1852798827)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852798821, 1060.6, 7195.9, 218.629, 1852798821)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852798821, 1331.1, 7145.9, 219.766, 1852798821)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852798821, 1349.1, 6950.2, 224.981, 1852798821)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207713, -(711.7), 8844.7, 236.093, 1852207713)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207713, -(911.2), 8629.7, 18.359, 1852207713)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207713, -(389.4), 8507.4, 173.740, 1852207713)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207719, -(685.0), 8649.7, 308.571, 1852207719)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207719, -(845.5), 8463.8, 311.505, 1852207719)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207717, -(494.5), 8681.6, 261.084, 1852207717)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207713, -(2356.0), 6975.8, 39.641, 1852207713)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207713, -(2153.3), 6854.3, 48.919, 1852207713)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852207717, -(2322.8), 6807.4, 48.432, 1852207717)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055597, -(7673.4), 9546.4, 145.353, 1853055597)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055597, -(7908.0), 9633.1, 118.470, 1853055597)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055597, -(2041.0), 8826.2, 141.795, 1853055597)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055597, -(2302.7), 8802.4, 104.083, 1853055597)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055597, -(1992.1), 9044.7, 184.191, 1853055597)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1853055597, -(7957.1), 9401.0, 119.808, 1853055597)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852798821, -(1663.6), 6484.8, 22.995, 1852798821)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852798821, -(1563.7), 6665.6, 331.113, 1852798821)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852270450, 231.7, 10116.9, 147.531, 1852270450)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852270450, 270.3, 10530.2, 226.933, 1852270450)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852270450, -(78.7), 9939.9, 96.375, 1852270450)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852273524, -(20.1), 10405.6, 167.877, 1852273524)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852273524, -(211.7), 10157.7, 148.748, 1852273524)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852273252, -(1531.4), 13530.0, 295.646, 1852273252)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852269675, -(1748.2), 13290.4, 320.206, 1852269675)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852269675, -(1450.9), 13299.6, 309.601, 1852269675)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852269675, -(1216.0), 13390.2, 272.132, 1852269675)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852273271, -(1249.6), 13220.2, 277.941, 1852273271)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852273271, -(1683.8), 13109.1, 114.170, 1852273271)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852273271, -(1344.8), 13631.1, 280.580, 1852273271)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
-	u18 = __wurst_safe_BlzCreateUnitWithSkin(p15, 1852273271, -(1767.8), 13579.1, 307.387, 1852273271)
-	__wurst_safe_SetUnitAcquireRange(u18, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1851876459, 3970.0, 24084.2, 193.369, 1851876459)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1851876459, 3699.7, 24421.6, 256.144, 1851876459)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853320292, -(2227.9), 17428.5, 23.784, 1853320292)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853320308, -(2384.9), 17282.9, 36.400, 1853320308)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853320308, -(2300.4), 17593.5, 22.273, 1853320308)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853320295, -(2420.5), 17505.7, 2.949, 1853320295)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852404840, 4621.8, 19915.2, 265.540, 1852404840)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852404855, 4851.6, 19567.1, 220.147, 1852404855)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852404852, 5049.4, 19507.4, 271.836, 1852404852)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852404852, 4693.9, 19729.1, 266.265, 1852404852)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852404852, 4963.7, 19785.5, 261.087, 1852404852)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852668274, -(5210.8), 24812.9, 253.303, 1852668274)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852732279, -(5109.6), 24971.0, 244.970, 1852732279)
+	__wurst_safe_SetUnitState(u20, UNIT_STATE_MANA, 0.)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060204, -(3699.8), 14255.5, 101.876, 1853060204)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060204, -(4834.3), 17598.8, 94.733, 1853060204)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060211, -(5169.0), 17475.6, 93.685, 1853060211)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060211, -(5089.8), 17110.1, 96.945, 1853060211)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060211, -(4035.2), 14066.9, 94.506, 1853060211)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060211, -(3604.3), 14467.3, 87.511, 1853060211)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060211, -(5390.8), 17343.4, 44.658, 1853060211)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853055348, -(5034.9), 17663.6, 256.692, 1853055348)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853055348, -(4050.9), 14454.2, 140.684, 1853055348)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853055348, -(5288.4), 17707.1, 147.386, 1853055348)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853055348, -(3821.6), 14496.8, 35.519, 1853055348)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853055348, -(3860.9), 14138.9, 116.712, 1853055348)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853055348, -(3527.7), 14356.7, 103.805, 1853055348)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853055348, -(5151.8), 17712.7, 310.082, 1853055348)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853055348, -(5399.6), 17594.4, 72.787, 1853055348)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852730727, -(5319.2), 24721.8, -(50.793), 1852730727)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852730727, -(5108.0), 24704.4, 200.008, 1852730727)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853056884, -(1107.4), 15740.7, 38.455, 1853056884)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853059186, -(925.9), 15843.8, 37.961, 1853059186)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853059186, -(1127.1), 16121.3, 18.959, 1853059186)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853059186, -(1040.3), 16057.0, 347.569, 1853059186)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853059186, -(1009.9), 15739.0, 37.961, 1853059186)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1311780918, -(3486.0), 13467.2, 88.520, 1311780918)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852666723, -(11935.3), 9716.7, 318.489, 1852666723)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852666486, -(11876.1), 9943.2, 296.661, 1852666486)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852666486, -(12037.8), 9887.2, 311.319, 1852666486)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852666486, -(12167.1), 9714.1, 337.297, 1852666486)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852666486, -(12173.2), 9587.3, 352.502, 1852666486)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852666486, -(12028.2), 9489.9, 7.068, 1852666486)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852666734, -(11786.5), 9791.0, 283.788, 1852666734)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852666734, -(11900.1), 9573.4, 345.672, 1852666734)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852666999, -(11790.3), 9654.0, 298.452, 1852666999)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852666999, -(11629.4), 9726.6, 245.035, 1852666999)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852666999, -(11850.8), 9469.5, 24.356, 1852666999)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852666999, -(11869.8), 9318.0, 54.830, 1852666999)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852666999, -(11439.8), 9736.5, 216.482, 1852666999)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852467042, -(10298.9), 9814.3, 303.919, 1852467042)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852467042, -(10036.4), 9933.3, 278.130, 1852467042)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852466993, -(10248.2), 9691.0, 330.954, 1852466993)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852466993, -(10073.8), 9781.7, 312.043, 1852466993)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852466993, -(9851.3), 9770.5, 260.418, 1852466993)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852600950, -(10710.9), 10687.9, 151.012, 1852600950)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852076662, -(11024.4), 10814.4, 359.121, 1852076662)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852076662, -(10577.6), 10877.6, 127.665, 1852076662)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853059702, -(10783.0), 11005.9, 141.882, 1853059702)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853059702, -(10508.2), 11027.5, 311.032, 1853059702)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853059702, -(11019.9), 10983.4, 145.540, 1853059702)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852601198, -(10718.0), 8115.6, 74.173, 1852601198)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852597363, -(10376.6), 7799.8, 114.988, 1852597363)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852597363, -(10556.9), 7817.7, 86.108, 1852597363)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852597363, -(10224.8), 7943.2, 151.870, 1852597363)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853320292, -(7795.1), 9437.0, 126.944, 1853320292)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853320292, -(7714.8), 9620.9, 159.972, 1853320292)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853320295, -(7966.5), 9446.2, 111.132, 1853320295)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852207713, -(936.5), 8794.8, 324.424, 1852207713)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060200, -(5503.0), 11603.3, 230.714, 1853060200)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060200, -(5835.3), 11435.1, 241.856, 1853060200)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060204, -(5858.1), 11655.2, 253.218, 1853060204)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060204, -(5701.3), 11561.8, 239.774, 1853060204)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060204, -(5563.7), 11406.0, 246.106, 1853060204)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060211, -(5852.3), 11814.4, 251.068, 1853060211)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060211, -(5605.8), 11863.2, 243.740, 1853060211)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060211, -(5394.9), 11748.6, 214.145, 1853060211)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060204, -(7247.7), 10088.4, 30.273, 1853060204)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060204, -(7050.3), 10135.0, 47.477, 1853060204)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060204, -(7356.8), 10241.5, 8.636, 1853060204)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060211, -(7330.0), 10433.0, 6.534, 1853060211)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060211, -(7146.8), 10332.4, 20.556, 1853060211)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853060211, -(6908.7), 10257.1, 38.241, 1853060211)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852272246, -(5144.6), 7654.7, 321.361, 1852272246)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852272247, -(5345.7), 7666.5, 334.423, 1852272247)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852272247, -(5284.6), 7828.5, 316.372, 1852272247)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852272247, -(5094.7), 7868.0, 296.714, 1852272247)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852272226, -(5227.7), 7554.3, 342.382, 1852272226)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852272226, -(5002.6), 7741.3, 292.185, 1852272226)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852798827, 1251.6, 7315.2, 225.237, 1852798827)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852798827, 1550.6, 7094.4, 223.608, 1852798827)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852798821, 1060.6, 7195.9, 218.629, 1852798821)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852798821, 1331.1, 7145.9, 219.766, 1852798821)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852798821, 1349.1, 6950.2, 224.981, 1852798821)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852207713, -(711.7), 8844.7, 236.093, 1852207713)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852207713, -(911.2), 8629.7, 18.359, 1852207713)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852207713, -(389.4), 8507.4, 173.740, 1852207713)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852207719, -(685.0), 8649.7, 308.571, 1852207719)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852207719, -(845.5), 8463.8, 311.505, 1852207719)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852207717, -(494.5), 8681.6, 261.084, 1852207717)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852207713, -(2356.0), 6975.8, 39.641, 1852207713)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852207713, -(2153.3), 6854.3, 48.919, 1852207713)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852207717, -(2322.8), 6807.4, 48.432, 1852207717)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853055597, -(2041.0), 8826.2, 141.795, 1853055597)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853055597, -(2302.7), 8802.4, 104.083, 1853055597)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853055597, -(1992.1), 9044.7, 184.191, 1853055597)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852798821, -(1663.6), 6484.8, 22.995, 1852798821)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852798821, -(1563.7), 6665.6, 331.113, 1852798821)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852270450, 231.7, 10116.9, 147.531, 1852270450)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852270450, 270.3, 10530.2, 226.933, 1852270450)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852270450, -(78.7), 9939.9, 96.375, 1852270450)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852273524, -(20.1), 10405.6, 167.877, 1852273524)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852273524, -(211.7), 10157.7, 148.748, 1852273524)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852273252, -(1531.4), 13530.0, 295.646, 1852273252)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852269675, -(1748.2), 13290.4, 320.206, 1852269675)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852269675, -(1450.9), 13299.6, 309.601, 1852269675)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852269675, -(1216.0), 13390.2, 272.132, 1852269675)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852273271, -(1249.6), 13220.2, 277.941, 1852273271)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852273271, -(1683.8), 13109.1, 114.170, 1852273271)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852273271, -(1344.8), 13631.1, 280.580, 1852273271)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852273271, -(1767.8), 13579.1, 307.387, 1852273271)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853056364, -(8104.8), 17856.5, 326.348, 1853056364)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852990828, -(8034.8), 18065.8, 127.995, 1852990828)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852990828, -(7913.1), 17829.0, 255.792, 1852990828)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852601198, -(8011.8), 13291.3, 7.176, 1852601198)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852601198, -(7875.0), 13055.3, 50.962, 1852601198)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852600434, -(7596.4), 13430.3, 23.444, 1852600434)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852600434, -(7874.6), 13505.8, 2.729, 1852600434)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1852600434, -(7591.3), 13131.9, 67.337, 1852600434)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853059702, -(7343.6), 14647.9, 86.003, 1853059702)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853059702, -(7042.0), 14727.3, 113.071, 1853059702)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853059702, -(7203.1), 14790.5, 99.910, 1853059702)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853125238, -(7384.4), 14854.6, 79.389, 1853125238)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
+	u20 = __wurst_safe_BlzCreateUnitWithSkin(p18, 1853125238, -(7099.0), 14949.4, 117.745, 1853125238)
+	__wurst_safe_SetUnitAcquireRange(u20, 200.0)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function CreateNeutralPassiveBuildings(__wurst_stackPos279) 
-	local p16 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos279
+function CreateNeutralPassiveBuildings(__wurst_stackPos287) 
+	local p19 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos287
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	p16 = Player(PLAYER_NEUTRAL_PASSIVE)
-	__wurst_safe_BlzCreateUnitWithSkin(p16, 1851942508, 1536.0, 7360.0, 270.000, 1851942508)
-	__wurst_safe_BlzCreateUnitWithSkin(p16, 1852268900, 2560.0, 13312.0, 270.000, 1852268900)
+	p19 = Player(PLAYER_NEUTRAL_PASSIVE)
+	__wurst_safe_BlzCreateUnitWithSkin(p19, 1851946852, 448.0, 26496.0, 270.000, 1851946852)
+	gg_unit_e007_0064 = __wurst_safe_BlzCreateUnitWithSkin(p19, 1697656887, -(10944.0), 23808.0, 270.000, 1697656887)
+	gg_unit_eshy_0065 = __wurst_safe_BlzCreateUnitWithSkin(p19, 1702062201, -(12384.0), 24224.0, 270.000, 1702062201)
+	gg_unit_eate_0066 = __wurst_safe_BlzCreateUnitWithSkin(p19, 1700885605, -(11552.0), 24608.0, 270.000, 1700885605)
+	gg_unit_e008_0067 = __wurst_safe_BlzCreateUnitWithSkin(p19, 1697656888, -(12256.0), 22496.0, 270.000, 1697656888)
+	gg_unit_e00G_0068 = __wurst_safe_BlzCreateUnitWithSkin(p19, 1697656903, -(12928.0), 25728.0, 270.000, 1697656903)
+	__wurst_safe_BlzCreateUnitWithSkin(p19, 1701670775, -(11360.0), 28000.0, 270.000, 1701670775)
+	gg_unit_e008_0070 = __wurst_safe_BlzCreateUnitWithSkin(p19, 1697656888, -(11808.0), 25248.0, 270.000, 1697656888)
+	gg_unit_e008_0071 = __wurst_safe_BlzCreateUnitWithSkin(p19, 1697656888, -(10912.0), 26016.0, 270.000, 1697656888)
+	gg_unit_emow_0072 = __wurst_safe_BlzCreateUnitWithSkin(p19, 1701670775, -(9504.0), 26464.0, 270.000, 1701670775)
+	gg_unit_emow_0073 = __wurst_safe_BlzCreateUnitWithSkin(p19, 1701670775, -(11808.0), 24352.0, 270.000, 1701670775)
+	gg_unit_e00J_0074 = __wurst_safe_BlzCreateUnitWithSkin(p19, 1697656906, -(5792.0), 23328.0, 270.000, 1697656906)
+	gg_unit_edos_0075 = __wurst_safe_BlzCreateUnitWithSkin(p19, 1701080947, -(8832.0), 27200.0, 270.000, 1701080947)
+	gg_unit_e007_0079 = __wurst_safe_BlzCreateUnitWithSkin(p19, 1697656887, -(4544.0), 23232.0, 270.000, 1697656887)
+	gg_unit_eate_0186 = __wurst_safe_BlzCreateUnitWithSkin(p19, 1700885605, -(8352.0), 7456.0, 270.000, 1700885605)
+	gg_unit_e005_0187 = __wurst_safe_BlzCreateUnitWithSkin(p19, 1697656885, -(7232.0), 8512.0, 270.000, 1697656885)
+	gg_unit_emow_0188 = __wurst_safe_BlzCreateUnitWithSkin(p19, 1701670775, -(8160.0), 8544.0, 270.000, 1701670775)
+	gg_unit_emow_0189 = __wurst_safe_BlzCreateUnitWithSkin(p19, 1701670775, -(8160.0), 8288.0, 270.000, 1701670775)
+	__wurst_safe_BlzCreateUnitWithSkin(p19, 1851942508, 1536.0, 7360.0, 270.000, 1851942508)
+	gg_unit_etrp_0192 = __wurst_safe_BlzCreateUnitWithSkin(p19, 1702130288, -(7136.0), 7584.0, 270.000, 1702130288)
+	gg_unit_eate_0194 = __wurst_safe_BlzCreateUnitWithSkin(p19, 1700885605, -(2144.0), 11232.0, 270.000, 1700885605)
+	gg_unit_eaow_0195 = __wurst_safe_BlzCreateUnitWithSkin(p19, 1700884343, -(2496.0), 10560.0, 270.000, 1700884343)
+	__wurst_safe_BlzCreateUnitWithSkin(p19, 1852268900, 2560.0, 13312.0, 270.000, 1852268900)
+	gg_unit_edos_0342 = __wurst_safe_BlzCreateUnitWithSkin(p19, 1701080947, -(6848.0), 9536.0, 270.000, 1701080947)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function CreatePlayerBuildings(__wurst_stackPos280) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos280
+function CreatePlayerBuildings(__wurst_stackPos288) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos288
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	CreateBuildingsForPlayer0("when calling CreateBuildingsForPlayer0 in war3map, line 1004")
-	CreateBuildingsForPlayer1("when calling CreateBuildingsForPlayer1 in war3map, line 1005")
-	CreateBuildingsForPlayer5("when calling CreateBuildingsForPlayer5 in war3map, line 1006")
-	CreateBuildingsForPlayer18("when calling CreateBuildingsForPlayer18 in war3map, line 1007")
+	CreateBuildingsForPlayer0("when calling CreateBuildingsForPlayer0 in war3map, line 1208")
+	CreateBuildingsForPlayer1("when calling CreateBuildingsForPlayer1 in war3map, line 1209")
+	CreateBuildingsForPlayer3("when calling CreateBuildingsForPlayer3 in war3map, line 1210")
+	CreateBuildingsForPlayer5("when calling CreateBuildingsForPlayer5 in war3map, line 1211")
+	CreateBuildingsForPlayer18("when calling CreateBuildingsForPlayer18 in war3map, line 1212")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function CreatePlayerUnits(__wurst_stackPos281) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos281
+function CreatePlayerUnits(__wurst_stackPos289) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos289
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	CreateUnitsForPlayer0("when calling CreateUnitsForPlayer0 in war3map, line 1012")
-	CreateUnitsForPlayer5("when calling CreateUnitsForPlayer5 in war3map, line 1013")
+	CreateUnitsForPlayer0("when calling CreateUnitsForPlayer0 in war3map, line 1217")
+	CreateUnitsForPlayer3("when calling CreateUnitsForPlayer3 in war3map, line 1218")
+	CreateUnitsForPlayer5("when calling CreateUnitsForPlayer5 in war3map, line 1219")
+	CreateUnitsForPlayer23("when calling CreateUnitsForPlayer23 in war3map, line 1220")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function CreateAllUnits(__wurst_stackPos282) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos282
+function CreateAllUnits(__wurst_stackPos290) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos290
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	CreateNeutralHostileBuildings("when calling CreateNeutralHostileBuildings in war3map, line 1018")
-	CreateNeutralPassiveBuildings("when calling CreateNeutralPassiveBuildings in war3map, line 1019")
-	CreatePlayerBuildings("when calling CreatePlayerBuildings in war3map, line 1020")
-	CreateNeutralHostile("when calling CreateNeutralHostile in war3map, line 1021")
-	CreatePlayerUnits("when calling CreatePlayerUnits in war3map, line 1022")
+	CreateNeutralHostileBuildings("when calling CreateNeutralHostileBuildings in war3map, line 1225")
+	CreateNeutralPassiveBuildings("when calling CreateNeutralPassiveBuildings in war3map, line 1226")
+	CreatePlayerBuildings("when calling CreatePlayerBuildings in war3map, line 1227")
+	CreateNeutralHostile("when calling CreateNeutralHostile in war3map, line 1228")
+	CreatePlayerUnits("when calling CreatePlayerUnits in war3map, line 1229")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function CreateRegions(__wurst_stackPos283) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos283
+function CreateRegions(__wurst_stackPos291) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos291
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Rect(-(4960.0), -(6336.0), -(4512.0), -(5984.0))
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function Trig_Other_Actions(__wurst_stackPos284) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos284
+function Trig_testGate_Actions(__wurst_stackPos292) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos292
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	udg_testGate = gg_dest_ZTg3_0761
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function InitTrig_testGate(__wurst_stackPos293) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos293
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	gg_trg_testGate = CreateTrigger()
+	__wurst_safe_TriggerAddAction(gg_trg_testGate, function (...) 
+			xpcall(function (...) 
+					bridge_Trig_testGate_Actions(...)
+				end, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua callback error: " .. tostring(err)) xpcall(function() error1(tostring(err), "<lua error>") end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) BJDebugMsg("while reporting: " .. tostring(err))  end) end, ...)
+		end)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function Trig_auberdine_Actions(__wurst_stackPos294) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos294
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	__wurst_safe_GroupAddUnitSimple(gg_unit_e00J_0074, udg_darkshoreAuberdineBuildings)
+	__wurst_safe_GroupAddUnitSimple(gg_unit_e008_0080, udg_darkshoreAuberdineBuildings)
+	__wurst_safe_GroupAddUnitSimple(gg_unit_e008_0081, udg_darkshoreAuberdineBuildings)
+	__wurst_safe_GroupAddUnitSimple(gg_unit_e007_0079, udg_darkshoreAuberdineBuildings)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function InitTrig_auberdine(__wurst_stackPos295) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos295
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	gg_trg_auberdine = CreateTrigger()
+	__wurst_safe_TriggerAddAction(gg_trg_auberdine, function (...) 
+			xpcall(function (...) 
+					bridge_Trig_auberdine_Actions(...)
+				end, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua callback error: " .. tostring(err)) xpcall(function() error1(tostring(err), "<lua error>") end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) BJDebugMsg("while reporting: " .. tostring(err))  end) end, ...)
+		end)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function Trig_astranaar_Actions(__wurst_stackPos296) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos296
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	__wurst_safe_GroupAddUnitSimple(gg_unit_e005_0187, udg_ashenvaleAstranaarBuildings)
+	__wurst_safe_GroupAddUnitSimple(gg_unit_emow_0188, udg_ashenvaleAstranaarBuildings)
+	__wurst_safe_GroupAddUnitSimple(gg_unit_emow_0189, udg_ashenvaleAstranaarBuildings)
+	__wurst_safe_GroupAddUnitSimple(gg_unit_eate_0186, udg_ashenvaleAstranaarBuildings)
+	__wurst_safe_GroupAddUnitSimple(gg_unit_etrp_0192, udg_ashenvaleAstranaarBuildings)
+	__wurst_safe_GroupAddUnitSimple(gg_unit_etrp_0191, udg_ashenvaleAstranaarBuildings)
+	__wurst_safe_GroupAddUnitSimple(gg_unit_edos_0342, udg_ashenvaleAstranaarBuildings)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function InitTrig_astranaar(__wurst_stackPos297) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos297
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	gg_trg_astranaar = CreateTrigger()
+	__wurst_safe_TriggerAddAction(gg_trg_astranaar, function (...) 
+			xpcall(function (...) 
+					bridge_Trig_astranaar_Actions(...)
+				end, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua callback error: " .. tostring(err)) xpcall(function() error1(tostring(err), "<lua error>") end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) BJDebugMsg("while reporting: " .. tostring(err))  end) end, ...)
+		end)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function Trig_ashenvaleChimaeraFall_Actions(__wurst_stackPos298) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos298
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	__wurst_safe_GroupAddUnitSimple(gg_unit_eate_0194, udg_ashenvaleChimaeraFallBuilding)
+	__wurst_safe_GroupAddUnitSimple(gg_unit_eaow_0195, udg_ashenvaleChimaeraFallBuilding)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function InitTrig_ashenvaleChimaeraFall(__wurst_stackPos299) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos299
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	gg_trg_ashenvaleChimaeraFall = CreateTrigger()
+	__wurst_safe_TriggerAddAction(gg_trg_ashenvaleChimaeraFall, function (...) 
+			xpcall(function (...) 
+					bridge_Trig_ashenvaleChimaeraFall_Actions(...)
+				end, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua callback error: " .. tostring(err)) xpcall(function() error1(tostring(err), "<lua error>") end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) BJDebugMsg("while reporting: " .. tostring(err))  end) end, ...)
+		end)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function Trig_darnassus_Actions(__wurst_stackPos300) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos300
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	udg_darnassusGate = gg_dest_LTe2_0270
+	__wurst_safe_GroupAddUnitSimple(gg_unit_edos_0075, udg_darnassusBuildings)
+	__wurst_safe_GroupAddUnitSimple(gg_unit_emow_0072, udg_darnassusBuildings)
+	__wurst_safe_GroupAddUnitSimple(gg_unit_eate_0066, udg_darnassusBuildings)
+	__wurst_safe_GroupAddUnitSimple(gg_unit_emow_0073, udg_darnassusBuildings)
+	__wurst_safe_GroupAddUnitSimple(gg_unit_e007_0064, udg_darnassusBuildings)
+	__wurst_safe_GroupAddUnitSimple(gg_unit_eshy_0065, udg_darnassusBuildings)
+	__wurst_safe_GroupAddUnitSimple(gg_unit_e008_0067, udg_darnassusBuildings)
+	__wurst_safe_GroupAddUnitSimple(gg_unit_e008_0070, udg_darnassusTeldrassilBuildings)
+	__wurst_safe_GroupAddUnitSimple(gg_unit_e008_0071, udg_darnassusTeldrassilBuildings)
+	__wurst_safe_GroupAddUnitSimple(gg_unit_e00G_0068, udg_darnassusTeldrassilBuildings)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function InitTrig_darnassus(__wurst_stackPos301) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos301
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	gg_trg_darnassus = CreateTrigger()
+	__wurst_safe_TriggerAddAction(gg_trg_darnassus, function (...) 
+			xpcall(function (...) 
+					bridge_Trig_darnassus_Actions(...)
+				end, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua callback error: " .. tostring(err)) xpcall(function() error1(tostring(err), "<lua error>") end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) BJDebugMsg("while reporting: " .. tostring(err))  end) end, ...)
+		end)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function Trig_Other_Actions(__wurst_stackPos302) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos302
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	udg_townHall = gg_unit_etol_0001
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function InitTrig_Other(__wurst_stackPos285) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos285
+function InitTrig_Other(__wurst_stackPos303) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos303
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	gg_trg_Other = CreateTrigger()
 	__wurst_safe_TriggerAddAction(gg_trg_Other, function (...) 
@@ -3847,40 +4198,33 @@ function InitTrig_Other(__wurst_stackPos285)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function Trig_ControlPointInitialVariables_Actions(__wurst_stackPos286) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos286
+function Trig_ControlPointInitialVariables_Actions(__wurst_stackPos304) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos304
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	udg_mountHyjal = gg_unit_h000_0407
-	udg_mountHyjalGrove = gg_unit_h001_0008
-	udg_mountHyjalTown = gg_unit_h003_0016
-	udg_winterspringNorth = gg_unit_h006_0015
-	udg_winterspringRoost = gg_unit_h008_0011
-	udg_moongladeEast = gg_unit_h009_0014
-	udg_moongladeWest = gg_unit_h00A_0009
-	udg_felwoodCenter = gg_unit_h00E_0013
-	udg_felwoodSouth = gg_unit_h00D_0010
 	udg_ashenvaleAstranaar = gg_unit_h00C_0174
 	udg_ashenvaleBeachNorth = gg_unit_h00F_0163
 	udg_ashenvaleBeachSouth = gg_unit_h00G_0185
 	udg_ashenvaleChimaerasFall = gg_unit_h00O_0019
-	udg_ashenvaleChimaerasRest = gg_unit_h00H_0183
 	udg_ashenvaleCrossing = gg_unit_h00I_0135
 	udg_ashenvaleForestCenter = gg_unit_h00L_0184
-	udg_ashenvaleForestEast = gg_unit_h00K_0176
-	udg_ashenvaleForestNorth = gg_unit_h00M_0136
-	udg_ashenvaleForestSouth = gg_unit_cp00_0425
-	udg_ashenvaleForestWest = gg_unit_h00J_0177
-	udg_ashenvaleGraniteDen = gg_unit_h00N_0200
 	udg_ashenvaleRoost = gg_unit_h00P_0178
 	udg_ashenvaleVentureCo = gg_unit_h00Q_0197
-	udg_ashenvaleWarsongSouth = gg_unit_h00S_0179
 	udg_ashenvaleWarsongCenter = gg_unit_h00U_0175
-	udg_ashenvaleWarsongNorth = gg_unit_h00R_0196
+	udg_ashenvaleWarsongSouth = gg_unit_h00S_0179
+	udg_felwoodCenter = gg_unit_h00E_0013
+	udg_felwoodSouth = gg_unit_h00D_0010
+	udg_darnassus = gg_unit_h00H_0077
+	udg_darnassusTeldrassil = gg_unit_h00B_0076
+	udg_darkshoreAuberdine = gg_unit_h00R_0078
+	udg_mountHyjal = gg_unit_h000_0407
+	udg_mountHyjalGrove = gg_unit_h001_0008
+	udg_mountHyjalTown = gg_unit_h003_0016
+	udg_winterspringRoost = gg_unit_h007_0011
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function InitTrig_ControlPointInitialVariables(__wurst_stackPos287) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos287
+function InitTrig_ControlPointInitialVariables(__wurst_stackPos305) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos305
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	gg_trg_ControlPointInitialVariables = CreateTrigger()
 	__wurst_safe_TriggerAddAction(gg_trg_ControlPointInitialVariables, function (...) 
@@ -3891,17 +4235,27 @@ function InitTrig_ControlPointInitialVariables(__wurst_stackPos287)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function InitCustomTriggers(__wurst_stackPos288) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos288
+function InitCustomTriggers(__wurst_stackPos306) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos306
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	InitTrig_Other("when calling InitTrig_Other in war3map, line 1097")
-	InitTrig_ControlPointInitialVariables("when calling InitTrig_ControlPointInitialVariables in war3map, line 1098")
+	InitTrig_testGate("when calling InitTrig_testGate in war3map, line 1388")
+	InitTrig_auberdine("when calling InitTrig_auberdine in war3map, line 1389")
+	InitTrig_astranaar("when calling InitTrig_astranaar in war3map, line 1390")
+	InitTrig_ashenvaleChimaeraFall("when calling InitTrig_ashenvaleChimaeraFall in war3map, line 1391")
+	InitTrig_darnassus("when calling InitTrig_darnassus in war3map, line 1392")
+	InitTrig_Other("when calling InitTrig_Other in war3map, line 1393")
+	InitTrig_ControlPointInitialVariables("when calling InitTrig_ControlPointInitialVariables in war3map, line 1394")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function RunInitializationTriggers(__wurst_stackPos289) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos289
+function RunInitializationTriggers(__wurst_stackPos307) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos307
 	wurst_stack_depth = (wurst_stack_depth + 1)
+	__wurst_safe_ConditionalTriggerExecute(gg_trg_testGate)
+	__wurst_safe_ConditionalTriggerExecute(gg_trg_auberdine)
+	__wurst_safe_ConditionalTriggerExecute(gg_trg_astranaar)
+	__wurst_safe_ConditionalTriggerExecute(gg_trg_ashenvaleChimaeraFall)
+	__wurst_safe_ConditionalTriggerExecute(gg_trg_darnassus)
 	__wurst_safe_ConditionalTriggerExecute(gg_trg_Other)
 	__wurst_safe_ConditionalTriggerExecute(gg_trg_ControlPointInitialVariables)
 	wurst_stack_depth = (wurst_stack_depth - 1)
@@ -3909,10 +4263,73 @@ end
 
 function InitCustomPlayerSlots() 
 	__wurst_safe_SetPlayerStartLocation(Player(0), 0)
+	__wurst_safe_ForcePlayerStartLocation(Player(0), 0)
 	__wurst_safe_SetPlayerColor(Player(0), ConvertPlayerColor(0))
 	__wurst_safe_SetPlayerRacePreference(Player(0), RACE_PREF_HUMAN)
 	__wurst_safe_SetPlayerRaceSelectable(Player(0), true)
 	__wurst_safe_SetPlayerController(Player(0), MAP_CONTROL_USER)
+	__wurst_safe_SetPlayerStartLocation(Player(1), 1)
+	__wurst_safe_ForcePlayerStartLocation(Player(1), 1)
+	__wurst_safe_SetPlayerColor(Player(1), ConvertPlayerColor(1))
+	__wurst_safe_SetPlayerRacePreference(Player(1), RACE_PREF_ORC)
+	__wurst_safe_SetPlayerRaceSelectable(Player(1), true)
+	__wurst_safe_SetPlayerController(Player(1), MAP_CONTROL_USER)
+	__wurst_safe_SetPlayerStartLocation(Player(2), 2)
+	__wurst_safe_ForcePlayerStartLocation(Player(2), 2)
+	__wurst_safe_SetPlayerColor(Player(2), ConvertPlayerColor(2))
+	__wurst_safe_SetPlayerRacePreference(Player(2), RACE_PREF_UNDEAD)
+	__wurst_safe_SetPlayerRaceSelectable(Player(2), true)
+	__wurst_safe_SetPlayerController(Player(2), MAP_CONTROL_USER)
+	__wurst_safe_SetPlayerStartLocation(Player(3), 3)
+	__wurst_safe_ForcePlayerStartLocation(Player(3), 3)
+	__wurst_safe_SetPlayerColor(Player(3), ConvertPlayerColor(3))
+	__wurst_safe_SetPlayerRacePreference(Player(3), RACE_PREF_NIGHTELF)
+	__wurst_safe_SetPlayerRaceSelectable(Player(3), true)
+	__wurst_safe_SetPlayerController(Player(3), MAP_CONTROL_USER)
+end
+
+function InitCustomTeams() 
+	__wurst_safe_SetPlayerTeam(Player(0), 0)
+	__wurst_safe_SetPlayerTeam(Player(1), 0)
+	__wurst_safe_SetPlayerTeam(Player(2), 0)
+	__wurst_safe_SetPlayerTeam(Player(3), 0)
+	__wurst_safe_SetPlayerAllianceStateVisionBJ(Player(0), Player(1), true)
+	__wurst_safe_SetPlayerAllianceStateVisionBJ(Player(0), Player(2), true)
+	__wurst_safe_SetPlayerAllianceStateVisionBJ(Player(0), Player(3), true)
+	__wurst_safe_SetPlayerAllianceStateVisionBJ(Player(1), Player(0), true)
+	__wurst_safe_SetPlayerAllianceStateVisionBJ(Player(1), Player(2), true)
+	__wurst_safe_SetPlayerAllianceStateVisionBJ(Player(1), Player(3), true)
+	__wurst_safe_SetPlayerAllianceStateVisionBJ(Player(2), Player(0), true)
+	__wurst_safe_SetPlayerAllianceStateVisionBJ(Player(2), Player(1), true)
+	__wurst_safe_SetPlayerAllianceStateVisionBJ(Player(2), Player(3), true)
+	__wurst_safe_SetPlayerAllianceStateVisionBJ(Player(3), Player(0), true)
+	__wurst_safe_SetPlayerAllianceStateVisionBJ(Player(3), Player(1), true)
+	__wurst_safe_SetPlayerAllianceStateVisionBJ(Player(3), Player(2), true)
+	__wurst_safe_SetPlayerAllianceStateControlBJ(Player(0), Player(1), true)
+	__wurst_safe_SetPlayerAllianceStateControlBJ(Player(0), Player(2), true)
+	__wurst_safe_SetPlayerAllianceStateControlBJ(Player(0), Player(3), true)
+	__wurst_safe_SetPlayerAllianceStateControlBJ(Player(1), Player(0), true)
+	__wurst_safe_SetPlayerAllianceStateControlBJ(Player(1), Player(2), true)
+	__wurst_safe_SetPlayerAllianceStateControlBJ(Player(1), Player(3), true)
+	__wurst_safe_SetPlayerAllianceStateControlBJ(Player(2), Player(0), true)
+	__wurst_safe_SetPlayerAllianceStateControlBJ(Player(2), Player(1), true)
+	__wurst_safe_SetPlayerAllianceStateControlBJ(Player(2), Player(3), true)
+	__wurst_safe_SetPlayerAllianceStateControlBJ(Player(3), Player(0), true)
+	__wurst_safe_SetPlayerAllianceStateControlBJ(Player(3), Player(1), true)
+	__wurst_safe_SetPlayerAllianceStateControlBJ(Player(3), Player(2), true)
+end
+
+function InitAllyPriorities() 
+	SetStartLocPrioCount(0, 2)
+	__wurst_safe_SetStartLocPrio(0, 0, 1, MAP_LOC_PRIO_LOW)
+	__wurst_safe_SetStartLocPrio(0, 1, 3, MAP_LOC_PRIO_HIGH)
+	SetStartLocPrioCount(1, 2)
+	__wurst_safe_SetStartLocPrio(1, 0, 0, MAP_LOC_PRIO_LOW)
+	__wurst_safe_SetStartLocPrio(1, 1, 2, MAP_LOC_PRIO_HIGH)
+	SetStartLocPrioCount(2, 1)
+	__wurst_safe_SetStartLocPrio(2, 0, 1, MAP_LOC_PRIO_HIGH)
+	SetStartLocPrioCount(3, 1)
+	__wurst_safe_SetStartLocPrio(3, 0, 0, MAP_LOC_PRIO_HIGH)
 end
 
 function main() 
@@ -3923,67 +4340,92 @@ function main()
 	udg_mountHyjal = nil
 	udg_mountHyjalGrove = nil
 	udg_mountHyjalTown = nil
-	udg_mountHyjalCrypt = nil
-	udg_winterspringCenter = nil
-	udg_winterspringNorth = nil
-	udg_winterspringSouth = nil
-	udg_winterspringDen = nil
 	udg_winterspringRoost = nil
-	udg_moongladeWest = nil
-	udg_moongladeEast = nil
-	udg_felwoodNorth = nil
 	udg_felwoodCenter = nil
 	udg_felwoodSouth = nil
 	udg_ashenvaleChimaerasFall = nil
 	udg_ashenvaleAstranaar = nil
-	udg_ashenvaleForestEast = nil
 	udg_ashenvaleCrossing = nil
-	udg_ashenvaleChimaerasRest = nil
 	udg_ashenvaleBeachNorth = nil
-	udg_ashenvaleForestWest = nil
 	udg_ashenvaleForestCenter = nil
-	udg_ashenvaleGraniteDen = nil
 	udg_ashenvaleWarsongSouth = nil
-	udg_ashenvaleWarsongNorth = nil
 	udg_ashenvaleVentureCo = nil
 	udg_ashenvaleRoost = nil
 	udg_ashenvaleBeachSouth = nil
-	udg_ashenvaleForestNorth = nil
-	udg_winterspringFactory = nil
-	udg_ashenvaleForestSouth = nil
 	udg_ashenvaleWarsongCenter = nil
+	udg_darkshoreAuberdine = nil
+	udg_darnassus = nil
+	udg_darnassusTeldrassil = nil
+	udg_darkshoreAuberdineBuildings = nil
+	udg_darnassusBuildings = nil
+	udg_darnassusTeldrassilBuildings = nil
+	udg_darnassusGate = nil
+	udg_ashenvaleAstranaarBuildings = nil
+	udg_ashenvaleChimaeraFallBuilding = nil
+	udg_testGate = nil
 	gg_trg_Other = nil
 	gg_trg_ControlPointInitialVariables = nil
 	gg_unit_h00O_0019 = nil
-	gg_unit_h006_0015 = nil
-	gg_unit_h008_0011 = nil
 	gg_unit_h003_0016 = nil
 	gg_unit_h00E_0013 = nil
-	gg_unit_h009_0014 = nil
-	gg_unit_h00A_0009 = nil
 	gg_unit_h001_0008 = nil
 	gg_unit_h000_0407 = nil
 	gg_unit_etol_0001 = nil
-	gg_unit_h00K_0176 = nil
-	gg_unit_cp00_0425 = nil
 	gg_unit_h00L_0184 = nil
 	gg_unit_h00G_0185 = nil
 	gg_unit_h00P_0178 = nil
-	gg_unit_h00H_0183 = nil
-	gg_unit_h00N_0200 = nil
-	gg_unit_h00M_0136 = nil
 	gg_unit_h00F_0163 = nil
 	gg_unit_h00Q_0197 = nil
 	gg_unit_h00I_0135 = nil
 	gg_unit_h00D_0010 = nil
-	gg_unit_h00J_0177 = nil
 	gg_unit_h00C_0174 = nil
 	gg_unit_h00U_0175 = nil
-	gg_unit_h00R_0196 = nil
 	gg_unit_h00S_0179 = nil
+	gg_unit_h00H_0077 = nil
+	gg_unit_h00B_0076 = nil
+	gg_unit_h00R_0078 = nil
+	gg_unit_h007_0011 = nil
+	gg_trg_auberdine = nil
+	gg_unit_e00J_0074 = nil
+	gg_unit_e008_0080 = nil
+	gg_unit_e008_0081 = nil
+	gg_unit_e007_0079 = nil
+	gg_trg_darnassus = nil
+	gg_unit_edos_0075 = nil
+	gg_unit_emow_0072 = nil
+	gg_unit_eate_0066 = nil
+	gg_unit_emow_0073 = nil
+	gg_unit_e007_0064 = nil
+	gg_unit_eshy_0065 = nil
+	gg_unit_e008_0067 = nil
+	gg_unit_e008_0070 = nil
+	gg_unit_e008_0071 = nil
+	gg_unit_e00G_0068 = nil
+	gg_dest_LTe2_0270 = nil
+	gg_trg_astranaar = nil
+	gg_unit_e005_0187 = nil
+	gg_unit_emow_0188 = nil
+	gg_unit_emow_0189 = nil
+	gg_unit_eate_0186 = nil
+	gg_unit_etrp_0192 = nil
+	gg_unit_etrp_0191 = nil
+	gg_unit_edos_0342 = nil
+	gg_trg_ashenvaleChimaeraFall = nil
+	gg_unit_eate_0194 = nil
+	gg_unit_eaow_0195 = nil
+	gg_trg_testGate = nil
+	gg_dest_ZTg3_0761 = nil
 	Abilities_tranquility = ""
 	Angle_DEGTORAD = 0.
 	Angle_RADTODEG = 0.
+	AssignBuildings_astranaar = nil
+	AssignBuildings_chimaerasFall = nil
+	AssignBuildings_auberdine = nil
+	AssignBuildings_darnassus = nil
+	AssignBuildings_teldrassil = nil
+	AssignBuildings_neutralBuildingCps = nil
+	AssignBuildings_cpBuildingGroups = nil
+	AssignBuildings_neutralBuildingPlayers = nil
 	Basics_ANIMATION_PERIOD = 0.
 	Basics_HEIGHT_ENABLER = 0
 	Basics_DUMMY_PLAYER = nil
@@ -4103,6 +4545,11 @@ function main()
 		end)
 	Execute_tempCallbacksCount = 0
 	GameTimer_currentTime = 0.
+	GateLogic_darnassusGate = nil
+	GateLogic_testGate = nil
+	GateLogic_cpsWithGates = nil
+	GateLogic_cpsWithGatesMap = nil
+	GateLogic_gateList = nil
 	GroupUtils_GROUP_NUMBER_LIMIT = 0
 	GroupUtils_START_CREATE_GROUPS = 0
 	GroupUtils_used = nil
@@ -4577,6 +5024,8 @@ function main()
 	HashMap.HashMap_has = HashMap_HashMap_has
 	HashMap.HashMap_hasInt = Table_Table_hasInt
 	HashMap.HashMap_hasString = Table_Table_hasString
+	HashMap.HashMap_loadDestructable = Table_Table_loadDestructable
+	HashMap.HashMap_loadGroup = Table_Table_loadGroup
 	HashMap.HashMap_loadInt = Table_Table_loadInt
 	HashMap.HashMap_loadString = Table_Table_loadString
 	HashMap.HashMap_loadTrigger = Table_Table_loadTrigger
@@ -4589,6 +5038,8 @@ function main()
 	HashMap.HashMap_saveString = Table_Table_saveString
 	HashMap.Table_Table_hasInt = Table_Table_hasInt
 	HashMap.Table_Table_hasString = Table_Table_hasString
+	HashMap.Table_Table_loadDestructable = Table_Table_loadDestructable
+	HashMap.Table_Table_loadGroup = Table_Table_loadGroup
 	HashMap.Table_Table_loadInt = Table_Table_loadInt
 	HashMap.Table_Table_loadString = Table_Table_loadString
 	HashMap.Table_Table_loadTrigger = Table_Table_loadTrigger
@@ -4601,6 +5052,8 @@ function main()
 	HashMap.Table_has = HashMap_HashMap_has
 	HashMap.Table_hasInt = Table_Table_hasInt
 	HashMap.Table_hasString = Table_Table_hasString
+	HashMap.Table_loadDestructable = Table_Table_loadDestructable
+	HashMap.Table_loadGroup = Table_Table_loadGroup
 	HashMap.Table_loadInt = Table_Table_loadInt
 	HashMap.Table_loadString = Table_Table_loadString
 	HashMap.Table_loadTrigger = Table_Table_loadTrigger
@@ -5139,6 +5592,8 @@ function main()
 	CallbackSingle_doAfter_onCast_SummonTreant.__typeId__ = 21
 	Table.Table_Table_hasInt = Table_Table_hasInt
 	Table.Table_Table_hasString = Table_Table_hasString
+	Table.Table_Table_loadDestructable = Table_Table_loadDestructable
+	Table.Table_Table_loadGroup = Table_Table_loadGroup
 	Table.Table_Table_loadInt = Table_Table_loadInt
 	Table.Table_Table_loadString = Table_Table_loadString
 	Table.Table_Table_loadTrigger = Table_Table_loadTrigger
@@ -5149,6 +5604,8 @@ function main()
 	Table.Table_Table_saveString = Table_Table_saveString
 	Table.Table_hasInt = Table_Table_hasInt
 	Table.Table_hasString = Table_Table_hasString
+	Table.Table_loadDestructable = Table_Table_loadDestructable
+	Table.Table_loadGroup = Table_Table_loadGroup
 	Table.Table_loadInt = Table_Table_loadInt
 	Table.Table_loadString = Table_Table_loadString
 	Table.Table_loadTrigger = Table_Table_loadTrigger
@@ -5258,12 +5715,13 @@ function main()
 	SetAmbientDaySound("AshenvaleDay")
 	SetAmbientNightSound("AshenvaleNight")
 	SetMapMusic("Music", true, 0)
-	CreateRegions("when calling CreateRegions in war3map, line 1144")
-	CreateAllUnits("when calling CreateAllUnits in war3map, line 1145")
+	CreateRegions("when calling CreateRegions in war3map, line 1518")
+	CreateAllDestructables("when calling CreateAllDestructables in war3map, line 1519")
+	CreateAllUnits("when calling CreateAllUnits in war3map, line 1520")
 	InitBlizzard()
-	InitGlobals("when calling InitGlobals in war3map, line 1147")
-	InitCustomTriggers("when calling InitCustomTriggers in war3map, line 1148")
-	RunInitializationTriggers("when calling RunInitializationTriggers in war3map, line 1149")
+	InitGlobals("when calling InitGlobals in war3map, line 1522")
+	InitCustomTriggers("when calling InitCustomTriggers in war3map, line 1523")
+	RunInitializationTriggers("when calling RunInitializationTriggers in war3map, line 1524")
 	do
 	  local __wurst_init_ok = xpcall(init_Abilities, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() error1(tostring(err), "<lua error>") end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
 	  if not __wurst_init_ok then
@@ -5469,6 +5927,12 @@ function main()
 	  end
 	end
 	do
+	  local __wurst_init_ok = xpcall(init_AssignBuildings, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() error1(tostring(err), "<lua error>") end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
+	  if not __wurst_init_ok then
+	    error1("Could not initialize package AssignBuildings.", "<lua error>")
+	  end
+	end
+	do
 	  local __wurst_init_ok = xpcall(init_Icons, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() error1(tostring(err), "<lua error>") end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
 	  if not __wurst_init_ok then
 	    error1("Could not initialize package Icons.", "<lua error>")
@@ -5631,6 +6095,12 @@ function main()
 	  end
 	end
 	do
+	  local __wurst_init_ok = xpcall(init_GateLogic, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() error1(tostring(err), "<lua error>") end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
+	  if not __wurst_init_ok then
+	    error1("Could not initialize package GateLogic.", "<lua error>")
+	  end
+	end
+	do
 	  local __wurst_init_ok = xpcall(init_HeroTrainer, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua init error: " .. tostring(err)) xpcall(function() error1(tostring(err), "<lua error>") end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) end) end)
 	  if not __wurst_init_ok then
 	    error1("Could not initialize package HeroTrainer.", "<lua error>")
@@ -5731,72 +6201,160 @@ end
 function config() 
 	SetMapName("TRIGSTR_008")
 	SetMapDescription("")
-	SetPlayers(1)
-	SetTeams(1)
-	__wurst_safe_SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
+	SetPlayers(4)
+	SetTeams(4)
+	__wurst_safe_SetGamePlacement(MAP_PLACEMENT_TEAMS_TOGETHER)
 	DefineStartLocation(0, 1536.0, 18752.0)
+	DefineStartLocation(1, -(4032.0), -(64.0))
+	DefineStartLocation(2, -(3776.0), -(14976.0))
+	DefineStartLocation(3, -(9088.0), 26816.0)
 	InitCustomPlayerSlots()
-	__wurst_safe_SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
-	InitGenericPlayerSlots()
+	InitCustomTeams()
+	InitAllyPriorities()
 end
 
-function init_Abilities(__wurst_stackPos291) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos291
+function init_Abilities(__wurst_stackPos309) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos309
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Abilities_tranquility = "Abilities\\Spells\\NightElf\\Tranquility\\Tranquility.mdx"
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_AbilityIds(__wurst_stackPos292) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos292
+function init_AbilityIds(__wurst_stackPos310) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos310
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_AbilityObjEditing(__wurst_stackPos324) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos324
+function init_AbilityObjEditing(__wurst_stackPos342) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos342
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Angle(__wurst_stackPos296) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos296
+function init_Angle(__wurst_stackPos314) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos314
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Angle_DEGTORAD = 0.017453293
 	Angle_RADTODEG = 57.295779513
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function angle_degrees(this228, __wurst_stackPos368) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos368
+function angle_degrees(this232, __wurst_stackPos388) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos388
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return (this228[1] * Angle_RADTODEG)
+	return (this232[1] * Angle_RADTODEG)
 end
 
-function angle_radians(this229, __wurst_stackPos369) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos369
+function angle_radians(this233, __wurst_stackPos389) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos389
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return this229[1]
+	return this233[1]
 end
 
-function real_fromDeg(this230, __wurst_stackPos370) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos370
+function real_fromDeg(this234, __wurst_stackPos390) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos390
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return ({(this230 * Angle_DEGTORAD), })
+	return ({(this234 * Angle_DEGTORAD), })
 end
 
-function real_asAngleRadians(this231, __wurst_stackPos371) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos371
+function real_asAngleRadians(this235, __wurst_stackPos391) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos391
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return ({this231, })
+	return ({this235, })
 end
 
-function init_Basics(__wurst_stackPos304) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos304
+function init_AssignBuildings(__wurst_stackPos343) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos343
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	AssignBuildings_astranaar = udg_ashenvaleAstranaarBuildings
+	AssignBuildings_chimaerasFall = udg_ashenvaleChimaeraFallBuilding
+	AssignBuildings_auberdine = udg_darkshoreAuberdineBuildings
+	AssignBuildings_darnassus = udg_darnassusBuildings
+	AssignBuildings_teldrassil = udg_darnassusTeldrassilBuildings
+	AssignBuildings_neutralBuildingCps = CreateGroup()
+	AssignBuildings_cpBuildingGroups = HashMap_new_HashMap("when calling new_HashMap in AssignBuildings, line 15")
+	AssignBuildings_neutralBuildingPlayers = HashMap_new_HashMap("when calling new_HashMap in AssignBuildings, line 16")
+	setupTables("when calling setupTables in AssignBuildings, line 57")
+	neutralTrigger("when calling neutralTrigger in AssignBuildings, line 58")
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function setupTables(__wurst_stackPos392) 
+	local i6 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos392
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	group_add1(AssignBuildings_neutralBuildingCps, "when calling add in AssignBuildings, line 23", udg_ashenvaleAstranaar, udg_ashenvaleChimaerasFall, udg_darkshoreAuberdine, udg_darnassus, udg_darnassusTeldrassil)
+	HashMap_HashMap_put(AssignBuildings_cpBuildingGroups, __wurst_objectToIndex(udg_ashenvaleAstranaar), __wurst_objectToIndex(AssignBuildings_astranaar), "when calling put in AssignBuildings, line 30")
+	HashMap_HashMap_put(AssignBuildings_cpBuildingGroups, __wurst_objectToIndex(udg_ashenvaleChimaerasFall), __wurst_objectToIndex(AssignBuildings_chimaerasFall), "when calling put in AssignBuildings, line 31")
+	HashMap_HashMap_put(AssignBuildings_cpBuildingGroups, __wurst_objectToIndex(udg_darkshoreAuberdine), __wurst_objectToIndex(AssignBuildings_auberdine), "when calling put in AssignBuildings, line 32")
+	HashMap_HashMap_put(AssignBuildings_cpBuildingGroups, __wurst_objectToIndex(udg_darnassus), __wurst_objectToIndex(AssignBuildings_darnassus), "when calling put in AssignBuildings, line 33")
+	HashMap_HashMap_put(AssignBuildings_cpBuildingGroups, __wurst_objectToIndex(udg_darnassusTeldrassil), __wurst_objectToIndex(AssignBuildings_teldrassil), "when calling put in AssignBuildings, line 34")
+	i6 = 0
+	while true do
+		if (i6 > 23) then
+			break
+		end
+		HashMap_HashMap_put(AssignBuildings_neutralBuildingPlayers, playerToIndex(Player_players[i6], "when calling playerToIndex in AssignBuildings, line 37"), booleanToIndex(false, "when calling booleanToIndex in AssignBuildings, line 37"), "when calling put in AssignBuildings, line 37")
+		i6 = (i6 + 1)
+	end
+	HashMap_HashMap_put(AssignBuildings_neutralBuildingPlayers, playerToIndex(Player_players[0], "when calling playerToIndex in AssignBuildings, line 38"), booleanToIndex(true, "when calling booleanToIndex in AssignBuildings, line 38"), "when calling put in AssignBuildings, line 38")
+	HashMap_HashMap_put(AssignBuildings_neutralBuildingPlayers, playerToIndex(Player_players[18], "when calling playerToIndex in AssignBuildings, line 39"), booleanToIndex(true, "when calling booleanToIndex in AssignBuildings, line 39"), "when calling put in AssignBuildings, line 39")
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function neutralTrigger(__wurst_stackPos393) 
+	local receiver17 = nil
+	local receiver18 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos393
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	receiver17 = CreateTrigger()
+	trigger_registerUnitEvent(receiver17, udg_ashenvaleChimaerasFall, EVENT_UNIT_CHANGE_OWNER, "when calling registerUnitEvent in AssignBuildings, line 43")
+	receiver18 = receiver17
+	trigger_addAction(receiver18, function (...) 
+			xpcall(function (...) 
+					bridge_code__addAction_AssignBuildings(...)
+				end, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua callback error: " .. tostring(err)) xpcall(function() error1(tostring(err), "<lua error>") end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) BJDebugMsg("while reporting: " .. tostring(err))  end) end, ...)
+		end, "when calling addAction in AssignBuildings, line 44")
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function code__addAction_AssignBuildings(__wurst_stackPos397) 
+	local u21 = nil
+	local newOwner = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos397
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	u21 = GetTriggerUnit()
+	newOwner = unit_getOwner(u21, "when calling getOwner in AssignBuildings, line 46")
+	if (group_has(AssignBuildings_neutralBuildingCps, u21, "when calling has in AssignBuildings, line 47") and (booleanFromIndex(intEnsure(HashMap_HashMap_get(AssignBuildings_neutralBuildingPlayers, playerToIndex(newOwner, "when calling playerToIndex in AssignBuildings, line 47"), "when calling get in AssignBuildings, line 47")), "when calling booleanFromIndex in AssignBuildings, line 47") == true)) then
+		assignBuilding(__wurst_objectFromIndex(intEnsure(HashMap_HashMap_get(AssignBuildings_cpBuildingGroups, __wurst_objectToIndex(u21), "when calling get in AssignBuildings, line 48"))), newOwner, "when calling assignBuilding in AssignBuildings, line 48")
+	end
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function assignBuilding(g4, p20, __wurst_stackPos399) 
+	local iterator14 = nil
+	local u23 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos399
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	iterator14 = group_iterator(g4, "when calling iterator in AssignBuildings, line 53")
+	while true do
+		if not(GroupIterator_GroupIterator_hasNext(iterator14, "when calling hasNext in AssignBuildings, line 53")) then
+			break
+		end
+		u23 = GroupIterator_GroupIterator_next(iterator14, "when calling next in AssignBuildings, line 53")
+		__wurst_safe_SetUnitOwner(u23, p20, true)
+	end
+	GroupIterator_GroupIterator_close(iterator14, "when calling close in AssignBuildings, line 53")
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function init_Basics(__wurst_stackPos322) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos322
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Basics_ANIMATION_PERIOD = 0.030
 	Basics_HEIGHT_ENABLER = 1097691750
@@ -5804,50 +6362,50 @@ function init_Basics(__wurst_stackPos304)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_BitSet(__wurst_stackPos295) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos295
+function init_BitSet(__wurst_stackPos313) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos313
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	BitSet_BITSET_SIZE = 32
 	initPows("when calling initPows in BitSet, line 22")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function initPows(__wurst_stackPos372) 
+function initPows(__wurst_stackPos400) 
 	local allPows = nil
-	local i6 = nil
-	local temp5 = nil
 	local i7 = nil
+	local temp5 = nil
+	local i8 = nil
 	local temp6 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos372
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos400
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	BitSet_pows[0] = 1
 	allPows = 1
-	i6 = 1
+	i7 = 1
 	temp5 = (BitSet_BITSET_SIZE - 1)
 	while true do
-		if (i6 > temp5) then
+		if (i7 > temp5) then
 			break
 		end
-		BitSet_pows[i6] = (intEnsure(BitSet_pows[(i6 - 1)]) * 2)
-		allPows = int_bitOr(allPows, intEnsure(BitSet_pows[i6]), "when calling bitOr in BitSet, line 17")
-		i6 = (i6 + 1)
+		BitSet_pows[i7] = (intEnsure(BitSet_pows[(i7 - 1)]) * 2)
+		allPows = int_bitOr(allPows, intEnsure(BitSet_pows[i7]), "when calling bitOr in BitSet, line 17")
+		i7 = (i7 + 1)
 	end
-	i7 = 0
+	i8 = 0
 	temp6 = (BitSet_BITSET_SIZE - 1)
 	while true do
-		if (i7 > temp6) then
+		if (i8 > temp6) then
 			break
 		end
-		int_bitXor(allPows, intEnsure(BitSet_pows[i7]), "when calling bitXor in BitSet, line 19")
-		i7 = (i7 + 1)
+		int_bitXor(allPows, intEnsure(BitSet_pows[i8]), "when calling bitXor in BitSet, line 19")
+		i8 = (i8 + 1)
 	end
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Bloom(__wurst_stackPos339) 
+function init_Bloom(__wurst_stackPos358) 
 	local clVar13 = nil
-	local temp161 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos339
+	local temp61 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos358
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Bloom_HEALING_CLOUD_ID = intEnsure(1095577654)
 	Bloom_CLOUD_UNIT_ID = 1701212014
@@ -5861,10 +6419,10 @@ function init_Bloom(__wurst_stackPos339)
 	Bloom_CLOUD_DURATION[0] = 10.
 	Bloom_CLOUD_DURATION[1] = 10.
 	Bloom_CLOUD_DURATION[2] = 10.
-	temp161 = Bloom_HEALING_CLOUD_ID
+	temp61 = Bloom_HEALING_CLOUD_ID
 	clVar13 = OnCastListener_onCast_Bloom:create2()
 	OnCastListener_construct_OnCastListener(clVar13, "when calling construct_OnCastListener in Bloom, line 94")
-	EventListener_onCast(temp161, clVar13, "when calling onCast in Bloom, line 94")
+	EventListener_onCast(temp61, clVar13, "when calling onCast in Bloom, line 94")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -5874,8 +6432,8 @@ function spawnCloud(owner, pos1, heal1, radius1, duration1, __wurst_stackPos19)
 	local healTimer2 = nil
 	local clVar14 = nil
 	local clVar15 = nil
-	local temp162 = nil
-	local temp163 = nil
+	local temp7 = nil
+	local temp8 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos19
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	cloud = createUnit(owner, Bloom_CLOUD_UNIT_ID, pos1, ({0., }), "when calling createUnit in Bloom, line 70")
@@ -5887,21 +6445,21 @@ function spawnCloud(owner, pos1, heal1, radius1, duration1, __wurst_stackPos19)
 	sfx2 = widget_addEffect(cloud, Abilities_tranquility, "origin", "when calling addEffect in Bloom, line 77")
 	effect_setScale(sfx2, 1., "when calling setScale in Bloom, line 78")
 	effect_setColor(sfx2, 0, 255, 0, "when calling setColor in Bloom, line 79")
-	temp162 = Bloom_HEAL_INTERVAL
+	temp7 = Bloom_HEAL_INTERVAL
 	clVar14 = CallbackPeriodic_doPeriodically_Bloom:create()
 	CallbackPeriodic_construct_CallbackPeriodic(clVar14, "when calling construct_CallbackPeriodic in Bloom, line 81")
 	clVar14.pos = tupleCopy(pos1)
 	clVar14.radius = radius1
 	clVar14.owner = owner
 	clVar14.heal = heal1
-	healTimer2 = doPeriodically(temp162, clVar14, "when calling doPeriodically in Bloom, line 81")
-	temp163 = duration1
+	healTimer2 = doPeriodically(temp7, clVar14, "when calling doPeriodically in Bloom, line 81")
+	temp8 = duration1
 	clVar15 = CallbackSingle_doAfter_Bloom:create1()
 	CallbackSingle_construct_CallbackSingle(clVar15, "when calling construct_CallbackSingle in Bloom, line 88")
 	clVar15.healTimer = healTimer2
 	clVar15.cloud = cloud
 	clVar15.sfx = sfx2
-	doAfter(temp163, clVar15, "when calling doAfter in Bloom, line 88")
+	doAfter(temp8, clVar15, "when calling doAfter in Bloom, line 88")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -5918,27 +6476,27 @@ function boolean_toString(this161, __wurst_stackPos183)
 	return cond_result
 end
 
-function init_BuffIds(__wurst_stackPos340) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos340
+function init_BuffIds(__wurst_stackPos359) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos359
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_CenariusCharacter(__wurst_stackPos344) 
+function init_CenariusCharacter(__wurst_stackPos363) 
 	local clVar16 = nil
-	local temp164 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos344
+	local temp9 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos363
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	temp164 = Invigorate_INVIGORATE_ID
+	temp9 = Invigorate_INVIGORATE_ID
 	clVar16 = OnCastListener_onCast_CenariusCharacter:create3()
 	OnCastListener_construct_OnCastListener(clVar16, "when calling construct_OnCastListener in CenariusCharacter, line 27")
-	EventListener_onCast(temp164, clVar16, "when calling onCast in CenariusCharacter, line 27")
+	EventListener_onCast(temp9, clVar16, "when calling onCast in CenariusCharacter, line 27")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_ClosureEvents(__wurst_stackPos336) 
+function init_ClosureEvents(__wurst_stackPos355) 
 	local clVar17 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos336
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos355
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	ClosureEvents_EVENT_PLAYER_CHAT_FILTER = ConvertPlayerEvent(96)
 	EventListener_castMap = HashMap_new_HashMap("when calling new_HashMap in ClosureEvents, line 109")
@@ -5957,33 +6515,33 @@ function init_ClosureEvents(__wurst_stackPos336)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function fireEvents(_u, __wurst_stackPos379) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos379
+function fireEvents(_u, __wurst_stackPos407) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos407
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return true
 end
 
-function eventid_toIntId(this235, __wurst_stackPos380) 
+function eventid_toIntId(this242, __wurst_stackPos408) 
 	local id5 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos380
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos408
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	id5 = intEnsure(ClosureEvents_eventidToIndex[handle_getHandleId(this235, "when calling getHandleId in ClosureEvents, line 248")])
+	id5 = intEnsure(ClosureEvents_eventidToIndex[handle_getHandleId(this242, "when calling getHandleId in ClosureEvents, line 248")])
 	if (id5 == 0) then
-		id5 = registerEventId(this235, "when calling registerEventId in ClosureEvents, line 250")
+		id5 = registerEventId(this242, "when calling registerEventId in ClosureEvents, line 250")
 	end
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return id5
 end
 
-function registerEventId(evnt, __wurst_stackPos382) 
+function registerEventId(evnt, __wurst_stackPos410) 
 	local eventId = nil
-	local i8 = nil
-	local temp7 = nil
-	local receiver17 = nil
-	local receiver18 = nil
+	local i9 = nil
+	local temp10 = nil
 	local receiver19 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos382
+	local receiver20 = nil
+	local receiver21 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos410
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	eventId = handle_getHandleId(evnt, "when calling getHandleId in ClosureEvents, line 257")
 	ClosureEvents_eventTypeCounter = (ClosureEvents_eventTypeCounter + 1)
@@ -6013,33 +6571,33 @@ function registerEventId(evnt, __wurst_stackPos382)
 	end
 	if (eventid_isMouseEvent(evnt, "when calling isMouseEvent in ClosureEvents, line 270") and not(EventListener_useMouseEvents)) then
 		EventListener_useMouseEvents = true
-		i8 = 0
-		temp7 = (bj_MAX_PLAYERS - 1)
+		i9 = 0
+		temp10 = (bj_MAX_PLAYERS - 1)
 		while true do
-			if (i8 > temp7) then
+			if (i9 > temp10) then
 				break
 			end
-			receiver17 = ClosureEvents_keyTrig
-			trigger_registerPlayerEvent(receiver17, Player_players[i8], EVENT_PLAYER_MOUSE_UP, "when calling registerPlayerEvent in ClosureEvents, line 273")
-			receiver18 = receiver17
-			trigger_registerPlayerEvent(receiver18, Player_players[i8], EVENT_PLAYER_MOUSE_DOWN, "when calling registerPlayerEvent in ClosureEvents, line 274")
-			receiver19 = receiver18
-			trigger_registerPlayerEvent(receiver19, Player_players[i8], EVENT_PLAYER_MOUSE_MOVE, "when calling registerPlayerEvent in ClosureEvents, line 275")
-			i8 = (i8 + 1)
+			receiver19 = ClosureEvents_keyTrig
+			trigger_registerPlayerEvent(receiver19, Player_players[i9], EVENT_PLAYER_MOUSE_UP, "when calling registerPlayerEvent in ClosureEvents, line 273")
+			receiver20 = receiver19
+			trigger_registerPlayerEvent(receiver20, Player_players[i9], EVENT_PLAYER_MOUSE_DOWN, "when calling registerPlayerEvent in ClosureEvents, line 274")
+			receiver21 = receiver20
+			trigger_registerPlayerEvent(receiver21, Player_players[i9], EVENT_PLAYER_MOUSE_MOVE, "when calling registerPlayerEvent in ClosureEvents, line 275")
+			i9 = (i9 + 1)
 		end
 	end
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return ClosureEvents_eventTypeCounter
 end
 
-function unregisterEventsForUnit(u19, __wurst_stackPos386) 
+function unregisterEventsForUnit(u24, __wurst_stackPos414) 
 	local index3 = nil
 	local listener5 = nil
 	local t1 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos386
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos414
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	if fireEvents(u19, "when calling fireEvents in ClosureEvents, line 279") then
-		index3 = unit_getIndex(u19, "when calling getIndex in ClosureEvents, line 280")
+	if fireEvents(u24, "when calling fireEvents in ClosureEvents, line 279") then
+		index3 = unit_getIndex(u24, "when calling getIndex in ClosureEvents, line 280")
 		unregisterEvents(index3, "when calling unregisterEvents in ClosureEvents, line 281")
 		if not((EventListener_castMapCasters[index3] == nil)) then
 			listener5 = EventListener_castMapCasters[index3]
@@ -6057,10 +6615,10 @@ function unregisterEventsForUnit(u19, __wurst_stackPos386)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function unregisterEvents(id6, __wurst_stackPos387) 
+function unregisterEvents(id6, __wurst_stackPos415) 
 	local listener6 = nil
 	local t2 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos387
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos415
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	if (id6 > 0) then
 		if not((EventListener_unitListenersFirsts[id6] == nil)) then
@@ -6080,36 +6638,36 @@ function unregisterEvents(id6, __wurst_stackPos387)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function code__onUnitDeindex_ClosureEvents(__wurst_stackPos389) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos389
+function code__onUnitDeindex_ClosureEvents(__wurst_stackPos417) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos417
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	unregisterEventsForUnit(getIndexingUnit("when calling getIndexingUnit in ClosureEvents, line 304"), "when calling unregisterEventsForUnit in ClosureEvents, line 304")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function code__addAction_nullTimer_ClosureEvents(__wurst_stackPos391) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos391
+function code__addAction_nullTimer_ClosureEvents(__wurst_stackPos419) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos419
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	EventListener_generalEventCallback("when calling generalEventCallback in ClosureEvents, line 307")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function code__addAction_nullTimer_ClosureEvents1(__wurst_stackPos393) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos393
+function code__addAction_nullTimer_ClosureEvents1(__wurst_stackPos421) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos421
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	EventListener_generalEventCallback("when calling generalEventCallback in ClosureEvents, line 308")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function code__registerPlayerUnitEvent_nullTimer_ClosureEvents(__wurst_stackPos394) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos394
+function code__registerPlayerUnitEvent_nullTimer_ClosureEvents(__wurst_stackPos422) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos422
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	EventListener_onSpellEffect("when calling onSpellEffect in ClosureEvents, line 323")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function EventListener_add(eventId1, listener7, __wurst_stackPos396) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos396
+function EventListener_add(eventId1, listener7, __wurst_stackPos424) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos424
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	listener7.EventListener_eventId = eventid_toIntId(eventId1, "when calling toIntId in ClosureEvents, line 123")
 	if not((EventListener_generalListenersFirsts[listener7.EventListener_eventId] == nil)) then
@@ -6121,15 +6679,15 @@ function EventListener_add(eventId1, listener7, __wurst_stackPos396)
 	return listener7
 end
 
-function EventListener_addSpellInternal(u20, abilId1, listener8, __wurst_stackPos397) 
+function EventListener_addSpellInternal(u25, abilId1, listener8, __wurst_stackPos425) 
 	local index4 = nil
 	local entry2 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos397
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos425
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	listener8.OnCastListener_abilId = abilId1
-	if not((u20 == nil)) then
-		listener8.OnCastListener_eventUnit = u20
-		index4 = unit_getIndex(u20, "when calling getIndex in ClosureEvents, line 170")
+	if not((u25 == nil)) then
+		listener8.OnCastListener_eventUnit = u25
+		index4 = unit_getIndex(u25, "when calling getIndex in ClosureEvents, line 170")
 		if not((EventListener_castMapCasters[index4] == nil)) then
 			EventListener_castMapCasters[index4].OnCastListener_prev = listener8
 			listener8.OnCastListener_next = EventListener_castMapCasters[index4]
@@ -6147,16 +6705,16 @@ function EventListener_addSpellInternal(u20, abilId1, listener8, __wurst_stackPo
 	return listener8
 end
 
-function EventListener_onCast(abilId, listener4, __wurst_stackPos375) 
-	local stackTrace_tempReturn7 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos375
+function EventListener_onCast(abilId, listener4, __wurst_stackPos403) 
+	local stackTrace_tempReturn9 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos403
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn7 = EventListener_addSpellInternal(nil, abilId, listener4, "when calling addSpellInternal in ClosureEvents, line 155")
+	stackTrace_tempReturn9 = EventListener_addSpellInternal(nil, abilId, listener4, "when calling addSpellInternal in ClosureEvents, line 155")
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn7
+	return stackTrace_tempReturn9
 end
 
-function EventListener_generalEventCallback(__wurst_stackPos392) 
+function EventListener_generalEventCallback(__wurst_stackPos420) 
 	local trigUnit6 = nil
 	local id7 = nil
 	local index5 = nil
@@ -6164,7 +6722,7 @@ function EventListener_generalEventCallback(__wurst_stackPos392)
 	local nextListener = nil
 	local globalListener = nil
 	local nextListener1 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos392
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos420
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	trigUnit6 = GetTriggerUnit()
 	id7 = eventid_toIntId(GetTriggerEventId(), "when calling toIntId in ClosureEvents, line 186")
@@ -6200,7 +6758,7 @@ function EventListener_generalEventCallback(__wurst_stackPos392)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function EventListener_onSpellEffect(__wurst_stackPos395) 
+function EventListener_onSpellEffect(__wurst_stackPos423) 
 	local trigUnit7 = nil
 	local abilId2 = nil
 	local caster12 = nil
@@ -6208,7 +6766,7 @@ function EventListener_onSpellEffect(__wurst_stackPos395)
 	local listener10 = nil
 	local nextListener2 = nil
 	local nextListener3 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos395
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos423
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	trigUnit7 = GetTriggerUnit()
 	abilId2 = GetSpellAbilityId()
@@ -6239,8 +6797,8 @@ function EventListener_onSpellEffect(__wurst_stackPos395)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_ClosureForGroups(__wurst_stackPos320) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos320
+function init_ClosureForGroups(__wurst_stackPos338) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos338
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	CreateGroup()
 	ClosureForGroups_tempCallbacksCount = 0
@@ -6255,17 +6813,17 @@ function init_ClosureForGroups(__wurst_stackPos320)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function code__Filter_ClosureForGroups(__wurst_stackPos398) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos398
+function code__Filter_ClosureForGroups(__wurst_stackPos426) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos426
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	filterCallback(GetFilterUnit(), "when calling filterCallback in ClosureForGroups, line 21")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function filterCallback(filter4, __wurst_stackPos399) 
+function filterCallback(filter4, __wurst_stackPos427) 
 	local idx = nil
 	local mode = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos399
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos427
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	idx = (ClosureForGroups_tempCallbacksCount - 1)
 	mode = intEnsure(ClosureForGroups_callbackMode[idx])
@@ -6284,107 +6842,107 @@ function filterCallback(filter4, __wurst_stackPos399)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function currentCallback(__wurst_stackPos400) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos400
+function currentCallback(__wurst_stackPos428) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos428
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return ClosureForGroups_tempCallbacks[(ClosureForGroups_tempCallbacksCount - 1)]
 end
 
-function currentCallbackUntil(__wurst_stackPos401) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos401
+function currentCallbackUntil(__wurst_stackPos429) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos429
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return ClosureForGroups_tempCallbacksUntil[(ClosureForGroups_tempCallbacksCount - 1)]
 end
 
-function group_forEachFrom(this240, cb11, __wurst_stackPos402) 
-	local u21 = nil
+function group_forEachFrom(this247, cb11, __wurst_stackPos430) 
+	local u26 = nil
 	local from1 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos402
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos430
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	from1 = this240
+	from1 = this247
 	while true do
 		if not(group_hasNext(from1, "when calling hasNext in ClosureForGroups, line 80")) then
 			break
 		end
-		u21 = group_next(from1, "when calling next in ClosureForGroups, line 80")
-		cb11:callback(u21, "when calling callback in ClosureForGroups, line 81")
+		u26 = group_next(from1, "when calling next in ClosureForGroups, line 80")
+		cb11:callback(u26, "when calling callback in ClosureForGroups, line 81")
 	end
 	ForGroupCallback_destroyForGroupCallback(cb11, "when calling destroyForGroupCallback in ClosureForGroups, line 82")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_ClosureTimers(__wurst_stackPos327) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos327
+function init_ClosureTimers(__wurst_stackPos346) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos346
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	ClosureTimers_x = 200
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function timer_doAfter(this241, timeToWait1, cb12, __wurst_stackPos403) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos403
+function timer_doAfter(this248, timeToWait1, cb12, __wurst_stackPos431) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos431
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	CallbackSingle_CallbackSingle_start(cb12, this241, timeToWait1, "when calling start in ClosureTimers, line 17")
+	CallbackSingle_CallbackSingle_start(cb12, this248, timeToWait1, "when calling start in ClosureTimers, line 17")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return cb12
 end
 
 function doAfter(timeToWait, cb3, __wurst_stackPos83) 
-	local stackTrace_tempReturn8 = nil
+	local stackTrace_tempReturn10 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos83
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn8 = timer_doAfter(getTimer("when calling getTimer in ClosureTimers, line 28"), timeToWait, cb3, "when calling doAfter in ClosureTimers, line 28")
+	stackTrace_tempReturn10 = timer_doAfter(getTimer("when calling getTimer in ClosureTimers, line 28"), timeToWait, cb3, "when calling doAfter in ClosureTimers, line 28")
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn8
+	return stackTrace_tempReturn10
 end
 
-function nullTimer(cb10, __wurst_stackPos378) 
-	local stackTrace_tempReturn9 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos378
+function nullTimer(cb10, __wurst_stackPos406) 
+	local stackTrace_tempReturn11 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos406
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn9 = doAfter(0., cb10, "when calling doAfter in ClosureTimers, line 51")
+	stackTrace_tempReturn11 = doAfter(0., cb10, "when calling doAfter in ClosureTimers, line 51")
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn9
+	return stackTrace_tempReturn11
 end
 
-function timer_doPeriodically(this242, time5, cb13, __wurst_stackPos405) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos405
+function timer_doPeriodically(this249, time5, cb13, __wurst_stackPos433) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos433
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	CallbackPeriodic_CallbackPeriodic_start(cb13, this242, time5, "when calling start in ClosureTimers, line 63")
+	CallbackPeriodic_CallbackPeriodic_start(cb13, this249, time5, "when calling start in ClosureTimers, line 63")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return cb13
 end
 
 function doPeriodically(time4, cb2, __wurst_stackPos82) 
-	local stackTrace_tempReturn10 = nil
+	local stackTrace_tempReturn12 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos82
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn10 = timer_doPeriodically(getTimer("when calling getTimer in ClosureTimers, line 75"), time4, cb2, "when calling doPeriodically in ClosureTimers, line 75")
+	stackTrace_tempReturn12 = timer_doPeriodically(getTimer("when calling getTimer in ClosureTimers, line 75"), time4, cb2, "when calling doPeriodically in ClosureTimers, line 75")
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn10
+	return stackTrace_tempReturn12
 end
 
-function CallbackPeriodic_staticCallback(__wurst_stackPos406) 
+function CallbackPeriodic_staticCallback(__wurst_stackPos434) 
 	local cb14 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos406
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos434
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	cb14 = __wurst_objectFromIndex(timer_getData(GetExpiredTimer(), "when calling getData in ClosureTimers, line 162"))
 	cb14:call(cb14, "when calling call in ClosureTimers, line 163")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function code__start_CallbackSingle_ClosureTimers(__wurst_stackPos408) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos408
+function code__start_CallbackSingle_ClosureTimers(__wurst_stackPos436) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos436
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	CallbackSingle_staticCallback("when calling staticCallback in ClosureTimers, line 135")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function CallbackSingle_staticCallback(__wurst_stackPos409) 
+function CallbackSingle_staticCallback(__wurst_stackPos437) 
 	local t3 = nil
 	local cb15 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos409
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos437
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	t3 = GetExpiredTimer()
 	cb15 = __wurst_objectFromIndex(timer_getData(t3, "when calling getData in ClosureTimers, line 140"))
@@ -6393,8 +6951,8 @@ function CallbackSingle_staticCallback(__wurst_stackPos409)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Colors(__wurst_stackPos312) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos312
+function init_Colors(__wurst_stackPos330) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos330
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Colors_hexs[0] = "0"
 	Colors_hexs[1] = "1"
@@ -6423,19 +6981,19 @@ function init_Colors(__wurst_stackPos312)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function colorA_toColorString(this244, __wurst_stackPos410) 
-	local stackTrace_tempReturn11 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos410
+function colorA_toColorString(this251, __wurst_stackPos438) 
+	local stackTrace_tempReturn13 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos438
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn11 = stringConcat(stringConcat(stringConcat(stringConcat("|c", toHex(this244[4], "when calling toHex in Colors, line 194")), toHex(this244[1], "when calling toHex in Colors, line 194")), toHex(this244[2], "when calling toHex in Colors, line 194")), toHex(this244[3], "when calling toHex in Colors, line 194"))
+	stackTrace_tempReturn13 = stringConcat(stringConcat(stringConcat(stringConcat("|c", toHex(this251[4], "when calling toHex in Colors, line 194")), toHex(this251[1], "when calling toHex in Colors, line 194")), toHex(this251[2], "when calling toHex in Colors, line 194")), toHex(this251[3], "when calling toHex in Colors, line 194"))
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn11
+	return stackTrace_tempReturn13
 end
 
-function toHex(number, __wurst_stackPos412) 
+function toHex(number, __wurst_stackPos440) 
 	local firstpart = nil
 	local secondpart = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos412
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos440
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	firstpart = (number // 16)
 	secondpart = (number - (firstpart * 16))
@@ -6443,54 +7001,54 @@ function toHex(number, __wurst_stackPos412)
 	return stringConcat(stringEnsure(Colors_hexs[firstpart]), stringEnsure(Colors_hexs[secondpart]))
 end
 
-function initializeTable(__wurst_stackPos411) 
-	local i9 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos411
+function initializeTable(__wurst_stackPos439) 
+	local i10 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos439
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	i9 = 0
+	i10 = 0
 	while true do
-		if (i9 > 15) then
+		if (i10 > 15) then
 			break
 		end
-		Table_Table_saveInt(Colors_decs, string_getHash(stringEnsure(Colors_hexs[i9]), "when calling getHash in Colors, line 279"), i9, "when calling saveInt in Colors, line 279")
-		i9 = (i9 + 1)
+		Table_Table_saveInt(Colors_decs, string_getHash(stringEnsure(Colors_hexs[i10]), "when calling getHash in Colors, line 279"), i10, "when calling saveInt in Colors, line 279")
+		i10 = (i10 + 1)
 	end
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_ControlPoint(__wurst_stackPos346) 
+function init_ControlPoint(__wurst_stackPos365) 
 	local clVar18 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos346
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos365
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	ControlPoint_controlPoints = CreateGroup()
 	ControlPoint_cpOwners = HashMap_new_HashMap("when calling new_HashMap in ControlPoint, line 9")
 	ControlPoint_cpValues = HashMap_new_HashMap("when calling new_HashMap in ControlPoint, line 10")
-	setupAllControlPoints("when calling setupAllControlPoints in ControlPoint, line 91")
+	setupAllControlPoints("when calling setupAllControlPoints in ControlPoint, line 75")
 	clVar18 = CallbackSingle_doAfter_ControlPoint:create11()
-	CallbackSingle_construct_CallbackSingle(clVar18, "when calling construct_CallbackSingle in ControlPoint, line 92")
-	doAfter(0., clVar18, "when calling doAfter in ControlPoint, line 92")
+	CallbackSingle_construct_CallbackSingle(clVar18, "when calling construct_CallbackSingle in ControlPoint, line 76")
+	doAfter(0., clVar18, "when calling doAfter in ControlPoint, line 76")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function income(__wurst_stackPos415) 
-	local iterator14 = nil
+function income(__wurst_stackPos443) 
+	local iterator15 = nil
 	local cp = nil
 	local owner2 = nil
 	local value9 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos415
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos443
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	iterator14 = group_iterator(ControlPoint_controlPoints, "when calling iterator in ControlPoint, line 19")
+	iterator15 = group_iterator(ControlPoint_controlPoints, "when calling iterator in ControlPoint, line 19")
 	while true do
-		if not(GroupIterator_GroupIterator_hasNext(iterator14, "when calling hasNext in ControlPoint, line 19")) then
+		if not(GroupIterator_GroupIterator_hasNext(iterator15, "when calling hasNext in ControlPoint, line 19")) then
 			break
 		end
-		cp = GroupIterator_GroupIterator_next(iterator14, "when calling next in ControlPoint, line 19")
+		cp = GroupIterator_GroupIterator_next(iterator15, "when calling next in ControlPoint, line 19")
 		owner2 = playerFromIndex(intEnsure(HashMap_HashMap_get(ControlPoint_cpOwners, __wurst_objectToIndex(cp), "when calling get in ControlPoint, line 20")), "when calling playerFromIndex in ControlPoint, line 20")
 		value9 = intEnsure(HashMap_HashMap_get(ControlPoint_cpValues, __wurst_objectToIndex(cp), "when calling get in ControlPoint, line 21"))
 		player_addGold(owner2, value9, "when calling addGold in ControlPoint, line 22")
 		updateMultiboard("when calling updateMultiboard in ControlPoint, line 23")
 	end
-	GroupIterator_GroupIterator_close(iterator14, "when calling close in ControlPoint, line 19")
+	GroupIterator_GroupIterator_close(iterator15, "when calling close in ControlPoint, line 19")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -6511,15 +7069,15 @@ function incomeTimer(__wurst_stackPos63)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function setupCaptureOnHalf(target9, __wurst_stackPos419) 
-	local receiver20 = nil
-	local receiver21 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos419
+function setupCaptureOnHalf(target9, __wurst_stackPos447) 
+	local receiver22 = nil
+	local receiver23 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos447
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	receiver20 = CreateTrigger()
-	trigger_registerUnitEvent(receiver20, target9, EVENT_UNIT_DAMAGED, "when calling registerUnitEvent in ControlPoint, line 36")
-	receiver21 = receiver20
-	trigger_addAction(receiver21, function (...) 
+	receiver22 = CreateTrigger()
+	trigger_registerUnitEvent(receiver22, target9, EVENT_UNIT_DAMAGED, "when calling registerUnitEvent in ControlPoint, line 36")
+	receiver23 = receiver22
+	trigger_addAction(receiver23, function (...) 
 			xpcall(function (...) 
 					bridge_code__addAction_ControlPoint(...)
 				end, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua callback error: " .. tostring(err)) xpcall(function() error1(tostring(err), "<lua error>") end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) BJDebugMsg("while reporting: " .. tostring(err))  end) end, ...)
@@ -6527,28 +7085,28 @@ function setupCaptureOnHalf(target9, __wurst_stackPos419)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function code__addAction_ControlPoint(__wurst_stackPos421) 
-	local u22 = nil
+function code__addAction_ControlPoint(__wurst_stackPos448) 
+	local u27 = nil
 	local attacker = nil
 	local hp = nil
 	local maxHp = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos421
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos448
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	u22 = GetTriggerUnit()
+	u27 = GetTriggerUnit()
 	attacker = GetEventDamageSource()
-	hp = __wurst_safe_GetUnitState(u22, UNIT_STATE_LIFE)
-	maxHp = __wurst_safe_GetUnitState(u22, UNIT_STATE_MAX_LIFE)
+	hp = __wurst_safe_GetUnitState(u27, UNIT_STATE_LIFE)
+	maxHp = __wurst_safe_GetUnitState(u27, UNIT_STATE_MAX_LIFE)
 	if ((hp / maxHp) <= 0.5) then
-		HashMap_HashMap_put(ControlPoint_cpOwners, __wurst_objectToIndex(u22), playerToIndex(unit_getOwner(attacker, "when calling getOwner in ControlPoint, line 43"), "when calling playerToIndex in ControlPoint, line 43"), "when calling put in ControlPoint, line 43")
-		__wurst_safe_SetUnitOwner(u22, unit_getOwner(attacker, "when calling getOwner in ControlPoint, line 44"), true)
-		__wurst_safe_SetUnitState(u22, UNIT_STATE_LIFE, maxHp)
+		HashMap_HashMap_put(ControlPoint_cpOwners, __wurst_objectToIndex(u27), playerToIndex(unit_getOwner(attacker, "when calling getOwner in ControlPoint, line 43"), "when calling playerToIndex in ControlPoint, line 43"), "when calling put in ControlPoint, line 43")
+		__wurst_safe_SetUnitOwner(u27, unit_getOwner(attacker, "when calling getOwner in ControlPoint, line 44"), true)
+		__wurst_safe_SetUnitState(u27, UNIT_STATE_LIFE, maxHp)
 		updateMultiboard("when calling updateMultiboard in ControlPoint, line 46")
 	end
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function addControlPoint(cp1, value10, __wurst_stackPos423) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos423
+function addControlPoint(cp1, value10, __wurst_stackPos449) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos449
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	HashMap_HashMap_put(ControlPoint_cpValues, __wurst_objectToIndex(cp1), value10, "when calling put in ControlPoint, line 50")
 	HashMap_HashMap_put(ControlPoint_cpOwners, __wurst_objectToIndex(cp1), playerToIndex(unit_getOwner(cp1, "when calling getOwner in ControlPoint, line 51"), "when calling playerToIndex in ControlPoint, line 51"), "when calling put in ControlPoint, line 51")
@@ -6557,48 +7115,32 @@ function addControlPoint(cp1, value10, __wurst_stackPos423)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function setupAllControlPoints(__wurst_stackPos414) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos414
+function setupAllControlPoints(__wurst_stackPos442) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos442
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	addControlPoint(udg_mountHyjal, 30, "when calling addControlPoint in ControlPoint, line 57")
 	addControlPoint(udg_mountHyjalGrove, 10, "when calling addControlPoint in ControlPoint, line 58")
 	addControlPoint(udg_mountHyjalTown, 10, "when calling addControlPoint in ControlPoint, line 59")
-	addControlPoint(udg_mountHyjalCrypt, 10, "when calling addControlPoint in ControlPoint, line 60")
-	addControlPoint(udg_winterspringCenter, 10, "when calling addControlPoint in ControlPoint, line 61")
-	addControlPoint(udg_winterspringNorth, 10, "when calling addControlPoint in ControlPoint, line 62")
-	addControlPoint(udg_winterspringSouth, 10, "when calling addControlPoint in ControlPoint, line 63")
-	addControlPoint(udg_winterspringDen, 10, "when calling addControlPoint in ControlPoint, line 64")
-	addControlPoint(udg_winterspringRoost, 10, "when calling addControlPoint in ControlPoint, line 65")
-	addControlPoint(udg_moongladeWest, 10, "when calling addControlPoint in ControlPoint, line 66")
-	addControlPoint(udg_moongladeEast, 10, "when calling addControlPoint in ControlPoint, line 67")
-	addControlPoint(udg_felwoodNorth, 10, "when calling addControlPoint in ControlPoint, line 68")
-	addControlPoint(udg_felwoodCenter, 10, "when calling addControlPoint in ControlPoint, line 69")
-	addControlPoint(udg_felwoodSouth, 10, "when calling addControlPoint in ControlPoint, line 70")
-	addControlPoint(udg_ashenvaleChimaerasFall, 10, "when calling addControlPoint in ControlPoint, line 71")
-	addControlPoint(udg_ashenvaleAstranaar, 10, "when calling addControlPoint in ControlPoint, line 72")
-	addControlPoint(udg_ashenvaleForestEast, 10, "when calling addControlPoint in ControlPoint, line 73")
-	addControlPoint(udg_ashenvaleCrossing, 10, "when calling addControlPoint in ControlPoint, line 74")
-	addControlPoint(udg_ashenvaleChimaerasRest, 10, "when calling addControlPoint in ControlPoint, line 75")
-	addControlPoint(udg_ashenvaleBeachNorth, 10, "when calling addControlPoint in ControlPoint, line 76")
-	addControlPoint(udg_ashenvaleForestWest, 10, "when calling addControlPoint in ControlPoint, line 77")
-	addControlPoint(udg_ashenvaleForestCenter, 10, "when calling addControlPoint in ControlPoint, line 78")
-	addControlPoint(udg_ashenvaleGraniteDen, 10, "when calling addControlPoint in ControlPoint, line 79")
-	addControlPoint(udg_ashenvaleWarsongSouth, 10, "when calling addControlPoint in ControlPoint, line 80")
-	addControlPoint(udg_ashenvaleWarsongNorth, 10, "when calling addControlPoint in ControlPoint, line 81")
-	addControlPoint(udg_ashenvaleVentureCo, 10, "when calling addControlPoint in ControlPoint, line 82")
-	addControlPoint(udg_ashenvaleRoost, 10, "when calling addControlPoint in ControlPoint, line 83")
-	addControlPoint(udg_ashenvaleBeachSouth, 10, "when calling addControlPoint in ControlPoint, line 84")
-	addControlPoint(udg_ashenvaleForestNorth, 10, "when calling addControlPoint in ControlPoint, line 85")
-	addControlPoint(udg_winterspringFactory, 10, "when calling addControlPoint in ControlPoint, line 86")
-	addControlPoint(udg_ashenvaleForestSouth, 10, "when calling addControlPoint in ControlPoint, line 87")
-	addControlPoint(udg_ashenvaleWarsongCenter, 10, "when calling addControlPoint in ControlPoint, line 88")
+	addControlPoint(udg_winterspringRoost, 10, "when calling addControlPoint in ControlPoint, line 60")
+	addControlPoint(udg_felwoodCenter, 10, "when calling addControlPoint in ControlPoint, line 61")
+	addControlPoint(udg_felwoodSouth, 10, "when calling addControlPoint in ControlPoint, line 62")
+	addControlPoint(udg_ashenvaleChimaerasFall, 10, "when calling addControlPoint in ControlPoint, line 63")
+	addControlPoint(udg_ashenvaleAstranaar, 10, "when calling addControlPoint in ControlPoint, line 64")
+	addControlPoint(udg_ashenvaleCrossing, 10, "when calling addControlPoint in ControlPoint, line 65")
+	addControlPoint(udg_ashenvaleBeachNorth, 10, "when calling addControlPoint in ControlPoint, line 66")
+	addControlPoint(udg_ashenvaleForestCenter, 10, "when calling addControlPoint in ControlPoint, line 67")
+	addControlPoint(udg_ashenvaleWarsongSouth, 10, "when calling addControlPoint in ControlPoint, line 68")
+	addControlPoint(udg_ashenvaleVentureCo, 10, "when calling addControlPoint in ControlPoint, line 69")
+	addControlPoint(udg_ashenvaleRoost, 10, "when calling addControlPoint in ControlPoint, line 70")
+	addControlPoint(udg_ashenvaleBeachSouth, 10, "when calling addControlPoint in ControlPoint, line 71")
+	addControlPoint(udg_ashenvaleWarsongCenter, 10, "when calling addControlPoint in ControlPoint, line 72")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_CorruptedBlood(__wurst_stackPos347) 
+function init_CorruptedBlood(__wurst_stackPos366) 
 	local clVar19 = nil
-	local temp167 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos347
+	local temp12 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos366
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	CorruptedBlood_CORRUPTED_BLOOD_ID = intEnsure(1095577650)
 	CorruptedBlood_SLIME_UNIT_ID = 1852077933
@@ -6611,10 +7153,10 @@ function init_CorruptedBlood(__wurst_stackPos347)
 	CorruptedBlood_UPDATE_INTERVAL = 0.1
 	CorruptedBlood_GROW_SFX = "Abilities\\Spells\\Undead\\PlagueCloud\\PlagueCloudCaster.mdl"
 	CorruptedBlood_EXPLODE_SFX = "Abilities\\Weapons\\AvengerMissile\\AvengerMissile.mdl"
-	temp167 = CorruptedBlood_CORRUPTED_BLOOD_ID
+	temp12 = CorruptedBlood_CORRUPTED_BLOOD_ID
 	clVar19 = OnCastListener_onCast_CorruptedBlood:create13()
 	OnCastListener_construct_OnCastListener(clVar19, "when calling construct_OnCastListener in CorruptedBlood, line 62")
-	EventListener_onCast(temp167, clVar19, "when calling onCast in CorruptedBlood, line 62")
+	EventListener_onCast(temp12, clVar19, "when calling onCast in CorruptedBlood, line 62")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -6637,18 +7179,18 @@ function explodeSlime(slime1, caster4, __wurst_stackPos90)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_CustomIcons(__wurst_stackPos348) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos348
+function init_CustomIcons(__wurst_stackPos367) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos367
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_DamageEvent(__wurst_stackPos349) 
+function init_DamageEvent(__wurst_stackPos368) 
 	local clVar21 = nil
 	local clVar22 = nil
-	local temp168 = nil
-	local temp169 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos349
+	local temp13 = nil
+	local temp14 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos368
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	DamageEvent_DETECT_NATIVE_ABILITIES = true
 	DamageEvent_DAMAGE_ELEMENT_ATTACK = DamageElement_new_DamageElement("Physical", ({223, 59, 33, 255, }), "when calling new_DamageElement in DamageEvent, line 72")
@@ -6660,14 +7202,14 @@ function init_DamageEvent(__wurst_stackPos349)
 	DamageEvent_abort = false
 	DamageEvent_maxPriority = 0
 	DamageEvent_maxUnreducedPriority = 0
-	temp168 = EVENT_PLAYER_UNIT_DAMAGING
+	temp13 = EVENT_PLAYER_UNIT_DAMAGING
 	clVar21 = EventListener_add_DamageEvent:create16()
 	EventListener_construct_EventListener(clVar21, "when calling construct_EventListener in DamageEvent, line 476")
-	EventListener_add(temp168, clVar21, "when calling add in DamageEvent, line 476")
-	temp169 = EVENT_PLAYER_UNIT_DAMAGED
+	EventListener_add(temp13, clVar21, "when calling add in DamageEvent, line 476")
+	temp14 = EVENT_PLAYER_UNIT_DAMAGED
 	clVar22 = EventListener_add_DamageEvent1:create17()
 	EventListener_construct_EventListener(clVar22, "when calling construct_EventListener in DamageEvent, line 477")
-	EventListener_add(temp169, clVar22, "when calling add in DamageEvent, line 477")
+	EventListener_add(temp14, clVar22, "when calling add in DamageEvent, line 477")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -6675,8 +7217,8 @@ function DamageEvent_onUnreducedDamage(__wurst_stackPos93)
 	local amount2 = nil
 	local attackType1 = nil
 	local dmg = nil
-	local i10 = nil
-	local temp8 = nil
+	local i11 = nil
+	local temp11 = nil
 	local listener11 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos93
 	wurst_stack_depth = (wurst_stack_depth + 1)
@@ -6694,13 +7236,13 @@ function DamageEvent_onUnreducedDamage(__wurst_stackPos93)
 	DamageEvent_nextDamageId = 0
 	DamageEvent_nextDamageType = 4
 	DamageEvent_nextDamageElement = nil
-	i10 = 0
-	temp8 = DamageEvent_maxUnreducedPriority
+	i11 = 0
+	temp11 = DamageEvent_maxUnreducedPriority
 	while true do
-		if (i10 > temp8) then
+		if (i11 > temp11) then
 			break
 		end
-		listener11 = DamageEvent_firstUnreducedListeners[i10]
+		listener11 = DamageEvent_firstUnreducedListeners[i11]
 		while true do
 			if not(not((listener11 == nil))) then
 				break
@@ -6720,7 +7262,7 @@ function DamageEvent_onUnreducedDamage(__wurst_stackPos93)
 				break
 			end
 		end
-		i10 = (i10 + 1)
+		i11 = (i11 + 1)
 	end
 	__wurst_safe_BlzSetEventAttackType(dmg.DamageInstance_nativeAttackType)
 	__wurst_safe_BlzSetEventDamageType(dmg.DamageInstance_nativeDamageType)
@@ -6731,21 +7273,21 @@ end
 
 function DamageEvent_onDamage(__wurst_stackPos95) 
 	local dmg1 = nil
-	local i11 = nil
-	local temp9 = nil
+	local i12 = nil
+	local temp15 = nil
 	local listener12 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos95
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	dmg1 = DamageInstance_current
 	if not(DamageEvent_abort) then
 		DamageInstance_DamageInstance_setReducedAmount(dmg1, GetEventDamage(), "when calling setReducedAmount in DamageEvent, line 222")
-		i11 = 0
-		temp9 = DamageEvent_maxPriority
+		i12 = 0
+		temp15 = DamageEvent_maxPriority
 		while true do
-			if (i11 > temp9) then
+			if (i12 > temp15) then
 				break
 			end
-			listener12 = DamageEvent_firstListeners[i11]
+			listener12 = DamageEvent_firstListeners[i12]
 			while true do
 				if not(not((listener12 == nil))) then
 					break
@@ -6765,7 +7307,7 @@ function DamageEvent_onDamage(__wurst_stackPos95)
 					break
 				end
 			end
-			i11 = (i11 + 1)
+			i12 = (i12 + 1)
 		end
 		__wurst_safe_BlzSetEventAttackType(dmg1.DamageInstance_nativeAttackType)
 		__wurst_safe_BlzSetEventDamageType(dmg1.DamageInstance_nativeDamageType)
@@ -6777,51 +7319,51 @@ function DamageEvent_onDamage(__wurst_stackPos95)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function DamageEvent_addListener(listener13, __wurst_stackPos425) 
-	local stackTrace_tempReturn12 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos425
+function DamageEvent_addListener(listener13, __wurst_stackPos450) 
+	local stackTrace_tempReturn14 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos450
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn12 = DamageEvent_addListener1(DamageEvent_maxPriority, listener13, "when calling addListener in DamageEvent, line 248")
+	stackTrace_tempReturn14 = DamageEvent_addListener1(DamageEvent_maxPriority, listener13, "when calling addListener in DamageEvent, line 248")
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn12
+	return stackTrace_tempReturn14
 end
 
-function DamageEvent_addListener1(priority, listener14, __wurst_stackPos426) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos426
+function DamageEvent_addListener1(priority1, listener14, __wurst_stackPos451) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos451
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	if not((DamageEvent_firstListeners[priority] == nil)) then
-		listener14.DamageListener_next = DamageEvent_firstListeners[priority]
+	if not((DamageEvent_firstListeners[priority1] == nil)) then
+		listener14.DamageListener_next = DamageEvent_firstListeners[priority1]
 	end
-	DamageEvent_firstListeners[priority] = listener14
-	if (DamageEvent_maxPriority < priority) then
-		DamageEvent_maxPriority = priority
+	DamageEvent_firstListeners[priority1] = listener14
+	if (DamageEvent_maxPriority < priority1) then
+		DamageEvent_maxPriority = priority1
 	end
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return listener14
 end
 
-function DamageEvent_getSource(__wurst_stackPos427) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos427
+function DamageEvent_getSource(__wurst_stackPos452) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos452
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return DamageInstance_current.DamageInstance_source
 end
 
-function DamageEvent_getTarget(__wurst_stackPos428) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos428
+function DamageEvent_getTarget(__wurst_stackPos453) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos453
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return DamageInstance_current.DamageInstance_target
 end
 
-function init_Destructable(__wurst_stackPos300) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos300
+function init_Destructable(__wurst_stackPos318) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos318
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_DryadCasterMain(__wurst_stackPos351) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos351
+function init_DryadCasterMain(__wurst_stackPos370) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos370
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
@@ -6840,28 +7382,28 @@ function flashEffect1(path1, pos2, __wurst_stackPos67)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function flashEffect2(path4, pos10, scale2, yaw, __wurst_stackPos429) 
-	local receiver22 = nil
-	local receiver23 = nil
+function flashEffect2(path4, pos10, scale2, yaw, __wurst_stackPos454) 
 	local receiver24 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos429
+	local receiver25 = nil
+	local receiver26 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos454
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	receiver22 = addEffect(path4, pos10, "when calling addEffect in Effect, line 23")
-	effect_setScale(receiver22, scale2, "when calling setScale in Effect, line 23")
-	receiver23 = receiver22
-	effect_setYaw(receiver23, yaw, "when calling setYaw in Effect, line 23")
-	receiver24 = receiver23
-	effect_destr(receiver24, "when calling destr in Effect, line 23")
+	receiver24 = addEffect(path4, pos10, "when calling addEffect in Effect, line 23")
+	effect_setScale(receiver24, scale2, "when calling setScale in Effect, line 23")
+	receiver25 = receiver24
+	effect_setYaw(receiver25, yaw, "when calling setYaw in Effect, line 23")
+	receiver26 = receiver25
+	effect_destr(receiver26, "when calling destr in Effect, line 23")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
 function addEffect(path2, pos4, __wurst_stackPos81) 
-	local stackTrace_tempReturn13 = nil
+	local stackTrace_tempReturn15 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos81
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn13 = AddSpecialEffect(path2, pos4[1], pos4[2])
+	stackTrace_tempReturn15 = AddSpecialEffect(path2, pos4[1], pos4[2])
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn13
+	return stackTrace_tempReturn15
 end
 
 function effect_setScale(this62, scale, __wurst_stackPos72) 
@@ -6871,10 +7413,10 @@ function effect_setScale(this62, scale, __wurst_stackPos72)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function effect_setYaw(this250, yaw1, __wurst_stackPos430) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos430
+function effect_setYaw(this255, yaw1, __wurst_stackPos455) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos455
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_safe_BlzSetSpecialEffectYaw(this250, angle_radians(yaw1, "when calling radians in Effect, line 171"))
+	__wurst_safe_BlzSetSpecialEffectYaw(this255, angle_radians(yaw1, "when calling radians in Effect, line 171"))
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -6886,12 +7428,12 @@ function flashEffect(path, target, attachPointName, __wurst_stackPos9)
 end
 
 function addEffect1(path3, target5, attachPointName1, __wurst_stackPos141) 
-	local stackTrace_tempReturn14 = nil
+	local stackTrace_tempReturn16 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos141
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn14 = __wurst_safe_AddSpecialEffectTarget(path3, target5, attachPointName1)
+	stackTrace_tempReturn16 = __wurst_safe_AddSpecialEffectTarget(path3, target5, attachPointName1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn14
+	return stackTrace_tempReturn16
 end
 
 function effect_setColor(this63, r, g, b, __wurst_stackPos73) 
@@ -6908,8 +7450,8 @@ function effect_setPos(this74, pos6, __wurst_stackPos89)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_ErrorHandling(__wurst_stackPos306) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos306
+function init_ErrorHandling(__wurst_stackPos324) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos324
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	ErrorHandling_MUTE_ERROR_DURATION = 60
 	ErrorHandling_PRIMARY_ERROR_KEY = -1
@@ -6927,8 +7469,8 @@ function error1(msg, __wurst_stackPos26)
 	local stacktraceStr1 = nil
 	local stacktraceIndex1 = nil
 	local stacktraceLimit1 = nil
-	local temp170 = nil
-	local temp171 = nil
+	local temp151 = nil
+	local temp16 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos26
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	if MagicFunctions_compiletime then
@@ -6940,7 +7482,7 @@ function error1(msg, __wurst_stackPos26)
 			hash = string_getHash(msg, "when calling getHash in ErrorHandling, line 53")
 			if hashtable_hasInt(ErrorHandling_HT, ErrorHandling_PRIMARY_ERROR_KEY, hash, "when calling hasInt in ErrorHandling, line 54") then
 				if ((hashtable_loadInt(ErrorHandling_HT, ErrorHandling_PRIMARY_ERROR_KEY, hash, "when calling loadInt in ErrorHandling, line 56") + ErrorHandling_MUTE_ERROR_DURATION) < GameTimer_currentTime) then
-					temp170 = msg
+					temp151 = msg
 					stacktraceStr = " Stacktrace:"
 					stacktraceIndex = wurst_stack_depth
 					stacktraceLimit = 0
@@ -6958,7 +7500,7 @@ function error1(msg, __wurst_stackPos26)
 					if (stacktraceStr == " Stacktrace:") then
 						stacktraceStr = " Stacktrace: <none>"
 					end
-					Log_error(stringConcat(temp170, stacktraceStr), "when calling error in ErrorHandling, line 58")
+					Log_error(stringConcat(temp151, stacktraceStr), "when calling error in ErrorHandling, line 58")
 					hashtable_saveInt(ErrorHandling_HT, ErrorHandling_PRIMARY_ERROR_KEY, hash, real_toInt(GameTimer_currentTime, "when calling toInt in ErrorHandling, line 59"), "when calling saveInt in ErrorHandling, line 59")
 					hashtable_saveBoolean(ErrorHandling_HT, ErrorHandling_PRIMARY_ERROR_KEY, hash, false, "when calling saveBoolean in ErrorHandling, line 60")
 				elseif hashtable_hasBoolean(ErrorHandling_HT, ErrorHandling_PRIMARY_ERROR_KEY, hash, "when calling hasBoolean in ErrorHandling, line 61") then
@@ -6972,7 +7514,7 @@ function error1(msg, __wurst_stackPos26)
 				end
 			else
 				hashtable_saveInt(ErrorHandling_HT, ErrorHandling_PRIMARY_ERROR_KEY, hash, real_toInt(GameTimer_currentTime, "when calling toInt in ErrorHandling, line 69"), "when calling saveInt in ErrorHandling, line 69")
-				temp171 = stringConcat("Message: ", msg)
+				temp16 = stringConcat("Message: ", msg)
 				stacktraceStr1 = " Stacktrace:"
 				stacktraceIndex1 = wurst_stack_depth
 				stacktraceLimit1 = 0
@@ -6990,7 +7532,7 @@ function error1(msg, __wurst_stackPos26)
 				if (stacktraceStr1 == " Stacktrace:") then
 					stacktraceStr1 = " Stacktrace: <none>"
 				end
-				Log_error(stringConcat(temp171, stacktraceStr1), "when calling error in ErrorHandling, line 70")
+				Log_error(stringConcat(temp16, stacktraceStr1), "when calling error in ErrorHandling, line 70")
 			end
 		end
 		ErrorHandling_lastError = msg
@@ -6999,8 +7541,8 @@ function error1(msg, __wurst_stackPos26)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_EventHelper(__wurst_stackPos319) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos319
+function init_EventHelper(__wurst_stackPos337) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos337
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	HashMap_new_HashMap("when calling new_HashMap in EventHelper, line 6")
 	HashMap_new_HashMap("when calling new_HashMap in EventHelper, line 7")
@@ -7008,89 +7550,89 @@ function init_EventHelper(__wurst_stackPos319)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function eventid_isPlayerunitEvent(this237, __wurst_stackPos383) 
+function eventid_isPlayerunitEvent(this244, __wurst_stackPos411) 
 	local eventId2 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos383
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos411
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	eventId2 = handle_getHandleId(this237, "when calling getHandleId in EventHelper, line 53")
+	eventId2 = handle_getHandleId(this244, "when calling getHandleId in EventHelper, line 53")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return (((((eventId2 >= 18) and (eventId2 <= 51)) or ((eventId2 >= 269) and (eventId2 <= 277))) or (eventId2 == 315)) or (eventId2 == 308))
 end
 
-function eventid_isKeyboardEvent(this238, __wurst_stackPos384) 
+function eventid_isKeyboardEvent(this245, __wurst_stackPos412) 
 	local eventId3 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos384
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos412
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	eventId3 = handle_getHandleId(this238, "when calling getHandleId in EventHelper, line 57")
+	eventId3 = handle_getHandleId(this245, "when calling getHandleId in EventHelper, line 57")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return (((eventId3 >= 261) and (eventId3 <= 268)) or (eventId3 == 17))
 end
 
-function eventid_isMouseEvent(this239, __wurst_stackPos385) 
+function eventid_isMouseEvent(this246, __wurst_stackPos413) 
 	local eventId4 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos385
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos413
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	eventId4 = handle_getHandleId(this239, "when calling getHandleId in EventHelper, line 61")
+	eventId4 = handle_getHandleId(this246, "when calling getHandleId in EventHelper, line 61")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return ((eventId4 >= 305) and (eventId4 <= 307))
 end
 
 function EventData_getTriggerUnit(__wurst_stackPos190) 
-	local stackTrace_tempReturn15 = nil
+	local stackTrace_tempReturn17 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos190
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn15 = GetTriggerUnit()
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn15
-end
-
-function EventData_getDyingUnit(__wurst_stackPos202) 
-	local stackTrace_tempReturn16 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos202
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn16 = GetDyingUnit()
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn16
-end
-
-function EventData_getTrainedUnit(__wurst_stackPos132) 
-	local stackTrace_tempReturn17 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos132
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn17 = GetTrainedUnit()
+	stackTrace_tempReturn17 = GetTriggerUnit()
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn17
 end
 
-function EventData_getSpellTargetUnit(__wurst_stackPos22) 
+function EventData_getDyingUnit(__wurst_stackPos202) 
 	local stackTrace_tempReturn18 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos22
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos202
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn18 = GetSpellTargetUnit()
+	stackTrace_tempReturn18 = GetDyingUnit()
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn18
 end
 
-function EventData_getAbilityTargetPos(__wurst_stackPos436) 
-	local stackTrace_tempReturn19 = ({0., 0., })
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos436
+function EventData_getTrainedUnit(__wurst_stackPos132) 
+	local stackTrace_tempReturn19 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos132
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn19 = ({GetSpellTargetX(), GetSpellTargetY(), })
+	stackTrace_tempReturn19 = GetTrainedUnit()
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn19
 end
 
-function EventData_getSpellTargetPos(__wurst_stackPos181) 
-	local stackTrace_tempReturn20 = ({0., 0., })
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos181
+function EventData_getSpellTargetUnit(__wurst_stackPos22) 
+	local stackTrace_tempReturn20 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos22
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn20 = tupleCopy(EventData_getAbilityTargetPos("when calling getAbilityTargetPos in EventHelper, line 384"))
+	stackTrace_tempReturn20 = GetSpellTargetUnit()
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn20
 end
 
-function init_Execute(__wurst_stackPos337) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos337
+function EventData_getAbilityTargetPos(__wurst_stackPos461) 
+	local stackTrace_tempReturn21 = ({0., 0., })
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos461
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn21 = ({GetSpellTargetX(), GetSpellTargetY(), })
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn21
+end
+
+function EventData_getSpellTargetPos(__wurst_stackPos181) 
+	local stackTrace_tempReturn22 = ({0., 0., })
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos181
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn22 = tupleCopy(EventData_getAbilityTargetPos("when calling getAbilityTargetPos in EventHelper, line 384"))
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn22
+end
+
+function init_Execute(__wurst_stackPos356) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos356
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Execute_executeForce = CreateForce()
 	force_addPlayer(Execute_executeForce, Player_localPlayer, "when calling addPlayer in Execute, line 15")
@@ -7098,8 +7640,8 @@ function init_Execute(__wurst_stackPos337)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function executeCurrentCallback(__wurst_stackPos438) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos438
+function executeCurrentCallback(__wurst_stackPos463) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos463
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	ErrorHandling_lastError = ""
 	getCurrentCallback("when calling getCurrentCallback in Execute, line 19"):run("when calling run in Execute, line 19")
@@ -7107,22 +7649,22 @@ function executeCurrentCallback(__wurst_stackPos438)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function getCurrentCallback(__wurst_stackPos439) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos439
+function getCurrentCallback(__wurst_stackPos464) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos464
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return Execute_tempCallbacks[(Execute_tempCallbacksCount - 1)]
 end
 
-function setCurrentCallbackSuccess(value12, __wurst_stackPos440) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos440
+function setCurrentCallbackSuccess(value12, __wurst_stackPos465) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos465
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Execute_tempCallbacksSuccess[(Execute_tempCallbacksCount - 1)] = value12
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function pushCallback(c1, __wurst_stackPos441) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos441
+function pushCallback(c1, __wurst_stackPos466) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos466
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Execute_tempCallbacks[Execute_tempCallbacksCount] = c1
 	Execute_tempCallbacksSuccess[Execute_tempCallbacksCount] = false
@@ -7130,23 +7672,23 @@ function pushCallback(c1, __wurst_stackPos441)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function popCallback(__wurst_stackPos442) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos442
+function popCallback(__wurst_stackPos467) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos467
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Execute_tempCallbacksCount = (Execute_tempCallbacksCount - 1)
 	ForForceCallback_destroyForForceCallback(Execute_tempCallbacks[Execute_tempCallbacksCount], "when calling destroyForForceCallback in Execute, line 33")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function isLastCallbackSuccessful(__wurst_stackPos443) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos443
+function isLastCallbackSuccessful(__wurst_stackPos468) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos468
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return boolEnsure(Execute_tempCallbacksSuccess[Execute_tempCallbacksCount])
 end
 
-function execute(c2, __wurst_stackPos444) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos444
+function execute(c2, __wurst_stackPos469) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos469
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	if not(try(c2, "when calling try in Execute, line 78")) then
 		error1(stringConcat("execute: thread has crashed. caused by:\n| - ", ErrorHandling_lastError), "when calling error in Execute, line 79")
@@ -7154,10 +7696,10 @@ function execute(c2, __wurst_stackPos444)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function try(c3, __wurst_stackPos445) 
+function try(c3, __wurst_stackPos470) 
 	local suppressErrors = nil
-	local stackTrace_tempReturn21 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos445
+	local stackTrace_tempReturn23 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos470
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	pushCallback(c3, "when calling pushCallback in Execute, line 96")
 	suppressErrors = ErrorHandling_suppressErrorMessages
@@ -7169,43 +7711,43 @@ function try(c3, __wurst_stackPos445)
 		end, "when calling forEach in Execute, line 99")
 	ErrorHandling_suppressErrorMessages = suppressErrors
 	popCallback("when calling popCallback in Execute, line 101")
-	stackTrace_tempReturn21 = isLastCallbackSuccessful("when calling isLastCallbackSuccessful in Execute, line 102")
+	stackTrace_tempReturn23 = isLastCallbackSuccessful("when calling isLastCallbackSuccessful in Execute, line 102")
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn21
+	return stackTrace_tempReturn23
 end
 
-function init_Force(__wurst_stackPos310) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos310
+function init_Force(__wurst_stackPos328) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos328
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function force_addPlayer(this254, whichPlayer9, __wurst_stackPos437) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos437
+function force_addPlayer(this259, whichPlayer10, __wurst_stackPos462) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos462
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_safe_ForceAddPlayer(this254, whichPlayer9)
+	__wurst_safe_ForceAddPlayer(this259, whichPlayer10)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function force_forEach(this255, callback, __wurst_stackPos446) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos446
+function force_forEach(this260, callback, __wurst_stackPos471) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos471
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_ForForce(this255, callback)
+	__wurst_ForForce(this260, callback)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Framehandle(__wurst_stackPos313) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos313
+function init_Framehandle(__wurst_stackPos331) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos331
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_GameTimer(__wurst_stackPos305) 
-	local receiver25 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos305
+function init_GameTimer(__wurst_stackPos323) 
+	local receiver27 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos323
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	receiver25 = CreateTimer()
-	timer_start(receiver25, 100000., nil, "when calling start in GameTimer, line 7")
+	receiver27 = CreateTimer()
+	timer_start(receiver27, 100000., nil, "when calling start in GameTimer, line 7")
 	timer_startPeriodic(CreateTimer(), Basics_ANIMATION_PERIOD, function (...) 
 			xpcall(function (...) 
 					bridge_code__startPeriodic_GameTimer(...)
@@ -7214,22 +7756,120 @@ function init_GameTimer(__wurst_stackPos305)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function code__startPeriodic_GameTimer(__wurst_stackPos447) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos447
+function code__startPeriodic_GameTimer(__wurst_stackPos472) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos472
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	GameTimer_currentTime = (GameTimer_currentTime + Basics_ANIMATION_PERIOD)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Group(__wurst_stackPos314) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos314
+function init_GateLogic(__wurst_stackPos371) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos371
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	GateLogic_darnassusGate = udg_darnassusGate
+	GateLogic_testGate = udg_testGate
+	GateLogic_cpsWithGates = CreateGroup()
+	GateLogic_cpsWithGatesMap = HashMap_new_HashMap("when calling new_HashMap in GateLogic, line 16")
+	GateLogic_gateList = LinkedList_new_LinkedList("when calling new_LinkedList in GateLogic, line 17")
+	addGates("when calling addGates in GateLogic, line 56")
+	initGates("when calling initGates in GateLogic, line 57")
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function addGates(__wurst_stackPos473) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos473
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	LinkedList_LinkedList_add(GateLogic_gateList, "when calling add in GateLogic, line 22", __wurst_objectToIndex(udg_darnassusGate))
+	LinkedList_LinkedList_add(GateLogic_gateList, "when calling add in GateLogic, line 23", __wurst_objectToIndex(udg_testGate))
+	group_add1(GateLogic_cpsWithGates, "when calling add in GateLogic, line 25", udg_darnassusTeldrassil)
+	HashMap_HashMap_put(GateLogic_cpsWithGatesMap, __wurst_objectToIndex(GateLogic_darnassusGate), __wurst_objectToIndex(udg_darnassusTeldrassil), "when calling put in GateLogic, line 26")
+	group_add1(GateLogic_cpsWithGates, "when calling add in GateLogic, line 27", udg_mountHyjalGrove)
+	HashMap_HashMap_put(GateLogic_cpsWithGatesMap, __wurst_objectToIndex(GateLogic_testGate), __wurst_objectToIndex(udg_mountHyjalGrove), "when calling put in GateLogic, line 28")
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function onOpenGate(__wurst_stackPos475) 
+	local p21 = nil
+	local iterator16 = nil
+	local d1 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos475
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	p21 = GetTriggerPlayer()
+	iterator16 = LinkedList_LinkedList_iterator(GateLogic_gateList, "when calling iterator in GateLogic, line 33")
+	while true do
+		if not(LLIterator_LLIterator_hasNext(iterator16, "when calling hasNext in GateLogic, line 33")) then
+			break
+		end
+		d1 = __wurst_objectFromIndex(intEnsure(LLIterator_LLIterator_next(iterator16, "when calling next in GateLogic, line 33")))
+		if (HashMap_HashMap_has(GateLogic_cpsWithGatesMap, __wurst_objectToIndex(d1), "when calling has in GateLogic, line 34") and (playerFromIndex(intEnsure(HashMap_HashMap_get(ControlPoint_cpOwners, HashMap_HashMap_get(GateLogic_cpsWithGatesMap, __wurst_objectToIndex(d1), "when calling get in GateLogic, line 34"), "when calling get in GateLogic, line 34")), "when calling playerFromIndex in GateLogic, line 34") == p21)) then
+			__wurst_safe_ModifyGateBJ(bj_GATEOPERATION_OPEN, d1)
+		end
+	end
+	LLIterator_LLIterator_close(iterator16, "when calling close in GateLogic, line 33")
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function onCloseGate(__wurst_stackPos476) 
+	local p22 = nil
+	local iterator17 = nil
+	local d3 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos476
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	p22 = GetTriggerPlayer()
+	iterator17 = LinkedList_LinkedList_iterator(GateLogic_gateList, "when calling iterator in GateLogic, line 40")
+	while true do
+		if not(LLIterator_LLIterator_hasNext(iterator17, "when calling hasNext in GateLogic, line 40")) then
+			break
+		end
+		d3 = __wurst_objectFromIndex(intEnsure(LLIterator_LLIterator_next(iterator17, "when calling next in GateLogic, line 40")))
+		if (HashMap_HashMap_has(GateLogic_cpsWithGatesMap, __wurst_objectToIndex(d3), "when calling has in GateLogic, line 41") and (playerFromIndex(intEnsure(HashMap_HashMap_get(ControlPoint_cpOwners, HashMap_HashMap_get(GateLogic_cpsWithGatesMap, __wurst_objectToIndex(d3), "when calling get in GateLogic, line 41"), "when calling get in GateLogic, line 41")), "when calling playerFromIndex in GateLogic, line 41") == p22)) then
+			__wurst_safe_ModifyGateBJ(bj_GATEOPERATION_CLOSE, d3)
+		end
+	end
+	LLIterator_LLIterator_close(iterator17, "when calling close in GateLogic, line 40")
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function initGates(__wurst_stackPos474) 
+	local openTrig = nil
+	local closeTrig = nil
+	local i13 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos474
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	addGates("when calling addGates in GateLogic, line 46")
+	openTrig = CreateTrigger()
+	closeTrig = CreateTrigger()
+	i13 = 0
+	while true do
+		if (i13 > 23) then
+			break
+		end
+		trigger_registerPlayerChatEvent(openTrig, Player_players[i13], "-open", true, "when calling registerPlayerChatEvent in GateLogic, line 50")
+		trigger_registerPlayerChatEvent(closeTrig, Player_players[i13], "-close", true, "when calling registerPlayerChatEvent in GateLogic, line 51")
+		i13 = (i13 + 1)
+	end
+	trigger_addAction(openTrig, function (...) 
+			xpcall(function (...) 
+					bridge_onOpenGate(...)
+				end, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua callback error: " .. tostring(err)) xpcall(function() error1(tostring(err), "<lua error>") end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) BJDebugMsg("while reporting: " .. tostring(err))  end) end, ...)
+		end, "when calling addAction in GateLogic, line 52")
+	trigger_addAction(closeTrig, function (...) 
+			xpcall(function (...) 
+					bridge_onCloseGate(...)
+				end, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua callback error: " .. tostring(err)) xpcall(function() error1(tostring(err), "<lua error>") end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) BJDebugMsg("while reporting: " .. tostring(err))  end) end, ...)
+		end, "when calling addAction in GateLogic, line 53")
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function init_Group(__wurst_stackPos332) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos332
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Group_ENUM_GROUP = CreateGroup()
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_GroupUtils(__wurst_stackPos338) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos338
+function init_GroupUtils(__wurst_stackPos357) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos357
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	GroupUtils_GROUP_NUMBER_LIMIT = 1024
 	GroupUtils_START_CREATE_GROUPS = 64
@@ -7241,7 +7881,7 @@ function init_GroupUtils(__wurst_stackPos338)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function createGroups(number1, __wurst_stackPos449) 
+function createGroups(number1, __wurst_stackPos478) 
 	local maxCreatePerCycle = nil
 	local actualLimit = nil
 	local numTarget = nil
@@ -7249,7 +7889,7 @@ function createGroups(number1, __wurst_stackPos449)
 	local toCreate = nil
 	local createNow = nil
 	local clVar23 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos449
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos478
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	maxCreatePerCycle = 256
 	actualLimit = max("when calling max in GroupUtils, line 81", (JASS_MAX_ARRAY_SIZE - 1), GroupUtils_GROUP_NUMBER_LIMIT)
@@ -7282,8 +7922,8 @@ function push(g2, __wurst_stackPos111)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function initialize(__wurst_stackPos448) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos448
+function initialize(__wurst_stackPos477) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos477
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	createGroups(GroupUtils_START_CREATE_GROUPS, "when calling createGroups in GroupUtils, line 101")
 	wurst_stack_depth = (wurst_stack_depth - 1)
@@ -7310,26 +7950,26 @@ function group_enumUnitsInRect(this16, rec, filter1, __wurst_stackPos17)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function group_enumUnitsOfType(this256, id8, filter7, __wurst_stackPos453) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos453
+function group_enumUnitsOfType(this261, id8, filter7, __wurst_stackPos482) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos482
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_safe_GroupEnumUnitsOfType(this256, UnitId2String(id8), filter7)
+	__wurst_safe_GroupEnumUnitsOfType(this261, UnitId2String(id8), filter7)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
 function group_add(this99, __wurst_stackPos118, ...) 
-	local i12 = nil
-	local g5 = nil
+	local i14 = nil
+	local g6 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos118
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	i12 = 0
+	i14 = 0
 	local __args1 = table.pack(...)
-	for i13=1,__args1.n do
-	g5 = __args1[i13]
-	i12 = (i12 + __wurst_safe_BlzGroupAddGroupFast(g5, this99))
+	for i15=1,__args1.n do
+	g6 = __args1[i15]
+	i14 = (i14 + __wurst_safe_BlzGroupAddGroupFast(g6, this99))
 	end
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return i12
+	return i14
 end
 
 function group_clear(this101, __wurst_stackPos120) 
@@ -7339,38 +7979,38 @@ function group_clear(this101, __wurst_stackPos120)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function group_add1(this249, __wurst_stackPos424, ...) 
-	local i14 = nil
-	local u23 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos424
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	i14 = 0
-	local __args2 = table.pack(...)
-	for i15=1,__args2.n do
-	u23 = __args2[i15]
-	if __wurst_safe_GroupAddUnit(this249, u23) then
-		i14 = (i14 + 1)
-	end
-	end
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return i14
-end
-
-function group_remove(this257, __wurst_stackPos454, ...) 
+function group_add1(this236, __wurst_stackPos394, ...) 
 	local i16 = nil
-	local u24 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos454
+	local u28 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos394
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	i16 = 0
-	local __args3 = table.pack(...)
-	for i17=1,__args3.n do
-	u24 = __args3[i17]
-	if __wurst_safe_GroupRemoveUnit(this257, u24) then
+	local __args2 = table.pack(...)
+	for i17=1,__args2.n do
+	u28 = __args2[i17]
+	if __wurst_safe_GroupAddUnit(this236, u28) then
 		i16 = (i16 + 1)
 	end
 	end
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return i16
+end
+
+function group_remove(this262, __wurst_stackPos483, ...) 
+	local i18 = nil
+	local u29 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos483
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	i18 = 0
+	local __args3 = table.pack(...)
+	for i19=1,__args3.n do
+	u29 = __args3[i19]
+	if __wurst_safe_GroupRemoveUnit(this262, u29) then
+		i18 = (i18 + 1)
+	end
+	end
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return i18
 end
 
 function group_destr(this102, __wurst_stackPos121) 
@@ -7380,49 +8020,58 @@ function group_destr(this102, __wurst_stackPos121)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function group_size(this100, __wurst_stackPos119) 
-	local stackTrace_tempReturn22 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos119
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn22 = __wurst_safe_BlzGroupGetSize(this100)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn22
-end
-
-function group_isEmpty(this258, __wurst_stackPos455) 
-	local stackTrace_tempReturn23 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos455
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn23 = not(group_hasNext(this258, "when calling hasNext in Group, line 70"))
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn23
-end
-
-function group_hasNext(this130, __wurst_stackPos151) 
+function group_has(this238, u22, __wurst_stackPos398) 
 	local stackTrace_tempReturn24 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos151
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos398
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn24 = not((__wurst_safe_FirstOfGroup(this130) == nil))
+	stackTrace_tempReturn24 = __wurst_safe_IsUnitInGroup(u22, this238)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn24
 end
 
-function group_get(this93, index1, __wurst_stackPos112) 
+function group_size(this100, __wurst_stackPos119) 
 	local stackTrace_tempReturn25 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos112
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos119
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn25 = __wurst_safe_BlzGroupUnitAt(this93, index1)
+	stackTrace_tempReturn25 = __wurst_safe_BlzGroupGetSize(this100)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn25
 end
 
-function group_iterator(this2, __wurst_stackPos2) 
+function group_isEmpty(this263, __wurst_stackPos484) 
 	local stackTrace_tempReturn26 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos2
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos484
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn26 = GroupIterator_new_GroupIterator(this2, "when calling new_GroupIterator in Group, line 141")
+	stackTrace_tempReturn26 = not(group_hasNext(this263, "when calling hasNext in Group, line 70"))
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn26
+end
+
+function group_hasNext(this130, __wurst_stackPos151) 
+	local stackTrace_tempReturn27 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos151
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn27 = not((__wurst_safe_FirstOfGroup(this130) == nil))
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn27
+end
+
+function group_get(this93, index1, __wurst_stackPos112) 
+	local stackTrace_tempReturn28 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos112
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn28 = __wurst_safe_BlzGroupUnitAt(this93, index1)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn28
+end
+
+function group_iterator(this2, __wurst_stackPos2) 
+	local stackTrace_tempReturn29 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos2
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn29 = GroupIterator_new_GroupIterator(this2, "when calling new_GroupIterator in Group, line 141")
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn29
 end
 
 function group_next(this131, __wurst_stackPos152) 
@@ -7435,97 +8084,115 @@ function group_next(this131, __wurst_stackPos152)
 	return iterUnit
 end
 
-function init_HashList(__wurst_stackPos318) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos318
+function init_HashList(__wurst_stackPos336) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos336
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	HashList_ht = hashtable_compiletime
 	HashList_occurences = hashtable_compiletime1
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function hashtable_hasBoolean(this252, parentKey21, childKey11, __wurst_stackPos434) 
-	local stackTrace_tempReturn27 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos434
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn27 = __wurst_HaveSavedBoolean(this252, parentKey21, childKey11)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn27
-end
-
-function hashtable_hasInt(this191, parentKey4, childKey, __wurst_stackPos223) 
-	local stackTrace_tempReturn28 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos223
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn28 = __wurst_HaveSavedInteger(this191, parentKey4, childKey)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn28
-end
-
-function hashtable_hasString(this193, parentKey6, childKey1, __wurst_stackPos225) 
-	local stackTrace_tempReturn29 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos225
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn29 = __wurst_HaveSavedString(this193, parentKey6, childKey1)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn29
-end
-
-function hashtable_loadBoolean(this253, parentKey22, childKey12, __wurst_stackPos435) 
+function hashtable_hasBoolean(this257, parentKey25, childKey13, __wurst_stackPos459) 
 	local stackTrace_tempReturn30 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos435
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos459
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn30 = __wurst_LoadBoolean(this253, parentKey22, childKey12)
+	stackTrace_tempReturn30 = __wurst_HaveSavedBoolean(this257, parentKey25, childKey13)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn30
 end
 
-function hashtable_loadInt(this194, parentKey8, childKey3, __wurst_stackPos226) 
+function hashtable_hasInt(this191, parentKey4, childKey, __wurst_stackPos223) 
 	local stackTrace_tempReturn31 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos226
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos223
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn31 = __wurst_LoadInteger(this194, parentKey8, childKey3)
+	stackTrace_tempReturn31 = __wurst_HaveSavedInteger(this191, parentKey4, childKey)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn31
 end
 
-function hashtable_loadString(this197, parentKey11, childKey5, __wurst_stackPos229) 
+function hashtable_hasString(this193, parentKey6, childKey1, __wurst_stackPos225) 
 	local stackTrace_tempReturn32 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos229
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos225
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn32 = __wurst_LoadStr(this197, parentKey11, childKey5)
+	stackTrace_tempReturn32 = __wurst_HaveSavedString(this193, parentKey6, childKey1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn32
 end
 
-function hashtable_loadTriggerHandle(this203, parentKey17, childKey8, __wurst_stackPos235) 
+function hashtable_loadBoolean(this258, parentKey26, childKey14, __wurst_stackPos460) 
 	local stackTrace_tempReturn33 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos235
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos460
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn33 = __wurst_LoadTriggerHandle(this203, parentKey17, childKey8)
+	stackTrace_tempReturn33 = __wurst_LoadBoolean(this258, parentKey26, childKey14)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn33
 end
 
-function hashtable_loadUnitHandle(this201, parentKey15, childKey7, __wurst_stackPos233) 
+function hashtable_loadDestructableHandle(this203, parentKey17, childKey8, __wurst_stackPos235) 
 	local stackTrace_tempReturn34 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos233
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos235
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn34 = __wurst_LoadUnitHandle(this201, parentKey15, childKey7)
+	stackTrace_tempReturn34 = __wurst_LoadDestructableHandle(this203, parentKey17, childKey8)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn34
 end
 
-function hashtable_saveBoolean(this251, parentKey20, childKey10, value11, __wurst_stackPos433) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos433
+function hashtable_loadGroupHandle(this205, parentKey19, childKey9, __wurst_stackPos237) 
+	local stackTrace_tempReturn35 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos237
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_SaveBoolean(this251, parentKey20, childKey10, value11)
+	stackTrace_tempReturn35 = __wurst_LoadGroupHandle(this205, parentKey19, childKey9)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn35
+end
+
+function hashtable_loadInt(this194, parentKey8, childKey3, __wurst_stackPos226) 
+	local stackTrace_tempReturn36 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos226
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn36 = __wurst_LoadInteger(this194, parentKey8, childKey3)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn36
+end
+
+function hashtable_loadString(this197, parentKey11, childKey5, __wurst_stackPos229) 
+	local stackTrace_tempReturn37 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos229
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn37 = __wurst_LoadStr(this197, parentKey11, childKey5)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn37
+end
+
+function hashtable_loadTriggerHandle(this207, parentKey21, childKey10, __wurst_stackPos239) 
+	local stackTrace_tempReturn38 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos239
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn38 = __wurst_LoadTriggerHandle(this207, parentKey21, childKey10)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn38
+end
+
+function hashtable_loadUnitHandle(this201, parentKey15, childKey7, __wurst_stackPos233) 
+	local stackTrace_tempReturn39 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos233
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn39 = __wurst_LoadUnitHandle(this201, parentKey15, childKey7)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn39
+end
+
+function hashtable_saveBoolean(this256, parentKey24, childKey12, value11, __wurst_stackPos458) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos458
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	__wurst_SaveBoolean(this256, parentKey24, childKey12, value11)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function hashtable_saveFogStateHandle(this205, parentKey19, childKey9, value7, __wurst_stackPos237) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos237
+function hashtable_saveFogStateHandle(this209, parentKey23, childKey11, value7, __wurst_stackPos241) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos241
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_SaveFogStateHandle(this205, parentKey19, childKey9, value7)
+	__wurst_SaveFogStateHandle(this209, parentKey23, childKey11, value7)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -7543,23 +8210,23 @@ function hashtable_saveString(this199, parentKey13, childKey6, value5, __wurst_s
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_HeroTrainer(__wurst_stackPos352) 
+function init_HeroTrainer(__wurst_stackPos372) 
 	local clVar24 = nil
-	local temp172 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos352
+	local temp17 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos372
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	HeroTrainer_TAVERN_ID = 1848651827
-	temp172 = EVENT_PLAYER_UNIT_TRAIN_FINISH
+	temp17 = EVENT_PLAYER_UNIT_TRAIN_FINISH
 	clVar24 = EventListener_add_HeroTrainer:create25()
 	EventListener_construct_EventListener(clVar24, "when calling construct_EventListener in HeroTrainer, line 9")
-	EventListener_add(temp172, clVar24, "when calling add in HeroTrainer, line 9")
+	EventListener_add(temp17, clVar24, "when calling add in HeroTrainer, line 9")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Hibernate(__wurst_stackPos353) 
+function init_Hibernate(__wurst_stackPos373) 
 	local clVar25 = nil
-	local temp173 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos353
+	local temp18 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos373
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Hibernate_HIBERNATE_ID = intEnsure(1095577697)
 	Hibernate_HIBERNATE_BUFF_ID = intEnsure(1112354867)
@@ -7572,22 +8239,22 @@ function init_Hibernate(__wurst_stackPos353)
 	Hibernate_HP_FLAT[0] = 125.
 	Hibernate_HP_FLAT[1] = 175.
 	Hibernate_HP_FLAT[2] = 250.
-	temp173 = Hibernate_HIBERNATE_ID
+	temp18 = Hibernate_HIBERNATE_ID
 	clVar25 = OnCastListener_onCast_Hibernate:create26()
 	OnCastListener_construct_OnCastListener(clVar25, "when calling construct_OnCastListener in Hibernate, line 65")
-	EventListener_onCast(temp173, clVar25, "when calling onCast in Hibernate, line 65")
+	EventListener_onCast(temp18, clVar25, "when calling onCast in Hibernate, line 65")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Icons(__wurst_stackPos325) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos325
+function init_Icons(__wurst_stackPos344) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos344
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_InitFocusCamera(__wurst_stackPos354) 
+function init_InitFocusCamera(__wurst_stackPos374) 
 	local clVar26 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos354
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos374
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	clVar26 = CallbackSingle_doAfter_InitFocusCamera:create29()
 	CallbackSingle_construct_CallbackSingle(clVar26, "when calling construct_CallbackSingle in InitFocusCamera, line 6")
@@ -7595,39 +8262,39 @@ function init_InitFocusCamera(__wurst_stackPos354)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_InstantDummyCaster(__wurst_stackPos355) 
-	local receiver26 = nil
-	local receiver27 = nil
+function init_InstantDummyCaster(__wurst_stackPos375) 
 	local receiver28 = nil
 	local receiver29 = nil
 	local receiver30 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos355
+	local receiver31 = nil
+	local receiver32 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos375
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	InstantDummyCaster_DUMMY_CASTER_UNIT_ID = intEnsure(2016423985)
 	InstantDummyCaster_DUMMY_ROOT_ABIL_ID = intEnsure(1095577651)
-	receiver26 = createUnit(Basics_DUMMY_PLAYER, InstantDummyCaster_DUMMY_CASTER_UNIT_ID, MapBounds_boundMax, ({0., }), "when calling createUnit in InstantDummyCaster, line 97")
-	unit_setPathing(receiver26, false, "when calling setPathing in InstantDummyCaster, line 98")
-	receiver27 = receiver26
-	unit_addAbility(receiver27, Basics_HEIGHT_ENABLER, "when calling addAbility in InstantDummyCaster, line 98")
-	receiver28 = receiver27
-	unit_removeAbility(receiver28, Basics_HEIGHT_ENABLER, "when calling removeAbility in InstantDummyCaster, line 98")
+	receiver28 = createUnit(Basics_DUMMY_PLAYER, InstantDummyCaster_DUMMY_CASTER_UNIT_ID, MapBounds_boundMax, ({0., }), "when calling createUnit in InstantDummyCaster, line 97")
+	unit_setPathing(receiver28, false, "when calling setPathing in InstantDummyCaster, line 98")
 	receiver29 = receiver28
-	unit_addAbility(receiver29, InstantDummyCaster_DUMMY_ROOT_ABIL_ID, "when calling addAbility in InstantDummyCaster, line 98")
+	unit_addAbility(receiver29, Basics_HEIGHT_ENABLER, "when calling addAbility in InstantDummyCaster, line 98")
 	receiver30 = receiver29
-	unit_removeAbility(receiver30, InstantDummyCaster_DUMMY_ROOT_ABIL_ID, "when calling removeAbility in InstantDummyCaster, line 98")
-	InstantDummyCaster_caster = receiver30
+	unit_removeAbility(receiver30, Basics_HEIGHT_ENABLER, "when calling removeAbility in InstantDummyCaster, line 98")
+	receiver31 = receiver30
+	unit_addAbility(receiver31, InstantDummyCaster_DUMMY_ROOT_ABIL_ID, "when calling addAbility in InstantDummyCaster, line 98")
+	receiver32 = receiver31
+	unit_removeAbility(receiver32, InstantDummyCaster_DUMMY_ROOT_ABIL_ID, "when calling removeAbility in InstantDummyCaster, line 98")
+	InstantDummyCaster_caster = receiver32
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function InstantDummyCaster_prepare(owner3, id9, lvl1, pos11, __wurst_stackPos456) 
-	local receiver31 = nil
-	local receiver32 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos456
+function InstantDummyCaster_prepare(owner3, id9, lvl1, pos11, __wurst_stackPos485) 
+	local receiver33 = nil
+	local receiver34 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos485
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	receiver31 = InstantDummyCaster_caster
-	unit_addAbility(receiver31, id9, "when calling addAbility in InstantDummyCaster, line 27")
-	receiver32 = receiver31
-	unit_setMana(receiver32, 1000000., "when calling setMana in InstantDummyCaster, line 27")
+	receiver33 = InstantDummyCaster_caster
+	unit_addAbility(receiver33, id9, "when calling addAbility in InstantDummyCaster, line 27")
+	receiver34 = receiver33
+	unit_setMana(receiver34, 1000000., "when calling setMana in InstantDummyCaster, line 27")
 	if vec3_inBounds(pos11, "when calling inBounds in InstantDummyCaster, line 28") then
 		unit_setXYZ(InstantDummyCaster_caster, pos11, "when calling setXYZ in InstantDummyCaster, line 29")
 	end
@@ -7640,8 +8307,8 @@ function InstantDummyCaster_prepare(owner3, id9, lvl1, pos11, __wurst_stackPos45
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function InstantDummyCaster_finish(id10, __wurst_stackPos461) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos461
+function InstantDummyCaster_finish(id10, __wurst_stackPos490) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos490
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	unit_setOwner(InstantDummyCaster_caster, Basics_DUMMY_PLAYER, false, "when calling setOwner in InstantDummyCaster, line 36")
 	unit_removeAbility(InstantDummyCaster_caster, id10, "when calling removeAbility in InstantDummyCaster, line 37")
@@ -7649,9 +8316,9 @@ function InstantDummyCaster_finish(id10, __wurst_stackPos461)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function InstantDummyCaster_castTarget1(owner4, abilityId3, lvl3, orderId1, target10, casterPos1, __wurst_stackPos463) 
+function InstantDummyCaster_castTarget1(owner4, abilityId3, lvl3, orderId1, target10, casterPos1, __wurst_stackPos492) 
 	local success = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos463
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos492
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	InstantDummyCaster_prepare(owner4, abilityId3, lvl3, casterPos1, "when calling prepare in InstantDummyCaster, line 47")
 	unit_setFacing(InstantDummyCaster_caster, vec2_angleTo(unit_getPos(InstantDummyCaster_caster, "when calling getPos in InstantDummyCaster, line 48"), widget_getPos(target10, "when calling getPos in InstantDummyCaster, line 48"), "when calling angleTo in InstantDummyCaster, line 48"), "when calling setFacing in InstantDummyCaster, line 48")
@@ -7662,16 +8329,16 @@ function InstantDummyCaster_castTarget1(owner4, abilityId3, lvl3, orderId1, targ
 end
 
 function InstantDummyCaster_castTarget(owner1, abilityId2, lvl, orderId, target7, __wurst_stackPos184) 
-	local stackTrace_tempReturn35 = nil
+	local stackTrace_tempReturn40 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos184
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn35 = InstantDummyCaster_castTarget1(owner1, abilityId2, lvl, orderId, target7, vec2_toVec3(({__wurst_safe_GetWidgetX(target7), __wurst_safe_GetWidgetY(target7), }), "when calling toVec3 in InstantDummyCaster, line 62"), "when calling castTarget in InstantDummyCaster, line 62")
+	stackTrace_tempReturn40 = InstantDummyCaster_castTarget1(owner1, abilityId2, lvl, orderId, target7, vec2_toVec3(({__wurst_safe_GetWidgetX(target7), __wurst_safe_GetWidgetY(target7), }), "when calling toVec3 in InstantDummyCaster, line 62"), "when calling castTarget in InstantDummyCaster, line 62")
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn35
+	return stackTrace_tempReturn40
 end
 
-function init_Integer(__wurst_stackPos294) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos294
+function init_Integer(__wurst_stackPos312) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos312
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Integer_INT_MAX = 2147483647
 	Integer_INT_MIN = -2147483648
@@ -7686,34 +8353,34 @@ function int_toReal(this183, __wurst_stackPos214)
 end
 
 function int_toString(this132, __wurst_stackPos153) 
-	local stackTrace_tempReturn36 = nil
+	local stackTrace_tempReturn41 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos153
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn36 = tostring(this132)
+	stackTrace_tempReturn41 = tostring(this132)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn36
+	return stackTrace_tempReturn41
 end
 
-function int_bitOr(this232, other, __wurst_stackPos373) 
-	local stackTrace_tempReturn37 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos373
+function int_bitOr(this239, other, __wurst_stackPos401) 
+	local stackTrace_tempReturn42 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos401
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn37 = BlzBitOr(this232, other)
+	stackTrace_tempReturn42 = BlzBitOr(this239, other)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn37
+	return stackTrace_tempReturn42
 end
 
-function int_bitXor(this233, other1, __wurst_stackPos374) 
-	local stackTrace_tempReturn38 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos374
+function int_bitXor(this240, other1, __wurst_stackPos402) 
+	local stackTrace_tempReturn43 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos402
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn38 = BlzBitXor(this233, other1)
+	stackTrace_tempReturn43 = BlzBitXor(this240, other1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn38
+	return stackTrace_tempReturn43
 end
 
-function init_Invigorate(__wurst_stackPos341) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos341
+function init_Invigorate(__wurst_stackPos360) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos360
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Invigorate_seedlingCount = 0
 	Invigorate_INVIGORATE_ID = intEnsure(1095577655)
@@ -7743,77 +8410,77 @@ function addSeedlingStack(__wurst_stackPos23)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Isolation(__wurst_stackPos358) 
+function init_Isolation(__wurst_stackPos378) 
 	local clVar28 = nil
-	local temp174 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos358
+	local temp19 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos378
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	intEnsure(1095577653)
 	Isolation_ISOLATION_BUFF_ID = intEnsure(1112354866)
 	Isolation_ISOLATION_DAMAGE = 15.
 	Isolation_ISOLATION_PERIOD = 1.
-	temp174 = Isolation_ISOLATION_PERIOD
+	temp19 = Isolation_ISOLATION_PERIOD
 	clVar28 = CallbackPeriodic_doPeriodically_Isolation:create31()
 	CallbackPeriodic_construct_CallbackPeriodic(clVar28, "when calling construct_CallbackPeriodic in Isolation, line 77")
-	doPeriodically(temp174, clVar28, "when calling doPeriodically in Isolation, line 77")
+	doPeriodically(temp19, clVar28, "when calling doPeriodically in Isolation, line 77")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Lightning(__wurst_stackPos315) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos315
+function init_Lightning(__wurst_stackPos333) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos333
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_LinkedList(__wurst_stackPos321) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos321
+function init_LinkedList(__wurst_stackPos339) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos339
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	realToIndex(0., "when calling realToIndex in LinkedList, line 617")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_MagicFunctions(__wurst_stackPos303) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos303
+function init_MagicFunctions(__wurst_stackPos321) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos321
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	MagicFunctions_compiletime = false
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function compileError(msg3, __wurst_stackPos431) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos431
+function compileError(msg3, __wurst_stackPos456) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos456
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_MapBounds(__wurst_stackPos329) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos329
+function init_MapBounds(__wurst_stackPos348) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos348
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	initMapBounds("when calling initMapBounds in MapBounds, line 60")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function inBoundsXY(x5, y4, __wurst_stackPos470) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos470
+function inBoundsXY(x5, y4, __wurst_stackPos499) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos499
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return ((((x5 > MapBounds_boundMin[1]) and (x5 < MapBounds_boundMax[1])) and (y4 > MapBounds_boundMin[2])) and (y4 < MapBounds_boundMax[2]))
 end
 
-function vec3_inBounds(this260, __wurst_stackPos458) 
-	local stackTrace_tempReturn39 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos458
+function vec3_inBounds(this265, __wurst_stackPos487) 
+	local stackTrace_tempReturn44 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos487
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn39 = inBoundsXY(this260[1], this260[2], "when calling inBoundsXY in MapBounds, line 40")
+	stackTrace_tempReturn44 = inBoundsXY(this265[1], this265[2], "when calling inBoundsXY in MapBounds, line 40")
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn39
+	return stackTrace_tempReturn44
 end
 
-function initMapBounds(__wurst_stackPos469) 
+function initMapBounds(__wurst_stackPos498) 
 	local cond_result1 = nil
-	local receiver33 = nil
+	local receiver35 = nil
 	local cond_result2 = nil
-	local receiver34 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos469
+	local receiver36 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos498
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	if MagicFunctions_compiletime then
 		cond_result1 = Rect(-1024., -1024., 1024., 1024.)
@@ -7821,17 +8488,17 @@ function initMapBounds(__wurst_stackPos469)
 		cond_result1 = GetPlayableMapRect()
 	end
 	MapBounds_playableMapRect = cond_result1
-	receiver33 = CreateRegion()
-	region_addRect(receiver33, MapBounds_playableMapRect, "when calling addRect in MapBounds, line 49")
+	receiver35 = CreateRegion()
+	region_addRect(receiver35, MapBounds_playableMapRect, "when calling addRect in MapBounds, line 49")
 	if MagicFunctions_compiletime then
 		cond_result2 = Rect(-1536., -1536., 1536., 1536.)
 	else
 		cond_result2 = GetWorldBounds()
 	end
 	MapBounds_boundRect = cond_result2
-	receiver34 = CreateRegion()
-	region_addRect(receiver34, MapBounds_boundRect, "when calling addRect in MapBounds, line 51")
-	MapBounds_boundRegion = receiver34
+	receiver36 = CreateRegion()
+	region_addRect(receiver36, MapBounds_boundRect, "when calling addRect in MapBounds, line 51")
+	MapBounds_boundRegion = receiver36
 	MapBounds_playableMin = ({rect_getMinX(MapBounds_playableMapRect, "when calling getMinX in MapBounds, line 52"), rect_getMinY(MapBounds_playableMapRect, "when calling getMinY in MapBounds, line 52"), })
 	MapBounds_playableMax = ({rect_getMaxX(MapBounds_playableMapRect, "when calling getMaxX in MapBounds, line 53"), rect_getMaxY(MapBounds_playableMapRect, "when calling getMaxY in MapBounds, line 53"), })
 	MapBounds_boundMin = ({rect_getMinX(MapBounds_boundRect, "when calling getMinX in MapBounds, line 54"), rect_getMinY(MapBounds_boundRect, "when calling getMinY in MapBounds, line 54"), })
@@ -7841,22 +8508,22 @@ function initMapBounds(__wurst_stackPos469)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Maths(__wurst_stackPos297) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos297
+function init_Maths(__wurst_stackPos315) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos315
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function max(__wurst_stackPos450, ...) 
+function max(__wurst_stackPos479, ...) 
 	local maxNumber = nil
 	local cond_result3 = nil
 	local number2 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos450
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos479
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	maxNumber = Integer_INT_MIN
 	local __args4 = table.pack(...)
-	for i18=1,__args4.n do
-	number2 = __args4[i18]
+	for i20=1,__args4.n do
+	number2 = __args4[i20]
 	if (number2 > maxNumber) then
 		cond_result3 = number2
 	else
@@ -7868,16 +8535,16 @@ function max(__wurst_stackPos450, ...)
 	return maxNumber
 end
 
-function min(__wurst_stackPos451, ...) 
+function min(__wurst_stackPos480, ...) 
 	local minNumber = nil
 	local cond_result4 = nil
 	local number3 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos451
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos480
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	minNumber = Integer_INT_MAX
 	local __args5 = table.pack(...)
-	for i19=1,__args5.n do
-	number3 = __args5[i19]
+	for i21=1,__args5.n do
+	number3 = __args5[i21]
 	if (number3 < minNumber) then
 		cond_result4 = number3
 	else
@@ -7889,60 +8556,60 @@ function min(__wurst_stackPos451, ...)
 	return minNumber
 end
 
-function init_Matrices(__wurst_stackPos307) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos307
+function init_Matrices(__wurst_stackPos325) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos325
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function multiboard_getItem(this275, row, column, __wurst_stackPos478) 
-	local stackTrace_tempReturn40 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos478
+function multiboard_getItem(this280, row, column, __wurst_stackPos507) 
+	local stackTrace_tempReturn45 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos507
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn40 = __wurst_safe_MultiboardGetItem(this275, row, column)
+	stackTrace_tempReturn45 = __wurst_safe_MultiboardGetItem(this280, row, column)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn40
+	return stackTrace_tempReturn45
 end
 
-function multiboarditem_release(this276, __wurst_stackPos479) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos479
+function multiboarditem_release(this281, __wurst_stackPos508) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos508
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_safe_MultiboardReleaseItem(this276)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function multiboard_setItemValueColor(this277, row2, column2, r5, g6, b3, a2, __wurst_stackPos480) 
-	local receiver35 = nil
-	local receiver36 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos480
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	receiver35 = multiboard_getItem(this277, row2, column2, "when calling getItem in Multiboard, line 115")
-	multiboarditem_setValueColor(receiver35, r5, g6, b3, a2, "when calling setValueColor in Multiboard, line 116")
-	receiver36 = receiver35
-	multiboarditem_release(receiver36, "when calling release in Multiboard, line 117")
+	__wurst_safe_MultiboardReleaseItem(this281)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function multiboarditem_setValueColor(this278, r6, g7, b4, a3, __wurst_stackPos481) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos481
+function multiboard_setItemValueColor(this282, row2, column2, r5, g7, b3, a2, __wurst_stackPos509) 
+	local receiver37 = nil
+	local receiver38 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos509
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_safe_MultiboardSetItemValueColor(this278, r6, g7, b4, a3)
+	receiver37 = multiboard_getItem(this282, row2, column2, "when calling getItem in Multiboard, line 115")
+	multiboarditem_setValueColor(receiver37, r5, g7, b3, a2, "when calling setValueColor in Multiboard, line 116")
+	receiver38 = receiver37
+	multiboarditem_release(receiver38, "when calling release in Multiboard, line 117")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function multiboard_setItemValueColor1(this279, row3, column3, col, __wurst_stackPos482) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos482
+function multiboarditem_setValueColor(this283, r6, g8, b4, a3, __wurst_stackPos510) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos510
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	multiboard_setItemValueColor(this279, row3, column3, col[1], col[2], col[3], col[4], "when calling setItemValueColor in Multiboard, line 120")
+	__wurst_safe_MultiboardSetItemValueColor(this283, r6, g8, b4, a3)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Nightmare(__wurst_stackPos357) 
+function multiboard_setItemValueColor1(this284, row3, column3, col, __wurst_stackPos511) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos511
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	multiboard_setItemValueColor(this284, row3, column3, col[1], col[2], col[3], col[4], "when calling setItemValueColor in Multiboard, line 120")
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function init_Nightmare(__wurst_stackPos377) 
 	local clVar29 = nil
 	local clVar30 = nil
-	local temp176 = nil
-	local temp177 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos357
+	local temp21 = nil
+	local temp22 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos377
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Nightmare_NIGHTMARE_ID = intEnsure(1095577652)
 	Nightmare_NIGHTMARE_BUFF_ID = intEnsure(1112354865)
@@ -7951,26 +8618,26 @@ function init_Nightmare(__wurst_stackPos357)
 	Nightmare_CORRUPT_SFX = "Abilities\\Spells\\Undead\\UndeadDismember\\UndeadDismemberTarget.mdl"
 	Nightmare_NIGHTMARE_SFX = "Abilities\\Spells\\Undead\\Sleep\\SleepSpecialArt.mdl"
 	Nightmare_sleepingUnits = HashMap_new_HashMap("when calling new_HashMap in Nightmare, line 30")
-	temp176 = Nightmare_NIGHTMARE_ID
+	temp21 = Nightmare_NIGHTMARE_ID
 	clVar29 = OnCastListener_onCast_Nightmare:create37()
 	OnCastListener_construct_OnCastListener(clVar29, "when calling construct_OnCastListener in Nightmare, line 59")
-	EventListener_onCast(temp176, clVar29, "when calling onCast in Nightmare, line 59")
-	temp177 = EVENT_PLAYER_UNIT_DAMAGED
+	EventListener_onCast(temp21, clVar29, "when calling onCast in Nightmare, line 59")
+	temp22 = EVENT_PLAYER_UNIT_DAMAGED
 	clVar30 = EventListener_add_Nightmare:create39()
 	EventListener_construct_EventListener(clVar30, "when calling construct_EventListener in Nightmare, line 95")
-	EventListener_add(temp177, clVar30, "when calling add in Nightmare, line 95")
+	EventListener_add(temp22, clVar30, "when calling add in Nightmare, line 95")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function createObjectDefinition(fileType, newId4, deriveFrom, __wurst_stackPos261) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos261
+function createObjectDefinition(fileType, newId4, deriveFrom, __wurst_stackPos265) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos265
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return ({"", })
 end
 
-function init_ObjectIdGenerator(__wurst_stackPos331) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos331
+function init_ObjectIdGenerator(__wurst_stackPos350) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos350
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	IdGenerator_new_IdGenerator(2016423984, "when calling new_IdGenerator in ObjectIdGenerator, line 6")
 	IdGenerator_new_IdGenerator(1213018160, "when calling new_IdGenerator in ObjectIdGenerator, line 7")
@@ -7981,30 +8648,30 @@ function init_ObjectIdGenerator(__wurst_stackPos331)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_ObjectIds(__wurst_stackPos322) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos322
+function init_ObjectIds(__wurst_stackPos340) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos340
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_OnUnitEnterLeave(__wurst_stackPos334) 
-	local i20 = nil
-	local temp10 = nil
+function init_OnUnitEnterLeave(__wurst_stackPos353) 
+	local i22 = nil
+	local temp20 = nil
 	local clVar31 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos334
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos353
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	OnUnitEnterLeave_eventTrigger = CreateTrigger()
 	OnUnitEnterLeave_preplacedUnits = CreateGroup()
 	OnUnitEnterLeave_tempUnitsCount = 0
 	OnUnitEnterLeave_ABILITY_ID = intEnsure(1095577649)
-	i20 = 0
-	temp10 = (bj_MAX_PLAYER_SLOTS - 1)
+	i22 = 0
+	temp20 = (bj_MAX_PLAYER_SLOTS - 1)
 	while true do
-		if (i20 > temp10) then
+		if (i22 > temp20) then
 			break
 		end
-		player_setAbilityAvailable(Player_players[i20], OnUnitEnterLeave_ABILITY_ID, false, "when calling setAbilityAvailable in OnUnitEnterLeave, line 64")
-		i20 = (i20 + 1)
+		player_setAbilityAvailable(Player_players[i22], OnUnitEnterLeave_ABILITY_ID, false, "when calling setAbilityAvailable in OnUnitEnterLeave, line 64")
+		i22 = (i22 + 1)
 	end
 	clVar31 = CallbackSingle_nullTimer_OnUnitEnterLeave:create41()
 	CallbackSingle_construct_CallbackSingle(clVar31, "when calling construct_CallbackSingle in OnUnitEnterLeave, line 66")
@@ -8012,23 +8679,23 @@ function init_OnUnitEnterLeave(__wurst_stackPos334)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function pushUnit1(u25, __wurst_stackPos484) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos484
+function pushUnit1(u30, __wurst_stackPos513) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos513
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	OnUnitEnterLeave_tempUnits[OnUnitEnterLeave_tempUnitsCount] = u25
+	OnUnitEnterLeave_tempUnits[OnUnitEnterLeave_tempUnitsCount] = u30
 	OnUnitEnterLeave_tempUnitsCount = (OnUnitEnterLeave_tempUnitsCount + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function popUnit1(__wurst_stackPos485) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos485
+function popUnit1(__wurst_stackPos514) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos514
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	OnUnitEnterLeave_tempUnitsCount = (OnUnitEnterLeave_tempUnitsCount - 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function getEnterLeaveUnit(__wurst_stackPos486) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos486
+function getEnterLeaveUnit(__wurst_stackPos515) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos515
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	if (OnUnitEnterLeave_tempUnitsCount <= 0) then
 		wurst_stack_depth = (wurst_stack_depth - 1)
@@ -8038,45 +8705,45 @@ function getEnterLeaveUnit(__wurst_stackPos486)
 	return OnUnitEnterLeave_tempUnits[(OnUnitEnterLeave_tempUnitsCount - 1)]
 end
 
-function onEnter(c4, __wurst_stackPos487) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos487
+function onEnter(c4, __wurst_stackPos516) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos516
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	trigger_addCondition(OnUnitEnterLeave_eventTrigger, __wurst_safe_Filter(c4), "when calling addCondition in OnUnitEnterLeave, line 46")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function onLeave(c5, __wurst_stackPos489) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos489
+function onLeave(c5, __wurst_stackPos518) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos518
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	trigger_addAction(OnUnitEnterLeave_eventTrigger, c5, "when calling addAction in OnUnitEnterLeave, line 50")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
 function prepareUnit(u9, __wurst_stackPos197) 
-	local receiver37 = nil
-	local receiver38 = nil
+	local receiver39 = nil
+	local receiver40 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos197
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	receiver37 = u9
-	unit_addAbility(receiver37, OnUnitEnterLeave_ABILITY_ID, "when calling addAbility in OnUnitEnterLeave, line 56")
-	receiver38 = receiver37
-	unit_makeAbilityPermanent(receiver38, OnUnitEnterLeave_ABILITY_ID, true, "when calling makeAbilityPermanent in OnUnitEnterLeave, line 56")
+	receiver39 = u9
+	unit_addAbility(receiver39, OnUnitEnterLeave_ABILITY_ID, "when calling addAbility in OnUnitEnterLeave, line 56")
+	receiver40 = receiver39
+	unit_makeAbilityPermanent(receiver40, OnUnitEnterLeave_ABILITY_ID, true, "when calling makeAbilityPermanent in OnUnitEnterLeave, line 56")
 	pushUnit1(u9, "when calling pushUnit in OnUnitEnterLeave, line 57")
 	trigger_evaluate(OnUnitEnterLeave_eventTrigger, "when calling evaluate in OnUnitEnterLeave, line 58")
 	popUnit1("when calling popUnit in OnUnitEnterLeave, line 59")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function code__Filter_registerEnterRegion_nullTimer_OnUnitEnterLeave(__wurst_stackPos491) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos491
+function code__Filter_registerEnterRegion_nullTimer_OnUnitEnterLeave(__wurst_stackPos520) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos520
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	prepareUnit(GetFilterUnit(), "when calling prepareUnit in OnUnitEnterLeave, line 68")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function code__registerPlayerUnitEvent_nullTimer_OnUnitEnterLeave(__wurst_stackPos492) 
+function code__registerPlayerUnitEvent_nullTimer_OnUnitEnterLeave(__wurst_stackPos521) 
 	local leavingUnit = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos492
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos521
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	leavingUnit = GetTriggerUnit()
 	if ((unit_getAbilityLevel(leavingUnit, OnUnitEnterLeave_ABILITY_ID, "when calling getAbilityLevel in OnUnitEnterLeave, line 73") == 0) and (GetIssuedOrderId() == OrderIds_undefend)) then
@@ -8087,8 +8754,8 @@ function code__registerPlayerUnitEvent_nullTimer_OnUnitEnterLeave(__wurst_stackP
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Orders(__wurst_stackPos333) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos333
+function init_Orders(__wurst_stackPos352) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos352
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	OrderIds_rejuvination = 852160
 	OrderIds_sleep = 852227
@@ -8097,142 +8764,142 @@ function init_Orders(__wurst_stackPos333)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Player(__wurst_stackPos301) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos301
+function init_Player(__wurst_stackPos319) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos319
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Player_localPlayer = GetLocalPlayer()
 	initPlayerArray("when calling initPlayerArray in Player, line 12")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function initPlayerArray(__wurst_stackPos494) 
-	local i21 = nil
-	local temp12 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos494
+function initPlayerArray(__wurst_stackPos523) 
+	local i23 = nil
+	local temp23 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos523
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	i21 = 0
-	temp12 = (bj_MAX_PLAYER_SLOTS - 1)
+	i23 = 0
+	temp23 = (bj_MAX_PLAYER_SLOTS - 1)
 	while true do
-		if (i21 > temp12) then
+		if (i23 > temp23) then
 			break
 		end
-		Player_players[i21] = Player(i21)
-		i21 = (i21 + 1)
+		Player_players[i23] = Player(i23)
+		i23 = (i23 + 1)
 	end
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function player_setGold(this284, val3, __wurst_stackPos495) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos495
+function player_setGold(this289, val3, __wurst_stackPos524) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos524
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	player_setState(this284, PLAYER_STATE_RESOURCE_GOLD, val3, "when calling setState in Player, line 19")
+	player_setState(this289, PLAYER_STATE_RESOURCE_GOLD, val3, "when calling setState in Player, line 19")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function player_setState(this285, state, val4, __wurst_stackPos496) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos496
+function player_setState(this290, state, val4, __wurst_stackPos525) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos525
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_safe_SetPlayerState(this285, state, val4)
+	__wurst_safe_SetPlayerState(this290, state, val4)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function player_addGold(this246, val1, __wurst_stackPos417) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos417
+function player_addGold(this253, val1, __wurst_stackPos445) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos445
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	player_addState(this246, PLAYER_STATE_RESOURCE_GOLD, val1, "when calling addState in Player, line 22")
+	player_addState(this253, PLAYER_STATE_RESOURCE_GOLD, val1, "when calling addState in Player, line 22")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function player_addState(this286, state1, val5, __wurst_stackPos497) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos497
+function player_addState(this291, state1, val5, __wurst_stackPos526) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos526
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_safe_SetPlayerState(this286, state1, (player_getState(this286, state1, "when calling getState in Player, line 31") + val5))
+	__wurst_safe_SetPlayerState(this291, state1, (player_getState(this291, state1, "when calling getState in Player, line 31") + val5))
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function player_setLumber(this288, val6, __wurst_stackPos499) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos499
+function player_setLumber(this293, val6, __wurst_stackPos528) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos528
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	player_setState(this288, PLAYER_STATE_RESOURCE_LUMBER, val6, "when calling setState in Player, line 25")
+	player_setState(this293, PLAYER_STATE_RESOURCE_LUMBER, val6, "when calling setState in Player, line 25")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function player_getState(this287, state2, __wurst_stackPos498) 
-	local stackTrace_tempReturn41 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos498
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn41 = __wurst_safe_GetPlayerState(this287, state2)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn41
-end
-
-function player_getId(this289, __wurst_stackPos500) 
-	local stackTrace_tempReturn42 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos500
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn42 = __wurst_safe_GetPlayerId(this289)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn42
-end
-
-function player_getName(this290, __wurst_stackPos501) 
-	local stackTrace_tempReturn43 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos501
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn43 = player_getName1(this290, false, "when calling getName in Player, line 83")
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn43
-end
-
-function player_getName1(this291, removeHash, __wurst_stackPos502) 
-	local cond_result5 = nil
-	local stackTrace_tempReturn44 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos502
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	if removeHash then
-		cond_result5 = string_substring(__wurst_safe_GetPlayerName(this291), 0, string_indexOf(__wurst_safe_GetPlayerName(this291), "#", "when calling indexOf in Player, line 87"), "when calling substring in Player, line 87")
-	else
-		cond_result5 = __wurst_safe_GetPlayerName(this291)
-	end
-	stackTrace_tempReturn44 = cond_result5
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn44
-end
-
-function player_isAllyOf(this6, p, __wurst_stackPos6) 
-	local stackTrace_tempReturn45 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos6
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn45 = __wurst_safe_IsPlayerAlly(this6, p)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn45
-end
-
-function player_isEnemyOf(this58, p2, __wurst_stackPos68) 
+function player_getState(this292, state2, __wurst_stackPos527) 
 	local stackTrace_tempReturn46 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos68
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos527
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn46 = __wurst_safe_IsPlayerEnemy(this58, p2)
+	stackTrace_tempReturn46 = __wurst_safe_GetPlayerState(this292, state2)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn46
 end
 
-function player_setAbilityAvailable(this280, abilityId4, avail, __wurst_stackPos483) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos483
+function player_getId(this294, __wurst_stackPos529) 
+	local stackTrace_tempReturn47 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos529
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_safe_SetPlayerAbilityAvailable(this280, abilityId4, avail)
+	stackTrace_tempReturn47 = __wurst_safe_GetPlayerId(this294)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn47
+end
+
+function player_getName(this295, __wurst_stackPos530) 
+	local stackTrace_tempReturn48 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos530
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn48 = player_getName1(this295, false, "when calling getName in Player, line 83")
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn48
+end
+
+function player_getName1(this296, removeHash, __wurst_stackPos531) 
+	local cond_result5 = nil
+	local stackTrace_tempReturn49 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos531
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	if removeHash then
+		cond_result5 = string_substring(__wurst_safe_GetPlayerName(this296), 0, string_indexOf(__wurst_safe_GetPlayerName(this296), "#", "when calling indexOf in Player, line 87"), "when calling substring in Player, line 87")
+	else
+		cond_result5 = __wurst_safe_GetPlayerName(this296)
+	end
+	stackTrace_tempReturn49 = cond_result5
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn49
+end
+
+function player_isAllyOf(this6, p, __wurst_stackPos6) 
+	local stackTrace_tempReturn50 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos6
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn50 = __wurst_safe_IsPlayerAlly(this6, p)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn50
+end
+
+function player_isEnemyOf(this58, p2, __wurst_stackPos68) 
+	local stackTrace_tempReturn51 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos68
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn51 = __wurst_safe_IsPlayerEnemy(this58, p2)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn51
+end
+
+function player_setAbilityAvailable(this285, abilityId4, avail, __wurst_stackPos512) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos512
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	__wurst_safe_SetPlayerAbilityAvailable(this285, abilityId4, avail)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Playercolor(__wurst_stackPos311) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos311
+function init_Playercolor(__wurst_stackPos329) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos329
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Preloader(__wurst_stackPos330) 
+function init_Preloader(__wurst_stackPos349) 
 	local clVar32 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos330
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos349
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Preloader_autoFinish = true
 	Preloader_dumg = CreateGroup()
@@ -8251,41 +8918,41 @@ end
 
 function finishPreload(__wurst_stackPos200) 
 	local clVar33 = nil
-	local temp178 = nil
+	local temp231 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos200
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	unit_remove(Preloader_dum, "when calling remove in Preloader, line 47")
-	temp178 = Preloader_dumg
+	temp231 = Preloader_dumg
 	clVar33 = ForGroupCallback_forEachFrom_Preloader:create42()
-	group_forEachFrom(temp178, clVar33, "when calling forEachFrom in Preloader, line 48")
+	group_forEachFrom(temp231, clVar33, "when calling forEachFrom in Preloader, line 48")
 	group_destr(Preloader_dumg, "when calling destr in Preloader, line 49")
 	Preloader_dumg = nil
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Printing(__wurst_stackPos302) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos302
+function init_Printing(__wurst_stackPos320) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos320
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Printing_DEBUG_LEVEL = 2
 	Printing_DEBUG_MSG_DURATION = 45.
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function Loglevel_getTag(this294, __wurst_stackPos505) 
-	local temp13 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos505
+function Loglevel_getTag(this299, __wurst_stackPos534) 
+	local temp24 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos534
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	temp13 = this294
-	if (temp13 == 0) then
+	temp24 = this299
+	if (temp24 == 0) then
 		wurst_stack_depth = (wurst_stack_depth - 1)
 		return "|cffADADADtrace|r"
-	elseif (temp13 == 1) then
+	elseif (temp24 == 1) then
 		wurst_stack_depth = (wurst_stack_depth - 1)
 		return "|cff2685DCdebug|r"
-	elseif (temp13 == 2) then
+	elseif (temp24 == 2) then
 		wurst_stack_depth = (wurst_stack_depth - 1)
 		return "|cffFFCC00info|r"
-	elseif (temp13 == 3) then
+	elseif (temp24 == 3) then
 		wurst_stack_depth = (wurst_stack_depth - 1)
 		return "|cffF47E3Ewarning|r"
 	else
@@ -8294,9 +8961,9 @@ function Loglevel_getTag(this294, __wurst_stackPos505)
 	end
 end
 
-function printLog(showTo, loglvl, msg6, __wurst_stackPos506) 
+function printLog(showTo, loglvl, msg6, __wurst_stackPos535) 
 	local compositeMsg = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos506
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos535
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	if (Printing_DEBUG_LEVEL <= loglvl) then
 		compositeMsg = stringConcat(stringConcat(Loglevel_getTag(loglvl, "when calling getTag in Printing, line 81"), " - "), msg6)
@@ -8312,125 +8979,125 @@ function print1(msg1, __wurst_stackPos75)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function Log_trace(msg2, __wurst_stackPos388) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos388
+function Log_trace(msg2, __wurst_stackPos416) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos416
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	printLog(Player_localPlayer, 0, msg2, "when calling printLog in Printing, line 33")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function Log_warn(msg5, __wurst_stackPos452) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos452
+function Log_warn(msg5, __wurst_stackPos481) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos481
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	printLog(Player_localPlayer, 3, msg5, "when calling printLog in Printing, line 45")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function Log_error(msg4, __wurst_stackPos432) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos432
+function Log_error(msg4, __wurst_stackPos457) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos457
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	printLog(Player_localPlayer, 4, msg4, "when calling printLog in Printing, line 49")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Quaternion(__wurst_stackPos308) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos308
+function init_Quaternion(__wurst_stackPos326) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos326
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Real(__wurst_stackPos293) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos293
+function init_Real(__wurst_stackPos311) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos311
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function real_squared(this295, __wurst_stackPos507) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos507
+function real_squared(this300, __wurst_stackPos536) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos536
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return (this295 * this295)
+	return (this300 * this300)
 end
 
 function real_toInt(this189, __wurst_stackPos221) 
-	local stackTrace_tempReturn47 = nil
+	local stackTrace_tempReturn52 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos221
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn47 = R2I(this189)
+	stackTrace_tempReturn52 = R2I(this189)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn47
+	return stackTrace_tempReturn52
 end
 
-function rect_getMinX(this269, __wurst_stackPos472) 
-	local stackTrace_tempReturn48 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos472
+function rect_getMinX(this274, __wurst_stackPos501) 
+	local stackTrace_tempReturn53 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos501
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn48 = __wurst_safe_GetRectMinX(this269)
+	stackTrace_tempReturn53 = __wurst_safe_GetRectMinX(this274)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn48
+	return stackTrace_tempReturn53
 end
 
-function rect_getMaxX(this271, __wurst_stackPos474) 
-	local stackTrace_tempReturn49 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos474
+function rect_getMaxX(this276, __wurst_stackPos503) 
+	local stackTrace_tempReturn54 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos503
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn49 = __wurst_safe_GetRectMaxX(this271)
+	stackTrace_tempReturn54 = __wurst_safe_GetRectMaxX(this276)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn49
+	return stackTrace_tempReturn54
 end
 
-function rect_getMinY(this270, __wurst_stackPos473) 
-	local stackTrace_tempReturn50 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos473
+function rect_getMinY(this275, __wurst_stackPos502) 
+	local stackTrace_tempReturn55 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos502
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn50 = __wurst_safe_GetRectMinY(this270)
+	stackTrace_tempReturn55 = __wurst_safe_GetRectMinY(this275)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn50
+	return stackTrace_tempReturn55
 end
 
-function rect_getMaxY(this272, __wurst_stackPos475) 
-	local stackTrace_tempReturn51 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos475
+function rect_getMaxY(this277, __wurst_stackPos504) 
+	local stackTrace_tempReturn56 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos504
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn51 = __wurst_safe_GetRectMaxY(this272)
+	stackTrace_tempReturn56 = __wurst_safe_GetRectMaxY(this277)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn51
+	return stackTrace_tempReturn56
 end
 
-function init_Recycle(__wurst_stackPos359) 
-	local iterator15 = nil
-	local u26 = nil
+function init_Recycle(__wurst_stackPos379) 
+	local iterator18 = nil
+	local u31 = nil
 	local clVar34 = nil
-	local temp179 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos359
+	local temp241 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos379
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Recycle_RECYCLE_ID = intEnsure(1095577704)
 	group_enumUnitsOfType(Group_ENUM_GROUP, 1697656882, nil, "when calling enumUnitsOfType in Recycle, line 36")
-	iterator15 = group_iterator(Group_ENUM_GROUP, "when calling iterator in Recycle, line 37")
+	iterator18 = group_iterator(Group_ENUM_GROUP, "when calling iterator in Recycle, line 37")
 	while true do
-		if not(GroupIterator_GroupIterator_hasNext(iterator15, "when calling hasNext in Recycle, line 37")) then
+		if not(GroupIterator_GroupIterator_hasNext(iterator18, "when calling hasNext in Recycle, line 37")) then
 			break
 		end
-		u26 = GroupIterator_GroupIterator_next(iterator15, "when calling next in Recycle, line 37")
-		__wurst_safe_UnitAddAbility(u26, Recycle_RECYCLE_ID)
+		u31 = GroupIterator_GroupIterator_next(iterator18, "when calling next in Recycle, line 37")
+		__wurst_safe_UnitAddAbility(u31, Recycle_RECYCLE_ID)
 	end
-	GroupIterator_GroupIterator_close(iterator15, "when calling close in Recycle, line 37")
-	temp179 = EVENT_PLAYER_UNIT_DEATH
+	GroupIterator_GroupIterator_close(iterator18, "when calling close in Recycle, line 37")
+	temp241 = EVENT_PLAYER_UNIT_DEATH
 	clVar34 = EventListener_add_Recycle:create44()
 	EventListener_construct_EventListener(clVar34, "when calling construct_EventListener in Recycle, line 41")
-	EventListener_add(temp179, clVar34, "when calling add in Recycle, line 41")
+	EventListener_add(temp241, clVar34, "when calling add in Recycle, line 41")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function region_addRect(this268, rct, __wurst_stackPos471) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos471
+function region_addRect(this273, rct, __wurst_stackPos500) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos500
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_safe_RegionAddRect(this268, rct)
+	__wurst_safe_RegionAddRect(this273, rct)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_RegisterEvents(__wurst_stackPos332) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos332
+function init_RegisterEvents(__wurst_stackPos351) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos351
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	RegisterEvents_onCastMap = HashMap_new_HashMap("when calling new_HashMap in RegisterEvents, line 55")
 	registerPlayerUnitEvent1(EVENT_PLAYER_UNIT_SPELL_EFFECT, function (...) 
@@ -8454,9 +9121,9 @@ function registerPlayerUnitEvent(p1, filter2, condition, action, __wurst_stackPo
 	local hid = nil
 	local k = nil
 	local cond_result6 = nil
-	local temp180 = nil
-	local temp181 = nil
-	local temp182 = nil
+	local temp25 = nil
+	local temp26 = nil
+	local temp27 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos29
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	hid = handle_getHandleId(p1, "when calling getHandleId in RegisterEvents, line 17")
@@ -8467,15 +9134,15 @@ function registerPlayerUnitEvent(p1, filter2, condition, action, __wurst_stackPo
 			if (k < 0) then
 				break
 			end
-			temp180 = RegisterEvents_t[hid]
-			temp181 = Player_players[k]
-			temp182 = p1
+			temp25 = RegisterEvents_t[hid]
+			temp26 = Player_players[k]
+			temp27 = p1
 			if not((filter2 == nil)) then
 				cond_result6 = __wurst_safe_Filter(filter2)
 			else
 				cond_result6 = nil
 			end
-			trigger_registerPlayerUnitEvent(temp180, temp181, temp182, cond_result6, "when calling registerPlayerUnitEvent in RegisterEvents, line 21")
+			trigger_registerPlayerUnitEvent(temp25, temp26, temp27, cond_result6, "when calling registerPlayerUnitEvent in RegisterEvents, line 21")
 			k = (k - 1)
 		end
 	end
@@ -8488,24 +9155,24 @@ function registerPlayerUnitEvent(p1, filter2, condition, action, __wurst_stackPo
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function code__registerPlayerUnitEvent_RegisterEvents(__wurst_stackPos509) 
-	local stackTrace_tempReturn52 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos509
+function code__registerPlayerUnitEvent_RegisterEvents(__wurst_stackPos538) 
+	local stackTrace_tempReturn57 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos538
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn52 = trigger_evaluate(__wurst_objectFromIndex(intEnsure(HashMap_HashMap_get(RegisterEvents_onCastMap, GetSpellAbilityId(), "when calling get in RegisterEvents, line 58"))), "when calling evaluate in RegisterEvents, line 58")
+	stackTrace_tempReturn57 = trigger_evaluate(__wurst_objectFromIndex(intEnsure(HashMap_HashMap_get(RegisterEvents_onCastMap, GetSpellAbilityId(), "when calling get in RegisterEvents, line 58"))), "when calling evaluate in RegisterEvents, line 58")
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn52
+	return stackTrace_tempReturn57
 end
 
-function init_Scoreboard(__wurst_stackPos345) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos345
+function init_Scoreboard(__wurst_stackPos364) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos364
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	setupPlayerColors("when calling setupPlayerColors in Scoreboard, line 135")
+	setupPlayerColors("when calling setupPlayerColors in Scoreboard, line 134")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function setupPlayerColors(__wurst_stackPos510) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos510
+function setupPlayerColors(__wurst_stackPos539) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos539
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Scoreboard_playerColors[0] = ({255, 2, 2, 255, })
 	Scoreboard_playerColors[1] = ({0, 65, 255, 255, })
@@ -8534,59 +9201,59 @@ function setupPlayerColors(__wurst_stackPos510)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function getActivePlayers(__wurst_stackPos511) 
+function getActivePlayers(__wurst_stackPos540) 
 	local count1 = nil
-	local i22 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos511
+	local i24 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos540
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	count1 = 0
-	i22 = 0
+	i24 = 0
 	while true do
-		if (i22 > 23) then
+		if (i24 > 23) then
 			break
 		end
-		if (__wurst_safe_GetPlayerSlotState(Player_players[i22]) == PLAYER_SLOT_STATE_PLAYING) then
+		if (__wurst_safe_GetPlayerSlotState(Player_players[i24]) == PLAYER_SLOT_STATE_PLAYING) then
 			count1 = (count1 + 1)
 		end
-		i22 = (i22 + 1)
+		i24 = (i24 + 1)
 	end
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return count1
 end
 
-function updatePlayerIncome(__wurst_stackPos512) 
+function updatePlayerIncome(__wurst_stackPos541) 
 	local playerCount = nil
-	local i23 = nil
-	local temp14 = nil
-	local iterator16 = nil
+	local i25 = nil
+	local temp28 = nil
+	local iterator19 = nil
 	local cp2 = nil
 	local owner5 = nil
 	local ownerId = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos512
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos541
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	playerCount = getActivePlayers("when calling getActivePlayers in Scoreboard, line 50")
-	i23 = 0
-	temp14 = (playerCount - 1)
+	playerCount = getActivePlayers("when calling getActivePlayers in Scoreboard, line 49")
+	i25 = 0
+	temp28 = (playerCount - 1)
 	while true do
-		if (i23 > temp14) then
+		if (i25 > temp28) then
 			break
 		end
-		ControlPoint_playerIncome[i23] = 0
-		ControlPoint_playerCpCount[i23] = 0
-		i23 = (i23 + 1)
+		ControlPoint_playerIncome[i25] = 0
+		ControlPoint_playerCpCount[i25] = 0
+		i25 = (i25 + 1)
 	end
-	iterator16 = group_iterator(ControlPoint_controlPoints, "when calling iterator in Scoreboard, line 57")
+	iterator19 = group_iterator(ControlPoint_controlPoints, "when calling iterator in Scoreboard, line 56")
 	while true do
-		if not(GroupIterator_GroupIterator_hasNext(iterator16, "when calling hasNext in Scoreboard, line 57")) then
+		if not(GroupIterator_GroupIterator_hasNext(iterator19, "when calling hasNext in Scoreboard, line 56")) then
 			break
 		end
-		cp2 = GroupIterator_GroupIterator_next(iterator16, "when calling next in Scoreboard, line 57")
-		owner5 = playerFromIndex(intEnsure(HashMap_HashMap_get(ControlPoint_cpOwners, __wurst_objectToIndex(cp2), "when calling get in Scoreboard, line 58")), "when calling playerFromIndex in Scoreboard, line 58")
-		ownerId = player_getId(owner5, "when calling getId in Scoreboard, line 59")
-		ControlPoint_playerIncome[ownerId] = (intEnsure(ControlPoint_playerIncome[ownerId]) + intEnsure(HashMap_HashMap_get(ControlPoint_cpValues, __wurst_objectToIndex(cp2), "when calling get in Scoreboard, line 60")))
+		cp2 = GroupIterator_GroupIterator_next(iterator19, "when calling next in Scoreboard, line 56")
+		owner5 = playerFromIndex(intEnsure(HashMap_HashMap_get(ControlPoint_cpOwners, __wurst_objectToIndex(cp2), "when calling get in Scoreboard, line 57")), "when calling playerFromIndex in Scoreboard, line 57")
+		ownerId = player_getId(owner5, "when calling getId in Scoreboard, line 58")
+		ControlPoint_playerIncome[ownerId] = (intEnsure(ControlPoint_playerIncome[ownerId]) + intEnsure(HashMap_HashMap_get(ControlPoint_cpValues, __wurst_objectToIndex(cp2), "when calling get in Scoreboard, line 59")))
 		ControlPoint_playerCpCount[ownerId] = (intEnsure(ControlPoint_playerCpCount[ownerId]) + 1)
 	end
-	GroupIterator_GroupIterator_close(iterator16, "when calling close in Scoreboard, line 57")
+	GroupIterator_GroupIterator_close(iterator19, "when calling close in Scoreboard, line 56")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -8598,7 +9265,7 @@ function setupMultiboard(__wurst_stackPos64)
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Scoreboard_incomeBoard = CreateMultiboard()
 	__wurst_safe_MultiboardSetColumnCount(Scoreboard_incomeBoard, 3)
-	__wurst_safe_MultiboardSetRowCount(Scoreboard_incomeBoard, (getActivePlayers("when calling getActivePlayers in Scoreboard, line 81") + 1))
+	__wurst_safe_MultiboardSetRowCount(Scoreboard_incomeBoard, (getActivePlayers("when calling getActivePlayers in Scoreboard, line 80") + 1))
 	__wurst_safe_MultiboardSetTitleText(Scoreboard_incomeBoard, "Statistics")
 	h0 = __wurst_safe_MultiboardGetItem(Scoreboard_incomeBoard, 0, 0)
 	h1 = __wurst_safe_MultiboardGetItem(Scoreboard_incomeBoard, 0, 1)
@@ -8625,23 +9292,23 @@ end
 function updateMultiboard(__wurst_stackPos65) 
 	local row4 = nil
 	local playerCount1 = nil
-	local i24 = nil
-	local temp15 = nil
+	local i26 = nil
+	local temp29 = nil
 	local item1 = nil
 	local item2 = nil
 	local item3 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos65
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	updatePlayerIncome("when calling updatePlayerIncome in Scoreboard, line 110")
+	updatePlayerIncome("when calling updatePlayerIncome in Scoreboard, line 109")
 	row4 = 1
-	playerCount1 = getActivePlayers("when calling getActivePlayers in Scoreboard, line 112")
-	i24 = 0
-	temp15 = (playerCount1 - 1)
+	playerCount1 = getActivePlayers("when calling getActivePlayers in Scoreboard, line 111")
+	i26 = 0
+	temp29 = (playerCount1 - 1)
 	while true do
-		if (i24 > temp15) then
+		if (i26 > temp29) then
 			break
 		end
-		if (__wurst_safe_GetPlayerSlotState(Player_players[i24]) == PLAYER_SLOT_STATE_PLAYING) then
+		if (__wurst_safe_GetPlayerSlotState(Player_players[i26]) == PLAYER_SLOT_STATE_PLAYING) then
 			item1 = __wurst_safe_MultiboardGetItem(Scoreboard_incomeBoard, row4, 0)
 			item2 = __wurst_safe_MultiboardGetItem(Scoreboard_incomeBoard, row4, 1)
 			item3 = __wurst_safe_MultiboardGetItem(Scoreboard_incomeBoard, row4, 2)
@@ -8651,24 +9318,24 @@ function updateMultiboard(__wurst_stackPos65)
 			__wurst_safe_MultiboardSetItemStyle(item1, true, false)
 			__wurst_safe_MultiboardSetItemStyle(item2, true, false)
 			__wurst_safe_MultiboardSetItemStyle(item3, true, false)
-			__wurst_safe_MultiboardSetItemValue(item1, player_getName(Player_players[i24], "when calling getName in Scoreboard, line 124"))
-			multiboard_setItemValueColor1(Scoreboard_incomeBoard, row4, 0, Scoreboard_playerColors[i24], "when calling setItemValueColor in Scoreboard, line 125")
-			__wurst_safe_MultiboardSetItemValue(item2, int_toString(intEnsure(ControlPoint_playerCpCount[i24]), "when calling toString in Scoreboard, line 126"))
-			__wurst_safe_MultiboardSetItemValue(item3, int_toString(intEnsure(ControlPoint_playerIncome[i24]), "when calling toString in Scoreboard, line 127"))
+			__wurst_safe_MultiboardSetItemValue(item1, player_getName(Player_players[i26], "when calling getName in Scoreboard, line 123"))
+			multiboard_setItemValueColor1(Scoreboard_incomeBoard, row4, 0, Scoreboard_playerColors[i26], "when calling setItemValueColor in Scoreboard, line 124")
+			__wurst_safe_MultiboardSetItemValue(item2, int_toString(intEnsure(ControlPoint_playerCpCount[i26]), "when calling toString in Scoreboard, line 125"))
+			__wurst_safe_MultiboardSetItemValue(item3, int_toString(intEnsure(ControlPoint_playerIncome[i26]), "when calling toString in Scoreboard, line 126"))
 			__wurst_safe_MultiboardReleaseItem(item1)
 			__wurst_safe_MultiboardReleaseItem(item2)
 			__wurst_safe_MultiboardReleaseItem(item3)
 			row4 = (row4 + 1)
 		end
-		i24 = (i24 + 1)
+		i26 = (i26 + 1)
 	end
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_SeedBurst(__wurst_stackPos343) 
+function init_SeedBurst(__wurst_stackPos362) 
 	local clVar35 = nil
-	local temp183 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos343
+	local temp281 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos362
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	SeedBurst_SEED_BURST_ID = intEnsure(1095577657)
 	SeedBurst_BURST_DAMAGE[0] = 75.
@@ -8681,16 +9348,16 @@ function init_SeedBurst(__wurst_stackPos343)
 	SeedBurst_BURST_SFX = "Abilities\\Spells\\Other\\Entangle\\EntangledTarget.mdl"
 	SeedBurst_EXPLOSION_SFX = "Abilities\\Weapons\\GryphonRider\\GryphonRiderMissileArt.mdl"
 	SeedBurst_INVIGORATE_BUFF_ID = 1114793322
-	temp183 = SeedBurst_SEED_BURST_ID
+	temp281 = SeedBurst_SEED_BURST_ID
 	clVar35 = OnCastListener_onCast_SeedBurst:create45()
 	OnCastListener_construct_OnCastListener(clVar35, "when calling construct_OnCastListener in SeedBurst, line 80")
-	EventListener_onCast(temp183, clVar35, "when calling onCast in SeedBurst, line 80")
+	EventListener_onCast(temp281, clVar35, "when calling onCast in SeedBurst, line 80")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_ShieldBash(__wurst_stackPos360) 
+function init_ShieldBash(__wurst_stackPos380) 
 	local clVar36 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos360
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos380
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	intEnsure(1112354870)
 	ShieldBash_MY_ABILITY_ID = intEnsure(1095577702)
@@ -8731,10 +9398,10 @@ function onDamageTaken(__wurst_stackPos212)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_SpiritWisps(__wurst_stackPos350) 
+function init_SpiritWisps(__wurst_stackPos369) 
 	local clVar37 = nil
-	local temp184 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos350
+	local temp291 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos369
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	SpiritWisps_SPIRIT_WISPS_ID = intEnsure(1095577700)
 	SpiritWisps_WISP_BUFF_ID = intEnsure(1112354869)
@@ -8746,15 +9413,15 @@ function init_SpiritWisps(__wurst_stackPos350)
 	SpiritWisps_HEAL_INTERVAL = 1.
 	SpiritWisps_ORBIT_RADIUS = 150.
 	SpiritWisps_UPDATE_INTERVAL = 0.05
-	temp184 = SpiritWisps_SPIRIT_WISPS_ID
+	temp291 = SpiritWisps_SPIRIT_WISPS_ID
 	clVar37 = OnCastListener_onCast_SpiritWisps:create49()
 	OnCastListener_construct_OnCastListener(clVar37, "when calling construct_OnCastListener in SpiritWisps, line 58")
-	EventListener_onCast(temp184, clVar37, "when calling onCast in SpiritWisps, line 58")
+	EventListener_onCast(temp291, clVar37, "when calling onCast in SpiritWisps, line 58")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_String(__wurst_stackPos298) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos298
+function init_String(__wurst_stackPos316) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos316
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	String_charset = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	String_numberset = "0123456789"
@@ -8763,8 +9430,8 @@ function init_String(__wurst_stackPos298)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_StringUtils(__wurst_stackPos356) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos356
+function init_StringUtils(__wurst_stackPos376) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos376
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	StringUtils_MAX_INDEX = (126 + 1)
 	initialize1("when calling initialize in StringUtils, line 186")
@@ -8772,8 +9439,8 @@ function init_StringUtils(__wurst_stackPos356)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function initialize1(__wurst_stackPos514) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos514
+function initialize1(__wurst_stackPos543) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos543
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	c2sInit("when calling c2sInit in StringUtils, line 181")
 	s2cInit("when calling s2cInit in StringUtils, line 182")
@@ -8781,8 +9448,8 @@ function initialize1(__wurst_stackPos514)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function c2sInit(__wurst_stackPos515) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos515
+function c2sInit(__wurst_stackPos544) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos544
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	StringUtils_c2s[0] = ""
 	StringUtils_c2s[1] = ""
@@ -8915,93 +9582,93 @@ function c2sInit(__wurst_stackPos515)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function s2cInit(__wurst_stackPos516) 
-	local i25 = nil
-	local temp16 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos516
+function s2cInit(__wurst_stackPos545) 
+	local i27 = nil
+	local temp30 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos545
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	i25 = 0
-	temp16 = StringUtils_MAX_INDEX
+	i27 = 0
+	temp30 = StringUtils_MAX_INDEX
 	while true do
-		if (i25 > temp16) then
+		if (i27 > temp30) then
 			break
 		end
-		if (string_toUpperCase(stringEnsure(StringUtils_c2s[i25]), "when calling toUpperCase in StringUtils, line 321") == stringEnsure(StringUtils_c2s[i25])) then
+		if (string_toUpperCase(stringEnsure(StringUtils_c2s[i27]), "when calling toUpperCase in StringUtils, line 321") == stringEnsure(StringUtils_c2s[i27])) then
 		end
-		i25 = (i25 + 1)
+		i27 = (i27 + 1)
 	end
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function widthInit(__wurst_stackPos517) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos517
+function widthInit(__wurst_stackPos546) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos546
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function string_length(this297, __wurst_stackPos513) 
-	local stackTrace_tempReturn53 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos513
+function string_length(this302, __wurst_stackPos542) 
+	local stackTrace_tempReturn58 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos542
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn53 = StringLength(this297)
+	stackTrace_tempReturn58 = StringLength(this302)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn53
+	return stackTrace_tempReturn58
 end
 
-function string_substring(this292, start2, stop, __wurst_stackPos503) 
-	local stackTrace_tempReturn54 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos503
+function string_substring(this297, start2, stop, __wurst_stackPos532) 
+	local stackTrace_tempReturn59 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos532
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn54 = SubString(this292, start2, stop)
+	stackTrace_tempReturn59 = SubString(this297, start2, stop)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn54
+	return stackTrace_tempReturn59
 end
 
-function string_toUpperCase(this298, __wurst_stackPos518) 
-	local stackTrace_tempReturn55 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos518
+function string_toUpperCase(this303, __wurst_stackPos547) 
+	local stackTrace_tempReturn60 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos547
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn55 = StringCase(this298, true)
+	stackTrace_tempReturn60 = StringCase(this303, true)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn55
+	return stackTrace_tempReturn60
 end
 
-function string_indexOf(this293, s, __wurst_stackPos504) 
+function string_indexOf(this298, s, __wurst_stackPos533) 
 	local len = nil
-	local i26 = nil
-	local temp17 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos504
+	local i28 = nil
+	local temp31 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos533
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	len = string_length(s, "when calling length in String, line 143")
-	i26 = 0
-	temp17 = (string_length(this293, "when calling length in String, line 144") - len)
+	i28 = 0
+	temp31 = (string_length(this298, "when calling length in String, line 144") - len)
 	while true do
-		if (i26 > temp17) then
+		if (i28 > temp31) then
 			break
 		end
-		if (string_substring(this293, i26, (i26 + len), "when calling substring in String, line 145") == s) then
+		if (string_substring(this298, i28, (i28 + len), "when calling substring in String, line 145") == s) then
 			wurst_stack_depth = (wurst_stack_depth - 1)
-			return i26
+			return i28
 		end
-		i26 = (i26 + 1)
+		i28 = (i28 + 1)
 	end
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return -1
 end
 
-function string_getHash(this245, __wurst_stackPos413) 
-	local stackTrace_tempReturn56 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos413
+function string_getHash(this252, __wurst_stackPos441) 
+	local stackTrace_tempReturn61 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos441
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn56 = StringHash(this245)
+	stackTrace_tempReturn61 = StringHash(this252)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn56
+	return stackTrace_tempReturn61
 end
 
-function init_SummonTreant(__wurst_stackPos342) 
+function init_SummonTreant(__wurst_stackPos361) 
 	local clVar38 = nil
-	local temp185 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos342
+	local temp301 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos361
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	SummonTreant_SUMMON_TREANT_ID = intEnsure(1095577656)
 	SummonTreant_TREANT_UNIT_ID = 1697656882
@@ -9011,38 +9678,38 @@ function init_SummonTreant(__wurst_stackPos342)
 	SummonTreant_BONUS_TREANTS[0] = 0
 	SummonTreant_BONUS_TREANTS[1] = 1
 	SummonTreant_BONUS_TREANTS[2] = 2
-	temp185 = SummonTreant_SUMMON_TREANT_ID
+	temp301 = SummonTreant_SUMMON_TREANT_ID
 	clVar38 = OnCastListener_onCast_SummonTreant:create53()
 	OnCastListener_construct_OnCastListener(clVar38, "when calling construct_OnCastListener in SummonTreant, line 69")
-	EventListener_onCast(temp185, clVar38, "when calling onCast in SummonTreant, line 69")
+	EventListener_onCast(temp301, clVar38, "when calling onCast in SummonTreant, line 69")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Table(__wurst_stackPos309) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos309
+function init_Table(__wurst_stackPos327) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos327
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Table_ht = hashtable_compiletime3
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_TargetsAllowed(__wurst_stackPos323) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos323
+function init_TargetsAllowed(__wurst_stackPos341) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos341
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_ThickBark(__wurst_stackPos362) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos362
+function init_ThickBark(__wurst_stackPos382) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos382
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	intEnsure(1095577705)
 	intEnsure(1380790321)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_ThrowExplosives(__wurst_stackPos363) 
+function init_ThrowExplosives(__wurst_stackPos383) 
 	local clVar39 = nil
-	local temp186 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos363
+	local temp311 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos383
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	ThrowExplosives_THROW_EXPLOSIVES_ID = intEnsure(1095577701)
 	ThrowExplosives_BARREL_UNIT_ID = 1697656886
@@ -9051,24 +9718,24 @@ function init_ThrowExplosives(__wurst_stackPos363)
 	ThrowExplosives_EXPLODE_DAMAGE = 400.
 	ThrowExplosives_FUSE_SFX = "Abilities\\Spells\\Human\\FlameStrike\\FlameStrikeEmbers.mdl"
 	ThrowExplosives_EXPLODE_SFX = "Abilities\\Spells\\Human\\Thunderclap\\ThunderClapCaster.mdl"
-	temp186 = ThrowExplosives_THROW_EXPLOSIVES_ID
+	temp311 = ThrowExplosives_THROW_EXPLOSIVES_ID
 	clVar39 = OnCastListener_onCast_ThrowExplosives:create56()
 	OnCastListener_construct_OnCastListener(clVar39, "when calling construct_OnCastListener in ThrowExplosives, line 60")
-	EventListener_onCast(temp186, clVar39, "when calling onCast in ThrowExplosives, line 60")
+	EventListener_onCast(temp311, clVar39, "when calling onCast in ThrowExplosives, line 60")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function timer_createTimerDialog(this247, __wurst_stackPos418) 
-	local stackTrace_tempReturn57 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos418
+function timer_createTimerDialog(this254, __wurst_stackPos446) 
+	local stackTrace_tempReturn62 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos446
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn57 = __wurst_safe_CreateTimerDialog(this247)
+	stackTrace_tempReturn62 = __wurst_safe_CreateTimerDialog(this254)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn57
+	return stackTrace_tempReturn62
 end
 
-function init_TimerUtils(__wurst_stackPos326) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos326
+function init_TimerUtils(__wurst_stackPos345) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos345
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	TimerUtils_freeTimersCount = 0
 	TimerUtils_timerData = Table_new_Table("when calling new_Table in TimerUtils, line 13")
@@ -9084,19 +9751,19 @@ function timer_setData(this42, data, __wurst_stackPos48)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function timer_getData(this243, __wurst_stackPos407) 
-	local stackTrace_tempReturn58 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos407
+function timer_getData(this250, __wurst_stackPos435) 
+	local stackTrace_tempReturn63 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos435
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn58 = Table_Table_loadInt(TimerUtils_timerData, handle_getTCHandleId(this243, "when calling getTCHandleId in TimerUtils, line 22"), "when calling loadInt in TimerUtils, line 22")
+	stackTrace_tempReturn63 = Table_Table_loadInt(TimerUtils_timerData, handle_getTCHandleId(this250, "when calling getTCHandleId in TimerUtils, line 22"), "when calling loadInt in TimerUtils, line 22")
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn58
+	return stackTrace_tempReturn63
 end
 
-function getTimer(__wurst_stackPos404) 
-	local receiver39 = nil
-	local stackTrace_tempReturn59 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos404
+function getTimer(__wurst_stackPos432) 
+	local receiver41 = nil
+	local stackTrace_tempReturn64 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos432
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	if (TimerUtils_freeTimersCount > 0) then
 		TimerUtils_freeTimersCount = (TimerUtils_freeTimersCount - 1)
@@ -9104,11 +9771,11 @@ function getTimer(__wurst_stackPos404)
 		wurst_stack_depth = (wurst_stack_depth - 1)
 		return TimerUtils_freeTimers[TimerUtils_freeTimersCount]
 	else
-		receiver39 = CreateTimer()
-		timer_setData(receiver39, 0, "when calling setData in TimerUtils, line 33")
-		stackTrace_tempReturn59 = receiver39
+		receiver41 = CreateTimer()
+		timer_setData(receiver41, 0, "when calling setData in TimerUtils, line 33")
+		stackTrace_tempReturn64 = receiver41
 		wurst_stack_depth = (wurst_stack_depth - 1)
-		return stackTrace_tempReturn59
+		return stackTrace_tempReturn64
 	end
 end
 
@@ -9132,10 +9799,10 @@ function timer_release(this48, __wurst_stackPos54)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function timer_pause(this300, __wurst_stackPos520) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos520
+function timer_pause(this305, __wurst_stackPos549) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos549
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_safe_PauseTimer(this300)
+	__wurst_safe_PauseTimer(this305)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -9154,86 +9821,86 @@ function timer_startPeriodic(this43, time1, timerCallBack, __wurst_stackPos49)
 end
 
 function trigger_addAction(this21, actionFunc, __wurst_stackPos25) 
-	local stackTrace_tempReturn60 = nil
+	local stackTrace_tempReturn65 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos25
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn60 = __wurst_safe_TriggerAddAction(this21, actionFunc)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn60
-end
-
-function trigger_addCondition(this281, condition1, __wurst_stackPos488) 
-	local stackTrace_tempReturn61 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos488
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn61 = __wurst_safe_TriggerAddCondition(this281, condition1)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn61
-end
-
-function trigger_evaluate(this217, __wurst_stackPos250) 
-	local stackTrace_tempReturn62 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos250
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn62 = __wurst_safe_TriggerEvaluate(this217)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn62
-end
-
-function trigger_execute(this283, __wurst_stackPos493) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos493
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_safe_TriggerExecute(this283)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function trigger_registerEnterRegion(this169, whichRegion, filter3, __wurst_stackPos195) 
-	local stackTrace_tempReturn63 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos195
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn63 = __wurst_safe_TriggerRegisterEnterRegion(this169, whichRegion, filter3)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn63
-end
-
-function trigger_registerPlayerChatEvent(this23, whichPlayer1, chatMessageToDetect, exactMatchOnly, __wurst_stackPos28) 
-	local stackTrace_tempReturn64 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos28
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn64 = __wurst_safe_TriggerRegisterPlayerChatEvent(this23, whichPlayer1, chatMessageToDetect, exactMatchOnly)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn64
-end
-
-function trigger_registerPlayerEvent(this22, whichPlayer, whichPlayerEvent, __wurst_stackPos27) 
-	local stackTrace_tempReturn65 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos27
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn65 = __wurst_safe_TriggerRegisterPlayerEvent(this22, whichPlayer, whichPlayerEvent)
+	stackTrace_tempReturn65 = __wurst_safe_TriggerAddAction(this21, actionFunc)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn65
 end
 
-function trigger_registerPlayerUnitEvent(this296, whichPlayer18, whichPlayerUnitEvent, filter9, __wurst_stackPos508) 
+function trigger_addCondition(this286, condition1, __wurst_stackPos517) 
 	local stackTrace_tempReturn66 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos508
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos517
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn66 = __wurst_safe_TriggerRegisterPlayerUnitEvent(this296, whichPlayer18, whichPlayerUnitEvent, filter9)
+	stackTrace_tempReturn66 = __wurst_safe_TriggerAddCondition(this286, condition1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn66
 end
 
-function trigger_registerUnitEvent(this248, whichUnit7, whichEvent1, __wurst_stackPos420) 
+function trigger_evaluate(this221, __wurst_stackPos254) 
 	local stackTrace_tempReturn67 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos420
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos254
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn67 = __wurst_safe_TriggerRegisterUnitEvent(this248, whichUnit7, whichEvent1)
+	stackTrace_tempReturn67 = __wurst_safe_TriggerEvaluate(this221)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn67
 end
 
-function init_TypeCasting(__wurst_stackPos317) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos317
+function trigger_execute(this288, __wurst_stackPos522) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos522
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	__wurst_safe_TriggerExecute(this288)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function trigger_registerEnterRegion(this169, whichRegion, filter3, __wurst_stackPos195) 
+	local stackTrace_tempReturn68 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos195
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn68 = __wurst_safe_TriggerRegisterEnterRegion(this169, whichRegion, filter3)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn68
+end
+
+function trigger_registerPlayerChatEvent(this23, whichPlayer1, chatMessageToDetect, exactMatchOnly, __wurst_stackPos28) 
+	local stackTrace_tempReturn69 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos28
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn69 = __wurst_safe_TriggerRegisterPlayerChatEvent(this23, whichPlayer1, chatMessageToDetect, exactMatchOnly)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn69
+end
+
+function trigger_registerPlayerEvent(this22, whichPlayer, whichPlayerEvent, __wurst_stackPos27) 
+	local stackTrace_tempReturn70 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos27
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn70 = __wurst_safe_TriggerRegisterPlayerEvent(this22, whichPlayer, whichPlayerEvent)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn70
+end
+
+function trigger_registerPlayerUnitEvent(this301, whichPlayer19, whichPlayerUnitEvent, filter9, __wurst_stackPos537) 
+	local stackTrace_tempReturn71 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos537
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn71 = __wurst_safe_TriggerRegisterPlayerUnitEvent(this301, whichPlayer19, whichPlayerUnitEvent, filter9)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn71
+end
+
+function trigger_registerUnitEvent(this237, whichUnit9, whichEvent1, __wurst_stackPos396) 
+	local stackTrace_tempReturn72 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos396
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn72 = __wurst_safe_TriggerRegisterUnitEvent(this237, whichUnit9, whichEvent1)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn72
+end
+
+function init_TypeCasting(__wurst_stackPos335) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos335
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	TypeCasting_typecastdata = Table_new_Table("when calling new_Table in TypeCasting, line 7")
 	TypeCasting_R2I_PRECISION = 1000.
@@ -9242,65 +9909,77 @@ function init_TypeCasting(__wurst_stackPos317)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function initTypecastData(__wurst_stackPos521) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos521
+function initTypecastData(__wurst_stackPos550) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos550
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Table_Table_saveString(TypeCasting_typecastdata, 0, "", "when calling saveString in TypeCasting, line 12")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function handle_getTCHandleId(this299, __wurst_stackPos519) 
-	local stackTrace_tempReturn68 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos519
+function handle_getTCHandleId(this304, __wurst_stackPos548) 
+	local stackTrace_tempReturn73 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos548
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn68 = GetHandleId(this299)
+	stackTrace_tempReturn73 = GetHandleId(this304)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn68
+	return stackTrace_tempReturn73
 end
 
-function realToIndex(r4, __wurst_stackPos468) 
-	local stackTrace_tempReturn69 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos468
+function realToIndex(r4, __wurst_stackPos497) 
+	local stackTrace_tempReturn74 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos497
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn69 = real_toInt((r4 * TypeCasting_R2I_PRECISION), "when calling toInt in TypeCasting, line 24")
+	stackTrace_tempReturn74 = real_toInt((r4 * TypeCasting_R2I_PRECISION), "when calling toInt in TypeCasting, line 24")
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn69
+	return stackTrace_tempReturn74
 end
 
-function stringToIndex(s1, __wurst_stackPos522) 
+function stringToIndex(s1, __wurst_stackPos551) 
 	return __wurst_stringToIndex(s1)
 end
 
-function playerFromIndex(index7, __wurst_stackPos416) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos416
+function playerFromIndex(index7, __wurst_stackPos444) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos444
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return Player_players[index7]
 end
 
-function playerToIndex(object, __wurst_stackPos422) 
-	local stackTrace_tempReturn70 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos422
+function playerToIndex(object, __wurst_stackPos395) 
+	local stackTrace_tempReturn75 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos395
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn70 = player_getId(object, "when calling getId in TypeCasting, line 49")
+	stackTrace_tempReturn75 = player_getId(object, "when calling getId in TypeCasting, line 49")
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn70
+	return stackTrace_tempReturn75
 end
 
-function unitFromIndex(index9, __wurst_stackPos523) 
+function unitFromIndex(index9, __wurst_stackPos552) 
 	return __wurst_objectFromIndex(index9)
 end
 
-function unitToIndex(object1, __wurst_stackPos524) 
+function unitToIndex(object1, __wurst_stackPos553) 
 	return __wurst_objectToIndex(object1)
 end
 
-function groupToIndex(object2, __wurst_stackPos525) 
+function destructableFromIndex(index10, __wurst_stackPos554) 
+	return __wurst_objectFromIndex(index10)
+end
+
+function destructableToIndex(object2, __wurst_stackPos555) 
 	return __wurst_objectToIndex(object2)
 end
 
-function triggerFromIndex(index10, __wurst_stackPos526) 
-	return __wurst_objectFromIndex(index10)
+function groupFromIndex(index11, __wurst_stackPos556) 
+	return __wurst_objectFromIndex(index11)
+end
+
+function groupToIndex(object3, __wurst_stackPos557) 
+	return __wurst_objectToIndex(object3)
+end
+
+function triggerFromIndex(index12, __wurst_stackPos558) 
+	return __wurst_objectFromIndex(index12)
 end
 
 function booleanToIndex(u8, __wurst_stackPos185) 
@@ -9323,16 +10002,16 @@ function booleanFromIndex(index2, __wurst_stackPos187)
 	return (index2 == 1)
 end
 
-function init_UnitIds(__wurst_stackPos328) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos328
+function init_UnitIds(__wurst_stackPos347) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos347
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	UnitIds_shade = 1970497636
 	UnitIds_wisp = 1702327152
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_UnitIndexer(__wurst_stackPos335) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos335
+function init_UnitIndexer(__wurst_stackPos354) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos354
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	UnitIndexer_onIndexTrigger = CreateTrigger()
 	UnitIndexer_onDeindexTrigger = CreateTrigger()
@@ -9350,51 +10029,51 @@ function init_UnitIndexer(__wurst_stackPos335)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function pushUnit(u17, __wurst_stackPos249) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos249
+function pushUnit(u17, __wurst_stackPos253) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos253
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	UnitIndexer_tempUnits[UnitIndexer_tempUnitsCount] = u17
 	UnitIndexer_tempUnitsCount = (UnitIndexer_tempUnitsCount + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function popUnit(__wurst_stackPos251) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos251
+function popUnit(__wurst_stackPos255) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos255
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	UnitIndexer_tempUnitsCount = (UnitIndexer_tempUnitsCount - 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function shouldIndex(_u1, __wurst_stackPos527) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos527
+function shouldIndex(_u1, __wurst_stackPos559) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos559
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return true
 end
 
 function unit_getIndex(this33, __wurst_stackPos39) 
-	local stackTrace_tempReturn71 = nil
+	local stackTrace_tempReturn76 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos39
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn71 = unit_getUserData(this33, "when calling getUserData in UnitIndexer, line 128")
+	stackTrace_tempReturn76 = unit_getUserData(this33, "when calling getUserData in UnitIndexer, line 128")
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn71
+	return stackTrace_tempReturn76
 end
 
-function unit_toUnitIndex(this302, __wurst_stackPos529) 
+function unit_toUnitIndex(this307, __wurst_stackPos561) 
 	local instance = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos529
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos561
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	instance = __wurst_objectFromIndex(unit_getUserData(this302, "when calling getUserData in UnitIndexer, line 132"))
+	instance = __wurst_objectFromIndex(unit_getUserData(this307, "when calling getUserData in UnitIndexer, line 132"))
 	if (instance == nil) then
-		instance = UnitIndex_new_UnitIndex(this302, "when calling new_UnitIndex in UnitIndexer, line 135")
+		instance = UnitIndex_new_UnitIndex(this307, "when calling new_UnitIndex in UnitIndexer, line 135")
 	end
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return instance
 end
 
-function getIndexingUnit(__wurst_stackPos390) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos390
+function getIndexingUnit(__wurst_stackPos418) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos418
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	if (UnitIndexer_tempUnitsCount <= 0) then
 		wurst_stack_depth = (wurst_stack_depth - 1)
@@ -9404,28 +10083,28 @@ function getIndexingUnit(__wurst_stackPos390)
 	return UnitIndexer_tempUnits[(UnitIndexer_tempUnitsCount - 1)]
 end
 
-function onUnitDeindex(func1, __wurst_stackPos377) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos377
+function onUnitDeindex(func1, __wurst_stackPos405) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos405
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	trigger_addCondition(UnitIndexer_onDeindexTrigger, __wurst_safe_Condition(func1), "when calling addCondition in UnitIndexer, line 150")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function unit_deindex(this303, __wurst_stackPos530) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos530
+function unit_deindex(this308, __wurst_stackPos562) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos562
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	if (unit_getUserData(this303, "when calling getUserData in UnitIndexer, line 160") == 0) then
+	if (unit_getUserData(this308, "when calling getUserData in UnitIndexer, line 160") == 0) then
 		wurst_stack_depth = (wurst_stack_depth - 1)
 		return false
 	else
-		UnitIndex_destroyUnitIndex(unit_toUnitIndex(this303, "when calling toUnitIndex in UnitIndexer, line 163"), "when calling destroyUnitIndex in UnitIndexer, line 163")
+		UnitIndex_destroyUnitIndex(unit_toUnitIndex(this308, "when calling toUnitIndex in UnitIndexer, line 163"), "when calling destroyUnitIndex in UnitIndexer, line 163")
 		wurst_stack_depth = (wurst_stack_depth - 1)
 		return true
 	end
 end
 
-function code__onEnter_UnitIndexer(__wurst_stackPos531) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos531
+function code__onEnter_UnitIndexer(__wurst_stackPos563) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos563
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	if shouldIndex(getEnterLeaveUnit("when calling getEnterLeaveUnit in UnitIndexer, line 190"), "when calling shouldIndex in UnitIndexer, line 190") then
 		unit_toUnitIndex(getEnterLeaveUnit("when calling getEnterLeaveUnit in UnitIndexer, line 190"), "when calling toUnitIndex in UnitIndexer, line 190")
@@ -9433,8 +10112,8 @@ function code__onEnter_UnitIndexer(__wurst_stackPos531)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function code__onLeave_UnitIndexer(__wurst_stackPos532) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos532
+function code__onLeave_UnitIndexer(__wurst_stackPos564) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos564
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	if shouldIndex(getEnterLeaveUnit("when calling getEnterLeaveUnit in UnitIndexer, line 191"), "when calling shouldIndex in UnitIndexer, line 191") then
 		unit_deindex(getEnterLeaveUnit("when calling getEnterLeaveUnit in UnitIndexer, line 191"), "when calling deindex in UnitIndexer, line 191")
@@ -9443,62 +10122,62 @@ function code__onLeave_UnitIndexer(__wurst_stackPos532)
 end
 
 function unit_getTypeId(this113, __wurst_stackPos133) 
-	local stackTrace_tempReturn72 = nil
+	local stackTrace_tempReturn77 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos133
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn72 = __wurst_safe_GetUnitTypeId(this113)
+	stackTrace_tempReturn77 = __wurst_safe_GetUnitTypeId(this113)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn72
+	return stackTrace_tempReturn77
 end
 
 function unit_isType(this160, utype, __wurst_stackPos182) 
-	local stackTrace_tempReturn73 = nil
+	local stackTrace_tempReturn78 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos182
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn73 = __wurst_safe_IsUnitType(this160, utype)
+	stackTrace_tempReturn78 = __wurst_safe_IsUnitType(this160, utype)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn73
+	return stackTrace_tempReturn78
 end
 
 function createUnit(p3, unitId, pos3, facing, __wurst_stackPos74) 
-	local stackTrace_tempReturn74 = nil
+	local stackTrace_tempReturn79 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos74
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn74 = __wurst_safe_CreateUnit(p3, unitId, pos3[1], pos3[2], angle_degrees(facing, "when calling degrees in Unit, line 57"))
+	stackTrace_tempReturn79 = __wurst_safe_CreateUnit(p3, unitId, pos3[1], pos3[2], angle_degrees(facing, "when calling degrees in Unit, line 57"))
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn74
+	return stackTrace_tempReturn79
 end
 
-function unit_setFlyHeight(this304, height, rate, __wurst_stackPos533) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos533
+function unit_setFlyHeight(this309, height, rate, __wurst_stackPos565) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos565
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_safe_SetUnitFlyHeight(this304, height, rate)
+	__wurst_safe_SetUnitFlyHeight(this309, height, rate)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
 function unit_addAbility(this65, abil, __wurst_stackPos77) 
-	local stackTrace_tempReturn75 = nil
+	local stackTrace_tempReturn80 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos77
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn75 = __wurst_safe_UnitAddAbility(this65, abil)
+	stackTrace_tempReturn80 = __wurst_safe_UnitAddAbility(this65, abil)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn75
+	return stackTrace_tempReturn80
 end
 
-function unit_setAbilityLevel(this262, abilId3, lvl2, __wurst_stackPos460) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos460
+function unit_setAbilityLevel(this267, abilId3, lvl2, __wurst_stackPos489) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos489
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_safe_SetUnitAbilityLevel(this262, abilId3, lvl2)
+	__wurst_safe_SetUnitAbilityLevel(this267, abilId3, lvl2)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function unit_makeAbilityPermanent(this282, abil2, flag1, __wurst_stackPos490) 
-	local stackTrace_tempReturn76 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos490
+function unit_makeAbilityPermanent(this287, abil2, flag3, __wurst_stackPos519) 
+	local stackTrace_tempReturn81 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos519
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn76 = __wurst_safe_UnitMakeAbilityPermanent(this282, flag1, abil2)
+	stackTrace_tempReturn81 = __wurst_safe_UnitMakeAbilityPermanent(this287, flag3, abil2)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn76
+	return stackTrace_tempReturn81
 end
 
 function unit_addHP(this8, val, __wurst_stackPos8) 
@@ -9508,20 +10187,20 @@ function unit_addHP(this8, val, __wurst_stackPos8)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function unit_addState(this305, state3, value17, __wurst_stackPos534) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos534
+function unit_addState(this310, state3, value17, __wurst_stackPos566) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos566
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_safe_SetUnitState(this305, state3, (unit_getState(this305, state3, "when calling getState in Unit, line 96") + value17))
+	__wurst_safe_SetUnitState(this310, state3, (unit_getState(this310, state3, "when calling getState in Unit, line 96") + value17))
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function unit_getState(this306, state4, __wurst_stackPos535) 
-	local stackTrace_tempReturn77 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos535
+function unit_getState(this311, state4, __wurst_stackPos567) 
+	local stackTrace_tempReturn82 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos567
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn77 = __wurst_safe_GetUnitState(this306, state4)
+	stackTrace_tempReturn82 = __wurst_safe_GetUnitState(this311, state4)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn77
+	return stackTrace_tempReturn82
 end
 
 function unit_damageTarget(this59, target1, amount, attack, ranged, attackType, damageType, weaponType, __wurst_stackPos69) 
@@ -9539,111 +10218,111 @@ function unit_kill(this12, __wurst_stackPos13)
 end
 
 function unit_getAbilityLevel(this15, id, __wurst_stackPos16) 
-	local stackTrace_tempReturn78 = nil
+	local stackTrace_tempReturn83 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos16
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn78 = __wurst_safe_GetUnitAbilityLevel(this15, id)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn78
-end
-
-function unit_getHP(this185, __wurst_stackPos216) 
-	local stackTrace_tempReturn79 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos216
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn79 = unit_getState(this185, UNIT_STATE_LIFE, "when calling getState in Unit, line 211")
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn79
-end
-
-function unit_getMaxHP(this116, __wurst_stackPos136) 
-	local stackTrace_tempReturn80 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos136
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn80 = unit_getState(this116, UNIT_STATE_MAX_LIFE, "when calling getState in Unit, line 223")
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn80
-end
-
-function handle_getHandleId(this236, __wurst_stackPos381) 
-	local stackTrace_tempReturn81 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos381
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn81 = GetHandleId(this236)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn81
-end
-
-function unit_getName(this64, __wurst_stackPos76) 
-	local stackTrace_tempReturn82 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos76
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn82 = __wurst_safe_GetUnitName(this64)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn82
-end
-
-function unit_getOwner(this7, __wurst_stackPos7) 
-	local stackTrace_tempReturn83 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos7
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn83 = __wurst_safe_GetOwningPlayer(this7)
+	stackTrace_tempReturn83 = __wurst_safe_GetUnitAbilityLevel(this15, id)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn83
 end
 
-function unit_getPos(this18, __wurst_stackPos20) 
-	local stackTrace_tempReturn84 = ({0., 0., })
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos20
+function unit_getHP(this185, __wurst_stackPos216) 
+	local stackTrace_tempReturn84 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos216
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn84 = ({unit_getX(this18, "when calling getX in Unit, line 249"), unit_getY(this18, "when calling getY in Unit, line 249"), })
+	stackTrace_tempReturn84 = unit_getState(this185, UNIT_STATE_LIFE, "when calling getState in Unit, line 211")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn84
 end
 
-function unit_getX(this125, __wurst_stackPos146) 
+function unit_getMaxHP(this116, __wurst_stackPos136) 
 	local stackTrace_tempReturn85 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos146
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos136
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn85 = __wurst_safe_GetUnitX(this125)
+	stackTrace_tempReturn85 = unit_getState(this116, UNIT_STATE_MAX_LIFE, "when calling getState in Unit, line 223")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn85
 end
 
-function unit_getY(this126, __wurst_stackPos147) 
+function handle_getHandleId(this243, __wurst_stackPos409) 
 	local stackTrace_tempReturn86 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos147
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos409
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn86 = __wurst_safe_GetUnitY(this126)
+	stackTrace_tempReturn86 = GetHandleId(this243)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn86
 end
 
-function unit_getUserData(this301, __wurst_stackPos528) 
+function unit_getName(this64, __wurst_stackPos76) 
 	local stackTrace_tempReturn87 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos528
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos76
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn87 = __wurst_safe_GetUnitUserData(this301)
+	stackTrace_tempReturn87 = __wurst_safe_GetUnitName(this64)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn87
 end
 
-function unit_hasAbility(this17, id1, __wurst_stackPos18) 
+function unit_getOwner(this7, __wurst_stackPos7) 
 	local stackTrace_tempReturn88 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos18
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos7
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn88 = (__wurst_safe_GetUnitAbilityLevel(this17, id1) > 0)
+	stackTrace_tempReturn88 = __wurst_safe_GetOwningPlayer(this7)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn88
 end
 
-function unit_isAlive(this5, __wurst_stackPos5) 
-	local stackTrace_tempReturn89 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos5
+function unit_getPos(this18, __wurst_stackPos20) 
+	local stackTrace_tempReturn89 = ({0., 0., })
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos20
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn89 = UnitAlive(this5)
+	stackTrace_tempReturn89 = ({unit_getX(this18, "when calling getX in Unit, line 249"), unit_getY(this18, "when calling getY in Unit, line 249"), })
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn89
+end
+
+function unit_getX(this125, __wurst_stackPos146) 
+	local stackTrace_tempReturn90 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos146
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn90 = __wurst_safe_GetUnitX(this125)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn90
+end
+
+function unit_getY(this126, __wurst_stackPos147) 
+	local stackTrace_tempReturn91 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos147
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn91 = __wurst_safe_GetUnitY(this126)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn91
+end
+
+function unit_getUserData(this306, __wurst_stackPos560) 
+	local stackTrace_tempReturn92 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos560
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn92 = __wurst_safe_GetUnitUserData(this306)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn92
+end
+
+function unit_hasAbility(this17, id1, __wurst_stackPos18) 
+	local stackTrace_tempReturn93 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos18
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn93 = (__wurst_safe_GetUnitAbilityLevel(this17, id1) > 0)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn93
+end
+
+function unit_isAlive(this5, __wurst_stackPos5) 
+	local stackTrace_tempReturn94 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos5
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn94 = UnitAlive(this5)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn94
 end
 
 if UnitAlive then
@@ -9653,13 +10332,13 @@ else
 		end
 end
 
-function unit_issueTargetOrderById(this266, id11, target11, __wurst_stackPos466) 
-	local stackTrace_tempReturn90 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos466
+function unit_issueTargetOrderById(this271, id11, target11, __wurst_stackPos495) 
+	local stackTrace_tempReturn95 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos495
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn90 = __wurst_safe_IssueTargetOrderById(this266, id11, target11)
+	stackTrace_tempReturn95 = __wurst_safe_IssueTargetOrderById(this271, id11, target11)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn90
+	return stackTrace_tempReturn95
 end
 
 function unit_pause(this119, __wurst_stackPos139) 
@@ -9684,32 +10363,32 @@ function unit_remove(this114, __wurst_stackPos134)
 end
 
 function unit_removeAbility(this174, abil1, __wurst_stackPos205) 
-	local stackTrace_tempReturn91 = nil
+	local stackTrace_tempReturn96 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos205
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn91 = __wurst_safe_UnitRemoveAbility(this174, abil1)
+	stackTrace_tempReturn96 = __wurst_safe_UnitRemoveAbility(this174, abil1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn91
+	return stackTrace_tempReturn96
 end
 
-function unit_setAnimation(this234, name2, __wurst_stackPos376) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos376
+function unit_setAnimation(this241, name2, __wurst_stackPos404) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos404
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_safe_SetUnitAnimation(this234, name2)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function unit_setFacing(this264, a1, __wurst_stackPos464) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos464
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_safe_SetUnitFacing(this264, angle_degrees(a1, "when calling degrees in Unit, line 516"))
+	__wurst_safe_SetUnitAnimation(this241, name2)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function unit_setState(this307, state5, value18, __wurst_stackPos536) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos536
+function unit_setFacing(this269, a1, __wurst_stackPos493) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos493
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_safe_SetUnitState(this307, state5, value18)
+	__wurst_safe_SetUnitFacing(this269, angle_degrees(a1, "when calling degrees in Unit, line 516"))
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function unit_setState(this312, state5, value18, __wurst_stackPos568) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos568
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	__wurst_safe_SetUnitState(this312, state5, value18)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -9720,10 +10399,10 @@ function unit_setInvulnerable(this66, flag, __wurst_stackPos78)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function unit_setMana(this259, val2, __wurst_stackPos457) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos457
+function unit_setMana(this264, val2, __wurst_stackPos486) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos486
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	unit_setState(this259, UNIT_STATE_MANA, val2, "when calling setState in Unit, line 528")
+	unit_setState(this264, UNIT_STATE_MANA, val2, "when calling setState in Unit, line 528")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -9741,10 +10420,10 @@ function unit_setPathing(this120, value2, __wurst_stackPos140)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function unit_setPos(this263, pos13, __wurst_stackPos462) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos462
+function unit_setPos(this268, pos13, __wurst_stackPos491) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos491
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_safe_SetUnitPosition(this263, pos13[1], pos13[2])
+	__wurst_safe_SetUnitPosition(this268, pos13[1], pos13[2])
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -9755,10 +10434,10 @@ function unit_setScale(this67, scale1, __wurst_stackPos79)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function unit_setUserData(this216, data1, __wurst_stackPos248) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos248
+function unit_setUserData(this220, data1, __wurst_stackPos252) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos252
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_safe_SetUnitUserData(this216, data1)
+	__wurst_safe_SetUnitUserData(this220, data1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
@@ -9769,54 +10448,54 @@ function unit_setVertexColor(this68, r1, g1, b1, a, __wurst_stackPos80)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function unit_setX(this308, x8, __wurst_stackPos537) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos537
+function unit_setX(this313, x8, __wurst_stackPos569) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos569
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_safe_SetUnitX(this308, x8)
+	__wurst_safe_SetUnitX(this313, x8)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
 function unit_setXY(this72, pos5, __wurst_stackPos87) 
-	local receiver40 = nil
-	local receiver41 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos87
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	receiver40 = this72
-	unit_setX(receiver40, pos5[1], "when calling setX in Unit, line 598")
-	receiver41 = receiver40
-	unit_setY(receiver41, pos5[2], "when calling setY in Unit, line 598")
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function unit_setY(this309, y7, __wurst_stackPos538) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos538
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	__wurst_safe_SetUnitY(this309, y7)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function unit_setXYZ(this261, pos12, __wurst_stackPos459) 
 	local receiver42 = nil
 	local receiver43 = nil
-	local receiver44 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos459
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos87
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	receiver42 = this261
-	unit_setX(receiver42, pos12[1], "when calling setX in Unit, line 608")
+	receiver42 = this72
+	unit_setX(receiver42, pos5[1], "when calling setX in Unit, line 598")
 	receiver43 = receiver42
-	unit_setY(receiver43, pos12[2], "when calling setY in Unit, line 608")
-	receiver44 = receiver43
-	unit_setFlyHeight(receiver44, pos12[3], 0., "when calling setFlyHeight in Unit, line 609")
+	unit_setY(receiver43, pos5[2], "when calling setY in Unit, line 598")
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function unit_setY(this314, y7, __wurst_stackPos570) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos570
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	__wurst_safe_SetUnitY(this314, y7)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function unit_setXYZ(this266, pos12, __wurst_stackPos488) 
+	local receiver44 = nil
+	local receiver45 = nil
+	local receiver46 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos488
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	receiver44 = this266
+	unit_setX(receiver44, pos12[1], "when calling setX in Unit, line 608")
+	receiver45 = receiver44
+	unit_setY(receiver45, pos12[2], "when calling setY in Unit, line 608")
+	receiver46 = receiver45
+	unit_setFlyHeight(receiver46, pos12[3], 0., "when calling setFlyHeight in Unit, line 609")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
 function unit_getArmor(this118, __wurst_stackPos138) 
-	local stackTrace_tempReturn92 = nil
+	local stackTrace_tempReturn97 = nil
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos138
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn92 = __wurst_safe_BlzGetUnitArmor(this118)
+	stackTrace_tempReturn97 = __wurst_safe_BlzGetUnitArmor(this118)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn92
+	return stackTrace_tempReturn97
 end
 
 function unit_setArmor(this117, armorAmount, __wurst_stackPos137) 
@@ -9826,16 +10505,16 @@ function unit_setArmor(this117, armorAmount, __wurst_stackPos137)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_UpgradeObjEditing(__wurst_stackPos361) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos361
+function init_UpgradeObjEditing(__wurst_stackPos381) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos381
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_UrsocCharge(__wurst_stackPos364) 
+function init_UrsocCharge(__wurst_stackPos384) 
 	local clVar40 = nil
-	local temp187 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos364
+	local temp32 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos384
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	UrsocCharge_URSOC_CHARGE_ID = intEnsure(1095577698)
 	UrsocCharge_CHARGE_STUN_ID = intEnsure(1095577699)
@@ -9843,135 +10522,135 @@ function init_UrsocCharge(__wurst_stackPos364)
 	UrsocCharge_CHARGE_DAMAGE = 100.
 	UrsocCharge_CHARGE_SFX = "Abilities\\Spells\\Human\\Charge\\ChargeTarget.mdl"
 	UrsocCharge_IMPACT_SFX = "Abilities\\Spells\\Human\\Thunderclap\\ThunderClapCaster.mdl"
-	temp187 = UrsocCharge_URSOC_CHARGE_ID
+	temp32 = UrsocCharge_URSOC_CHARGE_ID
 	clVar40 = OnCastListener_onCast_UrsocCharge:create64()
 	OnCastListener_construct_OnCastListener(clVar40, "when calling construct_OnCastListener in UrsocCharge, line 93")
-	EventListener_onCast(temp187, clVar40, "when calling onCast in UrsocCharge, line 93")
+	EventListener_onCast(temp32, clVar40, "when calling onCast in UrsocCharge, line 93")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_UrsocMain(__wurst_stackPos365) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos365
+function init_UrsocMain(__wurst_stackPos385) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos385
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_Vectors(__wurst_stackPos299) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos299
+function init_Vectors(__wurst_stackPos317) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos317
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	Location(0., 0.)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function vec2_op_plus(this274, v2, __wurst_stackPos477) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos477
+function vec2_op_plus(this279, v2, __wurst_stackPos506) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos506
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return ({(this274[1] + v2[1]), (this274[2] + v2[2]), })
+	return ({(this279[1] + v2[1]), (this279[2] + v2[2]), })
 end
 
-function vec2_op_mult(this273, factor, __wurst_stackPos476) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos476
+function vec2_op_mult(this278, factor, __wurst_stackPos505) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos505
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return ({(this273[1] * factor), (this273[2] * factor), })
+	return ({(this278[1] * factor), (this278[2] * factor), })
 end
 
-function vec2_toVec3(this267, __wurst_stackPos467) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos467
+function vec2_toVec3(this272, __wurst_stackPos496) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos496
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	wurst_stack_depth = (wurst_stack_depth - 1)
-	return ({this267[1], this267[2], 0., })
+	return ({this272[1], this272[2], 0., })
 end
 
 function vec2_angleTo(this71, v1, __wurst_stackPos86) 
-	local stackTrace_tempReturn93 = ({0., })
+	local stackTrace_tempReturn98 = ({0., })
 	wurst_stack[wurst_stack_depth] = __wurst_stackPos86
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn93 = tupleCopy1(real_asAngleRadians(Atan2((v1[2] - this71[2]), (v1[1] - this71[1])), "when calling asAngleRadians in Vectors, line 127"))
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn93
-end
-
-function vec2_polarOffset(this73, ang, dist1, __wurst_stackPos88) 
-	local stackTrace_tempReturn94 = ({0., 0., })
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos88
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn94 = tupleCopy(vec2_op_plus(this73, angle_toVec(ang, dist1, "when calling toVec in Vectors, line 131"), "when calling op_plus in Vectors, line 131"))
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn94
-end
-
-function angle_toVec(this310, len1, __wurst_stackPos539) 
-	local stackTrace_tempReturn95 = ({0., 0., })
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos539
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn95 = ({(Cos(this310[1]) * len1), (Sin(this310[1]) * len1), })
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn95
-end
-
-function vec2_distanceTo(this70, v, __wurst_stackPos85) 
-	local stackTrace_tempReturn96 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos85
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn96 = SquareRoot((real_squared((v[1] - this70[1]), "when calling squared in Vectors, line 157") + real_squared((v[2] - this70[2]), "when calling squared in Vectors, line 157")))
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn96
-end
-
-function init_WeatherEffects(__wurst_stackPos316) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos316
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	wurst_stack_depth = (wurst_stack_depth - 1)
-end
-
-function widget_getPos(this265, __wurst_stackPos465) 
-	local stackTrace_tempReturn97 = ({0., 0., })
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos465
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn97 = ({widget_getX(this265, "when calling getX in Widget, line 12"), widget_getY(this265, "when calling getY in Widget, line 12"), })
-	wurst_stack_depth = (wurst_stack_depth - 1)
-	return stackTrace_tempReturn97
-end
-
-function widget_getX(this311, __wurst_stackPos540) 
-	local stackTrace_tempReturn98 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos540
-	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn98 = __wurst_safe_GetWidgetX(this311)
+	stackTrace_tempReturn98 = tupleCopy1(real_asAngleRadians(Atan2((v1[2] - this71[2]), (v1[1] - this71[1])), "when calling asAngleRadians in Vectors, line 127"))
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn98
 end
 
-function widget_getY(this312, __wurst_stackPos541) 
-	local stackTrace_tempReturn99 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos541
+function vec2_polarOffset(this73, ang, dist1, __wurst_stackPos88) 
+	local stackTrace_tempReturn99 = ({0., 0., })
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos88
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn99 = __wurst_safe_GetWidgetY(this312)
+	stackTrace_tempReturn99 = tupleCopy(vec2_op_plus(this73, angle_toVec(ang, dist1, "when calling toVec in Vectors, line 131"), "when calling op_plus in Vectors, line 131"))
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn99
 end
 
-function widget_addEffect(this61, modelName, attachment, __wurst_stackPos71) 
-	local stackTrace_tempReturn100 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos71
+function angle_toVec(this315, len1, __wurst_stackPos571) 
+	local stackTrace_tempReturn100 = ({0., 0., })
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos571
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	stackTrace_tempReturn100 = __wurst_safe_AddSpecialEffectTarget(modelName, this61, attachment)
+	stackTrace_tempReturn100 = ({(Cos(this315[1]) * len1), (Sin(this315[1]) * len1), })
 	wurst_stack_depth = (wurst_stack_depth - 1)
 	return stackTrace_tempReturn100
 end
 
-function init_XaviusMain(__wurst_stackPos366) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos366
+function vec2_distanceTo(this70, v, __wurst_stackPos85) 
+	local stackTrace_tempReturn101 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos85
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn101 = SquareRoot((real_squared((v[1] - this70[1]), "when calling squared in Vectors, line 157") + real_squared((v[2] - this70[2]), "when calling squared in Vectors, line 157")))
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn101
+end
+
+function init_WeatherEffects(__wurst_stackPos334) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos334
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+end
+
+function widget_getPos(this270, __wurst_stackPos494) 
+	local stackTrace_tempReturn102 = ({0., 0., })
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos494
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn102 = ({widget_getX(this270, "when calling getX in Widget, line 12"), widget_getY(this270, "when calling getY in Widget, line 12"), })
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn102
+end
+
+function widget_getX(this316, __wurst_stackPos572) 
+	local stackTrace_tempReturn103 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos572
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn103 = __wurst_safe_GetWidgetX(this316)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn103
+end
+
+function widget_getY(this317, __wurst_stackPos573) 
+	local stackTrace_tempReturn104 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos573
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn104 = __wurst_safe_GetWidgetY(this317)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn104
+end
+
+function widget_addEffect(this61, modelName, attachment, __wurst_stackPos71) 
+	local stackTrace_tempReturn105 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos71
+	wurst_stack_depth = (wurst_stack_depth + 1)
+	stackTrace_tempReturn105 = __wurst_safe_AddSpecialEffectTarget(modelName, this61, attachment)
+	wurst_stack_depth = (wurst_stack_depth - 1)
+	return stackTrace_tempReturn105
+end
+
+function init_XaviusMain(__wurst_stackPos386) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos386
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	XaviusMain_XAVIUS_ID = 1311780918
 	UnitDefinition_new_UnitDefinition(XaviusMain_XAVIUS_ID, XaviusMain_XAVIUS_ID, "when calling new_UnitDefinition in XaviusMain, line 14")
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function init_winLoss(__wurst_stackPos367) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos367
+function init_winLoss(__wurst_stackPos387) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos387
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	winLoss_footmen = CreateGroup()
 	setupDefeatCondition("when calling setupDefeatCondition in winLoss, line 21")
@@ -9981,15 +10660,15 @@ function init_winLoss(__wurst_stackPos367)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function setupVictoryCondition(__wurst_stackPos543) 
-	local receiver45 = nil
-	local receiver46 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos543
+function setupVictoryCondition(__wurst_stackPos575) 
+	local receiver47 = nil
+	local receiver48 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos575
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	receiver45 = CreateTrigger()
-	trigger_registerPlayerUnitEvent(receiver45, Player_players[1], EVENT_PLAYER_UNIT_DEATH, nil, "when calling registerPlayerUnitEvent in winLoss, line 7")
-	receiver46 = receiver45
-	trigger_addAction(receiver46, function (...) 
+	receiver47 = CreateTrigger()
+	trigger_registerPlayerUnitEvent(receiver47, Player_players[1], EVENT_PLAYER_UNIT_DEATH, nil, "when calling registerPlayerUnitEvent in winLoss, line 7")
+	receiver48 = receiver47
+	trigger_addAction(receiver48, function (...) 
 			xpcall(function (...) 
 					bridge_code__addAction_winLoss(...)
 				end, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua callback error: " .. tostring(err)) xpcall(function() error1(tostring(err), "<lua error>") end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) BJDebugMsg("while reporting: " .. tostring(err))  end) end, ...)
@@ -9997,8 +10676,8 @@ function setupVictoryCondition(__wurst_stackPos543)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function code__addAction_winLoss(__wurst_stackPos544) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos544
+function code__addAction_winLoss(__wurst_stackPos576) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos576
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	group_remove(winLoss_footmen, "when calling remove in winLoss, line 9", GetTriggerUnit())
 	if group_isEmpty(winLoss_footmen, "when calling isEmpty in winLoss, line 10") then
@@ -10007,15 +10686,15 @@ function code__addAction_winLoss(__wurst_stackPos544)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function setupDefeatCondition(__wurst_stackPos542) 
-	local receiver47 = nil
-	local receiver48 = nil
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos542
+function setupDefeatCondition(__wurst_stackPos574) 
+	local receiver49 = nil
+	local receiver50 = nil
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos574
 	wurst_stack_depth = (wurst_stack_depth + 1)
-	receiver47 = CreateTrigger()
-	trigger_registerPlayerUnitEvent(receiver47, Player_players[0], EVENT_PLAYER_UNIT_DEATH, nil, "when calling registerPlayerUnitEvent in winLoss, line 15")
-	receiver48 = receiver47
-	trigger_addAction(receiver48, function (...) 
+	receiver49 = CreateTrigger()
+	trigger_registerPlayerUnitEvent(receiver49, Player_players[0], EVENT_PLAYER_UNIT_DEATH, nil, "when calling registerPlayerUnitEvent in winLoss, line 15")
+	receiver50 = receiver49
+	trigger_addAction(receiver50, function (...) 
 			xpcall(function (...) 
 					bridge_code__addAction_winLoss1(...)
 				end, function(err) if err == "__wurst_abort_thread" then return end BJDebugMsg("lua callback error: " .. tostring(err)) xpcall(function() error1(tostring(err), "<lua error>") end, function(err2) if err2 == "__wurst_abort_thread" then return end BJDebugMsg("error reporting error: " .. tostring(err2)) BJDebugMsg("while reporting: " .. tostring(err))  end) end, ...)
@@ -10023,8 +10702,8 @@ function setupDefeatCondition(__wurst_stackPos542)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function code__addAction_winLoss1(__wurst_stackPos545) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos545
+function code__addAction_winLoss1(__wurst_stackPos577) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos577
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	if (GetTriggerUnit() == udg_townHall) then
 		__wurst_safe_CustomDefeatBJ(Player_players[0], "You have been defeated!")
@@ -10032,15 +10711,15 @@ function code__addAction_winLoss1(__wurst_stackPos545)
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function initCompiletimeState(__wurst_stackPos290) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos290
+function initCompiletimeState(__wurst_stackPos308) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos308
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	bridge_initCompiletimeState_0()
 	wurst_stack_depth = (wurst_stack_depth - 1)
 end
 
-function initCompiletimeState_0(__wurst_stackPos546) 
-	wurst_stack[wurst_stack_depth] = __wurst_stackPos546
+function initCompiletimeState_0(__wurst_stackPos578) 
+	wurst_stack[wurst_stack_depth] = __wurst_stackPos578
 	wurst_stack_depth = (wurst_stack_depth + 1)
 	hashtable_compiletime3 = __wurst_InitHashtable()
 	hashtable_compiletime2 = __wurst_InitHashtable()
@@ -10154,35 +10833,59 @@ function initCompiletimeState_0(__wurst_stackPos546)
 end
 
 function bridge_Unit000038_DropItems() 
-	Unit000038_DropItems("via function reference war3map, line 634")
+	Unit000038_DropItems("via function reference war3map, line 804")
 end
 
 function bridge_Unit000043_DropItems() 
-	Unit000043_DropItems("via function reference war3map, line 648")
+	Unit000043_DropItems("via function reference war3map, line 816")
 end
 
 function bridge_Unit000090_DropItems() 
-	Unit000090_DropItems("via function reference war3map, line 680")
+	Unit000090_DropItems("via function reference war3map, line 853")
 end
 
 function bridge_Unit000097_DropItems() 
-	Unit000097_DropItems("via function reference war3map, line 694")
+	Unit000097_DropItems("via function reference war3map, line 865")
 end
 
 function bridge_Unit000003_DropItems() 
-	Unit000003_DropItems("via function reference war3map, line 718")
+	Unit000003_DropItems("via function reference war3map, line 889")
 end
 
 function bridge_Unit000116_DropItems() 
-	Unit000116_DropItems("via function reference war3map, line 732")
+	Unit000116_DropItems("via function reference war3map, line 903")
+end
+
+function bridge_Trig_testGate_Actions() 
+	Trig_testGate_Actions("via function reference war3map, line 1260")
+end
+
+function bridge_Trig_auberdine_Actions() 
+	Trig_auberdine_Actions("via function reference war3map, line 1276")
+end
+
+function bridge_Trig_astranaar_Actions() 
+	Trig_astranaar_Actions("via function reference war3map, line 1295")
+end
+
+function bridge_Trig_ashenvaleChimaeraFall_Actions() 
+	Trig_ashenvaleChimaeraFall_Actions("via function reference war3map, line 1309")
+end
+
+function bridge_Trig_darnassus_Actions() 
+	Trig_darnassus_Actions("via function reference war3map, line 1332")
 end
 
 function bridge_Trig_Other_Actions() 
-	Trig_Other_Actions("via function reference war3map, line 1054")
+	Trig_Other_Actions("via function reference war3map, line 1346")
 end
 
 function bridge_Trig_ControlPointInitialVariables_Actions() 
-	Trig_ControlPointInitialVariables_Actions("via function reference war3map, line 1092")
+	Trig_ControlPointInitialVariables_Actions("via function reference war3map, line 1383")
+end
+
+function bridge_code__addAction_AssignBuildings() 
+	code__addAction_AssignBuildings("via function reference AssignBuildings, line 44")
 end
 
 function bridge_code__onUnitDeindex_ClosureEvents() 
@@ -10219,6 +10922,14 @@ end
 
 function bridge_code__startPeriodic_GameTimer() 
 	code__startPeriodic_GameTimer("via function reference GameTimer, line 15")
+end
+
+function bridge_onOpenGate() 
+	onOpenGate("via function reference GateLogic, line 52")
+end
+
+function bridge_onCloseGate() 
+	onCloseGate("via function reference GateLogic, line 53")
 end
 
 function bridge_code__registerPlayerUnitEvent_RegisterEvents() 
@@ -10324,18 +11035,18 @@ function __wurst_safe_GetRectMaxY(whichRect3)
 	return GetRectMaxY(whichRect3)
 end
 
-function __wurst_safe_GetUnitX(whichUnit23) 
-	if (whichUnit23 == nil) then
+function __wurst_safe_GetUnitX(whichUnit25) 
+	if (whichUnit25 == nil) then
 		return 0.0
 	end
-	return GetUnitX(whichUnit23)
+	return GetUnitX(whichUnit25)
 end
 
-function __wurst_safe_GetUnitY(whichUnit24) 
-	if (whichUnit24 == nil) then
+function __wurst_safe_GetUnitY(whichUnit26) 
+	if (whichUnit26 == nil) then
 		return 0.0
 	end
-	return GetUnitY(whichUnit24)
+	return GetUnitY(whichUnit26)
 end
 
 function __wurst_safe_TriggerEvaluate(whichTrigger4) 
@@ -10421,30 +11132,30 @@ function __wurst_safe_TriggerRegisterTimerExpireEvent(whichTrigger10, t5)
 	return TriggerRegisterTimerExpireEvent(whichTrigger10, t5)
 end
 
-function __wurst_safe_TriggerRegisterPlayerUnitEvent(whichTrigger9, whichPlayer22, whichPlayerUnitEvent1, filter11) 
+function __wurst_safe_TriggerRegisterPlayerUnitEvent(whichTrigger9, whichPlayer23, whichPlayerUnitEvent1, filter11) 
 	if (whichTrigger9 == nil) then
 		return nil
 	end
-	if (whichPlayer22 == nil) then
+	if (whichPlayer23 == nil) then
 		return nil
 	end
 	if (whichPlayerUnitEvent1 == nil) then
 		return nil
 	end
-	return TriggerRegisterPlayerUnitEvent(whichTrigger9, whichPlayer22, whichPlayerUnitEvent1, filter11)
+	return TriggerRegisterPlayerUnitEvent(whichTrigger9, whichPlayer23, whichPlayerUnitEvent1, filter11)
 end
 
-function __wurst_safe_TriggerRegisterPlayerEvent(whichTrigger8, whichPlayer21, whichPlayerEvent1) 
+function __wurst_safe_TriggerRegisterPlayerEvent(whichTrigger8, whichPlayer22, whichPlayerEvent1) 
 	if (whichTrigger8 == nil) then
 		return nil
 	end
-	if (whichPlayer21 == nil) then
+	if (whichPlayer22 == nil) then
 		return nil
 	end
 	if (whichPlayerEvent1 == nil) then
 		return nil
 	end
-	return TriggerRegisterPlayerEvent(whichTrigger8, whichPlayer21, whichPlayerEvent1)
+	return TriggerRegisterPlayerEvent(whichTrigger8, whichPlayer22, whichPlayerEvent1)
 end
 
 function __wurst_safe_TriggerRegisterGameStateEvent(whichTrigger11, whichState, opcode, limitval) 
@@ -10508,18 +11219,18 @@ function __wurst_safe_DestroyEffect(whichEffect)
 	DestroyEffect(whichEffect)
 end
 
-function __wurst_safe_SetUnitAbilityLevel(whichUnit16, abilcode, level4) 
-	if (whichUnit16 == nil) then
+function __wurst_safe_SetUnitAbilityLevel(whichUnit18, abilcode, level4) 
+	if (whichUnit18 == nil) then
 		return 0
 	end
-	return SetUnitAbilityLevel(whichUnit16, abilcode, level4)
+	return SetUnitAbilityLevel(whichUnit18, abilcode, level4)
 end
 
-function __wurst_safe_GetUnitAbilityLevel(whichUnit20, abilcode1) 
-	if (whichUnit20 == nil) then
+function __wurst_safe_GetUnitAbilityLevel(whichUnit22, abilcode1) 
+	if (whichUnit22 == nil) then
 		return 0
 	end
-	return GetUnitAbilityLevel(whichUnit20, abilcode1)
+	return GetUnitAbilityLevel(whichUnit22, abilcode1)
 end
 
 function __wurst_safe_UnitRemoveAbility(whichUnit1, abilityId1) 
@@ -10529,11 +11240,11 @@ function __wurst_safe_UnitRemoveAbility(whichUnit1, abilityId1)
 	return UnitRemoveAbility(whichUnit1, abilityId1)
 end
 
-function __wurst_safe_GetItemTypeId(i27) 
-	if (i27 == nil) then
+function __wurst_safe_GetItemTypeId(i29) 
+	if (i29 == nil) then
 		return 0
 	end
-	return GetItemTypeId(i27)
+	return GetItemTypeId(i29)
 end
 
 function __wurst_safe_ChooseRandomItemEx(whichType, level5) 
@@ -10543,21 +11254,21 @@ function __wurst_safe_ChooseRandomItemEx(whichType, level5)
 	return ChooseRandomItemEx(whichType, level5)
 end
 
-function __wurst_safe_GroupClear(whichGroup4) 
-	if (whichGroup4 == nil) then
+function __wurst_safe_GroupClear(whichGroup5) 
+	if (whichGroup5 == nil) then
 		return nil
 	end
-	GroupClear(whichGroup4)
+	GroupClear(whichGroup5)
 end
 
-function __wurst_safe_GroupAddUnit(whichGroup5, whichUnit11) 
-	if (whichGroup5 == nil) then
+function __wurst_safe_GroupAddUnit(whichGroup6, whichUnit12) 
+	if (whichGroup6 == nil) then
 		return false
 	end
-	if (whichUnit11 == nil) then
+	if (whichUnit12 == nil) then
 		return false
 	end
-	return GroupAddUnit(whichGroup5, whichUnit11)
+	return GroupAddUnit(whichGroup6, whichUnit12)
 end
 
 function __wurst_GetEnumUnit() 
@@ -10585,42 +11296,42 @@ function __wurst_ForGroup(whichGroup, callback)
 	__wurst_enumUnit_override = prev
 end
 
-function __wurst_safe_UnitSuspendDecay(whichUnit41, suspend) 
-	if (whichUnit41 == nil) then
+function __wurst_safe_UnitSuspendDecay(whichUnit43, suspend) 
+	if (whichUnit43 == nil) then
 		return nil
 	end
-	UnitSuspendDecay(whichUnit41, suspend)
+	UnitSuspendDecay(whichUnit43, suspend)
 end
 
-function __wurst_safe_GetUnitState(whichUnit8, whichUnitState) 
-	if (whichUnit8 == nil) then
+function __wurst_safe_GetUnitState(whichUnit11, whichUnitState1) 
+	if (whichUnit11 == nil) then
 		return 0.0
 	end
-	if (whichUnitState == nil) then
+	if (whichUnitState1 == nil) then
 		return 0.0
 	end
-	return GetUnitState(whichUnit8, whichUnitState)
+	return GetUnitState(whichUnit11, whichUnitState1)
 end
 
-function __wurst_safe_SetUnitTimeScale(whichUnit42, timeScale) 
-	if (whichUnit42 == nil) then
+function __wurst_safe_SetUnitTimeScale(whichUnit44, timeScale) 
+	if (whichUnit44 == nil) then
 		return nil
 	end
-	SetUnitTimeScale(whichUnit42, timeScale)
+	SetUnitTimeScale(whichUnit44, timeScale)
 end
 
-function __wurst_safe_SetUnitAnimation(whichUnit29, whichAnimation) 
-	if (whichUnit29 == nil) then
+function __wurst_safe_SetUnitAnimation(whichUnit31, whichAnimation) 
+	if (whichUnit31 == nil) then
 		return nil
 	end
-	SetUnitAnimation(whichUnit29, whichAnimation)
+	SetUnitAnimation(whichUnit31, whichAnimation)
 end
 
-function __wurst_safe_DestroyGroup(whichGroup7) 
-	if (whichGroup7 == nil) then
+function __wurst_safe_DestroyGroup(whichGroup8) 
+	if (whichGroup8 == nil) then
 		return nil
 	end
-	DestroyGroup(whichGroup7)
+	DestroyGroup(whichGroup8)
 end
 
 function __wurst_safe_TriggerAddAction(whichTrigger2, actionFunc1) 
@@ -10630,21 +11341,21 @@ function __wurst_safe_TriggerAddAction(whichTrigger2, actionFunc1)
 	return TriggerAddAction(whichTrigger2, actionFunc1)
 end
 
-function __wurst_safe_SetUnitState(whichUnit10, whichUnitState1, newVal) 
-	if (whichUnit10 == nil) then
+function __wurst_safe_SetUnitState(whichUnit6, whichUnitState, newVal) 
+	if (whichUnit6 == nil) then
 		return nil
 	end
-	if (whichUnitState1 == nil) then
+	if (whichUnitState == nil) then
 		return nil
 	end
-	SetUnitState(whichUnit10, whichUnitState1, newVal)
+	SetUnitState(whichUnit6, whichUnitState, newVal)
 end
 
-function __wurst_safe_IsUnitDeadBJ(whichUnit43) 
-	if (whichUnit43 == nil) then
+function __wurst_safe_IsUnitDeadBJ(whichUnit45) 
+	if (whichUnit45 == nil) then
 		return false
 	end
-	return IsUnitDeadBJ(whichUnit43)
+	return IsUnitDeadBJ(whichUnit45)
 end
 
 function __wurst_safe_IsUnitHidden(whichUnit4) 
@@ -10654,45 +11365,45 @@ function __wurst_safe_IsUnitHidden(whichUnit4)
 	return IsUnitHidden(whichUnit4)
 end
 
-function __wurst_safe_IsUnitType(whichUnit14, whichUnitType) 
-	if (whichUnit14 == nil) then
+function __wurst_safe_IsUnitType(whichUnit16, whichUnitType) 
+	if (whichUnit16 == nil) then
 		return false
 	end
 	if (whichUnitType == nil) then
 		return false
 	end
-	return IsUnitType(whichUnit14, whichUnitType)
+	return IsUnitType(whichUnit16, whichUnitType)
 end
 
-function __wurst_safe_GetUnitTypeId(whichUnit13) 
-	if (whichUnit13 == nil) then
+function __wurst_safe_GetUnitTypeId(whichUnit15) 
+	if (whichUnit15 == nil) then
 		return 0
 	end
-	return GetUnitTypeId(whichUnit13)
+	return GetUnitTypeId(whichUnit15)
 end
 
-function __wurst_safe_FirstOfGroup(whichGroup9) 
-	if (whichGroup9 == nil) then
+function __wurst_safe_FirstOfGroup(whichGroup11) 
+	if (whichGroup11 == nil) then
 		return nil
 	end
-	return FirstOfGroup(whichGroup9)
+	return FirstOfGroup(whichGroup11)
 end
 
-function __wurst_safe_IssueTargetOrderById(whichUnit26, order, targetWidget1) 
-	if (whichUnit26 == nil) then
+function __wurst_safe_IssueTargetOrderById(whichUnit28, order, targetWidget1) 
+	if (whichUnit28 == nil) then
 		return false
 	end
 	if (targetWidget1 == nil) then
 		return false
 	end
-	return IssueTargetOrderById(whichUnit26, order, targetWidget1)
+	return IssueTargetOrderById(whichUnit28, order, targetWidget1)
 end
 
-function __wurst_safe_SetUnitFlyHeight(whichUnit15, newHeight, rate1) 
-	if (whichUnit15 == nil) then
+function __wurst_safe_SetUnitFlyHeight(whichUnit17, newHeight, rate1) 
+	if (whichUnit17 == nil) then
 		return nil
 	end
-	SetUnitFlyHeight(whichUnit15, newHeight, rate1)
+	SetUnitFlyHeight(whichUnit17, newHeight, rate1)
 end
 
 function __wurst_safe_SetUnitAcquireRange(whichUnit5, newAcquireRange) 
@@ -10702,28 +11413,28 @@ function __wurst_safe_SetUnitAcquireRange(whichUnit5, newAcquireRange)
 	SetUnitAcquireRange(whichUnit5, newAcquireRange)
 end
 
-function __wurst_safe_SetPlayerState(whichPlayer11, whichPlayerState, value16) 
-	if (whichPlayer11 == nil) then
+function __wurst_safe_SetPlayerState(whichPlayer12, whichPlayerState, value16) 
+	if (whichPlayer12 == nil) then
 		return nil
 	end
 	if (whichPlayerState == nil) then
 		return nil
 	end
-	SetPlayerState(whichPlayer11, whichPlayerState, value16)
+	SetPlayerState(whichPlayer12, whichPlayerState, value16)
 end
 
-function __wurst_safe_PauseUnit(whichUnit27, flag2) 
-	if (whichUnit27 == nil) then
+function __wurst_safe_PauseUnit(whichUnit29, flag4) 
+	if (whichUnit29 == nil) then
 		return nil
 	end
-	PauseUnit(whichUnit27, flag2)
+	PauseUnit(whichUnit29, flag4)
 end
 
-function __wurst_safe_GetPlayerController(whichPlayer25) 
-	if (whichPlayer25 == nil) then
+function __wurst_safe_GetPlayerController(whichPlayer26) 
+	if (whichPlayer26 == nil) then
 		return nil
 	end
-	return GetPlayerController(whichPlayer25)
+	return GetPlayerController(whichPlayer26)
 end
 
 function __wurst_safe_UnitAddAbility(whichUnit, abilityId) 
@@ -10733,25 +11444,25 @@ function __wurst_safe_UnitAddAbility(whichUnit, abilityId)
 	return UnitAddAbility(whichUnit, abilityId)
 end
 
-function __wurst_safe_UnitMakeAbilityPermanent(whichUnit17, permanent, abilityId5) 
-	if (whichUnit17 == nil) then
+function __wurst_safe_UnitMakeAbilityPermanent(whichUnit19, permanent, abilityId5) 
+	if (whichUnit19 == nil) then
 		return false
 	end
-	return UnitMakeAbilityPermanent(whichUnit17, permanent, abilityId5)
+	return UnitMakeAbilityPermanent(whichUnit19, permanent, abilityId5)
 end
 
-function __wurst_safe_KillUnit(whichUnit19) 
-	if (whichUnit19 == nil) then
+function __wurst_safe_KillUnit(whichUnit21) 
+	if (whichUnit21 == nil) then
 		return nil
 	end
-	KillUnit(whichUnit19)
+	KillUnit(whichUnit21)
 end
 
-function __wurst_safe_GetOwningPlayer(whichUnit22) 
-	if (whichUnit22 == nil) then
+function __wurst_safe_GetOwningPlayer(whichUnit24) 
+	if (whichUnit24 == nil) then
 		return nil
 	end
-	return GetOwningPlayer(whichUnit22)
+	return GetOwningPlayer(whichUnit24)
 end
 
 function __wurst_safe_CreateUnit(id12, unitid1, x7, y6, face1) 
@@ -10761,36 +11472,36 @@ function __wurst_safe_CreateUnit(id12, unitid1, x7, y6, face1)
 	return CreateUnit(id12, unitid1, x7, y6, face1)
 end
 
-function __wurst_safe_RemoveUnit(whichUnit28) 
-	if (whichUnit28 == nil) then
-		return nil
-	end
-	RemoveUnit(whichUnit28)
-end
-
-function __wurst_safe_SetUnitFacing(whichUnit30, facingAngle) 
+function __wurst_safe_RemoveUnit(whichUnit30) 
 	if (whichUnit30 == nil) then
 		return nil
 	end
-	SetUnitFacing(whichUnit30, facingAngle)
+	RemoveUnit(whichUnit30)
 end
 
-function __wurst_safe_AddItemToStock(whichUnit44, itemId, currentStock, stockMax) 
-	if (whichUnit44 == nil) then
+function __wurst_safe_SetUnitFacing(whichUnit32, facingAngle) 
+	if (whichUnit32 == nil) then
 		return nil
 	end
-	AddItemToStock(whichUnit44, itemId, currentStock, stockMax)
+	SetUnitFacing(whichUnit32, facingAngle)
 end
 
-function __wurst_safe_RemoveItemFromStock(whichUnit45, itemId1) 
-	if (whichUnit45 == nil) then
+function __wurst_safe_AddItemToStock(whichUnit46, itemId, currentStock, stockMax) 
+	if (whichUnit46 == nil) then
 		return nil
 	end
-	RemoveItemFromStock(whichUnit45, itemId1)
+	AddItemToStock(whichUnit46, itemId, currentStock, stockMax)
 end
 
-function __wurst_safe_UnitDamageTarget(whichUnit18, target12, amount3, attack1, ranged1, attackType3, damageType4, weaponType2) 
-	if (whichUnit18 == nil) then
+function __wurst_safe_RemoveItemFromStock(whichUnit47, itemId1) 
+	if (whichUnit47 == nil) then
+		return nil
+	end
+	RemoveItemFromStock(whichUnit47, itemId1)
+end
+
+function __wurst_safe_UnitDamageTarget(whichUnit20, target12, amount3, attack1, ranged1, attackType3, damageType4, weaponType2) 
+	if (whichUnit20 == nil) then
 		return false
 	end
 	if (target12 == nil) then
@@ -10805,21 +11516,21 @@ function __wurst_safe_UnitDamageTarget(whichUnit18, target12, amount3, attack1, 
 	if (weaponType2 == nil) then
 		return false
 	end
-	return UnitDamageTarget(whichUnit18, target12, amount3, attack1, ranged1, attackType3, damageType4, weaponType2)
+	return UnitDamageTarget(whichUnit20, target12, amount3, attack1, ranged1, attackType3, damageType4, weaponType2)
 end
 
-function __wurst_safe_GetDestructableX(d1) 
-	if (d1 == nil) then
+function __wurst_safe_GetDestructableX(d4) 
+	if (d4 == nil) then
 		return 0.0
 	end
-	return GetDestructableX(d1)
+	return GetDestructableX(d4)
 end
 
-function __wurst_safe_GetDestructableY(d2) 
-	if (d2 == nil) then
+function __wurst_safe_GetDestructableY(d5) 
+	if (d5 == nil) then
 		return 0.0
 	end
-	return GetDestructableY(d2)
+	return GetDestructableY(d5)
 end
 
 function __wurst_safe_GetDestructableLoc(whichDestructable) 
@@ -10829,41 +11540,76 @@ function __wurst_safe_GetDestructableLoc(whichDestructable)
 	return GetDestructableLoc(whichDestructable)
 end
 
-function __wurst_safe_SetUnitPosition(whichUnit33, newX, newY) 
-	if (whichUnit33 == nil) then
-		return nil
+function __wurst_safe_GetDestructableLife(d6) 
+	if (d6 == nil) then
+		return 0.0
 	end
-	SetUnitPosition(whichUnit33, newX, newY)
+	return GetDestructableLife(d6)
 end
 
-function __wurst_safe_GroupEnumUnitsInRect(whichGroup1, r3, filter6) 
-	if (whichGroup1 == nil) then
+function __wurst_safe_GetDestructableMaxLife(d7) 
+	if (d7 == nil) then
+		return 0.0
+	end
+	return GetDestructableMaxLife(d7)
+end
+
+function __wurst_safe_DestructableRestoreLife(d8, life, birth) 
+	if (d8 == nil) then
+		return nil
+	end
+	DestructableRestoreLife(d8, life, birth)
+end
+
+function __wurst_safe_SetDestructableAnimation(d9, whichAnimation1) 
+	if (d9 == nil) then
+		return nil
+	end
+	SetDestructableAnimation(d9, whichAnimation1)
+end
+
+function __wurst_safe_KillDestructable(d10) 
+	if (d10 == nil) then
+		return nil
+	end
+	KillDestructable(d10)
+end
+
+function __wurst_safe_SetUnitPosition(whichUnit35, newX, newY) 
+	if (whichUnit35 == nil) then
+		return nil
+	end
+	SetUnitPosition(whichUnit35, newX, newY)
+end
+
+function __wurst_safe_GroupEnumUnitsInRect(whichGroup2, r3, filter6) 
+	if (whichGroup2 == nil) then
 		return nil
 	end
 	if (r3 == nil) then
 		return nil
 	end
-	GroupEnumUnitsInRect(whichGroup1, r3, filter6)
+	GroupEnumUnitsInRect(whichGroup2, r3, filter6)
 end
 
-function __wurst_safe_GroupRemoveUnit(whichGroup6, whichUnit12) 
-	if (whichGroup6 == nil) then
+function __wurst_safe_GroupRemoveUnit(whichGroup7, whichUnit13) 
+	if (whichGroup7 == nil) then
 		return false
 	end
-	if (whichUnit12 == nil) then
+	if (whichUnit13 == nil) then
 		return false
 	end
-	return GroupRemoveUnit(whichGroup6, whichUnit12)
+	return GroupRemoveUnit(whichGroup7, whichUnit13)
 end
 
-function __wurst_safe_ForceAddPlayer(whichForce, whichPlayer10) 
+function __wurst_safe_ForceAddPlayer(whichForce, whichPlayer11) 
 	if (whichForce == nil) then
 		return nil
 	end
-	if (whichPlayer10 == nil) then
+	if (whichPlayer11 == nil) then
 		return nil
 	end
-	ForceAddPlayer(whichForce, whichPlayer10)
+	ForceAddPlayer(whichForce, whichPlayer11)
 end
 
 function __wurst_ForForce(whichForce, callback) 
@@ -10889,35 +11635,35 @@ function __wurst_safe_ForceEnumPlayers(whichForce2, filter12)
 	ForceEnumPlayers(whichForce2, filter12)
 end
 
-function __wurst_safe_IsUnitAliveBJ(whichUnit46) 
-	if (whichUnit46 == nil) then
+function __wurst_safe_IsUnitAliveBJ(whichUnit48) 
+	if (whichUnit48 == nil) then
 		return false
 	end
-	return IsUnitAliveBJ(whichUnit46)
+	return IsUnitAliveBJ(whichUnit48)
 end
 
-function __wurst_safe_SetUnitScale(whichUnit34, scaleX, scaleY, scaleZ) 
-	if (whichUnit34 == nil) then
-		return nil
-	end
-	SetUnitScale(whichUnit34, scaleX, scaleY, scaleZ)
-end
-
-function __wurst_safe_SetUnitVertexColor(whichUnit36, red1, green1, blue1, alpha1) 
+function __wurst_safe_SetUnitScale(whichUnit36, scaleX, scaleY, scaleZ) 
 	if (whichUnit36 == nil) then
 		return nil
 	end
-	SetUnitVertexColor(whichUnit36, red1, green1, blue1, alpha1)
+	SetUnitScale(whichUnit36, scaleX, scaleY, scaleZ)
 end
 
-function __wurst_safe_DialogDisplay(whichPlayer26, whichDialog2, flag5) 
-	if (whichPlayer26 == nil) then
+function __wurst_safe_SetUnitVertexColor(whichUnit38, red1, green1, blue1, alpha1) 
+	if (whichUnit38 == nil) then
+		return nil
+	end
+	SetUnitVertexColor(whichUnit38, red1, green1, blue1, alpha1)
+end
+
+function __wurst_safe_DialogDisplay(whichPlayer27, whichDialog2, flag7) 
+	if (whichPlayer27 == nil) then
 		return nil
 	end
 	if (whichDialog2 == nil) then
 		return nil
 	end
-	DialogDisplay(whichPlayer26, whichDialog2, flag5)
+	DialogDisplay(whichPlayer27, whichDialog2, flag7)
 end
 
 function __wurst_safe_DialogSetMessage(whichDialog3, messageText) 
@@ -10934,27 +11680,47 @@ function __wurst_safe_DialogAddButton(whichDialog4, buttonText, hotkey)
 	return DialogAddButton(whichDialog4, buttonText, hotkey)
 end
 
-function __wurst_safe_SetPlayerAlliance(sourcePlayer, otherPlayer2, whichAllianceSetting, value19) 
-	if (sourcePlayer == nil) then
+function __wurst_safe_SetPlayerAlliance(sourcePlayer2, otherPlayer4, whichAllianceSetting, value19) 
+	if (sourcePlayer2 == nil) then
 		return nil
 	end
-	if (otherPlayer2 == nil) then
+	if (otherPlayer4 == nil) then
 		return nil
 	end
 	if (whichAllianceSetting == nil) then
 		return nil
 	end
-	SetPlayerAlliance(sourcePlayer, otherPlayer2, whichAllianceSetting, value19)
+	SetPlayerAlliance(sourcePlayer2, otherPlayer4, whichAllianceSetting, value19)
 end
 
-function __wurst_safe_SetUnitOwner(whichUnit9, whichPlayer8, changeColor1) 
-	if (whichUnit9 == nil) then
+function __wurst_safe_SetPlayerAllianceStateVisionBJ(sourcePlayer, otherPlayer, flag1) 
+	if (sourcePlayer == nil) then
 		return nil
 	end
-	if (whichPlayer8 == nil) then
+	if (otherPlayer == nil) then
 		return nil
 	end
-	SetUnitOwner(whichUnit9, whichPlayer8, changeColor1)
+	SetPlayerAllianceStateVisionBJ(sourcePlayer, otherPlayer, flag1)
+end
+
+function __wurst_safe_SetPlayerAllianceStateControlBJ(sourcePlayer1, otherPlayer1, flag2) 
+	if (sourcePlayer1 == nil) then
+		return nil
+	end
+	if (otherPlayer1 == nil) then
+		return nil
+	end
+	SetPlayerAllianceStateControlBJ(sourcePlayer1, otherPlayer1, flag2)
+end
+
+function __wurst_safe_SetUnitOwner(whichUnit10, whichPlayer9, changeColor1) 
+	if (whichUnit10 == nil) then
+		return nil
+	end
+	if (whichPlayer9 == nil) then
+		return nil
+	end
+	SetUnitOwner(whichUnit10, whichPlayer9, changeColor1)
 end
 
 function __wurst_safe_DisplayTimedTextFromPlayer(toPlayer1, x9, y8, duration4, message2) 
@@ -10974,14 +11740,14 @@ function __wurst_safe_TriggerRegisterDialogButtonEvent(whichTrigger12, whichButt
 	return TriggerRegisterDialogButtonEvent(whichTrigger12, whichButton)
 end
 
-function __wurst_safe_StartSoundForPlayerBJ(whichPlayer27, soundHandle2) 
-	if (whichPlayer27 == nil) then
+function __wurst_safe_StartSoundForPlayerBJ(whichPlayer28, soundHandle2) 
+	if (whichPlayer28 == nil) then
 		return nil
 	end
 	if (soundHandle2 == nil) then
 		return nil
 	end
-	StartSoundForPlayerBJ(whichPlayer27, soundHandle2)
+	StartSoundForPlayerBJ(whichPlayer28, soundHandle2)
 end
 
 function __wurst_safe_AllowVictoryDefeat(gameResult) 
@@ -10991,14 +11757,14 @@ function __wurst_safe_AllowVictoryDefeat(gameResult)
 	return AllowVictoryDefeat(gameResult)
 end
 
-function __wurst_safe_RemovePlayer(whichPlayer28, gameResult1) 
-	if (whichPlayer28 == nil) then
+function __wurst_safe_RemovePlayer(whichPlayer29, gameResult1) 
+	if (whichPlayer29 == nil) then
 		return nil
 	end
 	if (gameResult1 == nil) then
 		return nil
 	end
-	RemovePlayer(whichPlayer28, gameResult1)
+	RemovePlayer(whichPlayer29, gameResult1)
 end
 
 function __wurst_safe_SetGameDifficulty(whichdifficulty) 
@@ -11008,35 +11774,35 @@ function __wurst_safe_SetGameDifficulty(whichdifficulty)
 	SetGameDifficulty(whichdifficulty)
 end
 
-function __wurst_safe_VolumeGroupSetVolumeForPlayerBJ(whichPlayer29, vgroup1, scale5) 
-	if (whichPlayer29 == nil) then
+function __wurst_safe_VolumeGroupSetVolumeForPlayerBJ(whichPlayer30, vgroup1, scale5) 
+	if (whichPlayer30 == nil) then
 		return nil
 	end
 	if (vgroup1 == nil) then
 		return nil
 	end
-	VolumeGroupSetVolumeForPlayerBJ(whichPlayer29, vgroup1, scale5)
+	VolumeGroupSetVolumeForPlayerBJ(whichPlayer30, vgroup1, scale5)
 end
 
-function __wurst_safe_CustomVictoryDialogBJ(whichPlayer30) 
-	if (whichPlayer30 == nil) then
-		return nil
-	end
-	CustomVictoryDialogBJ(whichPlayer30)
-end
-
-function __wurst_safe_CustomVictorySkipBJ(whichPlayer31) 
+function __wurst_safe_CustomVictoryDialogBJ(whichPlayer31) 
 	if (whichPlayer31 == nil) then
 		return nil
 	end
-	CustomVictorySkipBJ(whichPlayer31)
+	CustomVictoryDialogBJ(whichPlayer31)
 end
 
-function __wurst_safe_CustomDefeatDialogBJ(whichPlayer32, message3) 
+function __wurst_safe_CustomVictorySkipBJ(whichPlayer32) 
 	if (whichPlayer32 == nil) then
 		return nil
 	end
-	CustomDefeatDialogBJ(whichPlayer32, message3)
+	CustomVictorySkipBJ(whichPlayer32)
+end
+
+function __wurst_safe_CustomDefeatDialogBJ(whichPlayer33, message3) 
+	if (whichPlayer33 == nil) then
+		return nil
+	end
+	CustomDefeatDialogBJ(whichPlayer33, message3)
 end
 
 function __wurst_safe_CreateTimerDialog(t4) 
@@ -11144,42 +11910,42 @@ function __wurst_safe_MultiboardSetItemIcon(mbi5, iconFileName)
 	MultiboardSetItemIcon(mbi5, iconFileName)
 end
 
-function __wurst_safe_PingMinimapForPlayer(whichPlayer33, x10, y9, duration5) 
-	if (whichPlayer33 == nil) then
+function __wurst_safe_PingMinimapForPlayer(whichPlayer34, x10, y9, duration5) 
+	if (whichPlayer34 == nil) then
 		return nil
 	end
-	PingMinimapForPlayer(whichPlayer33, x10, y9, duration5)
+	PingMinimapForPlayer(whichPlayer34, x10, y9, duration5)
 end
 
-function __wurst_safe_UnitAddIndicator(whichUnit47, red2, green2, blue2, alpha2) 
-	if (whichUnit47 == nil) then
+function __wurst_safe_UnitAddIndicator(whichUnit49, red2, green2, blue2, alpha2) 
+	if (whichUnit49 == nil) then
 		return nil
 	end
-	UnitAddIndicator(whichUnit47, red2, green2, blue2, alpha2)
+	UnitAddIndicator(whichUnit49, red2, green2, blue2, alpha2)
 end
 
-function __wurst_safe_RescueUnitBJ(whichUnit48, rescuer, changeColor2) 
-	if (whichUnit48 == nil) then
+function __wurst_safe_RescueUnitBJ(whichUnit50, rescuer, changeColor2) 
+	if (whichUnit50 == nil) then
 		return nil
 	end
 	if (rescuer == nil) then
 		return nil
 	end
-	RescueUnitBJ(whichUnit48, rescuer, changeColor2)
+	RescueUnitBJ(whichUnit50, rescuer, changeColor2)
 end
 
-function __wurst_safe_SetPlayerTechMaxAllowed(whichPlayer34, techid, maximum) 
-	if (whichPlayer34 == nil) then
+function __wurst_safe_SetPlayerTechMaxAllowed(whichPlayer35, techid, maximum) 
+	if (whichPlayer35 == nil) then
 		return nil
 	end
-	SetPlayerTechMaxAllowed(whichPlayer34, techid, maximum)
+	SetPlayerTechMaxAllowed(whichPlayer35, techid, maximum)
 end
 
-function __wurst_safe_SetPlayerAbilityAvailable(whichPlayer17, abilid, avail1) 
-	if (whichPlayer17 == nil) then
+function __wurst_safe_SetPlayerAbilityAvailable(whichPlayer18, abilid, avail1) 
+	if (whichPlayer18 == nil) then
 		return nil
 	end
-	SetPlayerAbilityAvailable(whichPlayer17, abilid, avail1)
+	SetPlayerAbilityAvailable(whichPlayer18, abilid, avail1)
 end
 
 function __wurst_InitHashtable() 
@@ -11232,6 +11998,12 @@ function __wurst_LoadStr(h, p, c)
 	return t[p][c]
 end
 
+function __wurst_LoadDestructableHandle(h, p, c) 
+	local t = h.__wurst_ht_handle
+	if t == nil or t[p] == nil then return nil end
+	return t[p][c]
+end
+
 function __wurst_LoadUnitHandle(h, p, c) 
 	local t = h.__wurst_ht_handle
 	if t == nil or t[p] == nil then return nil end
@@ -11239,6 +12011,12 @@ function __wurst_LoadUnitHandle(h, p, c)
 end
 
 function __wurst_LoadTriggerHandle(h, p, c) 
+	local t = h.__wurst_ht_handle
+	if t == nil or t[p] == nil then return nil end
+	return t[p][c]
+end
+
+function __wurst_LoadGroupHandle(h, p, c) 
 	local t = h.__wurst_ht_handle
 	if t == nil or t[p] == nil then return nil end
 	return t[p][c]
@@ -11259,59 +12037,59 @@ function __wurst_HaveSavedString(h, p, c)
 	return t ~= nil and t[p] ~= nil and t[p][c] ~= nil
 end
 
-function __wurst_safe_GetPlayerSlotState(whichPlayer19) 
-	if (whichPlayer19 == nil) then
+function __wurst_safe_GetPlayerSlotState(whichPlayer20) 
+	if (whichPlayer20 == nil) then
 		return nil
 	end
-	return GetPlayerSlotState(whichPlayer19)
+	return GetPlayerSlotState(whichPlayer20)
 end
 
-function __wurst_safe_GetPlayerState(whichPlayer12, whichPlayerState1) 
-	if (whichPlayer12 == nil) then
+function __wurst_safe_GetPlayerState(whichPlayer13, whichPlayerState1) 
+	if (whichPlayer13 == nil) then
 		return 0
 	end
 	if (whichPlayerState1 == nil) then
 		return 0
 	end
-	return GetPlayerState(whichPlayer12, whichPlayerState1)
+	return GetPlayerState(whichPlayer13, whichPlayerState1)
 end
 
-function __wurst_safe_GetPlayerId(whichPlayer13) 
-	if (whichPlayer13 == nil) then
+function __wurst_safe_GetPlayerId(whichPlayer14) 
+	if (whichPlayer14 == nil) then
 		return 0
 	end
-	return GetPlayerId(whichPlayer13)
+	return GetPlayerId(whichPlayer14)
 end
 
-function __wurst_safe_SetPlayerColor(whichPlayer3, color2) 
-	if (whichPlayer3 == nil) then
+function __wurst_safe_SetPlayerColor(whichPlayer4, color2) 
+	if (whichPlayer4 == nil) then
 		return nil
 	end
 	if (color2 == nil) then
 		return nil
 	end
-	SetPlayerColor(whichPlayer3, color2)
+	SetPlayerColor(whichPlayer4, color2)
 end
 
-function __wurst_safe_GroupEnumUnitsInRange(whichGroup, x4, y3, radius3, filter5) 
-	if (whichGroup == nil) then
+function __wurst_safe_GroupEnumUnitsInRange(whichGroup1, x4, y3, radius3, filter5) 
+	if (whichGroup1 == nil) then
 		return nil
 	end
-	GroupEnumUnitsInRange(whichGroup, x4, y3, radius3, filter5)
+	GroupEnumUnitsInRange(whichGroup1, x4, y3, radius3, filter5)
 end
 
-function __wurst_safe_GetPlayerName(whichPlayer14) 
-	if (whichPlayer14 == nil) then
+function __wurst_safe_GetPlayerName(whichPlayer15) 
+	if (whichPlayer15 == nil) then
 		return ""
 	end
-	return GetPlayerName(whichPlayer14)
+	return GetPlayerName(whichPlayer15)
 end
 
-function __wurst_safe_SetPlayerTeam(whichPlayer35, whichTeam) 
-	if (whichPlayer35 == nil) then
+function __wurst_safe_SetPlayerTeam(whichPlayer8, whichTeam) 
+	if (whichPlayer8 == nil) then
 		return nil
 	end
-	SetPlayerTeam(whichPlayer35, whichTeam)
+	SetPlayerTeam(whichPlayer8, whichTeam)
 end
 
 function __wurst_safe_Filter(func) 
@@ -11339,11 +12117,11 @@ function __wurst_safe_GetItemLevel(whichItem1)
 	return GetItemLevel(whichItem1)
 end
 
-function __wurst_safe_GroupEnumUnitsOfType(whichGroup2, unitname, filter8) 
-	if (whichGroup2 == nil) then
+function __wurst_safe_GroupEnumUnitsOfType(whichGroup3, unitname, filter8) 
+	if (whichGroup3 == nil) then
 		return nil
 	end
-	GroupEnumUnitsOfType(whichGroup2, unitname, filter8)
+	GroupEnumUnitsOfType(whichGroup3, unitname, filter8)
 end
 
 function __wurst_safe_UpdateEachStockBuilding(iType, iLevel) 
@@ -11409,17 +12187,27 @@ function __wurst_safe_BlzCreateUnitWithSkin(id4, unitid, x2, y1, face, skinId)
 	return BlzCreateUnitWithSkin(id4, unitid, x2, y1, face, skinId)
 end
 
-function __wurst_safe_TriggerRegisterUnitEvent(whichTrigger1, whichUnit6, whichEvent) 
+function __wurst_safe_TriggerRegisterUnitEvent(whichTrigger1, whichUnit7, whichEvent) 
 	if (whichTrigger1 == nil) then
 		return nil
 	end
-	if (whichUnit6 == nil) then
+	if (whichUnit7 == nil) then
 		return nil
 	end
 	if (whichEvent == nil) then
 		return nil
 	end
-	return TriggerRegisterUnitEvent(whichTrigger1, whichUnit6, whichEvent)
+	return TriggerRegisterUnitEvent(whichTrigger1, whichUnit7, whichEvent)
+end
+
+function __wurst_safe_GroupAddUnitSimple(whichUnit8, whichGroup) 
+	if (whichUnit8 == nil) then
+		return nil
+	end
+	if (whichGroup == nil) then
+		return nil
+	end
+	GroupAddUnitSimple(whichUnit8, whichGroup)
 end
 
 function __wurst_safe_ConditionalTriggerExecute(trig) 
@@ -11436,31 +12224,45 @@ function __wurst_safe_SetPlayerStartLocation(whichPlayer2, startLocIndex)
 	SetPlayerStartLocation(whichPlayer2, startLocIndex)
 end
 
-function __wurst_safe_SetPlayerRacePreference(whichPlayer4, whichRacePreference) 
-	if (whichPlayer4 == nil) then
+function __wurst_safe_ForcePlayerStartLocation(whichPlayer3, startLocIndex1) 
+	if (whichPlayer3 == nil) then
+		return nil
+	end
+	ForcePlayerStartLocation(whichPlayer3, startLocIndex1)
+end
+
+function __wurst_safe_SetPlayerRacePreference(whichPlayer5, whichRacePreference) 
+	if (whichPlayer5 == nil) then
 		return nil
 	end
 	if (whichRacePreference == nil) then
 		return nil
 	end
-	SetPlayerRacePreference(whichPlayer4, whichRacePreference)
+	SetPlayerRacePreference(whichPlayer5, whichRacePreference)
 end
 
-function __wurst_safe_SetPlayerRaceSelectable(whichPlayer5, value8) 
-	if (whichPlayer5 == nil) then
+function __wurst_safe_SetPlayerRaceSelectable(whichPlayer6, value8) 
+	if (whichPlayer6 == nil) then
 		return nil
 	end
-	SetPlayerRaceSelectable(whichPlayer5, value8)
+	SetPlayerRaceSelectable(whichPlayer6, value8)
 end
 
-function __wurst_safe_SetPlayerController(whichPlayer6, controlType) 
-	if (whichPlayer6 == nil) then
+function __wurst_safe_SetPlayerController(whichPlayer7, controlType) 
+	if (whichPlayer7 == nil) then
 		return nil
 	end
 	if (controlType == nil) then
 		return nil
 	end
-	SetPlayerController(whichPlayer6, controlType)
+	SetPlayerController(whichPlayer7, controlType)
+end
+
+function __wurst_safe_SetStartLocPrio(whichStartLoc, prioSlotIndex, otherStartLocIndex, priority) 
+	if (priority == nil) then
+		return nil
+	end
+	SetStartLocPrio(whichStartLoc, prioSlotIndex, otherStartLocIndex, priority)
 end
 
 function __wurst_safe_SetGamePlacement(whichPlacementType) 
@@ -11468,16 +12270,6 @@ function __wurst_safe_SetGamePlacement(whichPlacementType)
 		return nil
 	end
 	SetGamePlacement(whichPlacementType)
-end
-
-function __wurst_safe_SetPlayerSlotAvailable(whichPlayer7, control) 
-	if (whichPlayer7 == nil) then
-		return nil
-	end
-	if (control == nil) then
-		return nil
-	end
-	SetPlayerSlotAvailable(whichPlayer7, control)
 end
 
 function __wurst_safe_BlzSetEventAttackType(attackType2) 
@@ -11522,11 +12314,11 @@ function __wurst_safe_BlzSetSpecialEffectPosition(whichEffect4, x3, y2, z)
 	BlzSetSpecialEffectPosition(whichEffect4, x3, y2, z)
 end
 
-function __wurst_safe_BlzSetSpecialEffectColor(whichEffect3, r2, g4, b2) 
+function __wurst_safe_BlzSetSpecialEffectColor(whichEffect3, r2, g5, b2) 
 	if (whichEffect3 == nil) then
 		return nil
 	end
-	BlzSetSpecialEffectColor(whichEffect3, r2, g4, b2)
+	BlzSetSpecialEffectColor(whichEffect3, r2, g5, b2)
 end
 
 function __wurst_safe_BlzGetLocalSpecialEffectZ(whichEffect5) 
@@ -11536,28 +12328,45 @@ function __wurst_safe_BlzGetLocalSpecialEffectZ(whichEffect5)
 	return BlzGetLocalSpecialEffectZ(whichEffect5)
 end
 
-function __wurst_safe_BlzGroupAddGroupFast(whichGroup3, addGroup) 
-	if (whichGroup3 == nil) then
+function __wurst_safe_ModifyGateBJ(gateOperation, d2) 
+	if (d2 == nil) then
+		return nil
+	end
+	ModifyGateBJ(gateOperation, d2)
+end
+
+function __wurst_safe_BlzGroupAddGroupFast(whichGroup4, addGroup) 
+	if (whichGroup4 == nil) then
 		return 0
 	end
 	if (addGroup == nil) then
 		return 0
 	end
-	return BlzGroupAddGroupFast(whichGroup3, addGroup)
+	return BlzGroupAddGroupFast(whichGroup4, addGroup)
 end
 
-function __wurst_safe_BlzGroupGetSize(whichGroup8) 
-	if (whichGroup8 == nil) then
+function __wurst_safe_IsUnitInGroup(whichUnit14, whichGroup9) 
+	if (whichUnit14 == nil) then
+		return false
+	end
+	if (whichGroup9 == nil) then
+		return false
+	end
+	return IsUnitInGroup(whichUnit14, whichGroup9)
+end
+
+function __wurst_safe_BlzGroupGetSize(whichGroup10) 
+	if (whichGroup10 == nil) then
 		return 0
 	end
-	return BlzGroupGetSize(whichGroup8)
+	return BlzGroupGetSize(whichGroup10)
 end
 
-function __wurst_safe_BlzGroupUnitAt(whichGroup10, index8) 
-	if (whichGroup10 == nil) then
+function __wurst_safe_BlzGroupUnitAt(whichGroup12, index8) 
+	if (whichGroup12 == nil) then
 		return nil
 	end
-	return BlzGroupUnitAt(whichGroup10, index8)
+	return BlzGroupUnitAt(whichGroup12, index8)
 end
 
 function __wurst_RemoveSavedInteger(h, p, c) 
@@ -11565,24 +12374,24 @@ function __wurst_RemoveSavedInteger(h, p, c)
 	if t ~= nil and t[p] then t[p][c] = nil end
 end
 
-function __wurst_safe_IsPlayerAlly(whichPlayer15, otherPlayer) 
-	if (whichPlayer15 == nil) then
-		return false
-	end
-	if (otherPlayer == nil) then
-		return false
-	end
-	return IsPlayerAlly(whichPlayer15, otherPlayer)
-end
-
-function __wurst_safe_IsPlayerEnemy(whichPlayer16, otherPlayer1) 
+function __wurst_safe_IsPlayerAlly(whichPlayer16, otherPlayer2) 
 	if (whichPlayer16 == nil) then
 		return false
 	end
-	if (otherPlayer1 == nil) then
+	if (otherPlayer2 == nil) then
 		return false
 	end
-	return IsPlayerEnemy(whichPlayer16, otherPlayer1)
+	return IsPlayerAlly(whichPlayer16, otherPlayer2)
+end
+
+function __wurst_safe_IsPlayerEnemy(whichPlayer17, otherPlayer3) 
+	if (whichPlayer17 == nil) then
+		return false
+	end
+	if (otherPlayer3 == nil) then
+		return false
+	end
+	return IsPlayerEnemy(whichPlayer17, otherPlayer3)
 end
 
 function __wurst_safe_TriggerAddCondition(whichTrigger3, condition2) 
@@ -11592,94 +12401,94 @@ function __wurst_safe_TriggerAddCondition(whichTrigger3, condition2)
 	return TriggerAddCondition(whichTrigger3, condition2)
 end
 
-function __wurst_safe_TriggerRegisterPlayerChatEvent(whichTrigger7, whichPlayer20, chatMessageToDetect1, exactMatchOnly1) 
+function __wurst_safe_TriggerRegisterPlayerChatEvent(whichTrigger7, whichPlayer21, chatMessageToDetect1, exactMatchOnly1) 
 	if (whichTrigger7 == nil) then
 		return nil
 	end
-	if (whichPlayer20 == nil) then
+	if (whichPlayer21 == nil) then
 		return nil
 	end
-	return TriggerRegisterPlayerChatEvent(whichTrigger7, whichPlayer20, chatMessageToDetect1, exactMatchOnly1)
+	return TriggerRegisterPlayerChatEvent(whichTrigger7, whichPlayer21, chatMessageToDetect1, exactMatchOnly1)
 end
 
 function __wurst_safe_Condition(func2) 
 	return Condition(func2)
 end
 
-function __wurst_safe_GetUnitName(whichUnit21) 
-	if (whichUnit21 == nil) then
+function __wurst_safe_GetUnitName(whichUnit23) 
+	if (whichUnit23 == nil) then
 		return ""
 	end
-	return GetUnitName(whichUnit21)
+	return GetUnitName(whichUnit23)
 end
 
-function __wurst_safe_GetUnitUserData(whichUnit25) 
-	if (whichUnit25 == nil) then
+function __wurst_safe_GetUnitUserData(whichUnit27) 
+	if (whichUnit27 == nil) then
 		return 0
 	end
-	return GetUnitUserData(whichUnit25)
+	return GetUnitUserData(whichUnit27)
 end
 
-function __wurst_safe_SetUnitInvulnerable(whichUnit31, flag3) 
-	if (whichUnit31 == nil) then
+function __wurst_safe_SetUnitInvulnerable(whichUnit33, flag5) 
+	if (whichUnit33 == nil) then
 		return nil
 	end
-	SetUnitInvulnerable(whichUnit31, flag3)
+	SetUnitInvulnerable(whichUnit33, flag5)
 end
 
-function __wurst_safe_SetUnitPathing(whichUnit32, flag4) 
-	if (whichUnit32 == nil) then
+function __wurst_safe_SetUnitPathing(whichUnit34, flag6) 
+	if (whichUnit34 == nil) then
 		return nil
 	end
-	SetUnitPathing(whichUnit32, flag4)
+	SetUnitPathing(whichUnit34, flag6)
 end
 
-function __wurst_safe_SetUnitUserData(whichUnit35, data2) 
-	if (whichUnit35 == nil) then
-		return nil
-	end
-	SetUnitUserData(whichUnit35, data2)
-end
-
-function __wurst_safe_SetUnitX(whichUnit37, newX1) 
+function __wurst_safe_SetUnitUserData(whichUnit37, data2) 
 	if (whichUnit37 == nil) then
 		return nil
 	end
-	SetUnitX(whichUnit37, newX1)
+	SetUnitUserData(whichUnit37, data2)
 end
 
-function __wurst_safe_SetUnitY(whichUnit38, newY1) 
-	if (whichUnit38 == nil) then
+function __wurst_safe_SetUnitX(whichUnit39, newX1) 
+	if (whichUnit39 == nil) then
 		return nil
 	end
-	SetUnitY(whichUnit38, newY1)
+	SetUnitX(whichUnit39, newX1)
 end
 
-function __wurst_safe_BlzGetUnitArmor(whichUnit39) 
-	if (whichUnit39 == nil) then
-		return 0.0
-	end
-	return BlzGetUnitArmor(whichUnit39)
-end
-
-function __wurst_safe_BlzSetUnitArmor(whichUnit40, armorAmount1) 
+function __wurst_safe_SetUnitY(whichUnit40, newY1) 
 	if (whichUnit40 == nil) then
 		return nil
 	end
-	BlzSetUnitArmor(whichUnit40, armorAmount1)
+	SetUnitY(whichUnit40, newY1)
 end
 
-function __wurst_safe_CustomVictoryBJ(whichPlayer23, showDialog, showScores) 
-	if (whichPlayer23 == nil) then
+function __wurst_safe_BlzGetUnitArmor(whichUnit41) 
+	if (whichUnit41 == nil) then
+		return 0.0
+	end
+	return BlzGetUnitArmor(whichUnit41)
+end
+
+function __wurst_safe_BlzSetUnitArmor(whichUnit42, armorAmount1) 
+	if (whichUnit42 == nil) then
 		return nil
 	end
-	CustomVictoryBJ(whichPlayer23, showDialog, showScores)
+	BlzSetUnitArmor(whichUnit42, armorAmount1)
 end
 
-function __wurst_safe_CustomDefeatBJ(whichPlayer24, message1) 
+function __wurst_safe_CustomVictoryBJ(whichPlayer24, showDialog, showScores) 
 	if (whichPlayer24 == nil) then
 		return nil
 	end
-	CustomDefeatBJ(whichPlayer24, message1)
+	CustomVictoryBJ(whichPlayer24, showDialog, showScores)
+end
+
+function __wurst_safe_CustomDefeatBJ(whichPlayer25, message1) 
+	if (whichPlayer25 == nil) then
+		return nil
+	end
+	CustomDefeatBJ(whichPlayer25, message1)
 end
 
