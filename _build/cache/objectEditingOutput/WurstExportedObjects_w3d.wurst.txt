@@ -116,6 +116,7 @@ import DoodadObjEditing
 	..setName(0, "Mossy Log Bridge")
 	..setModel(0, "war3mapImported\\Mossy_Log_Bridge_002.mdl")
 	..setTilesets(0, "*")
+	// TODO no wrapper: 	..setLvlDataInt("dwlk", 0, 0, 1)
 
 
 @compiletime function create_w3d_D00G()
@@ -237,5 +238,11 @@ import DoodadObjEditing
 @compiletime function create_w3d_NRic()
 	new DoodadDefinition('NRic', 'NRic')
 	..setPathTexture(0, "")
+
+
+@compiletime function create_w3d_AOlg()
+	new DoodadDefinition('AOlg', 'AOlg')
+	..setTilesets(0, "A,*")
+	..setMaximumScale(0, 10.0)
 
 

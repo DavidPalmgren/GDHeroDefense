@@ -79,6 +79,7 @@ import UnitObjEditing
 	..setSpeedBase(240)
 	..setGoldCost(130)
 	..setBuildTime(20)
+	..setCollisionSize(8.0)
 	..setTooltipBasic("Train Treant")
 	..setTooltipExtended("Basic frontline unit. Can learn Thicker Bark to resist some damage and Recycle to invigorate a nearby unit on death. |n|n|cffffcc00Attacks land units.|r")
 	..setHotkey("Q")
@@ -116,6 +117,7 @@ import UnitObjEditing
 @compiletime function create_w3u_e004()
 	new UnitDefinition('e004', 'edry')
 	..setManaInitialAmount(150)
+	..setCollisionSize(8.0)
 	..setName("DryadCaster")
 	..setModelFile("war3mapImported\\SylvanEnchantress.mdl")
 	..setNormalAbilities("AM0d,AInv,Ault,ACm2,Aien,Aadm,Aspo")
@@ -692,6 +694,11 @@ import UnitObjEditing
 @compiletime function create_w3u_eate()
 	new BuildingDefinition('eate', 'eate')
 	..setUnitsTrained("E003,Edem,Ekee,Emoo,Ewar")
+
+
+@compiletime function create_w3u_edry()
+	new UnitDefinition('edry', 'edry')
+	..setCollisionSize(8.0)
 
 
 @compiletime function create_w3u_Ekee()
