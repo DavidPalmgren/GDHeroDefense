@@ -73,6 +73,7 @@ import UnitObjEditing
 	..setHotkey("Q")
 	..setNormalAbilities("AM0h")
 	..setNormalAbilities("AM0h")
+	..setNormalAbilities("AM0h")
 
 
 @compiletime function create_w3u_E003()
@@ -103,6 +104,8 @@ import UnitObjEditing
 	..setHeroAbilities("AM0b,A002,AM0a,AHav")
 	..setNormalAbilities("A001,AInv,Ault")
 	..setHeroAbilities("AM0b,A002,AM0a,AHav")
+	..setNormalAbilities("A001,AInv,Ault")
+	..setHeroAbilities("AM0b,A002,AM0a,AHav")
 
 
 @compiletime function create_w3u_e004()
@@ -111,6 +114,7 @@ import UnitObjEditing
 	..setCollisionSize(8.0)
 	..setName("DryadCaster")
 	..setModelFile("war3mapImported\\SylvanEnchantress.mdl")
+	..setNormalAbilities("AM0d,AInv,Ault,ACm2,Aien,Aadm,Aspo")
 	..setNormalAbilities("AM0d,AInv,Ault,ACm2,Aien,Aadm,Aspo")
 	..setNormalAbilities("AM0d,AInv,Ault,ACm2,Aien,Aadm,Aspo")
 
@@ -552,6 +556,9 @@ import UnitObjEditing
 	..setNormalAbilities("AM04,AM05,AM02")
 	..setLevel(6)
 	..setName("Xavius")
+	..setNormalAbilities("AM04,AM05,AM02")
+	..setLevel(6)
+	..setName("Xavius")
 
 
 @compiletime function create_w3u_e00J()
@@ -635,10 +642,15 @@ import UnitObjEditing
 	..setHeroAbilities("AM08,AM09,AM06")
 	..setNormalAbilities("AM07,AInv,Ault")
 	..setHeroAbilities("AM08,AM09,AM06")
+	..setNormalAbilities("AM07,AInv,Ault")
+	..setHeroAbilities("AM08,AM09,AM06")
 
 
 @compiletime function create_w3u_Hblm()
 	new HeroDefinition('Hblm', 'Hblm')
+	..setNormalAbilities("AM0e")
+	..setLevel(6)
+	..setName("Ligga")
 	..setNormalAbilities("AM0e")
 	..setLevel(6)
 	..setName("Ligga")

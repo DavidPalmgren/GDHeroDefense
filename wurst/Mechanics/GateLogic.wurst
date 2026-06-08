@@ -18,7 +18,7 @@ LinkedList<destructable> gateList = new LinkedList<destructable>()
 // function to initialize all the gates and link gates to control points
 function addGates()
     gateList.add(udg_darnassusGate)
-    gateList.add(udg_testGate)
+    //gateList.add(udg_testGate) // debug
 
     // set command for gate
     gateCommands.put("darnassus", udg_darnassusGate)
@@ -26,8 +26,8 @@ function addGates()
     
     cpsWithGates.add(udg_darnassus)
     cpsWithGatesMap.put(udg_darnassusGate, udg_darnassus)
-    cpsWithGates.add(udg_mountHyjalGrove) // debug
-    cpsWithGatesMap.put(udg_testGate, udg_mountHyjalGrove) // debug
+    //cpsWithGates.add(udg_mountHyjalGrove) // debug
+    //cpsWithGatesMap.put(udg_testGate, udg_mountHyjalGrove) // debug
 
 // function to open gate if the triggering player is the owner
 function onOpenGate()
