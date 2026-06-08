@@ -2,6 +2,7 @@ package ControlPoint
 import Scoreboard
 import HashMap
 import ClosureTimers
+import AssignBuildings
 
 // create Variables and Hashmaps
 public unit target = null
@@ -11,6 +12,7 @@ public let cpValues = new HashMap<unit, int>()
 public int array playerIncome
 public int array playerCpCount
 int count = 0
+bool isCapturing = false // debug
 
 //Functions
 
@@ -26,8 +28,10 @@ public function income()
 public function incomeTimer()
     let countdown = CreateTimer()
     let d = countdown.createTimerDialog()
+    // adjust textbox for timer here
     TimerDialogSetTitle(d, "Income")
     TimerDialogDisplay(d, true)
+    // adjust income timer here
     TimerStart(countdown,60.,true,function income)
 
 // set up a trigger for each control point that allows it to be captured when it is damaged to half health
@@ -43,6 +47,8 @@ function setupCaptureOnHalf(unit target)
             cpOwners.put(u, attacker.getOwner())
             SetUnitOwner(u, attacker.getOwner(), true)
             SetUnitState(u, UNIT_STATE_LIFE, maxHp)
+            if cpBuildingGroups.has(u)
+                assignBuilding(cpBuildingGroups.get(u), attacker.getOwner())
             updateMultiboard()
 
 // helper function to add control points to the map, set their value, and set up the trigger for capturing them
@@ -52,7 +58,7 @@ function addControlPoint(unit cp, int value)
     controlPoints.add(cp)
     setupCaptureOnHalf(cp)
 
-// set up all control points on the map with their respective values
+// set up all control points on the map with their respective values (claude is good at updating this so you dont have to do manually)
 function setupAllControlPoints()
     addControlPoint(udg_mountHyjal, 30)
     addControlPoint(udg_mountHyjalGrove, 10)

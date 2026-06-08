@@ -13,19 +13,12 @@ public group neutralBuildingCps = CreateGroup()
 
 // create a Hashmap
 public HashMap<unit, group> cpBuildingGroups = new HashMap<unit, group>()
-public HashMap<player, bool> neutralBuildingPlayers = new HashMap<player, bool>()
+HashMap<player, bool> neutralBuildingPlayers = new HashMap<player, bool>()
 
 //Functions
 
 // setup groups and hashmaps for assigning neutral units on cp capture
 function setupTables()
-// add to group all cps that have neutral units
-    neutralBuildingCps.add(
-        udg_ashenvaleAstranaar,
-        udg_ashenvaleChimaerasFall,
-        udg_darkshoreAuberdine,
-        udg_darnassus,
-        udg_darnassusTeldrassil)
 // add to hashmap which cps correspond to which neutral unit groups   
     cpBuildingGroups.put(udg_ashenvaleAstranaar, astranaar)
     cpBuildingGroups.put(udg_ashenvaleChimaerasFall, chimaerasFall)
@@ -38,21 +31,9 @@ function setupTables()
     neutralBuildingPlayers.put(players[0], true) // player slots with neutral units set to true
     neutralBuildingPlayers.put(players[18], true)
 
-function neutralTrigger()
-    let t = CreateTrigger()
-        ..registerUnitEvent(udg_ashenvaleChimaerasFall, EVENT_UNIT_CHANGE_OWNER)
-        ..addAction()->
-        let u = GetTriggerUnit()
-        let newOwner = u.getOwner()
-        if neutralBuildingCps.has(u) and neutralBuildingPlayers.get(newOwner) == true
-            assignBuilding(cpBuildingGroups.get(u), newOwner)
-
-// helper function to assign a building to a player and set its health to max
-
 public function assignBuilding(group g, player p)
     for u in g
         SetUnitOwner(u, p, true)
 
 init
     setupTables()
-    neutralTrigger()

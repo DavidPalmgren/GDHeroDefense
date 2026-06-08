@@ -24,29 +24,40 @@ buildMapData:
     useItemClassificationSystem: false
   players:
   - id: 0
-    name: DefaultPlayer
+    name: Player 1
+    race: HUMAN
+    controller: USER
+    fixedStartLoc: true
+  - id: 1
+    name: Player 2
     race: HUMAN
     controller: USER
     fixedStartLoc: false
-  - id: 0
-    name: DefaultPlayer
+  - id: 2
+    name: Player 3
     race: HUMAN
     controller: USER
     fixedStartLoc: false
-  - id: 0
-    name: DefaultPlayer
+  - id: 3
+    name: Player 4
     race: HUMAN
     controller: USER
-    fixedStartLoc: false
-  - id: 0
-    name: DefaultPlayer
-    race: HUMAN
-    controller: USER
-    fixedStartLoc: false
+    fixedStartLoc: true
   forces:
-  - name: DefaultForce
+  - name: Druids
     playerIds:
     - 0
+    - 1
+    flags:
+      allied: true
+      alliedVictory: true
+      sharedVision: true
+      sharedControl: false
+      sharedControlAdvanced: false
+  - name: Naga
+    playerIds:
+    - 2
+    - 3
     flags:
       allied: true
       alliedVictory: true
