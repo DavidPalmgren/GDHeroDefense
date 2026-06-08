@@ -1,0 +1,86 @@
+package WurstExportedObjects_w3h
+import ObjEditingNatives
+import BuffObjEditing
+
+// Modified Table (contains all custom objects)
+
+@compiletime function create_w3h_B000()
+	new BuffDefinition('B000', 'BHtc')
+	..setName("Ground Slam")
+	..setTooltipNormal("Ground Slam")
+	..setTooltipNormalExtended("This unit has been hit by Ground Slam, its movement speed and attack rate are reduced.")
+
+
+@compiletime function create_w3h_BM01()
+	new BuffDefinition('BM01', 'BUsl')
+	..setName(1, "Nightmare")
+	..setTooltipNormal(1, "Experiencing a Nightmare")
+	..setTooltipNormalExtended(1, "This unit has been pulled into the emerald nightmare. Wake it before time runs out or it will turn!")
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNSleep.blp")
+
+
+@compiletime function create_w3h_BM02()
+	new BuffDefinition('BM02', 'Basl')
+	..setName(1, "Isolation")
+	..setTooltipNormal(1, "Isolation")
+	..setTooltipNormalExtended(1, "This unit is being isolated by the emerald nightmare, keep your friends close.")
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNPossession.blp")
+	..setEffect(1, "")
+
+
+@compiletime function create_w3h_BM03()
+	new BuffDefinition('BM03', 'Basl')
+	..setName(1, "Invigorate")
+	..setTooltipNormal(1, "Invigorated")
+	..setTooltipNormalExtended(1, "This unit is invigorated, regenerating health and mana.")
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNAcorn.blp")
+	..setArtTarget(1, "Abilities\\Spells\\NightElf\\Rejuvenation\\RejuvenationTarget.mdx")
+	..setArtSpecial(1, "")
+	..setTargetAttachmentPoint0(1, "chest")
+
+
+@compiletime function create_w3h_BM04()
+	new BuffDefinition('BM04', 'Basl')
+	..setName(1, "Moon Warrior")
+	..setTooltipNormal(1, "Moon Warrior")
+	..setTooltipNormalExtended(1, "Tyrande has dismounted, gaining bonus attack speed and damage.")
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNPriestessOfTheMoon.blp")
+	..setArtTarget(1, "")
+	..setArtSpecial(1, "")
+
+
+@compiletime function create_w3h_BM05()
+	new BuffDefinition('BM05', 'Basl')
+	..setName(1, "Hibernate")
+	..setTooltipNormal(1, "Hibernate")
+	..setTooltipNormalExtended(1, "This unit is hibernating, rapidly regenerating health but unable to act.")
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNSleep.blp")
+
+
+@compiletime function create_w3h_BM06()
+	new BuffDefinition('BM06', 'BNso')
+	..setName(1, "Mauled")
+	..setTooltipNormal(1, "Mauled")
+	..setTooltipNormalExtended(1, "This unit has been charged by Ursoc and is stunned.")
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNStun.blp")
+
+
+@compiletime function create_w3h_BM07()
+	new BuffDefinition('BM07', 'Basl')
+	..setName(1, "Spirit Wisps")
+	..setTooltipNormal(1, "Spirit Wisps")
+	..setTooltipNormalExtended(1, "This unit is accompanied by healing spirit wisps.")
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNWisp.blp")
+
+
+@compiletime function create_w3h_BM08()
+	new BuffDefinition('BM08', 'Basl')
+	..setName(1, "Iron Skin")
+	..setTooltipNormal(1, "Iron Skin")
+	..setTooltipNormalExtended(1, "Increases armor by 4 and has a 25% chance to retaliate.")
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\UI\\Cursor\\BTNAcorn.blp")
+
+
+// Original Table (contains all modified default/melee objects)
+// These are emitted when createObjectDefinition uses the same base/new id.
+

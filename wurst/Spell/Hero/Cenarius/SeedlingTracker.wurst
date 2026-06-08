@@ -1,0 +1,54 @@
+package SeedlingTracker
+
+import Item
+import ItemIds
+import Abilities
+
+import ObjectIdGenerator
+import ItemObjEditing
+import Icons
+import ClosureTimers
+import ClosureEvents
+import Invigorate
+import ObjectIds
+import AbilityIds
+
+public constant SEEDLING_TRACKER_ITEM_ID = compiletime(ITEM_ID_GEN.next())
+
+@compiletime function genItem()
+    new ItemDefinition(SEEDLING_TRACKER_ITEM_ID, 'moon')
+        ..setName("Bundle of acorns")
+        ..setTooltipBasic("Seedling Stacks")
+        ..setTooltipExtended("+5 to All Stats. Tracks the current number of active seedling stacks.")
+        ..setInterfaceIcon(Icons.bTNAcorn)
+        ..setNumberofCharges(0)
+        ..setActivelyUsed(false)        // cant be used
+        ..setCanBeDropped(false)           // cant be dropped
+        ..setCanBeSoldToMerchants(false)
+        ..setPerishable(false)          // doesnt expire
+        ..setIgnoreCooldown(true)
+        ..setLevel(0)
+        ..setGoldCost(0)
+        ..setLumberCost(0)
+        ..setMaxStack(5)
+        ..setAbilities(commaList(AbilityIds.crownofKingsAllPlus5))
+
+// Call this after giving Cenarius the item to get a reference
+unit trackerOwner = null
+item trackerItem = null
+
+public function initSeedlingTracker(unit owner)
+    trackerOwner = owner
+    trackerItem = createItem(SEEDLING_TRACKER_ITEM_ID, owner.getPos())
+    owner.addItemHandle(trackerItem)
+
+    // Update charges every 0.1s to reflect seedling count
+    doPeriodically(0.1) cb ->
+        if trackerItem != null
+            trackerItem.setCharges(getSeedlingCount())
+
+init
+    EventListener.add(EVENT_PLAYER_UNIT_TRAIN_FINISH) ->
+        let trained = EventData.getTrainedUnit()
+        if trained.getTypeId() == 'Ekee'
+            initSeedlingTracker(trained)

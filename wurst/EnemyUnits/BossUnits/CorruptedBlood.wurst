@@ -1,0 +1,124 @@
+package CorruptedBlood
+
+import AbilityObjEditing
+import ObjectIdGenerator
+import Icons
+import ClosureEvents
+import ClosureTimers
+
+public constant CORRUPTED_BLOOD_ID = compiletime(ABIL_ID_GEN.next())
+
+constant int SLIME_UNIT_ID = 'ndwm'
+constant real SLIME_LIFETIME = 10.  // slime dies after 20 seconds if it never explodes
+constant real SLIME_SPEED = 100.
+constant real SLIME_PROXIMITY = 150.
+constant real GROW_DURATION = 3.
+constant real EXPLODE_RADIUS = 400.
+constant real EXPLODE_DAMAGE = 500.
+constant real UPDATE_INTERVAL = 0.1
+constant string GROW_SFX = "Abilities\\Spells\\Undead\\PlagueCloud\\PlagueCloudCaster.mdl"
+constant string EXPLODE_SFX = "Abilities\\Weapons\\AvengerMissile\\AvengerMissile.mdl"
+
+@compiletime function genAbility()
+    new AbilityDefinitionFireBoltcreep(CORRUPTED_BLOOD_ID)
+        ..setName("Corrupted Blood")
+        ..setTooltipNormal(1, "Corrupted Blood")
+        ..setTooltipNormalExtended(1, "Hurls a bolt of corrupted blood at an enemy, spawning a slime on impact that chases the target. If the target stays within " + SLIME_PROXIMITY.toInt().toString() + " range for " + GROW_DURATION.toInt().toString() + " seconds the slime explodes for " + EXPLODE_DAMAGE.toInt().toString() + " damage.")
+        ..setIconNormal(Icons.bTNPoisonSting)
+        ..setButtonPositionNormalX(1)
+        ..setButtonPositionNormalY(0)
+        ..setCastRange(1, 800.)
+        ..setCooldown(1, 15.)
+        ..setManaCost(1, 80)
+        ..setDamage(1, 100)
+        ..setDurationNormal(1, 1.)
+        ..setDurationHero(1, 1.)
+        ..setBuffs(1, "")
+        ..setMissileArt("")
+        ..setMissileSpeed(1000)
+        ..setRequirements("")
+        ..setRequirementsLevels("")
+        ..setHeroAbility(false)
+        ..setItemAbility(false)
+
+function explodeSlime(unit slime, unit caster)
+    let pos = slime.getPos()
+    let sfx = addEffect(GROW_SFX, pos)
+    sfx.setScale(3.0)
+
+    doAfter(0.5) ->
+        sfx.destr()
+        flashEffect(EXPLODE_SFX, pos)
+        ENUM_GROUP.enumUnitsInRange(pos, EXPLODE_RADIUS, null)
+        for u in ENUM_GROUP
+            if u.isAlive() and u.getOwner().isEnemyOf(caster.getOwner())
+                caster.damageTarget(u, EXPLODE_DAMAGE, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+                // 
+        slime.kill()
+
+init
+    EventListener.onCast(CORRUPTED_BLOOD_ID) (caster) ->
+        let target = EventData.getSpellTargetUnit()
+        let targetSfx = target.addEffect("Abilities\\Spells\\Other\\Doom\\DoomTarget.mdl", "overhead")
+        targetSfx.setScale(0.8)
+        targetSfx.setColor(0, 255, 0)  // green tint to match slime theme
+        // 
+        let slime = createUnit(caster.getOwner(), SLIME_UNIT_ID, caster.getPos(), angle(0.))
+        // 
+
+        if target == null
+            return
+
+        
+
+        // Spawn slime on top of the target
+        slime.addAbility('Aloc')
+        slime.setInvulnerable(true)
+        slime.setScale(0.5)
+        slime.setVertexColor(150,80,200, 255)
+        
+
+        let sfx = addEffect(GROW_SFX, slime.getPos())
+        sfx.setScale(1)
+
+        var proximityTime = 0.
+        var exploded = false
+
+        doPeriodically(UPDATE_INTERVAL) cb ->
+            if exploded or not slime.isAlive() or not target.isAlive()
+                targetSfx.destr()
+                destroy cb
+                return
+
+            // Move slime toward target
+            let slimePos = slime.getPos()
+            let targetPos = target.getPos()
+            let dist = slimePos.distanceTo(targetPos)
+            let moveDir = slimePos.angleTo(targetPos)
+            slime.setXY(slimePos.polarOffset(moveDir, SLIME_SPEED * UPDATE_INTERVAL))
+            sfx.setPos(slime.getPos())
+
+            if dist <= SLIME_PROXIMITY
+                proximityTime += UPDATE_INTERVAL
+                let growProgress = proximityTime / GROW_DURATION
+                slime.setScale(0.5 + growProgress * 2.0)
+                sfx.setScale(0.5 + growProgress * 2.0)
+
+                if proximityTime >= GROW_DURATION
+                    exploded = true
+                    sfx.destr()
+                    targetSfx.destr()
+                    explodeSlime(slime, caster)
+                    destroy cb
+            else
+                proximityTime = 0.
+                slime.setScale(0.5)
+                sfx.setScale(0.5)
+
+        doAfter(SLIME_LIFETIME) ->
+            if not exploded and slime.isAlive()
+                sfx.destr()
+                targetSfx.destr()
+                flashEffect(EXPLODE_SFX, slime.getPos())  // small pop effect on timeout
+                slime.kill()
+                exploded = true  // prevent the periodic timer from doing anything after

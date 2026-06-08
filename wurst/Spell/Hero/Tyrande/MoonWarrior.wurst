@@ -1,0 +1,113 @@
+package MoonWarrior
+
+import AbilityObjEditing
+import BuffObjEditing
+import ObjectIdGenerator
+import Icons
+import ClosureEvents
+import ClosureTimers
+import GroupUtils
+import StringUtils
+import UnitObjEditing
+import ObjectIds
+import UnitIds
+import Units
+
+public constant MOON_WARRIOR_ID = compiletime(ABIL_ID_GEN.next())
+public constant MOON_WARRIOR_BUFF_ID = compiletime(BUFF_ID_GEN.next())
+public constant TYRANDE_MODEL_ID = compiletime(UNIT_ID_GEN.next())
+
+
+// Replace these with your actual unit IDs
+constant int TYRANDE_MOUNTED_ID = 'Emoo'    // Tyrande on tiger model
+constant int TYRANDE_DISMOUNTED_ID = 'nfbr' // Tyrande on foot model
+constant int TIGER_UNIT_ID = 'nfbr'         // summonable tiger unit
+
+constant real TIGER_DURATION = 30.
+constant real BONUS_ATTACK_SPEED = 0.50     // 50% attack speed bonus
+constant real BONUS_DAMAGE = 40.
+constant string DISMOUNT_SFX = "Abilities\\Spells\\NightElf\\Blink\\BlinkCaster.mdl"
+constant string SUMMON_SFX = "Abilities\\Spells\\NightElf\\Roar\\RoarCaster.mdl"
+
+
+
+
+
+
+@compiletime function genBuff()
+    new BuffDefinition(MOON_WARRIOR_BUFF_ID, 'Basl')
+        ..setName(1, "Moon Warrior")
+        ..setTooltipNormal(1, "Moon Warrior")
+        ..setTooltipNormalExtended(1, "Tyrande has dismounted, gaining bonus attack speed and damage.")
+        ..setIcon(Icons.bTNPriestessOfTheMoon)
+        ..setArtTarget("")
+        ..setArtSpecial("")
+
+
+@compiletime function genAbility()
+    new AbilityDefinitionAlchemistChemicalRage(MOON_WARRIOR_ID)
+        ..setName("Moon Warrior")
+        ..setTooltipNormal(1, "Moon Warrior")
+        ..setTooltipNormalExtended(1, "Tyrande dismounts from her tiger, gaining +" + BONUS_DAMAGE.toInt().toString() + " damage and +" + (BONUS_ATTACK_SPEED * 100).toInt().toString() + "% attack speed for " + TIGER_DURATION.toInt().toString() + " seconds while summoning her tiger into battle.")
+        ..setTooltipLearn("Learn Moon Warrior")
+        ..setTooltipLearnExtended("Dismount from your tiger and summon it into battle.")
+        ..setIconNormal(Icons.bTNPriestessOfTheMoon)
+        ..setIconResearch(Icons.bTNPriestessOfTheMoon)
+        ..setAlternateFormUnit(1, "Ekee")
+        ..setButtonPositionNormalX(0)
+        ..setButtonPositionNormalY(0)
+        ..setCooldown(1, 40.)
+        ..setManaCost(1, 75)
+        ..setAreaofEffect(1, 0.)
+        ..setDurationNormal(1, 0.)
+        ..setDurationHero(1, 0.)
+        ..setBuffs(1, toRawCode(MOON_WARRIOR_BUFF_ID))
+        ..setEffects(1, "")
+        ..setRequirements("")
+        ..setRequirementsLevels("")
+        ..setRequiredLevel(1)
+        ..setLevelSkipRequirement(2)
+        ..setHeroAbility(true)
+        ..setItemAbility(false)
+
+
+init
+    print("so this: " + toRawCode(TYRANDE_MODEL_ID))
+
+    EventListener.onCast(MOON_WARRIOR_ID) (caster) ->
+        let pos = caster.getPos()
+        let owner = caster.getOwner()
+
+        // Visual effect on dismount
+        flashEffect(DISMOUNT_SFX, pos)
+
+        // Apply stat bonuses
+        let originalCooldown = caster.getAttackCooldown(1)
+        caster.setAttackCooldown(caster.getAttackCooldown(1) * BONUS_ATTACK_SPEED,1)
+        caster.setBaseDamage(caster.getBaseDamage(0) + BONUS_DAMAGE.toInt(), 0)
+        UnitAddAbility(caster, MOON_WARRIOR_BUFF_ID)
+
+        // Swap model — replace mounted Tyrande with dismounted version
+        // We do this by replacing the unit while keeping position and facing
+        // Note: if Tyrande is a hero this won't work directly
+        // Instead just change her model via vertex color trick or accept model stays same
+        // and focus on the tiger summon + stats
+
+        // Summon tiger near Tyrande
+        let tiger = createUnit(owner, TIGER_UNIT_ID, pos.polarOffset(caster.getFacingAngle(), 100.), caster.getFacingAngle())
+        flashEffect(SUMMON_SFX, tiger.getPos())
+        print("Tiger summoned!")
+
+        // After 30s remove tiger and stat bonuses
+        doAfter(TIGER_DURATION) ->
+            // Remove stat bonuses
+            caster.setAttackCooldown(originalCooldown,1)
+            caster.setBaseDamage(caster.getBaseDamage(0) - BONUS_DAMAGE.toInt(), 0)
+            UnitRemoveAbility(caster, MOON_WARRIOR_BUFF_ID)
+
+            // Kill tiger if still alive
+            if tiger.isAlive()
+                flashEffect(DISMOUNT_SFX, tiger.getPos())
+                tiger.kill()
+
+            print("Moon Warrior ended.")

@@ -1,0 +1,29 @@
+package CenariusCharacter
+
+import Invigorate
+import SummonTreant
+import Bloom
+import SeedBurst
+import SeedlingTracker
+
+
+import UnitIds
+import ClosureEvents
+import UnitObjEditing
+import ObjectIds
+import AbilityIds
+
+public constant CENARIUS_CHARACTER_ID = UnitIds.keeperofthegrove // "Ekee"
+
+@compiletime function addSpells()
+    new UnitOrHeroDefinition('Ekee', 'Ekee')
+        ..setNormalAbilities(commaList(INVIGORATE_ID,AbilityIds.inventory, AbilityIds.ultravision))
+
+@compiletime function addHeroSpells()
+    new HeroDefinition('Ekee', 'Ekee')
+        ..setHeroAbilities(commaList(SUMMON_TREANT_ID, SEED_BURST_ID, HEALING_CLOUD_ID))
+
+init
+    EventListener.onCast(INVIGORATE_ID) (caster) ->
+        EventData.getSpellTargetUnit()
+        addSeedlingStack()

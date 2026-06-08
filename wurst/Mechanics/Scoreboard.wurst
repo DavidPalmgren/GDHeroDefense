@@ -1,0 +1,132 @@
+package Scoreboard
+import HashMap
+import initlater ControlPoint
+
+colorA array playerColors = []
+
+//Functions
+
+// map out array of player colors in colorA format for use in multiboard
+function setupPlayerColors()
+    playerColors[0]  = colorA(255, 2, 2, 255)     // red
+    playerColors[1]  = colorA(0, 65, 255, 255)    // blue
+    playerColors[2]  = colorA(27, 229, 184, 255)  // teal
+    playerColors[3]  = colorA(83, 0, 128, 255)    // purple
+    playerColors[4]  = colorA(255, 252, 0, 255)   // yellow
+    playerColors[5]  = colorA(254, 137, 13, 255)  // orange
+    playerColors[6]  = colorA(31, 191, 0, 255)    // green
+    playerColors[7]  = colorA(228, 90, 175, 255)  // pink
+    playerColors[8]  = colorA(148, 149, 150, 255) // gray
+    playerColors[9]  = colorA(125, 190, 241, 255) // light blue
+    playerColors[10] = colorA(15, 97, 69, 255)    // dark green
+    playerColors[11] = colorA(77, 41, 3, 255)     // brown
+    playerColors[12] = colorA(155, 0, 0, 255)     // maroon
+    playerColors[13] = colorA(0, 0, 195, 255)     // navy
+    playerColors[14] = colorA(0, 234, 255, 255)   // turquoise
+    playerColors[15] = colorA(190, 0, 254, 255)   // violet
+    playerColors[16] = colorA(235, 205, 135, 255) // wheat
+    playerColors[17] = colorA(248, 164, 139, 255) // peach
+    playerColors[18] = colorA(191, 255, 128, 255) // mint
+    playerColors[19] = colorA(220, 185, 235, 255) // lavender
+    playerColors[20] = colorA(40, 40, 40, 255)    // coal
+    playerColors[21] = colorA(235, 240, 255, 255) // snow
+    playerColors[22] = colorA(0, 120, 30, 255)    // emerald
+    playerColors[23] = colorA(164, 111, 51, 255)  // peanut
+
+// create a multiboard to display player income and control point ownership
+multiboard incomeBoard
+
+// function to get the number of active players in the game
+public function getActivePlayers() returns int
+    var count = 0
+    for i = 0 to 23
+        if GetPlayerSlotState(players[i]) == PLAYER_SLOT_STATE_PLAYING
+            count++
+    return count
+
+// function to update player income and number of control points owned
+function updatePlayerIncome()
+    // reset all income values
+    for i = 0 to 23
+        playerIncome[i] = 0
+        playerCpCount[i] = 0
+
+    // sum up control point values by player
+    for cp in controlPoints
+        let owner = cpOwners.get(cp)
+        let ownerId = owner.getId()
+        playerIncome[ownerId] += cpValues.get(cp)
+        playerCpCount[ownerId]++
+
+// function to return a Hashmap of players and their corresponding income based on the control points they own
+function getIncomeByPlayer() returns HashMap<player, int>
+    let incomeMap = new HashMap<player, int>()
+    for cp in controlPoints
+        let owner = cpOwners.get(cp)
+        let value = cpValues.get(cp)
+        if incomeMap.has(owner)
+            incomeMap.put(owner, incomeMap.get(owner) + value)
+        else
+            incomeMap.put(owner, value)
+    return incomeMap
+
+// function to initialize the multiboard and set up its columns and rows
+public function setupMultiboard()
+    incomeBoard = CreateMultiboard()
+    let playerCount = getActivePlayers()
+    // set column and row count, and title
+    MultiboardSetColumnCount(incomeBoard, 3)
+    MultiboardSetRowCount(incomeBoard, playerCount + 1) // +1 for header row
+    MultiboardSetTitleText(incomeBoard, "Statistics")
+
+    // manually set header row
+    let h0 = MultiboardGetItem(incomeBoard, 0, 0)
+    let h1 = MultiboardGetItem(incomeBoard, 0, 1)
+    let h2 = MultiboardGetItem(incomeBoard, 0, 2)
+    
+    // set titles and styles for header row
+    MultiboardSetItemValue(h0, "")
+    MultiboardSetItemValue(h1, "CP")
+    MultiboardSetItemValue(h2, "Income")
+    MultiboardSetItemWidth(h0, 0.08)
+    MultiboardSetItemWidth(h1, 0.05)
+    MultiboardSetItemWidth(h2, 0.05)
+    MultiboardSetItemStyle(h0, false, false)
+    MultiboardSetItemIcon(h1,"ReplaceableTextures\\CommandButtons\\BTNCOP.blp")
+    MultiboardSetItemStyle(h1, false, true)
+    MultiboardSetItemIcon(h2,"ReplaceableTextures\\CommandButtons\\btnmgexchange.blp")
+    MultiboardSetItemStyle(h2, false, true) 
+    MultiboardReleaseItem(h0)
+    MultiboardReleaseItem(h1)
+    MultiboardReleaseItem(h2)
+
+    MultiboardDisplay(incomeBoard, true)
+    MultiboardMinimize(incomeBoard, false)
+
+// function to update the multiboard with the current player income values and control point ownership
+public function updateMultiboard()
+    updatePlayerIncome()
+    var row = 1
+    for i = 0 to 23
+        if GetPlayerSlotState(players[i]) == PLAYER_SLOT_STATE_PLAYING
+            let item1 = MultiboardGetItem(incomeBoard, row, 0)
+            let item2 = MultiboardGetItem(incomeBoard, row, 1)
+            let item3 = MultiboardGetItem(incomeBoard, row, 2)
+            MultiboardSetItemWidth(item1, 0.08)
+            MultiboardSetItemWidth(item2, 0.05)
+            MultiboardSetItemWidth(item3, 0.05)
+            MultiboardSetItemStyle(item1, true, false)
+            MultiboardSetItemStyle(item2, true, false)
+            MultiboardSetItemStyle(item3, true, false)
+            MultiboardSetItemValue(item1, players[i].getName())
+            incomeBoard.setItemValueColor(row, 0, playerColors[i])
+            MultiboardSetItemValue(item2, playerCpCount[i].toString())
+            MultiboardSetItemValue(item3, playerIncome[i].toString())
+            MultiboardReleaseItem(item1)
+            MultiboardReleaseItem(item2)
+            MultiboardReleaseItem(item3)
+            row++
+
+
+init
+    setupPlayerColors()

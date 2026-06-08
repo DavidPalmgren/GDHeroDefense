@@ -1,0 +1,114 @@
+package UrsocCharge
+
+import AbilityObjEditing
+import ObjectIdGenerator
+import Icons
+import ClosureEvents
+import InstantDummyCaster
+import Orders
+import BuffObjEditing
+import ObjectIds
+import CustomIcons
+
+public constant URSOC_CHARGE_ID = compiletime(ABIL_ID_GEN.next())
+public constant CHARGE_STUN_ID = compiletime(ABIL_ID_GEN.next())
+public constant CHARGE_STUN_BUFF_ID = compiletime(BUFF_ID_GEN.next())
+
+constant real CHARGE_DAMAGE = 100.
+constant real CHARGE_STUN_DURATION = 1.
+constant real CHARGE_SPEED = 900.
+constant string CHARGE_SFX = "Abilities\\Spells\\Human\\Charge\\ChargeTarget.mdl"
+constant string IMPACT_SFX = "Abilities\\Spells\\Human\\Thunderclap\\ThunderClapCaster.mdl"
+constant string CHARGE_CUSTOM_ICON = "ReplaceableTextures\\CommandButtons\\BTNCharge.blp"
+constant string DISABLED_CUSTOM_ICON = "ReplaceableTextures\\CommandButtonsDisabled\\DISBTNCharge.blp"
+
+
+
+
+
+@compiletime function genBuff()
+    new BuffDefinition(CHARGE_STUN_BUFF_ID, 'BNso')
+        ..setName(1, "Mauled")
+        ..setTooltipNormal(1, "Mauled")
+        ..setTooltipNormalExtended(1, "This unit has been charged by Ursoc and is stunned.")
+        ..setIcon(Icons.bTNStun)
+
+// @compiletime function genStunAbility()
+//     new AbilityDefinitionStunCreep(CHARGE_STUN_ID)
+//         ..setDurationNormal(1, CHARGE_STUN_DURATION)
+//         ..setDurationHero(1, CHARGE_STUN_DURATION * 0.5)
+//         ..setBuffs(1, toRawCode(CHARGE_STUN_BUFF_ID))
+//         ..setHeroAbility(false)
+//         ..setItemAbility(false)
+
+@compiletime function genAbility()
+    new AbilityDefinitionMountainKingThunderBolt(URSOC_CHARGE_ID)
+        ..setLevels(3)
+        ..setName("Mauling Charge")
+        ..setTooltipNormal(1, "Mauling Charge")
+        ..setTooltipNormal(2, "Mauling Charge")
+        ..setTooltipNormal(3, "Mauling Charge")
+        ..setTooltipNormalExtended(1, "Ursoc charges at the target enemy dealing 100 damage and stunning for 2 seconds, half on heroes.")
+        ..setTooltipNormalExtended(2, "Ursoc charges at the target enemy dealing 175 damage and stunning for 3 seconds, half on heroes.")
+        ..setTooltipNormalExtended(3, "Ursoc charges at the target enemy dealing 250 damage and stunning for 4 seconds, half on heroes.")
+        ..setTooltipLearn("Learn Mauling Charge - [|cffffcc00Level %d|r]")
+        ..setTooltipLearnExtended("Ursoc charges at the target enemy dealing damage and stunning them. |n|n|cffffcc00Level 1|r - <AHtb,DataA1> damage, <AHtb,Dur1> second stun. |n|cffffcc00Level 2|r - <AHtb,DataA2> damage, <AHtb,Dur2> second stun. |n|cffffcc00Level 3|r - <AHtb,DataA3> damage, <AHtb,Dur3> second stun.")
+        ..setIconNormal(CHARGE_CUSTOM_ICON)
+        ..setIconResearch(CHARGE_CUSTOM_ICON)
+        ..setIconTurnOff(DISABLED_CUSTOM_ICON)
+        ..setButtonPositionNormalX(0)
+        ..setButtonPositionNormalY(0)
+        // Level 1
+        ..setCooldown(1, 12.)
+        ..setManaCost(1, 60)
+        ..setDamage(1, 100)
+        ..setDurationNormal(1, 2.)
+        ..setDurationHero(1, 1.)
+        ..setCastRange(1, 700.)
+        // Level 2
+        ..setCooldown(2, 10.)
+        ..setManaCost(2, 70)
+        ..setDamage(2, 175)
+        ..setDurationNormal(2, 3.)
+        ..setDurationHero(2, 1.5)
+        ..setCastRange(2, 800.)
+        // Level 3
+        ..setCooldown(3, 8.)
+        ..setManaCost(3, 80)
+        ..setDamage(3, 250)
+        ..setDurationNormal(3, 4.)
+        ..setDurationHero(3, 2.)
+        ..setCastRange(3, 900.)
+        ..setBuffs(1, toRawCode(CHARGE_STUN_BUFF_ID))
+        ..setBuffs(2, toRawCode(CHARGE_STUN_BUFF_ID))
+        ..setBuffs(3, toRawCode(CHARGE_STUN_BUFF_ID))
+        ..setRequirements("")
+        ..setRequirementsLevels("")
+        ..setRequiredLevel(1)
+        ..setLevelSkipRequirement(2)
+        ..setHeroAbility(true)
+        ..setItemAbility(false)
+
+init
+    EventListener.onCast(URSOC_CHARGE_ID) (caster) ->
+        let target = EventData.getSpellTargetUnit()
+        let targetPos = target.getPos()
+
+        // Move caster instantly, subject to change
+        caster.setXY(targetPos)
+
+        flashEffect(CHARGE_SFX, targetPos)
+        flashEffect(IMPACT_SFX, targetPos)
+
+        caster.damageTarget(
+            target,
+            CHARGE_DAMAGE,
+            false,
+            false,
+            ATTACK_TYPE_NORMAL,
+            DAMAGE_TYPE_MAGIC,
+            WEAPON_TYPE_WHOKNOWS
+        )
+
+        // Stun via dummy cast
+        InstantDummyCaster.castTarget(caster.getOwner(), CHARGE_STUN_ID, 1, Orders.thunderbolt, target)

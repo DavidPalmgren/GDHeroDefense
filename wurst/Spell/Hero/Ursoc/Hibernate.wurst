@@ -1,0 +1,91 @@
+package Hibernate
+import AbilityObjEditing
+import ObjectIdGenerator
+import BuffObjEditing
+import Icons
+import ClosureEvents
+import ClosureTimers
+
+public constant HIBERNATE_ID = compiletime(ABIL_ID_GEN.next())
+public constant HIBERNATE_BUFF_ID = compiletime(BUFF_ID_GEN.next())
+
+constant real HIBERNATE_DURATION = 4.
+constant real HEAL_INTERVAL = 0.1
+constant real ARMOR_BONUS = 20.
+
+// Per level index
+constant real array HP_PCT = [0.30, 0.40, 0.50]
+constant real array HP_FLAT = [125., 175., 250.]
+
+@compiletime function genBuff()
+    new BuffDefinition(HIBERNATE_BUFF_ID, 'Basl')
+        ..setName(1, "Hibernate")
+        ..setTooltipNormal(1, "Hibernate")
+        ..setTooltipNormalExtended(1, "This unit is hibernating, rapidly regenerating health but unable to act.")
+        ..setIcon(Icons.bTNSleep)
+
+@compiletime function genAbility()
+    new AbilityDefinitionRoar(HIBERNATE_ID)
+        ..setName("Hibernate")
+        ..setTooltipNormal(1, "Hibernate")
+        ..setTooltipNormal(2, "Hibernate")
+        ..setTooltipNormal(3, "Hibernate")
+        ..setTooltipNormalExtended(1, "Ursoc hibernates for " + HIBERNATE_DURATION.toInt().toString() + "s, healing " + (HP_PCT[0] * 100).toInt().toString() + "% max HP + " + HP_FLAT[0].toInt().toString() + " and gaining +" + ARMOR_BONUS.toInt().toString() + " armor. Cannot act while hibernating.")
+        ..setTooltipNormalExtended(2, "Ursoc hibernates for " + HIBERNATE_DURATION.toInt().toString() + "s, healing " + (HP_PCT[1] * 100).toInt().toString() + "% max HP + " + HP_FLAT[1].toInt().toString() + " and gaining +" + ARMOR_BONUS.toInt().toString() + " armor. Cannot act while hibernating.")
+        ..setTooltipNormalExtended(3, "Ursoc hibernates for " + HIBERNATE_DURATION.toInt().toString() + "s, healing " + (HP_PCT[2] * 100).toInt().toString() + "% max HP + " + HP_FLAT[2].toInt().toString() + " and gaining +" + ARMOR_BONUS.toInt().toString() + " armor. Cannot act while hibernating.")
+        ..setTooltipLearn("Learn Hibernate")
+        ..setTooltipLearnExtended("Ursoc hibernates for 4 seconds, rapidly healing and gaining bonus armor. Cannot act while hibernating.")
+        ..setIconNormal(Icons.bTNSleep)
+        ..setIconResearch(Icons.bTNSleep)
+        ..setButtonPositionNormalX(1)
+        ..setButtonPositionNormalY(0)
+        ..setCooldown(1, 20.)
+        ..setCooldown(2, 18.)
+        ..setCooldown(3, 16.)
+        ..setManaCost(1, 50)
+        ..setManaCost(2, 50)
+        ..setManaCost(3, 50)
+        ..setDamageIncrease(1, 0)
+        ..setDamageIncrease(2, 0)
+        ..setDamageIncrease(3, 0)
+        ..setAreaofEffect(1, 0.)
+        ..setDurationNormal(1, 0.)
+        ..setDurationHero(1, 0.)
+        ..setBuffs(1, "")
+        ..setLevels(3)
+        ..setRequiredLevel(1)
+        ..setLevelSkipRequirement(2)
+        ..setRequirements("")
+        ..setRequirementsLevels("")
+        ..setHeroAbility(true)
+        ..setItemAbility(false)
+        ..setHotkeyLearn("R")
+
+init
+    EventListener.onCast(HIBERNATE_ID) (caster) ->
+        // Get spell level (1-based)
+        let level = caster.getAbilityLevel(HIBERNATE_ID) - 1
+
+        let totalHeal = (caster.getMaxHP() * HP_PCT[level]) + HP_FLAT[level]
+        let healPerTick = totalHeal / (HIBERNATE_DURATION / HEAL_INTERVAL)
+
+        caster.setArmor(caster.getArmor() + ARMOR_BONUS)
+        caster.pause()
+        caster.setPathing(false)
+
+        UnitAddAbility(caster, HIBERNATE_BUFF_ID)
+
+        let sfx = addEffect("Abilities\\Spells\\NightElf\\Rejuvenation\\RejuvenationTarget.mdl", caster, "origin")
+
+        let healTimer = doPeriodically(HEAL_INTERVAL) cb ->
+            if caster.isAlive()
+                caster.addHP(healPerTick)
+        
+        // Cleanup
+        doAfter(HIBERNATE_DURATION) ->
+            destroy healTimer
+            caster.unpause()
+            caster.setPathing(true)
+            caster.setArmor(caster.getArmor() - ARMOR_BONUS)
+            UnitRemoveAbility(caster, HIBERNATE_BUFF_ID)
+            sfx.destr()

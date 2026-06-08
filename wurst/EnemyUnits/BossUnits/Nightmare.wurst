@@ -1,0 +1,97 @@
+package Nightmare
+
+
+import BuffObjEditing
+import ObjectIds
+import ObjectIdGenerator
+import AbilityObjEditing
+import Icons
+import ClosureEvents
+import ClosureTimers
+import BuffIds
+import HashMap
+
+import InstantDummyCaster
+
+import Orders
+
+public constant NIGHTMARE_ID = compiletime(ABIL_ID_GEN.next())
+public constant NIGHTMARE_BUFF_ID = compiletime(BUFF_ID_GEN.next())
+
+constant real NIGHTMARE_RADIUS = 400.
+constant real NIGHTMARE_DURATION = 10.
+//constant string NIGHTMARE_SFX = Abilities.sleepTarget
+constant string CORRUPT_SFX = "Abilities\\Spells\\Undead\\UndeadDismember\\UndeadDismemberTarget.mdl"
+constant string NIGHTMARE_SFX = "Abilities\\Spells\\Undead\\Sleep\\SleepSpecialArt.mdl"
+// constant string CORRUPT_SFX = "Abilities\\Spells\\Undead\\UndeadDismember\\UndeadDismemberTarget.mdl"
+
+// Tracks which units are currently sleeping so we can check if they were woken
+let sleepingUnits = new HashMap<unit, bool>()
+
+@compiletime function generateEffect()
+    new BuffDefinition(NIGHTMARE_BUFF_ID, BuffIds.sleep)
+        ..setName(1, "Nightmare")
+        ..setTooltipNormal(1, "Experiencing a Nightmare")
+        ..setTooltipNormalExtended(1, "This unit has been pulled into the emerald nightmare. Wake it before time runs out or it will turn!")
+        ..setIcon(Icons.bTNSleep)
+
+@compiletime function generateAbility()
+    new AbilityDefinitionBloodMageFlameStrike(NIGHTMARE_ID)
+        ..setName("Nightmare")
+        ..setTooltipNormal(1, "Nightmare")
+        ..setTooltipNormalExtended(1, "Pulls all units in the target area into the emerald nightmare, putting them to sleep for " + NIGHTMARE_DURATION.toInt().toString() + " seconds. Non-hero units that are not woken will turn against their allies.")
+        ..setIconNormal(Icons.bTNSleep)
+        ..setBuffs(1, toRawCode(NIGHTMARE_BUFF_ID))
+        ..setEffects(1, toRawCode(NIGHTMARE_BUFF_ID))
+        ..setAreaofEffect(1, NIGHTMARE_RADIUS)
+        ..setDurationNormal(1, NIGHTMARE_DURATION)
+        ..setDurationHero(1, NIGHTMARE_DURATION * 0.5)
+        ..setFullDamageDealt(1, 0)
+        ..setHalfDamageDealt(1, 0)
+        ..setRequirements("")
+        ..setHeroAbility(false)
+        ..setItemAbility(false)
+        ..setArtEffect("") // find good alt later
+
+
+init
+    EventListener.onCast(NIGHTMARE_ID) (caster) ->
+        let targetPos = EventData.getSpellTargetPos()
+        flashEffect(NIGHTMARE_SFX, targetPos)
+
+        ENUM_GROUP.enumUnitsInRange(targetPos, NIGHTMARE_RADIUS, null)
+        for u in ENUM_GROUP
+            if u.isAlive() and u.getOwner().isEnemyOf(caster.getOwner()) and not u.isType(UNIT_TYPE_HERO)
+            and not u.isType(UNIT_TYPE_MAGIC_IMMUNE)
+                let target = u
+                let _originalOwner = u.getOwner()
+
+                
+                let _result = InstantDummyCaster.castTarget(players[PLAYER_NEUTRAL_AGGRESSIVE], 'AUsl', 1, Orders.sleep, u)
+                flashEffect(NIGHTMARE_SFX, target, "origin")
+                sleepingUnits.put(target, true)
+                flashEffect(NIGHTMARE_SFX, target, "origin")
+                
+
+                doAfter(NIGHTMARE_DURATION) ->
+                    if sleepingUnits.has(target) and sleepingUnits.get(target)
+
+                        target.setOwner(caster.getOwner(), true)
+                        UnitRemoveAbility(target, 'BUsl')
+                        UnitRemoveAbility(target, 'BUsp')
+                        UnitRemoveAbility(target, 'Bust')
+                            
+                        sleepingUnits.remove(target)
+                        flashEffect(CORRUPT_SFX, target, "origin")
+                    else
+                        // Was woken — clean up
+                        sleepingUnits.remove(target)
+
+    // Detect when a sleeping unit gets damaged (woken up)
+    EventListener.add(EVENT_PLAYER_UNIT_DAMAGED) ->
+        let damaged = EventData.getTriggerUnit()
+        if sleepingUnits.has(damaged) and sleepingUnits.get(damaged)
+
+            sleepingUnits.put(damaged, false)  // mark as woken
+            flashEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt.mdl", damaged, "origin")
+            

@@ -1,0 +1,107 @@
+package SeedBurst
+
+import AbilityObjEditing
+import Icons
+import ObjectIdGenerator
+import ClosureEvents
+import ClosureTimers
+import LinkedList
+
+public constant SEED_BURST_ID = compiletime(ABIL_ID_GEN.next())
+
+// Per level values
+constant real array BURST_DAMAGE = [75., 100., 125.]
+constant real array BURST_RADIUS = [256., 320., 350.]
+constant real array BURST_COOLDOWN = [12., 10., 8.]
+constant real array BURST_MANA = [50., 65., 80.]
+constant real BURST_DELAY = 0.15
+constant string BURST_SFX = "Abilities\\Spells\\Other\\Entangle\\EntangledTarget.mdl"
+constant string EXPLOSION_SFX = "Abilities\\Weapons\\GryphonRider\\GryphonRiderMissileArt.mdl"
+constant int INVIGORATE_BUFF_ID = 'Brej'
+
+class Vec2Wrapper
+    vec2 pos
+    construct(vec2 p)
+        pos = p
+
+@compiletime function genAbility()
+    new AbilityDefinitionMountainKingThunderClap(SEED_BURST_ID)
+        ..setName("Seed Burst")
+        ..setTooltipNormal(1, "Seed Burst")
+        ..setTooltipNormal(2, "Seed Burst")
+        ..setTooltipNormal(3, "Seed Burst")
+        ..setTooltipNormalExtended(1, "Detonates all invigorated units for " + BURST_DAMAGE[0].toInt().toString() + " damage in " + BURST_RADIUS[0].toInt().toString() + " radius.")
+        ..setTooltipNormalExtended(2, "Detonates all invigorated units for " + BURST_DAMAGE[1].toInt().toString() + " damage in " + BURST_RADIUS[1].toInt().toString() + " radius.")
+        ..setTooltipNormalExtended(3, "Detonates all invigorated units for " + BURST_DAMAGE[2].toInt().toString() + " damage in " + BURST_RADIUS[2].toInt().toString() + " radius.")
+        ..setTooltipLearn("Learn Seed Burst - [|cffffcc00Level %d|r]")
+        ..setTooltipLearnExtended("Consumes all invigorated units, detonating each one for damage to nearby enemies. Damage and radius increases per level.")
+        ..setIconNormal(Icons.bTNEntanglingRoots)
+        ..setIconResearch(Icons.bTNEntanglingRoots)
+        ..setButtonPositionNormalX(0)
+        ..setButtonPositionNormalY(1)
+        // Level 1
+        ..setCooldown(1, BURST_COOLDOWN[0])
+        ..setManaCost(1, BURST_MANA[0].toInt())
+        ..setAreaofEffect(1, 0.)
+        ..setAOEDamage(1, 0)
+        ..setAttackSpeedReduction(1, 0.)
+        ..setMovementSpeedReduction(1, 0.)
+        ..setDurationNormal(1, 0.)
+        ..setDurationHero(1, 0.)
+        ..setBuffs(1, "")
+        // Level 2
+        ..setCooldown(2, BURST_COOLDOWN[1])
+        ..setManaCost(2, BURST_MANA[1].toInt())
+        ..setAreaofEffect(2, 0.)
+        ..setAOEDamage(2, 0)
+        ..setAttackSpeedReduction(2, 0.)
+        ..setMovementSpeedReduction(2, 0.)
+        ..setDurationNormal(2, 0.)
+        ..setDurationHero(2, 0.)
+        ..setBuffs(2, "")
+        // Level 3
+        ..setCooldown(3, BURST_COOLDOWN[2])
+        ..setManaCost(3, BURST_MANA[2].toInt())
+        ..setAreaofEffect(3, 0.)
+        ..setAOEDamage(3, 0)
+        ..setAttackSpeedReduction(3, 0.)
+        ..setMovementSpeedReduction(3, 0.)
+        ..setDurationNormal(3, 0.)
+        ..setDurationHero(3, 0.)
+        ..setBuffs(3, "")
+        ..setRequirements("")
+        ..setRequirementsLevels("")
+        ..setRequiredLevel(1)
+        ..setLevelSkipRequirement(2)
+        ..setHeroAbility(true)
+        ..setItemAbility(false)
+
+init
+    EventListener.onCast(SEED_BURST_ID) (caster) ->
+        // Get 0-based level index
+        let level = caster.getAbilityLevel(SEED_BURST_ID) - 1
+
+        let targets = new LinkedList<Vec2Wrapper>()
+        ENUM_GROUP.enumUnitsInRect(bj_mapInitialPlayableArea, null)
+        for u in ENUM_GROUP
+            if u.hasAbility(INVIGORATE_BUFF_ID)
+                targets.add(new Vec2Wrapper(u.getPos()))
+                u.removeAbility(INVIGORATE_BUFF_ID)
+
+        var delay = 0.
+        for wrapper in targets
+            let explodePos = wrapper.pos
+            let damage = BURST_DAMAGE[level]
+            let radius = BURST_RADIUS[level]
+            doAfter(delay) ->
+                flashEffect(BURST_SFX, explodePos)
+                flashEffect(EXPLOSION_SFX, explodePos)
+                ENUM_GROUP.enumUnitsInRange(explodePos, radius, null)
+                for u in ENUM_GROUP
+                    if u.isAlive() and u.getOwner().isEnemyOf(caster.getOwner())
+                        caster.damageTarget(u, damage, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+            delay += BURST_DELAY
+
+        for wrapper in targets
+            destroy wrapper
+        destroy targets

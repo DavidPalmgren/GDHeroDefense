@@ -1,0 +1,101 @@
+package ControlPoint
+import Scoreboard
+import HashMap
+import ClosureTimers
+import AssignBuildings
+
+// create Variables and Hashmaps
+public unit target = null
+public group controlPoints = CreateGroup()
+public let cpOwners = new HashMap<unit, player>()
+public let cpValues = new HashMap<unit, int>()
+public let isCapturingMap = new HashMap<unit, bool>()
+public int array playerIncome
+public int array playerCpCount
+int count = 0
+
+
+//Functions
+
+// add gold to each player based on the control points they own
+public function income()
+    for cp in controlPoints
+        let owner = cpOwners.get(cp)
+        let value = cpValues.get(cp)
+        owner.addGold(value)
+
+// create a timer that calls the income function on a set cadence
+public function incomeTimer()
+    let countdown = CreateTimer()
+    let d = countdown.createTimerDialog()
+    // adjust textbox for timer here
+    TimerDialogSetTitle(d, "Income")
+    TimerDialogDisplay(d, true)
+    // adjust income timer here
+    TimerStart(countdown,60.,true,function income)
+
+function setupMultiboardTimer()
+    TimerStart(CreateTimer(), 2., true, function updateMultiboard)
+
+// set up a trigger for each control point that allows it to be captured when it is damaged to half health
+function setupCaptureOnHalf(unit target)
+    CreateTrigger()
+        ..registerUnitEvent(target, EVENT_UNIT_DAMAGED)
+        ..addAction() ->
+        let u = GetTriggerUnit()
+        let attacker = GetEventDamageSource()
+        let hp = GetUnitState(u, UNIT_STATE_LIFE)
+        let maxHp = GetUnitState(u, UNIT_STATE_MAX_LIFE)
+        if hp / maxHp <= 0.5
+            let newOwner = attacker.getOwner()
+            if cpOwners.get(u) != newOwner  // only fire if owner is changing
+                cpOwners.put(u, newOwner)
+                SetUnitOwner(u, newOwner, true)
+                SetUnitState(u, UNIT_STATE_LIFE, maxHp)
+                if cpBuildingGroups.has(u) and cpBuildingOwners.get(cpBuildingGroups.get(u)) == newOwner // need to test this
+                    assignBuilding(cpBuildingGroups.get(u), newOwner)
+            else
+                SetUnitState(u, UNIT_STATE_LIFE, maxHp)
+
+// helper function to add control points to the map, set their value, and set up the trigger for capturing them
+function addControlPoint(unit cp, int value)
+    cpValues.put(cp, value)
+    cpOwners.put(cp, cp.getOwner())
+    controlPoints.add(cp)
+    setupCaptureOnHalf(cp)
+
+// set up all control points on the map with their respective values (claude is good at updating this so you dont have to do manually)
+function setupAllControlPoints()
+    addControlPoint(udg_mountHyjal, 30)
+    addControlPoint(udg_mountHyjalGrove, 10)
+    addControlPoint(udg_mountHyjalTown, 10)
+    addControlPoint(udg_winterspring, 10)
+    addControlPoint(udg_winterspringRoost, 10)
+    addControlPoint(udg_felwoodCenter, 10)
+    addControlPoint(udg_felwoodSouth, 10)
+    addControlPoint(udg_ashenvaleAstranaar, 10)
+    addControlPoint(udg_ashenvaleBeachNorth, 10)
+    addControlPoint(udg_ashenvaleBeachSouth, 10)
+    addControlPoint(udg_ashenvaleChimaerasFall, 10)
+    addControlPoint(udg_ashenvaleCrossing, 10)
+    addControlPoint(udg_ashenvaleForestCenter, 10)
+    addControlPoint(udg_ashenvaleRoost, 10)
+    addControlPoint(udg_ashenvaleVentureCo, 10)
+    addControlPoint(udg_ashenvaleWarsongCenter, 10)
+    addControlPoint(udg_ashenvaleWarsongSouth, 10)
+    addControlPoint(udg_darnassus, 10)
+    addControlPoint(udg_darnassusTeldrassil, 10)
+    addControlPoint(udg_darkshore, 10)
+    addControlPoint(udg_darkshoreAuberdine, 10)
+    addControlPoint(udg_darkshoreAzuremystIsle, 10)
+    addControlPoint(udg_darkshoreBloodmystIsle, 10)
+    addControlPoint(udg_moongladeBarrowDen, 10)
+    addControlPoint(udg_moongladeTimbermawHold, 10)
+
+init
+    setupAllControlPoints()
+    doAfter(0.) ->     
+        incomeTimer()
+        setupMultiboard()
+        setupMultiboardTimer()
+        updateMultiboard()

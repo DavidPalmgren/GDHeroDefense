@@ -1,0 +1,19 @@
+package XaviusMain
+
+import UnitObjEditing
+import ObjectIds
+
+import Nightmare
+import Isolation
+import CorruptedBlood
+
+
+public constant XAVIUS_ID = 'N006'
+
+let abc = new UnitDefinition(XAVIUS_ID, XAVIUS_ID)
+// , CORRUPTED_BLOOD_ID, NIGHTMARE_ID, ISOLATION_ID
+@compiletime function setupXavius()
+    new UnitDefinition(XAVIUS_ID, XAVIUS_ID)
+        ..setNormalAbilities(commaList(NIGHTMARE_ID,ISOLATION_ID,CORRUPTED_BLOOD_ID))
+        ..setLevel(6)
+        ..setName("Xavius")

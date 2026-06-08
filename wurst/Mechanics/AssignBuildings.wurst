@@ -1,0 +1,49 @@
+package AssignBuildings
+import HashMap
+
+// get variables set in world editor from war3map.j
+let astranaar = udg_ashenvaleAstranaarBuildings
+let chimaerasFall = udg_ashenvaleChimaeraFallBuilding
+let auberdine = udg_darkshoreAuberdineBuildings
+let darnassus = udg_darnassusBuildings
+let teldrassil = udg_darnassusTeldrassilBuildings
+
+//create group with neutral building cps
+public group neutralBuildingCps = CreateGroup()
+
+// create a Hashmap
+public HashMap<unit, group> cpBuildingGroups = new HashMap<unit, group>()
+public HashMap<group, player> cpBuildingOwners = new HashMap<group, player>()
+HashMap<player, bool> neutralBuildingPlayers = new HashMap<player, bool>()
+
+//Functions
+
+// setup groups and hashmaps for assigning neutral units on cp capture
+function setupTables()
+// add to hashmap which cps correspond to which neutral unit groups   
+    cpBuildingGroups.put(udg_ashenvaleAstranaar, astranaar)
+    cpBuildingGroups.put(udg_ashenvaleChimaerasFall, chimaerasFall)
+    cpBuildingGroups.put(udg_darkshoreAuberdine, auberdine)
+    cpBuildingGroups.put(udg_darnassus, darnassus)
+    cpBuildingGroups.put(udg_darnassusTeldrassil, teldrassil)
+
+    // add to hashmap which building groups correspond to which player  
+    // Druids
+    cpBuildingOwners.put(chimaerasFall, players[0])
+    // Sentinels
+    cpBuildingOwners.put(darnassus, players[0])
+    cpBuildingOwners.put(auberdine, players[18])
+    cpBuildingOwners.put(astranaar, players[18])
+    cpBuildingOwners.put(teldrassil, players[18])
+// add to hashmap which player slots have possible neutral units to assign
+    for i = 0 to 23
+        neutralBuildingPlayers.put(players[i], false) // set all to false
+    neutralBuildingPlayers.put(players[0], true) // player slots with neutral units set to true
+    neutralBuildingPlayers.put(players[18], true)
+
+public function assignBuilding(group g, player p)
+    for u in g
+        SetUnitOwner(u, p, true)
+
+init
+    setupTables()

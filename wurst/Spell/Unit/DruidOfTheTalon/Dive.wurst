@@ -1,0 +1,76 @@
+package Dive
+
+import AbilityObjEditing
+import ObjectIdGenerator
+import Icons
+import ClosureEvents
+import ClosureTimers
+
+
+public constant CROW_TACKLE_ID = compiletime(ABIL_ID_GEN.next())
+
+constant real TACKLE_DAMAGE = 200.
+constant real DASH_SPEED = 1200.
+constant real UPDATE_INTERVAL = 0.05
+constant string DASH_SFX = "Abilities\\Spells\\NightElf\\Blink\\BlinkCaster.mdl"
+constant string IMPACT_SFX = "Abilities\\Spells\\Human\\Thunderclap\\ThunderClapCaster.mdl"
+
+@compiletime function genAbility()
+    new AbilityDefinitionFireBolt(CROW_TACKLE_ID)
+        ..setName("Crow Tackle")
+        ..setTooltipNormal(1, "Crow Tackle")
+        ..setTooltipNormalExtended(1, "Transforms into crow form and dashes at the target enemy dealing " + TACKLE_DAMAGE.toInt().toString() + " damage on impact.")
+        ..setTooltipLearn("Learn Crow Tackle")
+        ..setTooltipLearnExtended("Dash at an enemy in crow form dealing damage on impact.")
+        ..setIconNormal(Icons.bTNStarFall)
+        ..setButtonPositionNormalX(0)
+        ..setButtonPositionNormalY(0)
+        ..setCastRange(1, 900.)
+        ..setCooldown(1, 12.)
+        ..setManaCost(1, 60)
+        ..setDamage(1, 0)
+        ..setDurationNormal(1, 0.)
+        ..setDurationHero(1, 0.)
+        ..setBuffs(1, "")
+        ..setMissileArt("")
+        ..setMissileSpeed(1)
+        ..setRequirements("")
+        ..setRequirementsLevels("")
+        ..setRequiredLevel(1)
+        ..setLevelSkipRequirement(2)
+        ..setHeroAbility(true)
+        ..setItemAbility(false)
+
+
+
+init
+    EventListener.onCast(CROW_TACKLE_ID) (caster) ->
+        let target = EventData.getSpellTargetUnit()
+
+        if target == null
+            return
+
+        doPeriodically(UPDATE_INTERVAL) cb ->
+            if not caster.isAlive() or not target.isAlive()
+                destroy cb
+                return
+
+            let casterPos = caster.getPos()
+            let targetPos = target.getPos()
+            let dist = casterPos.distanceTo(targetPos)
+            let moveDir = casterPos.angleTo(targetPos)
+
+            // Reached target — deal damage and transform back
+            if dist <= 80.
+                caster.damageTarget(target, TACKLE_DAMAGE, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+                flashEffect(IMPACT_SFX, targetPos)
+
+                flashEffect(DASH_SFX, casterPos)
+
+                destroy cb
+                return
+
+            // Move toward target
+            let moveAmount = DASH_SPEED * UPDATE_INTERVAL
+            caster.setXY(casterPos.polarOffset(moveDir, moveAmount))
+

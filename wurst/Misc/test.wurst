@@ -1,0 +1,77 @@
+package test
+
+import DummyCaster
+import Unit
+import AbilityObjEditing
+import ObjectIdGenerator
+import EventHelper
+import ClosureEvents
+import ClosureTimers
+import ObjectIds
+import Timer
+import TimerUtils
+import UnitIds
+
+
+public constant GPROJECTILE_ID = compiletime(ABIL_ID_GEN.next())
+
+class PortableProjectile
+  int speed
+  string model
+
+  construct(int speed, string model)
+    this.speed = speed
+    this.model = model
+
+function abc(player owner, int unitId, vec2 pos, angle facing ) returns unit
+  let u = createUnit(owner, unitId, pos, facing)
+  u.addAbility('Aloc')
+  return u
+
+
+
+function moveUnit(unit u, vec2 targetPos, real dist, real update, real speed)
+  doPeriodically(update) cb ->
+    let dir = u.getPos().angleTo(targetPos)
+    u.setXY(u.getPos()) // <-------- removed polar maybe fix maybe shit
+    if u.getPos().distanceTo(targetPos) < dist
+      u.remove()
+      destroy cb
+
+// Overload 1
+function moveUnit(unit u, vec2 targetPos, real dist, real speed)
+  moveUnit(u, targetPos, dist, 0.05, speed)
+
+// Overload 2
+function moveUnit(unit u, vec2 targetPos)
+  moveUnit(u, targetPos, 10., 0.05)
+
+
+
+
+@compiletime function genAbil()
+  new AbilityDefinitionRainofFire(GPROJECTILE_ID)
+      ..setDamagePerSecond(1, 0)
+      ..setNumberofWaves(1, 0)
+      ..setBuffs(1, "")
+      ..setEffects(1, "")
+      ..setArtTarget("")
+      ..setArtCaster("")
+      ..setMissileArt("")
+      ..setMaximumDamageperWave(1, 0)
+      ..setDamage(1, 0)
+      ..setManaCost(1, 1)
+      ..setCooldown(1, 1)
+
+
+
+@compiletime function giveAbil()
+  new HeroDefinition('Udre', 'Udre')
+    ..setHeroAbilities(commaList(GPROJECTILE_ID))
+
+init
+  EventListener.onPointCast(GPROJECTILE_ID) (caster, targetPos) ->
+    let casterFacing = caster.getFacingAngle()
+    let casterPos = caster.getPos()
+    let u = abc(caster.getOwner(), UnitIds.abomination, casterPos, casterFacing)
+    moveUnit(u, targetPos, 10.,0.05,300 )

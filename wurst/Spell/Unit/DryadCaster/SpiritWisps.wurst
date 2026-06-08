@@ -1,0 +1,128 @@
+package SpiritWisps
+import AbilityObjEditing
+import ObjectIdGenerator
+import BuffObjEditing
+import Icons
+import ClosureEvents
+import ClosureTimers
+import LinkedList
+import ObjectIds
+import UnitIds
+
+
+public constant SPIRIT_WISPS_ID = compiletime(ABIL_ID_GEN.next())
+public constant WISP_BUFF_ID = compiletime(BUFF_ID_GEN.next())
+
+constant int WISP_UNIT_ID = UnitIds.wisp
+constant int WISP_COUNT = 3
+constant real WISP_DURATION = 10.
+constant real WISP_HEAL = 25.
+constant real WISP_RADIUS = 500.
+constant real HEAL_INTERVAL = 1.
+constant real ORBIT_RADIUS = 500.
+constant real ORBIT_SPEED = 1.5
+constant real UPDATE_INTERVAL = 0.05
+
+@compiletime function genBuff()
+    new BuffDefinition(WISP_BUFF_ID, 'Basl')
+        ..setName(1, "Spirit Wisps")
+        ..setTooltipNormal(1, "Spirit Wisps")
+        ..setTooltipNormalExtended(1, "This unit is accompanied by healing spirit wisps.")
+        ..setIcon(Icons.bTNWisp)
+
+@compiletime function genAbility()
+    new AbilityDefinitionRoar(SPIRIT_WISPS_ID)
+        ..setName("Spirit Wisps")
+        ..setTooltipNormal(1, "Spirit Wisps")
+        ..setTooltipNormalExtended(1, "Summons 3 spirit wisps that orbit the caster for " + WISP_DURATION.toInt().toString() + " seconds, healing nearby damaged friendly units for " + WISP_HEAL.toInt().toString() + " HP/s.")
+        ..setTooltipLearn("Learn Spirit Wisps")
+        ..setTooltipLearnExtended("Summons 3 spirit wisps that orbit the caster, healing nearby damaged friendly units.")
+        ..setIconNormal(Icons.bTNWisp)
+        ..setButtonPositionNormalX(2)
+        ..setButtonPositionNormalY(0)
+        ..setCooldown(1, 20.)
+        ..setManaCost(1, 70)
+        ..setDamageIncrease(1, 0.)
+        ..setAreaofEffect(1, 0.)
+        ..setDurationNormal(1, 10.)
+        ..setDurationHero(1, 0.)
+        ..setBuffs(1, toRawCode(WISP_BUFF_ID))
+        ..setRequirements("")
+        ..setRequirementsLevels("")
+        ..setRequiredLevel(1)
+        ..setLevelSkipRequirement(2)
+        ..setHeroAbility(false)
+        ..setItemAbility(false)
+
+init
+    EventListener.onCast(SPIRIT_WISPS_ID) (caster) ->
+        // Spawn 3 wisps evenly spaced around caster
+        let wisps = new LinkedList<unit>()
+
+        for i = 0 to WISP_COUNT - 1
+            let startAngle = (2. * bj_PI * i.toReal()) / WISP_COUNT.toReal()
+            let spawnPos = caster.getPos().polarOffset(angle(startAngle), ORBIT_RADIUS)
+            let wisp = createUnit(caster.getOwner(), WISP_UNIT_ID, spawnPos, angle(0.))
+            wisp.addAbility('Aloc')
+            wisp.setVertexColor(50, 255, 50, 255) // light blue tint
+            wisp.setScale(0.5)
+            //let _sfx = wisp.addEffect("Doodads\\Cinematic\\GlowingRunes\\GlowingRunes2.mdl", "origin")
+            wisps.add(wisp)
+
+        let moveTimer = doPeriodically(UPDATE_INTERVAL) cb ->
+            let wispTargets = new LinkedList<unit>()
+            for wisp in wisps
+                let casterPos = caster.getPos()
+                unit nearestInjured = null
+                real nearestDist = 99999.
+
+                ENUM_GROUP.enumUnitsInRange(casterPos, WISP_RADIUS, null)
+
+                for u in ENUM_GROUP
+                    if u.isAlive() and u.getOwner().isAllyOf(caster.getOwner()) and u.getHP() < u.getMaxHP()
+                        let dist = wisp.getPos().distanceTo(u.getPos())
+                        if dist < nearestDist and not wispTargets.has(u)
+                            nearestDist = dist
+                            nearestInjured = u
+                            wispTargets.add(u)
+
+                vec2 targetPos
+                if nearestInjured != null
+                    // Drift toward injured unit but not all the way — stop nearby
+                    targetPos = nearestInjured.getPos().polarOffset(
+                        wisp.getPos().angleTo(nearestInjured.getPos()),
+                        -50.  // hover just outside the unit
+                    )
+                else
+                    // No injured units — wander randomly near caster
+                    let randomAngle = angle(GetRandomReal(0., 2. * bj_PI))
+                    let randomDist = GetRandomReal(50., ORBIT_RADIUS)
+                    targetPos = casterPos.polarOffset(randomAngle, randomDist)
+
+                // Move wisp smoothly toward target
+                let moveDir = wisp.getPos().angleTo(targetPos)
+                let moveSpeed = 200. * UPDATE_INTERVAL
+                let newPos = wisp.getPos().polarOffset(moveDir, moveSpeed)
+
+                // Keep wisps tethered to caster — dont let them stray too far
+                if newPos.distanceTo(casterPos) > WISP_RADIUS
+                    wisp.setXY(casterPos.polarOffset(newPos.angleTo(casterPos), -WISP_RADIUS + 20.))
+                else
+                    wisp.setXY(newPos)
+
+        // Heal timer — heals damaged friendlies in range every second
+        let healTimer = doPeriodically(HEAL_INTERVAL) cb ->
+            ENUM_GROUP.enumUnitsInRange(caster.getPos(), WISP_RADIUS, null)
+            for u in ENUM_GROUP
+                if u.isAlive() and u.getOwner().isAllyOf(caster.getOwner()) and u.getHP() < u.getMaxHP()
+                    u.addHP(WISP_HEAL)
+                    flashEffect("Abilities\\Spells\\Items\\AIhe\\AIheTarget.mdl", u, "origin")
+
+        // After duration clean everything up
+        doAfter(WISP_DURATION) ->
+            destroy moveTimer  // was orbitTimer
+            destroy healTimer
+            for wisp in wisps
+                wisp.kill()
+            destroy wisps
+            UnitRemoveAbility(caster, WISP_BUFF_ID)
