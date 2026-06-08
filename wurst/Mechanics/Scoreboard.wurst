@@ -46,9 +46,8 @@ public function getActivePlayers() returns int
 
 // function to update player income and number of control points owned
 function updatePlayerIncome()
-    let playerCount = getActivePlayers()
     // reset all income values
-    for i = 0 to playerCount - 1
+    for i = 0 to 23
         playerIncome[i] = 0
         playerCpCount[i] = 0
 
@@ -74,10 +73,10 @@ function getIncomeByPlayer() returns HashMap<player, int>
 // function to initialize the multiboard and set up its columns and rows
 public function setupMultiboard()
     incomeBoard = CreateMultiboard()
-    
+    let playerCount = getActivePlayers()
     // set column and row count, and title
     MultiboardSetColumnCount(incomeBoard, 3)
-    MultiboardSetRowCount(incomeBoard, getActivePlayers() + 1) // +1 for header row
+    MultiboardSetRowCount(incomeBoard, playerCount + 1) // +1 for header row
     MultiboardSetTitleText(incomeBoard, "Statistics")
 
     // manually set header row
@@ -108,8 +107,7 @@ public function setupMultiboard()
 public function updateMultiboard()
     updatePlayerIncome()
     var row = 1
-    let playerCount = getActivePlayers()
-    for i = 0 to playerCount - 1
+    for i = 0 to 23
         if GetPlayerSlotState(players[i]) == PLAYER_SLOT_STATE_PLAYING
             let item1 = MultiboardGetItem(incomeBoard, row, 0)
             let item2 = MultiboardGetItem(incomeBoard, row, 1)

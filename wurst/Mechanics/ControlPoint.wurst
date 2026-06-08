@@ -9,10 +9,11 @@ public unit target = null
 public group controlPoints = CreateGroup()
 public let cpOwners = new HashMap<unit, player>()
 public let cpValues = new HashMap<unit, int>()
+public let isCapturingMap = new HashMap<unit, bool>()
 public int array playerIncome
 public int array playerCpCount
 int count = 0
-bool isCapturing = false // debug
+
 
 //Functions
 
@@ -22,7 +23,6 @@ public function income()
         let owner = cpOwners.get(cp)
         let value = cpValues.get(cp)
         owner.addGold(value)
-        updateMultiboard()
 
 // create a timer that calls the income function on a set cadence
 public function incomeTimer()
@@ -34,22 +34,29 @@ public function incomeTimer()
     // adjust income timer here
     TimerStart(countdown,60.,true,function income)
 
+function setupMultiboardTimer()
+    TimerStart(CreateTimer(), 2., true, function updateMultiboard)
+
 // set up a trigger for each control point that allows it to be captured when it is damaged to half health
 function setupCaptureOnHalf(unit target)
     CreateTrigger()
         ..registerUnitEvent(target, EVENT_UNIT_DAMAGED)
         ..addAction() ->
         let u = GetTriggerUnit()
-        let attacker = GetEventDamageSource()
-        let hp = GetUnitState(u, UNIT_STATE_LIFE)
-        let maxHp = GetUnitState(u, UNIT_STATE_MAX_LIFE)
-        if hp / maxHp <= 0.5
-            cpOwners.put(u, attacker.getOwner())
-            SetUnitOwner(u, attacker.getOwner(), true)
-            SetUnitState(u, UNIT_STATE_LIFE, maxHp)
-            if cpBuildingGroups.has(u)
-                assignBuilding(cpBuildingGroups.get(u), attacker.getOwner())
-            updateMultiboard()
+        if not isCapturingMap.get(u)
+            let attacker = GetEventDamageSource()
+            let hp = GetUnitState(u, UNIT_STATE_LIFE)
+            let maxHp = GetUnitState(u, UNIT_STATE_MAX_LIFE)
+            if hp / maxHp <= 0.5
+                let newOwner = attacker.getOwner()
+                if cpOwners.get(u) != newOwner  // only fire if owner is changing
+                    cpOwners.put(u, attacker.getOwner())
+                    SetUnitOwner(u, newOwner, true)
+                    SetUnitState(u, UNIT_STATE_LIFE, maxHp)
+                    if cpBuildingGroups.has(u)
+                        assignBuilding(cpBuildingGroups.get(u), newOwner)
+                else
+                    SetUnitState(u, UNIT_STATE_LIFE, maxHp)
 
 // helper function to add control points to the map, set their value, and set up the trigger for capturing them
 function addControlPoint(unit cp, int value)
@@ -91,4 +98,5 @@ init
     doAfter(0.) ->     
         incomeTimer()
         setupMultiboard()
+        setupMultiboardTimer()
         updateMultiboard()
