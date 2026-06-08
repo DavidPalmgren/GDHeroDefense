@@ -5,8 +5,6 @@ import ObjectIdGenerator
 import Icons
 import ClosureEvents
 import ClosureTimers
-import GroupUtils
-import UnitIds
 
 public constant CORRUPTED_BLOOD_ID = compiletime(ABIL_ID_GEN.next())
 

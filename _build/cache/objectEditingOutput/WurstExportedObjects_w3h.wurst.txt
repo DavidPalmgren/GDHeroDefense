@@ -30,34 +30,55 @@ import BuffObjEditing
 
 @compiletime function create_w3h_BM03()
 	new BuffDefinition('BM03', 'Basl')
+	..setName(1, "Invigorate")
+	..setTooltipNormal(1, "Invigorated")
+	..setTooltipNormalExtended(1, "This unit is invigorated, regenerating health and mana.")
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNAcorn.blp")
+	..setArtTarget(1, "Abilities\\Spells\\NightElf\\Rejuvenation\\RejuvenationTarget.mdx")
+	..setArtSpecial(1, "")
+	..setTargetAttachmentPoint0(1, "chest")
+
+
+@compiletime function create_w3h_BM04()
+	new BuffDefinition('BM04', 'Basl')
 	..setName(1, "Hibernate")
 	..setTooltipNormal(1, "Hibernate")
 	..setTooltipNormalExtended(1, "This unit is hibernating, rapidly regenerating health but unable to act.")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNSleep.blp")
 
 
-@compiletime function create_w3h_BM04()
-	new BuffDefinition('BM04', 'BNso')
+@compiletime function create_w3h_BM05()
+	new BuffDefinition('BM05', 'BNso')
 	..setName(1, "Mauled")
 	..setTooltipNormal(1, "Mauled")
 	..setTooltipNormalExtended(1, "This unit has been charged by Ursoc and is stunned.")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNStun.blp")
 
 
-@compiletime function create_w3h_BM05()
-	new BuffDefinition('BM05', 'Basl')
+@compiletime function create_w3h_BM06()
+	new BuffDefinition('BM06', 'Basl')
 	..setName(1, "Spirit Wisps")
 	..setTooltipNormal(1, "Spirit Wisps")
 	..setTooltipNormalExtended(1, "This unit is accompanied by healing spirit wisps.")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNWisp.blp")
 
 
-@compiletime function create_w3h_BM06()
-	new BuffDefinition('BM06', 'Basl')
+@compiletime function create_w3h_BM07()
+	new BuffDefinition('BM07', 'Basl')
 	..setName(1, "Iron Skin")
 	..setTooltipNormal(1, "Iron Skin")
 	..setTooltipNormalExtended(1, "Increases armor by 4 and has a 25% chance to retaliate.")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\UI\\Cursor\\BTNAcorn.blp")
+
+
+@compiletime function create_w3h_BM08()
+	new BuffDefinition('BM08', 'Basl')
+	..setName(1, "Moon Warrior")
+	..setTooltipNormal(1, "Moon Warrior")
+	..setTooltipNormalExtended(1, "Tyrande has dismounted, gaining bonus attack speed and damage.")
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNPriestessOfTheMoon.blp")
+	..setArtTarget(1, "")
+	..setArtSpecial(1, "")
 
 
 // Original Table (contains all modified default/melee objects)

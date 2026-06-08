@@ -43,7 +43,7 @@ import UnitObjEditing
 	..setAttacksEnabled(0)
 	..setSpeedBase(0)
 	..setHitPointsMaximumBase(20000)
-	..setHitPointsRegenerationRate(300.0)
+	..setHitPointsRegenerationRate(3.0)
 	..setName("KoboldThemedTargetDummy")
 
 
@@ -82,7 +82,9 @@ import UnitObjEditing
 	..setTooltipBasic("Train Treant")
 	..setTooltipExtended("Basic frontline unit. Can learn Thicker Bark to resist some damage and Recycle to invigorate a nearby unit on death. |n|n|cffffcc00Attacks land units.|r")
 	..setHotkey("Q")
-	..setNormalAbilities("AM0h")
+	..setNormalAbilities("AM0g")
+	..setNormalAbilities("AM0g")
+	..setNormalAbilities("AM0g")
 
 
 @compiletime function create_w3u_E003()
@@ -111,6 +113,10 @@ import UnitObjEditing
 	..setProperNamesUsed(1)
 	..setNormalAbilities("A001,AInv,Ault")
 	..setHeroAbilities("AM0b,A002,AM0a,AHav")
+	..setNormalAbilities("A001,AInv,Ault")
+	..setHeroAbilities("AM0b,A002,AM0a,AHav")
+	..setNormalAbilities("A001,AInv,Ault")
+	..setHeroAbilities("AM0b,A002,AM0a,AHav")
 
 
 @compiletime function create_w3u_e004()
@@ -118,6 +124,8 @@ import UnitObjEditing
 	..setManaInitialAmount(150)
 	..setName("DryadCaster")
 	..setModelFile("war3mapImported\\SylvanEnchantress.mdl")
+	..setNormalAbilities("AM0d,AInv,Ault,ACm2,Aien,Aadm,Aspo")
+	..setNormalAbilities("AM0d,AInv,Ault,ACm2,Aien,Aadm,Aspo")
 	..setNormalAbilities("AM0d,AInv,Ault,ACm2,Aien,Aadm,Aspo")
 
 
@@ -620,13 +628,33 @@ import UnitObjEditing
 	..setHitPointsMaximumBase(5000)
 	..setHitPointsRegenerationRate(3.0)
 	..setManaRegeneration(7.0)
+	..setManaMaximum(1000)
+	..setLevel(10)
+	..setGoldBountyAwardedBase(120)
+	..setGoldBountyAwardedSidesperDie(6)
 	..setName("Xavius")
 	// TODO no wrapper: 	..setString("uhas", "")
 	..setProperNames("Xavius")
-	..setModelFile("xavius2.mdl")
 	..setNormalAbilities("AM04,AM05,AM02")
 	..setLevel(6)
 	..setName("Xavius")
+	..setNormalAbilities("AM04,AM05,AM02")
+	..setLevel(6)
+	..setName("Xavius")
+	..setNormalAbilities("AM04,AM05,AM02")
+	..setLevel(6)
+	..setName("Xavius")
+
+
+@compiletime function create_w3u_e00J()
+	new BuildingDefinition('e00J', 'etrp')
+	..setNormalAbilities("")
+	..setAttack1TargetsAllowed("debris,enemies,ground,item,neutral,structure,ward")
+	..setTargetedAs("ground")
+	..setCollisionSize(100.7)
+	..setArmorType("normal")
+	..setName("Ancient Protector Siege")
+	..setAbilitySkinList("")
 
 
 @compiletime function create_w3u_x001()
@@ -658,6 +686,51 @@ import UnitObjEditing
 	..setTooltipBasic("")
 	..setNormalAbilities("Aloc,Agho")
 	..setCollisionSize(0.0)
+
+
+@compiletime function create_w3u_x004()
+	new UnitDefinition('x004', 'ewsp')
+	..setName("Effect Dummy Unit")
+	..setUpgradesUsed("")
+	..setStructuresBuilt("")
+	..setManaRegeneration(0.1)
+	..setManaInitialAmount(1000)
+	..setManaMaximum(1000)
+	..setCollisionSize(0.0)
+	..setRace("commoner")
+	..setFoodCost(0)
+	..setArmorType("divine")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNTemp.blp")
+	..setSpeedBase(522)
+	..setModelFile("dummy.mdl")
+	..setAnimationBlendTimeseconds(0.0)
+	..setAnimationCastBackswing(0.0)
+	..setMaximumPitchAngledegrees(0.0)
+	..setMaximumRollAngledegrees(0.0)
+	..setArtSpecial("")
+	..setProjectileImpactZ(0.0)
+	..setProjectileLaunchZ(0.0)
+	..setNameEditorSuffix("(Basics)")
+	..setSightRadiusDay(1)
+	..setSightRadiusNight(1)
+	..setUnitClassification("_")
+	..setPropulsionWindowdegrees(1.0)
+	..setTooltipBasic("")
+	..setAttacksEnabled(1)
+	..setAttack1AnimationBackswingPoint(0.0)
+	..setAttack1AnimationDamagePoint(0.0)
+	..setAttack1CooldownTime(0.0)
+	..setAttack1AttackType("unknown")
+	..setAttack1DamageBase(-1)
+	..setAttack1DamageNumberofDice(1)
+	..setAttack1DamageSidesperDie(1)
+	..setAttack1ProjectileSpeed(2147483647)
+	..setAttack1Range(2147483647)
+	..setAttack1TargetsAllowed("air,debris,ground,invulnerable,item,structure,vulnerable,ward")
+	..setAttack1WeaponSound("Nothing")
+	..setAttack1WeaponType("instant")
+	..setAcquisitionRange(2.1474836E9)
+	..setNormalAbilities("Avul,Aloc,AM0o")
 
 
 // Original Table (contains all modified default/melee objects)
@@ -694,16 +767,75 @@ import UnitObjEditing
 	..setUnitsTrained("E003,Edem,Ekee,Emoo,Ewar")
 
 
+@compiletime function create_w3u_edry()
+	new UnitDefinition('edry', 'edry')
+	..setUpgradesUsed("R001,Resw,Rerh,Resi,Reuv,Repm")
+	..setBuildTime(2)
+	..setNormalAbilities("A003,Amim,Aien,Ault")
+	..setAbilitySkinList("A003,Amim,Aien,Ault")
+
+
+@compiletime function create_w3u_hwtw()
+	new BuildingDefinition('hwtw', 'hwtw')
+	..setResearchesAvailable("R002,R001")
+
+
 @compiletime function create_w3u_Ekee()
 	new HeroDefinition('Ekee', 'Ekee')
-	..setNormalAbilities("AM07,AInv,Ault")
-	..setHeroAbilities("AM08,AM09,AM06")
+	..setBuildTime(3)
+	..setNormalAbilities("AM06,AInv,Ault")
+	..setHeroAbilities("AM08,AM09,AM07")
+	..setNormalAbilities("AM06,AInv,Ault")
+	..setHeroAbilities("AM08,AM09,AM07")
+	..setNormalAbilities("AM06,AInv,Ault")
+	..setHeroAbilities("AM08,AM09,AM07")
+
+
+@compiletime function create_w3u_earc()
+	new UnitDefinition('earc', 'earc')
+	..setNormalAbilities("A005,Aco2,Ashm,Aien,Ault")
+	..setUpgradesUsed("R002,Resm,Rema,Reib,Remk,Reuv,Repm")
+	..setAbilitySkinList("A005,Aco2,Ashm,Aien,Ault,Aegr,Aeib,Aemk")
 
 
 @compiletime function create_w3u_Hblm()
 	new HeroDefinition('Hblm', 'Hblm')
-	..setNormalAbilities("AM0e")
+	..setNormalAbilities("AM0i")
 	..setLevel(6)
 	..setName("Ligga")
+	..setNormalAbilities("AM0i")
+	..setLevel(6)
+	..setName("Ligga")
+	..setNormalAbilities("AM0i")
+	..setLevel(6)
+	..setName("Ligga")
+
+
+@compiletime function create_w3u_edtm()
+	new UnitDefinition('edtm', 'edtm')
+	..setNormalAbilities("AM0j,Arav")
+	..setNormalAbilities("AM0j,Arav")
+	..setNormalAbilities("AM0j,Arav")
+
+
+@compiletime function create_w3u_x003()
+	new UnitDefinition('x003', 'x003')
+	..setModelFile("TyrandeWhisperwind.mdx")
+	..setModelFile("TyrandeWhisperwind.mdx")
+	..setModelFile("TyrandeWhisperwind.mdx")
+
+
+@compiletime function create_w3u_Emoo()
+	new HeroDefinition('Emoo', 'Emoo')
+	..setHeroAbilities("AM0k,AM0l")
+	..setHeroAbilities("AM0k,AM0l")
+	..setHeroAbilities("AM0k,AM0l")
+
+
+@compiletime function create_w3u_Udre()
+	new HeroDefinition('Udre', 'Udre')
+	..setHeroAbilities("AM0p")
+	..setHeroAbilities("AM0p")
+	..setHeroAbilities("AM0p")
 
 

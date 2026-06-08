@@ -1,15 +1,29 @@
 package Invigorate
 
 import AbilityObjEditing
+import BuffObjEditing
 import Icons
 import ObjectIdGenerator
 import ClosureTimers
+import StringUtils
+import ObjectIds
+import Textures
+import Abilities
+import AbilityIds
 
 public var seedlingCount = 0
 
 public constant INVIGORATE_ID = compiletime(ABIL_ID_GEN.next())
+public constant INVIGORATE_BUFF_ID = compiletime(BUFF_ID_GEN.next())
 public constant MAX_SEEDLING_STACKS = 5
+public constant INVIGORATE_DURATION = 12.
+public constant TOTAL_HEAL = 150.
+public constant TOTAL_MANA = 20.
 
+
+
+public constant HPS =  TOTAL_HEAL / INVIGORATE_DURATION
+public constant MPS =  TOTAL_MANA / INVIGORATE_DURATION
 
 public function getSeedlingCount() returns int
     return seedlingCount
@@ -20,16 +34,25 @@ public function addSeedlingStack()
 
     seedlingCount++
 
-    // After 12s remove this stack
     doAfter(12.) ->
         if seedlingCount > 0
             seedlingCount--
+
+@compiletime function genBuff()
+    new BuffDefinition(INVIGORATE_BUFF_ID, 'Basl')
+        ..setName(1, "Invigorate")
+        ..setTooltipNormal(1, "Invigorated")
+        ..setTooltipNormalExtended(1, "This unit is invigorated, regenerating health and mana.")
+        ..setIcon(Icons.bTNAcorn1)
+        ..setArtTarget(Abilities.rejuvenationTarget)
+        ..setArtSpecial("")
+        ..setTargetAttachmentPoint0(1, "chest")
 
 @compiletime function genAbility()
     new AbilityDefinitionRejuvination(INVIGORATE_ID)
         ..setName("Invigorate")
         ..setTooltipNormal(1, "Invigorate")
-        ..setTooltipNormalExtended(1, "Increases health regeneration by 5 and mana regeneration by 1 for 10 seconds. Adds 1 seedling stack (max " + MAX_SEEDLING_STACKS.toString() + " active stacks).")
+        ..setTooltipNormalExtended(1, "Increases health regeneration by " + HPS.toString() + " and mana regeneration by " + MPS.toString() + " for " + INVIGORATE_DURATION.toString() + " seconds." + " Adds a seedling stack whilst active")
         ..setIconNormal(Icons.bTNAcorn)
         ..setButtonPositionNormalX(1)
         ..setButtonPositionNormalY(1)
@@ -41,3 +64,6 @@ public function addSeedlingStack()
         ..setHeroAbility(false)
         ..setItemAbility(false)
         ..setManaCost(1, 25)
+        ..setBuffs(1, toRawCode(INVIGORATE_BUFF_ID))
+        ..setHitPointsGained(1, (TOTAL_HEAL))
+        ..setManaPointsGained(1, (TOTAL_MANA))

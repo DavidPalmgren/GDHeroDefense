@@ -6,7 +6,8 @@ import ObjectIdGenerator
 import ClosureEvents
 import ClosureTimers
 import Abilities
-import GroupUtils
+
+import Invigorate
 
 public constant HEALING_CLOUD_ID = compiletime(ABIL_ID_GEN.next())
 
@@ -99,5 +100,5 @@ init
 
         ENUM_GROUP.enumUnitsInRect(bj_mapInitialPlayableArea, null)
         for u in ENUM_GROUP
-            if u.hasAbility('Brej')
+            if u.hasAbility(INVIGORATE_BUFF_ID)
                 spawnCloud(caster.getOwner(), u.getPos(), heal, radius, duration)

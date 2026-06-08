@@ -6,7 +6,6 @@ import ObjectIdGenerator
 import ClosureEvents
 import ClosureTimers
 import Invigorate
-import GroupUtils
 
 public constant SUMMON_TREANT_ID = compiletime(ABIL_ID_GEN.next())
 

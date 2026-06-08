@@ -1,0 +1,11 @@
+package GlaiveThrow
+
+import ObjectIdGenerator
+import UnitObjEditing
+import Abilities
+import AbilityObjEditing
+
+public constant GLIAVE_THROW_ID = compiletime(ABIL_ID_GEN.next())
+
+@compiletime function genSpell()
+  new AbilityDefinitionDreadlordCarrionSwarm(GLIAVE_THROW_ID)

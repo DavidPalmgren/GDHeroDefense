@@ -1,0 +1,106 @@
+package Starfall
+
+import AbilityObjEditing
+import ObjectIdGenerator
+import Icons
+import ClosureEvents
+import ClosureTimers
+import GroupUtils
+
+
+public constant STARFALL_ID = compiletime(ABIL_ID_GEN.next())
+
+constant real STARFALL_RADIUS = 500.
+constant real STAR_DAMAGE = 100.
+constant real STAR_AOE = 250.
+constant real CHANNEL_DURATION = 6.
+constant real BASE_INTERVAL = 1.0    // starts at 1 star per second
+constant real MIN_INTERVAL = 0.15   // ramps up to ~6 stars per second
+constant string STAR_SFX = "Abilities\\Spells\\NightElf\\Starfall\\StarfallTarget.mdl"
+constant string IMPACT_SFX = "Abilities\\Spells\\NightElf\\Starfall\\StarfallCaster.mdl"
+constant string CHANNEL_SFX = "Abilities\\Spells\\NightElf\\Starfall\\StarfallCaster.mdl"
+
+@compiletime function genAbility()
+    new AbilityDefinitionArchMageBlizzard(STARFALL_ID)
+        ..setName("Starfall")
+        ..setTooltipNormal(1, "Starfall")
+        ..setTooltipNormalExtended(1, "Calls down stars in the target area dealing " + STAR_DAMAGE.toInt().toString() + " damage in " + STAR_AOE.toInt().toString() + " radius each. Stars fall faster the longer the spell channels.")
+        ..setTooltipLearn("Learn Starfall")
+        ..setTooltipLearnExtended("Channel a starfall that ramps up in intensity over time.")
+        ..setIconNormal(Icons.bTNStarFall)
+        ..setIconResearch(Icons.bTNStarFall)
+        ..setButtonPositionNormalX(1)
+        ..setButtonPositionNormalY(0)
+        ..setDamage(1, 0)
+        ..setDamage(2, 0)
+        ..setDamage(3, 0)
+        ..setCastRange(1, 900.)
+        ..setCooldown(1, 1.)
+        ..setManaCost(1, 2)
+        ..setAreaofEffect(1, STARFALL_RADIUS)
+        ..setDurationNormal(1, CHANNEL_DURATION)
+        ..setDurationHero(1, CHANNEL_DURATION)
+        ..setDamagePerSecond(1, 0)      // zero out blizzard damage
+        ..setNumberofWaves(1, 0)        // zero out blizzard waves
+        ..setRequirements("")
+        ..setRequirementsLevels("")
+        ..setRequiredLevel(1)
+        ..setLevelSkipRequirement(2)
+        ..setHeroAbility(true)
+        ..setItemAbility(false)
+        ..setBuffs(1, "")
+        ..setBuffs(2, "")
+        ..setBuffs(3, "")
+        ..setEffects(1, "")
+        ..setEffects(2, "")
+        ..setEffects(3, "")
+
+
+
+
+init
+    EventListener.onCast(STARFALL_ID) (caster) ->
+        let targetPos = EventData.getSpellTargetPos()
+
+        // Caster effect while channeling
+        let channelSfx = caster.addEffect(CHANNEL_SFX, "overhead")
+
+        var elapsed = 0.
+        var currentInterval = BASE_INTERVAL
+        var timeSinceLastStar = 0.
+
+        // Main channel loop
+        let channelTimer = doPeriodically(0.05) cb ->
+            elapsed += 0.05
+            timeSinceLastStar += 0.05
+
+            // Ramp up speed — interval shrinks as elapsed time grows
+            currentInterval = BASE_INTERVAL - ((BASE_INTERVAL - MIN_INTERVAL) * (elapsed / CHANNEL_DURATION))
+
+            if timeSinceLastStar >= currentInterval
+                timeSinceLastStar = 0.
+
+                // Pick a random point inside the AOE
+                let randomAngle = angle(GetRandomReal(0., 2. * bj_PI))
+                let randomDist = GetRandomReal(0., STARFALL_RADIUS)
+                let starPos = targetPos.polarOffset(randomAngle, randomDist)
+
+                // Drop star visual
+                flashEffect(STAR_SFX, starPos)
+
+                // Short delay then impact damage
+                doAfter(0.5) ->
+                    flashEffect(IMPACT_SFX, starPos)
+                    ENUM_GROUP.enumUnitsInRange(starPos, STAR_AOE, null)
+                    for u in ENUM_GROUP
+                        if u.isAlive() and u.getOwner().isEnemyOf(caster.getOwner())
+                            caster.damageTarget(u, STAR_DAMAGE, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+
+            // End channel after duration
+            if elapsed >= CHANNEL_DURATION
+                destroy cb
+                channelSfx.destr()
+
+        // Also end if caster dies or cancels
+        doAfter(CHANNEL_DURATION + 0.1) ->
+            channelSfx.destr()

@@ -1,7 +1,6 @@
 package XaviusMain
 
 import UnitObjEditing
-import ObjectIdGenerator
 import ObjectIds
 
 import Nightmare

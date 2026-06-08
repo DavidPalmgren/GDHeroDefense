@@ -1,0 +1,14 @@
+package TyrandeMain
+
+import UnitObjEditing
+import MoonWarrior
+import Starfall
+import ObjectIds
+import Destructable
+
+@compiletime function setupTyrandeModel()
+    new UnitDefinition(TYRANDE_MODEL_ID, TYRANDE_MODEL_ID)
+        ..setModelFile("TyrandeWhisperwind.mdx")
+
+    new HeroDefinition('Emoo', 'Emoo')
+    ..setHeroAbilities(commaList(MOON_WARRIOR_ID, STARFALL_ID))
