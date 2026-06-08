@@ -727,7 +727,7 @@ function CreateNeutralHostileBuildings takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'ncmw', -4320.0, 13984.0, 270.000, 'ncmw' )
     set u = BlzCreateUnitWithSkin( p, 'ncap', -4384.0, 14240.0, 270.000, 'ncap' )
     set u = BlzCreateUnitWithSkin( p, 'ncap', -3232.0, 14752.0, 270.000, 'ncap' )
-    set gg_unit_h00C_0174 = BlzCreateUnitWithSkin( p, 'h00C', -7778.2, 7822.0, 270.000, 'h00C' )
+    set gg_unit_h00C_0174 = BlzCreateUnitWithSkin( p, 'h00C', 733.8, 18190.0, 270.000, 'h00C' )
     set gg_unit_h00U_0175 = BlzCreateUnitWithSkin( p, 'h00U', 1720.8, 10287.2, 270.000, 'h00U' )
     set gg_unit_h00P_0178 = BlzCreateUnitWithSkin( p, 'h00P', -1461.7, 13433.8, 270.000, 'h00P' )
     set gg_unit_h00S_0179 = BlzCreateUnitWithSkin( p, 'h00S', -672.9, 7222.8, 270.000, 'h00S' )

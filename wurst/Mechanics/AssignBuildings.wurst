@@ -13,6 +13,7 @@ public group neutralBuildingCps = CreateGroup()
 
 // create a Hashmap
 public HashMap<unit, group> cpBuildingGroups = new HashMap<unit, group>()
+public HashMap<group, player> cpBuildingOwners = new HashMap<group, player>()
 HashMap<player, bool> neutralBuildingPlayers = new HashMap<player, bool>()
 
 //Functions
@@ -25,6 +26,15 @@ function setupTables()
     cpBuildingGroups.put(udg_darkshoreAuberdine, auberdine)
     cpBuildingGroups.put(udg_darnassus, darnassus)
     cpBuildingGroups.put(udg_darnassusTeldrassil, teldrassil)
+
+    // add to hashmap which building groups correspond to which player  
+    // Druids
+    cpBuildingOwners.put(chimaerasFall, players[0])
+    // Sentinels
+    cpBuildingOwners.put(darnassus, players[0])
+    cpBuildingOwners.put(auberdine, players[18])
+    cpBuildingOwners.put(astranaar, players[18])
+    cpBuildingOwners.put(teldrassil, players[18])
 // add to hashmap which player slots have possible neutral units to assign
     for i = 0 to 23
         neutralBuildingPlayers.put(players[i], false) // set all to false

@@ -43,20 +43,19 @@ function setupCaptureOnHalf(unit target)
         ..registerUnitEvent(target, EVENT_UNIT_DAMAGED)
         ..addAction() ->
         let u = GetTriggerUnit()
-        if not isCapturingMap.get(u)
-            let attacker = GetEventDamageSource()
-            let hp = GetUnitState(u, UNIT_STATE_LIFE)
-            let maxHp = GetUnitState(u, UNIT_STATE_MAX_LIFE)
-            if hp / maxHp <= 0.5
-                let newOwner = attacker.getOwner()
-                if cpOwners.get(u) != newOwner  // only fire if owner is changing
-                    cpOwners.put(u, attacker.getOwner())
-                    SetUnitOwner(u, newOwner, true)
-                    SetUnitState(u, UNIT_STATE_LIFE, maxHp)
-                    if cpBuildingGroups.has(u)
-                        assignBuilding(cpBuildingGroups.get(u), newOwner)
-                else
-                    SetUnitState(u, UNIT_STATE_LIFE, maxHp)
+        let attacker = GetEventDamageSource()
+        let hp = GetUnitState(u, UNIT_STATE_LIFE)
+        let maxHp = GetUnitState(u, UNIT_STATE_MAX_LIFE)
+        if hp / maxHp <= 0.5
+            let newOwner = attacker.getOwner()
+            if cpOwners.get(u) != newOwner  // only fire if owner is changing
+                cpOwners.put(u, newOwner)
+                SetUnitOwner(u, newOwner, true)
+                SetUnitState(u, UNIT_STATE_LIFE, maxHp)
+                if cpBuildingGroups.has(u) and cpBuildingOwners.get(cpBuildingGroups.get(u)) == newOwner // need to test this
+                    assignBuilding(cpBuildingGroups.get(u), newOwner)
+            else
+                SetUnitState(u, UNIT_STATE_LIFE, maxHp)
 
 // helper function to add control points to the map, set their value, and set up the trigger for capturing them
 function addControlPoint(unit cp, int value)
