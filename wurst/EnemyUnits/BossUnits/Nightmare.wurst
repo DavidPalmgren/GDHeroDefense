@@ -68,12 +68,12 @@ init
 
                 // Put to sleep
                 // target.pause()
-                print("Has buff: " + target.hasAbility('Ausl').toString())
+                
                 let _result = InstantDummyCaster.castTarget(players[PLAYER_NEUTRAL_AGGRESSIVE], 'AUsl', 1, Orders.sleep, u)
                 flashEffect(NIGHTMARE_SFX, target, "origin")
                 sleepingUnits.put(target, true)
                 flashEffect(NIGHTMARE_SFX, target, "origin")
-                print(target.getName() + " falls into the Nightmare!")
+                
 
                 doAfter(NIGHTMARE_DURATION) ->
                     if sleepingUnits.has(target) and sleepingUnits.get(target)
@@ -98,4 +98,4 @@ init
             damaged.unpause()
             sleepingUnits.put(damaged, false)  // mark as woken
             flashEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt.mdl", damaged, "origin")
-            print(damaged.getName() + " has been woken from the Nightmare!")
+            

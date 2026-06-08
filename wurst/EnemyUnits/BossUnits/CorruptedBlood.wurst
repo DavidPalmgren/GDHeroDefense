@@ -20,7 +20,7 @@ constant string GROW_SFX = "Abilities\\Spells\\Undead\\PlagueCloud\\PlagueCloudC
 constant string EXPLODE_SFX = "Abilities\\Weapons\\AvengerMissile\\AvengerMissile.mdl"
 
 @compiletime function genAbility()
-    new AbilityDefinitionFireBolt(CORRUPTED_BLOOD_ID)
+    new AbilityDefinitionFireBoltcreep(CORRUPTED_BLOOD_ID)
         ..setName("Corrupted Blood")
         ..setTooltipNormal(1, "Corrupted Blood")
         ..setTooltipNormalExtended(1, "Hurls a bolt of corrupted blood at an enemy, spawning a slime on impact that chases the target. If the target stays within " + SLIME_PROXIMITY.toInt().toString() + " range for " + GROW_DURATION.toInt().toString() + " seconds the slime explodes for " + EXPLODE_DAMAGE.toInt().toString() + " damage.")
@@ -30,12 +30,12 @@ constant string EXPLODE_SFX = "Abilities\\Weapons\\AvengerMissile\\AvengerMissil
         ..setCastRange(1, 800.)
         ..setCooldown(1, 15.)
         ..setManaCost(1, 80)
-        ..setDamage(1, 0)
-        ..setDurationNormal(1, 0.)      // zero stun duration on normal units
-        ..setDurationHero(1, 0.)        // zero stun duration on heroes
-        ..setBuffs(1, "")               // remove stun buff
-        ..setMissileArt("")             // remove missile visual
-        ..setMissileSpeed(1)            // instant so onCast fires immediately
+        ..setDamage(1, 100)
+        ..setDurationNormal(1, 1.)
+        ..setDurationHero(1, 1.)
+        ..setBuffs(1, "")
+        ..setMissileArt("")
+        ..setMissileSpeed(1)
         ..setRequirements("")
         ..setRequirementsLevels("")
         ..setHeroAbility(false)
@@ -53,7 +53,7 @@ function explodeSlime(unit slime, unit caster)
         for u in ENUM_GROUP
             if u.isAlive() and u.getOwner().isEnemyOf(caster.getOwner())
                 caster.damageTarget(u, EXPLODE_DAMAGE, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-                // print(u.getName() + " hit by Corrupted Blood explosion!")
+                // 
         slime.kill()
 
 init
@@ -62,14 +62,14 @@ init
         let targetSfx = target.addEffect("Abilities\\Spells\\Other\\Doom\\DoomTarget.mdl", "overhead")
         targetSfx.setScale(0.8)
         targetSfx.setColor(0, 255, 0)  // green tint to match slime theme
-        // print("Cast fired! Target: " + (target == null ? "null" : target.getName()))
+        // 
         let slime = createUnit(caster.getOwner(), SLIME_UNIT_ID, caster.getPos(), angle(0.))
-        // print("Slime created: " + slime.getName())
+        // 
 
         if target == null
             return
 
-        print("Corrupted Blood cast on: " + target.getName())
+        
 
         // Spawn slime on top of the target
         slime.addAbility('Aloc')

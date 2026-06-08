@@ -1,0 +1,12 @@
+package TreantMain
+
+import UnitObjEditing
+import ObjectIds
+import AbilityIds
+
+import ThickBark
+import Recycle
+
+@compiletime function addToTreant()
+    new UnitDefinition('e002', 'e002')
+        ..setNormalAbilities(commaList(RECYCLE_ID, THICK_BARK_ID, AbilityIds.ultravision ))

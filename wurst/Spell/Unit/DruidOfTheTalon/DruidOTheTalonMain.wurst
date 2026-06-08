@@ -1,0 +1,14 @@
+package DruidOTheTalonMain
+
+import UnitObjEditing
+import ObjectIds
+import AbilityIds
+
+import Dive
+
+
+// THIS IS CROW FORM ONLY.
+
+@compiletime function setAbility()
+    new UnitDefinition('edtm', 'edtm')
+    ..setNormalAbilities(commaList(CROW_TACKLE_ID, AbilityIds.stormCrowForm, AbilityIds.faerieFireAfa2, AbilityIds.ultravision))

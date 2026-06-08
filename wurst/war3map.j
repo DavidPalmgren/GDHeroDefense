@@ -113,6 +113,8 @@ globals
     unit                    gg_unit_h00T_0143          = null
     unit                    gg_unit_h007_0011          = null
     destructable            gg_dest_LTe2_0270          = null
+    trigger                 gg_trg_XaviusKilled        = null
+    unit                    gg_unit_N006_0173          = null
 endglobals
 
 function InitGlobals takes nothing returns nothing
@@ -381,6 +383,10 @@ function CreateBuildingsForPlayer0 takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'eate', 608.0, 19040.0, 270.000, 'eate' )
     set u = BlzCreateUnitWithSkin( p, 'emow', 1888.0, 18784.0, 270.000, 'emow' )
     set gg_unit_h000_0407 = BlzCreateUnitWithSkin( p, 'h000', 1546.5, 18490.7, 270.000, 'h000' )
+    set u = BlzCreateUnitWithSkin( p, 'eaoe', 576.0, 18560.0, 270.000, 'eaoe' )
+    set u = BlzCreateUnitWithSkin( p, 'eaow', 192.0, 18560.0, 270.000, 'eaow' )
+    set u = BlzCreateUnitWithSkin( p, 'eden', 192.0, 17920.0, 270.000, 'eden' )
+    set u = BlzCreateUnitWithSkin( p, 'etrp', 352.0, 17632.0, 270.000, 'etrp' )
 endfunction
 
 //===========================================================================
@@ -391,13 +397,18 @@ function CreateUnitsForPlayer0 takes nothing returns nothing
     local trigger t
     local real life
 
-    set u = BlzCreateUnitWithSkin( p, 'e002', 784.9, 18019.4, 16.183, 'e002' )
+    set u = BlzCreateUnitWithSkin( p, 'e002', 733.7, 17919.7, 16.183, 'e002' )
     set u = BlzCreateUnitWithSkin( p, 'e002', 830.5, 18261.7, 202.847, 'e002' )
     set u = BlzCreateUnitWithSkin( p, 'edry', 1053.8, 18200.4, 335.588, 'edry' )
     set u = BlzCreateUnitWithSkin( p, 'edry', 1075.1, 18052.2, 180.917, 'edry' )
-    set u = BlzCreateUnitWithSkin( p, 'e002', 608.8, 18306.6, 76.335, 'e002' )
+    set u = BlzCreateUnitWithSkin( p, 'e002', 641.2, 18274.8, 76.335, 'e002' )
     set u = BlzCreateUnitWithSkin( p, 'e002', 571.0, 18062.6, 40.706, 'e002' )
     set u = BlzCreateUnitWithSkin( p, 'e004', 1249.3, 18054.5, 235.137, 'e004' )
+    set u = BlzCreateUnitWithSkin( p, 'edot', 1267.2, 18312.2, 220.524, 'edot' )
+    set u = BlzCreateUnitWithSkin( p, 'edot', 1312.1, 18226.8, 77.709, 'edot' )
+    set u = BlzCreateUnitWithSkin( p, 'edoc', 1479.8, 18178.8, 240.344, 'edoc' )
+    set u = BlzCreateUnitWithSkin( p, 'e002', 862.9, 18069.1, 110.811, 'e002' )
+    set u = BlzCreateUnitWithSkin( p, 'n004', 973.8, 17890.4, 54.648, 'n004' )
 endfunction
 
 //===========================================================================
@@ -727,7 +738,7 @@ function CreateNeutralHostileBuildings takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'ncmw', -4320.0, 13984.0, 270.000, 'ncmw' )
     set u = BlzCreateUnitWithSkin( p, 'ncap', -4384.0, 14240.0, 270.000, 'ncap' )
     set u = BlzCreateUnitWithSkin( p, 'ncap', -3232.0, 14752.0, 270.000, 'ncap' )
-    set gg_unit_h00C_0174 = BlzCreateUnitWithSkin( p, 'h00C', 733.8, 18190.0, 270.000, 'h00C' )
+    set gg_unit_h00C_0174 = BlzCreateUnitWithSkin( p, 'h00C', -7778.2, 7822.0, 270.000, 'h00C' )
     set gg_unit_h00U_0175 = BlzCreateUnitWithSkin( p, 'h00U', 1720.8, 10287.2, 270.000, 'h00U' )
     set gg_unit_h00P_0178 = BlzCreateUnitWithSkin( p, 'h00P', -1461.7, 13433.8, 270.000, 'h00P' )
     set gg_unit_h00S_0179 = BlzCreateUnitWithSkin( p, 'h00S', -672.9, 7222.8, 270.000, 'h00S' )
@@ -961,7 +972,7 @@ function CreateNeutralHostile takes nothing returns nothing
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nspr', -1009.9, 15739.0, 37.961, 'nspr' )
     call SetUnitAcquireRange( u, 200.0 )
-    set u = BlzCreateUnitWithSkin( p, 'N006', -3486.0, 13467.2, 88.520, 'N006' )
+    set gg_unit_N006_0173 = BlzCreateUnitWithSkin( p, 'N006', -3486.0, 13467.2, 88.520, 'N006' )
     set u = BlzCreateUnitWithSkin( p, 'nmsc', -11935.3, 9716.7, 318.489, 'nmsc' )
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nmrv', -11876.1, 9943.2, 296.661, 'nmrv' )
@@ -1249,6 +1260,20 @@ function InitTrig_testGate takes nothing returns nothing
 endfunction
 
 //===========================================================================
+// Trigger: XaviusKilled
+//===========================================================================
+function Trig_XaviusKilled_Actions takes nothing returns nothing
+    call SetPlayerTechResearchedSwap( 'R006', 1, Player(0) )
+endfunction
+
+//===========================================================================
+function InitTrig_XaviusKilled takes nothing returns nothing
+    set gg_trg_XaviusKilled = CreateTrigger(  )
+    call TriggerRegisterUnitEvent( gg_trg_XaviusKilled, gg_unit_N006_0173, EVENT_UNIT_DEATH )
+    call TriggerAddAction( gg_trg_XaviusKilled, function Trig_XaviusKilled_Actions )
+endfunction
+
+//===========================================================================
 // Trigger: auberdine
 //===========================================================================
 function Trig_auberdine_Actions takes nothing returns nothing
@@ -1374,6 +1399,7 @@ endfunction
 //===========================================================================
 function InitCustomTriggers takes nothing returns nothing
     call InitTrig_testGate(  )
+    call InitTrig_XaviusKilled(  )
     call InitTrig_auberdine(  )
     call InitTrig_astranaar(  )
     call InitTrig_ashenvaleChimaeraFall(  )

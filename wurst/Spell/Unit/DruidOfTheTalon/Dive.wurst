@@ -5,7 +5,7 @@ import ObjectIdGenerator
 import Icons
 import ClosureEvents
 import ClosureTimers
-import ObjectIds
+
 
 public constant CROW_TACKLE_ID = compiletime(ABIL_ID_GEN.next())
 
@@ -14,9 +14,6 @@ constant real DASH_SPEED = 1200.
 constant real UPDATE_INTERVAL = 0.05
 constant string DASH_SFX = "Abilities\\Spells\\NightElf\\Blink\\BlinkCaster.mdl"
 constant string IMPACT_SFX = "Abilities\\Spells\\Human\\Thunderclap\\ThunderClapCaster.mdl"
-
-// Raw ID of crow form ability on the unit — Druid of the Talon uses 'Amrf'
-// constant int CROW_FORM_ID = 'Amrf'
 
 @compiletime function genAbility()
     new AbilityDefinitionFireBolt(CROW_TACKLE_ID)
@@ -44,9 +41,7 @@ constant string IMPACT_SFX = "Abilities\\Spells\\Human\\Thunderclap\\ThunderClap
         ..setHeroAbility(true)
         ..setItemAbility(false)
 
-@compiletime function setAbility()
-    new UnitDefinition('edtm', 'edtm')
-    ..setNormalAbilities(commaList(CROW_TACKLE_ID, AbilityIds.stormCrowForm))
+
 
 init
     EventListener.onCast(CROW_TACKLE_ID) (caster) ->
@@ -55,8 +50,6 @@ init
         if target == null
             return
 
-
-        // Dash toward target
         doPeriodically(UPDATE_INTERVAL) cb ->
             if not caster.isAlive() or not target.isAlive()
                 destroy cb
@@ -67,8 +60,8 @@ init
             let dist = casterPos.distanceTo(targetPos)
             let moveDir = casterPos.angleTo(targetPos)
 
+            // Reached target — deal damage and transform back
             if dist <= 80.
-                // Reached target — deal damage and transform back
                 caster.damageTarget(target, TACKLE_DAMAGE, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
                 flashEffect(IMPACT_SFX, targetPos)
 

@@ -58,7 +58,7 @@ constant real ISOLATION_PERIOD = 1.
 //     let pos = getPosition(u)
 //     for i in ISOLATION_MAP_X
 //         if pos[0] > i + 100
-//             print("so far away")
+//             
 
 
 
@@ -74,7 +74,7 @@ init
             if u.hasAbility(ISOLATION_BUFF_ID) and not u.hasAbility(NIGHTMARE_BUFF_ID)
                 ENUM_GROUP.enumUnitsInRange(u.getPos(), 300, null)
                 if not ENUM_GROUP.size() > 1
-                    print("print size is: " + ENUM_GROUP.size().toString())
+                    
                     u.damageTarget(u, ISOLATION_DAMAGE, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
                 //ENUM_GROUP.destr()
 

@@ -59,19 +59,20 @@ import UnitObjEditing
 @compiletime function create_w3u_e002()
 	new UnitDefinition('e002', 'efon')
 	..setNormalAbilities("A000,Ault")
-	..setUpgradesUsed("R000,Reuv,Renb")
+	..setUpgradesUsed("R003,R000,Reuv,Renb")
 	..setFoodCost(2)
-	..setHitPointsMaximumBase(425)
+	..setHitPointsMaximumBase(525)
 	..setHitPointsRegenerationRate(1.0)
 	..setAttack1CooldownTime(1.45)
 	..setSpeedBase(240)
 	..setGoldCost(130)
-	..setBuildTime(20)
+	..setBuildTime(3)
 	..setCollisionSize(8.0)
 	..setTooltipBasic("Train Treant")
 	..setTooltipExtended("Basic frontline unit. Can learn Thicker Bark to resist some damage and Recycle to invigorate a nearby unit on death. |n|n|cffffcc00Attacks land units.|r")
 	..setHotkey("Q")
-	..setNormalAbilities("AM0h")
+	..setAbilitySkinList("A000,Ault")
+	..setNormalAbilities("AM0o,AM0p,Ault")
 
 
 @compiletime function create_w3u_E003()
@@ -85,6 +86,9 @@ import UnitObjEditing
 	..setIntelligencePerLevel(1.7)
 	..setAgilityPerLevel(2.0)
 	..setStartingAgility(18)
+	..setBuildTime(5)
+	..setLumberCost(0)
+	..setGoldCost(50)
 	..setName("Ursoc")
 	..setModelFile("units\\creeps\\GrizzlyBear\\GrizzlyBear.mdl")
 	..setTintingColorRed(120)
@@ -99,16 +103,33 @@ import UnitObjEditing
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNGrizzlyBear.blp")
 	..setProperNamesUsed(1)
 	..setNormalAbilities("A001,AInv,Ault")
-	..setHeroAbilities("AM0b,A002,AM0a,AHav")
+	..setHeroAbilities("AM0h,A002,AM0g,AHav")
 
 
 @compiletime function create_w3u_e004()
 	new UnitDefinition('e004', 'edry')
 	..setManaInitialAmount(150)
 	..setCollisionSize(8.0)
-	..setName("DryadCaster")
+	..setManaMaximum(250)
+	..setBuildTime(4)
+	..setLumberCost(0)
+	..setAttack1DamageBase(20)
+	..setManaRegeneration(1.25)
+	..setHitPointsMaximumBase(615)
+	..setNormalAbilities("Ahea,Aadm,Amim,Aspo,Aien,Ault")
+	..setAttack1AttackType("magic")
+	..setSpeedBase(340)
+	..setGoldCost(45)
+	..setName("Dryad Caster")
 	..setModelFile("war3mapImported\\SylvanEnchantress.mdl")
-	..setNormalAbilities("AM0d,AInv,Ault,ACm2,Aien,Aadm,Aspo")
+	..setIconGameInterface("war3mapImported\\BTNSylvanEnchantress.blp")
+	..setAbilitySkinList("Ahea,Aadm,Amim,Aspo,Aien,Ault")
+	..setTooltipExtended("Spellcaster that has a poison attack which slows and damages enemy units. Also has Spell Immunity which renders her invulnerable to magical effects and damage. Can learn Abolish Magic and Spirit Wisps. |n|n|cffffcc00Attacks land and air units.|r")
+	..setTooltipBasic("Train Dryad Caster")
+	..setAttack1ProjectileArt("Abilities\\Weapons\\KeeperGroveMissile\\KeeperGroveMissile.mdl")
+	..setButtonPositionX(2)
+	..setHotkey("C")
+	..setNormalAbilities("AM0k,AInv,Ault,ACm2,Aien,Aadm,Aspo")
 
 
 @compiletime function create_w3u_e005()
@@ -540,9 +561,9 @@ import UnitObjEditing
 	..setManaRegeneration(7.0)
 	..setName("Xavius")
 	// TODO no wrapper: 	..setString("uhas", "")
-	..setProperNames("Xavius")
+	..setProperNames("Xavius the Nightmare Lord")
 	..setModelFile("xavius2.mdl")
-	..setNormalAbilities("AM04,AM05,AM02")
+	..setNormalAbilities("AM05,AM06,AM03")
 	..setLevel(6)
 	..setName("Xavius")
 
@@ -550,6 +571,31 @@ import UnitObjEditing
 @compiletime function create_w3u_e00J()
 	new BuildingDefinition('e00J', 'eshy')
 	..setScalingValue(2.0)
+
+
+@compiletime function create_w3u_n004()
+	new UnitDefinition('n004', 'nowb')
+	..setManaInitialAmount(200)
+	..setManaRegeneration(1.0)
+	..setBuildTime(15)
+	..setFoodCost(4)
+	..setNormalAbilities("A004")
+	..setManaMaximum(400)
+	..setRace("nightelf")
+	..setAttack1Range(600)
+	..setAttack1ProjectileSpeed(1300)
+	..setAttack1ProjectileHomingEnabled(true)
+	..setAttack1WeaponType("missile")
+	..setAttack1WeaponSound("")
+	..setAcquisitionRange(600.0)
+	..setHitPointsMaximumBase(700)
+	..setAttack1TargetsAllowed("air,debris,ground,item,structure,ward")
+	..setAttack1DamageBase(39)
+	..setRequirements("etoe,R006")
+	..setName("Moonkin")
+	..setAttack1ProjectileArt("Abilities\\Weapons\\FarseerMissile\\FarseerMissile.mdl")
+	..setTooltipBasic("Summon Moonkin")
+	..setTooltipExtended("Moonkin are wild experts of the arcane arts providing Brilliance Aura and can cast Arcane Blast doing massive aoe damage. |n|n|cffffcc00Attacks land and air units.|r")
 
 
 @compiletime function create_w3u_x001()
@@ -583,6 +629,51 @@ import UnitObjEditing
 	..setCollisionSize(0.0)
 
 
+@compiletime function create_w3u_x002()
+	new UnitDefinition('x002', 'ewsp')
+	..setName("Effect Dummy Unit")
+	..setUpgradesUsed("")
+	..setStructuresBuilt("")
+	..setManaRegeneration(0.1)
+	..setManaInitialAmount(1000)
+	..setManaMaximum(1000)
+	..setCollisionSize(0.0)
+	..setRace("commoner")
+	..setFoodCost(0)
+	..setArmorType("divine")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNTemp.blp")
+	..setSpeedBase(522)
+	..setModelFile("dummy.mdl")
+	..setAnimationBlendTimeseconds(0.0)
+	..setAnimationCastBackswing(0.0)
+	..setMaximumPitchAngledegrees(0.0)
+	..setMaximumRollAngledegrees(0.0)
+	..setArtSpecial("")
+	..setProjectileImpactZ(0.0)
+	..setProjectileLaunchZ(0.0)
+	..setNameEditorSuffix("(Basics)")
+	..setSightRadiusDay(1)
+	..setSightRadiusNight(1)
+	..setUnitClassification("_")
+	..setPropulsionWindowdegrees(1.0)
+	..setTooltipBasic("")
+	..setAttacksEnabled(1)
+	..setAttack1AnimationBackswingPoint(0.0)
+	..setAttack1AnimationDamagePoint(0.0)
+	..setAttack1CooldownTime(0.0)
+	..setAttack1AttackType("unknown")
+	..setAttack1DamageBase(-1)
+	..setAttack1DamageNumberofDice(1)
+	..setAttack1DamageSidesperDie(1)
+	..setAttack1ProjectileSpeed(2147483647)
+	..setAttack1Range(2147483647)
+	..setAttack1TargetsAllowed("air,debris,ground,invulnerable,item,structure,vulnerable,ward")
+	..setAttack1WeaponSound("Nothing")
+	..setAttack1WeaponType("instant")
+	..setAcquisitionRange(2.1474836E9)
+	..setNormalAbilities("Avul,Aloc,AM08")
+
+
 // Original Table (contains all modified default/melee objects)
 // These are emitted when createObjectDefinition uses the same base/new id.
 
@@ -593,8 +684,9 @@ import UnitObjEditing
 
 @compiletime function create_w3u_eaom()
 	new BuildingDefinition('eaom', 'eaom')
-	..setResearchesAvailable("R000,Resc,Reib,Remk,Remg,Repb")
+	..setResearchesAvailable("Resi,R002,R003,R001,R000")
 	..setUnitsTrained("e002,e004,edry")
+	..setBuildTime(25)
 
 
 @compiletime function create_w3u_ndru()
@@ -614,24 +706,158 @@ import UnitObjEditing
 
 @compiletime function create_w3u_eate()
 	new BuildingDefinition('eate', 'eate')
-	..setUnitsTrained("E003,Edem,Ekee,Emoo,Ewar")
+	..setUnitsTrained("E003,Ekee")
+	..setBuildTime(20)
 
 
 @compiletime function create_w3u_edry()
 	new UnitDefinition('edry', 'edry')
 	..setCollisionSize(8.0)
+	..setFoodCost(2)
+	..setNormalAbilities("A003,Aien,Ault")
+	..setLumberCost(0)
+	..setAttack1DamageBase(27)
+	..setUpgradesUsed("R002,R001,Resw,Rerh,Resi,Reuv,Repm")
+	..setBuildTime(3)
+	..setSpeedBase(340)
+	..setGoldCost(30)
+	..setAbilitySkinList("A003,Aien,Ault")
+	..setTooltipExtended("Basic long-ranged attacker. Can learn the Marksmanship and Impetus upgrades.|n|n|cffffcc00Attacks land and air units.|r")
+	..setButtonPositionX(1)
+
+
+@compiletime function create_w3u_eaoe()
+	new BuildingDefinition('eaoe', 'eaoe')
+	..setBuildTime(30)
+	..setRequirements("etoa")
+	..setResearchesAvailable("R004,Redc,Rers,Rehs,Reeb")
+	..setNormalAbilities("Abds,Aro1")
+	..setUnitsTrained("edoc,emtg")
+	..setAbilitySkinList("Abds,Aro1")
+
+
+@compiletime function create_w3u_etrp()
+	new BuildingDefinition('etrp', 'etrp')
+	..setLumberCost(0)
+	..setBuildTime(30)
+
+
+@compiletime function create_w3u_emow()
+	new BuildingDefinition('emow', 'emow')
+	..setBuildTime(20)
+	..setManaRegeneration(1.5)
+
+
+@compiletime function create_w3u_etol()
+	new BuildingDefinition('etol', 'etol')
+	..setBuildTime(80)
+	..setNormalAbilities("Aeat,Aro1,Abdl,Atol,Arlm")
+	..setTooltipExtended("Primary structure, used to train Wisps. Can be upgraded to Tree of Ages and then Tree of Eternity to enable the production of additional types of structures and units. |n|n|cffffcc00Attacks land units.|r")
+	..setAbilitySkinList("Aeat,Aro1,Abdl,Atol,Arlm")
+
+
+@compiletime function create_w3u_etoa()
+	new BuildingDefinition('etoa', 'etoa')
+	..setBuildTime(95)
+	..setNormalAbilities("Aeat,Aro1,Abdl,Atol,Arlm")
+	..setLumberCost(0)
+	..setAbilitySkinList("Aeat,Aro1,Abdl,Atol,Arlm")
+
+
+@compiletime function create_w3u_etoe()
+	new BuildingDefinition('etoe', 'etoe')
+	..setBuildTime(115)
+	..setNormalAbilities("Aeat,Aro1,Abdl,Atol,Arlm")
+	..setAbilitySkinList("Aeat,Aro1,Abdl,Atol,Arlm")
+
+
+@compiletime function create_w3u_eden()
+	new BuildingDefinition('eden', 'eden')
+	..setLumberCost(0)
 
 
 @compiletime function create_w3u_Ekee()
 	new HeroDefinition('Ekee', 'Ekee')
-	..setNormalAbilities("AM07,AInv,Ault")
-	..setHeroAbilities("AM08,AM09,AM06")
+	..setBuildTime(5)
+	..setGoldCost(50)
+	..setLumberCost(0)
+	..setNormalAbilities("AM0a,AInv,Ault")
+	..setHeroAbilities("AM0c,AM0d,AM0b")
+
+
+@compiletime function create_w3u_Emoo()
+	new HeroDefinition('Emoo', 'Emoo')
+	..setBuildTime(5)
+	..setGoldCost(50)
+	..setLumberCost(0)
+	..setHeroAbilities("AM0e,AM0f")
+
+
+@compiletime function create_w3u_edot()
+	new UnitDefinition('edot', 'edot')
+	..setLumberCost(0)
+	..setBuildTime(5)
+
+
+@compiletime function create_w3u_edoc()
+	new UnitDefinition('edoc', 'edoc')
+	..setBuildTime(7)
+	..setFoodCost(3)
+	..setSpeedBase(280)
+	..setAttack1DamageBase(25)
+	..setHitPointsMaximumBase(425)
+	..setGoldCost(65)
+
+
+@compiletime function create_w3u_eaow()
+	new BuildingDefinition('eaow', 'eaow')
+	..setUnitsTrained("n004,ehip,edot,efdr")
+	..setAttack1ProjectileArt("Abilities\\Weapons\\FarseerMissile\\FarseerMissile.mdl")
+
+
+@compiletime function create_w3u_edcm()
+	new UnitDefinition('edcm', 'edcm')
+	..setNormalAbilities("A005,Abrf,Ara2,Aien,Ault")
+	..setUpgradesUsed("R004,Resw,Rerh,Reuv,Redc,Repm")
+	..setSpeedBase(280)
+	..setAttack1DamageBase(36)
+	..setHitPointsMaximumBase(890)
+
+
+@compiletime function create_w3u_ewsp()
+	new UnitDefinition('ewsp', 'ewsp')
+	..setBuildTime(3)
+
+
+@compiletime function create_w3u_echm()
+	new UnitDefinition('echm', 'echm')
+	..setRequirements("R006")
+
+
+@compiletime function create_w3u_emtg()
+	new UnitDefinition('emtg', 'emtg')
+	..setRequirements("R006,etoa,eden")
+
+
+@compiletime function create_w3u_Udre()
+	new HeroDefinition('Udre', 'Udre')
+	..setHeroAbilities("AM09")
+
+
+@compiletime function create_w3u_x003()
+	new UnitDefinition('x003', 'x003')
+	..setModelFile("TyrandeWhisperwind.mdx")
 
 
 @compiletime function create_w3u_Hblm()
 	new HeroDefinition('Hblm', 'Hblm')
-	..setNormalAbilities("AM0e")
+	..setNormalAbilities("AM0l")
 	..setLevel(6)
 	..setName("Ligga")
+
+
+@compiletime function create_w3u_edtm()
+	new UnitDefinition('edtm', 'edtm')
+	..setNormalAbilities("AM0j,Arav,Afa2,Ault")
 
 

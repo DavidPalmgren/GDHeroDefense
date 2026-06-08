@@ -23,21 +23,15 @@ public constant RECYCLE_ID = compiletime(ABIL_ID_GEN.next())
         ..setTooltipNormal(1, "Recycle")
         ..setTooltipNormalExtended(1, "On death, applies Invigorate to the nearest friendly unit.")
         ..setIconNormal(Icons.bTNAnkh)
-        ..setButtonPositionNormalX(0)
+        ..setButtonPositionNormalX(1)
         ..setButtonPositionNormalY(2)
         ..setHeroAbility(false)
         ..setItemAbility(false)
+        ..setRequirements("R003")
 
-@compiletime function addToTreant()
-    new UnitDefinition('e002', 'e002')
-        ..setNormalAbilities(commaList(RECYCLE_ID))
+
 
 init
-    ENUM_GROUP.enumUnitsOfType('e002', null)
-    for u in ENUM_GROUP
-        UnitAddAbility(u, RECYCLE_ID)
-
-
     EventListener.add(EVENT_PLAYER_UNIT_DEATH) ->
         let dying = EventData.getDyingUnit()
         if dying.hasAbility(RECYCLE_ID)
