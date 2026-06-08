@@ -1,0 +1,66 @@
+package GateLogic
+import LinkedList
+import HashMap
+import ControlPoint
+
+// create variables for functions
+group cpsWithGates = CreateGroup()
+destructable targetGate = null
+player targetOwner = null
+
+
+// create lists and hashmaps
+HashMap<destructable, unit> cpsWithGatesMap = new HashMap<destructable, unit>()
+HashMap<string, destructable> gateCommands = new HashMap<string, destructable>()
+LinkedList<destructable> gateList = new LinkedList<destructable>()
+
+
+// function to initialize all the gates and link gates to control points
+function addGates()
+    gateList.add(udg_darnassusGate)
+    //gateList.add(udg_testGate) // debug
+
+    // set command for gate
+    gateCommands.put("darnassus", udg_darnassusGate)
+    //gateCommands.put("testgate", udg_testGate) // debug
+    
+    cpsWithGates.add(udg_darnassus)
+    cpsWithGatesMap.put(udg_darnassusGate, udg_darnassus)
+    //cpsWithGates.add(udg_mountHyjalGrove) // debug
+    //cpsWithGatesMap.put(udg_testGate, udg_mountHyjalGrove) // debug
+
+// function to open gate if the triggering player is the owner
+function onOpenGate()
+    let p = GetTriggerPlayer()
+    let msg = GetEventPlayerChatString()
+    // pull out text from player input after "-open"
+    let gateName = msg.substring(6, msg.length())
+    // check text versus set command
+    if gateCommands.has(gateName)
+        let d = gateCommands.get(gateName)
+        if cpsWithGatesMap.has(d) and cpOwners.get(cpsWithGatesMap.get(d)) == p
+            ModifyGateBJ(bj_GATEOPERATION_OPEN, d)
+
+// function to close gate if the triggering player is the owner, works the same as open except 1 extra char for "-close"
+function onCloseGate()
+    let p = GetTriggerPlayer()
+    let msg = GetEventPlayerChatString()
+    let gateName = msg.substring(7, msg.length())
+    if gateCommands.has(gateName)
+        let d = gateCommands.get(gateName)
+        if cpsWithGatesMap.has(d) and cpOwners.get(cpsWithGatesMap.get(d)) == p
+            ModifyGateBJ(bj_GATEOPERATION_CLOSE, d)
+
+// function to set up triggers for all 24 slots to use gates
+function initGates()
+    addGates()
+    let openTrig = CreateTrigger()
+    let closeTrig = CreateTrigger()
+    for i = 0 to 23
+        openTrig.registerPlayerChatEvent(players[i], "-open", false)
+        closeTrig.registerPlayerChatEvent(players[i], "-close", false)
+    openTrig.addAction(function onOpenGate)
+    closeTrig.addAction(function onCloseGate)
+
+init
+    initGates()

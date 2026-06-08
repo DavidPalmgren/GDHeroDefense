@@ -116,6 +116,7 @@ import DoodadObjEditing
 	..setName(0, "Mossy Log Bridge")
 	..setModel(0, "war3mapImported\\Mossy_Log_Bridge_002.mdl")
 	..setTilesets(0, "*")
+	// TODO no wrapper: 	..setLvlDataInt("dwlk", 0, 0, 1)
 
 
 @compiletime function create_w3d_D00G()
@@ -179,6 +180,7 @@ import DoodadObjEditing
 	..setName(0, "Hippogriff Statue")
 	..setModel(0, "war3mapImported\\RuinsHyppoStat.mdl")
 	..setTilesets(0, "*")
+	..setMaximumScale(0, 7.0)
 
 
 @compiletime function create_w3d_D00P()
@@ -210,6 +212,25 @@ import DoodadObjEditing
 	// TODO no wrapper: 	..setLvlDataInt("dvb1", 1, 0, 34)
 
 
+@compiletime function create_w3d_D00S()
+	new DoodadDefinition('D00S', 'ZSs1')
+	// TODO no wrapper: 	..setLvlDataUnreal("ddes", 0, 0, 0.7)
+	..setModel(0, "Doodads\\Ruins\\Structures\\RuinsArchwayBroken450\\RuinsArchwayBroken450.mdl")
+	..setName(0, "Night elf ruin archway")
+	..setPathTexture(0, "")
+	..setTilesets(0, "A,C")
+	// TODO no wrapper: 	..setLvlDataInt("dvb1", 1, 0, 100)
+	// TODO no wrapper: 	..setLvlDataInt("dvb1", 2, 0, 100)
+	// TODO no wrapper: 	..setLvlDataInt("dvb1", 3, 0, 100)
+	// TODO no wrapper: 	..setLvlDataInt("dvg1", 1, 0, 100)
+	// TODO no wrapper: 	..setLvlDataInt("dvg1", 2, 0, 100)
+	// TODO no wrapper: 	..setLvlDataInt("dvg1", 3, 0, 100)
+	// TODO no wrapper: 	..setLvlDataInt("dvr1", 1, 0, 100)
+	// TODO no wrapper: 	..setLvlDataInt("dvr1", 2, 0, 100)
+	// TODO no wrapper: 	..setLvlDataInt("dvr1", 3, 0, 100)
+	..setMaximumScale(0, 100.0)
+
+
 // Original Table (contains all modified default/melee objects)
 // These are emitted when createObjectDefinition uses the same base/new id.
 
@@ -237,5 +258,11 @@ import DoodadObjEditing
 @compiletime function create_w3d_NRic()
 	new DoodadDefinition('NRic', 'NRic')
 	..setPathTexture(0, "")
+
+
+@compiletime function create_w3d_AOlg()
+	new DoodadDefinition('AOlg', 'AOlg')
+	..setTilesets(0, "A,*")
+	..setMaximumScale(0, 10.0)
 
 
