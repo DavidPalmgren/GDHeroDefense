@@ -33,6 +33,7 @@ constant int array BONUS_TREANTS = [0, 1, 2]
         ..setIconResearch(Icons.bTNEnt)
         ..setButtonPositionNormalX(2)
         ..setButtonPositionNormalY(1)
+        ..setLevels(3)
         // Level 1
         ..setCooldown(1, TREANT_COOLDOWN[0])
         ..setManaCost(1, TREANT_MANA[0].toInt())

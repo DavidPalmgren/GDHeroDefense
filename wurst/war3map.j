@@ -387,6 +387,9 @@ function CreateBuildingsForPlayer0 takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'eaow', 192.0, 18560.0, 270.000, 'eaow' )
     set u = BlzCreateUnitWithSkin( p, 'eden', 192.0, 17920.0, 270.000, 'eden' )
     set u = BlzCreateUnitWithSkin( p, 'etrp', 352.0, 17632.0, 270.000, 'etrp' )
+    set u = BlzCreateUnitWithSkin( p, 'e00K', -320.0, 18688.0, 270.000, 'e00K' )
+    set u = BlzCreateUnitWithSkin( p, 'nbwd', -512.0, 17856.0, 270.000, 'nbwd' )
+    set u = BlzCreateUnitWithSkin( p, 'nfv4', -864.0, 18592.0, 270.000, 'nfv4' )
 endfunction
 
 //===========================================================================
@@ -409,6 +412,10 @@ function CreateUnitsForPlayer0 takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'edoc', 1479.8, 18178.8, 240.344, 'edoc' )
     set u = BlzCreateUnitWithSkin( p, 'e002', 862.9, 18069.1, 110.811, 'e002' )
     set u = BlzCreateUnitWithSkin( p, 'n004', 973.8, 17890.4, 54.648, 'n004' )
+    set u = BlzCreateUnitWithSkin( p, 'nwat', -399.1, 18303.2, 232.621, 'nwat' )
+    set u = BlzCreateUnitWithSkin( p, 'nssn', -705.4, 18273.5, 17.029, 'nssn' )
+    set u = BlzCreateUnitWithSkin( p, 'esen', -607.3, 18417.1, 314.164, 'esen' )
+    set u = BlzCreateUnitWithSkin( p, 'Hblm', -510.9, 18215.0, 86.256, 'Hblm' )
 endfunction
 
 //===========================================================================
@@ -835,7 +842,18 @@ function CreateNeutralHostile takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'nssp', 455.1, 24149.9, 69.867, 'nssp' )
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'Ekgg', 3427.7, 25975.3, 220.020, 'Ekgg' )
+    call SetHeroLevel( u, 10, false )
     call SetUnitAcquireRange( u, 200.0 )
+    call SelectHeroSkill( u, 'AEer' )
+    call SelectHeroSkill( u, 'AEer' )
+    call SelectHeroSkill( u, 'AEer' )
+    call SelectHeroSkill( u, 'AEfn' )
+    call SelectHeroSkill( u, 'AEfn' )
+    call SelectHeroSkill( u, 'AEfn' )
+    call SelectHeroSkill( u, 'AEah' )
+    call SelectHeroSkill( u, 'AEah' )
+    call SelectHeroSkill( u, 'AEah' )
+    call SelectHeroSkill( u, 'AEtq' )
     set u = BlzCreateUnitWithSkin( p, 'nlkl', -10529.4, 8084.6, 92.035, 'nlkl' )
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nlsn', -10293.0, 8172.0, 153.416, 'nlsn' )
@@ -972,7 +990,7 @@ function CreateNeutralHostile takes nothing returns nothing
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nspr', -1009.9, 15739.0, 37.961, 'nspr' )
     call SetUnitAcquireRange( u, 200.0 )
-    set gg_unit_N006_0173 = BlzCreateUnitWithSkin( p, 'N006', -3486.0, 13467.2, 88.520, 'N006' )
+    set gg_unit_N006_0173 = BlzCreateUnitWithSkin( p, 'N006', -3617.5, 13112.6, 88.520, 'N006' )
     set u = BlzCreateUnitWithSkin( p, 'nmsc', -11935.3, 9716.7, 318.489, 'nmsc' )
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nmrv', -11876.1, 9943.2, 296.661, 'nmrv' )
@@ -1167,6 +1185,7 @@ function CreateNeutralHostile takes nothing returns nothing
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'ntrv', -7099.0, 14949.4, 117.745, 'ntrv' )
     call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'n000', 406.2, 18847.8, 94.529, 'n000' )
 endfunction
 
 //===========================================================================

@@ -16,10 +16,10 @@ public constant WISP_BUFF_ID = compiletime(BUFF_ID_GEN.next())
 constant int WISP_UNIT_ID = UnitIds.wisp
 constant int WISP_COUNT = 3
 constant real WISP_DURATION = 10.
-constant real WISP_HEAL = 15.
-constant real WISP_RADIUS = 400.
+constant real WISP_HEAL = 25.
+constant real WISP_RADIUS = 500.
 constant real HEAL_INTERVAL = 1.
-constant real ORBIT_RADIUS = 150.
+constant real ORBIT_RADIUS = 500.
 constant real ORBIT_SPEED = 1.5
 constant real UPDATE_INTERVAL = 0.05
 
@@ -65,8 +65,8 @@ init
             let wisp = createUnit(caster.getOwner(), WISP_UNIT_ID, spawnPos, angle(0.))
             wisp.addAbility('Aloc')
             wisp.setVertexColor(50, 255, 50, 255) // light blue tint
-            //wisp.setScale(1)
-            let _sfx = wisp.addEffect("Doodads\\Cinematic\\GlowingRunes\\GlowingRunes2.mdl", "origin")
+            wisp.setScale(0.5)
+            //let _sfx = wisp.addEffect("Doodads\\Cinematic\\GlowingRunes\\GlowingRunes2.mdl", "origin")
             wisps.add(wisp)
 
         let moveTimer = doPeriodically(UPDATE_INTERVAL) cb ->

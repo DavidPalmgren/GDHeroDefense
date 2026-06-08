@@ -79,6 +79,46 @@ import AbilityObjEditing
 	..setButtonPositionNormalX(0)
 
 
+@compiletime function create_w3a_A006()
+	new AbilityDefinitionBladeMasterCriticalStrike('A006')
+	..setChancetoCriticalStrike(1, 5.0)
+	..setChancetoCriticalStrike(2, 10.0)
+	..setRace("nightelf")
+	..setHeroAbility(false)
+	..setRequirements("R008")
+	..setTooltipNormalExtended(1, "Gives a 5% chance to do 2 times normal damage on an attack.")
+	..setTooltipNormalExtended(2, "Gives a 10% chance to do 3 times normal damage on an attack.")
+	..setTooltipNormalExtended(3, "Gives a 15% chance to do 4 times normal damage on an attack.")
+
+
+@compiletime function create_w3a_A007()
+	new AbilityDefinitionPolymorphcreep('A007')
+	..setDurationHero(1, 3.0)
+	..setName("Polymorph (Neutral Hostile)")
+
+
+@compiletime function create_w3a_A008()
+	new AbilityDefinitionBloodMageSiphonMana('A008')
+	..setLevels(1)
+	..setHeroAbility(false)
+
+
+@compiletime function create_w3a_A009()
+	new AbilityDefinitionWardenBlink('A009')
+	..setLevels(1)
+	..setMaximumRange(1, 800.0)
+	..setHeroAbility(false)
+
+
+@compiletime function create_w3a_A00A()
+	new AbilityDefinitionDemonHunterManaBurn('A00A')
+	..setLevels(1)
+	..setHeroAbility(false)
+	..setMaxManaDrained(1, 100.0)
+	..setTooltipNormalExtended(1, "Sends a bolt of negative energy that burns up to 100  points of a target enemy unit's mana. The mana combusts, dealing damage equal to the amount of mana burned.")
+	..setHotkeyNormal("V")
+
+
 @compiletime function create_w3a_AM01()
 	new AbilityDefinitionDreadlordCarrionSwarm('AM01')
 
@@ -93,7 +133,7 @@ import AbilityObjEditing
 
 
 @compiletime function create_w3a_AM03()
-	new AbilityDefinitionFireBolt('AM03')
+	new AbilityDefinitionFireBoltcreep('AM03')
 	..setName("Corrupted Blood")
 	..setTooltipNormal(1, "Corrupted Blood")
 	..setTooltipNormalExtended(1, "Hurls a bolt of corrupted blood at an enemy, spawning a slime on impact that chases the target. If the target stays within 150 range for 3 seconds the slime explodes for 500 damage.")
@@ -103,12 +143,12 @@ import AbilityObjEditing
 	..setCastRange(1, 800.0)
 	..setCooldown(1, 15.0)
 	..setManaCost(1, 80)
-	..setDamage(1, 0.0)
-	..setDurationNormal(1, 0.0)
-	..setDurationHero(1, 0.0)
+	..setDamage(1, 100.0)
+	..setDurationNormal(1, 1.0)
+	..setDurationHero(1, 1.0)
 	..setBuffs(1, "")
 	..setMissileArt("")
-	..setMissileSpeed(1)
+	..setMissileSpeed(1000)
 	..setRequirements("")
 	..setRequirementsLevels("")
 	..setHeroAbility(false)
@@ -261,6 +301,7 @@ import AbilityObjEditing
 	..setIconResearch("ReplaceableTextures\\CommandButtons\\BTNEnt.blp")
 	..setButtonPositionNormalX(2)
 	..setButtonPositionNormalY(1)
+	..setLevels(3)
 	..setCooldown(1, 14.0)
 	..setManaCost(1, 40)
 	..setDamageIncrease(1, 0.0)
@@ -518,7 +559,7 @@ import AbilityObjEditing
 	new AbilityDefinitionRoar('AM0k')
 	..setName("Spirit Wisps")
 	..setTooltipNormal(1, "Spirit Wisps")
-	..setTooltipNormalExtended(1, "Summons 3 spirit wisps that orbit the caster for 10 seconds, healing nearby damaged friendly units for 15 HP/s.")
+	..setTooltipNormalExtended(1, "Summons 3 spirit wisps that orbit the caster for 10 seconds, healing nearby damaged friendly units for 25 HP/s.")
 	..setTooltipLearn("Learn Spirit Wisps")
 	..setTooltipLearnExtended("Summons 3 spirit wisps that orbit the caster, healing nearby damaged friendly units.")
 	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNWisp.blp")

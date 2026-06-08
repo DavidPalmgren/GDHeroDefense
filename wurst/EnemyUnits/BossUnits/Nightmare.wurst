@@ -66,8 +66,6 @@ init
                 let target = u
                 let _originalOwner = u.getOwner()
 
-                // Put to sleep
-                // target.pause()
                 
                 let _result = InstantDummyCaster.castTarget(players[PLAYER_NEUTRAL_AGGRESSIVE], 'AUsl', 1, Orders.sleep, u)
                 flashEffect(NIGHTMARE_SFX, target, "origin")
@@ -77,8 +75,7 @@ init
 
                 doAfter(NIGHTMARE_DURATION) ->
                     if sleepingUnits.has(target) and sleepingUnits.get(target)
-                        // Still asleep — turn them to Xavius's team
-                        //target.unpause()
+
                         target.setOwner(caster.getOwner(), true)
                         UnitRemoveAbility(target, 'BUsl')
                         UnitRemoveAbility(target, 'BUsp')
@@ -95,7 +92,6 @@ init
         let damaged = EventData.getTriggerUnit()
         if sleepingUnits.has(damaged) and sleepingUnits.get(damaged)
 
-            damaged.unpause()
             sleepingUnits.put(damaged, false)  // mark as woken
             flashEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt.mdl", damaged, "origin")
             

@@ -31,7 +31,7 @@ import UnitObjEditing
 	..setAttacksEnabled(0)
 	..setSpeedBase(0)
 	..setHitPointsMaximumBase(20000)
-	..setHitPointsRegenerationRate(300.0)
+	..setHitPointsRegenerationRate(3.0)
 	..setName("KoboldThemedTargetDummy")
 
 
@@ -556,9 +556,18 @@ import UnitObjEditing
 @compiletime function create_w3u_N006()
 	new HeroDefinition('N006', 'Nmsr')
 	..setHeroAbilities("")
-	..setHitPointsMaximumBase(5000)
-	..setHitPointsRegenerationRate(3.0)
+	..setHitPointsMaximumBase(4000)
+	..setHitPointsRegenerationRate(4.0)
 	..setManaRegeneration(7.0)
+	..setManaMaximum(1000)
+	..setLevel(10)
+	..setStartingIntelligence(29)
+	..setStartingStrength(26)
+	..setStartingAgility(15)
+	..setIntelligencePerLevel(5.2)
+	..setAttack1DamageBase(10)
+	..setStrengthPerLevel(3.0)
+	..setCanFlee(false)
 	..setName("Xavius")
 	// TODO no wrapper: 	..setString("uhas", "")
 	..setProperNames("Xavius the Nightmare Lord")
@@ -592,10 +601,19 @@ import UnitObjEditing
 	..setAttack1TargetsAllowed("air,debris,ground,item,structure,ward")
 	..setAttack1DamageBase(39)
 	..setRequirements("etoe,R006")
+	..setAttack1AttackType("magic")
 	..setName("Moonkin")
 	..setAttack1ProjectileArt("Abilities\\Weapons\\FarseerMissile\\FarseerMissile.mdl")
-	..setTooltipBasic("Summon Moonkin")
+	..setTooltipBasic("Train Moonkin")
 	..setTooltipExtended("Moonkin are wild experts of the arcane arts providing Brilliance Aura and can cast Arcane Blast doing massive aoe damage. |n|n|cffffcc00Attacks land and air units.|r")
+
+
+@compiletime function create_w3u_e00K()
+	new BuildingDefinition('e00K', 'edob')
+	..setUnitsTrained("earc,esen,ebal")
+	..setResearchesAvailable("Remk,R008")
+	..setRequirements("")
+	..setName("Sentinel's Hall")
 
 
 @compiletime function create_w3u_x001()
@@ -687,6 +705,8 @@ import UnitObjEditing
 	..setResearchesAvailable("Resi,R002,R003,R001,R000")
 	..setUnitsTrained("e002,e004,edry")
 	..setBuildTime(25)
+	..setLumberCost(0)
+	..setGoldCost(60)
 
 
 @compiletime function create_w3u_ndru()
@@ -708,6 +728,8 @@ import UnitObjEditing
 	new BuildingDefinition('eate', 'eate')
 	..setUnitsTrained("E003,Ekee")
 	..setBuildTime(20)
+	..setGoldCost(40)
+	..setLumberCost(0)
 
 
 @compiletime function create_w3u_edry()
@@ -733,6 +755,8 @@ import UnitObjEditing
 	..setResearchesAvailable("R004,Redc,Rers,Rehs,Reeb")
 	..setNormalAbilities("Abds,Aro1")
 	..setUnitsTrained("edoc,emtg")
+	..setLumberCost(0)
+	..setGoldCost(70)
 	..setAbilitySkinList("Abds,Aro1")
 
 
@@ -740,18 +764,23 @@ import UnitObjEditing
 	new BuildingDefinition('etrp', 'etrp')
 	..setLumberCost(0)
 	..setBuildTime(30)
+	..setGoldCost(55)
 
 
 @compiletime function create_w3u_emow()
 	new BuildingDefinition('emow', 'emow')
 	..setBuildTime(20)
 	..setManaRegeneration(1.5)
+	..setLumberCost(0)
+	..setGoldCost(45)
 
 
 @compiletime function create_w3u_etol()
 	new BuildingDefinition('etol', 'etol')
 	..setBuildTime(80)
 	..setNormalAbilities("Aeat,Aro1,Abdl,Atol,Arlm")
+	..setLumberCost(0)
+	..setGoldCost(200)
 	..setTooltipExtended("Primary structure, used to train Wisps. Can be upgraded to Tree of Ages and then Tree of Eternity to enable the production of additional types of structures and units. |n|n|cffffcc00Attacks land units.|r")
 	..setAbilitySkinList("Aeat,Aro1,Abdl,Atol,Arlm")
 
@@ -761,6 +790,7 @@ import UnitObjEditing
 	..setBuildTime(95)
 	..setNormalAbilities("Aeat,Aro1,Abdl,Atol,Arlm")
 	..setLumberCost(0)
+	..setGoldCost(200)
 	..setAbilitySkinList("Aeat,Aro1,Abdl,Atol,Arlm")
 
 
@@ -768,12 +798,15 @@ import UnitObjEditing
 	new BuildingDefinition('etoe', 'etoe')
 	..setBuildTime(115)
 	..setNormalAbilities("Aeat,Aro1,Abdl,Atol,Arlm")
+	..setGoldCost(300)
+	..setLumberCost(0)
 	..setAbilitySkinList("Aeat,Aro1,Abdl,Atol,Arlm")
 
 
 @compiletime function create_w3u_eden()
 	new BuildingDefinition('eden', 'eden')
 	..setLumberCost(0)
+	..setGoldCost(45)
 
 
 @compiletime function create_w3u_Ekee()
@@ -807,11 +840,15 @@ import UnitObjEditing
 	..setAttack1DamageBase(25)
 	..setHitPointsMaximumBase(425)
 	..setGoldCost(65)
+	..setLumberCost(0)
 
 
 @compiletime function create_w3u_eaow()
 	new BuildingDefinition('eaow', 'eaow')
 	..setUnitsTrained("n004,ehip,edot,efdr")
+	..setGoldCost(70)
+	..setLumberCost(0)
+	..setBuildTime(35)
 	..setAttack1ProjectileArt("Abilities\\Weapons\\FarseerMissile\\FarseerMissile.mdl")
 
 
@@ -827,16 +864,96 @@ import UnitObjEditing
 @compiletime function create_w3u_ewsp()
 	new UnitDefinition('ewsp', 'ewsp')
 	..setBuildTime(3)
+	..setGoldCost(20)
 
 
 @compiletime function create_w3u_echm()
 	new UnitDefinition('echm', 'echm')
 	..setRequirements("R006")
+	..setBuildTime(15)
+	..setGoldCost(120)
+	..setLumberCost(0)
 
 
 @compiletime function create_w3u_emtg()
 	new UnitDefinition('emtg', 'emtg')
 	..setRequirements("R006,etoa,eden")
+	..setLumberCost(0)
+	..setGoldCost(90)
+	..setBuildTime(12)
+	..setAttack1DamageBase(50)
+	..setHitPointsMaximumBase(1800)
+
+
+@compiletime function create_w3u_efdr()
+	new UnitDefinition('efdr', 'efdr')
+	..setLumberCost(0)
+
+
+@compiletime function create_w3u_ehip()
+	new UnitDefinition('ehip', 'ehip')
+	..setBuildTime(3)
+	..setLumberCost(0)
+
+
+@compiletime function create_w3u_edob()
+	new BuildingDefinition('edob', 'edob')
+	..setLumberCost(0)
+	..setGoldCost(40)
+	..setBuildTime(40)
+
+
+@compiletime function create_w3u_edos()
+	new BuildingDefinition('edos', 'edos')
+	..setLumberCost(0)
+	..setBuildTime(50)
+
+
+@compiletime function create_w3u_earc()
+	new UnitDefinition('earc', 'earc')
+	..setUpgradesUsed("Resm,Rema,R008,Reib,Remk,Reuv,Repm")
+	..setNormalAbilities("A006,Aco2,Ashm,Aien,Ault")
+	..setHitPointsMaximumBase(410)
+	..setBuildTime(3)
+	..setGoldCost(30)
+	..setAbilitySkinList("A006,Aco2,Ashm,Aien,Ault,Aegr,Aeib,Aemk")
+
+
+@compiletime function create_w3u_esen()
+	new UnitDefinition('esen', 'esen')
+	..setGoldCost(40)
+	..setHitPointsMaximumBase(720)
+	..setLumberCost(0)
+	..setAttack1DamageBase(20)
+
+
+@compiletime function create_w3u_nwat()
+	new UnitDefinition('nwat', 'nwat')
+	..setNormalAbilities("A008,Adis,Ahea")
+	..setDefaultActiveAbility("Ahea")
+	..setAttack1Range(400)
+	..setAttack1AttackType("magic")
+	..setAttack1DamageBase(14)
+	..setAttack1ProjectileHomingEnabled(true)
+	..setAttack1TargetsAllowed("air,debris,ground,item,structure,ward")
+	..setHitPointsMaximumBase(400)
+	..setBuildTime(5)
+	..setGoldCost(45)
+	..setAbilitySkinList("A008,Adis,Ahea")
+	..setAttack1ProjectileArt("Abilities\\Weapons\\PriestMissile\\PriestMissile.mdl")
+
+
+@compiletime function create_w3u_nssn()
+	new UnitDefinition('nssn', 'nssn')
+	..setNormalAbilities("ACev,A00A,A009")
+	..setAttack1DamageBase(20)
+	..setAttack1DamageNumberofDice(3)
+	..setGoldCost(50)
+	..setLumberCost(0)
+	..setManaMaximum(200)
+	..setManaInitialAmount(75)
+	..setManaRegeneration(0.75)
+	..setAbilitySkinList("ACev,A00A,A009")
 
 
 @compiletime function create_w3u_Udre()

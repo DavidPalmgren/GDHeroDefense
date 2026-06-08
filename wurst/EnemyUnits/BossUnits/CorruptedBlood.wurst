@@ -35,7 +35,7 @@ constant string EXPLODE_SFX = "Abilities\\Weapons\\AvengerMissile\\AvengerMissil
         ..setDurationHero(1, 1.)
         ..setBuffs(1, "")
         ..setMissileArt("")
-        ..setMissileSpeed(1)
+        ..setMissileSpeed(1000)
         ..setRequirements("")
         ..setRequirementsLevels("")
         ..setHeroAbility(false)
