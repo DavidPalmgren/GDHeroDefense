@@ -1,0 +1,94 @@
+package AI
+import winLoss
+import ControlPoint
+
+public real nearestDist = 0
+public unit nearest = null
+public unit attackingUnit = null
+public unit selectedTarget = null
+public group attackingGroup = CreateGroup()
+public group warsong1 = CreateGroup()
+vec2 spawn1 = gg_rct_Region_000.getCenter()
+
+function createPlayerUnit(player p, int unitID, int number, group unitGroup)
+    for i=0 to number-1
+        let u = createUnit(p,unitID,spawn1, angle(0.))
+        unitGroup.add(u)
+
+public function spawnWave(player p, int u, group g )
+    createPlayerUnit(p,u,1, g)
+    setupAttackCp(g)
+    setupAttackPlayerCp(g, players[0])  //test
+
+function setupWaveSpawn()
+    CreateTrigger()
+        ..registerPlayerChatEvent(players[0], "-spawn", true)
+        ..addAction() ->
+        spawnWave(players[5],'nchg',warsong1)
+
+function setupAttackPlayerCp(group g, player p)
+    selectedTarget = getNearestEnemyPlayerCp(g.get(0))
+    attackingGroup = g
+    print("setupAttackPlayerCp: target = " + selectedTarget.getName()) // debug
+    CreateTrigger()
+        ..registerPlayerChatEvent(players[0], "-attack player", true)
+        ..addAction()->
+        print("attack trigger fired") // debug
+        for u in attackingGroup
+            attackCp(attackingGroup.get(0),false)
+
+function setupAttackCp(group g)
+    selectedTarget = getNearestNeutralCp(g.get(0))
+    attackingGroup = g
+    print("setupAttackCp: target = " + selectedTarget.getName()) // debug
+    CreateTrigger()
+        ..registerPlayerChatEvent(players[0], "-attack", true)
+        ..addAction()->
+        print("attack trigger fired") // debug
+        for u in attackingGroup
+            SetUnitAcquireRange(u, 100.)
+            attackCp(attackingGroup.get(0), true)
+
+// create function to assign the target and issue the attack. If bool = true attack nearest neutral cp, false = nearest player cp
+function attackCp(unit u, bool b)
+    attackingUnit = u
+    if b == true    
+        selectedTarget = getNearestNeutralCp(u)
+    else
+        selectedTarget = getNearestEnemyPlayerCp(u)
+    print("attackCp: unit = " + u.getName() + " targeting = " + selectedTarget.getName()) 
+    warsong1.targetOrder("attack", selectedTarget)
+    print("order issued to warsong1")
+
+function getNearestNeutralCp(unit u) returns unit
+    unit nearest = null
+    real nearestDist = 99999.
+    for cp in controlPoints
+        let owner = cpOwners.get(cp)
+        if owner == players[24]
+            let dist = u.getPos().distanceTo(cp.getPos())
+            if dist < nearestDist
+                nearestDist = dist
+                nearest = cp
+    return nearest
+
+function getNearestEnemyPlayerCp(unit u) returns unit
+    unit nearest = null
+    real nearestDist = 99999.
+    for cp in controlPoints
+        let owner = cpOwners.get(cp)
+        let ownerId = owner.getId()
+        if owner != u.getOwner()
+            and IsPlayerEnemy(owner, u.getOwner())
+            and ownerId != 24  // exclude neutral hostile
+            and ownerId != 25  // exclude neutral passive
+            let dist = u.getPos().distanceTo(cp.getPos())
+            if dist < nearestDist
+                nearestDist = dist
+                nearest = cp
+    return nearest
+
+init
+    setupWaveSpawn()
+    
+    // setupAttackPlayer()
