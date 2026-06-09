@@ -73,6 +73,9 @@ import UnitObjEditing
 	..setHotkey("Q")
 	..setAbilitySkinList("A000,Ault")
 	..setNormalAbilities("AM0o,AM0p,Ault")
+	..setNormalAbilities("AM0o,AM0p,Ault")
+	..setNormalAbilities("AM0o,AM0p,Ault")
+	..setNormalAbilities("AM0o,AM0p,Ault")
 
 
 @compiletime function create_w3u_E003()
@@ -104,6 +107,12 @@ import UnitObjEditing
 	..setProperNamesUsed(1)
 	..setNormalAbilities("A001,AInv,Ault")
 	..setHeroAbilities("AM0h,A002,AM0g,AHav")
+	..setNormalAbilities("A001,AInv,Ault")
+	..setHeroAbilities("AM0h,A002,AM0g,AHav")
+	..setNormalAbilities("A001,AInv,Ault")
+	..setHeroAbilities("AM0h,A002,AM0g,AHav")
+	..setNormalAbilities("A001,AInv,Ault")
+	..setHeroAbilities("AM0h,A002,AM0g,AHav")
 
 
 @compiletime function create_w3u_e004()
@@ -129,6 +138,9 @@ import UnitObjEditing
 	..setAttack1ProjectileArt("Abilities\\Weapons\\KeeperGroveMissile\\KeeperGroveMissile.mdl")
 	..setButtonPositionX(2)
 	..setHotkey("C")
+	..setNormalAbilities("AM0k,AInv,Ault,ACm2,Aien,Aadm,Aspo")
+	..setNormalAbilities("AM0k,AInv,Ault,ACm2,Aien,Aadm,Aspo")
+	..setNormalAbilities("AM0k,AInv,Ault,ACm2,Aien,Aadm,Aspo")
 	..setNormalAbilities("AM0k,AInv,Ault,ACm2,Aien,Aadm,Aspo")
 
 
@@ -575,6 +587,15 @@ import UnitObjEditing
 	..setNormalAbilities("AM05,AM06,AM03")
 	..setLevel(6)
 	..setName("Xavius")
+	..setNormalAbilities("AM05,AM06,AM03")
+	..setLevel(6)
+	..setName("Xavius")
+	..setNormalAbilities("AM05,AM06,AM03")
+	..setLevel(6)
+	..setName("Xavius")
+	..setNormalAbilities("AM05,AM06,AM03")
+	..setLevel(6)
+	..setName("Xavius")
 
 
 @compiletime function create_w3u_e00J()
@@ -816,6 +837,12 @@ import UnitObjEditing
 	..setLumberCost(0)
 	..setNormalAbilities("AM0a,AInv,Ault")
 	..setHeroAbilities("AM0c,AM0d,AM0b")
+	..setNormalAbilities("AM0a,AInv,Ault")
+	..setHeroAbilities("AM0c,AM0d,AM0b")
+	..setNormalAbilities("AM0a,AInv,Ault")
+	..setHeroAbilities("AM0c,AM0d,AM0b")
+	..setNormalAbilities("AM0a,AInv,Ault")
+	..setHeroAbilities("AM0c,AM0d,AM0b")
 
 
 @compiletime function create_w3u_Emoo()
@@ -823,6 +850,9 @@ import UnitObjEditing
 	..setBuildTime(5)
 	..setGoldCost(50)
 	..setLumberCost(0)
+	..setHeroAbilities("AM0e,AM0f")
+	..setHeroAbilities("AM0e,AM0f")
+	..setHeroAbilities("AM0e,AM0f")
 	..setHeroAbilities("AM0e,AM0f")
 
 
@@ -956,14 +986,34 @@ import UnitObjEditing
 	..setAbilitySkinList("ACev,A00A,A009")
 
 
+@compiletime function create_w3u_ogru()
+	new UnitDefinition('ogru', 'ogru')
+	..setBuildTime(10)
+	..setGoldCost(15)
+
+
 @compiletime function create_w3u_Udre()
 	new HeroDefinition('Udre', 'Udre')
+	..setHeroAbilities("AM09")
+	..setHeroAbilities("AM09")
+	..setHeroAbilities("AM09")
 	..setHeroAbilities("AM09")
 
 
 @compiletime function create_w3u_x003()
 	new UnitDefinition('x003', 'x003')
 	..setModelFile("TyrandeWhisperwind.mdx")
+	..setModelFile("TyrandeWhisperwind.mdx")
+	..setModelFile("TyrandeWhisperwind.mdx")
+	..setModelFile("TyrandeWhisperwind.mdx")
+
+
+@compiletime function create_w3u_edtm()
+	new UnitDefinition('edtm', 'edtm')
+	..setNormalAbilities("AM0j,Arav,Afa2,Ault")
+	..setNormalAbilities("AM0j,Arav,Afa2,Ault")
+	..setNormalAbilities("AM0j,Arav,Afa2,Ault")
+	..setNormalAbilities("AM0j,Arav,Afa2,Ault")
 
 
 @compiletime function create_w3u_Hblm()
@@ -971,10 +1021,14 @@ import UnitObjEditing
 	..setNormalAbilities("AM0l")
 	..setLevel(6)
 	..setName("Ligga")
-
-
-@compiletime function create_w3u_edtm()
-	new UnitDefinition('edtm', 'edtm')
-	..setNormalAbilities("AM0j,Arav,Afa2,Ault")
+	..setNormalAbilities("AM0l")
+	..setLevel(6)
+	..setName("Ligga")
+	..setNormalAbilities("AM0l")
+	..setLevel(6)
+	..setName("Ligga")
+	..setNormalAbilities("AM0l")
+	..setLevel(6)
+	..setName("Ligga")
 
 
