@@ -8,3 +8,4 @@ init
 
         if GetLocalPlayer() == Player(0)
             PanCameraToTimed(tree.getX(), tree.getY(), 0.)
+            FogModifierStart(CreateFogModifierRect(players[0], FOG_OF_WAR_VISIBLE, GetWorldBounds(), true, false))
