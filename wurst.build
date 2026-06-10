@@ -43,11 +43,22 @@ buildMapData:
     race: HUMAN
     controller: USER
     fixedStartLoc: true
+  - id: 4
+    name: Player 5
+    race: HUMAN
+    controller: USER
+    fixedStartLoc: false
+  - id: 5
+    name: Player 6
+    race: ORC
+    controller: USER
+    fixedStartLoc: true
   forces:
   - name: Druids
     playerIds:
     - 0
     - 1
+    - 2
     flags:
       allied: true
       alliedVictory: true
@@ -56,8 +67,9 @@ buildMapData:
       sharedControlAdvanced: false
   - name: Naga
     playerIds:
-    - 2
     - 3
+    - 4
+    - 5
     flags:
       allied: true
       alliedVictory: true

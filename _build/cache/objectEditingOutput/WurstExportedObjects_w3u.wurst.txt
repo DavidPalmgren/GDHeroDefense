@@ -72,9 +72,7 @@ import UnitObjEditing
 	..setTooltipExtended("Basic frontline unit. Can learn Thicker Bark to resist some damage and Recycle to invigorate a nearby unit on death. |n|n|cffffcc00Attacks land units.|r")
 	..setHotkey("Q")
 	..setAbilitySkinList("A000,Ault")
-	..setNormalAbilities("AM0l,AM0m,Ault")
-	..setNormalAbilities("AM0l,AM0m,Ault")
-	..setNormalAbilities("AM0l,AM0m,Ault")
+	..setNormalAbilities("AM0h,AM0i,Ault")
 
 
 @compiletime function create_w3u_E003()
@@ -105,11 +103,7 @@ import UnitObjEditing
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNGrizzlyBear.blp")
 	..setProperNamesUsed(1)
 	..setNormalAbilities("A001,AInv,Ault")
-	..setHeroAbilities("AM0e,A002,AM0d,AHav")
-	..setNormalAbilities("A001,AInv,Ault")
-	..setHeroAbilities("AM0e,A002,AM0d,AHav")
-	..setNormalAbilities("A001,AInv,Ault")
-	..setHeroAbilities("AM0e,A002,AM0d,AHav")
+	..setHeroAbilities("AM0b,A002,AM0a,AHav")
 
 
 @compiletime function create_w3u_e004()
@@ -135,9 +129,7 @@ import UnitObjEditing
 	..setAttack1ProjectileArt("Abilities\\Weapons\\KeeperGroveMissile\\KeeperGroveMissile.mdl")
 	..setButtonPositionX(2)
 	..setHotkey("C")
-	..setNormalAbilities("AM0h,AInv,Ault,ACm2,Aien,Aadm,Aspo")
-	..setNormalAbilities("AM0h,AInv,Ault,ACm2,Aien,Aadm,Aspo")
-	..setNormalAbilities("AM0h,AInv,Ault,ACm2,Aien,Aadm,Aspo")
+	..setNormalAbilities("AM0d,AInv,Ault,ACm2,Aien,Aadm,Aspo")
 
 
 @compiletime function create_w3u_e005()
@@ -580,13 +572,7 @@ import UnitObjEditing
 	// TODO no wrapper: 	..setString("uhas", "")
 	..setProperNames("Xavius the Nightmare Lord")
 	..setModelFile("xavius2.mdl")
-	..setNormalAbilities("AM05,AM06,AM03")
-	..setLevel(6)
-	..setName("Xavius")
-	..setNormalAbilities("AM05,AM06,AM03")
-	..setLevel(6)
-	..setName("Xavius")
-	..setNormalAbilities("AM05,AM06,AM03")
+	..setNormalAbilities("AM04,AM05,AM02")
 	..setLevel(6)
 	..setName("Xavius")
 
@@ -620,8 +606,6 @@ import UnitObjEditing
 	..setAttack1ProjectileArt("Abilities\\Weapons\\FarseerMissile\\FarseerMissile.mdl")
 	..setTooltipBasic("Train Moonkin")
 	..setTooltipExtended("Moonkin are wild experts of the arcane arts providing Brilliance Aura and can cast Arcane Blast doing massive aoe damage. |n|n|cffffcc00Attacks land and air units.|r")
-	// TODO no wrapper: 	..setString("uhab", "AM0p,AM0q")
-	..setNormalAbilities("AM0p,AM0q")
 
 
 @compiletime function create_w3u_e00K()
@@ -630,20 +614,6 @@ import UnitObjEditing
 	..setResearchesAvailable("Remk,R008")
 	..setRequirements("")
 	..setName("Sentinel's Hall")
-
-
-@compiletime function create_w3u_e00L()
-	new UnitDefinition('e00L', 'ewsp')
-	..setNormalAbilities("Aeth,Aloc")
-	..setCollisionSize(0.0)
-	..setStructuresBuilt("")
-	..setUpgradesUsed("")
-	..setFoodCost(0)
-	..setHitPointsMaximumBase(1000)
-	..setHitPointsRegenerationRate(200.0)
-	..setHitPointsRegenerationType("always")
-	..setName("DummyNoPathingNoCollisionLocust")
-	..setAbilitySkinList("")
 
 
 @compiletime function create_w3u_x001()
@@ -677,8 +647,8 @@ import UnitObjEditing
 	..setCollisionSize(0.0)
 
 
-@compiletime function create_w3u_x004()
-	new UnitDefinition('x004', 'ewsp')
+@compiletime function create_w3u_x003()
+	new UnitDefinition('x003', 'ewsp')
 	..setName("Effect Dummy Unit")
 	..setUpgradesUsed("")
 	..setStructuresBuilt("")
@@ -719,14 +689,7 @@ import UnitObjEditing
 	..setAttack1WeaponSound("Nothing")
 	..setAttack1WeaponType("instant")
 	..setAcquisitionRange(2.1474836E9)
-	..setNormalAbilities("Avul,Aloc,AM0o")
-
-
-@compiletime function create_w3u_x005()
-	new UnitDefinition('x005', 'ewsp')
-	..setFoodCost(0)
-	..setCollisionSize(0.0)
-	..setModelFile("dummy.mdl")
+	..setNormalAbilities("Avul,Aloc,AM0k")
 
 
 // Original Table (contains all modified default/melee objects)
@@ -851,12 +814,8 @@ import UnitObjEditing
 	..setBuildTime(5)
 	..setGoldCost(50)
 	..setLumberCost(0)
-	..setNormalAbilities("AM07,AInv,Ault")
-	..setHeroAbilities("AM09,AM0a,AM08")
-	..setNormalAbilities("AM07,AInv,Ault")
-	..setHeroAbilities("AM09,AM0a,AM08")
-	..setNormalAbilities("AM07,AInv,Ault")
-	..setHeroAbilities("AM09,AM0a,AM08")
+	..setNormalAbilities("AM06,AInv,Ault")
+	..setHeroAbilities("AM08,AM09,AM07")
 
 
 @compiletime function create_w3u_Emoo()
@@ -864,9 +823,7 @@ import UnitObjEditing
 	..setBuildTime(5)
 	..setGoldCost(50)
 	..setLumberCost(0)
-	..setHeroAbilities("AM0b,AM0c")
-	..setHeroAbilities("AM0b,AM0c")
-	..setHeroAbilities("AM0b,AM0c")
+	..setHeroAbilities("AM0n,AM0o")
 
 
 @compiletime function create_w3u_edot()
@@ -999,37 +956,31 @@ import UnitObjEditing
 	..setAbilitySkinList("ACev,A00A,A009")
 
 
-@compiletime function create_w3u_x002()
-	new UnitDefinition('x002', 'x002')
-	..setModelFile("TyrandeWhisperwind.mdx")
-	..setModelFile("TyrandeWhisperwind.mdx")
-	..setModelFile("TyrandeWhisperwind.mdx")
+@compiletime function create_w3u_ogru()
+	new UnitDefinition('ogru', 'ogru')
+	..setBuildTime(10)
+	..setGoldCost(15)
 
 
 @compiletime function create_w3u_Hblm()
 	new HeroDefinition('Hblm', 'Hblm')
-	..setNormalAbilities("AM0i")
+	..setNormalAbilities("AM0e")
 	..setLevel(6)
 	..setName("Ligga")
-	..setNormalAbilities("AM0i")
-	..setLevel(6)
-	..setName("Ligga")
-	..setNormalAbilities("AM0i")
-	..setLevel(6)
-	..setName("Ligga")
-
-
-@compiletime function create_w3u_edtm()
-	new UnitDefinition('edtm', 'edtm')
-	..setNormalAbilities("AM0g,Arav,Afa2,Ault")
-	..setNormalAbilities("AM0g,Arav,Afa2,Ault")
-	..setNormalAbilities("AM0g,Arav,Afa2,Ault")
 
 
 @compiletime function create_w3u_Udre()
 	new HeroDefinition('Udre', 'Udre')
-	..setHeroAbilities("AM0p,AM0q")
-	..setHeroAbilities("AM0p")
-	..setHeroAbilities("AM0p")
+	..setHeroAbilities("AM0m")
+
+
+@compiletime function create_w3u_x004()
+	new UnitDefinition('x004', 'x004')
+	..setModelFile("TyrandeWhisperwind.mdx")
+
+
+@compiletime function create_w3u_edtm()
+	new UnitDefinition('edtm', 'edtm')
+	..setNormalAbilities("AM0p,Arav,Afa2,Ault")
 
 
