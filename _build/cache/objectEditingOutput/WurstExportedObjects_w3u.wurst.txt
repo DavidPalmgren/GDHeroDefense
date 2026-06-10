@@ -72,10 +72,7 @@ import UnitObjEditing
 	..setTooltipExtended("Basic frontline unit. Can learn Thicker Bark to resist some damage and Recycle to invigorate a nearby unit on death. |n|n|cffffcc00Attacks land units.|r")
 	..setHotkey("Q")
 	..setAbilitySkinList("A000,Ault")
-	..setNormalAbilities("AM0o,AM0p,Ault")
-	..setNormalAbilities("AM0o,AM0p,Ault")
-	..setNormalAbilities("AM0o,AM0p,Ault")
-	..setNormalAbilities("AM0o,AM0p,Ault")
+	..setNormalAbilities("AM0p,AM0q,Ault")
 
 
 @compiletime function create_w3u_E003()
@@ -107,12 +104,6 @@ import UnitObjEditing
 	..setProperNamesUsed(1)
 	..setNormalAbilities("A001,AInv,Ault")
 	..setHeroAbilities("AM0h,A002,AM0g,AHav")
-	..setNormalAbilities("A001,AInv,Ault")
-	..setHeroAbilities("AM0h,A002,AM0g,AHav")
-	..setNormalAbilities("A001,AInv,Ault")
-	..setHeroAbilities("AM0h,A002,AM0g,AHav")
-	..setNormalAbilities("A001,AInv,Ault")
-	..setHeroAbilities("AM0h,A002,AM0g,AHav")
 
 
 @compiletime function create_w3u_e004()
@@ -139,13 +130,13 @@ import UnitObjEditing
 	..setButtonPositionX(2)
 	..setHotkey("C")
 	..setNormalAbilities("AM0k,AInv,Ault,ACm2,Aien,Aadm,Aspo")
-	..setNormalAbilities("AM0k,AInv,Ault,ACm2,Aien,Aadm,Aspo")
-	..setNormalAbilities("AM0k,AInv,Ault,ACm2,Aien,Aadm,Aspo")
-	..setNormalAbilities("AM0k,AInv,Ault,ACm2,Aien,Aadm,Aspo")
 
 
 @compiletime function create_w3u_e005()
 	new BuildingDefinition('e005', 'edob')
+	..setResearchesAvailable("")
+	..setRequirements("e00M,nbwd")
+	..setUnitsTrained("nssn,nwat")
 	..setName("Sentinel Embassy")
 	..setModelFile("war3mapImported\\NETownhall.mdl")
 
@@ -495,6 +486,7 @@ import UnitObjEditing
 
 @compiletime function create_w3u_e009()
 	new BuildingDefinition('e009', 'edob')
+	..setRequirements("e00H")
 	..setName("Sanctuary1")
 	..setModelFile("war3mapImported\\NightElf_SanctuaryV1.mdl")
 
@@ -507,14 +499,10 @@ import UnitObjEditing
 
 @compiletime function create_w3u_e00G()
 	new BuildingDefinition('e00G', 'edob')
+	..setRequirements("e009")
+	..setResearchesAvailable("")
 	..setName("Sanctuary2")
 	..setModelFile("war3mapImported\\NightElf_SanctuaryV2.mdl")
-
-
-@compiletime function create_w3u_e00H()
-	new BuildingDefinition('e00H', 'edob')
-	..setName("Sanctuary")
-	..setModelFile("war3mapImported\\NightElf_Sanctuary.mdl")
 
 
 @compiletime function create_w3u_e00A()
@@ -583,16 +571,6 @@ import UnitObjEditing
 	..setName("Xavius")
 	// TODO no wrapper: 	..setString("uhas", "")
 	..setProperNames("Xavius the Nightmare Lord")
-	..setModelFile("xavius2.mdl")
-	..setNormalAbilities("AM05,AM06,AM03")
-	..setLevel(6)
-	..setName("Xavius")
-	..setNormalAbilities("AM05,AM06,AM03")
-	..setLevel(6)
-	..setName("Xavius")
-	..setNormalAbilities("AM05,AM06,AM03")
-	..setLevel(6)
-	..setName("Xavius")
 	..setNormalAbilities("AM05,AM06,AM03")
 	..setLevel(6)
 	..setName("Xavius")
@@ -623,10 +601,12 @@ import UnitObjEditing
 	..setAttack1DamageBase(39)
 	..setRequirements("etoe,R006")
 	..setAttack1AttackType("magic")
+	..setSleeps(false)
 	..setName("Moonkin")
 	..setAttack1ProjectileArt("Abilities\\Weapons\\FarseerMissile\\FarseerMissile.mdl")
 	..setTooltipBasic("Train Moonkin")
 	..setTooltipExtended("Moonkin are wild experts of the arcane arts providing Brilliance Aura and can cast Arcane Blast doing massive aoe damage. |n|n|cffffcc00Attacks land and air units.|r")
+	..setNormalAbilities("AM09,AM0m")
 
 
 @compiletime function create_w3u_e00K()
@@ -635,6 +615,138 @@ import UnitObjEditing
 	..setResearchesAvailable("Remk,R008")
 	..setRequirements("")
 	..setName("Sentinel's Hall")
+
+
+@compiletime function create_w3u_n007()
+	new UnitDefinition('n007', 'nchg')
+	..setSpeedBase(522)
+	..setSpeedMaximum(522)
+	..setTurnRate(3.0)
+	..setSpeedMinimum(522)
+	..setCollisionSize(1.0)
+	..setTargetedAs("none")
+	..setName("DummyOrc")
+
+
+@compiletime function create_w3u_e00L()
+	new UnitDefinition('e00L', 'enec')
+	..setNormalAbilities("Ault,Arep")
+	..setStructuresBuilt("nbwd,e008,e00A,e00J,e00A")
+	..setBuildTime(3)
+	..setSpeedBase(280)
+	..setHitPointsMaximumBase(210)
+	..setFoodCost(1)
+	..setName("Night Elf Engineer")
+	..setAbilitySkinList("Ault")
+
+
+@compiletime function create_w3u_e00N()
+	new BuildingDefinition('e00N', 'edob')
+	..setResearchesAvailable("Reuv,Repm")
+	..setRequirements("")
+	..setGoldCost(200)
+	..setLumberCost(0)
+	..setRepairGoldCost(200)
+	..setRepairLumberCost(0)
+	..setBuildTime(115)
+	..setNormalAbilities("Atol,Abds")
+	..setUnitsTrained("e00L")
+	..setName("Sanctuary (Tier 3)")
+	..setModelFile("war3mapImported\\NightElf_SanctuaryV2.mdl")
+	..setTooltipBasic("Upgrade to Sanctuary (Tier 3)")
+	..setTooltipExtended("The main building of the sentinels can train Nightelf Engineers and contains upgrades for Ultravision and Backpack.")
+
+
+@compiletime function create_w3u_e00H()
+	new BuildingDefinition('e00H', 'edob')
+	..setResearchesAvailable("Reuv,Repm")
+	..setUnitsSold("e00L")
+	..setRequirements("")
+	..setGoldCost(200)
+	..setLumberCost(0)
+	..setRepairGoldCost(200)
+	..setRepairLumberCost(0)
+	..setBuildTime(95)
+	..setUpgradesTo("e00N")
+	..setNormalAbilities("Atol,Abds")
+	..setName("Sanctuary (Tier 2)")
+	..setModelFile("war3mapImported\\NightElf_SanctuaryV1.mdl")
+	..setTooltipBasic("Upgrade to Sanctuary (Tier 2)")
+	..setTooltipExtended("The main building of the sentinels can train Nightelf Engineers and contains upgrades for Ultravision and Backpack.")
+
+
+@compiletime function create_w3u_e00M()
+	new BuildingDefinition('e00M', 'edob')
+	..setResearchesAvailable("Reuv,Repm")
+	..setUnitsSold("e00L")
+	..setRequirements("")
+	..setGoldCost(200)
+	..setLumberCost(0)
+	..setRepairGoldCost(200)
+	..setRepairLumberCost(0)
+	..setBuildTime(80)
+	..setUpgradesTo("e00H")
+	..setNormalAbilities("Atol,Abds")
+	..setName("Sanctuary (Tier 1)")
+	..setModelFile("war3mapImported\\NightElf_Sanctuary.mdl")
+	..setTooltipBasic("Create Sanctuary")
+	..setTooltipExtended("The main building of the sentinels can train Nightelf Engineers and contains upgrades for Ultravision and Backpack.")
+
+
+@compiletime function create_w3u_n008()
+	new UnitDefinition('n008', 'nwlg')
+	..setAttack1DamageBase(27)
+	..setAttack1DamageNumberofDice(2)
+	..setAttack1Range(100)
+	..setSpeedBase(360)
+	..setBuildTime(5)
+	..setGoldCost(50)
+	..setLumberCost(0)
+	..setSightRadiusNight(1100)
+	..setUpgradesUsed("R009,Rema,Reuv")
+	..setNormalAbilities("A00B,Ault,ACev,ACct")
+	..setRace("nightelf")
+	..setSleeps(false)
+	..setCollisionSize(32.0)
+	..setDefenseBase(7)
+	..setName("Nightsaber")
+	..setIconGameInterface("war3mapImported\\BTNPanther.blp")
+	..setModelFile("war3mapImported\\Panther.mdl")
+	..setScalingValue(1.0)
+	..setSelectionScale(2.0)
+
+
+@compiletime function create_w3u_e00O()
+	new BuildingDefinition('e00O', 'eate')
+	..setUnitsTrained("Emoo,Ewar")
+	..setName("Altar of Elune")
+	..setModelFile("war3mapImported\\SEAltarOfStars.mdl")
+	..setIconGameInterface("war3mapImported\\BTNAltarOfStars.blp")
+
+
+@compiletime function create_w3u_e00P()
+	new UnitDefinition('e00P', 'eshd')
+	..setNormalAbilities("A006,Ault,Ashm")
+	..setUpgradesUsed("Rema,R009,Reib,Remk,Reuv")
+	..setManaInitialAmount(100)
+	..setManaMaximum(200)
+	..setManaRegeneration(0.5)
+	..setName("Elite Archer")
+	..setNormalAbilities("AM0r")
+
+
+@compiletime function create_w3u_E00Q()
+	new HeroDefinition('E00Q', 'Emoo')
+	..setName("TyrandeMoonWarrior")
+	..setModelFile("Units\\NightElf\\HeroDemonHunter\\HeroDemonHunter.mdl")
+
+
+@compiletime function create_w3u_n009()
+	new UnitDefinition('n009', 'nwlg')
+	..setRace("nightelf")
+	..setName("Ash'alah")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNTimberWolf.blp")
+	..setModelFile("war3mapImported\\WhiteTiger.mdl")
 
 
 @compiletime function create_w3u_x001()
@@ -711,6 +823,13 @@ import UnitObjEditing
 	..setAttack1WeaponType("instant")
 	..setAcquisitionRange(2.1474836E9)
 	..setNormalAbilities("Avul,Aloc,AM08")
+
+
+@compiletime function create_w3u_x003()
+	new UnitDefinition('x003', 'ewsp')
+	..setFoodCost(0)
+	..setCollisionSize(0.0)
+	..setModelFile("dummy.mdl")
 
 
 // Original Table (contains all modified default/melee objects)
@@ -802,6 +921,8 @@ import UnitObjEditing
 	..setNormalAbilities("Aeat,Aro1,Abdl,Atol,Arlm")
 	..setLumberCost(0)
 	..setGoldCost(200)
+	..setRepairGoldCost(200)
+	..setRepairLumberCost(0)
 	..setTooltipExtended("Primary structure, used to train Wisps. Can be upgraded to Tree of Ages and then Tree of Eternity to enable the production of additional types of structures and units. |n|n|cffffcc00Attacks land units.|r")
 	..setAbilitySkinList("Aeat,Aro1,Abdl,Atol,Arlm")
 
@@ -837,12 +958,6 @@ import UnitObjEditing
 	..setLumberCost(0)
 	..setNormalAbilities("AM0a,AInv,Ault")
 	..setHeroAbilities("AM0c,AM0d,AM0b")
-	..setNormalAbilities("AM0a,AInv,Ault")
-	..setHeroAbilities("AM0c,AM0d,AM0b")
-	..setNormalAbilities("AM0a,AInv,Ault")
-	..setHeroAbilities("AM0c,AM0d,AM0b")
-	..setNormalAbilities("AM0a,AInv,Ault")
-	..setHeroAbilities("AM0c,AM0d,AM0b")
 
 
 @compiletime function create_w3u_Emoo()
@@ -850,9 +965,6 @@ import UnitObjEditing
 	..setBuildTime(5)
 	..setGoldCost(50)
 	..setLumberCost(0)
-	..setHeroAbilities("AM0e,AM0f")
-	..setHeroAbilities("AM0e,AM0f")
-	..setHeroAbilities("AM0e,AM0f")
 	..setHeroAbilities("AM0e,AM0f")
 
 
@@ -941,7 +1053,7 @@ import UnitObjEditing
 
 @compiletime function create_w3u_earc()
 	new UnitDefinition('earc', 'earc')
-	..setUpgradesUsed("Resm,Rema,R008,Reib,Remk,Reuv,Repm")
+	..setUpgradesUsed("Rema,R008,R009,Reib,Remk,Reuv,Repm")
 	..setNormalAbilities("A006,Aco2,Ashm,Aien,Ault")
 	..setHitPointsMaximumBase(410)
 	..setBuildTime(3)
@@ -959,7 +1071,7 @@ import UnitObjEditing
 
 @compiletime function create_w3u_nwat()
 	new UnitDefinition('nwat', 'nwat')
-	..setNormalAbilities("A008,Adis,Ahea")
+	..setNormalAbilities("Ashm,A008,Adis,Ahea")
 	..setDefaultActiveAbility("Ahea")
 	..setAttack1Range(400)
 	..setAttack1AttackType("magic")
@@ -975,7 +1087,7 @@ import UnitObjEditing
 
 @compiletime function create_w3u_nssn()
 	new UnitDefinition('nssn', 'nssn')
-	..setNormalAbilities("ACev,A00A,A009")
+	..setNormalAbilities("Ashm,ACev,A00A,A009")
 	..setAttack1DamageBase(20)
 	..setAttack1DamageNumberofDice(3)
 	..setGoldCost(50)
@@ -992,41 +1104,41 @@ import UnitObjEditing
 	..setGoldCost(15)
 
 
+@compiletime function create_w3u_nbwd()
+	new BuildingDefinition('nbwd', 'nbwd')
+	..setResearchesAvailable("Rema,R009")
+	..setGoldCost(50)
+	..setBuildTime(45)
+	..setRepairGoldCost(50)
+	..setRepairLumberCost(0)
+	..setLumberCost(0)
+	..setHotkey("R")
+	..setTooltipBasic("Build Barrow Den")
+	..setTooltipExtended("Upgrade facility, contains universal upgrades for Damage and Armor.")
+
+
+@compiletime function create_w3u_eshd()
+	new UnitDefinition('eshd', 'eshd')
+	..setUpgradesUsed("Remk,R008,Reuv,R009,Rema")
+
+
 @compiletime function create_w3u_Udre()
 	new HeroDefinition('Udre', 'Udre')
 	..setHeroAbilities("AM09")
-	..setHeroAbilities("AM09")
-	..setHeroAbilities("AM09")
-	..setHeroAbilities("AM09")
 
 
-@compiletime function create_w3u_x003()
-	new UnitDefinition('x003', 'x003')
-	..setModelFile("TyrandeWhisperwind.mdx")
-	..setModelFile("TyrandeWhisperwind.mdx")
-	..setModelFile("TyrandeWhisperwind.mdx")
+@compiletime function create_w3u_x004()
+	new UnitDefinition('x004', 'x004')
 	..setModelFile("TyrandeWhisperwind.mdx")
 
 
 @compiletime function create_w3u_edtm()
 	new UnitDefinition('edtm', 'edtm')
 	..setNormalAbilities("AM0j,Arav,Afa2,Ault")
-	..setNormalAbilities("AM0j,Arav,Afa2,Ault")
-	..setNormalAbilities("AM0j,Arav,Afa2,Ault")
-	..setNormalAbilities("AM0j,Arav,Afa2,Ault")
 
 
 @compiletime function create_w3u_Hblm()
 	new HeroDefinition('Hblm', 'Hblm')
-	..setNormalAbilities("AM0l")
-	..setLevel(6)
-	..setName("Ligga")
-	..setNormalAbilities("AM0l")
-	..setLevel(6)
-	..setName("Ligga")
-	..setNormalAbilities("AM0l")
-	..setLevel(6)
-	..setName("Ligga")
 	..setNormalAbilities("AM0l")
 	..setLevel(6)
 	..setName("Ligga")

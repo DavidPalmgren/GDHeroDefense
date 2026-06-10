@@ -21,7 +21,7 @@ public constant TYRANDE_MODEL_ID = compiletime(UNIT_ID_GEN.next())
 // Replace these with your actual unit IDs
 constant int TYRANDE_MOUNTED_ID = 'Emoo'    // Tyrande on tiger model
 constant int TYRANDE_DISMOUNTED_ID = 'nfbr' // Tyrande on foot model
-constant int TIGER_UNIT_ID = 'nfbr'         // summonable tiger unit
+constant int TIGER_UNIT_ID = 'n009'         // summonable tiger unit
 
 constant real TIGER_DURATION = 30.
 constant real BONUS_ATTACK_SPEED = 0.50     // 50% attack speed bonus
@@ -53,7 +53,7 @@ constant string SUMMON_SFX = "Abilities\\Spells\\NightElf\\Roar\\RoarCaster.mdl"
         ..setTooltipLearnExtended("Dismount from your tiger and summon it into battle.")
         ..setIconNormal(Icons.bTNPriestessOfTheMoon)
         ..setIconResearch(Icons.bTNPriestessOfTheMoon)
-        ..setAlternateFormUnit(1, "Ekee")
+        ..setAlternateFormUnit(1, "E00Q")
         ..setButtonPositionNormalX(0)
         ..setButtonPositionNormalY(0)
         ..setCooldown(1, 40.)
