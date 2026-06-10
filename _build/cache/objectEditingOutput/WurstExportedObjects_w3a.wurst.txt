@@ -196,33 +196,7 @@ import AbilityObjEditing
 
 
 @compiletime function create_w3a_AM07()
-	new AbilityDefinitionRootAncients('AM07')
-
-
-@compiletime function create_w3a_AM08()
-	new AbilityDefinitionPermanentInvisibility('AM08')
-	..setAutoAcquireAttackTargets(1, false)
-	..setDurationNormal(1, -1.0)
-	..setDurationHero(1, -1.0)
-
-
-@compiletime function create_w3a_AM09()
-	new AbilityDefinitionRainofFire('AM09')
-	..setDamagePerSecond(1, 0.0)
-	..setNumberofWaves(1, 0)
-	..setBuffs(1, "")
-	..setEffects(1, "")
-	..setArtTarget("")
-	..setArtCaster("")
-	..setMissileArt("")
-	..setMaximumDamageperWave(1, 0.0)
-	..setDamage(1, 0.0)
-	..setManaCost(1, 1)
-	..setCooldown(1, 1.0)
-
-
-@compiletime function create_w3a_AM0a()
-	new AbilityDefinitionRejuvination('AM0a')
+	new AbilityDefinitionRejuvination('AM07')
 	..setName("Invigorate")
 	..setTooltipNormal(1, "Invigorate")
 	..setTooltipNormalExtended(1, "Increases health regeneration by 12.5 and mana regeneration by 1.6666666 for 12.0 seconds. Adds a seedling stack whilst active")
@@ -242,8 +216,8 @@ import AbilityObjEditing
 	..setManaPointsGained(1, 20.0)
 
 
-@compiletime function create_w3a_AM0b()
-	new AbilityDefinitionTaurenChieftainWarStomp('AM0b')
+@compiletime function create_w3a_AM08()
+	new AbilityDefinitionTaurenChieftainWarStomp('AM08')
 	..setName("Bloom")
 	..setTooltipNormal(1, "Bloom")
 	..setTooltipNormal(2, "Bloom")
@@ -286,8 +260,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM0c()
-	new AbilityDefinitionRoar('AM0c')
+@compiletime function create_w3a_AM09()
+	new AbilityDefinitionRoar('AM09')
 	..setName("Summon Treant")
 	..setTooltipNormal(1, "Summon Treant")
 	..setTooltipNormal(2, "Summon Treant")
@@ -331,8 +305,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM0d()
-	new AbilityDefinitionMountainKingThunderClap('AM0d')
+@compiletime function create_w3a_AM0a()
+	new AbilityDefinitionMountainKingThunderClap('AM0a')
 	..setName("Seed Burst")
 	..setTooltipNormal(1, "Seed Burst")
 	..setTooltipNormal(2, "Seed Burst")
@@ -381,8 +355,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM0e()
-	new AbilityDefinitionAlchemistChemicalRage('AM0e')
+@compiletime function create_w3a_AM0b()
+	new AbilityDefinitionAlchemistChemicalRage('AM0b')
 	..setName("Moon Warrior")
 	..setTooltipNormal(1, "Moon Warrior")
 	..setTooltipNormalExtended(1, "Tyrande dismounts from her tiger, gaining +40 damage and +50% attack speed for 30 seconds while summoning her tiger into battle.")
@@ -408,8 +382,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM0f()
-	new AbilityDefinitionArchMageBlizzard('AM0f')
+@compiletime function create_w3a_AM0c()
+	new AbilityDefinitionArchMageBlizzard('AM0c')
 	..setName("Starfall")
 	..setTooltipNormal(1, "Starfall")
 	..setTooltipNormalExtended(1, "Calls down stars in the target area dealing 100 damage in 250 radius each. Stars fall faster the longer the spell channels.")
@@ -444,8 +418,8 @@ import AbilityObjEditing
 	..setEffects(3, "")
 
 
-@compiletime function create_w3a_AM0g()
-	new AbilityDefinitionRoar('AM0g')
+@compiletime function create_w3a_AM0d()
+	new AbilityDefinitionRoar('AM0d')
 	..setName("Hibernate")
 	..setTooltipNormal(1, "Hibernate")
 	..setTooltipNormal(2, "Hibernate")
@@ -482,8 +456,8 @@ import AbilityObjEditing
 	..setHotkeyLearn("R")
 
 
-@compiletime function create_w3a_AM0h()
-	new AbilityDefinitionMountainKingThunderBolt('AM0h')
+@compiletime function create_w3a_AM0e()
+	new AbilityDefinitionMountainKingThunderBolt('AM0e')
 	..setLevels(3)
 	..setName("Mauling Charge")
 	..setTooltipNormal(1, "Mauling Charge")
@@ -528,8 +502,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM0j()
-	new AbilityDefinitionFireBolt('AM0j')
+@compiletime function create_w3a_AM0g()
+	new AbilityDefinitionFireBolt('AM0g')
 	..setName("Crow Tackle")
 	..setTooltipNormal(1, "Crow Tackle")
 	..setTooltipNormalExtended(1, "Transforms into crow form and dashes at the target enemy dealing 200 damage on impact.")
@@ -555,8 +529,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM0k()
-	new AbilityDefinitionRoar('AM0k')
+@compiletime function create_w3a_AM0h()
+	new AbilityDefinitionRoar('AM0h')
 	..setName("Spirit Wisps")
 	..setTooltipNormal(1, "Spirit Wisps")
 	..setTooltipNormalExtended(1, "Summons 3 spirit wisps that orbit the caster for 10 seconds, healing nearby damaged friendly units for 25 HP/s.")
@@ -580,8 +554,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM0l()
-	new AbilityDefinitionBloodMageFlameStrike('AM0l')
+@compiletime function create_w3a_AM0i()
+	new AbilityDefinitionBloodMageFlameStrike('AM0i')
 	..setName("Throw Explosives")
 	..setTooltipNormal(1, "Throw Explosives")
 	..setTooltipNormalExtended(1, "Throws an explosive barrel to the target location. Explodes after 3 seconds dealing 400 damage to all nearby enemies.")
@@ -610,8 +584,8 @@ import AbilityObjEditing
 	..setArtEffect("")
 
 
-@compiletime function create_w3a_AM0m()
-	new AbilityDefinitionDefenseBonusPlus1('AM0m')
+@compiletime function create_w3a_AM0j()
+	new AbilityDefinitionDefenseBonusPlus1('AM0j')
 	..setName("Iron Skin")
 	..setDefenseBonus(1, 4)
 	..setBuffs(1, "BM01")
@@ -624,8 +598,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM0n()
-	new AbilityDefinitionPassiveSimple('AM0n')
+@compiletime function create_w3a_AM0k()
+	new AbilityDefinitionPassiveSimple('AM0k')
 	..setName("Iron Skin")
 	..setTooltipNormal(1, "Iron Skin")
 	..setTooltipNormalExtended(1, "Increases armor by 4 and has a 25% chance to retaliate.")
@@ -636,8 +610,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM0o()
-	new AbilityDefinitionPassiveSimple('AM0o')
+@compiletime function create_w3a_AM0l()
+	new AbilityDefinitionPassiveSimple('AM0l')
 	..setName("Recycle")
 	..setTooltipNormal(1, "Recycle")
 	..setTooltipNormalExtended(1, "On death, applies Invigorate to the nearest friendly unit.")
@@ -649,8 +623,8 @@ import AbilityObjEditing
 	..setRequirements("R003")
 
 
-@compiletime function create_w3a_AM0p()
-	new AbilityDefinitionHardenedSkin('AM0p')
+@compiletime function create_w3a_AM0m()
+	new AbilityDefinitionHardenedSkin('AM0m')
 	..setName("Thick Bark")
 	..setTooltipNormal(1, "Thick Bark")
 	..setTooltipNormalExtended(1, "Reduces each attack's damage by 10.0 minimum damage taken off 5.0% per hit.")
@@ -664,6 +638,71 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
+@compiletime function create_w3a_AM0n()
+	new AbilityDefinitionRootAncients('AM0n')
+
+
+@compiletime function create_w3a_AM0o()
+	new AbilityDefinitionPermanentInvisibility('AM0o')
+	..setAutoAcquireAttackTargets(1, false)
+	..setDurationNormal(1, -1.0)
+	..setDurationHero(1, -1.0)
+
+
+@compiletime function create_w3a_AM0p()
+	new AbilityDefinitionRainofFire('AM0p')
+	..setDamagePerSecond(1, 0.0)
+	..setNumberofWaves(1, 0)
+	..setBuffs(1, "")
+	..setEffects(1, "")
+	..setArtTarget("")
+	..setArtCaster("")
+	..setMissileArt("")
+	..setMaximumDamageperWave(1, 0.0)
+	..setDamage(1, 0.0)
+	..setManaCost(1, 1)
+	..setCooldown(1, 1.0)
+
+
+@compiletime function create_w3a_AM0q()
+	new AbilityDefinitionIllidanChannel('AM0q')
+	..setLevels(3)
+	..setBaseOrderID(1, "absorb")
+	..setBaseOrderID(2, "absorb")
+	..setBaseOrderID(3, "absorb")
+	..setDisableOtherAbilities(1, false)
+	..setDisableOtherAbilities(2, false)
+	..setDisableOtherAbilities(3, false)
+	..setFollowThroughTime(1, 0.0)
+	..setFollowThroughTime(2, 0.0)
+	..setFollowThroughTime(3, 0.0)
+	..setArtDuration(1, 0.0)
+	..setArtDuration(2, 0.0)
+	..setArtDuration(3, 0.0)
+	..setOptions(1, 1)
+	..setOptions(2, 1)
+	..setOptions(3, 1)
+	..setArtCaster("")
+	..setArtEffect("")
+	..setArtSpecial("")
+	..setArtTarget("")
+	..setButtonPositionNormalX(0)
+	..setButtonPositionNormalY(0)
+	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNCharm.blp")
+	..setTooltipNormal(1, "Cast Arcane Blast")
+	..setTooltipNormalExtended(1, "Fires a concentrated bolt of arcane energy that damages all enemies in its path.")
+	..setCooldown(1, 8.0)
+	..setManaCost(1, 125)
+	..setCastRange(1, 900.0)
+	..setTargetType(1, 2)
+	..setHeroAbility(false)
+
+
 // Original Table (contains all modified default/melee objects)
 // These are emitted when createObjectDefinition uses the same base/new id.
+
+@compiletime function create_w3a_ACca()
+	new AbilityDefinitionCarrionSwarmcreep('ACca')
+	..setMissileArt("Abilities\\Spells\\NightElf\\Blink\\BlinkTarget.mdl,Abilities\\Spells\\Undead\\CarrionSwarm\\CarrionSwarmMissile.mdl")
+
 
