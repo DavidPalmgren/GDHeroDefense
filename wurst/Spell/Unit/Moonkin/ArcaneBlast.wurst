@@ -1,0 +1,47 @@
+package ArcaneBlast
+
+
+import ClosureEvents
+import ObjectIdGenerator
+import AbilityObjEditing
+import ObjectIds
+import AbilityIds
+import Icons
+import ChannelAbilityPreset
+
+import Projectile 
+
+public constant ARCANE_BLAST_ID = compiletime(ABIL_ID_GEN.next())
+constant DAMAGE = 150.0
+
+@compiletime function genArcaneBlast()
+    new ChannelAbilityPreset(ARCANE_BLAST_ID,3, true)
+        ..setButtonPositionNormalX(0)
+        ..setButtonPositionNormalY(0)
+        ..setIconNormal(Icons.bTNCharm)
+        ..setTooltipNormal(1, "Cast Arcane Blast")
+        ..setTooltipNormalExtended(1, "Fires a concentrated bolt of arcane energy that damages all enemies in its path.")
+        ..setCooldown(1, 8.0)
+        ..setManaCost(1, 125)
+        ..setCastRange(1, 900.0)
+        ..setTargetType(1, 2)
+        ..setHeroAbility(false)
+
+@compiletime function giveAbilToHero()
+    new UnitDefinition('n004', 'n004')
+        ..setNormalAbilities(commaList(GPROJECTILE_ID, ARCANE_BLAST_ID))
+
+init
+    EventListener.onPointCast(ARCANE_BLAST_ID) (caster, targetPos) ->
+        let casterPos = caster.getPos()
+        let speed = 950.0
+        let radius = 120.0
+        // let projectileModel = "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBolt.mdl"
+        let projectileModel = "Abilities\\Spells\\NightElf\\Blink\\BlinkTarget.mdl"
+        let explosionModel = "Abilities\\Spells\\Human\\DispelMagic\\DispelMagicTarget.mdl"
+
+        // Adding 900.0 tells Wurst to use the fixed-range constructor:
+        new PortableProjectile(caster, casterPos, targetPos, speed, radius, 900.0, projectileModel) target ->
+            dealDamage(caster, target, DAMAGE, ATTACK_TYPE_MAGIC, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+
+            flashEffect(explosionModel, target.getPos())

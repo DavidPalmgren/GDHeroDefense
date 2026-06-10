@@ -62,14 +62,11 @@ init
         let targetSfx = target.addEffect("Abilities\\Spells\\Other\\Doom\\DoomTarget.mdl", "overhead")
         targetSfx.setScale(0.8)
         targetSfx.setColor(0, 255, 0)  // green tint to match slime theme
-        // 
+
         let slime = createUnit(caster.getOwner(), SLIME_UNIT_ID, caster.getPos(), angle(0.))
-        // 
 
         if target == null
             return
-
-        
 
         // Spawn slime on top of the target
         slime.addAbility('Aloc')

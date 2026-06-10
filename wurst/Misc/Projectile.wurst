@@ -1,0 +1,143 @@
+package Projectile
+
+import DummyCaster
+import AbilityObjEditing
+import ObjectIdGenerator
+import ClosureEvents
+import ClosureTimers
+import OrderIds
+import ObjectIds
+import UnitIds
+import LinkedList
+
+
+public constant GPROJECTILE_ID = compiletime(ABIL_ID_GEN.next())
+public constant DUMMY_WISP_ID = compiletime(UNIT_ID_GEN.next())
+
+public interface HitCallback
+    function run(unit target)
+
+public class PortableProjectile
+    private unit dummy
+    private unit caster
+    private vec2 targetPos
+    private real speed
+    private real hitRadius
+    private LinkedList<unit> hitUnits
+    private HitCallback onHit
+    private effect modelFx
+
+    // Private helper method so we don't repeat the setup code
+    private function setup(unit caster, vec2 startPos, vec2 finalDestination, real speed, real hitRadius, string model, HitCallback onHit)
+        this.caster = caster
+        this.targetPos = finalDestination
+        this.speed = speed
+        this.hitRadius = hitRadius
+        this.onHit = onHit
+        this.hitUnits = new LinkedList<unit>()
+
+        let facing = startPos.angleTo(finalDestination)
+        this.dummy = createUnit(caster.getOwner(), DUMMY_WISP_ID, startPos, facing)
+        this.dummy.addAbility(AbilityIds.locust)
+        this.dummy.setPathing(false)
+
+        if model != ""
+            this.modelFx = this.dummy.addEffect(model, "origin")
+
+        startMovement()
+
+    // -------------------------------------------------------------
+    // VARIATION 1: Stops exactly where you clicked (7 parameters)
+    // -------------------------------------------------------------
+    construct(unit caster, vec2 startPos, vec2 targetPos, real speed, real hitRadius, string model, HitCallback onHit)
+        setup(caster, startPos, targetPos, speed, hitRadius, model, onHit)
+
+    // -------------------------------------------------------------
+    // VARIATION 2: Travels a fixed maximum distance (8 parameters)
+    // -------------------------------------------------------------
+    construct(unit caster, vec2 startPos, vec2 targetPos, real speed, real hitRadius, real maxDistance, string model, HitCallback onHit)
+        let angleToTarget = startPos.angleTo(targetPos)
+        let calculatedDestination = startPos.polarOffset(angleToTarget, maxDistance)
+        
+        setup(caster, startPos, calculatedDestination, speed, hitRadius, model, onHit)
+
+
+    private function startMovement()
+        let updateTick = 0.03 
+        
+        doPeriodically(updateTick) cb ->
+            let currentPos = dummy.getPos()
+            let dir = currentPos.angleTo(targetPos)
+            let nextPos = currentPos.polarOffset(dir, speed * updateTick)
+            
+            dummy.setXY(nextPos)
+
+            ENUM_GROUP.enumUnitsInRange(nextPos, hitRadius, null)
+            for t in ENUM_GROUP
+                if t != dummy and t != caster and not hitUnits.has(t) and not t.getOwner().isAllyOf(caster.getOwner()) and t.isAlive()
+                    hitUnits.add(t)
+                    if onHit != null
+                        onHit.run(t)
+
+            if nextPos.distanceTo(targetPos) < 20.0
+                destroy cb     
+                destroy this   
+
+    ondestroy
+        if modelFx != null
+            modelFx.destr()
+        dummy.remove()
+        destroy hitUnits
+        if onHit != null
+            destroy onHit
+
+
+public function dealDamage(unit source, unit target, real amount, attacktype attackType, damagetype damageType, weapontype weaponType)
+    // The true/false parameters stand for: isAttack (true) and isRanged (false)
+    source.damageTarget(target, amount, true, false, attackType, damageType, weaponType)
+
+
+public function thunderBoltParty(unit source, unit target)
+    new DummyCaster()
+        ..origin(source.getPos())
+        ..owner(source.getOwner())
+        ..delay(1.5) // Lowered to 1.5 so dummy units don't clutter map memory
+        ..castTarget(AbilityIds.stormBolt, 1, OrderIds.thunderbolt, target)
+
+
+// --- Object Generation Specifications ---
+
+@compiletime function genDummyWisp()
+    new UnitDefinition(DUMMY_WISP_ID, UnitIds.wisp)
+        ..setFoodCost(0)
+        ..setCollisionSize(0.0)
+        ..setModelFile("dummy.mdl") // Ensures it stays invisible naturally
+
+@compiletime function genAbil()
+    new AbilityDefinitionRainofFire(GPROJECTILE_ID)
+        ..setDamagePerSecond(1, 0)
+        ..setNumberofWaves(1, 0)
+        ..setBuffs(1, "")
+        ..setEffects(1, "")
+        ..setArtTarget("")
+        ..setArtCaster("")
+        ..setMissileArt("")
+        ..setMaximumDamageperWave(1, 0)
+        ..setDamage(1, 0)
+        ..setManaCost(1, 1)
+        ..setCooldown(1, 1)
+
+@compiletime function giveAbil()
+    new HeroDefinition('Udre', 'Udre')
+        ..setHeroAbilities(commaList(GPROJECTILE_ID))
+
+
+// --- Spell Trigger Hook ---
+
+init
+    EventListener.onPointCast(GPROJECTILE_ID) (caster, targetPos) ->
+        let casterPos = caster.getPos()
+
+        new PortableProjectile(caster, casterPos, targetPos, 600.0, 100.0, "Abilities\\Weapons\\SearingArrow\\SearingArrowMissile.mdl") target ->
+            dealDamage(caster, target, 150.0, ATTACK_TYPE_MAGIC, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+            thunderBoltParty(caster, target)
