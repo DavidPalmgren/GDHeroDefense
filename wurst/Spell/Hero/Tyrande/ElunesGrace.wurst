@@ -1,0 +1,43 @@
+package ElunesGrace
+
+import ChannelAbilityPreset
+import ObjectIdGenerator
+import AbilityTooltipGenerator
+import ClosureEvents
+import GroupUtils
+
+public constant ELUNES_GRACE_ID = compiletime(ABIL_ID_GEN.next()) 
+constant real RANGE = 900.
+constant real BASE_AOE = 400.
+
+let tgen = new AbilityTooltipGenerator("Elune's Grace")
+
+@compiletime function generateAbility()
+    new ChannelAbilityPreset(ELUNES_GRACE_ID, 3, true, tgen)
+        ..setHeroAbility(false)
+        ..presetButtonPosNormal(0, 2)
+        ..presetTargetTypes(Targettype.POINT)
+        ..presetOption(Option.TARGETIMAGE, true)
+        ..presetAreaofEffect((int lvl) -> BASE_AOE + (lvl * 25.))
+        ..tooltipStartListen()
+        ..presetHotkey("Q")
+        ..setName("Elune's Grace")
+        ..presetIcon("BTNFrostBolt")
+        ..presetCooldown(lvl -> 24 - ((lvl - 1.) * 2))
+        ..presetManaCost(lvl -> 100 + ((lvl - 1) * 25))
+        ..presetCastRange((int lvl) -> RANGE + (lvl * 100.))
+        ..setLevelSkipRequirement(0)
+        ..tooltipStopListen()
+
+init
+    EventListener.onPointCast(ELUNES_GRACE_ID) (unit caster, vec2 target) ->
+        let lvl = caster.getAbilityLevel(ELUNES_GRACE_ID)
+        let currentAoE = BASE_AOE + (lvl * 25.)
+        let healAmount = 150.0 + (lvl * 50.0)
+        
+        ENUM_GROUP.enumUnitsInRange(target, currentAoE)
+        for u in ENUM_GROUP
+            if u.isAlive() and u.isAllyOf(caster.getOwner()) and not u.isType(UNIT_TYPE_STRUCTURE) and not u.isType(UNIT_TYPE_MECHANICAL)
+                u.setHP(u.getHP() + healAmount)
+
+                flashEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt.mdl", u.getPos())

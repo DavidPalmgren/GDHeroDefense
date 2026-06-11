@@ -1,8 +1,11 @@
 package TyrandeMain
 
-import UnitObjEditing
 import MoonWarrior
+import ElunesGrace
 import Starfall
+
+
+import UnitObjEditing
 import ObjectIds
 import Destructable
 
@@ -11,4 +14,10 @@ import Destructable
         ..setModelFile("TyrandeWhisperwind.mdx")
 
     new HeroDefinition('Emoo', 'Emoo')
-    ..setHeroAbilities(commaList(MOON_WARRIOR_ID, STARFALL_ID))
+        ..setHeroAbilities(commaList(MOON_WARRIOR_ID, STARFALL_ID, ELUNES_GRACE_ID))
+    new HeroDefinition('E00S', 'E00S')
+        ..setHeroAbilities(commaList(MOON_WARRIOR_ID, STARFALL_ID, ELUNES_GRACE_ID))
+    new HeroDefinition('E00Q', 'E00Q')
+        ..setHeroAbilities(commaList(MOON_WARRIOR_ID, STARFALL_ID, ELUNES_GRACE_ID))
+    new HeroDefinition('E00T', 'E00T')
+        ..setHeroAbilities(commaList(MOON_WARRIOR_ID, STARFALL_ID, ELUNES_GRACE_ID))

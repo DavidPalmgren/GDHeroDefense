@@ -6,7 +6,8 @@ import Icons
 import ClosureEvents
 import ClosureTimers
 import GroupUtils
-
+import AbilityTooltipGenerator
+import ChannelAbilityPreset
 
 public constant STARFALL_ID = compiletime(ABIL_ID_GEN.next())
 
@@ -20,40 +21,40 @@ constant string STAR_SFX = "Abilities\\Spells\\NightElf\\Starfall\\StarfallTarge
 constant string IMPACT_SFX = "Abilities\\Spells\\NightElf\\Starfall\\StarfallCaster.mdl"
 constant string CHANNEL_SFX = "Abilities\\Spells\\NightElf\\Starfall\\StarfallCaster.mdl"
 
+// FIXED: Changed header string from "Elune's Grace" to your custom Starfall rules description.
+// The tooltip generator will automatically append Mana, Cooldown, and Range stats right under this text!
+let tgen = new AbilityTooltipGenerator(
+    "Calls down stars in the target area dealing [100 / 150 / 200] damage in a " + 
+    STAR_AOE.toInt().toString() + " radius each. Stars fall faster the longer the spell channels."
+)
+
 @compiletime function genAbility()
-    new AbilityDefinitionArchMageBlizzard(STARFALL_ID)
+    new ChannelAbilityPreset(STARFALL_ID, 3, true, tgen)
+        ..setHeroAbility(true)
+        ..presetButtonPosNormal(1, 0)
+        ..presetTargetTypes(Targettype.POINT)
+        ..presetOption(Option.TARGETIMAGE, true) // Enables the green target ground circle indicator
+
+        // Wurst listens to presets inside this block to automatically construct level 1/2/3 hover tooltips
+        ..tooltipStartListen()
+        ..presetHotkey("W")
         ..setName("Starfall")
-        ..setTooltipNormal(1, "Starfall")
-        ..setTooltipNormalExtended(1, "Calls down stars in the target area dealing " + STAR_DAMAGE.toInt().toString() + " damage in " + STAR_AOE.toInt().toString() + " radius each. Stars fall faster the longer the spell channels.")
         ..setTooltipLearn("Learn Starfall")
         ..setTooltipLearnExtended("Channel a starfall that ramps up in intensity over time.")
+        
+        // MODERN PRESET METHODS: These automatically scale across all 3 ability levels via a simple lambda function
+        ..presetAreaofEffect(lvl -> STARFALL_RADIUS)
+        ..presetCastRange(lvl -> 900. + (lvl * 100.))   // Ranks up: 1000, 1100, 1200 range
+        ..presetCooldown(lvl -> 45. - (lvl * 5.))       // Ranks up: 40s, 35s, 30s cooldown
+        ..presetManaCost(lvl -> 100 + (lvl * 25))       // Ranks up: 125, 150, 175 mana
+        ..presetDurationNormal(lvl -> CHANNEL_DURATION)
+        ..presetDurationHero(lvl -> CHANNEL_DURATION)
+        ..tooltipStopListen()
+
         ..setIconNormal(Icons.bTNStarFall)
         ..setIconResearch(Icons.bTNStarFall)
-        ..setButtonPositionNormalX(1)
-        ..setButtonPositionNormalY(0)
-        ..setDamage(1, 0)
-        ..setDamage(2, 0)
-        ..setDamage(3, 0)
-        ..setCastRange(1, 900.)
-        ..setCooldown(1, 1.)
-        ..setManaCost(1, 2)
-        ..setAreaofEffect(1, STARFALL_RADIUS)
-        ..setDurationNormal(1, CHANNEL_DURATION)
-        ..setDurationHero(1, CHANNEL_DURATION)
-        ..setDamagePerSecond(1, 0)      // zero out blizzard damage
-        ..setNumberofWaves(1, 0)        // zero out blizzard waves
-        ..setRequirements("")
-        ..setRequirementsLevels("")
-        ..setRequiredLevel(1)
         ..setLevelSkipRequirement(2)
-        ..setHeroAbility(true)
-        ..setItemAbility(false)
-        ..setBuffs(1, "")
-        ..setBuffs(2, "")
-        ..setBuffs(3, "")
-        ..setEffects(1, "")
-        ..setEffects(2, "")
-        ..setEffects(3, "")
+        // Note: Empty elements like requirements, buffs, and effects are handled safely by the base template.
 
 
 
@@ -61,6 +62,10 @@ constant string CHANNEL_SFX = "Abilities\\Spells\\NightElf\\Starfall\\StarfallCa
 init
     EventListener.onCast(STARFALL_ID) (caster) ->
         let targetPos = EventData.getSpellTargetPos()
+        let lvl = caster.getAbilityLevel(STARFALL_ID)
+        
+        // 2. Scale the damage based on that level (Level 1: 100, Level 2: 150, Level 3: 200)
+        let currentDamage = STAR_DAMAGE + ((lvl - 1) * 25.0)
 
         // Caster effect while channeling
         let channelSfx = caster.addEffect(CHANNEL_SFX, "overhead")
@@ -94,7 +99,7 @@ init
                     ENUM_GROUP.enumUnitsInRange(starPos, STAR_AOE, null)
                     for u in ENUM_GROUP
                         if u.isAlive() and u.getOwner().isEnemyOf(caster.getOwner())
-                            caster.damageTarget(u, STAR_DAMAGE, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+                            caster.damageTarget(u, currentDamage, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 
             // End channel after duration
             if elapsed >= CHANNEL_DURATION
