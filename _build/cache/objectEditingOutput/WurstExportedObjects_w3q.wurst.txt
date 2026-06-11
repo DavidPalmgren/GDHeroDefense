@@ -167,6 +167,14 @@ import ObjEditingNatives
 	..setLvlDataString("gub1", 5, 0, "Increases the damage of all units")
 
 
+@compiletime function create_w3q_R00A()
+	let def = createObjectDefinition("w3q", 'R00A', 'Reht')
+	..setLvlDataString("gnam", 1, 0, "Nightsaber Taming")
+	..setLvlDataString("gar1", 1, 0, "ReplaceableTextures\\CommandButtons\\BTNAnimalWarTraining.blp")
+	..setLvlDataString("gtp1", 1, 0, "Research Nightsaber Taming")
+	..setLvlDataString("gub1", 1, 0, "Trains Nightsabers to allow Huntresses to mount them. This allows them to synergize gaining greater strength.")
+
+
 @compiletime function create_w3q_RM01()
 	let def = createObjectDefinition("w3q", 'RM01', 'Rhse')
 	..setLvlDataString("ghk1", 1, 0, "")

@@ -133,6 +133,30 @@ import AbilityObjEditing
 	..setTooltipLearnExtended("Allows the Elder Nightsaber to become invisible, move through units, although slowly for a set amount of time. When the Nightsaber attacks a unit to break invisibility, he will deal a bonus 75 physical damage.")
 
 
+@compiletime function create_w3a_A00C()
+	new AbilityDefinitionCoupleInstantArcher('A00C')
+	..setPartnerUnitType(1, "n008")
+	..setResultingUnitType(1, "esen")
+	..setRequirements("R00A")
+	..setName("Mount Nightsaber")
+	..setTooltipNormal(1, "Mount Nightsaber")
+	..setTooltipNormalExtended(1, "Mounts a Nightsaber so that the Huntress can ride into battle.")
+	// TODO no wrapper: 	..setLvlDataString("ausk", 0, 0, "e00R")
+	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNAnimalWarTraining.blp")
+
+
+@compiletime function create_w3a_A00D()
+	new AbilityDefinitionCoupleInstantHippogryph('A00D')
+	..setRequirements("R00A")
+	..setResultingUnitType(1, "esen")
+	..setPartnerUnitType(1, "e00R")
+	..setName("Pick up Huntress")
+	// TODO no wrapper: 	..setLvlDataString("ausk", 0, 0, "e00R")
+	..setTooltipNormal(1, "Pick up Huntress")
+	..setTooltipNormalExtended(1, "Picks up an Huntress so they can ride into battle.")
+	..setIconNormal("ReplaceableTextures\\PassiveButtons\\PASBTNAnimalWarTraining.blp")
+
+
 @compiletime function create_w3a_AM01()
 	new AbilityDefinitionDreadlordCarrionSwarm('AM01')
 

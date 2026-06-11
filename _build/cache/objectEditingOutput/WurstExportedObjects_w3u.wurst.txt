@@ -611,8 +611,8 @@ import UnitObjEditing
 
 @compiletime function create_w3u_e00K()
 	new BuildingDefinition('e00K', 'edob')
-	..setUnitsTrained("earc,esen,ebal")
-	..setResearchesAvailable("Remk,R008")
+	..setUnitsTrained("earc,esen,e00R,n008")
+	..setResearchesAvailable("R00A,Remk,R008")
 	..setRequirements("")
 	..setName("Sentinel's Hall")
 
@@ -703,8 +703,8 @@ import UnitObjEditing
 	..setGoldCost(50)
 	..setLumberCost(0)
 	..setSightRadiusNight(1100)
-	..setUpgradesUsed("R009,Rema,Reuv")
-	..setNormalAbilities("A00B,Ault,ACev,ACct")
+	..setUpgradesUsed("R00A,R009,Rema,Reuv")
+	..setNormalAbilities("A00D,A00B,Ault,ACev,ACct")
 	..setRace("nightelf")
 	..setSleeps(false)
 	..setCollisionSize(32.0)
@@ -714,14 +714,14 @@ import UnitObjEditing
 	..setModelFile("war3mapImported\\Panther.mdl")
 	..setScalingValue(1.0)
 	..setSelectionScale(2.0)
+	..setTooltipBasic("Train Nightsaber")
+	..setTooltipExtended("Medium melee unit with Critical Strike, Evasion and Prowl. Able to learn pick up huntress. |n|n|cffffcc00Attacks land units.|r")
 
 
 @compiletime function create_w3u_e00O()
 	new BuildingDefinition('e00O', 'eate')
 	..setUnitsTrained("Emoo,Ewar")
 	..setName("Altar of Elune")
-	..setModelFile("war3mapImported\\SEAltarOfStars.mdl")
-	..setIconGameInterface("war3mapImported\\BTNAltarOfStars.blp")
 
 
 @compiletime function create_w3u_e00P()
@@ -738,15 +738,33 @@ import UnitObjEditing
 @compiletime function create_w3u_E00Q()
 	new HeroDefinition('E00Q', 'Emoo')
 	..setName("TyrandeMoonWarrior")
-	..setModelFile("Units\\NightElf\\HeroDemonHunter\\HeroDemonHunter.mdl")
+	..setModelFile("units\\nightelf\\Archer\\Archer.mdl")
 
 
 @compiletime function create_w3u_n009()
 	new UnitDefinition('n009', 'nwlg')
 	..setRace("nightelf")
+	..setNormalAbilities("ACev,A00B,Arsk,ACct")
 	..setName("Ash'alah")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNTimberWolf.blp")
 	..setModelFile("war3mapImported\\WhiteTiger.mdl")
+
+
+@compiletime function create_w3u_e00R()
+	new UnitDefinition('e00R', 'esen')
+	..setSpeedBase(280)
+	..setBuildTime(3)
+	..setFoodCost(2)
+	..setLevel(2)
+	..setRepairLumberCost(0)
+	..setGoldCost(30)
+	..setUpgradesUsed("R009,Resm,Rema,Resc,Reuv,Remg,Repm")
+	..setArmorType("medium")
+	..setDefenseBase(3)
+	..setRequirements("")
+	..setNormalAbilities("A00C,Aesn,Ashm,Amgl,Aien,Ault")
+	..setModelFile("war3mapImported\\DismountedHuntress.mdl")
+	..setAbilitySkinList("A00C,Aesn,Ashm,Amgl,Aien,Ault,Amgi")
 
 
 @compiletime function create_w3u_x001()
@@ -1067,6 +1085,10 @@ import UnitObjEditing
 	..setHitPointsMaximumBase(720)
 	..setLumberCost(0)
 	..setAttack1DamageBase(20)
+	..setRequirements("e00K")
+	..setUpgradesUsed("R00A,Resm,Rema,Resc,Reuv,Remg,Repm")
+	..setName("Mounted Huntress")
+	..setTooltipBasic("Train Mounted Huntress")
 
 
 @compiletime function create_w3u_nwat()
