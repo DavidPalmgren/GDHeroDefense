@@ -7,8 +7,6 @@ import Icons
 import ClosureEvents
 import ClosureTimers
 import ObjectIds
-import RegisterEvents
-import TimerUtils
 
 
 public constant MOON_WARRIOR_ID = compiletime(ABIL_ID_GEN.next())
