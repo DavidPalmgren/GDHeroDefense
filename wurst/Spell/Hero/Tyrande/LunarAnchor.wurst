@@ -1,0 +1,134 @@
+package LunarAnchor
+
+import AbilityObjEditing
+import BuffObjEditing
+import ObjectIds
+import ObjectIdGenerator
+import Icons
+import DamageEvent
+import AbilityTooltipGenerator
+
+public constant LUNAR_ANCHOR_ID = compiletime(ABIL_ID_GEN.next())
+// Create separate tracking IDs for Normal Units and Heroes
+public constant LUNAR_BUFF_UNIT_ID = compiletime(ABIL_ID_GEN.next())
+public constant LUNAR_BUFF_HERO_ID = compiletime(ABIL_ID_GEN.next())
+
+constant string MOON_ART_OVERHEAD = "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareTarget.mdl"
+constant string MOON_ART_BODY     = "Abilities\\Spells\\NightElf\\AbolishMagic\\AbolishMagicTarget.mdl"
+
+
+
+
+@compiletime function genLunarAnchor()
+    // 1. Create the Normal Unit Buff (Based on 'Bspo')
+    new BuffDefinition(LUNAR_BUFF_UNIT_ID, 'Bspo') 
+        ..setIcon(Icons.bTNMoonStone)
+        ..setTooltipNormal(1, "Lunar Anchor")
+        ..setTooltipNormalExtended(1, "This unit's magic resistance is shattered. Taking increased damage from spells.")
+        ..setArtTarget(1, MOON_ART_OVERHEAD)
+        ..setTargetAttachmentPoint0(1, "overhead")
+
+
+    // 2. Create the Hero Buff (Based on 'Bshp')
+    new BuffDefinition(LUNAR_BUFF_HERO_ID, 'Bshp') 
+        ..setIcon(Icons.bTNMoonStone)
+        ..setTooltipNormal(1, "Lunar Anchor")
+        ..setTooltipNormalExtended(1, "This hero's magic resistance is shattered. Taking increased damage from spells.")
+        ..setArtTarget(1, MOON_ART_OVERHEAD)
+        ..setTargetAttachmentPoint0(1, "overhead")
+
+
+    let def = new AbilityDefinitionSlowPoison(LUNAR_ANCHOR_ID)
+        ..setHeroAbility(true)
+        ..setLevels(3)
+        ..presetButtonPosNormal(2, 2)
+        ..presetButtonPosResearch(2, 0)
+        ..presetHotkey("E")
+        ..setName("Lunar Anchor")
+        
+        // Mechanics
+        ..presetMovementSpeedFactor(lvl -> 0.10 + (lvl * 0.05)) 
+        ..presetAttackSpeedFactor(lvl -> 0.05 + (lvl * 0.05))   
+        ..presetDamagePerSecond(lvl -> 0.)      
+        
+        ..setBuffs(1, LUNAR_BUFF_UNIT_ID.toRawCode())
+        ..setBuffs(2, LUNAR_BUFF_UNIT_ID.toRawCode())
+        ..setBuffs(3, LUNAR_BUFF_UNIT_ID.toRawCode())
+        
+        ..setEffects(1, LUNAR_BUFF_HERO_ID.toRawCode())
+        ..setEffects(2, LUNAR_BUFF_HERO_ID.toRawCode())
+        ..setEffects(3, LUNAR_BUFF_HERO_ID.toRawCode())
+        
+        ..presetDurationNormal(lvl -> 6.0 + (lvl * 2.))
+        ..presetDurationHero(lvl -> 3.0 + (lvl * 1.))
+        ..setIconNormal(Icons.bTNMoonStone)
+        ..setIconResearch(Icons.bTNMoonStone)
+        ..setLevelSkipRequirement(2)
+
+    // Initialize your Tooltip Generator package
+    let tgen = new AbilityTooltipGenerator(
+        Targettype.PASSIVE,
+        "Enchants Tyrande's attacks with heavy moonlight, slowing struck enemies and fundamentally shattering their magic resistance."
+    )
+
+    // Supply core identification metadata properties
+    tgen.addProperty("Levels", lvl -> "3")
+    tgen.addProperty("Name", lvl -> "Lunar Anchor")
+    tgen.addProperty("Hotkey", lvl -> "E")
+
+    // Map the scaling mechanics out into clean data entries
+    tgen.addProperty("Movement Slow", lvl -> (10 + (lvl * 5)).toString() + "%")
+    tgen.addProperty("Attack Slow", lvl -> (5 + (lvl * 5)).toString() + "%")
+    tgen.addProperty("Magic Resist Reduced", lvl -> (10 + (lvl * 5)).toString() + "%")
+    tgen.addProperty("Duration (Units)", lvl -> (6 + (lvl * 2)).toString() + "s")
+    tgen.addProperty("Duration (Heroes)", lvl -> (3 + (lvl * 1)).toString() + "s")
+
+    // Build and compile the strings onto the asset definition
+    tgen.applyToDef(def)
+
+    // 3. Create the Ability and link BOTH fields
+    // new AbilityDefinitionSlowPoison(LUNAR_ANCHOR_ID)
+    //     ..setHeroAbility(true)
+    //     ..setLevels(3)
+    //     ..presetButtonPosNormal(2, 2)
+    //     ..presetButtonPosResearch(2, 0)
+    //     ..presetHotkey("E")
+    //     ..setName("Lunar Anchor")
+    //     ..setTooltipLearn("Learn Lunar Anchor")
+    //     ..setTooltipLearnExtended("Enchants attacks to slow enemies and drop their magic resistance.")
+        
+    //     ..presetMovementSpeedFactor(lvl -> 0.10 + (lvl * 0.05)) 
+    //     ..presetAttackSpeedFactor(lvl -> 0.05 + (lvl * 0.05))   
+    //     ..presetDamagePerSecond(lvl -> 0.)      
+        
+    //     // OVERRIDE BOTH UNIT AND HERO BUFF FIELDS FOR ALL LEVELS
+    //     ..setBuffs(1, LUNAR_BUFF_UNIT_ID.toRawCode())
+    //     ..setBuffs(2, LUNAR_BUFF_UNIT_ID.toRawCode())
+    //     ..setBuffs(3, LUNAR_BUFF_UNIT_ID.toRawCode())
+        
+    //     ..setEffects(1, LUNAR_BUFF_HERO_ID.toRawCode())
+    //     ..setEffects(2, LUNAR_BUFF_HERO_ID.toRawCode())
+    //     ..setEffects(3, LUNAR_BUFF_HERO_ID.toRawCode())
+        
+    //     ..presetDurationNormal(lvl -> 6.0 + (lvl * 2.))
+    //     ..presetDurationHero(lvl -> 3.0 + (lvl * 1.))
+    //     ..setIconNormal(Icons.bTNMoonStone)
+    //     ..setIconResearch(Icons.bTNMoonStone)
+    //     ..setLevelSkipRequirement(2)
+
+    //     ..presetTooltipNormal(lvl -> "Lunar Anchor - [|cffffcc00Level " + lvl.toString() + "|r]")
+    //     ..presetTooltipNormalExtended(lvl -> "Enchants Tyrande's attacks to slow the target's movement speed by |cffffcc00" + (10 + (lvl * 5)).toString() + "%|r and reduce their magic resistance by |cffffcc00" + (10 + (lvl * 5)).toString() + "%|r for 4 seconds.")
+
+init
+    DamageEvent.addListener() ->
+        let target = DamageEvent.getTarget()
+        
+        // Check if the target has EITHER the unit or the hero variation of Lunar Anchor
+        if (target.hasAbility(LUNAR_BUFF_UNIT_ID) or target.hasAbility(LUNAR_BUFF_HERO_ID)) and BlzGetEventDamageType() == DAMAGE_TYPE_MAGIC
+            let caster = DamageEvent.getSource()
+            let incomingDmg = DamageEvent.getAmount()
+            
+            let lvl = caster.getAbilityLevel(LUNAR_ANCHOR_ID)
+            let multiplier = 1.10 + (lvl * 0.05)
+            
+            DamageEvent.setAmount(incomingDmg * multiplier)

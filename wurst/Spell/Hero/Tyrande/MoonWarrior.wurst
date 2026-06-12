@@ -7,6 +7,8 @@ import Icons
 import ClosureEvents
 import ClosureTimers
 import ObjectIds
+import RegisterEvents
+import TimerUtils
 
 
 public constant MOON_WARRIOR_ID = compiletime(ABIL_ID_GEN.next())
@@ -23,6 +25,8 @@ constant real BONUS_ATTACK_SPEED = 0.50     // VISUAL ONLY
 constant real BONUS_DAMAGE = 30.            // VISUAL ONLY
 constant string DISMOUNT_SFX = "Abilities\\Spells\\NightElf\\Blink\\BlinkCaster.mdl"
 constant string SUMMON_SFX = "Abilities\\Spells\\NightElf\\Roar\\RoarCaster.mdl"
+constant string VANISH_SFX = "Abilities\\Spells\\NightElf\\Blink\\BlinkCaster.mdl"
+
 
 
 
@@ -51,8 +55,9 @@ constant string SUMMON_SFX = "Abilities\\Spells\\NightElf\\Roar\\RoarCaster.mdl"
         ..setAlternateFormUnit(1, "E00S") // base +30dmg atk cooldown from 2.460 -> 1.6 needs to be set in editor
         ..setAlternateFormUnit(2, "E00Q") //maybe more levels later.
         ..setAlternateFormUnit(3, "E00T") //maybe more levels later
-        ..setButtonPositionNormalX(0)
-        ..setButtonPositionNormalY(0)
+        ..setButtonPositionNormalX(3)
+        ..setButtonPositionNormalY(2)
+        ..presetButtonPosResearch(3, 0)
         ..setCooldown(1, 60.)
         ..setManaCost(1, 75)
         ..setAreaofEffect(1, 0.)
@@ -69,7 +74,9 @@ constant string SUMMON_SFX = "Abilities\\Spells\\NightElf\\Roar\\RoarCaster.mdl"
         ..setItemAbility(false)
 
 
+
 init
+    // 1. Handling the Spell Cast & Natural Timeout
     EventListener.onCast(MOON_WARRIOR_ID) (caster) ->
         if caster.getTypeId() == TYRANDE_MOUNTED_ID
             let pos = caster.getPos()
@@ -82,5 +89,19 @@ init
 
             doAfter(TIGER_DURATION) ->
                 if tiger.isAlive()
-                    flashEffect(DISMOUNT_SFX, tiger.getPos())
+                    flashEffect(VANISH_SFX, tiger.getPos())
                     tiger.remove()
+
+    // 2. NEW: Intercepting Combat Death 
+    registerPlayerUnitEvent(EVENT_PLAYER_UNIT_DEATH) ->
+        let dyingUnit = GetTriggerUnit()
+        
+        if dyingUnit.getTypeId() == TIGER_UNIT_ID
+
+            flashEffect(VANISH_SFX, dyingUnit.getPos())
+            
+
+            dyingUnit.setVertexColor(0, 0, 0, 0) 
+            
+            // Vaporize the corpse out of the game's memory completely
+            dyingUnit.remove()

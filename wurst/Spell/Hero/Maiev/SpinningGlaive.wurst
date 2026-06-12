@@ -1,0 +1,118 @@
+package SpinningGlaive
+
+import AbilityObjEditing
+import ObjectIdGenerator
+import Icons
+import RegisterEvents
+import ClosureTimers
+import ClosureForGroups
+import DummyCaster
+import Orders
+import AbilityTooltipGenerator
+import ChannelAbilityPreset
+import EventHelper
+import ClosureEvents
+
+// 1. Generate Unique Object IDs
+public constant SPINNING_GLAIVE_ID = compiletime(ABIL_ID_GEN.next())
+public constant DUMMY_SLOW_ID      = compiletime(ABIL_ID_GEN.next())
+
+// Visual model for Maiev's flying/spinning weapon
+constant string GLAIVE_MODEL = "Abilities\\Weapons\\SentinelMissile\\SentinelMissile.mdl"
+
+let tgen = new AbilityTooltipGenerator(
+    Targettype.POINT,
+    "Hurls a massive, spinning glaive exactly 300 units in the targeted direction. Upon arrival, the blade zones out the area, continuously grinding and slowing nearby enemies."
+)
+
+
+@compiletime function genSpinningGlaive()
+    tgen.addProperty("Levels", lvl -> "3")
+    tgen.addProperty("Name", lvl -> "Spinning Glaive")
+    tgen.addProperty("Hotkey", lvl -> "Q")
+    tgen.addProperty("Damage per Second", lvl -> (20 + (lvl * 15)).toString())
+    tgen.addProperty("Movement Slow", lvl -> (25 + (lvl * 5)).toString() + "%")
+    tgen.addProperty("Denial Duration", lvl -> "5s")
+
+    let def = new ChannelAbilityPreset(SPINNING_GLAIVE_ID, 3, true, tgen)
+        ..setHeroAbility(true)
+        ..setLevels(3)
+        ..presetButtonPosNormal(0, 2)
+        ..presetButtonPosResearch(0, 0)
+        ..presetHotkey("Q")
+        ..setName("Spinning Glaive")
+        ..setIconNormal(Icons.bTNFanOfKnives)
+        ..setIconResearch(Icons.bTNFanOfKnives)
+        ..setLevelSkipRequirement(2)
+        
+        ..presetCastRange(lvl -> 1000.)
+        ..presetManaCost(lvl -> 80 + (lvl * 10))
+        ..presetCooldown(lvl -> 14.0 - (lvl * 1.5))
+        
+        ..presetOption(Option.VISIBLE, true)
+        ..presetTargetTypes(Targettype.POINT)
+
+
+    new AbilityDefinitionSlow(DUMMY_SLOW_ID)
+        ..setDummyAbility()
+        ..setLevels(3)
+        ..presetMovementSpeedFactor(lvl -> 0.25 + (lvl * 0.05)) // 30%, 35%, 40% Slow
+        ..presetAttackSpeedFactor(lvl -> 0.)
+        ..presetDurationNormal(lvl -> 1.5) // Slightly longer than tick rate for smooth transitions
+        ..presetDurationHero(lvl -> 1.5)
+    
+    tgen.applyToDef(def)
+
+init
+    // Catch when Maiev casts the point spell
+    EventListener.onPointCast(SPINNING_GLAIVE_ID) (caster, targetPos) ->
+        let lvl = caster.getAbilityLevel(SPINNING_GLAIVE_ID)
+        let owner = caster.getOwner()
+        
+        // Extract direction vector and enforce exactly 300 units of travel
+        let startPos = caster.getPos()
+        let castAngle = startPos.angleTo(targetPos)
+        let endPos = startPos.polarOffset(castAngle, 300.)
+
+        // FIX 1: Use addEffect instead of createEffect
+        let glaiveFx = addEffect(GLAIVE_MODEL, startPos)
+        glaiveFx.setScale(3.0)
+        
+        // FIX 2: Use .radians() instead of .rad()
+        glaiveFx.setYaw(castAngle.radians()) 
+
+        // Setup smooth projectile sliding variables
+        let speed = 900.0 // Units per second
+        let distance = 300.0
+        let travelDuration = distance / speed
+        let tickInterval = 0.03
+        let distancePerTick = speed * tickInterval
+        
+        var currentPos = startPos
+
+        // PHASE 1: Travel from Caster to the 300-unit lock point
+        doPeriodicallyTimed(tickInterval, travelDuration) travelTimer ->
+            currentPos = currentPos.polarOffset(castAngle, distancePerTick)
+            
+            // This line will no longer be ambiguous now that glaiveFx is recognized as an effect!
+            glaiveFx.setPos(currentPos)
+
+            // When it reaches exactly 300 range, transition to Area Denial
+            if travelTimer.isLast()
+                let zoneDuration = 5.0
+                let damageRadius = 225.0
+                let tickDamage = 20.0 + (lvl * 15.0)
+
+                // PHASE 2: Lock down the area for 5 seconds
+                doPeriodicallyTimed(1.0, zoneDuration) zoneTimer ->
+                    
+                    forUnitsInRange(endPos, damageRadius) targetUnit ->
+                        if targetUnit.isAlive() and targetUnit.isEnemyOf(owner) and not targetUnit.isType(UNIT_TYPE_STRUCTURE) and not targetUnit.isType(UNIT_TYPE_FLYING)
+                            
+                            caster.damageTarget(targetUnit, tickDamage, false, false, ATTACK_TYPE_MAGIC, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+                            
+                            new DummyCaster()
+                                ..castTarget(DUMMY_SLOW_ID, lvl, OrderIds.slow, targetUnit)
+
+                    if zoneTimer.isLast()
+                        glaiveFx.destr()

@@ -1,0 +1,19 @@
+package MaievHeroDefinition
+
+import UnitObjEditing
+import ObjectIds
+import ObjectIdGenerator
+import AbilityIds
+
+
+import SpinningGlaive
+import VengefulRetribution
+import ModifiedBlink
+
+
+public constant MAIEV_ID = compiletime(UNIT_ID_GEN.next())
+
+
+@compiletime function defineHero()
+  new HeroDefinition('Ewar', 'Ewar')
+    ..setHeroAbilities(commaList(SPINNING_GLAIVE_ID,VENGEFUL_PASSIVE_ID, MODIFIED_BLINK_ID, AbilityIds.wardenSpiritofVengeance))

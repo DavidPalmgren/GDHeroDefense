@@ -1,0 +1,88 @@
+package VengefulRetribution
+
+import AbilityObjEditing
+import UnitObjEditing
+import ObjectIdGenerator
+import Icons
+import DamageEvent
+import HashMap
+import UnitIds
+
+// 1. Generate Unique IDs for the Passive and the Spirit
+public constant VENGEFUL_PASSIVE_ID = compiletime(ABIL_ID_GEN.next())
+public constant SPIRIT_UNIT_ID       = compiletime(UNIT_ID_GEN.next())
+
+@compiletime function genVengefulObjects()
+    // Create the Hero Passive (Using Level Loop to avoid syntax errors)
+    let def = new AbilityDefinitionHardenedSkin(VENGEFUL_PASSIVE_ID)
+        ..setHeroAbility(true)
+        ..setLevels(3)
+        ..presetButtonPosNormal(2, 2) // E Slot
+        ..presetButtonPosResearch(2, 0) // E Slot
+        ..presetHotkey("E")
+        ..setIconNormal(Icons.bTNWarden2)
+        ..setIconResearch(Icons.bTNWarden2)
+        ..setName("Vengeful Retribution")
+        ..setRequirements("")
+
+        ..setTooltipLearn("Learn Vengeful Retribution")
+        ..setTooltipLearnExtended("The Warden channels her pain into pure malice. Every damage threshold taken automatically spawns a short-lived Vengeful Spirit to assault nearby enemies.")
+        
+    for lvl = 1 to 3
+        // Scaling threshold: Level 1 requires 150 dmg, Lvl 2 requires 130, Lvl 3 requires 110
+        let threshold = 170 - (lvl * 20)
+        def.setTooltipNormal(lvl, "Vengeful Retribution - [|cffffcc00Level " + lvl.toString() + "|r]")
+        def.setTooltipNormalExtended(lvl, "The Warden channels her pain into pure malice. Every " + threshold.toString() + " damage taken automatically spawns a short-lived Vengeful Spirit to assault nearby enemies.")
+        
+        // Strip out base values so it doesn't reduce incoming damage
+        def.setChancetoReduceDamage(lvl, 0.0)
+        def.setIgnoredDamage(lvl, 0)
+        def.setMinimumDamage(lvl, 0)
+        def.setIncludeMeleeDamage(lvl, false)
+        def.setIncludeRangedDamage(lvl, false)
+
+    // Create the Custom Vengeful Spirit Unit
+    new UnitDefinition(SPIRIT_UNIT_ID, UnitIds.vengeance) // Clones 'esen' (the standard Spirit of Vengeance)
+        ..setName("Vengeful Spirit")
+        ..setNormalAbilities("")
+        ..setHitPointsMaximumBase(300)
+        ..setSpeedBase(330)
+        ..setAttack1DamageBase(18)
+        ..setAttack1CooldownTime(1.2)
+
+
+// Global map tracking current damage pools per unit instance
+let damageRegistry = new HashMap<unit, real>()
+
+init
+    // Global damage listener fires whenever ANY unit takes damage
+    DamageEvent.addListener() ->
+        let target = DamageEvent.getTarget()
+        
+        // Ensure the damaged unit has our passive and is still standing
+        if target.hasAbility(VENGEFUL_PASSIVE_ID) and target.isAlive()
+            let lvl = target.getAbilityLevel(VENGEFUL_PASSIVE_ID)
+            let threshold = 170.0 - (lvl * 20.0) // 150 / 130 / 110
+
+            var currentDmg = 0.0
+            if damageRegistry.has(target)
+                currentDmg = damageRegistry.get(target)
+                
+            currentDmg += DamageEvent.getAmount()
+            
+            while currentDmg >= threshold
+                currentDmg -= threshold
+                
+                let spawnPos = target.getPos()
+                let owner = target.getOwner()
+                
+                let spirit = createUnit(owner, SPIRIT_UNIT_ID, spawnPos, target.getFacingAngle())
+                
+                
+                spirit.setTimedLife(15.0)
+                
+                // Play a brief shadow poof effect at her feet
+                flashEffect("Abilities\\Spells\\NightElf\\Blink\\BlinkTarget.mdl", spawnPos)
+                
+            // Save the remaining leftover damage back to memory
+            damageRegistry.put(target, currentDmg)

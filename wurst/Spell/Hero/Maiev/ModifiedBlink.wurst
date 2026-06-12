@@ -1,0 +1,27 @@
+package ModifiedBlink
+
+import AbilityObjEditing
+import ObjectIdGenerator
+
+// The "tgen" compiletime ID generator for this ability
+public constant MODIFIED_BLINK_ID = compiletime(ABIL_ID_GEN.next())
+
+@compiletime function genModifiedBlink()
+    new AbilityDefinitionWardenBlink(MODIFIED_BLINK_ID)
+        ..setHeroAbility(true)
+        ..setLevels(3)
+        
+        // Configured for the 'W' Grid Slot
+        ..presetButtonPosNormal(1, 2)      // Column 1, Row 2 (W Slot)
+        ..presetButtonPosResearch(1, 0)    // Column 1, Row 0
+        ..presetHotkey("W")
+        
+        // Standard Blink defaults scaling per level
+        ..setName("Blink")
+        ..presetCastRange(lvl -> 200.0 + (lvl * 200.0)) // 400 / 600 / 800
+        ..presetCooldown(lvl -> 15.0 - (lvl * 3.0))     // 12 / 9 / 6 seconds
+        ..presetManaCost(lvl -> 50)                     // Flat 50 mana
+        
+        // Set tooltips to match the standard W hotkey layout
+        ..presetTooltipNormal(lvl -> "Blink - [|cffffcc00Level " + lvl.toString() + "|r]")
+        ..presetTooltipNormalExtended(lvl -> "Short distance teleportation that allows the Warden to pass in and out of combat safely.")

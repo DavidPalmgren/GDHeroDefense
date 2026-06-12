@@ -1,16 +1,12 @@
 package vipersting
 
 import ClosureEvents
-import ObjectIdGenerator
-import AbilityObjEditing
-import ObjectIds
-import AbilityIds
 import OrderIds
 import ChannelAbilityPreset
 import DummyCaster
-import Icons
 
-// Import your custom projectile & damage system from your core package
+
+
 import Projectile 
 
 public constant VIPER_STING_ID = compiletime(ABIL_ID_GEN.next())
@@ -20,26 +16,23 @@ public constant VIPER_STING_ID = compiletime(ABIL_ID_GEN.next())
         ..setButtonPositionNormalX(2)
         ..setButtonPositionNormalY(0)
         ..setIconNormal(Icons.bTNPoisonArrow)
-        ..setTooltipNormal(1, "Cast Viper Sting")
+        ..setTooltipNormal(1, "Viper Sting")
         ..setTooltipNormalExtended(1, "Fires a venom-tipped arrow in a straight line. Enemies struck take physical puncture damage and are infected with a lethal toxin that slows movement speed and inflicts nature damage over time.")
         ..setCooldown(1, 10.0)
         ..setManaCost(1, 60)
         ..setCastRange(1, 1100.0)
         ..setTargetType(1, 2) // Point Target
 
-@compiletime function giveAbilToHero()
-    // Updates your hero to have access to your growing toolkit
+@compiletime function giveAbilToUnit()
     new UnitDefinition('e00P', 'e00P')
         ..setNormalAbilities(commaList(VIPER_STING_ID))
 
 
-/// Spawns a dummy to strike the target with Shadow Strike to handle the poison DoT + Slow
 function applyPoison(unit source, unit target)
     new DummyCaster()
         ..origin(target.getPos())
         ..owner(source.getOwner())
         ..delay(1.5) 
-        // Shadow Strike naturally handles the initial decay slow, duration, and periodic tick damage
         ..castTarget(AbilityIds.shadowStrike, 1, OrderIds.shadowstrike, target)
 
 
@@ -47,16 +40,12 @@ init
     EventListener.onPointCast(VIPER_STING_ID) (caster, targetPos) ->
         let casterPos = caster.getPos()
         
-        let speed = 1400.0 // Slightly faster than Binding Shot
-        let radius = 90.0   // Slightly narrower skillshot width
+        let speed = 1400.0
+        let radius = 90.0
         let maxRange = 1100.0
         let poisonArrowModel = "Abilities\\Weapons\\PoisonArrow\\PoisonArrowMissile.mdl"
 
-        // Fire the projectile using our fixed-distance line variation
         new PortableProjectile(caster, casterPos, targetPos, speed, radius, maxRange, poisonArrowModel) target ->
-            
-            // 1. Initial Impact: Pierce physical damage (affected by armor)
+
             dealDamage(caster, target, 80.0, ATTACK_TYPE_PIERCE, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WOOD_LIGHT_BASH)
-            
-            // 2. Secondary Effect: Inject the venomous DoT + Slow
             applyPoison(caster, target)

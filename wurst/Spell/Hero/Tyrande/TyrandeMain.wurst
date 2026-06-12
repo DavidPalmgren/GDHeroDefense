@@ -1,23 +1,24 @@
 package TyrandeMain
 
+import UnitObjEditing
+import ObjectIds
+
 import MoonWarrior
 import ElunesGrace
 import Starfall
+import LunarAnchor
 
 
-import UnitObjEditing
-import ObjectIds
-import Destructable
 
 @compiletime function setupTyrandeModel()
     new UnitDefinition(TYRANDE_MODEL_ID, TYRANDE_MODEL_ID)
         ..setModelFile("TyrandeWhisperwind.mdx")
 
     new HeroDefinition('Emoo', 'Emoo')
-        ..setHeroAbilities(commaList(MOON_WARRIOR_ID, STARFALL_ID, ELUNES_GRACE_ID))
+        ..setHeroAbilities(commaList(MOON_WARRIOR_ID, STARFALL_ID, ELUNES_GRACE_ID, LUNAR_ANCHOR_ID))
     new HeroDefinition('E00S', 'E00S')
-        ..setHeroAbilities(commaList(MOON_WARRIOR_ID, STARFALL_ID, ELUNES_GRACE_ID))
+        ..setHeroAbilities(commaList(MOON_WARRIOR_ID, STARFALL_ID, ELUNES_GRACE_ID, LUNAR_ANCHOR_ID))
     new HeroDefinition('E00Q', 'E00Q')
-        ..setHeroAbilities(commaList(MOON_WARRIOR_ID, STARFALL_ID, ELUNES_GRACE_ID))
+        ..setHeroAbilities(commaList(MOON_WARRIOR_ID, STARFALL_ID, ELUNES_GRACE_ID, LUNAR_ANCHOR_ID))
     new HeroDefinition('E00T', 'E00T')
-        ..setHeroAbilities(commaList(MOON_WARRIOR_ID, STARFALL_ID, ELUNES_GRACE_ID))
+        ..setHeroAbilities(commaList(MOON_WARRIOR_ID, STARFALL_ID, ELUNES_GRACE_ID, LUNAR_ANCHOR_ID))
