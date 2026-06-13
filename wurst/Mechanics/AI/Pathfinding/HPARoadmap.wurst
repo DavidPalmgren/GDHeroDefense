@@ -1,0 +1,452 @@
+package HPARoadmap
+import ClosureTimers
+import HPAManager
+import LinkedList
+import HPAStructures
+import HPALocalSearch   // isTileClear: the engine pathing probe, reused per edge
+
+// =====================================================================
+// SEMI-MANUAL ROADMAP
+//
+// Replaces the cluster grid + per-cell flood. Instead of computing
+// walkability for the whole map (which is what blew the op limit), a
+// designer drops marker units in the editor wherever a waypoint should
+// be. At load we turn each marker into a graph node, then auto-link
+// every visible pair: an edge exists only if the straight segment
+// between two nodes is clear, checked with the engine pathing probe
+// (so it sees terrain, cliffs, pathing-blocker doodads AND trees alike).
+//
+// The expensive accurate check now runs once per EDGE (a few thousand),
+// not per CELL (millions), and is throttled across ticks, so it never
+// approaches the per-thread op limit. Queries connect start/target to
+// the nearest visible nodes and run the same macro A* as before.
+// =====================================================================
+
+// ---- CONFIG ---------------------------------------------------------
+// Your "Pathfinding Node" marker unit. Make it a locust unit (no collision,
+// not selectable); the model can be anything visible in the editor. Set this
+// to its rawcode.
+public constant int MARKER_NODE_ID = 'h002'
+
+// Two nodes are link candidates only within this range. Larger = fewer,
+// longer hops (cheaper graph, coarser routes); smaller = denser graph.
+constant real LINK_MAX_DIST = 1100.0
+// Sampling step along a candidate edge for the line-of-sight test. Smaller =
+// catches thinner blockers, more probes per edge.
+constant real LOS_STEP = 24.0
+// Per-tick cost ceiling for the link bake. A distance reject costs 1; an
+// edge LoS test costs its sample count. ~400 keeps each tick far under the
+// op limit while finishing the bake in a few seconds. Raise to bake faster.
+constant int LINK_BUDGET_PER_TICK = 400
+constant real LINK_TICK = 0.03
+
+// A* limits (mirrors the cluster A*).
+constant int MACRO_MAX_EXP = 6000
+constant int OPEN_CAP = 4096
+
+// ---- STATE ----------------------------------------------------------
+MacroNode array g_node
+int g_nodeCount = 0
+group g_enumGroup = CreateGroup()
+bool g_ready = false
+
+// Link-bake resumable cursor (outer i, inner j).
+int g_li = 0
+int g_lj = 1
+
+// A* scratch.
+int g_searchGen = 0
+MacroNode array g_open
+int g_openSize = 0
+
+// Per-query record of which real nodes got a temporary edge to the target,
+// so cleanup only touches those (not all nodes).
+let g_targetLinks = new LinkedList<MacroNode>()
+
+// ---- READY LISTENER -------------------------------------------------
+public interface RoadmapReadyListener
+    function run()
+
+RoadmapReadyListener g_listener = null
+
+public function onRoadmapReady(RoadmapReadyListener l)
+    g_listener = l
+    if g_ready
+        l.run()
+
+// ---- LINE OF SIGHT --------------------------------------------------
+// True if a unit can walk the straight segment a->b: every sampled point
+// (centre, endpoints, and every LOS_STEP along the way) must be clear per
+// the engine probe. One blocked sample (tree, blocker doodad, cliff) fails it.
+function segmentClear(vec2 a, vec2 b) returns bool
+    let dist = a.distanceTo(b)
+    let steps = (dist / LOS_STEP).toInt()
+    if steps <= 0
+        return isTileClear(a.x, a.y)
+    let dir = (b - a).norm()
+    for i = 0 to steps
+        let p = a + dir * (i.toReal() * LOS_STEP)
+        if not isTileClear(p.x, p.y)
+            return false
+    return true
+
+function sampleCount(vec2 a, vec2 b) returns int
+    return (a.distanceTo(b) / LOS_STEP).toInt() + 1
+
+// ---- NODE LOADING ---------------------------------------------------
+function loadMarkers()
+    g_nodeCount = 0
+    GroupEnumUnitsInRect(g_enumGroup, GetPlayableMapRect(), null)
+    var u = FirstOfGroup(g_enumGroup)
+    while u != null
+        GroupRemoveUnit(g_enumGroup, u)
+        if GetUnitTypeId(u) == MARKER_NODE_ID
+            g_node[g_nodeCount] = new MacroNode(vec2(GetUnitX(u), GetUnitY(u)))
+            g_nodeCount++
+            RemoveUnit(u)
+        u = FirstOfGroup(g_enumGroup)
+
+// ---- LINK BAKE (throttled) -----------------------------------------
+function bakeLinksTick()
+    var budget = LINK_BUDGET_PER_TICK
+    while g_li < g_nodeCount - 1 and budget > 0
+        let a = g_node[g_li]
+        let b = g_node[g_lj]
+        let d = a.worldPos.distanceTo(b.worldPos)
+        if d <= LINK_MAX_DIST
+            budget -= sampleCount(a.worldPos, b.worldPos)
+            if segmentClear(a.worldPos, b.worldPos)
+                // Undirected: add the edge both ways.
+                a.edges.add(new MacroEdge(b, d))
+                b.edges.add(new MacroEdge(a, d))
+        else
+            budget--
+        g_lj++
+        if g_lj >= g_nodeCount
+            g_li++
+            g_lj = g_li + 1
+
+// ---- INIT -----------------------------------------------------------
+public function initRoadmap()
+    loadMarkers()
+    print("HPA Roadmap: loaded " + g_nodeCount.toString() + " marker nodes.")
+    if g_nodeCount < 2
+        g_ready = true
+        print("HPA Roadmap: <2 nodes, nothing to link. Ready.")
+        if g_listener != null
+            g_listener.run()
+        return
+
+    g_li = 0
+    g_lj = 1
+    doPeriodically(LINK_TICK) cb ->
+        bakeLinksTick()
+        if g_li >= g_nodeCount - 1
+            destroy cb
+            g_ready = true
+            print("HPA Roadmap: linking complete. Ready for queries.")
+            if g_listener != null
+                g_listener.run()
+
+// ---- QUERY-TIME TEMP CONNECTIONS -----------------------------------
+// Connect a free point to every visible node within range. For the start we
+// add outgoing edges (start -> node); for the target we add incoming edges
+// (node -> target) and record the sources so we can unlink them after.
+//
+// Both report how many nodes were in range vs how many actually linked, and
+// will FORCE an attach to the nearest in-range node if the corridor test
+// linked nothing (see below). Returns the number of edges added.
+
+// Interior-only clearance test for query attach segments. Unlike segmentClear
+// (used for permanent node<->node edges, which samples both endpoints) this
+// SKIPS both endpoints. The free start/target point may legitimately sit on a
+// tight/blocked probe tile -- the unit is standing there, or wants to stop
+// there -- and the engine's own pathing resolves that first/last step. We
+// validate only the corridor strictly between the points, so a wall in the
+// middle still rejects the link.
+function attachClear(vec2 a, vec2 b) returns bool
+    let dist = a.distanceTo(b)
+    let steps = (dist / LOS_STEP).toInt()
+    if steps <= 1
+        return true   // too short to contain an interior sample
+    let dir = (b - a).norm()
+    for i = 1 to steps - 1
+        let p = a + dir * (i.toReal() * LOS_STEP)
+        if not isTileClear(p.x, p.y)
+            return false
+    return true
+
+function connectStart(MacroNode s) returns int
+    var inRange = 0
+    var linked = 0
+    MacroNode nearest = null
+    var nearestD = LINK_MAX_DIST + 1.0
+    for i = 0 to g_nodeCount - 1
+        let node = g_node[i]
+        let d = s.worldPos.distanceTo(node.worldPos)
+        if d <= LINK_MAX_DIST
+            inRange++
+            if d < nearestD
+                nearestD = d
+                nearest = node
+            if attachClear(s.worldPos, node.worldPos)
+                s.edges.add(new MacroEdge(node, d))
+                linked++
+    // Guarantee an attach if any node is in range. The unit's first move order
+    // uses the engine's native pathing, so a strict clear corridor is not
+    // required to reach the first waypoint -- this rescues a start that probes
+    // blocked (clearHere=false) or sits behind a thin blocker.
+    if linked == 0 and nearest != null
+        s.edges.add(new MacroEdge(nearest, nearestD))
+        linked++
+        print("HPA[Q]: start forced-attach to nearest in-range node " + nearest.worldPos.toString())
+    print("HPA[Q]: start " + s.worldPos.toString()
+        + " clearHere=" + isWorldPointClear(s.worldPos.x, s.worldPos.y).toString()
+        + " inRange=" + inRange.toString() + " linked=" + linked.toString())
+    return linked
+
+function connectTarget(MacroNode t) returns int
+    g_targetLinks.clear()
+    var inRange = 0
+    var linked = 0
+    MacroNode nearest = null
+    var nearestD = LINK_MAX_DIST + 1.0
+    for i = 0 to g_nodeCount - 1
+        let node = g_node[i]
+        let d = t.worldPos.distanceTo(node.worldPos)
+        if d <= LINK_MAX_DIST
+            inRange++
+            if d < nearestD
+                nearestD = d
+                nearest = node
+            if attachClear(node.worldPos, t.worldPos)
+                node.edges.add(new MacroEdge(t, d))
+                g_targetLinks.add(node)
+                linked++
+    if linked == 0 and nearest != null
+        nearest.edges.add(new MacroEdge(t, nearestD))
+        g_targetLinks.add(nearest)
+        linked++
+        print("HPA[Q]: target forced-attach from nearest in-range node " + nearest.worldPos.toString())
+    print("HPA[Q]: target " + t.worldPos.toString()
+        + " clearHere=" + isWorldPointClear(t.worldPos.x, t.worldPos.y).toString()
+        + " inRange=" + inRange.toString() + " linked=" + linked.toString())
+    return linked
+
+function unlinkTarget(MacroNode t)
+    for node in g_targetLinks
+        let keep = new LinkedList<MacroEdge>()
+        for e in node.edges
+            if e.targetNode == t
+                destroy e
+            else
+                keep.add(e)
+        node.edges.clear()
+        for e in keep
+            node.edges.add(e)
+        destroy keep
+    g_targetLinks.clear()
+
+// ---- A* (self-contained; same algorithm as the cluster macro A*) ---
+function roadAStar(MacroNode startN, MacroNode endN) returns real
+    g_searchGen++
+    g_openSize = 0
+    startN.aGen = g_searchGen
+    startN.aG = 0.0
+    startN.aF = startN.worldPos.distanceTo(endN.worldPos)
+    startN.aClosed = false
+    startN.aParent = null
+    g_open[0] = startN
+    g_openSize = 1
+
+    var finalDist = -1.0
+    var exp = 0
+    while g_openSize > 0 and exp < MACRO_MAX_EXP
+        exp++
+        var bestIdx = 0
+        for i = 1 to g_openSize - 1
+            if g_open[i].aF < g_open[bestIdx].aF
+                bestIdx = i
+        let current = g_open[bestIdx]
+
+        if current == endN
+            finalDist = current.aG
+            break
+
+        g_open[bestIdx] = g_open[g_openSize - 1]
+        g_openSize--
+        current.aClosed = true
+
+        for e in current.edges
+            let nb = e.targetNode
+            let alreadyClosed = nb.aGen == g_searchGen and nb.aClosed
+            if not alreadyClosed
+                let tentativeG = current.aG + e.cost
+                if nb.aGen != g_searchGen
+                    nb.aGen = g_searchGen
+                    nb.aClosed = false
+                    nb.aG = tentativeG
+                    nb.aF = tentativeG + nb.worldPos.distanceTo(endN.worldPos)
+                    nb.aParent = current
+                    if g_openSize < OPEN_CAP
+                        g_open[g_openSize] = nb
+                        g_openSize++
+                else if tentativeG < nb.aG
+                    nb.aG = tentativeG
+                    nb.aF = tentativeG + nb.worldPos.distanceTo(endN.worldPos)
+                    nb.aParent = current
+    return finalDist
+
+// Reconstruct START -> TARGET (travel order), matching what the unit mover
+// expects from getWaypoints().
+function roadReconstruct(MacroNode endN) returns HPAPath
+    let p = new HPAPath()
+    let rev = new LinkedList<MacroNode>()
+    var cur = endN
+    while cur != null
+        rev.add(cur)
+        cur = cur.aParent
+    for i = rev.size() - 1 downto 0
+        p.addWaypoint(rev.get(i).worldPos)
+    destroy rev
+    return p
+
+// ---- PUBLIC QUERY -------------------------------------------------
+public function getRoadPath(vec2 start, vec2 target) returns PathResult
+    if not g_ready
+        return new PathResult(null, -1.0, false, true)
+
+    let s = new MacroNode(start)
+    let t = new MacroNode(target)
+    let sLinks = connectStart(s)
+    let tLinks = connectTarget(t)
+    if sLinks == 0 or tLinks == 0
+        // No attach point on one side -> A* can't even begin. Report which side
+        // so the fix is obvious (add/extend markers near that endpoint).
+        print("HPA[Q]: cannot attach " + (sLinks == 0 ? "START" : "")
+            + ((sLinks == 0 and tLinks == 0) ? " and " : "")
+            + (tLinks == 0 ? "TARGET" : "") + " to the roadmap.")
+
+    let dist = roadAStar(s, t)
+    HPAPath path = null
+    if dist >= 0.0
+        path = roadReconstruct(t)
+
+    // Cleanup: remove the temporary edges and nodes so the graph is pristine
+    // for the next query.
+    unlinkTarget(t)
+    for e in s.edges
+        destroy e
+    destroy s.edges
+    destroy s
+    destroy t.edges
+    destroy t
+
+    return new PathResult(path, dist, dist >= 0.0, false)
+
+// ---- DEBUG & VERIFICATION TOOLS ------------------------------------
+
+// Internal helper to find the node closest to any given map coordinate
+function findClosestNode(vec2 pos) returns MacroNode
+    MacroNode closest = null
+    var minCDist = 999999.0
+    for i = 0 to g_nodeCount - 1
+        let d = g_node[i].worldPos.distanceTo(pos)
+        if d < minCDist
+            minCDist = d
+            closest = g_node[i]
+    return closest
+
+/** Prints a full text diagnostic of every node and its connection count */
+public function printRoadmapReport()
+    print("=== HPA ROADMAP LINK REPORT ===")
+    var isolatedNodes = 0
+    var totalEdges = 0
+    
+    for i = 0 to g_nodeCount - 1
+        let node = g_node[i]
+        let edgeCount = node.edges.size()
+        totalEdges += edgeCount
+        
+        // Log individual node health
+        print("Node #" + i.toString() + " at " + node.worldPos.toString() + " has " + edgeCount.toString() + " links.")
+        
+        if edgeCount == 0
+            isolatedNodes++
+            
+    print("Graph Summary: Total Nodes = " + g_nodeCount.toString() + " | Total Directed Edges = " + totalEdges.toString())
+    if isolatedNodes > 0
+        print("⚠️ WARNING: Found " + isolatedNodes.toString() + " completely isolated nodes with 0 links! Check your LINK_MAX_DIST or terrain blockers.")
+    print("===============================")
+
+// BFS scratch for printReachability (one slot per node).
+MacroNode array g_reach
+
+/** Connectivity probe. BFS over the BAKED edges starting from the node nearest
+    posA, then reports the size of that connected component and whether the node
+    nearest posB is inside it. This ignores the temporary start/target links a
+    query adds, so it reflects the permanent graph -- which is what decides
+    whether getRoadPath can find a route between two points.
+
+    success=false + sysErr=false from a query means "B reachable from A? false"
+    here: the two points sit in different components. The printed component list
+    is every node stranded with A, so the gap to bridge is between that list and
+    the nodes that are missing from it. */
+public function printReachability(vec2 posA, vec2 posB)
+    let a = findClosestNode(posA)
+    let b = findClosestNode(posB)
+    print("=== HPA REACHABILITY PROBE ===")
+    if a == null or b == null
+        print("Roadmap has no nodes; nothing to check.")
+        print("==============================")
+        return
+
+    // Reuse the A* generation stamp purely as a visited marker. Safe because
+    // this is a standalone diagnostic and the next real query bumps the gen.
+    g_searchGen++
+    var head = 0
+    var tail = 0
+    a.aGen = g_searchGen
+    g_reach[tail] = a
+    tail++
+
+    var reachedB = false
+    while head < tail
+        let cur = g_reach[head]
+        head++
+        if cur == b
+            reachedB = true
+        for e in cur.edges
+            let nb = e.targetNode
+            if nb.aGen != g_searchGen
+                nb.aGen = g_searchGen
+                g_reach[tail] = nb
+                tail++
+
+    print("A nearest node: " + a.worldPos.toString())
+    print("B nearest node: " + b.worldPos.toString())
+    print("Component reachable from A = " + tail.toString() + " / " + g_nodeCount.toString() + " nodes:")
+    for i = 0 to tail - 1
+        print("   " + g_reach[i].worldPos.toString())
+    print("B reachable from A? " + reachedB.toString())
+    if not reachedB
+        print("=> A and B are in DIFFERENT components. Bridge the gap between the")
+        print("   list above and the nodes NOT in it (add a marker, or raise")
+        print("   LINK_MAX_DIST enough that a CLEAR segment can span the gap).")
+    print("==============================")
+
+/** Checks if the two nodes closest to these two points are linked together */
+public function checkIsLinked(vec2 posA, vec2 posB) returns bool
+    let nodeA = findClosestNode(posA)
+    let nodeB = findClosestNode(posB)
+    
+    // Safety checks
+    if nodeA == null or nodeB == null or nodeA == nodeB
+        return false
+        
+    // Look for nodeB inside nodeA's edge list
+    for e in nodeA.edges
+        if e.targetNode == nodeB
+            return true
+            
+    return false

@@ -1,0 +1,8 @@
+package HPAPathfindingInit
+import HPARoadmap
+
+init
+    // Wait a moment at map start to let the engine settle, then build the
+    // roadmap from the placed marker units. (The old cluster grid + flood bake
+    // is retired; HPAManager still compiles but is no longer driven.)
+    CreateTimer()..start(0.0, () -> initRoadmap())

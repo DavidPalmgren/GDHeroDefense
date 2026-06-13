@@ -1,0 +1,64 @@
+package HPAStructures
+import LinkedList
+
+// =====================================================================
+// HPAStructures  -  graph node / edge / path types for the roadmap
+// ---------------------------------------------------------------------
+// The cluster-grid types (Cluster) and the cluster-layout constants
+// (MAP_MIN_*, maxClusters*, CLUSTER_*, TILE_SIZE, DEBUG_SHOW_GATES) that
+// the old cluster HPA* needed have been removed along with that system.
+// =====================================================================
+
+// High-level "highway" graph node (a roadmap waypoint).
+public class MacroNode
+    vec2 worldPos
+    let edges = new LinkedList<MacroEdge>()
+
+    // -----------------------------------------------------------------
+    // A* search scratch, stored directly on the node and validated by a
+    // generation stamp (aGen). When aGen != the current search's gen, the
+    // node is treated as fresh/unvisited. This removes the per-query O(n)
+    // open/closed membership scans and temporary search-node allocations.
+    // -----------------------------------------------------------------
+    int aGen = 0
+    real aG = 0.0
+    real aF = 0.0
+    bool aClosed = false
+    MacroNode aParent = null
+
+    construct(vec2 pos)
+        this.worldPos = pos
+
+// Connection between two highway nodes.
+public class MacroEdge
+    MacroNode targetNode
+    real cost
+
+    construct(MacroNode target, real cost)
+        this.targetNode = target
+        this.cost = cost
+
+// Wrapper class to safely hold a vec2 inside Wurst's generic containers
+// (vec2 is a tuple and cannot be a generic type argument directly).
+public class PathNode
+    vec2 pos
+    construct(vec2 pos)
+        this.pos = pos
+
+// Container for a calculated high-level waypoint path (START -> TARGET order).
+public class HPAPath
+    private let waypoints = new LinkedList<PathNode>()
+
+    function addWaypoint(vec2 pos)
+        this.waypoints.add(new PathNode(pos))
+
+    function getWaypoints() returns LinkedList<PathNode>
+        return this.waypoints
+
+    function size() returns int
+        return this.waypoints.size()
+
+    ondestroy
+        for node in this.waypoints
+            destroy node
+        destroy this.waypoints

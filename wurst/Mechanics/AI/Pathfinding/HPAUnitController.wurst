@@ -1,0 +1,163 @@
+package HPAUnitController
+import ClosureTimers
+import HPAManager
+import HPAStructures
+import HPARoadmap
+import LinkedList
+
+public class TrackNode
+    real x
+    real y
+    TrackNode nextNode = null
+
+    construct(real x, real y)
+        this.x = x
+        this.y = y
+
+// =====================================================================
+// GLOBAL PUBLIC HELPER INTERFACE
+// =====================================================================
+
+// Build a start->target ordered TrackNode chain from an HPAPath.
+// Returns the head node, or null if the path has no usable waypoint.
+//
+// The HPAPath is now guaranteed to be in START -> TARGET order: same-cluster
+// queries build [start, target] directly, and reconstructPath() reverses its
+// parent-pointer walk so cross-cluster queries come out start-first too. So we
+// just read it front-to-back. We drop a leading waypoint sitting on top of the
+// unit (within ~64) so the first order is to a real target, not the unit's
+// own tile.
+function buildChainFromPath(HPAPath path, vec2 startPos) returns TrackNode
+    let wps = path.getWaypoints()
+    let n = wps.size()
+    if n == 0
+        return null
+
+    TrackNode head = null
+    TrackNode tail = null
+    for i = 0 to n - 1
+        let p = wps.get(i).pos
+        let skip = head == null and p.distanceTo(startPos) < 64.0
+        if not skip
+            let node = new TrackNode(p.x, p.y)
+            if head == null
+                head = node
+                tail = node
+            else
+                tail.nextNode = node
+                tail = node
+    return head
+
+
+// Accepts the exact explicit start and end vectors. The navigator now asks
+// the HPA system for the real high-level path and walks its waypoints; the
+// hardcoded straight line is kept only as a fallback for when the system
+// returns no usable path (not ready, unreachable, or a degenerate path).
+public function startHPA_Navigation(unit u, vec2 startPos, vec2 endPos)
+    if u == null or GetUnitTypeId(u) == 0 or not IsUnitAliveBJ(u)
+        return
+
+    // 0.05s engine buffer window to prevent instant coordinate deletion
+    doAfter(0.05) ->
+        if u != null and GetUnitTypeId(u) != 0 and IsUnitAliveBJ(u)
+            u.setMoveSpeed(300.0)
+
+            // 1. ASK THE ROADMAP FOR A REAL PATH -------------------------
+            // getRoadPath runs the macro A* over the marker-node roadmap and
+            // returns a START -> TARGET waypoint chain. (The retired cluster
+            // query getHPA_PathDistance was never built, so it always failed
+            // and forced the straight-line fallback below -- that was the bug
+            // where the unit moved straight to the final node.)
+            TrackNode headNode = null
+            let result = getRoadPath(startPos, endPos)
+            if result != null
+                // Diagnostic: report exactly what the roadmap returned so a
+                // fallback run is distinguishable from a real-path run.
+                //   success=true  -> a path was found; waypoints is its length
+                //   sysErr=true   -> roadmap not ready when queried
+                //   success=false -> ready, but start/target couldn't be linked
+                //                    into one connected component (A* failed)
+                let wpCount = result.path != null ? result.path.size() : 0
+                print("HPA Nav: query success=" + result.isSuccess.toString()
+                    + " dist=" + result.distance.toString()
+                    + " sysErr=" + result.isSystemError.toString()
+                    + " waypoints=" + wpCount.toString())
+
+                if result.isSuccess and result.path != null
+                    headNode = buildChainFromPath(result.path, startPos)
+                // The PathResult and its HPAPath are heap objects we now own.
+                // We've copied the coordinates into our own TrackNodes, so free
+                // them here instead of leaking one allocation per navigation.
+                if result.path != null
+                    destroy result.path
+                destroy result
+
+            // 2. FALLBACK: straight-line baseline ------------------------
+            // Only used when the HPA query gave us nothing to walk. This is the
+            // old behaviour, retained so the mover still does *something* (and
+            // so you can tell a fallback run from a real-path run).
+            if headNode == null
+                print("HPA Nav: no usable path -> straight-line FALLBACK")
+                let firstWaypoint = startPos + (endPos - startPos).norm() * 150.0
+                headNode = new TrackNode(firstWaypoint.x, firstWaypoint.y)
+                let tailNode = new TrackNode(endPos.x, endPos.y)
+                headNode.nextNode = tailNode
+
+            // 3. DRIVE THE MOVER (unchanged) -----------------------------
+            if headNode != null
+                var currentTrackNode = headNode
+                let currentTargetVec = vec2(currentTrackNode.x, currentTrackNode.y)
+
+                // Fire the initial order to the first waypoint
+                u.issuePointOrderById(851986, currentTargetVec)
+                print("HPA Nav: move order -> world (" + currentTargetVec.x.toString() + ", " + currentTargetVec.y.toString() + ")")
+
+                var lastPos = u.getPos()
+                var ticksStuck = 0
+
+                // High-fidelity tracking loop running every 0.25 seconds
+                doPeriodically(0.25) cb ->
+                    if u == null or GetUnitTypeId(u) == 0 or not IsUnitAliveBJ(u)
+                        // Emergency memory cleanup loop to stop leaks if unit dies
+                        var temp = currentTrackNode
+                        while temp != null
+                            let next = temp.nextNode
+                            destroy temp
+                            temp = next
+                        destroy cb
+                    else if currentTrackNode == null
+                        destroy cb
+                    else
+                        let currentPos = u.getPos()
+                        let targetVec = vec2(currentTrackNode.x, currentTrackNode.y)
+
+                        // Node Proximity Check
+                        if currentPos.distanceTo(targetVec) < 130.0
+                            let old = currentTrackNode
+                            currentTrackNode = currentTrackNode.nextNode
+                            destroy old
+
+                            if currentTrackNode != null
+                                let nextTarget = vec2(currentTrackNode.x, currentTrackNode.y)
+                                u.issuePointOrderById(851986, nextTarget)
+                                print("HPA Nav: move order -> world (" + nextTarget.x.toString() + ", " + nextTarget.y.toString() + ")")
+                            else
+                                u.issueImmediateOrderById(851972) // Stop cleanly at final destination
+                                print("HPA Nav: final waypoint reached, issuing STOP")
+                                destroy cb
+                        else
+                            // Stuck Recovery / Anti-Interruption Override
+                            if currentPos.distanceTo(lastPos) < 6.0
+                                ticksStuck++
+                                if ticksStuck >= 4 or u.getCurrentOrder() == 0
+                                    u.issuePointOrderById(851986, targetVec)
+                                    print("HPA Nav: re-issue (stuck) -> world (" + targetVec.x.toString() + ", " + targetVec.y.toString() + ")")
+                                    ticksStuck = 0
+                            else if u.getCurrentOrder() == 0
+                                u.issuePointOrderById(851986, targetVec)
+                                print("HPA Nav: re-issue (idle) -> world (" + targetVec.x.toString() + ", " + targetVec.y.toString() + ")")
+                                ticksStuck = 0
+                            else
+                                ticksStuck = 0
+
+                            lastPos = currentPos

@@ -1,0 +1,148 @@
+package AI
+
+import winLoss
+import ControlPoint
+import HPAPathfindingInit
+import HPADebug
+import ClosureTimers
+import HPAUnitController
+import HPARoadmap
+
+// Variables
+public real nearestDist = 0
+public int spawnUnit = 0
+public int numberUnits = 0
+public vec2 spawnLocation = ZERO2
+public unit nearest = null
+public unit attackingUnit = null
+public unit selectedTarget = null
+public group attackingGroup = CreateGroup()
+public group spawnGroup = CreateGroup()
+public group warsong1 = CreateGroup()
+public player spawnPlayer = null
+public player playerTarget = null
+
+// Spawn Regions
+vec2 spawn1 = gg_rct_Region_000.getCenter()
+vec2 spawn2 = gg_rct_Region_001.getCenter()
+
+// creates number of units of type unitID for playerOwner at spawn and puts them in group unitGroup
+function createPlayerUnit(player playerOwner, int unitID, int number, group unitGroup, vec2 spawn)
+    for i=0 to number-1
+        let u = createUnit(playerOwner,unitID,spawn, angle(0.))
+        unitGroup.add(u)
+
+//creates number of units of type unit ID at spawn for playerOwner, adds them to unitGroup, and initializes the listener triggers for commands
+public function spawnWave(player playerOwner, player target, int unitID, int number, group unitGroup, vec2 spawn)
+    createPlayerUnit(playerOwner, unitID, number, unitGroup, spawn)
+    setupAttackCp(unitGroup)
+    setupAttackPlayerCp(unitGroup, target)
+
+// sets up listener to spawn units when players[0] types -spawn
+function setupWaveSpawn(player playerOwner, player target, int unitID, int number, group unitGroup, vec2 spawn)
+    spawnPlayer = playerOwner
+    playerTarget = target
+    spawnGroup = unitGroup
+    spawnUnit = unitID
+    numberUnits = number
+    spawnLocation = spawn
+    CreateTrigger()
+        ..registerPlayerChatEvent(players[0], "-spawn", true) // hardcoded for testing
+        ..addAction() ->
+        spawnWave(spawnPlayer,playerTarget, spawnUnit, numberUnits, spawnGroup, spawnLocation)
+
+
+// sets up listener to for group to attack nearest player cp from target when players[0] types -attack player
+function setupAttackPlayerCp(group attacker, player target)
+    attackingGroup = attacker
+    playerTarget = target
+    selectedTarget = getNearestEnemyPlayerCp(attacker.get(0), target)
+    CreateTrigger()
+        ..registerPlayerChatEvent(players[0], "-attack player", true) // hardcoded for testing
+        ..addAction()->
+        for i=0 to attackingGroup.size()-1
+            SetUnitAcquireRange(attackingGroup.get(i), 100.)
+            attackCp(attackingGroup.get(i),false, playerTarget)
+
+// same as setupAttackPlayerCp but targets a neutral cp target instead of a player cp and uses command -attack
+function setupAttackCp(group g)
+    selectedTarget = getNearestNeutralCp(g.get(0))
+    attackingGroup = g
+    CreateTrigger()
+        ..registerPlayerChatEvent(players[0], "-attack", true) // hardcoded for testing
+        ..addAction()->
+        for i=0 to attackingGroup.size()-1
+            SetUnitAcquireRange(attackingGroup.get(i), 100.)
+            attackCp(attackingGroup.get(i), true, null)
+
+// create function to assign the target and issue the attack. If bool = true attack nearest neutral cp, false = nearest player cp
+function attackCp(unit u, bool b, player p)
+    attackingUnit = u
+    if b == true    
+        selectedTarget = getNearestNeutralCp(u)
+    else
+        selectedTarget = getNearestEnemyPlayerCp(u, p)
+    attackingUnit.issueTargetOrder("attack", selectedTarget)
+
+// gets nearest neutral hostile cp relative to unit u
+function getNearestNeutralCp(unit u) returns unit
+    unit nearest = null
+    real nearestDist = 99999.
+    for controlpoint in controlPoints
+        let owner = cpOwners.get(controlpoint)
+        if owner == players[24]
+            let dist = u.getPos().distanceTo(controlpoint.getPos())
+            if dist < nearestDist
+                nearestDist = dist
+                nearest = controlpoint
+    return nearest
+
+// gets nearest enemy cp belonging to target relative to unit u
+function getNearestEnemyPlayerCp(unit u, player target) returns unit
+    playerTarget = target
+    unit nearest = null
+    real nearestDist = 99999.
+    for controlpoint in controlPoints
+        let owner = cpOwners.get(controlpoint)        
+        if owner == playerTarget
+            and IsPlayerEnemy(owner, u.getOwner())
+            let dist = u.getPos().distanceTo(controlpoint.getPos())
+            if dist < nearestDist
+                nearestDist = dist
+                nearest = controlpoint
+    return nearest
+
+   
+
+init
+    let targetPos = udg_mountHyjal.getPos()
+
+    onRoadmapReady()->
+        printRoadmapReport()
+
+        let testCarrier = players[5]
+
+        let spawn = gg_rct_Region_000
+        let center = spawn.getCenter()
+        let dir = (targetPos - center).norm()
+        let w = spawn.getMaxX() - spawn.getMinX()
+        let h = spawn.getMaxY() - spawn.getMinY()
+        let halfExtent = (w > h ? w : h) / 2.0
+        let safeSpawn = center + dir * (halfExtent + 64.0)
+
+        // Confirm the spawn and target sit in the same roadmap component before
+        // we navigate. If "B reachable from A? false", the query will fail and
+        // the mover will fall back to a straight line -- fix the graph, not the
+        // mover. (Lists the component stranded with the spawn.)
+        printReachability(safeSpawn, targetPos)
+
+        let u = createUnit(testCarrier, 'h005', safeSpawn, angle(0))
+        watchUnitFate(u, "test")  // (HPADebug) uncomment to trace the unit's fate
+        RemoveGuardPosition(u)
+        u.setInvulnerable(true)
+
+        // startHPA_Navigation queries the roadmap (getRoadPath) and walks the
+        // returned high-level waypoints node by node, falling back to a
+        // straight line only if the system returns no usable path.
+        doAfter(0.5) ->
+            startHPA_Navigation(u, safeSpawn, targetPos)

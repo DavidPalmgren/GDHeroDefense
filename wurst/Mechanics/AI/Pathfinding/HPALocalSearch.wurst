@@ -1,0 +1,109 @@
+package HPALocalSearch
+
+// =====================================================================
+// HPALocalSearch  -  engine walkability probe
+// ---------------------------------------------------------------------
+// This file used to hold the per-cluster BFS flood (floodFrom, the
+// generation-stamped walk/mark caches, the local-cell hash helpers, etc.)
+// that fed the old cluster HPA* bake. That bake is gone, so all of it has
+// been removed. What remains is the single capability the roadmap still
+// needs: a point-clear test against the engine's full pathing.
+//
+// IsTerrainPathable only reads the STATIC terrain layer (cliffs, water,
+// tile pathing) and cannot see doodads/destructables/trees, which block on
+// the engine's DYNAMIC pathing layer. To catch those we ask the engine
+// itself: SetUnitPosition resolves a unit against the pathing it walks on, so
+// we move an inert checker unit to the point and read back where it landed.
+// Landed within tolerance => clear; shoved away => blocked. IsTerrainPathable
+// is kept only as a fast reject for hard terrain so we skip the heavier probe
+// on cliffs/water.
+//
+// LOOKING THROUGH UNITS  (why the checker MUST be a 0-collision dummy)
+// SetUnitPosition resolves against FULL collision, which includes OTHER UNITS.
+// With a footman-collision checker ('hfoo', ~31 radius) a placed army standing
+// on a node or corridor shoves the checker, so the spot reads blocked and the
+// graph routes around troops that will have moved by the time anyone travels
+// there. Unit-vs-unit blocking is DYNAMIC and must never bake into a STATIC
+// graph -- live congestion is the runtime mover's problem, not the graph's.
+//
+// A unit with COLLISION SIZE 0 stacks freely with other units (it is never
+// blocked BY them) yet is still blocked by terrain, cliffs, water, building
+// pathing maps and destructable/tree pathing -- because those use pathing-map
+// textures that ignore the mover's collision. That is exactly the split we
+// want: ignore transient troops, still respect permanent structures/trees.
+//
+// >>> SET CHECKER_UNIT_ID to a dedicated ground-movement dummy whose Collision
+//     Size is 0 (Movement Type = Foot, NOT a Locust -- locust removes pathing
+//     resolution entirely and SetUnitPosition would just teleport). 'hfoo' is
+//     only a stand-in and is WRONG for production precisely because of its
+//     collision. Do NOT try to zero collision at runtime via BlzSetUnitRealField;
+//     that field is unreliable for collision. Use a purpose-built unit type.
+//
+// FOOTPRINT: a 0-collision checker is point-sized, so on its own it would call
+// a one-tile gap "clear" that a real footman-radius unit cannot squeeze
+// through. We restore footprint accuracy in software by also probing a ring of
+// points at PROBE_RADIUS around the centre (see isWorldPointClear). This is
+// independent of the checker's own collision, so we keep "passes through units"
+// while regaining "a disc of radius R fits here".
+// =====================================================================
+
+// Stand-in only. REPLACE with a 0-collision ground dummy (see header).
+public int CHECKER_UNIT_ID = 'hfoo'
+
+// Radius of the clearance disc to verify, in world units. Set to the collision
+// size of the units that will travel the graph (~32 for footman-sized). The
+// centre point plus a 4-point ring at this radius must all resolve clear for
+// the point to count as walkable. Set to 0 to probe a single point only.
+public real PROBE_RADIUS = 32.0
+
+// Squared landing tolerance. A clear point leaves the checker essentially
+// where we put it (~0 away); a blocked point shoves it to the nearest open
+// spot (typically a tile or more). 16 units sits comfortably between the two.
+constant real CLEAR_TOLERANCE_SQ = 16.0 * 16.0
+
+unit g_pathChecker = null
+
+function ensurePathChecker()
+    if g_pathChecker == null
+        g_pathChecker = CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), CHECKER_UNIT_ID, 0.0, 0.0, 0.0)
+        // Do NOT pause: SetUnitPosition's collision resolution (what makes a
+        // blocked point shove the checker away) is unreliable on paused units,
+        // and that resolution is the whole point. Keep it inert instead:
+        SetUnitAcquireRange(g_pathChecker, 0.0)             // never tries to engage
+        SetUnitInvulnerable(g_pathChecker, true)
+        SetUnitVertexColor(g_pathChecker, 255, 255, 255, 0) // fully transparent
+
+// One engine probe: move the checker to (x,y) and report whether it stayed put.
+// With a 0-collision checker this resolves against terrain / cliffs / water /
+// building & tree pathing maps, but NOT other mobile units.
+function probeResolves(real x, real y) returns bool
+    ensurePathChecker()
+    SetUnitPosition(g_pathChecker, x, y)
+    let ddx = GetUnitX(g_pathChecker) - x
+    let ddy = GetUnitY(g_pathChecker) - y
+    return (ddx * ddx + ddy * ddy) <= CLEAR_TOLERANCE_SQ
+
+// True if a disc of radius PROBE_RADIUS centred on (x,y) is clear of everything
+// the engine paths a ground unit against EXCEPT other mobile units (terrain +
+// doodads + destructables + building pathing). Other units are deliberately
+// ignored -- see the header.
+public function isWorldPointClear(real x, real y) returns bool
+    // Fast reject: hard terrain is blocked and cheap to detect, no probe needed.
+    if IsTerrainPathable(x, y, PATHING_TYPE_WALKABILITY)
+        return false
+    // Centre must resolve.
+    if not probeResolves(x, y)
+        return false
+    // Footprint ring: a PROBE_RADIUS disc must fit, not just the centre point.
+    if PROBE_RADIUS > 0.0
+        let ox = [PROBE_RADIUS, -PROBE_RADIUS, 0.0, 0.0]
+        let oy = [0.0, 0.0, PROBE_RADIUS, -PROBE_RADIUS]
+        for i = 0 to 3
+            if not probeResolves(x + ox[i], y + oy[i])
+                return false
+    return true
+
+// Tile-level wrapper (kept as its own function so callers reading "is this
+// point clear" stay readable).
+public function isTileClear(real cx, real cy) returns bool
+    return isWorldPointClear(cx, cy)

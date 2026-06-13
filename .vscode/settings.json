@@ -1,11 +1,11 @@
 {
   "wurst.javaOpts" : [ "-XX:+UseStringDeduplication", "-Xmx1G" ],
-  "wurst.wc3path": "D:\\Warcraft III\\_retail_\\x86_64",
+  "wurst.wc3path" : "D:\\Warcraft III\\_retail_\\x86_64",
   "files.associations" : {
     "wurst.build" : "yaml"
   },
   "search.useIgnoreFiles" : false,
-  "wurst.wurstJar" : "C:\\Users\\David\\.wurst\\wurst-compiler\\wurstscript.jar",
+  "wurst.wurstJar" : "C:\\Users\\elema\\.wurst\\wurst-compiler\\wurstscript.jar",
   "yaml.schemas" : {
     "./.vscode/wbschema.json" : "/wurst.build"
   }
