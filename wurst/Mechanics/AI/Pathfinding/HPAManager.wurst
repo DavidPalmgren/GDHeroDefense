@@ -1,0 +1,31 @@
+package HPAManager
+import HPAStructures
+
+// =====================================================================
+// HPAManager  -  shared path-query result type
+// ---------------------------------------------------------------------
+// The original cluster-based HPA* implementation (cluster grid, seam
+// gateways, intra-cluster flood baking, macro A* and the staggered bake
+// worker) lived here. That system has been retired in favour of the
+// marker-based roadmap in HPARoadmap, so all of it has been removed.
+//
+// PathResult is kept here because it is the common return type both the
+// roadmap query (HPARoadmap.getRoadPath) and the unit controller share.
+// =====================================================================
+
+// Result of a path query.
+//   path          : the high-level waypoint path (START -> TARGET), or null
+//   distance      : total path length in world units, or -1 if none
+//   isSuccess     : a usable path was found
+//   isSystemError : the pathfinding system was not ready when queried
+public class PathResult
+    HPAPath path
+    real distance
+    bool isSuccess
+    bool isSystemError
+
+    construct(HPAPath path, real dist, bool success, bool sysErr)
+        this.path = path
+        this.distance = dist
+        this.isSuccess = success
+        this.isSystemError = sysErr

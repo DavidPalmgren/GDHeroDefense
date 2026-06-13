@@ -1,0 +1,57 @@
+package HPADebug
+import ClosureTimers
+
+// Drop-in fate tracker. Call watchUnitFate(u, "test") immediately after you
+// createUnit(...) in AI.wurst, BEFORE the doAfter(0.5) that starts navigation.
+// It keeps watching across the spawn, the 0.5s wait, and the order, so the tick
+// it reports tells you whether the unit vanishes at spawn, during the wait, or
+// the moment the move order fires (~0.55s in).
+//
+// It answers the one question the bisection can't: KILLED vs REMOVED.
+//   - EVENT_UNIT_DEATH line prints  -> something KILLED it (combat / KillUnit)
+//   - "VANISHED" with NO death line -> something called RemoveUnit on it
+//                                       (almost always an order/cleanup trigger)
+
+public string tag1 = null
+
+public function watchUnitFate(unit u, string tag)
+    if u == null or GetUnitTypeId(u) == 0
+        print(tag + ": unit already invalid at watch start")
+        return
+
+    print(tag + ": watching. owner=" + u.getOwner().getId().toString()
+        + " typeId valid=" + (GetUnitTypeId(u) != 0).toString()
+        + " pos=" + u.getPos().toString())
+
+    // Did it DIE? (combat damage, KillUnit). RemoveUnit does NOT fire this.
+    tag1 = tag
+    CreateTrigger()
+        ..registerUnitEvent(u, EVENT_UNIT_DEATH)
+        ..addAction() ->
+        print(tag1 + ": >>> EVENT_UNIT_DEATH fired - the unit was KILLED")
+
+    var ticks = 0
+    var lastPos = u.getPos()
+    var lastOrder = u.getCurrentOrder()
+
+    doPeriodically(0.03) cb ->
+        ticks++
+        let secs = (ticks * 0.03)
+        if u == null or GetUnitTypeId(u) == 0
+            print(tag + ": >>> VANISHED at tick " + ticks.toString()
+                + " (~" + secs.toString() + "s). last pos=" + lastPos.toString()
+                + " last order=" + lastOrder.toString())
+            print(tag + ": (no DEATH line above => RemoveUnit; a DEATH line => killed)")
+            destroy cb
+        else
+            let nowOrder = u.getCurrentOrder()
+            // Log every order change so you can see exactly which order it had
+            // at the instant it disappeared.
+            if nowOrder != lastOrder
+                print(tag + ": order changed " + lastOrder.toString()
+                    + " -> " + nowOrder.toString() + " @ ~" + secs.toString() + "s")
+            lastOrder = nowOrder
+            lastPos = u.getPos()
+            if ticks mod 33 == 0 // ~once per second heartbeat
+                print(tag + ": alive @ " + lastPos.toString()
+                    + " order=" + nowOrder.toString())

@@ -1,0 +1,59 @@
+package Pathfinding
+import ClosureTimers
+
+public interface PathDistanceCallback
+    function onCalculated(real distance)
+
+public function calculateLongPathDistance(vec2 start, vec2 target, int dummyUnitId, PathDistanceCallback cb)
+    // FIX 1: Abandon Neutral Passive. Use an unused player slot (e.g., Player 12 / index 11).
+    // Units owned by normal player slots completely lack creep-leashing behaviors 
+    // and will never willingly run back to their spawn point.
+    let dummy = createUnit(players[PLAYER_NEUTRAL_PASSIVE], dummyUnitId, start, angle(0))
+    RemoveGuardPosition(dummy)
+    // 1. Make the unit 100% transparent (Red, Green, Blue, Alpha)
+    dummy.setVertexColor(255, 255, 255, 0)
+
+    // 2. Add Locust to hide the health bar, selection circle, and disable collision
+    dummy.addAbility('Aloc')
+    dummy.issuePointOrder("move", target)
+
+    var totalDistance = 0.0
+    var lastPos = start
+    var consecutiveStuckTicks = 0 
+    var orderRefreshTicks = 0
+
+    doPeriodically(0.05) (CallbackPeriodic cbPeriodic) ->
+        let currentPos = dummy.getPos()
+        let stepDist = lastPos.distanceTo(currentPos)
+        
+        totalDistance += stepDist
+        lastPos = currentPos
+
+        if stepDist < 0.01
+            consecutiveStuckTicks++
+        else
+            consecutiveStuckTicks = 0 
+
+        // FIX 2: Anti-Path-Decay Heartbeat
+        // WC3 has a hard limit on how many pathing nodes it can calculate in a single order.
+        // On huge paths, the order will randomly drop or decay mid-transit.
+        // We re-issue the move command every 2.0 seconds (40 ticks) to refresh its destination.
+        orderRefreshTicks++
+        if orderRefreshTicks >= 40
+            orderRefreshTicks = 0
+            dummy.issuePointOrder("move", target)
+
+        let arrived = currentPos.distanceTo(target) <= 64.0
+        
+        // Bumped to 3 seconds (60 ticks) of absolute zero movement before declaring failure.
+        let permanentlyStuck = consecutiveStuckTicks > 60
+
+        if arrived or permanentlyStuck
+            dummy.remove()
+            
+            if permanentlyStuck and not arrived
+                cb.onCalculated(-1.0) 
+            else
+                cb.onCalculated(totalDistance)
+                
+            destroy cbPeriodic
