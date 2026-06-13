@@ -78,10 +78,10 @@ public function startHPA_Navigation(unit u, vec2 startPos, vec2 endPos)
                 //   success=false -> ready, but start/target couldn't be linked
                 //                    into one connected component (A* failed)
                 let wpCount = result.path != null ? result.path.size() : 0
-                print("HPA Nav: query success=" + result.isSuccess.toString()
-                    + " dist=" + result.distance.toString()
-                    + " sysErr=" + result.isSystemError.toString()
-                    + " waypoints=" + wpCount.toString())
+                // print("HPA Nav: query success=" + result.isSuccess.toString()
+                //     + " dist=" + result.distance.toString()
+                //     + " sysErr=" + result.isSystemError.toString()
+                //     + " waypoints=" + wpCount.toString())
 
                 if result.isSuccess and result.path != null
                     headNode = buildChainFromPath(result.path, startPos)
@@ -97,7 +97,7 @@ public function startHPA_Navigation(unit u, vec2 startPos, vec2 endPos)
             // old behaviour, retained so the mover still does *something* (and
             // so you can tell a fallback run from a real-path run).
             if headNode == null
-                print("HPA Nav: no usable path -> straight-line FALLBACK")
+                // print("HPA Nav: no usable path -> straight-line FALLBACK")
                 let firstWaypoint = startPos + (endPos - startPos).norm() * 150.0
                 headNode = new TrackNode(firstWaypoint.x, firstWaypoint.y)
                 let tailNode = new TrackNode(endPos.x, endPos.y)
@@ -110,7 +110,7 @@ public function startHPA_Navigation(unit u, vec2 startPos, vec2 endPos)
 
                 // Fire the initial order to the first waypoint
                 u.issuePointOrderById(851986, currentTargetVec)
-                print("HPA Nav: move order -> world (" + currentTargetVec.x.toString() + ", " + currentTargetVec.y.toString() + ")")
+                // print("HPA Nav: move order -> world (" + currentTargetVec.x.toString() + ", " + currentTargetVec.y.toString() + ")")
 
                 var lastPos = u.getPos()
                 var ticksStuck = 0
@@ -140,10 +140,10 @@ public function startHPA_Navigation(unit u, vec2 startPos, vec2 endPos)
                             if currentTrackNode != null
                                 let nextTarget = vec2(currentTrackNode.x, currentTrackNode.y)
                                 u.issuePointOrderById(851986, nextTarget)
-                                print("HPA Nav: move order -> world (" + nextTarget.x.toString() + ", " + nextTarget.y.toString() + ")")
+                                // print("HPA Nav: move order -> world (" + nextTarget.x.toString() + ", " + nextTarget.y.toString() + ")")
                             else
                                 u.issueImmediateOrderById(851972) // Stop cleanly at final destination
-                                print("HPA Nav: final waypoint reached, issuing STOP")
+                                // print("HPA Nav: final waypoint reached, issuing STOP")
                                 destroy cb
                         else
                             // Stuck Recovery / Anti-Interruption Override
@@ -151,11 +151,11 @@ public function startHPA_Navigation(unit u, vec2 startPos, vec2 endPos)
                                 ticksStuck++
                                 if ticksStuck >= 4 or u.getCurrentOrder() == 0
                                     u.issuePointOrderById(851986, targetVec)
-                                    print("HPA Nav: re-issue (stuck) -> world (" + targetVec.x.toString() + ", " + targetVec.y.toString() + ")")
+                                    // print("HPA Nav: re-issue (stuck) -> world (" + targetVec.x.toString() + ", " + targetVec.y.toString() + ")")
                                     ticksStuck = 0
                             else if u.getCurrentOrder() == 0
                                 u.issuePointOrderById(851986, targetVec)
-                                print("HPA Nav: re-issue (idle) -> world (" + targetVec.x.toString() + ", " + targetVec.y.toString() + ")")
+                                // print("HPA Nav: re-issue (idle) -> world (" + targetVec.x.toString() + ", " + targetVec.y.toString() + ")")
                                 ticksStuck = 0
                             else
                                 ticksStuck = 0

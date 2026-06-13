@@ -254,3 +254,8 @@ import ObjEditingNatives
 	..setLvlDataString("gub1", 1, 0, "Increases Archers and Hippogryph Rider's attack range.")
 
 
+@compiletime function create_w3q_Remg()
+	let def = createObjectDefinition("w3q", 'Remg', 'Remg')
+	..setLvlDataString("greq", 1, 0, "")
+
+

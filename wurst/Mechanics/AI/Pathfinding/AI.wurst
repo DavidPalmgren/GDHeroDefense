@@ -2,8 +2,6 @@ package AI
 
 import winLoss
 import ControlPoint
-import HPAPathfindingInit
-import HPADebug
 import ClosureTimers
 import HPAUnitController
 import HPARoadmap
@@ -21,6 +19,9 @@ public group spawnGroup = CreateGroup()
 public group warsong1 = CreateGroup()
 public player spawnPlayer = null
 public player playerTarget = null
+
+
+public bool test = false //debug test
 
 // Spawn Regions
 vec2 spawn1 = gg_rct_Region_000.getCenter()
@@ -112,37 +113,35 @@ function getNearestEnemyPlayerCp(unit u, player target) returns unit
                 nearest = controlpoint
     return nearest
 
-   
-
 init
     let targetPos = udg_mountHyjal.getPos()
 
-    onRoadmapReady()->
-        printRoadmapReport()
+    if test == true
+        onRoadmapReady()->
+            printRoadmapReport()
 
-        let testCarrier = players[5]
+            let testCarrier = players[5]
+            let spawn = gg_rct_Region_000
+            let center = spawn.getCenter()
+            let dir = (targetPos - center).norm()
+            let w = spawn.getMaxX() - spawn.getMinX()
+            let h = spawn.getMaxY() - spawn.getMinY()
+            let halfExtent = (w > h ? w : h) / 2.0
+            let safeSpawn = center + dir * (halfExtent + 64.0)
 
-        let spawn = gg_rct_Region_000
-        let center = spawn.getCenter()
-        let dir = (targetPos - center).norm()
-        let w = spawn.getMaxX() - spawn.getMinX()
-        let h = spawn.getMaxY() - spawn.getMinY()
-        let halfExtent = (w > h ? w : h) / 2.0
-        let safeSpawn = center + dir * (halfExtent + 64.0)
+            // Confirm the spawn and target sit in the same roadmap component before
+            // we navigate. If "B reachable from A? false", the query will fail and
+            // the mover will fall back to a straight line -- fix the graph, not the
+            // mover. (Lists the component stranded with the spawn.)
+            printReachability(safeSpawn, targetPos)
 
-        // Confirm the spawn and target sit in the same roadmap component before
-        // we navigate. If "B reachable from A? false", the query will fail and
-        // the mover will fall back to a straight line -- fix the graph, not the
-        // mover. (Lists the component stranded with the spawn.)
-        printReachability(safeSpawn, targetPos)
+            let u = createUnit(testCarrier, 'h00K', safeSpawn, angle(0))
+            // watchUnitFate(u, "test")  // (HPADebug) uncomment to trace the unit's fate
+            RemoveGuardPosition(u)
+            u.setInvulnerable(true)
 
-        let u = createUnit(testCarrier, 'h005', safeSpawn, angle(0))
-        watchUnitFate(u, "test")  // (HPADebug) uncomment to trace the unit's fate
-        RemoveGuardPosition(u)
-        u.setInvulnerable(true)
-
-        // startHPA_Navigation queries the roadmap (getRoadPath) and walks the
-        // returned high-level waypoints node by node, falling back to a
-        // straight line only if the system returns no usable path.
-        doAfter(0.5) ->
-            startHPA_Navigation(u, safeSpawn, targetPos)
+            // startHPA_Navigation queries the roadmap (getRoadPath) and walks the
+            // returned high-level waypoints node by node, falling back to a
+            // straight line only if the system returns no usable path.
+            doAfter(0.5) ->
+                startHPA_Navigation(u, safeSpawn, targetPos)

@@ -26,7 +26,7 @@ import HPALocalSearch   // isTileClear: the engine pathing probe, reused per edg
 // Your "Pathfinding Node" marker unit. Make it a locust unit (no collision,
 // not selectable); the model can be anything visible in the editor. Set this
 // to its rawcode.
-public constant int MARKER_NODE_ID = 'h002'
+public constant int MARKER_NODE_ID = 'h00J'
 
 // Two nodes are link candidates only within this range. Larger = fewer,
 // longer hops (cheaper graph, coarser routes); smaller = denser graph.
@@ -129,10 +129,10 @@ function bakeLinksTick()
 // ---- INIT -----------------------------------------------------------
 public function initRoadmap()
     loadMarkers()
-    print("HPA Roadmap: loaded " + g_nodeCount.toString() + " marker nodes.")
+    // print("HPA Roadmap: loaded " + g_nodeCount.toString() + " marker nodes.")
     if g_nodeCount < 2
         g_ready = true
-        print("HPA Roadmap: <2 nodes, nothing to link. Ready.")
+        // print("HPA Roadmap: <2 nodes, nothing to link. Ready.")
         if g_listener != null
             g_listener.run()
         return
@@ -144,7 +144,7 @@ public function initRoadmap()
         if g_li >= g_nodeCount - 1
             destroy cb
             g_ready = true
-            print("HPA Roadmap: linking complete. Ready for queries.")
+            // print("HPA Roadmap: linking complete. Ready for queries.")
             if g_listener != null
                 g_listener.run()
 
@@ -199,10 +199,10 @@ function connectStart(MacroNode s) returns int
     if linked == 0 and nearest != null
         s.edges.add(new MacroEdge(nearest, nearestD))
         linked++
-        print("HPA[Q]: start forced-attach to nearest in-range node " + nearest.worldPos.toString())
-    print("HPA[Q]: start " + s.worldPos.toString()
-        + " clearHere=" + isWorldPointClear(s.worldPos.x, s.worldPos.y).toString()
-        + " inRange=" + inRange.toString() + " linked=" + linked.toString())
+    //     print("HPA[Q]: start forced-attach to nearest in-range node " + nearest.worldPos.toString())
+    // print("HPA[Q]: start " + s.worldPos.toString()
+    //     + " clearHere=" + isWorldPointClear(s.worldPos.x, s.worldPos.y).toString()
+    //     + " inRange=" + inRange.toString() + " linked=" + linked.toString())
     return linked
 
 function connectTarget(MacroNode t) returns int
@@ -227,10 +227,10 @@ function connectTarget(MacroNode t) returns int
         nearest.edges.add(new MacroEdge(t, nearestD))
         g_targetLinks.add(nearest)
         linked++
-        print("HPA[Q]: target forced-attach from nearest in-range node " + nearest.worldPos.toString())
-    print("HPA[Q]: target " + t.worldPos.toString()
-        + " clearHere=" + isWorldPointClear(t.worldPos.x, t.worldPos.y).toString()
-        + " inRange=" + inRange.toString() + " linked=" + linked.toString())
+    //     print("HPA[Q]: target forced-attach from nearest in-range node " + nearest.worldPos.toString())
+    // print("HPA[Q]: target " + t.worldPos.toString()
+    //     + " clearHere=" + isWorldPointClear(t.worldPos.x, t.worldPos.y).toString()
+    //     + " inRange=" + inRange.toString() + " linked=" + linked.toString())
     return linked
 
 function unlinkTarget(MacroNode t)
@@ -323,9 +323,9 @@ public function getRoadPath(vec2 start, vec2 target) returns PathResult
     if sLinks == 0 or tLinks == 0
         // No attach point on one side -> A* can't even begin. Report which side
         // so the fix is obvious (add/extend markers near that endpoint).
-        print("HPA[Q]: cannot attach " + (sLinks == 0 ? "START" : "")
-            + ((sLinks == 0 and tLinks == 0) ? " and " : "")
-            + (tLinks == 0 ? "TARGET" : "") + " to the roadmap.")
+        // print("HPA[Q]: cannot attach " + (sLinks == 0 ? "START" : "")
+        //     + ((sLinks == 0 and tLinks == 0) ? " and " : "")
+        //     + (tLinks == 0 ? "TARGET" : "") + " to the roadmap.")
 
     let dist = roadAStar(s, t)
     HPAPath path = null
@@ -359,7 +359,7 @@ function findClosestNode(vec2 pos) returns MacroNode
 
 /** Prints a full text diagnostic of every node and its connection count */
 public function printRoadmapReport()
-    print("=== HPA ROADMAP LINK REPORT ===")
+    // print("=== HPA ROADMAP LINK REPORT ===")
     var isolatedNodes = 0
     var totalEdges = 0
     
@@ -369,12 +369,12 @@ public function printRoadmapReport()
         totalEdges += edgeCount
         
         // Log individual node health
-        print("Node #" + i.toString() + " at " + node.worldPos.toString() + " has " + edgeCount.toString() + " links.")
+        // print("Node #" + i.toString() + " at " + node.worldPos.toString() + " has " + edgeCount.toString() + " links.")
         
         if edgeCount == 0
             isolatedNodes++
             
-    print("Graph Summary: Total Nodes = " + g_nodeCount.toString() + " | Total Directed Edges = " + totalEdges.toString())
+    // print("Graph Summary: Total Nodes = " + g_nodeCount.toString() + " | Total Directed Edges = " + totalEdges.toString())
     if isolatedNodes > 0
         print("⚠️ WARNING: Found " + isolatedNodes.toString() + " completely isolated nodes with 0 links! Check your LINK_MAX_DIST or terrain blockers.")
     print("===============================")
@@ -395,7 +395,7 @@ MacroNode array g_reach
 public function printReachability(vec2 posA, vec2 posB)
     let a = findClosestNode(posA)
     let b = findClosestNode(posB)
-    print("=== HPA REACHABILITY PROBE ===")
+    // print("=== HPA REACHABILITY PROBE ===")
     if a == null or b == null
         print("Roadmap has no nodes; nothing to check.")
         print("==============================")
@@ -423,8 +423,8 @@ public function printReachability(vec2 posA, vec2 posB)
                 g_reach[tail] = nb
                 tail++
 
-    print("A nearest node: " + a.worldPos.toString())
-    print("B nearest node: " + b.worldPos.toString())
+    // print("A nearest node: " + a.worldPos.toString())
+    // print("B nearest node: " + b.worldPos.toString())
     print("Component reachable from A = " + tail.toString() + " / " + g_nodeCount.toString() + " nodes:")
     for i = 0 to tail - 1
         print("   " + g_reach[i].worldPos.toString())

@@ -1,0 +1,46 @@
+package HPALog
+import LinkedList
+
+// =====================================================================
+// HPALog  -  batched, readable debug output (no chat spam)
+// ---------------------------------------------------------------------
+// Lines are buffered as you log them, then emitted by logShow as a few
+// MULTI-LINE messages instead of one message per line. A ~35-line node dump
+// collapses into ~6 messages, each shown long enough to read or screenshot.
+//
+// Why not a text file? The Preload "file write" exploit silently drops raw
+// text on current patches (it keeps only entries that look like engine calls),
+// so it produced empty files here. The maintained alternative -- stdlib FileIO
+// -- does write reliably, but encodes the data into BlzSetAbilityTooltip
+// chunks, so the file isn't clean to eyeball. Batched chat is the reliable,
+// readable option for reviewing graph state during development. If you ever
+// need the dump ON DISK (e.g. to diff across runs), say so and we can route
+// logFlush through FileIO and accept the chunk format.
+// =====================================================================
+
+let g_lines = new LinkedList<string>()
+
+// How many buffered lines to pack into a single chat message.
+constant int LINES_PER_MESSAGE = 6
+// How long (seconds) each batched message stays on screen, for reading.
+constant real SHOW_DURATION = 120.0
+
+// Buffer one line for the next logShow.
+public function logLine(string line)
+    g_lines.add(line)
+
+// Emit everything buffered so far as batched multi-line messages, then clear.
+public function logShow(string header)
+    print("===== " + header + " =====", SHOW_DURATION)
+    var batch = ""
+    var n = 0
+    for line in g_lines
+        batch += (n == 0 ? "" : "\n") + line
+        n++
+        if n >= LINES_PER_MESSAGE
+            print(batch, SHOW_DURATION)
+            batch = ""
+            n = 0
+    if n > 0
+        print(batch, SHOW_DURATION)
+    g_lines.clear()
