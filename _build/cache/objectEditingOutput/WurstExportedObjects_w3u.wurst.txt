@@ -13,7 +13,11 @@ import UnitObjEditing
 	new HeroDefinition('E000', 'Ewar')
 	..setTeamColor(0)
 	..setNormalAbilities("AInv,Ault")
+	..setBuildTime(5)
+	..setStrengthPerLevel(2.6)
+	..setAgilityPerLevel(2.6)
 	..setAbilitySkinList("AInv,Ault")
+	..setProperNames("Maeiv")
 
 
 @compiletime function create_w3u_n000()
@@ -65,13 +69,14 @@ import UnitObjEditing
 	..setHitPointsRegenerationRate(1.0)
 	..setAttack1CooldownTime(1.45)
 	..setSpeedBase(240)
-	..setGoldCost(130)
+	..setGoldCost(30)
 	..setBuildTime(3)
 	..setCollisionSize(8.0)
 	..setTooltipBasic("Train Treant")
 	..setTooltipExtended("Basic frontline unit. Can learn Thicker Bark to resist some damage and Recycle to invigorate a nearby unit on death. |n|n|cffffcc00Attacks land units.|r")
 	..setHotkey("Q")
 	..setAbilitySkinList("A000,Ault")
+	..setNormalAbilities("AM0t,AM0u,Ault")
 	..setNormalAbilities("AM0t,AM0u,Ault")
 
 
@@ -89,6 +94,7 @@ import UnitObjEditing
 	..setBuildTime(5)
 	..setLumberCost(0)
 	..setGoldCost(50)
+	..setDependencyEquivalents("")
 	..setName("Ursoc")
 	..setModelFile("units\\creeps\\GrizzlyBear\\GrizzlyBear.mdl")
 	..setTintingColorRed(120)
@@ -102,6 +108,8 @@ import UnitObjEditing
 	..setIconScoreScreen("ReplaceableTextures\\CommandButtons\\BTNGrizzlyBear.blp")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNGrizzlyBear.blp")
 	..setProperNamesUsed(1)
+	..setNormalAbilities("A001,AInv,Ault")
+	..setHeroAbilities("AM0l,A002,AM0k,AHav")
 	..setNormalAbilities("A001,AInv,Ault")
 	..setHeroAbilities("AM0l,A002,AM0k,AHav")
 
@@ -130,6 +138,7 @@ import UnitObjEditing
 	..setButtonPositionX(2)
 	..setHotkey("C")
 	..setNormalAbilities("AM0o,AInv,Ault,ACm2,Aien,Aadm,Aspo")
+	..setNormalAbilities("AM0o,AInv,Ault,ACm2,Aien,Aadm,Aspo")
 
 
 @compiletime function create_w3u_e005()
@@ -138,6 +147,7 @@ import UnitObjEditing
 	..setRequirements("e00M,nbwd")
 	..setUnitsTrained("nssn,nwat")
 	..setGoldCost(60)
+	..setLumberCost(0)
 	..setName("Sentinel Embassy")
 	..setModelFile("war3mapImported\\NETownhall.mdl")
 	..setTooltipBasic("Create Sentinel Embassy")
@@ -478,12 +488,14 @@ import UnitObjEditing
 
 @compiletime function create_w3u_e006()
 	new BuildingDefinition('e006', 'edob')
+	..setLumberCost(0)
 	..setName("Lodge")
 	..setModelFile("war3mapImported\\NightElf_Lodge.mdl")
 
 
 @compiletime function create_w3u_e007()
 	new BuildingDefinition('e007', 'edob')
+	..setLumberCost(0)
 	..setName("Refuge")
 	..setModelFile("war3mapImported\\NightElf_Refuge.mdl")
 
@@ -491,6 +503,7 @@ import UnitObjEditing
 @compiletime function create_w3u_e009()
 	new BuildingDefinition('e009', 'edob')
 	..setRequirements("e00H")
+	..setLumberCost(0)
 	..setName("Sanctuary1")
 	..setModelFile("war3mapImported\\NightElf_SanctuaryV1.mdl")
 
@@ -501,6 +514,7 @@ import UnitObjEditing
 	..setRequirements("e00N")
 	..setUnitsTrained("n00A,e00P")
 	..setGoldCost(80)
+	..setLumberCost(0)
 	..setName("Hall of Champions")
 	..setModelFile("war3mapImported\\NightElf_Haven.mdl")
 	..setTooltipBasic("Create Hall of Champions")
@@ -512,6 +526,7 @@ import UnitObjEditing
 	new BuildingDefinition('e00G', 'edob')
 	..setRequirements("e009")
 	..setResearchesAvailable("")
+	..setLumberCost(0)
 	..setName("Sanctuary2")
 	..setModelFile("war3mapImported\\NightElf_SanctuaryV2.mdl")
 
@@ -537,9 +552,25 @@ import UnitObjEditing
 @compiletime function create_w3u_e008()
 	new BuildingDefinition('e008', 'etrp')
 	..setGoldCost(40)
+	..setLumberCost(0)
+	..setRequirements("nbwd")
+	..setAttack1Range(700)
+	..setAttack1ProjectileSpeed(1500)
+	..setAttack1TargetsAllowed("air,debris,ground,item,structure,ward")
+	..setAttack1WeaponSound("")
+	..setAttack1WeaponType("missile")
+	..setNormalAbilities("Abds")
+	..setBuildTime(30)
+	..setRepairLumberCost(0)
+	..setRepairTime(30)
 	..setName("Sentinel Watchtower")
 	..setModelFile("war3mapImported\\NETByQ1.mdl")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNHumanWatchTower.blp")
+	..setTooltipBasic("Create Watchtower")
+	..setAttack1ProjectileArt("Abilities\\Weapons\\GuardTowerMissile\\GuardTowerMissile.mdl")
+	..setAbilitySkinList("Abds")
+	..setUnitSoundSet("Ballista")
+	..setTooltipExtended("Defensive watch tower. |n|n|cffffcc00Attacks land and air units.|r")
 
 
 @compiletime function create_w3u_e00B()
@@ -592,6 +623,9 @@ import UnitObjEditing
 	..setNormalAbilities("AM05,AM06,AM03")
 	..setLevel(6)
 	..setName("Xavius")
+	..setNormalAbilities("AM05,AM06,AM03")
+	..setLevel(6)
+	..setName("Xavius")
 
 
 @compiletime function create_w3u_e00J()
@@ -625,6 +659,7 @@ import UnitObjEditing
 	..setTooltipBasic("Train Moonkin")
 	..setTooltipExtended("Moonkin are wild experts of the arcane arts providing Brilliance Aura and can cast Arcane Blast doing massive aoe damage. |n|n|cffffcc00Attacks land and air units.|r")
 	..setNormalAbilities("AM09,AM0q")
+	..setNormalAbilities("AM09,AM0q")
 
 
 @compiletime function create_w3u_e00K()
@@ -633,6 +668,7 @@ import UnitObjEditing
 	..setResearchesAvailable("Reib,Remk,R008")
 	..setRequirements("")
 	..setGoldCost(50)
+	..setLumberCost(0)
 	..setName("Sentinel's Hall")
 	..setTooltipBasic("Create Sentinel's Hall")
 	..setTooltipExtended("Trains Archers, Huntresses and Glaive Throwers")
@@ -661,6 +697,7 @@ import UnitObjEditing
 	..setAbilitySkinList("Ault")
 	..setTooltipBasic("Train Night Elf Engineer")
 	..setTooltipExtended("Builds all sentinel buildings")
+	..setHotkey("Q")
 
 
 @compiletime function create_w3u_e00N()
@@ -703,7 +740,6 @@ import UnitObjEditing
 @compiletime function create_w3u_e00M()
 	new BuildingDefinition('e00M', 'edob')
 	..setResearchesAvailable("Reuv,Repm")
-	..setUnitsSold("e00L")
 	..setRequirements("")
 	..setGoldCost(150)
 	..setLumberCost(0)
@@ -712,6 +748,7 @@ import UnitObjEditing
 	..setBuildTime(80)
 	..setUpgradesTo("e00H")
 	..setNormalAbilities("Atol,Abds")
+	..setUnitsTrained("e00L")
 	..setName("Sanctuary (Tier 1)")
 	..setModelFile("war3mapImported\\NightElf_Sanctuary.mdl")
 	..setTooltipBasic("Create Sanctuary")
@@ -768,6 +805,7 @@ import UnitObjEditing
 	..setHotkey("W")
 	..setButtonPositionX(1)
 	..setNormalAbilities("AM0v")
+	..setNormalAbilities("AM0v")
 
 
 @compiletime function create_w3u_E00Q()
@@ -775,6 +813,7 @@ import UnitObjEditing
 	..setAttack1DamageBase(30)
 	..setName("TyrandeMoonWarrior 2")
 	..setModelFile("units\\nightelf\\Archer\\Archer.mdl")
+	..setHeroAbilities("AM0e,AM0f,AM0g,AM0h")
 	..setHeroAbilities("AM0e,AM0f,AM0g,AM0h")
 
 
@@ -817,6 +856,7 @@ import UnitObjEditing
 	..setName("TyrandeMoonWarrior 1")
 	..setModelFile("units\\nightelf\\Archer\\Archer.mdl")
 	..setHeroAbilities("AM0e,AM0f,AM0g,AM0h")
+	..setHeroAbilities("AM0e,AM0f,AM0g,AM0h")
 
 
 @compiletime function create_w3u_E00T()
@@ -824,6 +864,7 @@ import UnitObjEditing
 	..setAttack1DamageBase(30)
 	..setName("TyrandeMoonWarrior 3")
 	..setModelFile("units\\nightelf\\Archer\\Archer.mdl")
+	..setHeroAbilities("AM0e,AM0f,AM0g,AM0h")
 	..setHeroAbilities("AM0e,AM0f,AM0g,AM0h")
 
 
@@ -865,9 +906,12 @@ import UnitObjEditing
 	..setResearchesAvailable("R00A,Reht")
 	..setUnitsTrained("n008,ehip,n00B")
 	..setGoldCost(50)
+	..setLumberCost(0)
 	..setName("Beastiary")
 	..setModelFile("war3mapImported\\NightElf_Lodge.mdl")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNPigFarm.blp")
+	..setTooltipBasic("Create Beastiary")
+	..setTooltipExtended("Trains the various hunter pets. Contains upgrades for Nightsaber and Hippogryph taming.")
 
 
 @compiletime function create_w3u_n00B()
@@ -883,6 +927,14 @@ import UnitObjEditing
 	..setAbilitySkinList("ACmi,Adtg")
 	..setHotkey("E")
 	..setButtonPositionX(2)
+
+
+@compiletime function create_w3u_e00V()
+	new BuildingDefinition('e00V', 'eden')
+	..setName("Ancient Curios")
+	..setTooltipBasic("Build Ancient Curios")
+	..setModelFile("buildings\\other\\Marketplace\\Marketplace.mdl")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNBlackMarket.blp")
 
 
 @compiletime function create_w3u_x001()
@@ -1024,7 +1076,7 @@ import UnitObjEditing
 	..setFoodCost(2)
 	..setNormalAbilities("A003,Aien,Ault")
 	..setLumberCost(0)
-	..setAttack1DamageBase(27)
+	..setAttack1DamageBase(20)
 	..setUpgradesUsed("R002,R001,Resw,Rerh,Resi,Reuv,Repm")
 	..setBuildTime(3)
 	..setSpeedBase(340)
@@ -1104,6 +1156,8 @@ import UnitObjEditing
 	..setLumberCost(0)
 	..setNormalAbilities("AM0a,AInv,Ault")
 	..setHeroAbilities("AM0c,AM0d,AM0b")
+	..setNormalAbilities("AM0a,AInv,Ault")
+	..setHeroAbilities("AM0c,AM0d,AM0b")
 
 
 @compiletime function create_w3u_Emoo()
@@ -1111,6 +1165,9 @@ import UnitObjEditing
 	..setBuildTime(5)
 	..setGoldCost(50)
 	..setLumberCost(0)
+	..setIntelligencePerLevel(2.9)
+	..setProperNames("Tyrande")
+	..setHeroAbilities("AM0e,AM0f,AM0g,AM0h")
 	..setHeroAbilities("AM0e,AM0f,AM0g,AM0h")
 
 
@@ -1300,18 +1357,32 @@ import UnitObjEditing
 	..setUpgradesUsed("Rema,R009,R008,Reib,Remk,Reht,Reuv")
 
 
+@compiletime function create_w3u_ebal()
+	new UnitDefinition('ebal', 'ebal')
+	..setRequirements("nbwd")
+
+
+@compiletime function create_w3u_efon()
+	new UnitDefinition('efon', 'efon')
+	..setNormalAbilities("A000,Ault")
+	..setAbilitySkinList("A000,Ault")
+
+
 @compiletime function create_w3u_Udre()
 	new HeroDefinition('Udre', 'Udre')
+	..setHeroAbilities("AM09")
 	..setHeroAbilities("AM09")
 
 
 @compiletime function create_w3u_x004()
 	new UnitDefinition('x004', 'x004')
 	..setModelFile("TyrandeWhisperwind.mdx")
+	..setModelFile("TyrandeWhisperwind.mdx")
 
 
 @compiletime function create_w3u_edtm()
 	new UnitDefinition('edtm', 'edtm')
+	..setNormalAbilities("AM0n,Arav,Afa2,Ault")
 	..setNormalAbilities("AM0n,Arav,Afa2,Ault")
 
 
@@ -1320,10 +1391,14 @@ import UnitObjEditing
 	..setNormalAbilities("AM0p")
 	..setLevel(6)
 	..setName("Ligga")
+	..setNormalAbilities("AM0p")
+	..setLevel(6)
+	..setName("Ligga")
 
 
 @compiletime function create_w3u_Ewar()
 	new HeroDefinition('Ewar', 'Ewar')
+	..setHeroAbilities("AM0w,AM0y,AM0z,AEsv")
 	..setHeroAbilities("AM0w,AM0y,AM0z,AEsv")
 
 

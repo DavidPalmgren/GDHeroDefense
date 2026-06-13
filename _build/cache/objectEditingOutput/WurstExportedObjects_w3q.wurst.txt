@@ -7,6 +7,7 @@ import ObjEditingNatives
 	let def = createObjectDefinition("w3q", 'R000', 'Rehs')
 	..setLvlDataString("greq", 1, 0, "")
 	..setLvlDataInt("gtib", 0, 0, 30)
+	..setLvlDataInt("glmb", 0, 0, 0)
 	..setLvlDataString("gnam", 1, 0, "Thicker Bark")
 	..setLvlDataString("gar1", 1, 0, "ReplaceableTextures\\CommandButtons\\BTNEatTree.blp")
 	..setLvlDataString("gtp1", 1, 0, "Research Thicker Bark")
@@ -172,6 +173,7 @@ import ObjEditingNatives
 	let def = createObjectDefinition("w3q", 'R00A', 'Reht')
 	..setLvlDataInt("glmb", 0, 0, 0)
 	..setLvlDataInt("gtib", 0, 0, 45)
+	..setLvlDataString("greq", 1, 0, "nbwd")
 	..setLvlDataString("gnam", 1, 0, "Nightsaber Taming")
 	..setLvlDataString("gar1", 1, 0, "ReplaceableTextures\\CommandButtons\\BTNAnimalWarTraining.blp")
 	..setLvlDataString("gtp1", 1, 0, "Research Nightsaber Taming")
@@ -204,7 +206,7 @@ import ObjEditingNatives
 @compiletime function create_w3q_Remk()
 	let def = createObjectDefinition("w3q", 'Remk', 'Remk')
 	..setLvlDataUnreal("gba1", 0, 0, 6.0)
-	..setLvlDataString("greq", 1, 0, "edob,etoa")
+	..setLvlDataString("greq", 1, 0, "e00H,nbwd")
 	..setLvlDataInt("glmb", 0, 0, 0)
 
 
@@ -242,6 +244,7 @@ import ObjEditingNatives
 @compiletime function create_w3q_Reht()
 	let def = createObjectDefinition("w3q", 'Reht', 'Reht')
 	..setLvlDataInt("glmb", 0, 0, 0)
+	..setLvlDataString("greq", 1, 0, "nbwd")
 
 
 @compiletime function create_w3q_Reib()

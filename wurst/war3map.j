@@ -366,63 +366,6 @@ endfunction
 
 //***************************************************************************
 //*
-//*  Items
-//*
-//***************************************************************************
-
-function CreateAllItems takes nothing returns nothing
-    local integer itemID
-
-    call BlzCreateItemWithSkin( 'gold', 21302.6, 13507.3, 'gold' )
-    call BlzCreateItemWithSkin( 'gold', 21515.1, 13265.9, 'gold' )
-    call BlzCreateItemWithSkin( 'gold', 21162.9, 13186.9, 'gold' )
-    call BlzCreateItemWithSkin( 'rman', 21442.5, 12992.4, 'rman' )
-    call BlzCreateItemWithSkin( 'rman', 21693.7, 12982.2, 'rman' )
-    call BlzCreateItemWithSkin( 'rman', 21495.6, 12989.0, 'rman' )
-    call BlzCreateItemWithSkin( 'rman', 21438.5, 13047.5, 'rman' )
-    call BlzCreateItemWithSkin( 'rman', 21486.3, 13044.0, 'rman' )
-    call BlzCreateItemWithSkin( 'rman', 21525.6, 13040.6, 'rman' )
-    call BlzCreateItemWithSkin( 'rman', 21587.5, 13037.1, 'rman' )
-    call BlzCreateItemWithSkin( 'rman', 21660.1, 12982.2, 'rman' )
-    call BlzCreateItemWithSkin( 'rman', 21621.0, 12982.2, 'rman' )
-    call BlzCreateItemWithSkin( 'rman', 21548.7, 12989.0, 'rman' )
-    call BlzCreateItemWithSkin( 'rman', 21697.3, 13037.1, 'rman' )
-    call BlzCreateItemWithSkin( 'rman', 21658.1, 13040.6, 'rman' )
-    call BlzCreateItemWithSkin( 'texp', 21732.7, 13552.9, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21624.1, 13620.4, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21656.9, 13625.7, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21731.6, 13411.4, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21734.6, 13375.6, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21711.1, 13345.0, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21672.7, 13314.8, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21735.0, 13504.8, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21474.3, 13457.6, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21481.1, 13413.8, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21495.7, 13378.0, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21512.8, 13433.2, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21528.5, 13378.0, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21548.7, 13352.0, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21568.4, 13455.2, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21573.8, 13401.8, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21601.0, 13363.8, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21624.7, 13340.3, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21628.6, 13479.8, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21636.2, 13406.6, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21684.5, 13404.2, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21693.7, 13452.7, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21677.7, 13507.3, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21652.6, 13552.9, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21564.0, 13540.1, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21521.3, 13517.3, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21477.8, 13527.4, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21456.4, 13558.0, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21453.0, 13596.8, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21530.6, 13617.8, 'texp' )
-    call BlzCreateItemWithSkin( 'texp', 21579.2, 13615.1, 'texp' )
-endfunction
-
-//***************************************************************************
-//*
 //*  Unit Creation
 //*
 //***************************************************************************
@@ -435,36 +378,23 @@ function CreateBuildingsForPlayer0 takes nothing returns nothing
     local trigger t
     local real life
 
-    set gg_unit_etol_0001 = BlzCreateUnitWithSkin( p, 'etol', 20096.0, 13248.0, 270.000, 'etol' )
+    set u = BlzCreateUnitWithSkin( p, 'etrp', 19936.0, 16032.0, 270.000, 'etrp' )
+    set gg_unit_etol_0001 = BlzCreateUnitWithSkin( p, 'etol', 20416.0, 16320.0, 270.000, 'etol' )
     set gg_unit_h00O_0019 = BlzCreateUnitWithSkin( p, 'h00O', -2242.8, 10951.6, 270.000, 'h00O' )
+    set u = BlzCreateUnitWithSkin( p, 'etrp', 20896.0, 16032.0, 270.000, 'etrp' )
+    set u = BlzCreateUnitWithSkin( p, 'etrp', 19936.0, 12512.0, 270.000, 'etrp' )
+    set u = BlzCreateUnitWithSkin( p, 'etrp', 20832.0, 12512.0, 270.000, 'etrp' )
     set u = BlzCreateUnitWithSkin( p, 'emow', 1056.0, 18848.0, 270.000, 'emow' )
     set u = BlzCreateUnitWithSkin( p, 'eaom', 960.0, 18496.0, 270.000, 'eaom' )
     set u = BlzCreateUnitWithSkin( p, 'eate', 608.0, 19040.0, 270.000, 'eate' )
     set u = BlzCreateUnitWithSkin( p, 'emow', 1888.0, 18784.0, 270.000, 'emow' )
     set u = BlzCreateUnitWithSkin( p, 'emow', -224.0, 19808.0, 270.000, 'emow' )
-    set u = BlzCreateUnitWithSkin( p, 'e00U', 19392.0, 13568.0, 270.000, 'e00U' )
-    set u = BlzCreateUnitWithSkin( p, 'e00C', 19712.0, 14976.0, 270.000, 'e00C' )
+    set u = BlzCreateUnitWithSkin( p, 'etrp', 19936.0, 14048.0, 270.000, 'etrp' )
+    set u = BlzCreateUnitWithSkin( p, 'etrp', 20960.0, 14048.0, 270.000, 'etrp' )
+    set u = BlzCreateUnitWithSkin( p, 'emow', 20896.0, 16416.0, 270.000, 'emow' )
     set u = BlzCreateUnitWithSkin( p, 'emow', 480.0, 20064.0, 270.000, 'emow' )
     set u = BlzCreateUnitWithSkin( p, 'emow', 608.0, 19680.0, 270.000, 'emow' )
-    set u = BlzCreateUnitWithSkin( p, 'nheb', 20224.0, 14464.0, 270.000, 'nheb' )
-    set u = BlzCreateUnitWithSkin( p, 'e00M', 20096.0, 15936.0, 270.000, 'e00M' )
-    set u = BlzCreateUnitWithSkin( p, 'e008', 18336.0, 12768.0, 270.000, 'e008' )
-    set u = BlzCreateUnitWithSkin( p, 'e008', 18208.0, 14304.0, 270.000, 'e008' )
-    set u = BlzCreateUnitWithSkin( p, 'e008', 18272.0, 16480.0, 270.000, 'e008' )
-    set u = BlzCreateUnitWithSkin( p, 'e008', 20768.0, 16608.0, 270.000, 'e008' )
-    set u = BlzCreateUnitWithSkin( p, 'e008', 22432.0, 16544.0, 270.000, 'e008' )
-    set u = BlzCreateUnitWithSkin( p, 'e008', 22496.0, 14240.0, 270.000, 'e008' )
-    set u = BlzCreateUnitWithSkin( p, 'e008', 22368.0, 12832.0, 270.000, 'e008' )
-    set u = BlzCreateUnitWithSkin( p, 'e00J', 18144.0, 13600.0, 270.000, 'e00J' )
-    set u = BlzCreateUnitWithSkin( p, 'e007', 19328.0, 15168.0, 270.000, 'e007' )
-    set u = BlzCreateUnitWithSkin( p, 'e00H', 20608.0, 15936.0, 270.000, 'e00H' )
-    set u = BlzCreateUnitWithSkin( p, 'e00O', 21088.0, 14048.0, 270.000, 'e00O' )
-    set u = BlzCreateUnitWithSkin( p, 'e005', 19392.0, 14016.0, 270.000, 'e005' )
-    set u = BlzCreateUnitWithSkin( p, 'e00K', 19328.0, 14336.0, 270.000, 'e00K' )
-    set u = BlzCreateUnitWithSkin( p, 'e008', 20640.0, 14240.0, 270.000, 'e008' )
-    set u = BlzCreateUnitWithSkin( p, 'e00A', 20832.0, 14240.0, 270.000, 'e00A' )
-    set u = BlzCreateUnitWithSkin( p, 'nbwd', 20096.0, 14016.0, 270.000, 'nbwd' )
-    set u = BlzCreateUnitWithSkin( p, 'e00N', 21120.0, 15936.0, 270.000, 'e00N' )
+    set u = BlzCreateUnitWithSkin( p, 'eden', 20032.0, 16640.0, 270.000, 'eden' )
     set gg_unit_h000_0407 = BlzCreateUnitWithSkin( p, 'h000', 1546.5, 18490.7, 270.000, 'h000' )
     set u = BlzCreateUnitWithSkin( p, 'eden', 192.0, 17920.0, 270.000, 'eden' )
     set u = BlzCreateUnitWithSkin( p, 'etrp', 352.0, 17632.0, 270.000, 'etrp' )
@@ -478,41 +408,11 @@ function CreateUnitsForPlayer0 takes nothing returns nothing
     local trigger t
     local real life
 
-    set u = BlzCreateUnitWithSkin( p, 'Ewar', 20860.3, 13511.8, 98.539, 'Ewar' )
     set u = BlzCreateUnitWithSkin( p, 'e002', 830.5, 18261.7, 202.847, 'e002' )
     set u = BlzCreateUnitWithSkin( p, 'edry', 1053.8, 18200.4, 335.588, 'edry' )
     set u = BlzCreateUnitWithSkin( p, 'edry', 1075.1, 18052.2, 180.917, 'edry' )
     set u = BlzCreateUnitWithSkin( p, 'e002', 641.2, 18274.8, 76.335, 'e002' )
-    set u = BlzCreateUnitWithSkin( p, 'n00A', 21001.2, 13513.2, 192.552, 'n00A' )
-    call SetUnitColor( u, ConvertPlayerColor(24) )
     set u = BlzCreateUnitWithSkin( p, 'e004', 1211.3, 18206.1, 235.137, 'e004' )
-    set u = BlzCreateUnitWithSkin( p, 'e00P', 20221.7, 13689.4, 45.133, 'e00P' )
-    set u = BlzCreateUnitWithSkin( p, 'e00P', 20252.8, 13521.2, 349.464, 'e00P' )
-    set u = BlzCreateUnitWithSkin( p, 'e00L', 18805.9, 16321.8, 165.448, 'e00L' )
-    set u = BlzCreateUnitWithSkin( p, 'e00L', 20029.3, 16222.5, 334.698, 'e00L' )
-    set u = BlzCreateUnitWithSkin( p, 'e00L', 21936.9, 16231.5, 5.098, 'e00L' )
-    set u = BlzCreateUnitWithSkin( p, 'e00L', 22004.0, 14615.2, 22.259, 'e00L' )
-    set u = BlzCreateUnitWithSkin( p, 'e00L', 18845.2, 12978.4, 57.768, 'e00L' )
-    set u = BlzCreateUnitWithSkin( p, 'e00L', 18678.3, 14795.9, 189.773, 'e00L' )
-    set u = BlzCreateUnitWithSkin( p, 'e00L', 20323.2, 14862.1, 181.390, 'e00L' )
-    set u = BlzCreateUnitWithSkin( p, 'earc', 20693.7, 13980.3, 267.130, 'earc' )
-    set u = BlzCreateUnitWithSkin( p, 'esen', 20431.7, 13927.5, 172.260, 'esen' )
-    set u = BlzCreateUnitWithSkin( p, 'ebal', 21030.7, 13835.7, 256.407, 'ebal' )
-    set u = BlzCreateUnitWithSkin( p, 'nssn', 21106.6, 13513.6, 281.632, 'nssn' )
-    set u = BlzCreateUnitWithSkin( p, 'nwat', 20876.6, 13965.9, 245.717, 'nwat' )
-    set u = BlzCreateUnitWithSkin( p, 'Emoo', 20708.6, 13496.7, 264.449, 'Emoo' )
-    set u = BlzCreateUnitWithSkin( p, 'n008', 20576.5, 13921.1, 203.506, 'n008' )
-    set u = BlzCreateUnitWithSkin( p, 'n009', 21184.8, 13803.3, 138.443, 'n009' )
-    set u = BlzCreateUnitWithSkin( p, 'e00R', 20786.6, 13965.2, 346.596, 'e00R' )
-    set u = BlzCreateUnitWithSkin( p, 'nfra', 21429.4, 13911.2, 236.100, 'nfra' )
-    set life = GetUnitState( u, UNIT_STATE_LIFE )
-    call SetUnitState( u, UNIT_STATE_LIFE, 0.01 * life )
-    set u = BlzCreateUnitWithSkin( p, 'nfra', 21433.9, 14042.9, 310.520, 'nfra' )
-    set life = GetUnitState( u, UNIT_STATE_LIFE )
-    call SetUnitState( u, UNIT_STATE_LIFE, 0.01 * life )
-    set u = BlzCreateUnitWithSkin( p, 'nfra', 21559.2, 13950.9, 44.070, 'nfra' )
-    set life = GetUnitState( u, UNIT_STATE_LIFE )
-    call SetUnitState( u, UNIT_STATE_LIFE, 0.01 * life )
     set u = BlzCreateUnitWithSkin( p, 'e002', 862.9, 18069.1, 110.811, 'e002' )
 endfunction
 
@@ -525,6 +425,15 @@ function CreateBuildingsForPlayer1 takes nothing returns nothing
     local real life
 
     set gg_unit_hwtw_0003 = BlzCreateUnitWithSkin( p, 'hwtw', 5248.0, 6080.0, 270.000, 'hwtw' )
+    set u = BlzCreateUnitWithSkin( p, 'e00M', 20608.0, 2304.0, 270.000, 'e00M' )
+    set u = BlzCreateUnitWithSkin( p, 'e008', 20064.0, 6432.0, 270.000, 'e008' )
+    set u = BlzCreateUnitWithSkin( p, 'e008', 21088.0, 6368.0, 270.000, 'e008' )
+    set u = BlzCreateUnitWithSkin( p, 'e008', 20000.0, 4640.0, 270.000, 'e008' )
+    set u = BlzCreateUnitWithSkin( p, 'e008', 21408.0, 4576.0, 270.000, 'e008' )
+    set u = BlzCreateUnitWithSkin( p, 'e008', 20192.0, 2720.0, 270.000, 'e008' )
+    set u = BlzCreateUnitWithSkin( p, 'e008', 20960.0, 2720.0, 270.000, 'e008' )
+    set u = BlzCreateUnitWithSkin( p, 'e00V', 20224.0, 2176.0, 270.000, 'e00V' )
+    set u = BlzCreateUnitWithSkin( p, 'e00A', 21472.0, 2464.0, 270.000, 'e00A' )
 endfunction
 
 //===========================================================================
@@ -801,7 +710,6 @@ function CreateNeutralHostile takes nothing returns nothing
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nstl', -3987.5, 19573.8, 137.695, 'nstl' )
     call SetUnitAcquireRange( u, 200.0 )
-    set u = BlzCreateUnitWithSkin( p, 'n000', 21307.1, 12540.7, 243.871, 'n000' )
     set u = BlzCreateUnitWithSkin( p, 'nsts', -4123.8, 19532.3, 104.475, 'nsts' )
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nsts', -3882.2, 19867.3, 191.766, 'nsts' )
@@ -820,7 +728,6 @@ function CreateNeutralHostile takes nothing returns nothing
     call TriggerRegisterUnitEvent( t, u, EVENT_UNIT_DEATH )
     call TriggerRegisterUnitEvent( t, u, EVENT_UNIT_CHANGE_OWNER )
     call TriggerAddAction( t, function Unit000038_DropItems )
-    set u = BlzCreateUnitWithSkin( p, 'n000', 21387.5, 12543.0, 243.871, 'n000' )
     set u = BlzCreateUnitWithSkin( p, 'nfrl', 3465.3, 16447.0, 42.380, 'nfrl' )
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nfrl', 3831.0, 16463.6, 147.349, 'nfrl' )
@@ -831,7 +738,6 @@ function CreateNeutralHostile takes nothing returns nothing
     call TriggerRegisterUnitEvent( t, u, EVENT_UNIT_DEATH )
     call TriggerRegisterUnitEvent( t, u, EVENT_UNIT_CHANGE_OWNER )
     call TriggerAddAction( t, function Unit000043_DropItems )
-    set u = BlzCreateUnitWithSkin( p, 'n000', 21390.9, 12466.2, 243.871, 'n000' )
     set u = BlzCreateUnitWithSkin( p, 'ngh1', 1311.2, 15547.8, 135.758, 'ngh1' )
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'ngh1', 1544.8, 15614.7, 138.055, 'ngh1' )
@@ -1129,7 +1035,6 @@ function CreateNeutralHostile takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'nsty', 20406.8, 11275.1, 28.412, 'nsty' )
     set u = BlzCreateUnitWithSkin( p, 'nsty', 20010.4, 11051.8, 244.190, 'nsty' )
     set u = BlzCreateUnitWithSkin( p, 'nsty', 20070.9, 11341.3, 124.556, 'nsty' )
-    set u = BlzCreateUnitWithSkin( p, 'n000', 21313.5, 12466.8, 243.871, 'n000' )
     set u = BlzCreateUnitWithSkin( p, 'nsel', -9768.3, 17690.7, 81.653, 'nsel' )
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nrel', -9905.2, 17820.1, 127.995, 'nrel' )
@@ -1470,7 +1375,7 @@ function InitCustomTeams takes nothing returns nothing
     call SetPlayerTeam( Player(0), 0 )
     call SetPlayerTeam( Player(5), 0 )
 
-    // Force: TRIGSTR_155
+    // Force: TRIGSTR_344
     call SetPlayerTeam( Player(1), 1 )
 
     // Force: TRIGSTR_156
@@ -1483,13 +1388,17 @@ endfunction
 
 function InitAllyPriorities takes nothing returns nothing
 
-    call SetStartLocPrioCount( 0, 2 )
-    call SetStartLocPrio( 0, 0, 1, MAP_LOC_PRIO_LOW )
-    call SetStartLocPrio( 0, 1, 3, MAP_LOC_PRIO_HIGH )
+    call SetStartLocPrioCount( 0, 1 )
+    call SetStartLocPrio( 0, 0, 3, MAP_LOC_PRIO_HIGH )
 
-    call SetStartLocPrioCount( 1, 2 )
-    call SetStartLocPrio( 1, 0, 0, MAP_LOC_PRIO_LOW )
-    call SetStartLocPrio( 1, 1, 2, MAP_LOC_PRIO_HIGH )
+    call SetEnemyStartLocPrioCount( 0, 1 )
+    call SetEnemyStartLocPrio( 0, 0, 1, MAP_LOC_PRIO_HIGH )
+
+    call SetStartLocPrioCount( 1, 1 )
+    call SetStartLocPrio( 1, 0, 2, MAP_LOC_PRIO_HIGH )
+
+    call SetEnemyStartLocPrioCount( 1, 1 )
+    call SetEnemyStartLocPrio( 1, 0, 0, MAP_LOC_PRIO_HIGH )
 
     call SetStartLocPrioCount( 2, 1 )
     call SetStartLocPrio( 2, 0, 1, MAP_LOC_PRIO_HIGH )
@@ -1526,7 +1435,6 @@ function main takes nothing returns nothing
     call SetMapMusic( "Music", true, 0 )
     call CreateRegions(  )
     call CreateAllDestructables(  )
-    call CreateAllItems(  )
     call CreateAllUnits(  )
     call InitBlizzard(  )
     call InitGlobals(  )
@@ -1548,8 +1456,8 @@ function config takes nothing returns nothing
     call SetTeams( 5 )
     call SetGamePlacement( MAP_PLACEMENT_TEAMS_TOGETHER )
 
-    call DefineStartLocation( 0, 1536.0, 18752.0 )
-    call DefineStartLocation( 1, -4032.0, -64.0 )
+    call DefineStartLocation( 0, 22400.0, 16640.0 )
+    call DefineStartLocation( 1, 23296.0, 2304.0 )
     call DefineStartLocation( 2, -3776.0, -14976.0 )
     call DefineStartLocation( 3, -9088.0, 26816.0 )
     call DefineStartLocation( 4, 2112.0, 10432.0 )

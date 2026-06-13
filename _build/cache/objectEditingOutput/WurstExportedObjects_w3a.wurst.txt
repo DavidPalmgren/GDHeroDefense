@@ -8,6 +8,7 @@ import AbilityObjEditing
 	new AbilityDefinitionHardenedSkin('A000')
 	..setIgnoredDamage(1, 10.0)
 	..setRequirements("R000")
+	..setCheckDependencies(false)
 	..setName("Thicker Bark")
 	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNEatTree.blp")
 	..setTooltipNormal(1, "Thicker Bark")
@@ -873,6 +874,7 @@ import AbilityObjEditing
 	..setButtonPositionNormalY(2)
 	..setHeroAbility(false)
 	..setItemAbility(false)
+	..setRequirements("R000")
 
 
 @compiletime function create_w3a_AM0v()

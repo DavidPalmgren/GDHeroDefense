@@ -24,6 +24,7 @@ constant real DAMAGE_REDUCTION_PCT = 1
         ..setButtonPositionNormalY(2)
         ..setHeroAbility(false)
         ..setItemAbility(false)
+        ..setRequirements("R000")
 
 @compiletime function genUpgrade()
     new UpgradeDefinition(THICK_BARK_UPGRADE_ID)

@@ -1,12 +1,12 @@
 package InitFocusCamera
 
-import ClosureTimers
+// import ClosureTimers
 
-init
-    doAfter(0.0) ->
-        let tree = gg_unit_etol_0001
+// init
+//     doAfter(0.0) ->
+//         let tree = gg_unit_etol_0001
 
-        if GetLocalPlayer() == Player(0)
-            PanCameraToTimed(tree.getX(), tree.getY(), 0.)
-            SetCameraField(CAMERA_FIELD_TARGET_DISTANCE, 3400., 0.)
-            FogModifierStart(CreateFogModifierRect(players[0], FOG_OF_WAR_VISIBLE, GetWorldBounds(), true, false))
+//         if GetLocalPlayer() == Player(0)
+//             PanCameraToTimed(tree.getX(), tree.getY(), 0.)
+//             SetCameraField(CAMERA_FIELD_TARGET_DISTANCE, 3400., 0.)
+//             FogModifierStart(CreateFogModifierRect(players[0], FOG_OF_WAR_VISIBLE, GetWorldBounds(), true, false))

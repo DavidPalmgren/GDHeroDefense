@@ -1,24 +1,26 @@
 package winLoss
 
-public group footmen = CreateGroup()
+// public group footmen = CreateGroup()
 
-function setupVictoryCondition()
-    CreateTrigger()
-        ..registerPlayerUnitEvent(players[1], EVENT_PLAYER_UNIT_DEATH, null)
-        ..addAction() ->
-        footmen.remove(GetTriggerUnit())
-        if footmen.isEmpty()
-            CustomVictoryBJ(players[0], true, true)
+// function setupVictoryCondition()
+//     CreateTrigger()
+//         ..registerPlayerUnitEvent(players[1], EVENT_PLAYER_UNIT_DEATH, null)
+//         ..addAction() ->
+//         footmen.remove(GetTriggerUnit())
+//         if footmen.isEmpty()
+//             CustomVictoryBJ(players[0], true, true)
 
-function setupDefeatCondition()
-    CreateTrigger()
-        ..registerPlayerUnitEvent(players[0], EVENT_PLAYER_UNIT_DEATH, null)
-        ..addAction() ->
-        if GetTriggerUnit() == udg_townHall
-            CustomDefeatBJ(players[0], "You have been defeated!")
+// function setupDefeatCondition()
+//     CreateTrigger()
+//         ..registerPlayerUnitEvent(players[0], EVENT_PLAYER_UNIT_DEATH, null)
+//         ..addAction() ->
+//         if GetTriggerUnit() == udg_townHall
+//             CustomDefeatBJ(players[0], "You have been defeated!")
 
 init
-    setupDefeatCondition()
-    setupVictoryCondition()
-    players[0].setGold(1000)
-    players[0].setLumber(1000)
+    // setupDefeatCondition()
+    // setupVictoryCondition()
+    players[0].setGold(10000)
+    players[0].setLumber(10000)
+    players[1].setGold(10000)
+    players[1].setLumber(10000)
