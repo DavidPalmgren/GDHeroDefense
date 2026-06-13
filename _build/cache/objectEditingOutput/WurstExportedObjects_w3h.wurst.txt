@@ -39,6 +39,24 @@ import BuffObjEditing
 	..setTargetAttachmentPoint0(1, "chest")
 
 
+@compiletime function create_w3h_AM0k()
+	new BuffDefinition('AM0k', 'Bspo')
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNMoonStone.blp")
+	..setTooltipNormal(1, "Lunar Anchor")
+	..setTooltipNormalExtended(1, "This unit's magic resistance is shattered. Taking increased damage from spells.")
+	..setArtTarget(1, "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareTarget.mdl")
+	..setTargetAttachmentPoint0(1, "overhead")
+
+
+@compiletime function create_w3h_AM0l()
+	new BuffDefinition('AM0l', 'Bshp')
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNMoonStone.blp")
+	..setTooltipNormal(1, "Lunar Anchor")
+	..setTooltipNormalExtended(1, "This hero's magic resistance is shattered. Taking increased damage from spells.")
+	..setArtTarget(1, "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareTarget.mdl")
+	..setTargetAttachmentPoint0(1, "overhead")
+
+
 @compiletime function create_w3h_BM04()
 	new BuffDefinition('BM04', 'Basl')
 	..setName(1, "Moon Warrior")
@@ -47,24 +65,6 @@ import BuffObjEditing
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNPriestessOfTheMoon.blp")
 	..setArtTarget(1, "")
 	..setArtSpecial(1, "")
-
-
-@compiletime function create_w3h_AM0i()
-	new BuffDefinition('AM0i', 'Bspo')
-	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNMoonStone.blp")
-	..setTooltipNormal(1, "Lunar Anchor")
-	..setTooltipNormalExtended(1, "This unit's magic resistance is shattered. Taking increased damage from spells.")
-	..setArtTarget(1, "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareTarget.mdl")
-	..setTargetAttachmentPoint0(1, "overhead")
-
-
-@compiletime function create_w3h_AM0j()
-	new BuffDefinition('AM0j', 'Bshp')
-	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNMoonStone.blp")
-	..setTooltipNormal(1, "Lunar Anchor")
-	..setTooltipNormalExtended(1, "This hero's magic resistance is shattered. Taking increased damage from spells.")
-	..setArtTarget(1, "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareTarget.mdl")
-	..setTargetAttachmentPoint0(1, "overhead")
 
 
 @compiletime function create_w3h_BM05()

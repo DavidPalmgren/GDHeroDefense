@@ -98,15 +98,11 @@ globals
     unit                    gg_unit_h008_0141          = null
     unit                    gg_unit_edos_0342          = null
     unit                    gg_unit_h007_0011          = null
-    unit                    gg_unit_e008_0081          = null
     unit                    gg_unit_h00H_0077          = null
     unit                    gg_unit_eate_0066          = null
-    unit                    gg_unit_e008_0071          = null
     unit                    gg_unit_h00B_0076          = null
     unit                    gg_unit_edos_0075          = null
     unit                    gg_unit_eshy_0065          = null
-    unit                    gg_unit_e008_0070          = null
-    unit                    gg_unit_e008_0067          = null
     unit                    gg_unit_e007_0064          = null
     unit                    gg_unit_e00G_0068          = null
     unit                    gg_unit_emow_0072          = null
@@ -114,7 +110,6 @@ globals
     unit                    gg_unit_e00J_0074          = null
     unit                    gg_unit_h00R_0078          = null
     unit                    gg_unit_e007_0079          = null
-    unit                    gg_unit_e008_0080          = null
     destructable            gg_dest_LTe2_0270          = null
 endglobals
 
@@ -425,13 +420,11 @@ function CreateBuildingsForPlayer1 takes nothing returns nothing
     local real life
 
     set gg_unit_hwtw_0003 = BlzCreateUnitWithSkin( p, 'hwtw', 5248.0, 6080.0, 270.000, 'hwtw' )
+    set u = BlzCreateUnitWithSkin( p, 'h005', 20352.0, 15872.0, 270.000, 'h005' )
+    set u = BlzCreateUnitWithSkin( p, 'h005', 20544.0, 15936.0, 270.000, 'h005' )
     set u = BlzCreateUnitWithSkin( p, 'e00M', 20608.0, 2304.0, 270.000, 'e00M' )
-    set u = BlzCreateUnitWithSkin( p, 'e008', 20064.0, 6432.0, 270.000, 'e008' )
-    set u = BlzCreateUnitWithSkin( p, 'e008', 21088.0, 6368.0, 270.000, 'e008' )
-    set u = BlzCreateUnitWithSkin( p, 'e008', 20000.0, 4640.0, 270.000, 'e008' )
-    set u = BlzCreateUnitWithSkin( p, 'e008', 21408.0, 4576.0, 270.000, 'e008' )
-    set u = BlzCreateUnitWithSkin( p, 'e008', 20192.0, 2720.0, 270.000, 'e008' )
-    set u = BlzCreateUnitWithSkin( p, 'e008', 20960.0, 2720.0, 270.000, 'e008' )
+    set u = BlzCreateUnitWithSkin( p, 'h005', 20480.0, 15360.0, 270.000, 'h005' )
+    set u = BlzCreateUnitWithSkin( p, 'h005', 19904.0, 15360.0, 270.000, 'h005' )
     set u = BlzCreateUnitWithSkin( p, 'e00V', 20224.0, 2176.0, 270.000, 'e00V' )
     set u = BlzCreateUnitWithSkin( p, 'e00A', 21472.0, 2464.0, 270.000, 'e00A' )
 endfunction
@@ -594,18 +587,6 @@ function CreateUnitsForPlayer5 takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'nbwm', 2537.5, 10957.5, 276.381, 'nbwm' )
     set u = BlzCreateUnitWithSkin( p, 'nbdk', 2326.1, 10879.9, 94.364, 'nbdk' )
     set u = BlzCreateUnitWithSkin( p, 'nbdk', 2790.7, 10919.0, 319.437, 'nbdk' )
-endfunction
-
-//===========================================================================
-function CreateBuildingsForPlayer18 takes nothing returns nothing
-    local player p = Player(18)
-    local unit u
-    local integer unitID
-    local trigger t
-    local real life
-
-    set gg_unit_e008_0080 = BlzCreateUnitWithSkin( p, 'e008', -6752.0, 23776.0, 270.000, 'e008' )
-    set gg_unit_e008_0081 = BlzCreateUnitWithSkin( p, 'e008', -6880.0, 23072.0, 270.000, 'e008' )
 endfunction
 
 //===========================================================================
@@ -1081,11 +1062,8 @@ function CreateNeutralPassiveBuildings takes nothing returns nothing
     set gg_unit_e007_0064 = BlzCreateUnitWithSkin( p, 'e007', -10944.0, 23808.0, 270.000, 'e007' )
     set gg_unit_eshy_0065 = BlzCreateUnitWithSkin( p, 'eshy', -12384.0, 24224.0, 270.000, 'eshy' )
     set gg_unit_eate_0066 = BlzCreateUnitWithSkin( p, 'eate', -11552.0, 24608.0, 270.000, 'eate' )
-    set gg_unit_e008_0067 = BlzCreateUnitWithSkin( p, 'e008', -12256.0, 22496.0, 270.000, 'e008' )
     set gg_unit_e00G_0068 = BlzCreateUnitWithSkin( p, 'e00G', -12928.0, 25728.0, 270.000, 'e00G' )
     set u = BlzCreateUnitWithSkin( p, 'emow', -11360.0, 28000.0, 270.000, 'emow' )
-    set gg_unit_e008_0070 = BlzCreateUnitWithSkin( p, 'e008', -11808.0, 25248.0, 270.000, 'e008' )
-    set gg_unit_e008_0071 = BlzCreateUnitWithSkin( p, 'e008', -10912.0, 26016.0, 270.000, 'e008' )
     set gg_unit_emow_0072 = BlzCreateUnitWithSkin( p, 'emow', -9504.0, 26464.0, 270.000, 'emow' )
     set gg_unit_emow_0073 = BlzCreateUnitWithSkin( p, 'emow', -11808.0, 24352.0, 270.000, 'emow' )
     set gg_unit_e00J_0074 = BlzCreateUnitWithSkin( p, 'e00J', -5792.0, 23328.0, 270.000, 'e00J' )
@@ -1109,7 +1087,6 @@ function CreatePlayerBuildings takes nothing returns nothing
     call CreateBuildingsForPlayer1(  )
     call CreateBuildingsForPlayer3(  )
     call CreateBuildingsForPlayer5(  )
-    call CreateBuildingsForPlayer18(  )
 endfunction
 
 //===========================================================================
@@ -1179,8 +1156,6 @@ endfunction
 //===========================================================================
 function Trig_auberdine_Actions takes nothing returns nothing
     call GroupAddUnitSimple( gg_unit_e00J_0074, udg_darkshoreAuberdineBuildings )
-    call GroupAddUnitSimple( gg_unit_e008_0080, udg_darkshoreAuberdineBuildings )
-    call GroupAddUnitSimple( gg_unit_e008_0081, udg_darkshoreAuberdineBuildings )
     call GroupAddUnitSimple( gg_unit_e007_0079, udg_darkshoreAuberdineBuildings )
 endfunction
 
@@ -1234,9 +1209,6 @@ function Trig_darnassus_Actions takes nothing returns nothing
     call GroupAddUnitSimple( gg_unit_emow_0073, udg_darnassusBuildings )
     call GroupAddUnitSimple( gg_unit_e007_0064, udg_darnassusBuildings )
     call GroupAddUnitSimple( gg_unit_eshy_0065, udg_darnassusBuildings )
-    call GroupAddUnitSimple( gg_unit_e008_0067, udg_darnassusBuildings )
-    call GroupAddUnitSimple( gg_unit_e008_0070, udg_darnassusTeldrassilBuildings )
-    call GroupAddUnitSimple( gg_unit_e008_0071, udg_darnassusTeldrassilBuildings )
     call GroupAddUnitSimple( gg_unit_e00G_0068, udg_darnassusTeldrassilBuildings )
 endfunction
 
