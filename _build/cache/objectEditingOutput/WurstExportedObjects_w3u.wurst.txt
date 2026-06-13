@@ -563,6 +563,7 @@ import UnitObjEditing
 	..setBuildTime(30)
 	..setRepairLumberCost(0)
 	..setRepairTime(30)
+	..setUnitClassification("mechanical")
 	..setName("Sentinel Watchtower")
 	..setModelFile("war3mapImported\\NETByQ1.mdl")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNHumanWatchTower.blp")
@@ -721,7 +722,6 @@ import UnitObjEditing
 @compiletime function create_w3u_e00H()
 	new BuildingDefinition('e00H', 'edob')
 	..setResearchesAvailable("Reuv,Repm")
-	..setUnitsSold("e00L")
 	..setRequirements("")
 	..setGoldCost(200)
 	..setLumberCost(0)
@@ -730,6 +730,7 @@ import UnitObjEditing
 	..setBuildTime(95)
 	..setUpgradesTo("e00N")
 	..setNormalAbilities("Atol,Abds")
+	..setUnitsTrained("e00L")
 	..setName("Sanctuary (Tier 2)")
 	..setModelFile("war3mapImported\\NightElf_SanctuaryV1.mdl")
 	..setTooltipBasic("Upgrade to Sanctuary (Tier 2)")
@@ -1045,6 +1046,8 @@ import UnitObjEditing
 	..setBuildTime(25)
 	..setLumberCost(0)
 	..setGoldCost(60)
+	..setNormalAbilities("Abds,Aro1")
+	..setAbilitySkinList("Abds,Aro1")
 
 
 @compiletime function create_w3u_ndru()
@@ -1103,6 +1106,8 @@ import UnitObjEditing
 	..setLumberCost(0)
 	..setBuildTime(30)
 	..setGoldCost(55)
+	..setNormalAbilities("Abds,Aro2")
+	..setAbilitySkinList("Abds,Aro2")
 
 
 @compiletime function create_w3u_emow()
@@ -1116,37 +1121,39 @@ import UnitObjEditing
 @compiletime function create_w3u_etol()
 	new BuildingDefinition('etol', 'etol')
 	..setBuildTime(80)
-	..setNormalAbilities("Aeat,Aro1,Abdl,Atol,Arlm")
+	..setNormalAbilities("Aro1,Abdl,Atol,Arlm")
 	..setLumberCost(0)
 	..setGoldCost(150)
 	..setRepairGoldCost(200)
 	..setRepairLumberCost(0)
 	..setTooltipExtended("Primary structure, used to train Wisps. Can be upgraded to Tree of Ages and then Tree of Eternity to enable the production of additional types of structures and units. |n|n|cffffcc00Attacks land units.|r")
-	..setAbilitySkinList("Aeat,Aro1,Abdl,Atol,Arlm")
+	..setAbilitySkinList("Aro1,Abdl,Atol,Arlm")
 
 
 @compiletime function create_w3u_etoa()
 	new BuildingDefinition('etoa', 'etoa')
 	..setBuildTime(95)
-	..setNormalAbilities("Aeat,Aro1,Abdl,Atol,Arlm")
+	..setNormalAbilities("Aro1,Abdl,Atol,Arlm")
 	..setLumberCost(0)
 	..setGoldCost(200)
-	..setAbilitySkinList("Aeat,Aro1,Abdl,Atol,Arlm")
+	..setAbilitySkinList("Aro1,Abdl,Atol,Arlm")
 
 
 @compiletime function create_w3u_etoe()
 	new BuildingDefinition('etoe', 'etoe')
 	..setBuildTime(115)
-	..setNormalAbilities("Aeat,Aro1,Abdl,Atol,Arlm")
+	..setNormalAbilities("Aro1,Abdl,Atol,Arlm")
 	..setGoldCost(250)
 	..setLumberCost(0)
-	..setAbilitySkinList("Aeat,Aro1,Abdl,Atol,Arlm")
+	..setAbilitySkinList("Aro1,Abdl,Atol,Arlm")
 
 
 @compiletime function create_w3u_eden()
 	new BuildingDefinition('eden', 'eden')
 	..setLumberCost(0)
 	..setGoldCost(45)
+	..setNormalAbilities("Abds,Aall,Aro1,Apit")
+	..setAbilitySkinList("Abds,Aall,Aro1,Apit")
 
 
 @compiletime function create_w3u_Ekee()
@@ -1194,7 +1201,9 @@ import UnitObjEditing
 	..setGoldCost(70)
 	..setLumberCost(0)
 	..setBuildTime(35)
+	..setNormalAbilities("Abds,Aro1")
 	..setAttack1ProjectileArt("Abilities\\Weapons\\FarseerMissile\\FarseerMissile.mdl")
+	..setAbilitySkinList("Abds,Aro1")
 
 
 @compiletime function create_w3u_edcm()

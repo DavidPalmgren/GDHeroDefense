@@ -200,6 +200,7 @@ import ObjEditingNatives
 
 @compiletime function create_w3q_Resi()
 	let def = createObjectDefinition("w3q", 'Resi', 'Resi')
+	..setLvlDataInt("glmb", 0, 0, 0)
 	..setLvlDataInt("gbpx", 0, 0, 2)
 
 
