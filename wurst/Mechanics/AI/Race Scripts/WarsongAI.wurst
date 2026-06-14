@@ -2,9 +2,8 @@ package WarsongAI
 import ControlPoint
 import AI
 import ClosureTimers
-import ClosureEvents
-import EventHelper
 import HPAUnitController
+import LinkedList
 import HPARoadmap
 
 // Using Player(id) instead of players[id] to prevent potential syntax array errors
@@ -16,9 +15,11 @@ rect spawn2 = gg_rct_Astranaar2
 rect warsongLumber = gg_rct_WarsongLumberCamp
 rect warsongFrontline = gg_rct_WarsongFrontline
 rect warsongBackline = gg_rct_WarsongBackline
+rect warsongNordrassil = gg_rct_NordrassilAttackWarsong
 region warsongLumberRegion = CreateRegion()
 public group warsong1 = CreateGroup()
 public group warsong2 = CreateGroup()
+public group warsong3 = CreateGroup()
 
 
 function checkWarsongTrigger()
@@ -65,6 +66,25 @@ init
             ..addAction() ->
             checkWarsongTrigger()
 
+    doAfter(1080.0) ->
+        doPeriodically(120.0) (CallbackPeriodic cb) ->
+            if udg_ashenvaleWarsongCenter.getOwner() == players[5]
+                let g = CreateGroup()
+                spawnWave(Player(5), players[0], 'nchg', 8, g, warsongNordrassil.getCenter())
+                spawnWave(Player(5), players[0], 'nckb', 2, g, warsongNordrassil.getCenter())
+                spawnWave(Player(5), players[0], 'nchw', 4, g, warsongNordrassil.getCenter())
+                spawnWave(Player(5), players[0], 'nchr', 4, g, warsongNordrassil.getCenter())
+
+                // ONE macro A* for the whole wave (same start + goal):
+                let wps = queryRoadWaypoints(warsongNordrassil.getCenter(), udg_mountHyjal.getPos())
+                for u in g
+                    startHPA_NavigationShared(u, warsongNordrassil.getCenter(), udg_mountHyjal.getPos(), wps,true)
+                freeWaypoints(wps)
+
+                g.destr()
+            else
+                destroy cb
+        
 
 
 

@@ -56,6 +56,10 @@ globals
     // Generated
     rect                    gg_rct_Astranaar1          = null
     rect                    gg_rct_Astranaar2          = null
+    rect                    gg_rct_WarsongLumberCamp   = null
+    rect                    gg_rct_WarsongFrontline    = null
+    rect                    gg_rct_WarsongBackline     = null
+    rect                    gg_rct_VentureCo           = null
     trigger                 gg_trg_testGate            = null
     trigger                 gg_trg_XaviusKilled        = null
     trigger                 gg_trg_auberdine           = null
@@ -111,10 +115,7 @@ globals
     unit                    gg_unit_h00R_0078          = null
     unit                    gg_unit_e007_0079          = null
     destructable            gg_dest_LTe2_0270          = null
-    rect                    gg_rct_WarsongLumberCamp   = null
-    rect                    gg_rct_WarsongFrontline    = null
-    rect                    gg_rct_WarsongBackline     = null
-    rect                    gg_rct_VentureCo           = null
+    rect                    gg_rct_NordrassilAttackWarsong = null
 endglobals
 
 function InitGlobals takes nothing returns nothing
@@ -413,8 +414,7 @@ function CreateUnitsForPlayer0 takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'e002', 641.2, 18274.8, 76.335, 'e002' )
     set u = BlzCreateUnitWithSkin( p, 'e004', 1211.3, 18206.1, 235.137, 'e004' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', -674.1, 7225.4, 285.192, 'h00J' )
-    set u = BlzCreateUnitWithSkin( p, 'h00J', 1725.6, 10293.3, 307.264, 'h00J' )
-    set u = BlzCreateUnitWithSkin( p, 'h00J', 1930.0, 13111.2, 107.592, 'h00J' )
+    set u = BlzCreateUnitWithSkin( p, 'h00J', 1723.8, 10289.8, 307.264, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'hfoo', -347.4, 7469.5, 302.672, 'hfoo' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', -2241.6, 10957.3, 236.005, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', -3772.3, 8519.7, 323.722, 'h00J' )
@@ -424,18 +424,10 @@ function CreateUnitsForPlayer0 takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'h00J', 1219.3, 9369.4, 296.904, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', 1397.9, 9913.4, 51.670, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', 1519.3, 10830.5, 307.088, 'h00J' )
-    set u = BlzCreateUnitWithSkin( p, 'h00J', 1109.7, 11262.1, 219.601, 'h00J' )
-    set u = BlzCreateUnitWithSkin( p, 'h00J', 788.4, 11515.2, 197.518, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', -1568.1, 22828.2, 15.403, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', -1261.9, 22856.8, 91.563, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', -1533.1, 23213.7, 295.838, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', -1278.8, 23267.6, 274.919, 'h00J' )
-    set u = BlzCreateUnitWithSkin( p, 'h00J', 951.0, 11966.0, 129.368, 'h00J' )
-    set u = BlzCreateUnitWithSkin( p, 'h00J', 1325.1, 12298.5, 133.136, 'h00J' )
-    set u = BlzCreateUnitWithSkin( p, 'h00J', 1563.4, 12641.5, 275.139, 'h00J' )
-    set u = BlzCreateUnitWithSkin( p, 'h00J', 1753.9, 12885.9, 321.854, 'h00J' )
-    set u = BlzCreateUnitWithSkin( p, 'h00J', 1579.0, 13180.2, 276.337, 'h00J' )
-    set u = BlzCreateUnitWithSkin( p, 'h00J', 2300.0, 13130.1, 250.826, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', 2079.7, 10755.9, 63.811, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', 2562.1, 10882.4, 39.706, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', 3132.3, 10875.9, 92.980, 'h00J' )
@@ -755,10 +747,6 @@ function CreateUnitsForPlayer0 takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'h00J', 1760.8, 10672.4, 207.989, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', 2340.4, 11240.9, 237.202, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', 2644.7, 11278.1, 167.217, 'h00J' )
-    set u = BlzCreateUnitWithSkin( p, 'h00J', 1115.8, 11701.6, 163.042, 'h00J' )
-    set u = BlzCreateUnitWithSkin( p, 'h00J', 496.2, 11621.1, 58.889, 'h00J' )
-    set u = BlzCreateUnitWithSkin( p, 'h00J', 2113.2, 12756.8, 52.176, 'h00J' )
-    set u = BlzCreateUnitWithSkin( p, 'h00J', 1219.1, 13191.4, 115.569, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', 1645.9, 9483.7, 163.130, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', 2089.0, 9508.2, 163.130, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', 2083.5, 9142.7, 163.130, 'h00J' )
@@ -983,6 +971,7 @@ function CreateBuildingsForPlayer5 takes nothing returns nothing
     local real life
 
     set u = BlzCreateUnitWithSkin( p, 'ogre', 2112.0, 10432.0, 270.000, 'ogre' )
+    set gg_unit_h00U_0175 = BlzCreateUnitWithSkin( p, 'h00U', 1720.8, 10287.2, 270.000, 'h00U' )
     set u = BlzCreateUnitWithSkin( p, 'obar', 1920.0, 11008.0, 270.000, 'obar' )
     set u = BlzCreateUnitWithSkin( p, 'owtw', 704.0, 9280.0, 270.000, 'owtw' )
     set u = BlzCreateUnitWithSkin( p, 'otrb', 2528.0, 9952.0, 270.000, 'otrb' )
@@ -1001,25 +990,6 @@ function CreateBuildingsForPlayer5 takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'owtw', 2112.0, 11712.0, 270.000, 'owtw' )
     set u = BlzCreateUnitWithSkin( p, 'owtw', 3136.0, 11648.0, 270.000, 'owtw' )
     set u = BlzCreateUnitWithSkin( p, 'ocbw', 2784.0, 12000.0, 270.000, 'ocbw' )
-endfunction
-
-//===========================================================================
-function CreateUnitsForPlayer18 takes nothing returns nothing
-    local player p = Player(18)
-    local unit u
-    local integer unitID
-    local trigger t
-    local real life
-
-    set u = BlzCreateUnitWithSkin( p, 'esen', -7872.0, 7940.9, 237.235, 'esen' )
-    set u = BlzCreateUnitWithSkin( p, 'esen', -7676.2, 7944.4, 44.353, 'esen' )
-    set u = BlzCreateUnitWithSkin( p, 'esen', -7986.3, 7797.2, 98.353, 'esen' )
-    set u = BlzCreateUnitWithSkin( p, 'esen', -7847.4, 7627.5, 214.086, 'esen' )
-    set u = BlzCreateUnitWithSkin( p, 'esen', -7638.0, 7654.5, 254.583, 'esen' )
-    set u = BlzCreateUnitWithSkin( p, 'esen', -7560.2, 7807.0, 28.631, 'esen' )
-    set u = BlzCreateUnitWithSkin( p, 'esen', -7570.5, 8055.0, 64.283, 'esen' )
-    set u = BlzCreateUnitWithSkin( p, 'esen', -7860.1, 8086.7, 315.768, 'esen' )
-    set u = BlzCreateUnitWithSkin( p, 'esen', -8018.4, 7920.5, 211.482, 'esen' )
 endfunction
 
 //===========================================================================
@@ -1083,7 +1053,6 @@ function CreateNeutralHostileBuildings takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'ncap', -4384.0, 14240.0, 270.000, 'ncap' )
     set u = BlzCreateUnitWithSkin( p, 'ncap', -3232.0, 14752.0, 270.000, 'ncap' )
     set gg_unit_h00C_0174 = BlzCreateUnitWithSkin( p, 'h00C', -7778.2, 7822.0, 270.000, 'h00C' )
-    set gg_unit_h00U_0175 = BlzCreateUnitWithSkin( p, 'h00U', 1720.8, 10287.2, 270.000, 'h00U' )
     set gg_unit_h00P_0178 = BlzCreateUnitWithSkin( p, 'h00P', -1461.7, 13433.8, 270.000, 'h00P' )
     set gg_unit_h00S_0179 = BlzCreateUnitWithSkin( p, 'h00S', -672.9, 7222.8, 270.000, 'h00S' )
     set gg_unit_h00L_0184 = BlzCreateUnitWithSkin( p, 'h00L', -6933.1, 10844.2, 270.000, 'h00L' )
@@ -1312,7 +1281,7 @@ function CreateNeutralHostile takes nothing returns nothing
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nspr', -1009.9, 15739.0, 37.961, 'nspr' )
     call SetUnitAcquireRange( u, 200.0 )
-    set gg_unit_N006_0173 = BlzCreateUnitWithSkin( p, 'N006', -3780.7, 14105.7, 88.520, 'N006' )
+    set gg_unit_N006_0173 = BlzCreateUnitWithSkin( p, 'N006', -2234.3, 15011.5, 88.520, 'N006' )
     set u = BlzCreateUnitWithSkin( p, 'nmsc', -11935.3, 9716.7, 318.489, 'nmsc' )
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nmrv', -12037.8, 9887.2, 311.319, 'nmrv' )
@@ -1532,7 +1501,6 @@ endfunction
 function CreatePlayerUnits takes nothing returns nothing
     call CreateUnitsForPlayer0(  )
     call CreateUnitsForPlayer3(  )
-    call CreateUnitsForPlayer18(  )
     call CreateUnitsForPlayer23(  )
 endfunction
 
@@ -1560,6 +1528,7 @@ function CreateRegions takes nothing returns nothing
     set gg_rct_WarsongFrontline = Rect( 832.0, 8832.0, 1376.0, 9376.0 )
     set gg_rct_WarsongBackline = Rect( 1184.0, 9376.0, 1888.0, 9824.0 )
     set gg_rct_VentureCo = Rect( 1600.0, 12704.0, 2080.0, 13024.0 )
+    set gg_rct_NordrassilAttackWarsong = Rect( -4160.0, 11584.0, -3040.0, 12480.0 )
 endfunction
 
 //***************************************************************************
