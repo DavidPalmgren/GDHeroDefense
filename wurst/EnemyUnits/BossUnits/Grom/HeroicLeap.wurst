@@ -1,0 +1,134 @@
+package HeroicLeap
+
+import ChannelAbilityPreset
+import ObjectIdGenerator
+import AbilityTooltipGenerator
+import AbilityObjEditing
+import UnitObjEditing
+import ObjectIds
+import RegisterEvents
+import ClosureTimers
+import ClosureForGroups
+import Icons
+
+// 1. Compiletime ID Generation System Setup
+public constant tgen = new AbilityTooltipGenerator()
+public constant HEROIC_LEAP_ID      = compiletime(ABIL_ID_GEN.next())
+public constant LEAP_SLOW_DUMMY_ID = compiletime(ABIL_ID_GEN.next())
+public constant LEAP_DUMMY_UNIT_ID = compiletime(UNIT_ID_GEN.next())
+
+// Physics and Scaling Balances
+public constant RANGE = 600.0
+public constant AOE_RADIUS = 300.0
+public constant LEAP_SPEED = 900.0   // Traveling horizontal velocity
+public constant MAX_HEIGHT = 320.0   // Apex height of the jump jump
+
+@compiletime function genAbil()
+    // -------------------------------------------------------------------------
+    // THE MAIN CHANNEL HERO SPELL
+    // -------------------------------------------------------------------------
+    new ChannelAbilityPreset(HEROIC_LEAP_ID, 3, true, tgen)
+        ..setHeroAbility(true)
+        ..setLevels(3)
+        ..presetButtonPosNormal(0, 2)   // Q Slot
+        ..presetButtonPosResearch(0, 0)
+        ..presetTargetTypes(Targettype.POINT)
+        
+        // CRUCIAL: This flag activates the visual targeting indicator circle!
+        ..presetOption(Option.TARGETIMAGE, true) 
+        ..presetAreaofEffect(lvl -> AOE_RADIUS) // Scale indicator size to your script radius
+        
+        ..tooltipStartListen()
+        ..presetHotkey("Q")
+        ..setName("Heroic Leap")
+        ..presetIcon(Icons.bTNWarStomp)
+        ..presetCooldown(lvl -> 20.0 - (lvl * 2.0))
+        ..presetManaCost(lvl -> 70)
+        ..presetCastRange(lvl -> RANGE)
+        ..tooltipStopListen()
+
+    // -------------------------------------------------------------------------
+    // THE LANDING SLOW EFFECTS DUMMY
+    // -------------------------------------------------------------------------
+    new AbilityDefinitionMountainKingThunderClap(LEAP_SLOW_DUMMY_ID)
+        ..setDummyAbility() 
+        ..presetAOEDamage(lvl -> 0.0) // Script explicitly drops raw damage values
+        ..presetAreaofEffect(lvl -> AOE_RADIUS)
+        ..presetMovementSpeedReduction(lvl -> 0.50) // 50% target movement speed slow
+        ..presetAttackSpeedReduction(lvl -> 0.25)
+        ..presetDurationHero(lvl -> 3.0)
+        ..presetDurationNormal(lvl -> 5.0)
+
+    // -------------------------------------------------------------------------
+    // SYSTEM HOOK DUMMY UNIT
+    // -------------------------------------------------------------------------
+    new UnitDefinition(LEAP_DUMMY_UNIT_ID, 'uloc') 
+        ..setName("Spell Dummy")
+        ..setNormalAbilities(LEAP_SLOW_DUMMY_ID.toRawCode())
+
+// ==========================================
+// 2. The Kinematic Parabolic Jump Code Logic
+// ==========================================
+function castHeroicLeap()
+    let caster = GetSpellAbilityUnit()
+    let targetPos = vec2(GetSpellTargetX(), GetSpellTargetY()) 
+    let startPos = caster.getPos()
+    let lvl = caster.getAbilityLevel(HEROIC_LEAP_ID)
+    
+    let distance = startPos.distanceTo(targetPos)
+    if distance <= 5.0
+        return 
+        
+    let angle = startPos.angleTo(targetPos)
+    let duration = distance / LEAP_SPEED
+    
+    caster.pause()
+    caster.setAnimation("attack slam")
+    
+    // Unlock vertical Z-axis restrictions
+    caster.addAbility('Amrf')
+    caster.removeAbility('Amrf')
+
+    // Local tracker variables for precise physics tracking
+    var elapsed = 0.0
+
+    // FIXED: Using standard CallbackPeriodic loop
+    doPeriodically(0.03) (CallbackPeriodic cb) ->
+        elapsed += 0.03
+        let progress = elapsed / duration
+
+        if progress >= 1.0
+            // 1. Instantly destroy the periodic timer so it stops running
+            destroy cb 
+            
+            // 2. LANDING IMPACT PHASE
+            caster.setPos(targetPos)
+            caster.setFlyHeight(0.0, 0.0)
+            caster.unpause()
+            caster.setAnimation("stand")
+            
+            flashEffect("Abilities\\Spells\\Orc\\WarStomp\\WarStompCaster.mdl", targetPos)
+            
+            // Scaled Physical Damage Step
+            let dmgFactor = 100.0 * lvl
+            forUnitsInRange(targetPos, AOE_RADIUS) (unit u) ->
+                if u.isAlive() and u.isEnemyOf(caster.getOwner()) and not u.isType(UNIT_TYPE_STRUCTURE)
+                    caster.damageTarget(u, dmgFactor, true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_NORMAL, null)
+            
+            // Deploy Hidden Dummy to cast Thunder Clap Slow
+            let dummy = createUnit(caster.getOwner(), LEAP_DUMMY_UNIT_ID, targetPos, angle)
+            dummy.setAbilityLevel(LEAP_SLOW_DUMMY_ID, lvl)
+            dummy.issueImmediateOrder("thunderclap")
+            dummy.setTimedLife(1.0)
+            
+        else
+            // 3. ACTIVE MID-AIR TRANSLATION PHASE
+            let currentGroundPos = startPos + (targetPos - startPos) * progress
+            caster.setPos(currentGroundPos)
+            
+            // Curve equation tracking parabola height trajectory
+            let currentAirHeight = 4.0 * MAX_HEIGHT * progress * (1.0 - progress)
+            caster.setFlyHeight(currentAirHeight, 0.0)
+
+init
+    registerSpellEffectEvent(HEROIC_LEAP_ID, function castHeroicLeap)
