@@ -39,8 +39,8 @@ import BuffObjEditing
 	..setTargetAttachmentPoint0(1, "chest")
 
 
-@compiletime function create_w3h_AM0k()
-	new BuffDefinition('AM0k', 'Bspo')
+@compiletime function create_w3h_AM0y()
+	new BuffDefinition('AM0y', 'Bspo')
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNMoonStone.blp")
 	..setTooltipNormal(1, "Lunar Anchor")
 	..setTooltipNormalExtended(1, "This unit's magic resistance is shattered. Taking increased damage from spells.")
@@ -48,8 +48,8 @@ import BuffObjEditing
 	..setTargetAttachmentPoint0(1, "overhead")
 
 
-@compiletime function create_w3h_AM0l()
-	new BuffDefinition('AM0l', 'Bshp')
+@compiletime function create_w3h_AM0z()
+	new BuffDefinition('AM0z', 'Bshp')
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNMoonStone.blp")
 	..setTooltipNormal(1, "Lunar Anchor")
 	..setTooltipNormalExtended(1, "This hero's magic resistance is shattered. Taking increased damage from spells.")

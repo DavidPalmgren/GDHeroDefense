@@ -1,0 +1,13 @@
+package GromHeroDefinition
+
+import UnitIds
+import ObjectIds
+import AbilityObjEditing
+
+import HeroicLeap
+
+public constant GROM_HERO_ID = 'Ogrh'
+
+@compiletime function heroDef()
+  new HeroDefinition(GROM_HERO_ID, GROM_HERO_ID)
+    ..setHeroAbilities(commaList(HEROIC_LEAP_ID))
