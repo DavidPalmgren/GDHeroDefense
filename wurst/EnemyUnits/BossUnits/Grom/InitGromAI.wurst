@@ -1,18 +1,18 @@
-package InitGromAI
+// package InitGromAI
 
-import ClosureForGroups
-import ClosureTimers
+// import ClosureForGroups
+// import ClosureTimers
 
-import GromAI
+// import GromAI
 
-public constant GROM_HERO_ID = 'Ogrh'
+// public constant GROM_HERO_ID = 'Ogrh'
 
-init
-    // Wait a microscopic moment for the map engine to finish generating pre-placed units
-    nullTimer() -> 
-        // Scan the entire playable map area
-        forUnitsInRect(GetPlayableMapRect()) (unit u) ->
-            // Check if this unit is your pre-placed Grom boss
-            if u.getTypeId() == GROM_HERO_ID
-                // Found him! Level him up to 3, teach him his spells, and wake up his AI
-                initializeGromAI(u, 9)
+// init
+//     // Wait a microscopic moment for the map engine to finish generating pre-placed units
+//     nullTimer() -> 
+//         // Scan the entire playable map area
+//         forUnitsInRect(GetPlayableMapRect()) (unit u) ->
+//             // Check if this unit is your pre-placed Grom boss
+//             if u.getTypeId() == GROM_HERO_ID
+//                 // Found him! Level him up to 3, teach him his spells, and wake up his AI
+//                 initializeGromAI(u, 9)
