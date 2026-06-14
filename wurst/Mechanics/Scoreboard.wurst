@@ -6,6 +6,13 @@ colorA array playerColors = []
 
 //Functions
 
+// Current color of a player as an index into playerColors[].
+// GetPlayerColor returns the player's LIVE color (so it reflects any runtime
+// SetPlayerColor/SetPlayerColorBJ change), and GetHandleId on a player-color
+// constant yields its 0-23 ordinal -- which lines up with playerColors[].
+function player.getColorIndex() returns int
+    return GetHandleId(GetPlayerColor(this))
+
 // map out array of player colors in colorA format for use in multiboard
 function setupPlayerColors()
     playerColors[0]  = colorA(255, 2, 2, 255)     // red
@@ -119,7 +126,7 @@ public function updateMultiboard()
             MultiboardSetItemStyle(item2, true, false)
             MultiboardSetItemStyle(item3, true, false)
             MultiboardSetItemValue(item1, players[i].getName())
-            incomeBoard.setItemValueColor(row, 0, playerColors[i])
+            incomeBoard.setItemValueColor(row, 0, playerColors[players[i].getColorIndex()])
             MultiboardSetItemValue(item2, playerCpCount[i].toString())
             MultiboardSetItemValue(item3, playerIncome[i].toString())
             MultiboardReleaseItem(item1)

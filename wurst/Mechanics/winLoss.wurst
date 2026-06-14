@@ -10,15 +10,26 @@ package winLoss
 //         if footmen.isEmpty()
 //             CustomVictoryBJ(players[0], true, true)
 
-// function setupDefeatCondition()
-//     CreateTrigger()
-//         ..registerPlayerUnitEvent(players[0], EVENT_PLAYER_UNIT_DEATH, null)
-//         ..addAction() ->
-//         if GetTriggerUnit() == udg_townHall
-//             CustomDefeatBJ(players[0], "You have been defeated!")
+function setupDefeatCondition()
+    //Druids
+    CreateTrigger()
+        ..registerPlayerUnitEvent(players[0], EVENT_PLAYER_UNIT_DEATH, null)
+        ..addAction() ->
+        if GetTriggerUnit() == udg_druidTree
+            print("The |cff4e2a04SDruids|r have fallen!")
+            CustomDefeatBJ(players[0], "Thanks for playing!")
+
+    //Sentinels
+    let t = CreateTrigger()
+    for i = 0 to bj_MAX_PLAYER_SLOTS - 1
+        t.registerPlayerUnitEvent(players[i], EVENT_PLAYER_UNIT_CHANGE_OWNER, null)
+    t.addAction() ->
+        if GetTriggerUnit() == udg_darnassusTeldrassil and udg_darnassusTeldrassil.getOwner() == players[3]
+            print("The |cff9eff9eSentinels|r have fallen!")
+            CustomDefeatBJ(players[2], "Thanks for playing!")
 
 init
-    // setupDefeatCondition()
+    setupDefeatCondition()
     // setupVictoryCondition()
     players[0].setGold(10000)
     players[0].setLumber(10000)

@@ -32,14 +32,14 @@ function setupTables()
     cpBuildingOwners.put(chimaerasFall, players[0])
     // Sentinels
     cpBuildingOwners.put(darnassus, players[0])
-    cpBuildingOwners.put(auberdine, players[18])
-    cpBuildingOwners.put(astranaar, players[18])
-    cpBuildingOwners.put(teldrassil, players[18])
+    cpBuildingOwners.put(auberdine, players[1])
+    cpBuildingOwners.put(astranaar, players[1])
+    cpBuildingOwners.put(teldrassil, players[1])
 // add to hashmap which player slots have possible neutral units to assign
     for i = 0 to 23
         neutralBuildingPlayers.put(players[i], false) // set all to false
     neutralBuildingPlayers.put(players[0], true) // player slots with neutral units set to true
-    neutralBuildingPlayers.put(players[18], true)
+    neutralBuildingPlayers.put(players[1], true)
 
 public function assignBuilding(group g, player p)
     for u in g

@@ -47,10 +47,9 @@ init
             checkNagaTrigger()
     doAfter(1200.0)->
         print("Queen Azshara: Darnassus has fallen to the |cff540081Highborne|r, we shall usher in a new age!")
-        print(naga1.size().toString())
         KillDestructable(udg_darnassusGate)
         for ud in naga1
-            ud.issueTargetOrder("attack:", udg_darnassusTeldrassil)
+            ud.issueTargetOrder("attack", udg_darnassusTeldrassil)
 
 
 

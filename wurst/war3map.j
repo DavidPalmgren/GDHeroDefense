@@ -16,7 +16,7 @@
 
 globals
     // User-defined
-    unit                    udg_townHall               = null
+    unit                    udg_druidTree              = null
     unit                    udg_watchTower             = null
     unit                    udg_heroSelector           = null
     group                   udg_AllControlPoints       = null
@@ -140,7 +140,7 @@ globals
 endglobals
 
 function InitGlobals takes nothing returns nothing
-    set udg_townHall = null
+    set udg_druidTree = null
     set udg_AllControlPoints = CreateGroup()
     set udg_darkshoreAuberdineBuildings = CreateGroup()
     set udg_darnassusBuildings = CreateGroup()
@@ -330,8 +330,6 @@ function CreateUnitsForPlayer0 takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'edry', 1075.1, 18052.2, 180.917, 'edry' )
     set u = BlzCreateUnitWithSkin( p, 'e002', 641.2, 18274.8, 76.335, 'e002' )
     set u = BlzCreateUnitWithSkin( p, 'e004', 1211.3, 18206.1, 235.137, 'e004' )
-    set u = BlzCreateUnitWithSkin( p, 'e00R', -6092.9, 24019.2, 46.979, 'e00R' )
-    set u = BlzCreateUnitWithSkin( p, 'etrs', -6254.9, 23781.9, 89.640, 'etrs' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', -674.1, 7225.4, 285.192, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', 1349.8, 15825.5, 126.588, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', -2241.6, 10957.3, 236.005, 'h00J' )
@@ -592,7 +590,7 @@ function CreateBuildingsForPlayer1 takes nothing returns nothing
     local trigger t
     local real life
 
-    set gg_unit_hwtw_0003 = BlzCreateUnitWithSkin( p, 'hwtw', 5248.0, 6080.0, 270.000, 'hwtw' )
+    set u = BlzCreateUnitWithSkin( p, 'hwtw', 5248.0, 6080.0, 270.000, 'hwtw' )
     set u = BlzCreateUnitWithSkin( p, 'h005', 20288.0, 2624.0, 270.000, 'h005' )
     set u = BlzCreateUnitWithSkin( p, 'h005', 20928.0, 2688.0, 270.000, 'h005' )
     set u = BlzCreateUnitWithSkin( p, 'h005', 20096.0, 5184.0, 270.000, 'h005' )
@@ -1136,11 +1134,11 @@ function CreateNeutralPassive takes nothing returns nothing
     local trigger t
     local real life
 
-    set gg_unit_ensh_0250 = BlzCreateUnitWithSkin( p, 'ensh', -11937.0, 26451.9, -39.341, 'ensh' )
-    set gg_unit_n008_0251 = BlzCreateUnitWithSkin( p, 'n008', -11935.5, 26249.8, -27.850, 'n008' )
-    set gg_unit_n008_0252 = BlzCreateUnitWithSkin( p, 'n008', -11712.6, 26464.6, -51.138, 'n008' )
-    set gg_unit_e00P_0253 = BlzCreateUnitWithSkin( p, 'e00P', -12145.2, 26415.2, -42.216, 'e00P' )
-    set gg_unit_e00P_0254 = BlzCreateUnitWithSkin( p, 'e00P', -11886.1, 26654.7, -24.977, 'e00P' )
+    set gg_unit_ensh_0250 = BlzCreateUnitWithSkin( p, 'ensh', -12597.5, 25660.0, -4.542, 'ensh' )
+    set gg_unit_n008_0251 = BlzCreateUnitWithSkin( p, 'n008', -12467.3, 25539.3, 1.528, 'n008' )
+    set gg_unit_n008_0252 = BlzCreateUnitWithSkin( p, 'n008', -12465.5, 25806.1, 11.991, 'n008' )
+    set gg_unit_e00P_0253 = BlzCreateUnitWithSkin( p, 'e00P', -12650.7, 25907.3, 1.280, 'e00P' )
+    set gg_unit_e00P_0254 = BlzCreateUnitWithSkin( p, 'e00P', -12700.4, 25440.7, -40.802, 'e00P' )
 endfunction
 
 //===========================================================================
@@ -1319,8 +1317,8 @@ endfunction
 // Trigger: Other
 //===========================================================================
 function Trig_Other_Actions takes nothing returns nothing
-    set udg_watchTower = gg_unit_hwtw_0003
-    set udg_townHall = gg_unit_etol_0001
+    set udg_druidTree = gg_unit_etol_0001
+    set udg_druidTree = gg_unit_etol_0001
 endfunction
 
 //===========================================================================
@@ -1403,7 +1401,7 @@ function InitCustomPlayerSlots takes nothing returns nothing
     call SetPlayerStartLocation( Player(0), 0 )
     call ForcePlayerStartLocation( Player(0), 0 )
     call SetPlayerColor( Player(0), ConvertPlayerColor(0) )
-    call SetPlayerRacePreference( Player(0), RACE_PREF_HUMAN )
+    call SetPlayerRacePreference( Player(0), RACE_PREF_NIGHTELF )
     call SetPlayerRaceSelectable( Player(0), false )
     call SetPlayerController( Player(0), MAP_CONTROL_USER )
 
@@ -1411,7 +1409,7 @@ function InitCustomPlayerSlots takes nothing returns nothing
     call SetPlayerStartLocation( Player(1), 1 )
     call ForcePlayerStartLocation( Player(1), 1 )
     call SetPlayerColor( Player(1), ConvertPlayerColor(1) )
-    call SetPlayerRacePreference( Player(1), RACE_PREF_ORC )
+    call SetPlayerRacePreference( Player(1), RACE_PREF_NIGHTELF )
     call SetPlayerRaceSelectable( Player(1), false )
     call SetPlayerController( Player(1), MAP_CONTROL_USER )
 
