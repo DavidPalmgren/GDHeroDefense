@@ -1,6 +1,5 @@
 package GromAI
 
-
 import ClosureTimers
 import ClosureForGroups
 
@@ -12,12 +11,10 @@ public var axeTossAICooldown = 0.0
 public var leapAICooldown = 0.0
 public var berserkAICooldown = 0.0 
 
-// FIXED: Moving targetHero to package scope allows the closure to update it perfectly!
-public unit targetHero = null
+public unit targetUnit = null
 
 public constant AI_MAX_LEAP_RANGE = 700.0
 
-/// Call this function right after spawning your Grom boss to set his stats and AI
 public function initializeGromAI(unit boss, int bossLevel)
     SetHeroLevel(boss, bossLevel, false)
     boss.addAbility(BERSERK_ID)
@@ -25,9 +22,7 @@ public function initializeGromAI(unit boss, int bossLevel)
 
     let skillLevelsToLearn = bossLevel.clamp(1, 3)
     for i = 1 to skillLevelsToLearn
-        SelectHeroSkill(boss, HEROIC_LEAP_ID)
-        
-    print("Grom AI Active. Spells trained successfully.")
+        SelectHeroSkill(boss, HEROIC_LEAP_ID)   
         
     doPeriodically(1.0) (CallbackPeriodic cb) ->
         if not boss.isAlive()
@@ -43,43 +38,30 @@ public function initializeGromAI(unit boss, int bossLevel)
             executeBossLogic(boss)
 
 function executeBossLogic(unit boss)
-    // Clear out the tracking handle right before starting our fresh radar scan
-    targetHero = null 
+    targetUnit = null 
     
     forUnitsInRange(boss.getPos(), 900.0) (unit u) ->
-        if u.isType(UNIT_TYPE_HERO) and u.isAlive() and u.isEnemyOf(boss.getOwner())
-            targetHero = u
+        if u.isAlive() and u.isEnemyOf(boss.getOwner()) and not u.isType(UNIT_TYPE_STRUCTURE)
+            targetUnit = u
 
-    // If the scanner didn't lock onto an enemy hero, exit early
-    if targetHero == null
+    if targetUnit == null
         return
 
-    // 1. BERSERK OFF COOLDOWN LOGIC
     if berserkAICooldown <= 0.0
-        print("AI: Attempting to activate Berserk...")
         if boss.issueImmediateOrder("berserk")
-            print("BERSERK CAST SUCCESSFUL!")
             berserkAICooldown = 15.0
-        else
-            print("BERSERK ORDER FAILED!")
 
-    // 2. HEROIC LEAP LOGIC
+
     if leapAICooldown <= 0.0
-        let distance = boss.getPos().distanceTo(targetHero.getPos())
+        let distance = boss.getPos().distanceTo(targetUnit.getPos())
         
         if distance <= AI_MAX_LEAP_RANGE
-            print("AI: Targeted " + targetHero.getName() + " at distance: " + distance.toString())
             leapAICooldown = 14.0 
+            boss.issuePointOrder("shockwave", targetUnit.getPos())
             
-            if boss.issuePointOrder("shockwave", targetHero.getPos())
-                print("LEAP CAST SUCCESSFUL!")
-            else
-                print("LEAP ORDER REJECTED BY ENGINE!")
 
-      // 3. AXE TOSS OFF COOLDOWN LOGIC
+    // 3. AXE TOSS OFF COOLDOWN LOGIC
     if axeTossAICooldown <= 0.0
-        print("AI: Hurling axe at " + targetHero.getName())
         
-        // "stormbolt" is the internal engine order string for our base ability
-        if boss.issueTargetOrder("stormbolt", targetHero)
+        if boss.issueTargetOrder("stormbolt", targetUnit)
             axeTossAICooldown = 5.0

@@ -41,13 +41,14 @@ function checkWarsongTrigger()
             spawnWave(Player(5), u.getOwner(), 'nchg', 10, warsong2, warsongFrontline.getCenter())
             spawnWave(Player(5), u.getOwner(), 'nckb', 2, warsong2, warsongFrontline.getCenter())
             spawnWave(Player(5), u.getOwner(), 'nchw', 10, warsong2, warsongBackline.getCenter())
-            spawnWave(Player(5), u.getOwner(), 'Ogrh', 1, warsong2, warsongBackline.getCenter())
+            spawnWave(Player(5), u.getOwner(), 'Ogrh', 1, warsong2, warsongFrontline.getCenter())
             //Grom placeholder
             for un in warsong2
                 un.issueTargetOrder("attack", u)
-            forUnitsInRect(warsongFrontline) (unit u) ->
-                if u.getTypeId() == GROM_HERO_ID
-                    initializeGromAI(u, 9)
+            nullTimer() ->
+                forUnitsInRect(warsongFrontline) (unit u) ->
+                    if u.getTypeId() == GROM_HERO_ID
+                        initializeGromAI(u, 9)
 
 
 init
