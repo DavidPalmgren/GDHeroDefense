@@ -1,0 +1,72 @@
+package Berserk
+
+import AbilityObjEditing
+import ObjectIdGenerator
+import AbilityTooltipGenerator
+import RegisterEvents
+import ClosureTimers
+
+// 1. Compiletime ID Generation Setup
+public constant tgen = new AbilityTooltipGenerator()
+public constant BERSERK_ID = compiletime(ABIL_ID_GEN.next())
+
+// --- Balance Tuning Knobs ---
+public constant BERSERK_DURATION = 12.0
+public constant ATTACK_SPEED_BONUS = 0.65  // +65% faster attacks
+public constant MOVE_SPEED_BONUS = 0.25    // +25% movement speed
+public constant DAMAGE_TAKEN_PENALTY = 0.15 // Takes 15% MORE damage (Vulnerability Window!)
+public constant BOSS_BASE_SCALE = 1.0       // His normal mechanical scale
+public constant BOSS_RAGE_SCALE = 1.35      // Visual growth multiplier during Berserk
+
+@compiletime function genAbil()
+    // Base the ability definition on the native Berserk preset
+    new AbilityDefinitionBerserk(BERSERK_ID)
+        ..setLevels(1)
+        ..presetButtonPosNormal(1, 2)   // W Slot
+        ..presetHotkey("W")
+        ..setName("Enraged Berserk")
+        ..presetIcon("ReplaceableTextures\\CommandButtons\\BTNBerserk.blp")
+        
+        // Engine Stat Modification Values
+        ..setAttackSpeedIncrease(1, ATTACK_SPEED_BONUS)
+        ..setMovementSpeedIncrease(1, MOVE_SPEED_BONUS)
+        ..setDamageTakenIncrease(1, DAMAGE_TAKEN_PENALTY)
+        
+        // Timing Profile
+        ..setDurationHero(1, BERSERK_DURATION)
+        ..setDurationNormal(1, BERSERK_DURATION)
+        ..setCooldown(1, 30.0)
+        ..setManaCost(1, 50)
+        
+        // Clean Tooltip Formatting
+        ..setTooltipNormal(1, "Enraged Berserk")
+        ..setTooltipNormalExtended(1, "Grom enters an unstoppable blood frenzy for 12 seconds. " + 
+            "Increases attack speed by 65% and movement speed by 25%, but makes him reckless, " + 
+            "increasing all damage taken by 15%.")
+
+// ==========================================
+// 2. The Runtime Visual Transformation Logic
+// ==========================================
+function castBerserk()
+    let caster = GetSpellAbilityUnit()
+    
+    // 1. Visually transform the boss into a massive raging threat
+    caster.setScale(BOSS_RAGE_SCALE)
+    caster.setVertexColor(255, 80, 80, 255) // Tint his model fierce deep crimson
+    
+    // 2. Fire immediate, visceral impact effects
+    flashEffect("Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl", caster, "overhead")
+    flashEffect("Abilities\\Spells\\Orc\\WarStomp\\WarStompCaster.mdl", caster.getPos())
+    
+    // 3. Create a delayed task to safely revert his metrics when the buff falls off
+    doAfter(BERSERK_DURATION) ->
+        // Defensive check ensures we don't manipulate a dead corpse if he is defeated mid-rage
+        if caster.isAlive()
+            caster.setScale(BOSS_BASE_SCALE)
+            caster.setVertexColor(255, 255, 255, 255) // Reset back to natural clean colors
+            
+            // Subtle visual puff of smoke showing the energy has depleted
+            flashEffect("Abilities\\Spells\\Other\\SpawnUnderWaterCreature\\SpawnUnderwaterCreature.mdl", caster.getPos())
+
+init
+    registerSpellEffectEvent(BERSERK_ID, function castBerserk)

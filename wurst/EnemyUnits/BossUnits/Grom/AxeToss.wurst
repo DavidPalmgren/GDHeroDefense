@@ -1,0 +1,29 @@
+package AxeToss
+
+import AbilityObjEditing
+import ObjectIdGenerator
+
+public constant AXE_TOSS_ID = compiletime(ABIL_ID_GEN.next())
+
+@compiletime function genAxeToss()
+    new AbilityDefinitionMountainKingThunderBolt(AXE_TOSS_ID)
+        ..setName("Axe Toss")
+        ..setHeroAbility(true)
+        ..setLevels(1)
+        ..presetHotkey("W")
+        ..presetButtonPosNormal(1, 2) // Places it in the 'W' hotkey grid slot
+        
+        // Visual Assets
+        ..presetIcon("ReplaceableTextures\\CommandButtons\\BTNOrcMeleeUpOne.blp")
+        ..setMissileArt("Abilities\\Weapons\\RexxarMissile\\RexxarMissile.mdl")
+        ..setMissileSpeed(1400)
+        
+        // Core Mechanics
+        ..presetCooldown(lvl -> 5.0)
+        ..presetManaCost(lvl -> 0)
+        ..presetCastRange(lvl -> 700.0)
+        
+        // Damage & Impact Tuning
+        ..presetDamage(lvl -> 150.0)
+        ..presetDurationHero(lvl -> 0.1)   // Micro-stun gives the axe a nice, weighty impact
+        ..presetDurationNormal(lvl -> 0.1) // without keeping players locked down endlessly
