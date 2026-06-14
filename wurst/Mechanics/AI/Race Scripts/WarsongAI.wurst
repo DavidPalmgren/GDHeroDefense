@@ -27,9 +27,11 @@ function checkWarsongTrigger()
     if not event_flag_warsongLumber
         if warsongLumber.contains(u.getPos()) and u.getOwner() != players[5]
             event_flag_warsongLumber = true
+            print("Grom Hellscream: The |cffff9900Warsong|r will never fall!")
             spawnWave(Player(5), u.getOwner(), 'nchg', 10, warsong2, warsongFrontline.getCenter())
             spawnWave(Player(5), u.getOwner(), 'nckb', 2, warsong2, warsongFrontline.getCenter())
             spawnWave(Player(5), u.getOwner(), 'nchw', 10, warsong2, warsongBackline.getCenter())
+            //Grom placeholder
             for un in warsong2
                 un.issueTargetOrder("attack", u)
         
@@ -38,13 +40,13 @@ function checkWarsongTrigger()
 init
     doPeriodically(10.0) (CallbackPeriodic cb) ->
         if event_flag_astranaar == false
-            // Note: Cleaned up the redundant duplicated "or" check here
             if udg_ashenvaleAstranaar.getOwner() == Player(18)
                 event_flag_astranaar = true
                 destroy cb 
                 
                 // 2. Schedule the actual wave to arrive 30 seconds from now
                 doAfter(30.0) ->
+                    spawnWave(Player(5), udg_ashenvaleAstranaar.getOwner(), 'owar', 1, warsong1, spawn1.getCenter())
                     spawnWave(Player(5), udg_ashenvaleAstranaar.getOwner(), 'nchg', 4, warsong1, spawn1.getCenter())
                     spawnWave(Player(5), udg_ashenvaleAstranaar.getOwner(), 'nckb', 1, warsong1, spawn1.getCenter())
                     spawnWave(Player(5), udg_ashenvaleAstranaar.getOwner(), 'nchw', 3, warsong1, spawn1.getCenter())
@@ -54,7 +56,7 @@ init
                     spawnWave(Player(5), udg_ashenvaleAstranaar.getOwner(), 'nchw', 3, warsong1, spawn2.getCenter())
                     spawnWave(Player(5), udg_ashenvaleAstranaar.getOwner(), 'nchr', 3, warsong1, spawn2.getCenter())
                     
-                    print("|cffff9900Warsong|r" + " is attacking Astranaar!")
+                    print("Orc Warchief: " + "Glory to the |cffff9900Warsong|r" + "Astranaar will burn!")
                     for u in warsong1
                         attackCp(u,false, players[18])
     
@@ -67,6 +69,7 @@ init
             checkWarsongTrigger()
 
     doAfter(1080.0) ->
+        print("|cffff9900Warsong|r" + " prepares for a final assault on Teldrassil!")
         doPeriodically(120.0) (CallbackPeriodic cb) ->
             if udg_ashenvaleWarsongCenter.getOwner() == players[5]
                 let g = CreateGroup()
