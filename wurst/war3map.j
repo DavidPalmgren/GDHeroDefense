@@ -137,6 +137,8 @@ globals
     unit                    gg_unit_earc_0244          = null
     unit                    gg_unit_earc_0245          = null
     unit                    gg_unit_earc_0246          = null
+    rect                    gg_rct_BarrensGate         = null
+    rect                    gg_rct_BarrensGate2        = null
 endglobals
 
 function InitGlobals takes nothing returns nothing
@@ -330,6 +332,12 @@ function CreateUnitsForPlayer0 takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'edry', 1075.1, 18052.2, 180.917, 'edry' )
     set u = BlzCreateUnitWithSkin( p, 'e002', 641.2, 18274.8, 76.335, 'e002' )
     set u = BlzCreateUnitWithSkin( p, 'e004', 1211.3, 18206.1, 235.137, 'e004' )
+    set u = BlzCreateUnitWithSkin( p, 'emtg', 1827.3, 10452.6, 87.553, 'emtg' )
+    set u = BlzCreateUnitWithSkin( p, 'emtg', 1562.7, 10222.8, 226.776, 'emtg' )
+    set u = BlzCreateUnitWithSkin( p, 'emtg', 1935.3, 10084.9, 119.952, 'emtg' )
+    set u = BlzCreateUnitWithSkin( p, 'emtg', 1700.7, 10558.2, 326.326, 'emtg' )
+    set u = BlzCreateUnitWithSkin( p, 'emtg', 1851.9, 10234.7, 205.473, 'emtg' )
+    set u = BlzCreateUnitWithSkin( p, 'emtg', 1661.7, 10072.4, 302.661, 'emtg' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', -674.1, 7225.4, 285.192, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', 1349.8, 15825.5, 126.588, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', -2241.6, 10957.3, 236.005, 'h00J' )
@@ -1183,6 +1191,8 @@ function CreateRegions takes nothing returns nothing
     set gg_rct_NordrassilAttackWarsong = Rect( -4160.0, 11584.0, -3040.0, 12480.0 )
     set gg_rct_DarnassusPort = Rect( -11808.0, 23584.0, -11072.0, 24448.0 )
     set gg_rct_DarnassusHighborneSpawn = Rect( -9728.0, 25664.0, -9088.0, 26176.0 )
+    set gg_rct_BarrensGate = Rect( -1216.0, 5536.0, -512.0, 5856.0 )
+    set gg_rct_BarrensGate2 = Rect( -4480.0, 2304.0, -3840.0, 3136.0 )
 endfunction
 
 //***************************************************************************

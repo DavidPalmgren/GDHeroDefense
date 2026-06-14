@@ -78,6 +78,7 @@ import UnitObjEditing
 	..setAbilitySkinList("A000,Ault")
 	..setNormalAbilities("AM0v,AM0w,Ault")
 	..setNormalAbilities("AM0v,AM0w,Ault")
+	..setNormalAbilities("AM0v,AM0w,Ault")
 
 
 @compiletime function create_w3u_E003()
@@ -114,6 +115,8 @@ import UnitObjEditing
 	..setHeroAbilities("AM0m,A002,AM0k,AHav")
 	..setNormalAbilities("A001,AInv,Ault")
 	..setHeroAbilities("AM0m,A002,AM0k,AHav")
+	..setNormalAbilities("A001,AInv,Ault")
+	..setHeroAbilities("AM0m,A002,AM0k,AHav")
 
 
 @compiletime function create_w3u_e004()
@@ -140,6 +143,7 @@ import UnitObjEditing
 	..setAttack1ProjectileArt("Abilities\\Weapons\\KeeperGroveMissile\\KeeperGroveMissile.mdl")
 	..setButtonPositionX(2)
 	..setHotkey("C")
+	..setNormalAbilities("AM0p,AInv,Ault,ACm2,Aien,Aadm,Aspo")
 	..setNormalAbilities("AM0p,AInv,Ault,ACm2,Aien,Aadm,Aspo")
 	..setNormalAbilities("AM0p,AInv,Ault,ACm2,Aien,Aadm,Aspo")
 
@@ -608,6 +612,9 @@ import UnitObjEditing
 	..setNormalAbilities("AM0{,AM0|,AM0z")
 	..setLevel(6)
 	..setName("Xavius")
+	..setNormalAbilities("AM0{,AM0|,AM0z")
+	..setLevel(6)
+	..setName("Xavius")
 
 
 @compiletime function create_w3u_e00J()
@@ -641,6 +648,7 @@ import UnitObjEditing
 	..setAttack1ProjectileArt("Abilities\\Weapons\\FarseerMissile\\FarseerMissile.mdl")
 	..setTooltipBasic("Train Moonkin")
 	..setTooltipExtended("Moonkin are wild experts of the arcane arts providing Brilliance Aura and can cast Arcane Blast doing massive aoe damage. |n|n|cffffcc00Attacks land and air units.|r")
+	..setNormalAbilities("AM05,AM0s")
 	..setNormalAbilities("AM05,AM0s")
 	..setNormalAbilities("AM05,AM0s")
 
@@ -792,6 +800,7 @@ import UnitObjEditing
 	..setButtonPositionX(1)
 	..setNormalAbilities("AM0q")
 	..setNormalAbilities("AM0q")
+	..setNormalAbilities("AM0q")
 
 
 @compiletime function create_w3u_E00Q()
@@ -799,6 +808,7 @@ import UnitObjEditing
 	..setAttack1DamageBase(30)
 	..setName("TyrandeMoonWarrior 2")
 	..setModelFile("units\\nightelf\\Archer\\Archer.mdl")
+	..setHeroAbilities("AM0i,AM0j,AM0e,AM0f")
 	..setHeroAbilities("AM0i,AM0j,AM0e,AM0f")
 	..setHeroAbilities("AM0i,AM0j,AM0e,AM0f")
 
@@ -843,6 +853,7 @@ import UnitObjEditing
 	..setModelFile("units\\nightelf\\Archer\\Archer.mdl")
 	..setHeroAbilities("AM0i,AM0j,AM0e,AM0f")
 	..setHeroAbilities("AM0i,AM0j,AM0e,AM0f")
+	..setHeroAbilities("AM0i,AM0j,AM0e,AM0f")
 
 
 @compiletime function create_w3u_E00T()
@@ -850,6 +861,7 @@ import UnitObjEditing
 	..setAttack1DamageBase(30)
 	..setName("TyrandeMoonWarrior 3")
 	..setModelFile("units\\nightelf\\Archer\\Archer.mdl")
+	..setHeroAbilities("AM0i,AM0j,AM0e,AM0f")
 	..setHeroAbilities("AM0i,AM0j,AM0e,AM0f")
 	..setHeroAbilities("AM0i,AM0j,AM0e,AM0f")
 
@@ -1280,6 +1292,8 @@ import UnitObjEditing
 	..setHeroAbilities("AM08,AM09,AM07")
 	..setNormalAbilities("AM06,AInv,Ault")
 	..setHeroAbilities("AM08,AM09,AM07")
+	..setNormalAbilities("AM06,AInv,Ault")
+	..setHeroAbilities("AM08,AM09,AM07")
 
 
 @compiletime function create_w3u_Emoo()
@@ -1289,6 +1303,7 @@ import UnitObjEditing
 	..setLumberCost(0)
 	..setIntelligencePerLevel(2.9)
 	..setProperNames("Tyrande")
+	..setHeroAbilities("AM0i,AM0j,AM0e,AM0f")
 	..setHeroAbilities("AM0i,AM0j,AM0e,AM0f")
 	..setHeroAbilities("AM0i,AM0j,AM0e,AM0f")
 
@@ -1528,10 +1543,12 @@ import UnitObjEditing
 	new HeroDefinition('Udre', 'Udre')
 	..setHeroAbilities("AM05")
 	..setHeroAbilities("AM05")
+	..setHeroAbilities("AM05")
 
 
 @compiletime function create_w3u_Ewar()
 	new HeroDefinition('Ewar', 'Ewar')
+	..setHeroAbilities("AM0a,AM0c,AM0d,AEsv")
 	..setHeroAbilities("AM0a,AM0c,AM0d,AEsv")
 	..setHeroAbilities("AM0a,AM0c,AM0d,AEsv")
 
@@ -1540,10 +1557,12 @@ import UnitObjEditing
 	new UnitDefinition('x005', 'x005')
 	..setModelFile("TyrandeWhisperwind.mdx")
 	..setModelFile("TyrandeWhisperwind.mdx")
+	..setModelFile("TyrandeWhisperwind.mdx")
 
 
 @compiletime function create_w3u_edtm()
 	new UnitDefinition('edtm', 'edtm')
+	..setNormalAbilities("AM0o,Arav,Afa2,Ault")
 	..setNormalAbilities("AM0o,Arav,Afa2,Ault")
 	..setNormalAbilities("AM0o,Arav,Afa2,Ault")
 
@@ -1556,10 +1575,14 @@ import UnitObjEditing
 	..setNormalAbilities("AM0r")
 	..setLevel(6)
 	..setName("Ligga")
+	..setNormalAbilities("AM0r")
+	..setLevel(6)
+	..setName("Ligga")
 
 
 @compiletime function create_w3u_Ogrh()
 	new HeroDefinition('Ogrh', 'Ogrh')
+	..setHeroAbilities("AM0x")
 	..setHeroAbilities("AM0x")
 	..setHeroAbilities("AM0x")
 
