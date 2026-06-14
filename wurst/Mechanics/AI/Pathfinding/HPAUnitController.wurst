@@ -5,6 +5,10 @@ import HPAStructures
 import HPARoadmap
 import LinkedList
 
+// Engine order ids used by the mover.
+constant int ORDER_MOVE = 851986    // plain move to point (intermediate legs)
+constant int ORDER_ATTACK = 851983  // attack-move to point (final leg)
+
 public class TrackNode
     real x
     real y
@@ -78,10 +82,10 @@ public function startHPA_Navigation(unit u, vec2 startPos, vec2 endPos)
                 //   success=false -> ready, but start/target couldn't be linked
                 //                    into one connected component (A* failed)
                 let wpCount = result.path != null ? result.path.size() : 0
-                // print("HPA Nav: query success=" + result.isSuccess.toString()
-                //     + " dist=" + result.distance.toString()
-                //     + " sysErr=" + result.isSystemError.toString()
-                //     + " waypoints=" + wpCount.toString())
+                print("HPA Nav: query success=" + result.isSuccess.toString()
+                    + " dist=" + result.distance.toString()
+                    + " sysErr=" + result.isSystemError.toString()
+                    + " waypoints=" + wpCount.toString())
 
                 if result.isSuccess and result.path != null
                     headNode = buildChainFromPath(result.path, startPos)
@@ -97,7 +101,7 @@ public function startHPA_Navigation(unit u, vec2 startPos, vec2 endPos)
             // old behaviour, retained so the mover still does *something* (and
             // so you can tell a fallback run from a real-path run).
             if headNode == null
-                // print("HPA Nav: no usable path -> straight-line FALLBACK")
+                print("HPA Nav: no usable path -> straight-line FALLBACK")
                 let firstWaypoint = startPos + (endPos - startPos).norm() * 150.0
                 headNode = new TrackNode(firstWaypoint.x, firstWaypoint.y)
                 let tailNode = new TrackNode(endPos.x, endPos.y)
@@ -108,9 +112,13 @@ public function startHPA_Navigation(unit u, vec2 startPos, vec2 endPos)
                 var currentTrackNode = headNode
                 let currentTargetVec = vec2(currentTrackNode.x, currentTrackNode.y)
 
-                // Fire the initial order to the first waypoint
-                u.issuePointOrderById(851986, currentTargetVec)
-                // print("HPA Nav: move order -> world (" + currentTargetVec.x.toString() + ", " + currentTargetVec.y.toString() + ")")
+                // Fire the initial order. Normally a plain move to the first
+                // waypoint; the attack-move handoff happens later, on reaching
+                // the 2nd-to-last node. The only time the very first order is an
+                // attack-move is a single-node chain (the first node IS final).
+                let firstIsFinal = currentTrackNode.nextNode == null
+                u.issuePointOrderById(firstIsFinal ? ORDER_ATTACK : ORDER_MOVE, currentTargetVec)
+                print("HPA Nav: " + (firstIsFinal ? "attack-move" : "move") + " order -> world (" + currentTargetVec.x.toString() + ", " + currentTargetVec.y.toString() + ")")
 
                 var lastPos = u.getPos()
                 var ticksStuck = 0
@@ -133,29 +141,54 @@ public function startHPA_Navigation(unit u, vec2 startPos, vec2 endPos)
 
                         // Node Proximity Check
                         if currentPos.distanceTo(targetVec) < 130.0
-                            let old = currentTrackNode
-                            currentTrackNode = currentTrackNode.nextNode
-                            destroy old
+                            let reached = currentTrackNode
+                            let next = reached.nextNode
 
-                            if currentTrackNode != null
-                                let nextTarget = vec2(currentTrackNode.x, currentTrackNode.y)
-                                u.issuePointOrderById(851986, nextTarget)
-                                // print("HPA Nav: move order -> world (" + nextTarget.x.toString() + ", " + nextTarget.y.toString() + ")")
+                            if next != null and next.nextNode == null
+                                // Reached the SECOND-TO-LAST node: fire a single
+                                // attack-move at the FINAL node and hand the last
+                                // segment to the engine. The unit paths there and
+                                // engages on arrival -- no more node-by-node.
+                                let finalVec = vec2(next.x, next.y)
+                                u.issuePointOrderById(ORDER_ATTACK, finalVec)
+                                print("HPA Nav: 2nd-to-last reached -> attack-move to final (" + finalVec.x.toString() + ", " + finalVec.y.toString() + ")")
+                                destroy reached
+                                destroy next
+                                currentTrackNode = null
+                                destroy cb
+                            else if next != null
+                                // Normal intermediate hop: plain move to the next node.
+                                destroy reached
+                                currentTrackNode = next
+                                let nextTarget = vec2(next.x, next.y)
+                                u.issuePointOrderById(ORDER_MOVE, nextTarget)
+                                print("HPA Nav: move order -> world (" + nextTarget.x.toString() + ", " + nextTarget.y.toString() + ")")
                             else
-                                u.issueImmediateOrderById(851972) // Stop cleanly at final destination
-                                // print("HPA Nav: final waypoint reached, issuing STOP")
+                                // next == null: a single-node chain (we were already
+                                // attack-moving to the only/final node) -> done.
+                                destroy reached
+                                currentTrackNode = null
+                                print("HPA Nav: final node reached")
                                 destroy cb
                         else
-                            // Stuck Recovery / Anti-Interruption Override
+                            let isFinal = currentTrackNode.nextNode == null
+                            let oid = isFinal ? ORDER_ATTACK : ORDER_MOVE
+                            let label = isFinal ? "attack-move" : "move"
+                            let idle = u.getCurrentOrder() == 0
+                            // Stuck Recovery / Anti-Interruption Override.
+                            // On the final (attack-move) leg a static position
+                            // usually means the unit is FIGHTING, so we do NOT
+                            // re-issue on stuck-position there -- only if it has
+                            // gone truly idle. Earlier move legs re-path on stuck.
                             if currentPos.distanceTo(lastPos) < 6.0
                                 ticksStuck++
-                                if ticksStuck >= 4 or u.getCurrentOrder() == 0
-                                    u.issuePointOrderById(851986, targetVec)
-                                    // print("HPA Nav: re-issue (stuck) -> world (" + targetVec.x.toString() + ", " + targetVec.y.toString() + ")")
+                                if ((not isFinal) and ticksStuck >= 4) or idle
+                                    u.issuePointOrderById(oid, targetVec)
+                                    print("HPA Nav: re-issue " + label + " (stuck) -> world (" + targetVec.x.toString() + ", " + targetVec.y.toString() + ")")
                                     ticksStuck = 0
-                            else if u.getCurrentOrder() == 0
-                                u.issuePointOrderById(851986, targetVec)
-                                // print("HPA Nav: re-issue (idle) -> world (" + targetVec.x.toString() + ", " + targetVec.y.toString() + ")")
+                            else if idle
+                                u.issuePointOrderById(oid, targetVec)
+                                print("HPA Nav: re-issue " + label + " (idle) -> world (" + targetVec.x.toString() + ", " + targetVec.y.toString() + ")")
                                 ticksStuck = 0
                             else
                                 ticksStuck = 0

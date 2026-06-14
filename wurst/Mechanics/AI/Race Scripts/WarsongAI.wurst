@@ -1,0 +1,60 @@
+package WarsongAI
+import ControlPoint
+import AI
+import ClosureTimers
+import OnUnitEnterLeave
+import HPAUnitController
+import HPARoadmap
+
+// Using Player(id) instead of players[id] to prevent potential syntax array errors
+public bool event_flag_astranaar = false
+public bool event_flag_warsongLumber = false
+
+rect spawn1 = gg_rct_Astranaar1
+rect spawn2 = gg_rct_Astranaar2
+rect warsongLumber = gg_rct_WarsongLumberCamp
+rect warsongFrontline = gg_rct_WarsongFrontline
+rect warsongBackline = gg_rct_WarsongBackline
+public group warsong1 = CreateGroup()
+public group warsong2 = CreateGroup()
+
+
+init
+    doPeriodically(10.0) (CallbackPeriodic cb) ->
+        if event_flag_astranaar == false
+            // Note: Cleaned up the redundant duplicated "or" check here
+            if udg_ashenvaleAstranaar.getOwner() == Player(18)
+                event_flag_astranaar = true
+                destroy cb 
+                
+                // 2. Schedule the actual wave to arrive 30 seconds from now
+                doAfter(30.0) ->
+                    spawnWave(Player(5), udg_ashenvaleAstranaar.getOwner(), 'nchg', 4, warsong1, spawn1.getCenter())
+                    spawnWave(Player(5), udg_ashenvaleAstranaar.getOwner(), 'nckb', 1, warsong1, spawn1.getCenter())
+                    spawnWave(Player(5), udg_ashenvaleAstranaar.getOwner(), 'nchw', 3, warsong1, spawn1.getCenter())
+                    spawnWave(Player(5), udg_ashenvaleAstranaar.getOwner(), 'nchr', 3, warsong1, spawn1.getCenter())
+                    spawnWave(Player(5), udg_ashenvaleAstranaar.getOwner(), 'nchg', 4, warsong1, spawn2.getCenter())
+                    spawnWave(Player(5), udg_ashenvaleAstranaar.getOwner(), 'nckb', 1, warsong1, spawn2.getCenter())
+                    spawnWave(Player(5), udg_ashenvaleAstranaar.getOwner(), 'nchw', 3, warsong1, spawn2.getCenter())
+                    spawnWave(Player(5), udg_ashenvaleAstranaar.getOwner(), 'nchr', 3, warsong1, spawn2.getCenter())
+                    
+                    print("|cffff9900Warsong|r" + " is attacking Astranaar!")
+                    for u in warsong1
+                        attackCp(u,false, players[18])
+    
+    // doAfter(30.0) ->  
+    //     onEnter() ->
+    //         if not event_flag_warsongLumber
+    //             let u = getTriggerUnit()
+    //             print(u.getOwner().getName())
+    //             if warsongLumber.contains(u.getPos()) and u.getOwner() != players[5]
+    //                 event_flag_warsongLumber = true
+    //                 spawnWave(Player(5), u.getOwner(), 'nchg', 10, warsong2, warsongFrontline.getCenter())
+    //                 spawnWave(Player(5), u.getOwner(), 'nckb', 2, warsong2, warsongFrontline.getCenter())
+    //                 spawnWave(Player(5), u.getOwner(), 'nchw', 10, warsong2, warsongBackline.getCenter())
+    //                 for un in warsong2
+    //                     un.issueTargetOrder("attack", u)
+                
+
+                    
+        

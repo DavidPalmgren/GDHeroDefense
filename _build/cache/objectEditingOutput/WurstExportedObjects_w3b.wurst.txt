@@ -15,6 +15,62 @@ import DestructableObjEditing
 
 @compiletime function create_w3b_CTtc()
 	new DestructableDefinition('CTtc', 'CTtc')
+	..setHitPoints(99999.0)
 	..setPath("")
+
+
+@compiletime function create_w3b_ATtc()
+	new DestructableDefinition('ATtc', 'ATtc')
+	..setHitPoints(99999.0)
+
+
+@compiletime function create_w3b_ATtr()
+	new DestructableDefinition('ATtr', 'ATtr')
+	..setHitPoints(99999.0)
+
+
+@compiletime function create_w3b_FTtw()
+	new DestructableDefinition('FTtw', 'FTtw')
+	..setHitPoints(99999.0)
+
+
+@compiletime function create_w3b_CTtr()
+	new DestructableDefinition('CTtr', 'CTtr')
+	..setHitPoints(99999.0)
+
+
+@compiletime function create_w3b_NTtw()
+	new DestructableDefinition('NTtw', 'NTtw')
+	..setHitPoints(99999.0)
+
+
+@compiletime function create_w3b_BTtw()
+	new DestructableDefinition('BTtw', 'BTtw')
+	..setHitPoints(99999.0)
+
+
+@compiletime function create_w3b_BTtc()
+	new DestructableDefinition('BTtc', 'BTtc')
+	..setHitPoints(99999.0)
+
+
+@compiletime function create_w3b_ZTtc()
+	new DestructableDefinition('ZTtc', 'ZTtc')
+	..setHitPoints(99999.0)
+
+
+@compiletime function create_w3b_ZTtw()
+	new DestructableDefinition('ZTtw', 'ZTtw')
+	..setHitPoints(99999.0)
+
+
+@compiletime function create_w3b_WTst()
+	new DestructableDefinition('WTst', 'WTst')
+	..setHitPoints(99999.0)
+
+
+@compiletime function create_w3b_Yts1()
+	new DestructableDefinition('Yts1', 'Yts1')
+	..setHitPoints(99999.0)
 
 

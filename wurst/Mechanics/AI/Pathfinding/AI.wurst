@@ -16,7 +16,7 @@ public unit attackingUnit = null
 public unit selectedTarget = null
 public group attackingGroup = CreateGroup()
 public group spawnGroup = CreateGroup()
-public group warsong1 = CreateGroup()
+
 public player spawnPlayer = null
 public player playerTarget = null
 
@@ -24,8 +24,8 @@ public player playerTarget = null
 public bool test = false //debug test
 
 // Spawn Regions
-vec2 spawn1 = gg_rct_Region_000.getCenter()
-vec2 spawn2 = gg_rct_Region_001.getCenter()
+vec2 spawn1 = gg_rct_Astranaar1.getCenter()
+vec2 spawn2 = gg_rct_Astranaar2.getCenter()
 
 // creates number of units of type unitID for playerOwner at spawn and puts them in group unitGroup
 function createPlayerUnit(player playerOwner, int unitID, int number, group unitGroup, vec2 spawn)
@@ -36,8 +36,8 @@ function createPlayerUnit(player playerOwner, int unitID, int number, group unit
 //creates number of units of type unit ID at spawn for playerOwner, adds them to unitGroup, and initializes the listener triggers for commands
 public function spawnWave(player playerOwner, player target, int unitID, int number, group unitGroup, vec2 spawn)
     createPlayerUnit(playerOwner, unitID, number, unitGroup, spawn)
-    setupAttackCp(unitGroup)
-    setupAttackPlayerCp(unitGroup, target)
+    // setupAttackCp(unitGroup)
+    // setupAttackPlayerCp(unitGroup, target)
 
 // sets up listener to spawn units when players[0] types -spawn
 function setupWaveSpawn(player playerOwner, player target, int unitID, int number, group unitGroup, vec2 spawn)
@@ -77,7 +77,7 @@ function setupAttackCp(group g)
             attackCp(attackingGroup.get(i), true, null)
 
 // create function to assign the target and issue the attack. If bool = true attack nearest neutral cp, false = nearest player cp
-function attackCp(unit u, bool b, player p)
+public function attackCp(unit u, bool b, player p)
     attackingUnit = u
     if b == true    
         selectedTarget = getNearestNeutralCp(u)
@@ -121,7 +121,7 @@ init
             printRoadmapReport()
 
             let testCarrier = players[5]
-            let spawn = gg_rct_Region_000
+            let spawn = gg_rct_Astranaar1
             let center = spawn.getCenter()
             let dir = (targetPos - center).norm()
             let w = spawn.getMaxX() - spawn.getMinX()
