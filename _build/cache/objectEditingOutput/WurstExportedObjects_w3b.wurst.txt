@@ -76,6 +76,6 @@ import DestructableObjEditing
 
 @compiletime function create_w3b_LTe2()
 	new DestructableDefinition('LTe2', 'LTe2')
-	..setHitPoints(50000.0)
+	..setHitPoints(60000.0)
 
 

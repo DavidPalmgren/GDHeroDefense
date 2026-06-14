@@ -1,0 +1,61 @@
+package NagaAI
+import ControlPoint
+import AI
+import ClosureTimers
+import HPAUnitController
+import LinkedList
+import HPARoadmap
+import GateLogic
+
+// Using Player(id) instead of players[id] to prevent potential syntax array errors
+public bool event_flag_darnassus = false
+// public bool event_flag_warsongLumber = false
+
+rect darnassusSpawn = gg_rct_DarnassusHighborneSpawn
+// rect spawn2 = gg_rct_Astranaar2
+rect darnassusPort = gg_rct_DarnassusPort
+// rect warsongFrontline = gg_rct_WarsongFrontline
+// rect warsongBackline = gg_rct_WarsongBackline
+// rect warsongNordrassil = gg_rct_NordrassilAttackWarsong
+region darnassusPortRegion = CreateRegion()
+public group naga1 = udg_darnassusNaga
+public group naga2 = CreateGroup()
+public group naga3 = CreateGroup()
+
+
+function checkNagaTrigger()
+    let u = GetEnteringUnit()
+    if not event_flag_darnassus
+        if darnassusPort.contains(u.getPos()) and u.getOwner() != players[3]
+            event_flag_darnassus = true
+            print("Queen Azshara: You will drown in the tides! |cff540081Highborne|r, rally to your queen and send them to the depths")
+            spawnWave(Player(3), u.getOwner(), 'e00R', 10, naga2, darnassusSpawn.getCenter())
+            spawnWave(Player(3), u.getOwner(), 'earc', 5, naga2, darnassusSpawn.getCenter())
+            //Highborne caster placeholder
+            //Azshara placeholder
+            for un in naga2
+                un.issueTargetOrder("attack", u)    
+            for ud in naga1
+                ud.issueTargetOrder("attack", u)
+
+init    
+    doAfter(0.0) ->       
+        darnassusPortRegion.addRect(darnassusPort)
+        let t = CreateTrigger()
+            ..registerEnterRegion(darnassusPortRegion, null)
+            ..addAction() ->
+            checkNagaTrigger()
+    doAfter(1200.0)->
+        print("Queen Azshara: Darnassus has fallen to the |cff540081Highborne|r, we shall usher in a new age!")
+        print(naga1.size().toString())
+        KillDestructable(udg_darnassusGate)
+        for ud in naga1
+            ud.issueTargetOrder("attack:", udg_darnassusTeldrassil)
+
+
+
+
+
+                
+               
+        

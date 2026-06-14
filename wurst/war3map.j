@@ -52,6 +52,7 @@ globals
     group                   udg_ashenvaleAstranaarBuildings = null
     group                   udg_ashenvaleChimaeraFallBuilding = null
     destructable            udg_testGate               = null
+    group                   udg_darnassusNaga          = null
 
     // Generated
     rect                    gg_rct_Astranaar1          = null
@@ -116,6 +117,26 @@ globals
     unit                    gg_unit_h00R_0078          = null
     unit                    gg_unit_e007_0079          = null
     destructable            gg_dest_LTe2_0270          = null
+    unit                    gg_unit_ensh_0250          = null
+    unit                    gg_unit_e00P_0254          = null
+    unit                    gg_unit_e00P_0253          = null
+    unit                    gg_unit_n008_0252          = null
+    unit                    gg_unit_n008_0251          = null
+    rect                    gg_rct_DarnassusPort       = null
+    rect                    gg_rct_DarnassusHighborneSpawn = null
+    trigger                 gg_trg_enemyForcesInit     = null
+    unit                    gg_unit_esen_0249          = null
+    unit                    gg_unit_esen_0247          = null
+    unit                    gg_unit_nwat_0238          = null
+    unit                    gg_unit_nwat_0239          = null
+    unit                    gg_unit_nwat_0241          = null
+    unit                    gg_unit_ebal_0243          = null
+    unit                    gg_unit_ebal_0242          = null
+    unit                    gg_unit_eshd_0227          = null
+    unit                    gg_unit_eshd_0237          = null
+    unit                    gg_unit_earc_0244          = null
+    unit                    gg_unit_earc_0245          = null
+    unit                    gg_unit_earc_0246          = null
 endglobals
 
 function InitGlobals takes nothing returns nothing
@@ -126,6 +147,7 @@ function InitGlobals takes nothing returns nothing
     set udg_darnassusTeldrassilBuildings = CreateGroup()
     set udg_ashenvaleAstranaarBuildings = CreateGroup()
     set udg_ashenvaleChimaeraFallBuilding = CreateGroup()
+    set udg_darnassusNaga = CreateGroup()
 endfunction
 
 //***************************************************************************
@@ -308,7 +330,8 @@ function CreateUnitsForPlayer0 takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'edry', 1075.1, 18052.2, 180.917, 'edry' )
     set u = BlzCreateUnitWithSkin( p, 'e002', 641.2, 18274.8, 76.335, 'e002' )
     set u = BlzCreateUnitWithSkin( p, 'e004', 1211.3, 18206.1, 235.137, 'e004' )
-    set u = BlzCreateUnitWithSkin( p, 'ebal', 627.7, 18108.0, 154.637, 'ebal' )
+    set u = BlzCreateUnitWithSkin( p, 'e00R', -6092.9, 24019.2, 46.979, 'e00R' )
+    set u = BlzCreateUnitWithSkin( p, 'etrs', -6254.9, 23781.9, 89.640, 'etrs' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', -674.1, 7225.4, 285.192, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', 1349.8, 15825.5, 126.588, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', -2241.6, 10957.3, 236.005, 'h00J' )
@@ -594,16 +617,18 @@ function CreateUnitsForPlayer3 takes nothing returns nothing
     local trigger t
     local real life
 
-    set u = BlzCreateUnitWithSkin( p, 'eshd', -10689.8, 24791.9, 154.453, 'eshd' )
-    set u = BlzCreateUnitWithSkin( p, 'eshd', -10507.4, 24943.5, 155.552, 'eshd' )
-    set u = BlzCreateUnitWithSkin( p, 'nwat', -11048.3, 24854.2, 163.574, 'nwat' )
-    set u = BlzCreateUnitWithSkin( p, 'nwat', -10856.7, 25089.4, 152.451, 'nwat' )
-    set u = BlzCreateUnitWithSkin( p, 'nwat', -10637.7, 25269.3, 138.630, 'nwat' )
-    set u = BlzCreateUnitWithSkin( p, 'ebal', -10641.1, 25065.8, 142.347, 'ebal' )
-    set u = BlzCreateUnitWithSkin( p, 'ebal', -10841.9, 24896.8, 138.580, 'ebal' )
-    set u = BlzCreateUnitWithSkin( p, 'earc', -10678.4, 24616.1, 127.643, 'earc' )
-    set u = BlzCreateUnitWithSkin( p, 'earc', -10480.1, 24772.6, 125.397, 'earc' )
-    set u = BlzCreateUnitWithSkin( p, 'earc', -10306.9, 24954.9, 126.500, 'earc' )
+    set gg_unit_eshd_0227 = BlzCreateUnitWithSkin( p, 'eshd', -10689.8, 24791.9, 154.453, 'eshd' )
+    set gg_unit_eshd_0237 = BlzCreateUnitWithSkin( p, 'eshd', -10507.4, 24943.5, 155.552, 'eshd' )
+    set gg_unit_nwat_0238 = BlzCreateUnitWithSkin( p, 'nwat', -11048.3, 24854.2, 163.574, 'nwat' )
+    set gg_unit_nwat_0239 = BlzCreateUnitWithSkin( p, 'nwat', -10856.7, 25089.4, 152.451, 'nwat' )
+    set gg_unit_nwat_0241 = BlzCreateUnitWithSkin( p, 'nwat', -10637.7, 25269.3, 138.630, 'nwat' )
+    set gg_unit_ebal_0242 = BlzCreateUnitWithSkin( p, 'ebal', -10641.1, 25065.8, 142.347, 'ebal' )
+    set gg_unit_ebal_0243 = BlzCreateUnitWithSkin( p, 'ebal', -10841.9, 24896.8, 138.580, 'ebal' )
+    set gg_unit_earc_0244 = BlzCreateUnitWithSkin( p, 'earc', -10678.4, 24616.1, 127.643, 'earc' )
+    set gg_unit_earc_0245 = BlzCreateUnitWithSkin( p, 'earc', -10480.1, 24772.6, 125.397, 'earc' )
+    set gg_unit_earc_0246 = BlzCreateUnitWithSkin( p, 'earc', -10306.9, 24954.9, 126.500, 'earc' )
+    set gg_unit_esen_0247 = BlzCreateUnitWithSkin( p, 'esen', -11055.2, 25073.4, 141.088, 'esen' )
+    set gg_unit_esen_0249 = BlzCreateUnitWithSkin( p, 'esen', -10870.8, 25279.2, 145.498, 'esen' )
     set u = BlzCreateUnitWithSkin( p, 'nsc3', -7958.8, 13274.6, 66.731, 'nsc3' )
     call SetUnitAcquireRange( u, 200.0 )
 endfunction
@@ -1104,6 +1129,21 @@ function CreateNeutralPassiveBuildings takes nothing returns nothing
 endfunction
 
 //===========================================================================
+function CreateNeutralPassive takes nothing returns nothing
+    local player p = Player(PLAYER_NEUTRAL_PASSIVE)
+    local unit u
+    local integer unitID
+    local trigger t
+    local real life
+
+    set gg_unit_ensh_0250 = BlzCreateUnitWithSkin( p, 'ensh', -11937.0, 26451.9, -39.341, 'ensh' )
+    set gg_unit_n008_0251 = BlzCreateUnitWithSkin( p, 'n008', -11935.5, 26249.8, -27.850, 'n008' )
+    set gg_unit_n008_0252 = BlzCreateUnitWithSkin( p, 'n008', -11712.6, 26464.6, -51.138, 'n008' )
+    set gg_unit_e00P_0253 = BlzCreateUnitWithSkin( p, 'e00P', -12145.2, 26415.2, -42.216, 'e00P' )
+    set gg_unit_e00P_0254 = BlzCreateUnitWithSkin( p, 'e00P', -11886.1, 26654.7, -24.977, 'e00P' )
+endfunction
+
+//===========================================================================
 function CreatePlayerBuildings takes nothing returns nothing
     call CreateBuildingsForPlayer0(  )
     call CreateBuildingsForPlayer1(  )
@@ -1123,6 +1163,7 @@ function CreateAllUnits takes nothing returns nothing
     call CreateNeutralPassiveBuildings(  )
     call CreatePlayerBuildings(  )
     call CreateNeutralHostile(  )
+    call CreateNeutralPassive(  )
     call CreatePlayerUnits(  )
 endfunction
 
@@ -1142,6 +1183,8 @@ function CreateRegions takes nothing returns nothing
     set gg_rct_WarsongBackline = Rect( 1184.0, 9376.0, 1888.0, 9824.0 )
     set gg_rct_VentureCo = Rect( 1600.0, 12704.0, 2080.0, 13024.0 )
     set gg_rct_NordrassilAttackWarsong = Rect( -4160.0, 11584.0, -3040.0, 12480.0 )
+    set gg_rct_DarnassusPort = Rect( -11808.0, 23584.0, -11072.0, 24448.0 )
+    set gg_rct_DarnassusHighborneSpawn = Rect( -9728.0, 25664.0, -9088.0, 26176.0 )
 endfunction
 
 //***************************************************************************
@@ -1160,6 +1203,30 @@ endfunction
 function InitTrig_testGate takes nothing returns nothing
     set gg_trg_testGate = CreateTrigger(  )
     call TriggerAddAction( gg_trg_testGate, function Trig_testGate_Actions )
+endfunction
+
+//===========================================================================
+// Trigger: enemyForcesInit
+//===========================================================================
+function Trig_enemyForcesInit_Actions takes nothing returns nothing
+    call GroupAddUnitSimple( gg_unit_esen_0249, udg_darnassusNaga )
+    call GroupAddUnitSimple( gg_unit_esen_0247, udg_darnassusNaga )
+    call GroupAddUnitSimple( gg_unit_nwat_0238, udg_darnassusNaga )
+    call GroupAddUnitSimple( gg_unit_nwat_0239, udg_darnassusNaga )
+    call GroupAddUnitSimple( gg_unit_nwat_0241, udg_darnassusNaga )
+    call GroupAddUnitSimple( gg_unit_ebal_0243, udg_darnassusNaga )
+    call GroupAddUnitSimple( gg_unit_ebal_0242, udg_darnassusNaga )
+    call GroupAddUnitSimple( gg_unit_eshd_0227, udg_darnassusNaga )
+    call GroupAddUnitSimple( gg_unit_eshd_0237, udg_darnassusNaga )
+    call GroupAddUnitSimple( gg_unit_earc_0244, udg_darnassusNaga )
+    call GroupAddUnitSimple( gg_unit_earc_0245, udg_darnassusNaga )
+    call GroupAddUnitSimple( gg_unit_earc_0246, udg_darnassusNaga )
+endfunction
+
+//===========================================================================
+function InitTrig_enemyForcesInit takes nothing returns nothing
+    set gg_trg_enemyForcesInit = CreateTrigger(  )
+    call TriggerAddAction( gg_trg_enemyForcesInit, function Trig_enemyForcesInit_Actions )
 endfunction
 
 //===========================================================================
@@ -1234,6 +1301,11 @@ function Trig_darnassus_Actions takes nothing returns nothing
     call GroupAddUnitSimple( gg_unit_emow_0073, udg_darnassusBuildings )
     call GroupAddUnitSimple( gg_unit_e007_0064, udg_darnassusBuildings )
     call GroupAddUnitSimple( gg_unit_eshy_0065, udg_darnassusBuildings )
+    call GroupAddUnitSimple( gg_unit_ensh_0250, udg_darnassusTeldrassilBuildings )
+    call GroupAddUnitSimple( gg_unit_e00P_0254, udg_darnassusTeldrassilBuildings )
+    call GroupAddUnitSimple( gg_unit_e00P_0253, udg_darnassusTeldrassilBuildings )
+    call GroupAddUnitSimple( gg_unit_n008_0252, udg_darnassusTeldrassilBuildings )
+    call GroupAddUnitSimple( gg_unit_n008_0251, udg_darnassusTeldrassilBuildings )
     call GroupAddUnitSimple( gg_unit_e00G_0068, udg_darnassusTeldrassilBuildings )
 endfunction
 
@@ -1297,6 +1369,7 @@ endfunction
 //===========================================================================
 function InitCustomTriggers takes nothing returns nothing
     call InitTrig_testGate(  )
+    call InitTrig_enemyForcesInit(  )
     call InitTrig_XaviusKilled(  )
     call InitTrig_auberdine(  )
     call InitTrig_astranaar(  )
@@ -1309,6 +1382,7 @@ endfunction
 //===========================================================================
 function RunInitializationTriggers takes nothing returns nothing
     call ConditionalTriggerExecute( gg_trg_testGate )
+    call ConditionalTriggerExecute( gg_trg_enemyForcesInit )
     call ConditionalTriggerExecute( gg_trg_auberdine )
     call ConditionalTriggerExecute( gg_trg_astranaar )
     call ConditionalTriggerExecute( gg_trg_ashenvaleChimaeraFall )
