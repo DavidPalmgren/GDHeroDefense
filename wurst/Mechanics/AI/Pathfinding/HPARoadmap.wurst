@@ -4,6 +4,7 @@ import HPAManager
 import LinkedList
 import HPAStructures
 import HPALocalSearch   // isTileClear: the engine pathing probe, reused per edge
+import HPALog
 
 // =====================================================================
 // SEMI-MANUAL ROADMAP
@@ -26,11 +27,17 @@ import HPALocalSearch   // isTileClear: the engine pathing probe, reused per edg
 // Your "Pathfinding Node" marker unit. Make it a locust unit (no collision,
 // not selectable); the model can be anything visible in the editor. Set this
 // to its rawcode.
-public constant int MARKER_NODE_ID = 'h002'
+public constant int MARKER_NODE_ID = 'h00J'
 
 // Two nodes are link candidates only within this range. Larger = fewer,
 // longer hops (cheaper graph, coarser routes); smaller = denser graph.
 constant real LINK_MAX_DIST = 1100.0
+// Spatial-hash cell size for the bake. Must be >= LINK_MAX_DIST so that any
+// two nodes within linking range land in the same or an adjacent cell, which
+// lets the bake scan only a 3x3 cell neighborhood per node instead of all
+// nodes. Using exactly LINK_MAX_DIST keeps the neighborhood as tight as
+// possible while still capturing every in-range pair.
+constant real CELL_SIZE = LINK_MAX_DIST
 // Sampling step along a candidate edge for the line-of-sight test. Smaller =
 // catches thinner blockers, more probes per edge.
 constant real LOS_STEP = 24.0
@@ -50,9 +57,31 @@ int g_nodeCount = 0
 group g_enumGroup = CreateGroup()
 bool g_ready = false
 
-// Link-bake resumable cursor (outer i, inner j).
+// Link-bake resumable cursor: current node (g_li) and how far through that
+// node's candidate list we are (g_candIdx).
 int g_li = 0
-int g_lj = 1
+int g_candIdx = 0
+
+// ---- BAKE SPATIAL GRID ----------------------------------------------
+// Uniform grid over the playable rect. Buckets are stored as an intrusive
+// linked list: g_cellHead[cell] is the first node in that cell, g_nodeNext[n]
+// is the next node sharing n's cell (-1 terminates). Built once before baking.
+real g_gridMinX = 0.0
+real g_gridMinY = 0.0
+int g_gridCols = 1
+int g_gridRows = 1
+// Actual cell size used (>= CELL_SIZE). Grown at build time if a fixed
+// CELL_SIZE grid would exceed the JASS array cap, so g_cellHead never goes
+// out of bounds no matter the map size.
+real g_cellSize = CELL_SIZE
+int array g_cellHead
+int array g_nodeNext
+// Scratch candidate list for the node currently being baked.
+int array g_cand
+int g_candCount = 0
+
+// JASS arrays hold 8192 entries; keep the cell grid within that.
+constant int MAX_GRID_CELLS = 8192
 
 // A* scratch.
 int g_searchGen = 0
@@ -106,25 +135,92 @@ function loadMarkers()
             RemoveUnit(u)
         u = FirstOfGroup(g_enumGroup)
 
-// ---- LINK BAKE (throttled) -----------------------------------------
+// ---- BAKE SPATIAL GRID ----------------------------------------------
+function cellX(real x) returns int
+    var cx = ((x - g_gridMinX) / g_cellSize).toInt()
+    if cx < 0
+        cx = 0
+    if cx >= g_gridCols
+        cx = g_gridCols - 1
+    return cx
+
+function cellY(real y) returns int
+    var cy = ((y - g_gridMinY) / g_cellSize).toInt()
+    if cy < 0
+        cy = 0
+    if cy >= g_gridRows
+        cy = g_gridRows - 1
+    return cy
+
+// Bucket every node into the grid. O(n), done once before the bake starts.
+function buildGrid()
+    let r = GetPlayableMapRect()
+    g_gridMinX = GetRectMinX(r)
+    g_gridMinY = GetRectMinY(r)
+    let w = GetRectMaxX(r) - g_gridMinX
+    let h = GetRectMaxY(r) - g_gridMinY
+
+    // Pick the smallest cell size >= CELL_SIZE whose grid fits the array cap.
+    // Doubling keeps the 3x3-neighborhood guarantee (cells only get larger).
+    g_cellSize = CELL_SIZE
+    while ((w / g_cellSize).toInt() + 1) * ((h / g_cellSize).toInt() + 1) > MAX_GRID_CELLS
+        g_cellSize *= 2.0
+    g_gridCols = (w / g_cellSize).toInt() + 1
+    g_gridRows = (h / g_cellSize).toInt() + 1
+
+    for c = 0 to g_gridCols * g_gridRows - 1
+        g_cellHead[c] = -1
+    for n = 0 to g_nodeCount - 1
+        let p = g_node[n].worldPos
+        let c = cellY(p.y) * g_gridCols + cellX(p.x)
+        g_nodeNext[n] = g_cellHead[c]
+        g_cellHead[c] = n
+
+// Fill g_cand with the node indices in ai's 3x3 cell neighborhood that come
+// AFTER ai (index > ai), so each undirected pair is considered exactly once.
+function buildCandidates(int ai)
+    g_candCount = 0
+    let p = g_node[ai].worldPos
+    let cx = cellX(p.x)
+    let cy = cellY(p.y)
+    var ny = cy - 1
+    while ny <= cy + 1
+        if ny >= 0 and ny < g_gridRows
+            var nx = cx - 1
+            while nx <= cx + 1
+                if nx >= 0 and nx < g_gridCols
+                    var b = g_cellHead[ny * g_gridCols + nx]
+                    while b != -1
+                        if b > ai
+                            g_cand[g_candCount] = b
+                            g_candCount++
+                        b = g_nodeNext[b]
+                nx++
+        ny++
+
+// ---- LINK BAKE (throttled, grid-accelerated) ------------------------
 function bakeLinksTick()
     var budget = LINK_BUDGET_PER_TICK
     while g_li < g_nodeCount - 1 and budget > 0
+        // Build this node's candidate list once, the first time we touch it.
+        if g_candIdx == 0
+            buildCandidates(g_li)
         let a = g_node[g_li]
-        let b = g_node[g_lj]
-        let d = a.worldPos.distanceTo(b.worldPos)
-        if d <= LINK_MAX_DIST
-            budget -= sampleCount(a.worldPos, b.worldPos)
-            if segmentClear(a.worldPos, b.worldPos)
-                // Undirected: add the edge both ways.
-                a.edges.add(new MacroEdge(b, d))
-                b.edges.add(new MacroEdge(a, d))
-        else
-            budget--
-        g_lj++
-        if g_lj >= g_nodeCount
+        while g_candIdx < g_candCount and budget > 0
+            let b = g_node[g_cand[g_candIdx]]
+            let d = a.worldPos.distanceTo(b.worldPos)
+            if d <= LINK_MAX_DIST
+                budget -= sampleCount(a.worldPos, b.worldPos)
+                if segmentClear(a.worldPos, b.worldPos)
+                    // Undirected: add the edge both ways.
+                    a.edges.add(new MacroEdge(b, d))
+                    b.edges.add(new MacroEdge(a, d))
+            else
+                budget--
+            g_candIdx++
+        if g_candIdx >= g_candCount
             g_li++
-            g_lj = g_li + 1
+            g_candIdx = 0
 
 // ---- INIT -----------------------------------------------------------
 public function initRoadmap()
@@ -138,7 +234,8 @@ public function initRoadmap()
         return
 
     g_li = 0
-    g_lj = 1
+    g_candIdx = 0
+    buildGrid()
     doPeriodically(LINK_TICK) cb ->
         bakeLinksTick()
         if g_li >= g_nodeCount - 1
@@ -359,7 +456,7 @@ function findClosestNode(vec2 pos) returns MacroNode
 
 /** Prints a full text diagnostic of every node and its connection count */
 public function printRoadmapReport()
-    print("=== HPA ROADMAP LINK REPORT ===")
+    logLine("=== HPA ROADMAP LINK REPORT ===")
     var isolatedNodes = 0
     var totalEdges = 0
     
@@ -367,17 +464,16 @@ public function printRoadmapReport()
         let node = g_node[i]
         let edgeCount = node.edges.size()
         totalEdges += edgeCount
-        
-        // Log individual node health
-        print("Node #" + i.toString() + " at " + node.worldPos.toString() + " has " + edgeCount.toString() + " links.")
-        
+
+        // Only report problem nodes -- the isolated ones with no links.
         if edgeCount == 0
             isolatedNodes++
+            logLine("ISOLATED Node #" + i.toString() + " at " + node.worldPos.toString() + " has 0 links.")
             
-    print("Graph Summary: Total Nodes = " + g_nodeCount.toString() + " | Total Directed Edges = " + totalEdges.toString())
+    logLine("Graph Summary: Total Nodes = " + g_nodeCount.toString() + " | Total Directed Edges = " + totalEdges.toString())
     if isolatedNodes > 0
-        print("⚠️ WARNING: Found " + isolatedNodes.toString() + " completely isolated nodes with 0 links! Check your LINK_MAX_DIST or terrain blockers.")
-    print("===============================")
+        logLine("⚠️ WARNING: Found " + isolatedNodes.toString() + " completely isolated nodes with 0 links! Check your LINK_MAX_DIST or terrain blockers.")
+    logLine("===============================")
 
 // BFS scratch for printReachability (one slot per node).
 MacroNode array g_reach
@@ -395,10 +491,10 @@ MacroNode array g_reach
 public function printReachability(vec2 posA, vec2 posB)
     let a = findClosestNode(posA)
     let b = findClosestNode(posB)
-    print("=== HPA REACHABILITY PROBE ===")
+    logLine("=== HPA REACHABILITY PROBE ===")
     if a == null or b == null
-        print("Roadmap has no nodes; nothing to check.")
-        print("==============================")
+        logLine("Roadmap has no nodes; nothing to check.")
+        logLine("==============================")
         return
 
     // Reuse the A* generation stamp purely as a visited marker. Safe because
@@ -423,17 +519,19 @@ public function printReachability(vec2 posA, vec2 posB)
                 g_reach[tail] = nb
                 tail++
 
-    print("A nearest node: " + a.worldPos.toString())
-    print("B nearest node: " + b.worldPos.toString())
-    print("Component reachable from A = " + tail.toString() + " / " + g_nodeCount.toString() + " nodes:")
-    for i = 0 to tail - 1
-        print("   " + g_reach[i].worldPos.toString())
-    print("B reachable from A? " + reachedB.toString())
+    logLine("A nearest node: " + a.worldPos.toString())
+    logLine("B nearest node: " + b.worldPos.toString())
+    logLine("Component reachable from A = " + tail.toString() + " / " + g_nodeCount.toString() + " nodes")
+    logLine("B reachable from A? " + reachedB.toString())
     if not reachedB
-        print("=> A and B are in DIFFERENT components. Bridge the gap between the")
-        print("   list above and the nodes NOT in it (add a marker, or raise")
-        print("   LINK_MAX_DIST enough that a CLEAR segment can span the gap).")
-    print("==============================")
+        // Only when disconnected: list the stranded component so you can see
+        // which side of the gap A is on.
+        for i = 0 to tail - 1
+            logLine("   " + g_reach[i].worldPos.toString())
+        logLine("=> A and B are in DIFFERENT components. Bridge the gap between the")
+        logLine("   list above and the nodes NOT in it (add a marker, or raise")
+        logLine("   LINK_MAX_DIST enough that a CLEAR segment can span the gap).")
+    logLine("==============================")
 
 /** Checks if the two nodes closest to these two points are linked together */
 public function checkIsLinked(vec2 posA, vec2 posB) returns bool

@@ -5,11 +5,25 @@ import HPAStructures
 import HPARoadmap
 import LinkedList
 
+// Engine order ids used by the mover.
+constant int ORDER_MOVE = 851986    // plain move to point (intermediate legs)
+constant int ORDER_ATTACK = 851983  // attack-move to point (final leg)
+
 public class TrackNode
     real x
     real y
     TrackNode nextNode = null
 
+    construct(real x, real y)
+        this.x = x
+        this.y = y
+
+// Lightweight, read-only waypoint box for the shared group path. vec2 is a
+// tuple and can't be a generic type argument, so coords are boxed in a class
+// to live in a LinkedList<WP>.
+public class WP
+    real x
+    real y
     construct(real x, real y)
         this.x = x
         this.y = y
@@ -48,12 +62,44 @@ function buildChainFromPath(HPAPath path, vec2 startPos) returns TrackNode
                 tail = node
     return head
 
+// Same as buildChainFromPath, but reads a shared read-only LinkedList<WP>
+// instead of an HPAPath. Lets every unit in a wave build its OWN TrackNode
+// chain (which it consumes/destroys as it walks) from ONE shared waypoint list,
+// so the expensive roadmap query runs once, not per unit.
+function buildChainFromWaypoints(LinkedList<WP> wps, vec2 startPos) returns TrackNode
+    let n = wps.size()
+    if n == 0
+        return null
+
+    TrackNode head = null
+    TrackNode tail = null
+    for i = 0 to n - 1
+        let w = wps.get(i)
+        let skip = head == null and vec2(w.x, w.y).distanceTo(startPos) < 64.0
+        if not skip
+            let node = new TrackNode(w.x, w.y)
+            if head == null
+                head = node
+                tail = node
+            else
+                tail.nextNode = node
+                tail = node
+    return head
+
+
 
 // Accepts the exact explicit start and end vectors. The navigator now asks
 // the HPA system for the real high-level path and walks its waypoints; the
 // hardcoded straight line is kept only as a fallback for when the system
 // returns no usable path (not ready, unreachable, or a degenerate path).
+// Backwards-compatible entry point: default behaviour (plain move to
+// intermediate nodes, attack-move only the final node).
 public function startHPA_Navigation(unit u, vec2 startPos, vec2 endPos)
+    startHPA_Navigation(u, startPos, endPos, false)
+
+// attackMoveAll = true issues an attack-move at EVERY node, so the unit
+// engages anything it meets along the whole route instead of only at the end.
+public function startHPA_Navigation(unit u, vec2 startPos, vec2 endPos, bool attackMoveAll)
     if u == null or GetUnitTypeId(u) == 0 or not IsUnitAliveBJ(u)
         return
 
@@ -91,73 +137,199 @@ public function startHPA_Navigation(unit u, vec2 startPos, vec2 endPos)
                 if result.path != null
                     destroy result.path
                 destroy result
+            driveMover(u, startPos, endPos, headNode, attackMoveAll)
 
-            // 2. FALLBACK: straight-line baseline ------------------------
-            // Only used when the HPA query gave us nothing to walk. This is the
-            // old behaviour, retained so the mover still does *something* (and
-            // so you can tell a fallback run from a real-path run).
-            if headNode == null
-                print("HPA Nav: no usable path -> straight-line FALLBACK")
-                let firstWaypoint = startPos + (endPos - startPos).norm() * 150.0
-                headNode = new TrackNode(firstWaypoint.x, firstWaypoint.y)
-                let tailNode = new TrackNode(endPos.x, endPos.y)
-                headNode.nextNode = tailNode
+// =====================================================================
+// SHARED MOVER DRIVER -- fallback + per-unit tracking loop, factored out so the
+// single-unit and group entry points drive units through identical logic.
+// headNodeParam is this unit's own chain (already built), or null for fallback.
+// =====================================================================
+// attackMoveAll: false = default (plain-move to intermediate nodes, attack-move
+// only the final node). true = issue an attack-move at EVERY node so the unit
+// engages anything it meets along the whole route.
+function driveMover(unit u, vec2 startPos, vec2 endPos, TrackNode headNodeParam, bool attackMoveAll)
+    var headNode = headNodeParam
+    // 2. FALLBACK: straight-line baseline ------------------------
+    // Only used when the HPA query gave us nothing to walk. This is the
+    // old behaviour, retained so the mover still does *something* (and
+    // so you can tell a fallback run from a real-path run).
+    if headNode == null
+        print("HPA Nav: no usable path -> straight-line FALLBACK")
+        let firstWaypoint = startPos + (endPos - startPos).norm() * 150.0
+        headNode = new TrackNode(firstWaypoint.x, firstWaypoint.y)
+        let tailNode = new TrackNode(endPos.x, endPos.y)
+        headNode.nextNode = tailNode
 
-            // 3. DRIVE THE MOVER (unchanged) -----------------------------
-            if headNode != null
-                var currentTrackNode = headNode
-                let currentTargetVec = vec2(currentTrackNode.x, currentTrackNode.y)
+    // 3. DRIVE THE MOVER (unchanged) -----------------------------
+    if headNode != null
+        var currentTrackNode = headNode
+        let currentTargetVec = vec2(currentTrackNode.x, currentTrackNode.y)
 
-                // Fire the initial order to the first waypoint
-                u.issuePointOrderById(851986, currentTargetVec)
-                print("HPA Nav: move order -> world (" + currentTargetVec.x.toString() + ", " + currentTargetVec.y.toString() + ")")
+        // Fire the initial order. By default a plain move to the first
+        // waypoint (the attack-move handoff happens later, at the 2nd-to-last
+        // node), unless this is a single-node chain (first node IS final) or
+        // attackMoveAll is set -- either of which makes the first order an
+        // attack-move.
+        let firstIsFinal = currentTrackNode.nextNode == null
+        let firstAttack = attackMoveAll or firstIsFinal
+        u.issuePointOrderById(firstAttack ? ORDER_ATTACK : ORDER_MOVE, currentTargetVec)
+        print("HPA Nav: " + (firstAttack ? "attack-move" : "move") + " order -> world (" + currentTargetVec.x.toString() + ", " + currentTargetVec.y.toString() + ")")
 
-                var lastPos = u.getPos()
-                var ticksStuck = 0
+        var lastPos = u.getPos()
+        var ticksStuck = 0
 
-                // High-fidelity tracking loop running every 0.25 seconds
-                doPeriodically(0.25) cb ->
-                    if u == null or GetUnitTypeId(u) == 0 or not IsUnitAliveBJ(u)
-                        // Emergency memory cleanup loop to stop leaks if unit dies
-                        var temp = currentTrackNode
-                        while temp != null
-                            let next = temp.nextNode
-                            destroy temp
-                            temp = next
+        // High-fidelity tracking loop running every 0.25 seconds
+        doPeriodically(0.25) cb ->
+            if u == null or GetUnitTypeId(u) == 0 or not IsUnitAliveBJ(u)
+                // Emergency memory cleanup loop to stop leaks if unit dies
+                var temp = currentTrackNode
+                while temp != null
+                    let next = temp.nextNode
+                    destroy temp
+                    temp = next
+                destroy cb
+            else if currentTrackNode == null
+                destroy cb
+            else
+                let currentPos = u.getPos()
+                let targetVec = vec2(currentTrackNode.x, currentTrackNode.y)
+
+                // Node Proximity Check
+                if currentPos.distanceTo(targetVec) < 130.0
+                    let reached = currentTrackNode
+                    let next = reached.nextNode
+
+                    if next != null and next.nextNode == null
+                        // Reached the SECOND-TO-LAST node: fire a single
+                        // attack-move at the FINAL node and hand the last
+                        // segment to the engine. The unit paths there and
+                        // engages on arrival -- no more node-by-node.
+                        let finalVec = vec2(next.x, next.y)
+                        u.issuePointOrderById(ORDER_ATTACK, finalVec)
+                        print("HPA Nav: 2nd-to-last reached -> attack-move to final (" + finalVec.x.toString() + ", " + finalVec.y.toString() + ")")
+                        destroy reached
+                        destroy next
+                        currentTrackNode = null
                         destroy cb
-                    else if currentTrackNode == null
-                        destroy cb
+                    else if next != null
+                        // Normal intermediate hop. Plain move by default;
+                        // attack-move when attackMoveAll is set.
+                        destroy reached
+                        currentTrackNode = next
+                        let nextTarget = vec2(next.x, next.y)
+                        let hopOid = attackMoveAll ? ORDER_ATTACK : ORDER_MOVE
+                        u.issuePointOrderById(hopOid, nextTarget)
+                        print("HPA Nav: " + (attackMoveAll ? "attack-move" : "move") + " order -> world (" + nextTarget.x.toString() + ", " + nextTarget.y.toString() + ")")
                     else
-                        let currentPos = u.getPos()
-                        let targetVec = vec2(currentTrackNode.x, currentTrackNode.y)
+                        // next == null: a single-node chain (we were already
+                        // attack-moving to the only/final node) -> done.
+                        destroy reached
+                        currentTrackNode = null
+                        print("HPA Nav: final node reached")
+                        destroy cb
+                else
+                    let isFinal = currentTrackNode.nextNode == null
+                    let attackThis = attackMoveAll or isFinal
+                    let oid = attackThis ? ORDER_ATTACK : ORDER_MOVE
+                    let label = attackThis ? "attack-move" : "move"
+                    let idle = u.getCurrentOrder() == 0
+                    // Stuck Recovery / Anti-Interruption Override.
+                    // On an attack-move leg a static position usually means the
+                    // unit is FIGHTING, so we do NOT re-issue on stuck-position
+                    // there -- only if it has gone truly idle. Plain-move legs
+                    // re-path on stuck. In attackMoveAll mode every leg is an
+                    // attack-move, so all legs skip the stuck-repath and re-issue
+                    // only when idle (fight over but no advance).
+                    if currentPos.distanceTo(lastPos) < 6.0
+                        ticksStuck++
+                        if ((not attackThis) and ticksStuck >= 4) or idle
+                            u.issuePointOrderById(oid, targetVec)
+                            print("HPA Nav: re-issue " + label + " (stuck) -> world (" + targetVec.x.toString() + ", " + targetVec.y.toString() + ")")
+                            ticksStuck = 0
+                    else if idle
+                        u.issuePointOrderById(oid, targetVec)
+                        print("HPA Nav: re-issue " + label + " (idle) -> world (" + targetVec.x.toString() + ", " + targetVec.y.toString() + ")")
+                        ticksStuck = 0
+                    else
+                        ticksStuck = 0
 
-                        // Node Proximity Check
-                        if currentPos.distanceTo(targetVec) < 130.0
-                            let old = currentTrackNode
-                            currentTrackNode = currentTrackNode.nextNode
-                            destroy old
+                    lastPos = currentPos
 
-                            if currentTrackNode != null
-                                let nextTarget = vec2(currentTrackNode.x, currentTrackNode.y)
-                                u.issuePointOrderById(851986, nextTarget)
-                                print("HPA Nav: move order -> world (" + nextTarget.x.toString() + ", " + nextTarget.y.toString() + ")")
-                            else
-                                u.issueImmediateOrderById(851972) // Stop cleanly at final destination
-                                print("HPA Nav: final waypoint reached, issuing STOP")
-                                destroy cb
-                        else
-                            // Stuck Recovery / Anti-Interruption Override
-                            if currentPos.distanceTo(lastPos) < 6.0
-                                ticksStuck++
-                                if ticksStuck >= 4 or u.getCurrentOrder() == 0
-                                    u.issuePointOrderById(851986, targetVec)
-                                    print("HPA Nav: re-issue (stuck) -> world (" + targetVec.x.toString() + ", " + targetVec.y.toString() + ")")
-                                    ticksStuck = 0
-                            else if u.getCurrentOrder() == 0
-                                u.issuePointOrderById(851986, targetVec)
-                                print("HPA Nav: re-issue (idle) -> world (" + targetVec.x.toString() + ", " + targetVec.y.toString() + ")")
-                                ticksStuck = 0
-                            else
-                                ticksStuck = 0
+// =====================================================================
+// GROUP NAVIGATION (one query, many followers)
+//
+//   let wps = queryRoadWaypoints(start, goal)            // 1 macro A*
+//   for u in g
+//       startHPA_NavigationShared(u, start, goal, wps)   // cheap per unit
+//   freeWaypoints(wps)                                    // safe: see below
+//
+// Each unit still gets its OWN TrackNode chain and OWN 0.25s tracking loop;
+// only the expensive roadmap query is shared.
+// =====================================================================
 
-                            lastPos = currentPos
+// Run the macro A* ONCE and copy its waypoints into a reusable LinkedList<WP>.
+// Returns null when the roadmap has no usable path (each follower then falls
+// back to the straight line on its own). getWaypoints() is read exactly once.
+//
+// OWNERSHIP: caller owns the list and frees it with freeWaypoints() after the
+// launch loop. startHPA_NavigationShared reads it SYNCHRONOUSLY (builds the
+// chain immediately), so freeing it right after the loop is safe.
+public function queryRoadWaypoints(vec2 startPos, vec2 endPos) returns LinkedList<WP>
+    let result = getRoadPath(startPos, endPos)
+    LinkedList<WP> out = null
+    if result != null
+        let wpCount = result.path != null ? result.path.size() : 0
+        print("HPA Nav[group]: query success=" + result.isSuccess.toString()
+            + " dist=" + result.distance.toString()
+            + " sysErr=" + result.isSystemError.toString()
+            + " waypoints=" + wpCount.toString())
+        if result.isSuccess and result.path != null
+            out = new LinkedList<WP>()
+            let wps = result.path.getWaypoints()
+            for i = 0 to wps.size() - 1
+                let p = wps.get(i).pos
+                out.add(new WP(p.x, p.y))
+        if result.path != null
+            destroy result.path
+        destroy result
+    return out
+
+// Free a waypoint list returned by queryRoadWaypoints (boxes + list).
+public function freeWaypoints(LinkedList<WP> wps)
+    if wps != null
+        for w in wps
+            destroy w
+        destroy wps
+
+// Navigate ONE unit along a precomputed shared waypoint list, skipping the
+// per-unit roadmap query. Pass null/empty to force the straight-line fallback.
+// The TrackNode chain is built NOW (synchronously, read-only over the shared
+// list) so the caller can free that list right after the launch loop; only the
+// move-speed set + first order + mover are deferred behind the same 0.05s
+// engine buffer as startHPA_Navigation.
+//
+// Backwards-compatible 4-arg form: default behaviour (attack-move only final).
+public function startHPA_NavigationShared(unit u, vec2 startPos, vec2 endPos, LinkedList<WP> sharedWaypoints)
+    startHPA_NavigationShared(u, startPos, endPos, sharedWaypoints, false)
+
+// attackMoveAll = true issues an attack-move at EVERY node (see driveMover).
+public function startHPA_NavigationShared(unit u, vec2 startPos, vec2 endPos, LinkedList<WP> sharedWaypoints, bool attackMoveAll)
+    if u == null or GetUnitTypeId(u) == 0 or not IsUnitAliveBJ(u)
+        return
+
+    TrackNode headNode = null
+    if sharedWaypoints != null and sharedWaypoints.size() > 0
+        headNode = buildChainFromWaypoints(sharedWaypoints, startPos)
+
+    doAfter(0.05) ->
+        if u != null and GetUnitTypeId(u) != 0 and IsUnitAliveBJ(u)
+            u.setMoveSpeed(300.0)
+            driveMover(u, startPos, endPos, headNode, attackMoveAll)
+        else
+            // Unit died during the buffer: free the chain we pre-built, since
+            // its tracking loop (which normally owns it) never starts.
+            var temp = headNode
+            while temp != null
+                let next = temp.nextNode
+                destroy temp
+                temp = next
