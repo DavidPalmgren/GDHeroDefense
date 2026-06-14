@@ -2,7 +2,8 @@ package WarsongAI
 import ControlPoint
 import AI
 import ClosureTimers
-import OnUnitEnterLeave
+import ClosureEvents
+import EventHelper
 import HPAUnitController
 import HPARoadmap
 
@@ -15,8 +16,22 @@ rect spawn2 = gg_rct_Astranaar2
 rect warsongLumber = gg_rct_WarsongLumberCamp
 rect warsongFrontline = gg_rct_WarsongFrontline
 rect warsongBackline = gg_rct_WarsongBackline
+region warsongLumberRegion = CreateRegion()
 public group warsong1 = CreateGroup()
 public group warsong2 = CreateGroup()
+
+
+function checkWarsongTrigger()
+    let u = GetEnteringUnit()
+    if not event_flag_warsongLumber
+        if warsongLumber.contains(u.getPos()) and u.getOwner() != players[5]
+            event_flag_warsongLumber = true
+            spawnWave(Player(5), u.getOwner(), 'nchg', 10, warsong2, warsongFrontline.getCenter())
+            spawnWave(Player(5), u.getOwner(), 'nckb', 2, warsong2, warsongFrontline.getCenter())
+            spawnWave(Player(5), u.getOwner(), 'nchw', 10, warsong2, warsongBackline.getCenter())
+            for un in warsong2
+                un.issueTargetOrder("attack", u)
+        
 
 
 init
@@ -42,19 +57,18 @@ init
                     for u in warsong1
                         attackCp(u,false, players[18])
     
-    // doAfter(30.0) ->  
-    //     onEnter() ->
-    //         if not event_flag_warsongLumber
-    //             let u = getTriggerUnit()
-    //             print(u.getOwner().getName())
-    //             if warsongLumber.contains(u.getPos()) and u.getOwner() != players[5]
-    //                 event_flag_warsongLumber = true
-    //                 spawnWave(Player(5), u.getOwner(), 'nchg', 10, warsong2, warsongFrontline.getCenter())
-    //                 spawnWave(Player(5), u.getOwner(), 'nckb', 2, warsong2, warsongFrontline.getCenter())
-    //                 spawnWave(Player(5), u.getOwner(), 'nchw', 10, warsong2, warsongBackline.getCenter())
-    //                 for un in warsong2
-    //                     un.issueTargetOrder("attack", u)
-                
 
-                    
+    doAfter(30.0) ->  
+        warsongLumberRegion.addRect(warsongLumber)
+        let t = CreateTrigger()
+            ..registerEnterRegion(warsongLumberRegion, null)
+            ..addAction() ->
+            checkWarsongTrigger()
+
+
+
+
+
+                
+               
         
