@@ -76,7 +76,9 @@ import UnitObjEditing
 	..setTooltipExtended("Basic frontline unit. Can learn Thicker Bark to resist some damage and Recycle to invigorate a nearby unit on death. |n|n|cffffcc00Attacks land units.|r")
 	..setHotkey("Q")
 	..setAbilitySkinList("A000,Ault")
-	..setNormalAbilities("AM0y,AM0z,Ault")
+	..setNormalAbilities("AM0v,AM0w,Ault")
+	..setNormalAbilities("AM0v,AM0w,Ault")
+	..setNormalAbilities("AM0v,AM0w,Ault")
 
 
 @compiletime function create_w3u_E003()
@@ -110,7 +112,11 @@ import UnitObjEditing
 	..setProperNamesUsed(1)
 	..setScalingValue(1.3)
 	..setNormalAbilities("A001,AInv,Ault")
-	..setHeroAbilities("AM0p,A002,AM0o,AHav")
+	..setHeroAbilities("AM0m,A002,AM0k,AHav")
+	..setNormalAbilities("A001,AInv,Ault")
+	..setHeroAbilities("AM0m,A002,AM0k,AHav")
+	..setNormalAbilities("A001,AInv,Ault")
+	..setHeroAbilities("AM0m,A002,AM0k,AHav")
 
 
 @compiletime function create_w3u_e004()
@@ -137,7 +143,9 @@ import UnitObjEditing
 	..setAttack1ProjectileArt("Abilities\\Weapons\\KeeperGroveMissile\\KeeperGroveMissile.mdl")
 	..setButtonPositionX(2)
 	..setHotkey("C")
-	..setNormalAbilities("AM0s,AInv,Ault,ACm2,Aien,Aadm,Aspo")
+	..setNormalAbilities("AM0p,AInv,Ault,ACm2,Aien,Aadm,Aspo")
+	..setNormalAbilities("AM0p,AInv,Ault,ACm2,Aien,Aadm,Aspo")
+	..setNormalAbilities("AM0p,AInv,Ault,ACm2,Aien,Aadm,Aspo")
 
 
 @compiletime function create_w3u_e005()
@@ -598,7 +606,13 @@ import UnitObjEditing
 	..setName("Xavius")
 	// TODO no wrapper: 	..setString("uhas", "")
 	..setProperNames("Xavius the Nightmare Lord")
-	..setNormalAbilities("AM05,AM06,AM03")
+	..setNormalAbilities("AM0{,AM0|,AM0z")
+	..setLevel(6)
+	..setName("Xavius")
+	..setNormalAbilities("AM0{,AM0|,AM0z")
+	..setLevel(6)
+	..setName("Xavius")
+	..setNormalAbilities("AM0{,AM0|,AM0z")
 	..setLevel(6)
 	..setName("Xavius")
 
@@ -634,7 +648,9 @@ import UnitObjEditing
 	..setAttack1ProjectileArt("Abilities\\Weapons\\FarseerMissile\\FarseerMissile.mdl")
 	..setTooltipBasic("Train Moonkin")
 	..setTooltipExtended("Moonkin are wild experts of the arcane arts providing Brilliance Aura and can cast Arcane Blast doing massive aoe damage. |n|n|cffffcc00Attacks land and air units.|r")
-	..setNormalAbilities("AM09,AM0v")
+	..setNormalAbilities("AM05,AM0s")
+	..setNormalAbilities("AM05,AM0s")
+	..setNormalAbilities("AM05,AM0s")
 
 
 @compiletime function create_w3u_e00K()
@@ -782,7 +798,9 @@ import UnitObjEditing
 	..setTooltipExtended("Battle hardened elite archers of the Sentinels they posses the same upgrades as normal Archers but much more deadly. Can use Viper stings a piercing nuke. |n|n|cffffcc00Attacks land and air units.|r")
 	..setHotkey("W")
 	..setButtonPositionX(1)
-	..setNormalAbilities("AM0t")
+	..setNormalAbilities("AM0q")
+	..setNormalAbilities("AM0q")
+	..setNormalAbilities("AM0q")
 
 
 @compiletime function create_w3u_E00Q()
@@ -790,7 +808,9 @@ import UnitObjEditing
 	..setAttack1DamageBase(30)
 	..setName("TyrandeMoonWarrior 2")
 	..setModelFile("units\\nightelf\\Archer\\Archer.mdl")
-	..setHeroAbilities("AM0m,AM0n,AM0i,AM0j")
+	..setHeroAbilities("AM0i,AM0j,AM0e,AM0f")
+	..setHeroAbilities("AM0i,AM0j,AM0e,AM0f")
+	..setHeroAbilities("AM0i,AM0j,AM0e,AM0f")
 
 
 @compiletime function create_w3u_n009()
@@ -831,7 +851,9 @@ import UnitObjEditing
 	..setAttack1CooldownTime(1.6)
 	..setName("TyrandeMoonWarrior 1")
 	..setModelFile("units\\nightelf\\Archer\\Archer.mdl")
-	..setHeroAbilities("AM0m,AM0n,AM0i,AM0j")
+	..setHeroAbilities("AM0i,AM0j,AM0e,AM0f")
+	..setHeroAbilities("AM0i,AM0j,AM0e,AM0f")
+	..setHeroAbilities("AM0i,AM0j,AM0e,AM0f")
 
 
 @compiletime function create_w3u_E00T()
@@ -839,7 +861,9 @@ import UnitObjEditing
 	..setAttack1DamageBase(30)
 	..setName("TyrandeMoonWarrior 3")
 	..setModelFile("units\\nightelf\\Archer\\Archer.mdl")
-	..setHeroAbilities("AM0m,AM0n,AM0i,AM0j")
+	..setHeroAbilities("AM0i,AM0j,AM0e,AM0f")
+	..setHeroAbilities("AM0i,AM0j,AM0e,AM0f")
+	..setHeroAbilities("AM0i,AM0j,AM0e,AM0f")
 
 
 @compiletime function create_w3u_n00A()
@@ -961,37 +985,6 @@ import UnitObjEditing
 
 @compiletime function create_w3u_x001()
 	new UnitDefinition('x001', 'ewsp')
-	..setName("Dummy Caster")
-	..setManaMaximum(1000000)
-	..setMovementType("fly")
-	..setUpgradesUsed("")
-	..setStructuresBuilt("")
-	..setRace("commoner")
-	..setFoodCost(0)
-	..setArmorType("divine")
-	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNtemp.blp")
-	..setSpeedBase(522)
-	..setModelFile("dummy.mdl")
-	..setAnimationBlendTimeseconds(0.0)
-	..setAnimationCastBackswing(0.0)
-	..setMaximumPitchAngledegrees(0.0)
-	..setMaximumRollAngledegrees(0.0)
-	..setTurnRate(3.0)
-	..setArtSpecial("")
-	..setProjectileImpactZ(0.0)
-	..setProjectileLaunchZ(0.0)
-	..setNameEditorSuffix("(Basics)")
-	..setSightRadiusDay(1)
-	..setSightRadiusNight(1)
-	..setUnitClassification("_")
-	..setPropulsionWindowdegrees(1.0)
-	..setTooltipBasic("")
-	..setNormalAbilities("Aloc,Agho")
-	..setCollisionSize(0.0)
-
-
-@compiletime function create_w3u_x002()
-	new UnitDefinition('x002', 'ewsp')
 	..setName("Effect Dummy Unit")
 	..setUpgradesUsed("")
 	..setStructuresBuilt("")
@@ -1032,24 +1025,137 @@ import UnitObjEditing
 	..setAttack1WeaponSound("Nothing")
 	..setAttack1WeaponType("instant")
 	..setAcquisitionRange(2.1474836E9)
-	..setNormalAbilities("Avul,Aloc,AM08")
+	..setNormalAbilities("Avul,Aloc,AM04")
 
 
-@compiletime function create_w3u_x003()
-	new UnitDefinition('x003', 'ewsp')
+@compiletime function create_w3u_x002()
+	new UnitDefinition('x002', 'ewsp')
 	..setFoodCost(0)
 	..setCollisionSize(0.0)
 	..setModelFile("dummy.mdl")
 
 
-@compiletime function create_w3u_x004()
-	new UnitDefinition('x004', 'even')
+@compiletime function create_w3u_x003()
+	new UnitDefinition('x003', 'even')
 	..setName("Vengeful Spirit")
 	..setNormalAbilities("")
 	..setHitPointsMaximumBase(300)
 	..setSpeedBase(330)
 	..setAttack1DamageBase(18)
 	..setAttack1CooldownTime(1.2)
+
+
+@compiletime function create_w3u_x006()
+	new UnitDefinition('x006', 'ewsp')
+	..setName("Dummy Caster")
+	..setManaMaximum(1000000)
+	..setMovementType("fly")
+	..setUpgradesUsed("")
+	..setStructuresBuilt("")
+	..setRace("commoner")
+	..setFoodCost(0)
+	..setArmorType("divine")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNtemp.blp")
+	..setSpeedBase(522)
+	..setModelFile("dummy.mdl")
+	..setAnimationBlendTimeseconds(0.0)
+	..setAnimationCastBackswing(0.0)
+	..setMaximumPitchAngledegrees(0.0)
+	..setMaximumRollAngledegrees(0.0)
+	..setTurnRate(3.0)
+	..setArtSpecial("")
+	..setProjectileImpactZ(0.0)
+	..setProjectileLaunchZ(0.0)
+	..setNameEditorSuffix("(Basics)")
+	..setSightRadiusDay(1)
+	..setSightRadiusNight(1)
+	..setUnitClassification("_")
+	..setPropulsionWindowdegrees(1.0)
+	..setTooltipBasic("")
+	..setNormalAbilities("Aloc,Agho")
+	..setCollisionSize(0.0)
+
+
+@compiletime function create_w3u_x008()
+	new UnitDefinition('x008', 'uloc')
+	..setName("Spell Dummy")
+	..setNormalAbilities("AM0y")
+
+
+@compiletime function create_w3u_x009()
+	new UnitDefinition('x009', 'nban')
+	..setName("Shadow Ambusher")
+	..setHitPointsMaximumBase(400)
+	..setAttack1DamageBase(20)
+	..setDefenseBase(2)
+	..setSpeedBase(310)
+	..setGoldBountyAwardedBase(12)
+	..setScalingValue(1.0)
+	..setNormalAbilities("AM0}")
+
+
+@compiletime function create_w3u_x00a()
+	new UnitDefinition('x00a', 'nban')
+	..setName("Shadow Assassin")
+	..setHitPointsMaximumBase(600)
+	..setAttack1DamageBase(30)
+	..setDefenseBase(4)
+	..setSpeedBase(330)
+	..setGoldBountyAwardedBase(22)
+	..setManaMaximum(200)
+	..setManaInitialAmount(100)
+	..setScalingValue(1.15)
+	..setNormalAbilities("AM0~,AM10")
+
+
+@compiletime function create_w3u_x00b()
+	new UnitDefinition('x00b', 'nban')
+	..setName("Shadow Stalker Captain")
+	..setHitPointsMaximumBase(900)
+	..setAttack1DamageBase(45)
+	..setDefenseBase(6)
+	..setSpeedBase(350)
+	..setGoldBountyAwardedBase(40)
+	..setScalingValue(1.35)
+	..setNormalAbilities("AM1!,AM12,AM11")
+
+
+@compiletime function create_w3u_x00c()
+	new UnitDefinition('x00c', 'uabo')
+	..setName("Rotting Devourer")
+	..setHitPointsMaximumBase(500)
+	..setAttack1DamageBase(24)
+	..setDefenseBase(3)
+	..setSpeedBase(280)
+	..setGoldBountyAwardedBase(16)
+	..setScalingValue(0.95)
+	..setNormalAbilities("AM13")
+
+
+@compiletime function create_w3u_x00d()
+	new UnitDefinition('x00d', 'uabo')
+	..setName("Plague Devourer")
+	..setHitPointsMaximumBase(750)
+	..setAttack1DamageBase(36)
+	..setDefenseBase(5)
+	..setSpeedBase(295)
+	..setGoldBountyAwardedBase(32)
+	..setManaMaximum(200)
+	..setManaInitialAmount(100)
+	..setScalingValue(1.15)
+	..setNormalAbilities("AM14,AM16")
+
+
+@compiletime function create_w3u_x00e()
+	new UnitDefinition('x00e', 'uabo')
+	..setName("Insatiable Gulgothar")
+	..setHitPointsMaximumBase(1125)
+	..setAttack1DamageBase(54)
+	..setDefenseBase(7)
+	..setSpeedBase(310)
+	..setGoldBountyAwardedBase(60)
+	..setScalingValue(1.4)
+	..setNormalAbilities("AM15,AM17,AM18")
 
 
 // Original Table (contains all modified default/melee objects)
@@ -1182,8 +1288,12 @@ import UnitObjEditing
 	..setBuildTime(5)
 	..setGoldCost(50)
 	..setLumberCost(0)
-	..setNormalAbilities("AM0a,AInv,Ault")
-	..setHeroAbilities("AM0c,AM0d,AM0b")
+	..setNormalAbilities("AM06,AInv,Ault")
+	..setHeroAbilities("AM08,AM09,AM07")
+	..setNormalAbilities("AM06,AInv,Ault")
+	..setHeroAbilities("AM08,AM09,AM07")
+	..setNormalAbilities("AM06,AInv,Ault")
+	..setHeroAbilities("AM08,AM09,AM07")
 
 
 @compiletime function create_w3u_Emoo()
@@ -1193,7 +1303,9 @@ import UnitObjEditing
 	..setLumberCost(0)
 	..setIntelligencePerLevel(2.9)
 	..setProperNames("Tyrande")
-	..setHeroAbilities("AM0m,AM0n,AM0i,AM0j")
+	..setHeroAbilities("AM0i,AM0j,AM0e,AM0f")
+	..setHeroAbilities("AM0i,AM0j,AM0e,AM0f")
+	..setHeroAbilities("AM0i,AM0j,AM0e,AM0f")
 
 
 @compiletime function create_w3u_edot()
@@ -1404,37 +1516,74 @@ import UnitObjEditing
 @compiletime function create_w3u_nckb()
 	new UnitDefinition('nckb', 'nckb')
 	..setSpeedBase(250)
+	..setCollisionSize(24.0)
 
 
 @compiletime function create_w3u_nchr()
 	new UnitDefinition('nchr', 'nchr')
-	..setSpeedBase(300)
+	..setSpeedBase(320)
+	..setCollisionSize(16.0)
+
+
+@compiletime function create_w3u_owar()
+	new UnitDefinition('owar', 'owar')
+	..setHitPointsMaximumBase(1400)
+	..setCollisionSize(16.0)
+	..setAttack1DamageBase(35)
+	..setAttack1AttackType("chaos")
+	..setDefaultActiveAbility("ANca")
+
+
+@compiletime function create_w3u_nchg()
+	new UnitDefinition('nchg', 'nchg')
+	..setCollisionSize(8.0)
 
 
 @compiletime function create_w3u_Udre()
 	new HeroDefinition('Udre', 'Udre')
-	..setHeroAbilities("AM09")
+	..setHeroAbilities("AM05")
+	..setHeroAbilities("AM05")
+	..setHeroAbilities("AM05")
 
 
 @compiletime function create_w3u_Ewar()
 	new HeroDefinition('Ewar', 'Ewar')
-	..setHeroAbilities("AM0e,AM0g,AM0h,AEsv")
+	..setHeroAbilities("AM0a,AM0c,AM0d,AEsv")
+	..setHeroAbilities("AM0a,AM0c,AM0d,AEsv")
+	..setHeroAbilities("AM0a,AM0c,AM0d,AEsv")
 
 
-@compiletime function create_w3u_x006()
-	new UnitDefinition('x006', 'x006')
+@compiletime function create_w3u_x005()
+	new UnitDefinition('x005', 'x005')
+	..setModelFile("TyrandeWhisperwind.mdx")
+	..setModelFile("TyrandeWhisperwind.mdx")
 	..setModelFile("TyrandeWhisperwind.mdx")
 
 
 @compiletime function create_w3u_edtm()
 	new UnitDefinition('edtm', 'edtm')
-	..setNormalAbilities("AM0r,Arav,Afa2,Ault")
+	..setNormalAbilities("AM0o,Arav,Afa2,Ault")
+	..setNormalAbilities("AM0o,Arav,Afa2,Ault")
+	..setNormalAbilities("AM0o,Arav,Afa2,Ault")
 
 
 @compiletime function create_w3u_Hblm()
 	new HeroDefinition('Hblm', 'Hblm')
-	..setNormalAbilities("AM0u")
+	..setNormalAbilities("AM0r")
 	..setLevel(6)
 	..setName("Ligga")
+	..setNormalAbilities("AM0r")
+	..setLevel(6)
+	..setName("Ligga")
+	..setNormalAbilities("AM0r")
+	..setLevel(6)
+	..setName("Ligga")
+
+
+@compiletime function create_w3u_Ogrh()
+	new HeroDefinition('Ogrh', 'Ogrh')
+	..setHeroAbilities("AM0x")
+	..setHeroAbilities("AM0x")
+	..setHeroAbilities("AM0x")
 
 

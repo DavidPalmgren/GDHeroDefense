@@ -1,8 +1,40 @@
 package HPAPathfindingInit
 import HPARoadmap
 
+// Master switch for the HPA pathfinder roadmap.
+//   true  -> marker units are turned into roadmap nodes and the link bake runs
+//            (initRoadmap also removes the markers as part of loading them).
+//   false -> the roadmap is NOT built, but the marker units are still stripped
+//            from the map. They are editor-only waypoints, so leaving them in
+//            play would put stray (possibly visible/colliding) units on the map.
+constant bool ENABLE_PATHFINDER = false
+
+// Strip every pathfinder marker unit from the map WITHOUT building the roadmap.
+// This mirrors only the removal half of HPARoadmap's loadMarkers(), so toggling
+// the pathfinder off leaves no marker units behind.
+function removeMarkerNodes()
+    let g = CreateGroup()
+    GroupEnumUnitsInRect(g, GetPlayableMapRect(), null)
+    var u = FirstOfGroup(g)
+    while u != null
+        GroupRemoveUnit(g, u)
+        if GetUnitTypeId(u) == MARKER_NODE_ID
+            RemoveUnit(u)
+        u = FirstOfGroup(g)
+    DestroyGroup(g)
+
+// Runs once at map start (after the settle delay). Either builds the roadmap or,
+// when disabled, just clears the marker units off the map.
+function startPathfinding()
+    if ENABLE_PATHFINDER
+        // initRoadmap() loads the markers (removing them in the process) and
+        // bakes the link graph from them.
+        initRoadmap()
+    else
+        // Pathfinder disabled: still clean the markers out of the map.
+        removeMarkerNodes()
+
 init
-    // Wait a moment at map start to let the engine settle, then build the
-    // roadmap from the placed marker units. (The old cluster grid + flood bake
-    // is retired; HPAManager still compiles but is no longer driven.)
-    CreateTimer()..start(0.0, () -> initRoadmap())
+    // Wait a moment at map start to let the engine settle, then either build the
+    // roadmap from the placed marker units, or (if disabled) just remove them.
+    CreateTimer()..start(0.0, () -> startPathfinding())
