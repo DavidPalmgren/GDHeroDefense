@@ -9,14 +9,14 @@ import GateLogic
 
 // Using Player(id) instead of players[id] to prevent potential syntax array errors
 public bool event_flag_darnassus = false
-// public bool event_flag_warsongLumber = false
+public bool event_flag_warsongLumber = false
 
 rect darnassusSpawn = gg_rct_DarnassusHighborneSpawn
-// rect spawn2 = gg_rct_Astranaar2
+rect spawn2 = gg_rct_Astranaar2
 rect darnassusPort = gg_rct_DarnassusPort
-// rect warsongFrontline = gg_rct_WarsongFrontline
-// rect warsongBackline = gg_rct_WarsongBackline
-// rect warsongNordrassil = gg_rct_NordrassilAttackWarsong
+rect warsongFrontline = gg_rct_WarsongFrontline
+rect warsongBackline = gg_rct_WarsongBackline
+rect warsongNordrassil = gg_rct_NordrassilAttackWarsong
 region darnassusPortRegion = CreateRegion()
 public group naga1 = udg_darnassusNaga
 public group naga2 = CreateGroup()

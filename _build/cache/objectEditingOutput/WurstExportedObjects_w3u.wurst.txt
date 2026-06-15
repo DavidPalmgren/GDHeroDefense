@@ -959,6 +959,78 @@ import UnitObjEditing
 	..setAbilitySkinList("")
 
 
+@compiletime function create_w3u_h00M()
+	new BuildingDefinition('h00M', 'hhou')
+	..setPlacementRequires("")
+	..setPathingMap("")
+	..setName("El'drathar (Stonetalon Mountains)")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCOP.blp")
+	..setModelFile("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setArtSpecial("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setUseClickHelper(true)
+	..setGroundTexture("")
+
+
+@compiletime function create_w3u_h00N()
+	new BuildingDefinition('h00N', 'hhou')
+	..setPlacementRequires("")
+	..setPathingMap("")
+	..setName("Stonetalon Peak")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCOP.blp")
+	..setModelFile("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setArtSpecial("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setUseClickHelper(true)
+	..setGroundTexture("")
+
+
+@compiletime function create_w3u_h00V()
+	new BuildingDefinition('h00V', 'hhou')
+	..setPlacementRequires("")
+	..setPathingMap("")
+	..setName("Stonetalon Mountains")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCOP.blp")
+	..setModelFile("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setArtSpecial("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setUseClickHelper(true)
+	..setGroundTexture("")
+
+
+@compiletime function create_w3u_h00W()
+	new BuildingDefinition('h00W', 'hhou')
+	..setPlacementRequires("")
+	..setPathingMap("")
+	..setName("Desolace")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCOP.blp")
+	..setModelFile("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setArtSpecial("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setUseClickHelper(true)
+	..setGroundTexture("")
+
+
+@compiletime function create_w3u_h00X()
+	new BuildingDefinition('h00X', 'hhou')
+	..setPlacementRequires("")
+	..setPathingMap("")
+	..setName("Ranzajar Isle (Desolace)")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCOP.blp")
+	..setModelFile("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setArtSpecial("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setUseClickHelper(true)
+	..setGroundTexture("")
+
+
+@compiletime function create_w3u_h00Y()
+	new BuildingDefinition('h00Y', 'hhou')
+	..setPlacementRequires("")
+	..setPathingMap("")
+	..setName("Maraudon")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCOP.blp")
+	..setModelFile("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setArtSpecial("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setUseClickHelper(true)
+	..setGroundTexture("")
+
+
 @compiletime function create_w3u_x001()
 	new UnitDefinition('x001', 'ewsp')
 	..setName("Effect Dummy Unit")
