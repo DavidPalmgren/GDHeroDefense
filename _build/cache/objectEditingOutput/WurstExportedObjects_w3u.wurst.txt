@@ -77,6 +77,7 @@ import UnitObjEditing
 	..setHotkey("Q")
 	..setAbilitySkinList("A000,Ault")
 	..setNormalAbilities("AM19,AM1a,Ault")
+	..setNormalAbilities("AM19,AM1a,Ault")
 
 
 @compiletime function create_w3u_E003()
@@ -111,6 +112,8 @@ import UnitObjEditing
 	..setScalingValue(1.3)
 	..setNormalAbilities("A001,AInv,Ault")
 	..setHeroAbilities("AM10,A002,AM1!,AHav")
+	..setNormalAbilities("A001,AInv,Ault")
+	..setHeroAbilities("AM10,A002,AM1!,AHav")
 
 
 @compiletime function create_w3u_e004()
@@ -137,6 +140,7 @@ import UnitObjEditing
 	..setAttack1ProjectileArt("Abilities\\Weapons\\KeeperGroveMissile\\KeeperGroveMissile.mdl")
 	..setButtonPositionX(2)
 	..setHotkey("C")
+	..setNormalAbilities("AM13,AInv,Ault,ACm2,Aien,Aadm,Aspo")
 	..setNormalAbilities("AM13,AInv,Ault,ACm2,Aien,Aadm,Aspo")
 
 
@@ -221,7 +225,7 @@ import UnitObjEditing
 	new BuildingDefinition('h004', 'hhou')
 	..setPlacementRequires("")
 	..setPathingMap("")
-	..setName("Bloodmyst Isle")
+	..setName("Feathermoon Stronghold")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCOP.blp")
 	..setModelFile("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
 	..setArtSpecial("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
@@ -353,7 +357,7 @@ import UnitObjEditing
 	new BuildingDefinition('h00G', 'hhou')
 	..setPlacementRequires("")
 	..setPathingMap("")
-	..setName("Ashenvale Beach South")
+	..setName("Feralas")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCOP.blp")
 	..setModelFile("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
 	..setArtSpecial("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
@@ -601,6 +605,9 @@ import UnitObjEditing
 	..setNormalAbilities("AM0b,AM0c,AM09")
 	..setLevel(6)
 	..setName("Xavius")
+	..setNormalAbilities("AM0b,AM0c,AM09")
+	..setLevel(6)
+	..setName("Xavius")
 
 
 @compiletime function create_w3u_e00J()
@@ -634,6 +641,7 @@ import UnitObjEditing
 	..setAttack1ProjectileArt("Abilities\\Weapons\\FarseerMissile\\FarseerMissile.mdl")
 	..setTooltipBasic("Train Moonkin")
 	..setTooltipExtended("Moonkin are wild experts of the arcane arts providing Brilliance Aura and can cast Arcane Blast doing massive aoe damage. |n|n|cffffcc00Attacks land and air units.|r")
+	..setNormalAbilities("AM0p,AM16")
 	..setNormalAbilities("AM0p,AM16")
 
 
@@ -783,6 +791,7 @@ import UnitObjEditing
 	..setHotkey("W")
 	..setButtonPositionX(1)
 	..setNormalAbilities("AM14")
+	..setNormalAbilities("AM14")
 
 
 @compiletime function create_w3u_E00Q()
@@ -790,6 +799,7 @@ import UnitObjEditing
 	..setAttack1DamageBase(30)
 	..setName("TyrandeMoonWarrior 2")
 	..setModelFile("units\\nightelf\\Archer\\Archer.mdl")
+	..setHeroAbilities("AM0},AM0~,AM0y,AM0z")
 	..setHeroAbilities("AM0},AM0~,AM0y,AM0z")
 
 
@@ -832,6 +842,7 @@ import UnitObjEditing
 	..setName("TyrandeMoonWarrior 1")
 	..setModelFile("units\\nightelf\\Archer\\Archer.mdl")
 	..setHeroAbilities("AM0},AM0~,AM0y,AM0z")
+	..setHeroAbilities("AM0},AM0~,AM0y,AM0z")
 
 
 @compiletime function create_w3u_E00T()
@@ -839,6 +850,7 @@ import UnitObjEditing
 	..setAttack1DamageBase(30)
 	..setName("TyrandeMoonWarrior 3")
 	..setModelFile("units\\nightelf\\Archer\\Archer.mdl")
+	..setHeroAbilities("AM0},AM0~,AM0y,AM0z")
 	..setHeroAbilities("AM0},AM0~,AM0y,AM0z")
 
 
@@ -963,7 +975,7 @@ import UnitObjEditing
 	new BuildingDefinition('h00M', 'hhou')
 	..setPlacementRequires("")
 	..setPathingMap("")
-	..setName("El'drathar (Stonetalon Mountains)")
+	..setName("El'drethar (Stonetalon Mountains)")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCOP.blp")
 	..setModelFile("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
 	..setArtSpecial("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
@@ -1011,7 +1023,7 @@ import UnitObjEditing
 	new BuildingDefinition('h00X', 'hhou')
 	..setPlacementRequires("")
 	..setPathingMap("")
-	..setName("Ranzajar Isle (Desolace)")
+	..setName("Dire Maul (Feralas)")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCOP.blp")
 	..setModelFile("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
 	..setArtSpecial("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
@@ -1023,7 +1035,79 @@ import UnitObjEditing
 	new BuildingDefinition('h00Y', 'hhou')
 	..setPlacementRequires("")
 	..setPathingMap("")
-	..setName("Maraudon")
+	..setName("Maraudon (Desolace)")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCOP.blp")
+	..setModelFile("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setArtSpecial("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setUseClickHelper(true)
+	..setGroundTexture("")
+
+
+@compiletime function create_w3u_h00Z()
+	new BuildingDefinition('h00Z', 'hhou')
+	..setPlacementRequires("")
+	..setPathingMap("")
+	..setName("Feathermoon")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCOP.blp")
+	..setModelFile("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setArtSpecial("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setUseClickHelper(true)
+	..setGroundTexture("")
+
+
+@compiletime function create_w3u_h010()
+	new BuildingDefinition('h010', 'hhou')
+	..setPlacementRequires("")
+	..setPathingMap("")
+	..setName("Feralas Grotto")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCOP.blp")
+	..setModelFile("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setArtSpecial("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setUseClickHelper(true)
+	..setGroundTexture("")
+
+
+@compiletime function create_w3u_h011()
+	new BuildingDefinition('h011', 'hhou')
+	..setPlacementRequires("")
+	..setPathingMap("")
+	..setName("Razorfen Kraul")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCOP.blp")
+	..setModelFile("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setArtSpecial("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setUseClickHelper(true)
+	..setGroundTexture("")
+
+
+@compiletime function create_w3u_h012()
+	new BuildingDefinition('h012', 'hhou')
+	..setPlacementRequires("")
+	..setPathingMap("")
+	..setName("Ranazjar Isle (Desolace)")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCOP.blp")
+	..setModelFile("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setArtSpecial("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setUseClickHelper(true)
+	..setGroundTexture("")
+
+
+@compiletime function create_w3u_h013()
+	new BuildingDefinition('h013', 'hhou')
+	..setPlacementRequires("")
+	..setPathingMap("")
+	..setName("Bloodmyst Isle")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCOP.blp")
+	..setModelFile("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setArtSpecial("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setUseClickHelper(true)
+	..setGroundTexture("")
+
+
+@compiletime function create_w3u_h014()
+	new BuildingDefinition('h014', 'hhou')
+	..setPlacementRequires("")
+	..setPathingMap("")
+	..setName("Ashenvale Beach South")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCOP.blp")
 	..setModelFile("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
 	..setArtSpecial("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
@@ -1345,6 +1429,8 @@ import UnitObjEditing
 	..setLumberCost(0)
 	..setNormalAbilities("AM0q,AInv,Ault")
 	..setHeroAbilities("AM0s,AM0t,AM0r")
+	..setNormalAbilities("AM0q,AInv,Ault")
+	..setHeroAbilities("AM0s,AM0t,AM0r")
 
 
 @compiletime function create_w3u_Emoo()
@@ -1354,6 +1440,7 @@ import UnitObjEditing
 	..setLumberCost(0)
 	..setIntelligencePerLevel(2.9)
 	..setProperNames("Tyrande")
+	..setHeroAbilities("AM0},AM0~,AM0y,AM0z")
 	..setHeroAbilities("AM0},AM0~,AM0y,AM0z")
 
 
@@ -1613,30 +1700,60 @@ import UnitObjEditing
 	..setAttack1CooldownTime(2.1)
 	..setAttack1Range(128)
 	..setSpeedBase(320)
+	..setHeroAbilities("AM07,AM04,AM03")
+	..setName("Grommash Hellscream")
+	..setProperNames("Chieftain of the Warsong")
+	..setProperNamesUsed(1)
+	..setPrimaryAttribute("STR")
+	..setStartingStrength(50)
+	..setStrengthPerLevel(5.0)
+	..setStartingAgility(20)
+	..setAgilityPerLevel(1.5)
+	..setStartingIntelligence(25)
+	..setIntelligencePerLevel(2.0)
+	..setLevel(10)
+	..setHitPointsMaximumBase(5000)
+	..setHitPointsRegenerationRate(8.5)
+	..setManaMaximum(600)
+	..setManaRegeneration(3.5)
+	..setDefenseBase(12)
+	..setAttack1DamageBase(120)
+	..setAttack1DamageNumberofDice(4)
+	..setAttack1DamageSidesperDie(10)
+	..setAttack1CooldownTime(2.1)
+	..setAttack1Range(128)
+	..setSpeedBase(320)
 
 
 @compiletime function create_w3u_Udre()
 	new HeroDefinition('Udre', 'Udre')
+	..setHeroAbilities("AM0p")
 	..setHeroAbilities("AM0p")
 
 
 @compiletime function create_w3u_Ewar()
 	new HeroDefinition('Ewar', 'Ewar')
 	..setHeroAbilities("AM0u,AM0w,AM0x,AEsv")
+	..setHeroAbilities("AM0u,AM0w,AM0x,AEsv")
 
 
 @compiletime function create_w3u_x00d()
 	new UnitDefinition('x00d', 'x00d')
+	..setModelFile("TyrandeWhisperwind.mdx")
 	..setModelFile("TyrandeWhisperwind.mdx")
 
 
 @compiletime function create_w3u_edtm()
 	new UnitDefinition('edtm', 'edtm')
 	..setNormalAbilities("AM12,Arav,Afa2,Ault")
+	..setNormalAbilities("AM12,Arav,Afa2,Ault")
 
 
 @compiletime function create_w3u_Hblm()
 	new HeroDefinition('Hblm', 'Hblm')
+	..setNormalAbilities("AM15")
+	..setLevel(6)
+	..setName("Ligga")
 	..setNormalAbilities("AM15")
 	..setLevel(6)
 	..setName("Ligga")

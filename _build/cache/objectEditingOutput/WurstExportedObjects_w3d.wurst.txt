@@ -300,3 +300,54 @@ import DoodadObjEditing
 	..setPathTexture(0, "")
 
 
+@compiletime function create_w3d_ZRrs()
+	new DoodadDefinition('ZRrs', 'ZRrs')
+	..setPathTexture(0, "")
+	..setMaximumScale(0, 4.0)
+
+
+@compiletime function create_w3d_ZRrk()
+	new DoodadDefinition('ZRrk', 'ZRrk')
+	..setMaximumScale(0, 4.0)
+
+
+@compiletime function create_w3d_ORrk()
+	new DoodadDefinition('ORrk', 'ORrk')
+	..setMaximumScale(0, 4.0)
+
+
+@compiletime function create_w3d_BRrk()
+	new DoodadDefinition('BRrk', 'BRrk')
+	..setMaximumScale(0, 4.0)
+
+
+@compiletime function create_w3d_DRrk()
+	new DoodadDefinition('DRrk', 'DRrk')
+	..setMaximumScale(0, 4.0)
+
+
+@compiletime function create_w3d_NRrk()
+	new DoodadDefinition('NRrk', 'NRrk')
+	..setMaximumScale(0, 4.0)
+
+
+@compiletime function create_w3d_ARrk()
+	new DoodadDefinition('ARrk', 'ARrk')
+	..setMaximumScale(0, 4.0)
+
+
+@compiletime function create_w3d_IRrk()
+	new DoodadDefinition('IRrk', 'IRrk')
+	..setMaximumScale(0, 4.0)
+
+
+@compiletime function create_w3d_LRrk()
+	new DoodadDefinition('LRrk', 'LRrk')
+	..setMaximumScale(0, 4.0)
+
+
+@compiletime function create_w3d_GRrk()
+	new DoodadDefinition('GRrk', 'GRrk')
+	..setMaximumScale(0, 4.0)
+
+
