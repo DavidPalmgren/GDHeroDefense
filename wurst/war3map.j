@@ -158,11 +158,11 @@ globals
     unit                    gg_unit_h00W_0365          = null
     unit                    gg_unit_h00M_0366          = null
     unit                    gg_unit_h00V_0367          = null
+    unit                    gg_unit_h012_0369          = null
     unit                    gg_unit_h00G_0444          = null
     unit                    gg_unit_h00Z_0445          = null
     unit                    gg_unit_h010_0446          = null
     unit                    gg_unit_h014_0185          = null
-    unit                    gg_unit_h012_0369          = null
     destructable            gg_dest_LTe2_0270          = null
 endglobals
 
@@ -740,13 +740,18 @@ function CreateNeutralHostileBuildings takes nothing returns nothing
     set gg_unit_h00R_0078 = BlzCreateUnitWithSkin( p, 'h00R', -5118.7, 22871.3, 270.000, 'h00R' )
     set u = BlzCreateUnitWithSkin( p, 'nth0', 1536.0, 23680.0, 270.000, 'nth0' )
     set u = BlzCreateUnitWithSkin( p, 'nth0', 2304.0, 23744.0, 270.000, 'nth0' )
+    set u = BlzCreateUnitWithSkin( p, 'nmh1', -11040.0, 18464.0, 270.000, 'nmh1' )
     set u = BlzCreateUnitWithSkin( p, 'ndru', 4096.0, 24448.0, 270.000, 'ndru' )
+    set u = BlzCreateUnitWithSkin( p, 'nmh1', -14816.0, 18784.0, 270.000, 'nmh1' )
     set u = BlzCreateUnitWithSkin( p, 'ncap', -5408.0, 17120.0, 270.000, 'ncap' )
     set u = BlzCreateUnitWithSkin( p, 'nth1', 5024.0, 20064.0, 270.000, 'nth1' )
     set u = BlzCreateUnitWithSkin( p, 'nth0', 4544.0, 20096.0, 270.000, 'nth0' )
+    set u = BlzCreateUnitWithSkin( p, 'nmh1', -14560.0, 19040.0, 270.000, 'nmh1' )
     set u = BlzCreateUnitWithSkin( p, 'ncaw', -3200.0, 14336.0, 270.000, 'ncaw' )
     set u = BlzCreateUnitWithSkin( p, 'nctl', -4032.0, 13568.0, 270.000, 'nctl' )
     set gg_unit_h00I_0135 = BlzCreateUnitWithSkin( p, 'h00I', -3767.8, 8514.8, 270.000, 'h00I' )
+    set u = BlzCreateUnitWithSkin( p, 'nmh1', -13792.0, 17632.0, 270.000, 'nmh1' )
+    set u = BlzCreateUnitWithSkin( p, 'nmh1', -13216.0, 18016.0, 270.000, 'nmh1' )
     set u = BlzCreateUnitWithSkin( p, 'ncmw', -3040.0, 13984.0, 270.000, 'ncmw' )
     set gg_unit_h008_0141 = BlzCreateUnitWithSkin( p, 'h008', -13840.5, 18604.0, 270.000, 'h008' )
     set gg_unit_h013_0142 = BlzCreateUnitWithSkin( p, 'h013', -13996.2, 21589.8, 270.000, 'h013' )
@@ -1313,11 +1318,6 @@ function CreateNeutralPassiveBuildings takes nothing returns nothing
     set gg_unit_e00J_0074 = BlzCreateUnitWithSkin( p, 'e00J', -5792.0, 23328.0, 270.000, 'e00J' )
     set gg_unit_edos_0075 = BlzCreateUnitWithSkin( p, 'edos', -8832.0, 27200.0, 270.000, 'edos' )
     set gg_unit_e007_0079 = BlzCreateUnitWithSkin( p, 'e007', -4544.0, 23232.0, 270.000, 'e007' )
-    set u = BlzCreateUnitWithSkin( p, 'nmh1', -11040.0, 18464.0, 270.000, 'nmh1' )
-    set u = BlzCreateUnitWithSkin( p, 'nmh1', -14816.0, 18784.0, 270.000, 'nmh1' )
-    set u = BlzCreateUnitWithSkin( p, 'nmh1', -14560.0, 19040.0, 270.000, 'nmh1' )
-    set u = BlzCreateUnitWithSkin( p, 'nmh1', -13792.0, 17632.0, 270.000, 'nmh1' )
-    set u = BlzCreateUnitWithSkin( p, 'nmh1', -13216.0, 18016.0, 270.000, 'nmh1' )
     set gg_unit_eate_0186 = BlzCreateUnitWithSkin( p, 'eate', -8352.0, 7456.0, 270.000, 'eate' )
     set gg_unit_e005_0187 = BlzCreateUnitWithSkin( p, 'e005', -7232.0, 8512.0, 270.000, 'e005' )
     set gg_unit_emow_0188 = BlzCreateUnitWithSkin( p, 'emow', -8160.0, 8544.0, 270.000, 'emow' )
