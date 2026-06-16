@@ -1,0 +1,46 @@
+package ZandalariBeastiary
+
+import UnitObjEditing
+import ObjectIdGenerator
+import ObjectIds
+import Icons
+
+// Pulling in our previously defined unit IDs
+import ZandalariTier2
+import ZandalariTier3
+import ZandalariTownHallID
+
+// https://www.hiveworkshop.com/threads/warbeast-kraal.343974/
+
+public constant ZANDALARI_BESTIARY_ID = compiletime(UNIT_ID_GEN.next())
+
+@compiletime function genZandalariBestiary()
+    new BuildingDefinition(ZANDALARI_BESTIARY_ID, 'obea')
+        ..setName("Zandalari Menagerie")
+        ..setTooltipBasic("Build [|cffffcc00Zandalari Menagerie|r]")
+        ..setTooltipExtended("Breeds and equips the massive prehistoric fauna of Zandalar. Trains Raptor Outriders, Pterrodax Riders, and Direhorn Ironclads.")
+        
+        // Visuals & Art
+        ..setIconGameInterface(Icons.bTNBeastiary)
+        ..setScalingValue(1.10) // Slightly scaled up to fit the massive Direhorns clearing the gates
+        
+        // Unit Production Pipeline
+        ..setUnitsTrained(commaList(
+            ZANDALARI_CAVALRY_ID, // Raptor Outrider (Tier 2 Skirmisher)
+            ZANDALARI_FLYER_ID,   // Pterrodax Rider (Tier 2 Anti-Air/Siege)
+            ZANDALARI_DINO_TANK_ID // Direhorn Ironclad (Tier 3 Super-Heavy Tank)
+        ))
+        
+        // Cost & Logistics (Enforcing the 0-Lumber Rule)
+        ..setGoldCost(145)
+        ..setLumberCost(0)
+        ..setBuildTime(55)
+        
+        // Durability Stats
+        ..setHitPointsMaximumBase(1200)
+        ..setArmorType(ArmorType.Fortified)
+        ..setDefenseBase(5)
+
+        ..setRequirements(commaList(ZANDALARI_T2_ID))
+        ..setResearchesAvailable("")
+

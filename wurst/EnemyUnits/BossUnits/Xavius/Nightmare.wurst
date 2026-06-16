@@ -18,7 +18,7 @@ import Orders
 public constant NIGHTMARE_ID = compiletime(ABIL_ID_GEN.next())
 public constant NIGHTMARE_BUFF_ID = compiletime(BUFF_ID_GEN.next())
 
-constant real NIGHTMARE_RADIUS = 400.
+constant real NIGHTMARE_RADIUS = 300.
 constant real NIGHTMARE_DURATION = 10.
 //constant string NIGHTMARE_SFX = Abilities.sleepTarget
 constant string CORRUPT_SFX = "Abilities\\Spells\\Undead\\UndeadDismember\\UndeadDismemberTarget.mdl"

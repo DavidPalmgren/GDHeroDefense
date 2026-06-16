@@ -1,0 +1,76 @@
+package ZandalariTownHall
+
+import ObjectIds
+import Icons
+import UnitObjEditing
+
+import ZandalariTownHallID
+import Worker
+import ZandalariAltar
+
+
+// 1. Generate Unique ID handles for all 3 Tiers
+
+
+@compiletime function genZandalariTownHalls()
+    
+    // -------------------------------------------------------------------------
+    // TIER 1: ZOCALO HEARTH
+    // -------------------------------------------------------------------------
+    // Maybe https://www.hiveworkshop.com/threads/troll-stronghold.290830/
+
+    // Better https://www.hiveworkshop.com/threads/troll-hall-tiered.332981/
+    new BuildingDefinition(ZANDALARI_T1_ID, 'ogre') // Inherits base Great Hall mechanics
+        ..setName("Zocalo Hearth")
+        ..setTooltipBasic("Build Zocalo Hearth")
+        ..setTooltipExtended("The economic and spiritual foundation of your settlement. Trains workers and accepts resource returns.")
+        ..setIconGameInterface(Icons.bTNGreatHall)
+        
+        // Tells the engine this building can morph directly into Tier 2
+        ..setUpgradesTo(commaList(ZANDALARI_T2_ID))
+        ..setUnitsTrained(commaList(ZANDALARI_WORKER_ID))
+        
+        // Gold/Lumber balancing
+        ..setGoldCost(150)
+        ..setLumberCost(0)
+        ..setBuildTime(60)
+        ..setHitPointsMaximumBase(1500)
+
+    // -------------------------------------------------------------------------
+    // TIER 2: ZANCHUL SANCTUM
+    // -------------------------------------------------------------------------
+    new BuildingDefinition(ZANDALARI_T2_ID, 'ostr') // Inherits base Stronghold mechanics
+        ..setName("Zanchul Sanctum")
+        ..setTooltipBasic("Upgrade to Zanchul Sanctum")
+        ..setTooltipExtended("Elevates the settlement into a stone sanctuary. Unlocks mid-tier military structures and tech upgrades.")
+        ..setIconGameInterface(Icons.bTNStrongHold)
+        
+        // Tells the engine this building can morph directly into Tier 3
+        ..setUpgradesTo(commaList(ZANDALARI_T3_ID))
+        ..setUnitsTrained(commaList(ZANDALARI_WORKER_ID))
+        
+        ..setGoldCost(200)
+        ..setLumberCost(0)
+        ..setBuildTime(120)
+        ..setHitPointsMaximumBase(2000)
+        ..setRequirements(commaList(ZANDALARI_ALTAR_ID))
+
+
+    // -------------------------------------------------------------------------
+    // TIER 3: DAZAR'ALOR ZIGGURAT
+    // -------------------------------------------------------------------------
+    new BuildingDefinition(ZANDALARI_T3_ID, 'ofrt') // Inherits base Fortress mechanics
+        ..setName("Dazar'alor Ziggurat")
+        ..setTooltipBasic("Upgrade to Dazar'alor Ziggurat")
+        ..setTooltipExtended("The ultimate golden pinnacle of Zandalari majesty. Unlocks high-tier units, ultimate tier researches, and Heroes.")
+        ..setIconGameInterface(Icons.bTNFortress)
+        ..setUnitsTrained(commaList(ZANDALARI_WORKER_ID))
+        
+        // Final tier structure, no further transitions
+        ..setUpgradesTo("") 
+        
+        ..setGoldCost(250)
+        ..setLumberCost(0)
+        ..setBuildTime(180)
+        ..setHitPointsMaximumBase(2500)
+        ..setRequirements(commaList(ZANDALARI_ALTAR_ID))

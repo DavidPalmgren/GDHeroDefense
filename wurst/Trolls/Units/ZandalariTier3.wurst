@@ -1,0 +1,144 @@
+package ZandalariTier3
+
+import UnitObjEditing
+import ObjectIdGenerator
+import ObjectIds
+import Icons
+import ZandalariTownHallID
+
+
+// Import your upgrades package to access the custom upgrade IDs
+import ZandalariBaseUpgrades
+
+// Generate Unique Engine IDs for Tier 3 Apex Forces
+public constant ZANDALARI_ALCHEMIST_ID  = compiletime(UNIT_ID_GEN.next())
+public constant ZANDALARI_BLOOD_MAGE_ID = compiletime(UNIT_ID_GEN.next())
+public constant ZANDALARI_DINO_TANK_ID  = compiletime(UNIT_ID_GEN.next())
+public constant ZANDALARI_EXECUTIONER_ID = compiletime(UNIT_ID_GEN.next())
+
+@compiletime function genZandalariTier3Units()
+
+    // -------------------------------------------------------------------------
+    // 1. POTION MAKER CASTER: MOJO APOTHECARY
+    // -------------------------------------------------------------------------
+    // https://www.hiveworkshop.com/threads/witchdoctor.145809/
+    new UnitDefinition(ZANDALARI_ALCHEMIST_ID, 'oshm') // Inherits Orc Shaman caster templates
+        ..setName("Mojo Apothecary")
+        ..setTooltipBasic("Train Mojo Apothecary")
+        ..setTooltipExtended("An alchemical doctor who carries volatile vats of bubbling brew. Throws healing elixirs to allies and corrosive acid cocktails to melt enemy armor strips.")
+        ..setIconGameInterface(Icons.bTNHeroAlchemist)
+        
+        // Caster Stat Allocation
+        ..setManaMaximum(400)
+        ..setManaInitialAmount(100)
+        ..setManaRegeneration(1.5)
+        
+        // Economy (Tier 3 Spellcaster Baseline)
+        ..setGoldCost(135)
+        ..setLumberCost(0) // 0-Lumber Rule
+        ..setBuildTime(5)
+        ..setFoodCost(3)
+        ..setUpgradesUsed(commaList(ZANDALARI_DAMAGE_UPG_ID, ZANDALARI_ARMOR_UPG_ID, ZANDALARI_REGEN_UPG_ID))
+
+    // -------------------------------------------------------------------------
+    // 2. RITUALIST CASTER: ZANCHUL BLOOD-WEAVER
+    // -------------------------------------------------------------------------
+    // https://www.hiveworkshop.com/threads/blood-troll-mage.326962/
+    new UnitDefinition(ZANDALARI_BLOOD_MAGE_ID, 'ospw') // Inherits Spirit Walker high-tier master slot
+        ..setName("Zanchul Blood-Weaver")
+        ..setTooltipBasic("Train Zanchul Blood-Weaver")
+        ..setTooltipExtended("A sinister practitioner of sacrificial voodoo magic. Channels forbidden rituals to siphon enemy vitality or links allied souls to split incoming pain.")
+        ..setIconGameInterface(Icons.bTNIceTrollBeserker1)
+        
+        // Caster Stat Allocation
+        ..setManaMaximum(500)
+        ..setManaInitialAmount(200)
+        ..setManaRegeneration(2.0)
+        
+        // Economy
+        ..setGoldCost(150)
+        ..setLumberCost(0) // 0-Lumber Rule
+        ..setBuildTime(6)
+        ..setFoodCost(3)
+        ..setUpgradesUsed(commaList(ZANDALARI_DAMAGE_UPG_ID, ZANDALARI_ARMOR_UPG_ID, ZANDALARI_REGEN_UPG_ID))
+
+    // -------------------------------------------------------------------------
+    // 3. APEX DINOSAUR TANK (WITH ANTI-AIR): DIREHORN IRONCLAD
+    // -------------------------------------------------------------------------
+    // https://www.hiveworkshop.com/threads/zandalari-throne-of-war.345255/
+    new UnitDefinition(ZANDALARI_DINO_TANK_ID, 'okod') // Inherits the massive Kodo Beast scale/collision footprint
+        ..setName("Direhorn Ironclad")
+        ..setTooltipBasic("Train Direhorn Ironclad")
+        ..setTooltipExtended("A colossal prehistoric warbeast covered in golden plates. Crushes ground forces underfoot while the Rastari riders hurl heavy barbed harpoons to impale flying enemies.")
+        ..setIconGameInterface(Icons.bTNRiderlessKodo)
+        
+        // Core Tank Statistics
+        ..setHitPointsMaximumBase(1100)
+        ..setDefenseBase(5)
+        
+        // DUAL WEAPON IMPLEMENTATION (Ground Melee + Air Ranged)
+        ..setAttacksEnabled(3) // Enables both Attack 1 and Attack 2 simultaneously
+        
+        // Attack 1: Ground Melee Stomp
+        ..setAttack1TargetsAllowed("ground,structure,debris")
+        ..setAttack1AttackType(AttackType.Normal)
+        ..setAttack1DamageBase(42)
+        ..setAttack1Range(128) // Melee engagement
+        
+        // Attack 2: Sky-Piercing Harpoon (Anti-Air)
+        // Multi target spears thrown or spell instead lets see
+        ..setAttack2TargetsAllowed("air") // Targets airborne forces exclusively
+        ..setAttack2AttackType(AttackType.Pierce)
+        ..setAttack2WeaponType(WeaponType.Missile)
+        ..setAttack2DamageBase(35)
+        ..setAttack2Range(550)
+        ..setAttack2ProjectileArt("Abilities\\Weapons\\Rifle\\RifleMissile.mdl")
+        ..setAttack2ProjectileSpeed(1400)
+        
+        // Economy & Supply Node Allocation
+        ..setGoldCost(150)
+        ..setLumberCost(0) // 0-Lumber Rule
+        ..setBuildTime(7)
+        ..setFoodCost(5) // Massive population draw
+        
+        ..setUpgradesUsed(commaList(
+            ZANDALARI_DAMAGE_UPG_ID, 
+            ZANDALARI_ARMOR_UPG_ID, 
+            ZANDALARI_REGEN_UPG_ID
+        ))
+
+        ..setRequirements(commaList(ZANDALARI_T3_ID))
+        ..setNormalAbilities("")
+
+
+    new UnitDefinition(ZANDALARI_EXECUTIONER_ID, 'ogru') // Based on Grunt skeleton for heavy two-handed swing animations
+        ..setName("Rastari Executioner")
+        ..setTooltipBasic("Train Rastari Executioner")
+        ..setTooltipExtended("Elite heavy shock trooper of the high military caste. Wields a massive, ornate golden executioner's glaive. Natively possesses the Berserk ability to enter a murderous battle frenzy.")
+        ..setIconGameInterface(Icons.bTNHeroBlademaster) // Elite, menacing swordfighter aesthetic
+        
+        // NATIVE ABILITY: Assigns the standard Orc Berserk active skill ('Absk')
+        ..setNormalAbilities("Absk") 
+        
+        // Elite Combat Attributes (Significantly beefier than standard infantry)
+        ..setHitPointsMaximumBase(750)
+        ..setDefenseBase(4)
+        ..setArmorType(ArmorType.Medium) // Heavy armor classification
+        ..setAttack1DamageBase(38)               // Devastating base crunch power
+        ..setAttack2CooldownTime(1.40)           // Slower base swing, meant to be accelerated by Berserk!
+        
+        // Scale up the physical size slightly in-game so they tower over standard Vanguards
+        ..setScalingValue(1.20)
+        
+        // Economy Configuration (0-Lumber Rule Enforced)
+        ..setGoldCost(115)
+        ..setLumberCost(0)
+        ..setBuildTime(5)  // Fast recruit cadence maintained
+        ..setFoodCost(3)   // Commands a higher upkeep draw
+        
+        // Universally scales with your 3 core upgrade matrices
+        ..setUpgradesUsed(commaList(
+            ZANDALARI_DAMAGE_UPG_ID, 
+            ZANDALARI_ARMOR_UPG_ID, 
+            ZANDALARI_REGEN_UPG_ID
+        ))

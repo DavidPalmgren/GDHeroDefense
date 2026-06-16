@@ -1,0 +1,69 @@
+package Worker
+
+// https://www.hiveworkshop.com/threads/darktrollworker.158619/
+// https://www.hiveworkshop.com/threads/troll-gatherer.334513/
+
+
+import UnitObjEditing
+import ObjectIdGenerator
+import ObjectIds
+import Icons
+import ClosureTimers
+
+// Import all building packages to access their unique ID handles
+import ZandalariBurrow
+import ZandalariUpgradeCenter
+import ZandalariBarracks
+import ZandalariBeastiary
+import ZandalariVoodooHut
+import ZandalariLoaShrines
+import ZandalariTownHallID
+import ZandalariAltar
+
+
+
+
+public constant ZANDALARI_WORKER_ID = compiletime(UNIT_ID_GEN.next())
+
+@compiletime function genZandalariWorker()
+    new UnitDefinition(ZANDALARI_WORKER_ID, 'opeo') // Inherits Orc Peon baseline
+        ..setName("Zandalari Freeman")
+        ..setTooltipBasic("Train Zandalari Freeman")
+        ..setTooltipExtended("The fundamental workforce of the empire. Can construct custom tribal structures and repair damaged installations.")
+        ..setIconGameInterface(Icons.bTNPeon)
+        
+        // BINDING BUILD LIST: This places all your custom structures onto the worker UI card!
+        ..setStructuresBuilt(commaList(
+            ZANDALARI_BURROW_ID,          // Loa Enclave
+            ZANDALARI_UPGRADE_CENTER_ID,  // Mojo Crucible
+            ZANDALARI_BARRACKS_ID,        // Rastari War-Pit
+            ZANDALARI_BESTIARY_ID,        // Zandalari Menagerie
+            ZANDALARI_VOODOO_HUT_ID,      // Zanchul Voodoo Hut
+            ZANDALARI_MONUMENT_ID,        // Zandalari Monument (Foundation Shrines)
+            ZANDALARI_T1_ID,               // TOWN HALL
+            ZANDALARI_ALTAR_ID
+        ))
+        
+        // Economy Configuration (0-Lumber Rule Applied)
+        ..setGoldCost(25)
+        ..setLumberCost(0)
+        ..setBuildTime(3)  // Maintains the fast-paced 3s build cadence of your tier 1 forces
+        ..setFoodCost(1)
+        
+        // Base Unit Physical Stats
+        ..setHitPointsMaximumBase(250)
+        ..setDefenseBase(0)
+        ..setArmorType(ArmorType.Medium) // Corresponds to Medium armor in-game for tier 1 workers
+
+// init
+//     // Wait a brief 0.0 seconds to make sure the map is fully loaded and ready
+//     nullTimer() ->
+//         // 1. Get the exact center coordinates of your "TrollParty" editor region
+//         let x = GetRectCenterX(gg_rct_TrollParty)
+//         let y = GetRectCenterY(gg_rct_TrollParty)
+        
+//         // 2. Define Player Red (Index 0)
+//         let playerRed = players[0]
+        
+//         // 3. Spawn the custom Zandalari Freeman at the location facing south (270 degrees)
+//         CreateUnit(playerRed, ZANDALARI_WORKER_ID, x, y, 270.0)

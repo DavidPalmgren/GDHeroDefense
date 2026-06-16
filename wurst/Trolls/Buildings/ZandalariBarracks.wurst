@@ -1,0 +1,38 @@
+package ZandalariBarracks
+
+import UnitObjEditing
+import ObjectIdGenerator
+import ObjectIds
+import Icons
+
+import ZandalariBaseUpgrades
+// import ZandalariEnsnare
+
+// Import your units package to access the custom unit IDs
+
+// https://www.hiveworkshop.com/threads/darktrollwarsongspiritlodgene1.372240/
+
+import ZandalariTier1
+import ZandalariTier2
+
+public constant ZANDALARI_BARRACKS_ID = compiletime(UNIT_ID_GEN.next())
+
+@compiletime function genZandalariBarracks()
+    new BuildingDefinition(ZANDALARI_BARRACKS_ID, 'obar') // Natively inherits Orc Barracks mechanics
+        ..setName("Rastari War-Pit")
+        ..setTooltipBasic("Build Rastari War-Pit")
+        ..setTooltipExtended("The martial heart of the empire. Trains Zandalari Vanguards and Headhunters to expand your territory.")
+        ..setIconGameInterface(Icons.bTNOrcBattleStandard)
+        
+        // LINKED: This tells the engine to sell your two custom units here
+        ..setUnitsTrained(commaList(ZANDALARI_WARRIOR_ID, ZANDALARI_HEADHUNTER_ID, ZANDALARI_SIEGE_ID))
+        
+        // Economy Configuration (0-Lumber Rule Applied)
+        ..setGoldCost(50)
+        ..setLumberCost(0)
+        
+        // Base Structural Stats
+        ..setBuildTime(50)
+        ..setHitPointsMaximumBase(1200)
+
+        ..setResearchesAvailable(commaList(ZANDALARI_REGEN_UPG_ID))

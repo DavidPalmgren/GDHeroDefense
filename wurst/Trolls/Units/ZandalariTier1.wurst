@@ -1,0 +1,65 @@
+package ZandalariTier1
+
+import UnitObjEditing
+import ObjectIdGenerator
+import ObjectIds
+import Icons
+// import ZandalariEnsnare
+
+// Import your upgrades package to access the custom upgrade IDs
+import ZandalariBaseUpgrades
+import ZandalariUpgradeCenter
+
+// Generate Unique Engine IDs for both combatants
+public constant ZANDALARI_WARRIOR_ID    = compiletime(UNIT_ID_GEN.next())
+public constant ZANDALARI_HEADHUNTER_ID = compiletime(UNIT_ID_GEN.next())
+
+@compiletime function genZandalariUnits()
+
+    // -------------------------------------------------------------------------
+    // 1. MELEE TANK/WARRIOR: ZANDALARI VANGUARD
+    // -------------------------------------------------------------------------
+    // https://www.hiveworkshop.com/threads/toll-spear-warrior.336432/
+    new UnitDefinition(ZANDALARI_WARRIOR_ID, 'ogru') // Inherits base Grunt tankiness
+        ..setName("Zandalari Vanguard")
+        ..setTooltipBasic("Train Zandalari Vanguard")
+        ..setTooltipExtended("Frontline heavy infantry of the empire. Armed with a golden broadshield and heavy stone axe to absorb punishment.")
+        ..setIconGameInterface(Icons.bTNGrunt)
+        //..setNormalAbilities(commaList(ABIL_ZANDALARI_ENSNARE))
+        
+        // Economy & Rapid-Spawn Configuration
+        ..setGoldCost(30)
+        ..setLumberCost(0)
+        ..setBuildTime(3) // 3 seconds flat!
+        ..setFoodCost(2)
+        
+        // Link the 3 custom upgrades we built earlier
+        ..setUpgradesUsed(commaList(
+            ZANDALARI_DAMAGE_UPG_ID, 
+            ZANDALARI_ARMOR_UPG_ID, 
+            ZANDALARI_REGEN_UPG_ID
+        ))
+
+    // -------------------------------------------------------------------------
+    // 2. RANGED ATTACKER: ZANDALARI HEADHUNTER
+    // -------------------------------------------------------------------------
+    //
+    new UnitDefinition(ZANDALARI_HEADHUNTER_ID, 'ohun') // Inherits base Headhunter ranged mechanics
+        ..setName("Zandalari Headhunter")
+        ..setTooltipBasic("Train Zandalari Headhunter")
+        ..setTooltipExtended("Savage ranged tracker who hurls deadly, long-range spears coated in sacrificial mojo.")
+        ..setIconGameInterface(Icons.bTNHeadhunter)
+        
+        // Economy & Rapid-Spawn Configuration
+        ..setGoldCost(30)
+        ..setLumberCost(0)
+        ..setBuildTime(3) // 3 seconds flat!
+        ..setFoodCost(2)
+        
+        // Link the same 3 custom upgrades
+        ..setUpgradesUsed(commaList(
+            ZANDALARI_DAMAGE_UPG_ID, 
+            ZANDALARI_ARMOR_UPG_ID, 
+            ZANDALARI_REGEN_UPG_ID
+        ))
+        ..setRequirements(commaList(ZANDALARI_UPGRADE_CENTER_ID))
