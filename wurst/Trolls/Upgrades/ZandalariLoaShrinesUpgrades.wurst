@@ -1,0 +1,46 @@
+package ZandalariLoaShrinesUpgrades
+
+import UpgradeObjEditing
+import ObjectIdGenerator
+import Icons
+import ClosureTimers
+
+
+// Generate Unique Engine ID for Rezan's favor
+public constant UPG_REZAN_GOLDEN_TRIBUTE = compiletime(UPGD_ID_GEN.next())
+
+@compiletime function genRezanUpgrades()
+    // We inherit from 'Roba' (Iron Ore Extraction baseline) just as a placeholder object
+    new UpgradeDefinition(UPG_REZAN_GOLDEN_TRIBUTE, 'Roba')
+        ..setLevels(1)
+        
+        // Custom Tooltips matching the golden aesthetic
+        ..setName(1, "Golden Tribute of Rezan")
+        ..setTooltip(1, "Research Golden Tribute of Rezan")
+        ..setTooltipExtended(1, "Establishes a direct blood-tithe to the Great Devilsaur. Grants a permanent blessing that generates |cffffcc0030 Gold Per Minute|r independently.")
+        ..setIcon(1, Icons.bTNChestOfGold)
+        
+        // Cost Matrix (0-Lumber Rule Enforced)
+        ..setGoldCostBase(200)
+        ..setGoldCostIncrement(0)
+        ..setLumberCostBase(0)
+        ..setLumberCostIncrement(0)
+        ..setTimeBase(40)
+
+// =============================================================================
+// RUNTIME INCOME CONTROLLER
+// This background loop kicks off automatically when the map initializes.
+// =============================================================================
+init
+    // Fires every 2.0 seconds automatically
+    doPeriodically(2.0) cb ->
+        for i = 0 to bj_MAX_PLAYERS - 1
+            let targetPlayer = players[i]
+            
+            // Safety Check: Ensure the player slot is active
+            if targetPlayer.getSlotState() == PLAYER_SLOT_STATE_PLAYING
+                
+                // FIXED: Using the core engine native directly
+                // Signature: GetPlayerTechCount(player whichPlayer, int techId, bool specificOnly)
+                if GetPlayerTechCount(targetPlayer, UPG_REZAN_GOLDEN_TRIBUTE, true) > 0
+                    targetPlayer.addGold(1)

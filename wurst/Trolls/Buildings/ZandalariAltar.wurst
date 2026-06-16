@@ -1,0 +1,30 @@
+package ZandalariAltar
+
+import UnitObjEditing
+import ObjectIdGenerator
+import ObjectIds
+import Icons
+
+// Generate Unique Engine ID for your Hero Altar
+public constant ZANDALARI_ALTAR_ID = compiletime(UNIT_ID_GEN.next())
+
+@compiletime function genZandalariAltar()
+    new BuildingDefinition(ZANDALARI_ALTAR_ID, 'oalt') // Inherits Altar of Storms baseline properties
+        ..setName("Zandalari Altar")
+        ..setTooltipBasic("Build [|cffffcc00Zandalari Altar|r]")
+        ..setTooltipExtended("A sacred temple of the high military caste. Summon and resurrect powerful Zandalari Heroes to lead your armies into battle.")
+        
+        // Visuals & Art
+        ..setIconGameInterface(Icons.bTNAltarOfStorms)
+        
+        // --- YOUR REQUESTED MODIFICATIONS ---
+        ..setGoldCost(50)   // Updated Gold Cost
+        ..setBuildTime(20)  // Updated Build Time (20 Seconds)
+        
+        // Economy & Logistics (Enforcing your map's 0-Lumber Rule)
+        ..setLumberCost(0)
+        
+        // Durability Stats
+        ..setHitPointsMaximumBase(900)
+        ..setArmorType(ArmorType.Fortified)
+        ..setDefenseBase(5)

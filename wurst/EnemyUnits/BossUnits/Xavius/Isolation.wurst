@@ -16,6 +16,7 @@ public constant ISOLATION_BUFF_ID = compiletime(BUFF_ID_GEN.next())
 constant real ISOLATION_RADIUS = 1800.
 constant real ISOLATION_DAMAGE = 15.
 constant real ISOLATION_PERIOD = 1.
+constant real ISOLATION_LIMIT = 200. // range from another unit makes the unit be considered isolated
 
 @compiletime function generateBuff()
     new BuffDefinition(ISOLATION_BUFF_ID, 'Basl')
@@ -72,7 +73,7 @@ init
         
         for u from g
             if u.hasAbility(ISOLATION_BUFF_ID) and not u.hasAbility(NIGHTMARE_BUFF_ID)
-                ENUM_GROUP.enumUnitsInRange(u.getPos(), 300, null)
+                ENUM_GROUP.enumUnitsInRange(u.getPos(), ISOLATION_LIMIT, null)
                 if not ENUM_GROUP.size() > 1
                     
                     u.damageTarget(u, ISOLATION_DAMAGE, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)

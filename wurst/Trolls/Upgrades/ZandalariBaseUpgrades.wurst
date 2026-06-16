@@ -1,0 +1,80 @@
+package ZandalariBaseUpgrades
+
+import UpgradeObjEditing
+import ObjectIdGenerator
+import Icons
+
+// Generate Unique IDs for the global upgrade keys
+public constant ZANDALARI_DAMAGE_UPG_ID = compiletime(UPGD_ID_GEN.next())
+public constant ZANDALARI_ARMOR_UPG_ID  = compiletime(UPGD_ID_GEN.next())
+public constant ZANDALARI_REGEN_UPG_ID  = compiletime(UPGD_ID_GEN.next())
+
+@compiletime function genZandalariUpgrades()
+    
+    // -------------------------------------------------------------------------
+    // 1. DAMAGE UPGRADE: ZANDALARI GOLDEN BLADES
+    // -------------------------------------------------------------------------
+    let damageUpg = new UpgradeDefinition(ZANDALARI_DAMAGE_UPG_ID, 'Omeu')
+        ..setLevels(5)
+        // Cost Setup (Base 50g, +50g per level | 0 Lumber)
+        ..setGoldCostBase(50)
+        ..setGoldCostIncrement(50)
+        ..setLumberCostBase(0)
+        ..setLumberCostIncrement(0)
+        // Pacing Setup (Base 60s, +60s per level)
+        ..setTimeBase(60)
+        ..setTimeIncrement(60)
+        // Stat Scaling (+3 Base Damage, +3 per level)
+        ..addEffectAttackDiceBonus(3,3)
+        ..presetIcon(lvl -> Icons.bTNSteelMelee)
+        ..setClass(UpgradeClass.Melee)
+
+    // -------------------------------------------------------------------------
+    // 2. ARMOR UPGRADE: ZANDALARI IMPERIAL SCALES
+    // -------------------------------------------------------------------------
+    let armorUpg = new UpgradeDefinition(ZANDALARI_ARMOR_UPG_ID, 'Oarm')
+        ..setLevels(5)
+        // Cost Setup (Base 50g, +50g per level | 0 Lumber)
+        ..setGoldCostBase(50)
+        ..setGoldCostIncrement(50)
+        ..setLumberCostBase(0)
+        ..setLumberCostIncrement(0)
+        // Pacing Setup (Base 60s, +60s per level)
+        ..setTimeBase(60)
+        ..setTimeIncrement(60)
+        // Stat Scaling (+1 Normal Defense Base, +1 per level)
+        ..addEffectApplyDefenseUpgradeBonus()
+        ..presetIcon(lvl -> Icons.bTNHumanArmorUpOne)
+        ..setClass(UpgradeClass.Armor)
+      
+    let regenUpg = new UpgradeDefinition(ZANDALARI_REGEN_UPG_ID, 'Ortr')
+        ..setLevels(3) // 3 levels total
+        // Cost Setup (Base 50g, +50g per level | 0 Lumber)
+        ..setButtonPositionX(1)
+        ..setButtonPositionY(2)
+        ..setGoldCostBase(50)
+        ..setGoldCostIncrement(50)
+        ..setLumberCostBase(0)
+        ..setLumberCostIncrement(0)
+        // Pacing Setup (Base 60s, +60s per level)
+        ..setTimeBase(60)
+        ..setTimeIncrement(60)
+        // Stat Scaling (+1.0 HP/sec base, +1.0 HP/sec per level increment)
+        ..addEffectHitPointRegeneration(1, 1)
+        ..presetIcon(lvl -> Icons.bTNRegenerate)
+
+    // -------------------------------------------------------------------------
+    // DYNAMIC STRING GENERATION
+    // Loops from level 1 to 5 to generate clean tooltips automatically!
+    // -------------------------------------------------------------------------
+    for i = 1 to 5
+        damageUpg..setName(i, "Zandalari Golden Blades")
+                 ..setTooltip(i, "Upgrade to Zandalari Golden Blades - Level " + i.toString())
+                 ..setTooltipExtended(i, "Refines the blades and spearheads of the tribe. Increases the attack damage of all Zandalari combatants by +3.")
+                 
+        armorUpg..setName(i, "Zandalari Imperial Scales")
+                ..setTooltip(i, "Upgrade to Zandalari Imperial Scales - Level " + i.toString())
+                ..setTooltipExtended(i, "Hardens the golden defensive array of your forces. Increases the armor rating of all Zandalari units by +1.")
+        regenUpg..setName(i, "Regenerative Troll Blood")
+                ..setTooltip(i, "Upgrade to Regenerative Troll Blood - Level " + i.toString())
+                ..setTooltipExtended(i, "Awakens the deep, dormant properties of the Troll biology. Increases hit point regeneration for all Troll units by +1 HP per second.")

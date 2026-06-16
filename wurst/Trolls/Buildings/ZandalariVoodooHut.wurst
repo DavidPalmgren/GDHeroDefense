@@ -1,0 +1,43 @@
+package ZandalariVoodooHut
+
+import UnitObjEditing
+import ObjectIdGenerator
+import ObjectIds
+import Icons
+
+// Import your caster unit IDs from their respective tier packages
+import ZandalariTier2
+import ZandalariTier3
+import ZandalariTownHallID
+import ZandalariWitchDoctorUpgrade
+
+public constant ZANDALARI_VOODOO_HUT_ID = compiletime(UNIT_ID_GEN.next())
+
+@compiletime function genZandalariVoodooHut()
+    new BuildingDefinition(ZANDALARI_VOODOO_HUT_ID, 'osld') // Inherits Orc Spirit Lodge baseline properties
+        ..setName("Zanchul Voodoo Hut")
+        ..setTooltipBasic("Build [|cffffcc00Zanchul Voodoo Hut|r]")
+        ..setTooltipExtended("The mystical heart of the empire. Trains Witch Doctors, Mojo Apothecaries, and Zanchul Blood-Weavers to turn the tide of battle with raw voodoo magic.")
+        
+        // Visuals & Art
+        ..setIconGameInterface(Icons.bTNSpiritLodge)
+        
+        // Unit Production Pipeline (Combines Tier 2 and Tier 3 Casters)
+        ..setUnitsTrained(commaList(
+            ZANDALARI_HEALER_ID,     // Zanchul Ward-Weaver (Tier 2)
+            ZANDALARI_ALCHEMIST_ID,   // Mojo Apothecary (Tier 3)
+            ZANDALARI_BLOOD_MAGE_ID  // Zanchul Blood-Weaver (Tier 3)
+        ))
+        
+        // Cost & Logistics (0-Lumber Rule Applied)
+        ..setGoldCost(130)
+        ..setLumberCost(0)
+        ..setBuildTime(50)
+        
+        // Durability Stats
+        ..setHitPointsMaximumBase(1000)
+        ..setArmorType(ArmorType.Fortified)
+        ..setDefenseBase(5)
+
+        ..setRequirements(commaList(ZANDALARI_T2_ID))
+        ..setResearchesAvailable(commaList(ZANDALARI_WITCHDOCTOR_UPG_ID))

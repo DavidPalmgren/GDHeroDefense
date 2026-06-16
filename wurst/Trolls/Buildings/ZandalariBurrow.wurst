@@ -1,0 +1,30 @@
+package ZandalariBurrow
+
+import UnitObjEditing
+import ObjectIdGenerator
+import Icons
+
+public constant ZANDALARI_BURROW_ID = compiletime(UNIT_ID_GEN.next())
+
+// Maybe https://www.hiveworkshop.com/threads/trolls-farm-home.225391/
+
+@compiletime function genZandalariBurrow()
+    new BuildingDefinition(ZANDALARI_BURROW_ID, 'otrb') // Inherits Orc Burrow battle station mechanics
+        ..setName("Loa Enclave")
+        ..setTooltipBasic("Build Loa Enclave")
+        ..setTooltipExtended("Provides tribal food to expand your maximum army capacity. Zandalari workers can garrison inside to unleash ranged mojo attacks against attackers.")
+        ..setIconGameInterface(Icons.bTNTrollBurrow)
+        ..setNormalAbilities("")
+        ..setUpgradesUsed("")
+        
+        // Economy Configuration
+        ..setGoldCost(50)
+        ..setLumberCost(0) // 0 Lumber constraint unlocked
+        
+        // Core Stats
+        ..setBuildTime(20)
+        ..setFoodProduced(10)
+        ..setHitPointsMaximumBase(600)
+        ..setDefenseUpgradeBonus(2)
+        // REMOVE ATTACK
+        ..setAttacksEnabled(0)

@@ -1,0 +1,124 @@
+package ZandalariTier2
+
+import UnitObjEditing
+import ObjectIdGenerator
+import ObjectIds
+import Icons
+
+// Import your upgrades package to access the custom upgrade IDs
+import ZandalariBaseUpgrades
+import ZandalariUpgradeCenter
+import ZandalariWitchDoctorUpgrade
+
+// Generate Unique Engine IDs for Tier 2 forces
+public constant ZANDALARI_SIEGE_ID   = compiletime(UNIT_ID_GEN.next())
+public constant ZANDALARI_HEALER_ID  = compiletime(UNIT_ID_GEN.next())
+public constant ZANDALARI_CAVALRY_ID = compiletime(UNIT_ID_GEN.next())
+public constant ZANDALARI_FLYER_ID   = compiletime(UNIT_ID_GEN.next())
+
+
+@compiletime function genZandalariTier2Units()
+
+    // -------------------------------------------------------------------------
+    // 1. SIEGE UNIT: THUNDERING DEMOLISHER
+    // -------------------------------------------------------------------------
+    new UnitDefinition(ZANDALARI_SIEGE_ID, 'odem') // Inherits base Orc Demolisher mechanics
+        ..setName("Thundering Demolisher")
+        ..setTooltipBasic("Train Thundering Demolisher")
+        ..setTooltipExtended("Heavy armored siege engine reinforced with golden plating. Fires massive, fire-tipped boulders to shatter enemy structures from afar.")
+        ..setIconGameInterface(Icons.bTNDemolisher)
+        
+        // Economy & Pacing Configuration (Tier 2 Standard)
+        ..setGoldCost(70)
+        ..setLumberCost(0) // 0-Lumber Rule Applied
+        ..setBuildTime(5)  
+        ..setFoodCost(3)
+        
+        // Link the 3 custom upgrades
+        ..setUpgradesUsed(commaList(
+            ZANDALARI_DAMAGE_UPG_ID, 
+            ZANDALARI_ARMOR_UPG_ID, 
+            ZANDALARI_REGEN_UPG_ID
+        ))
+        ..setRequirements(commaList(ZANDALARI_UPGRADE_CENTER_ID))
+
+
+    // -------------------------------------------------------------------------
+    // 2. TROLL HEALER UNIT: ZANCHUL WARD-WEAVER
+    // -------------------------------------------------------------------------
+    new UnitDefinition(ZANDALARI_HEALER_ID, 'odoc') // Inherits Troll Witch Doctor spellcasting template
+        ..setName("Witch Doctor")
+        ..setTooltipBasic("Train Witch Doctor")
+        ..setTooltipExtended("Spiritual mystic of the council caste. Commands deep voodoo mojo to place healing wards and cast protective enchantments over injured allies.")
+        ..setIconGameInterface(Icons.bTNWitchDoctor)
+
+        
+        // Economy & Pacing Configuration
+        ..setGoldCost(55)
+        ..setLumberCost(0) // 0-Lumber Rule Applied
+        ..setBuildTime(4)
+        ..setFoodCost(2)
+        
+        // Link the 3 custom upgrades
+        ..setUpgradesUsed(commaList(
+            ZANDALARI_DAMAGE_UPG_ID, 
+            ZANDALARI_ARMOR_UPG_ID, 
+            ZANDALARI_REGEN_UPG_ID,
+            ZANDALARI_WITCHDOCTOR_UPG_ID
+        ))
+
+
+
+    // -------------------------------------------------------------------------
+    // 3. LIGHT CAVALRY UNIT: RAPTOR OUTRIDER
+    // -------------------------------------------------------------------------
+    // https://www.hiveworkshop.com/threads/elite-darkspear-troll-rider.334472/
+    new UnitDefinition(ZANDALARI_CAVALRY_ID, 'orae') // Inherits Orc Raider ground-cavalry movement/attack properties
+        ..setName("Raptor Outrider")
+        ..setTooltipBasic("Train Raptor Outrider")
+        ..setTooltipExtended("Blistering fast skirmish cavalry mounted on a vicious Zandalari raptor. Specializes in flanking maneuvers and tracking fleeing targets.")
+        ..setIconGameInterface(Icons.bTNRaider)
+        
+        // Economy & Pacing Configuration
+        ..setGoldCost(55)
+        ..setLumberCost(0) // 0-Lumber Rule Applied
+        ..setBuildTime(4)
+        ..setFoodCost(3)
+        
+        // Link the 3 custom upgrades
+        ..setUpgradesUsed(commaList(
+            ZANDALARI_DAMAGE_UPG_ID, 
+            ZANDALARI_ARMOR_UPG_ID, 
+            ZANDALARI_REGEN_UPG_ID
+        ))
+    // -------------------------------------------------------------------------
+    // 3. LIGHT AIR UNIT: Pterrodax Rider
+    // -------------------------------------------------------------------------
+    // https://www.hiveworkshop.com/threads/zandalari-troll-pterrodax-rider.353747/
+    new UnitDefinition(ZANDALARI_FLYER_ID, 'otbr') // Inherits flying & rider baselines from the Batrider
+      ..setName("Pterrodax Rider")
+      ..setTooltipBasic("Train Pterrodax Rider")
+      ..setTooltipExtended("Swoops over the battlefield to rain down explosive jars of burning resin. Masters of aerial reconnaissance. Can only attack ground units.")
+      ..setIconGameInterface(Icons.bTNWyvernRider)
+      
+      // Strictly enforcing the Ground-Only combat behavior
+      ..setAttacksEnabled(1) // Enables Weapon 1 (Ground), Disables Weapon 2 (Air/Suicide)
+      ..setAttack1TargetsAllowed("ground,debris,item,ward,structure")
+      
+      // Wipes out the native 'Unstable Concoction' suicide ability so it behaves like a normal combat flyer
+      ..setNormalAbilities("") 
+      
+      // Economy & Pacing (Tier 2 Aerial Baseline)
+      ..setGoldCost(70)
+      ..setLumberCost(0) // 0-Lumber Rule Applied
+      ..setBuildTime(4)
+      ..setFoodCost(3)
+      
+      // Wire up your 3 custom upgrades
+      ..setUpgradesUsed(commaList(
+          ZANDALARI_DAMAGE_UPG_ID, 
+          ZANDALARI_ARMOR_UPG_ID, 
+          ZANDALARI_REGEN_UPG_ID
+      ))
+
+        ..setRequirements(commaList(ZANDALARI_UPGRADE_CENTER_ID))
