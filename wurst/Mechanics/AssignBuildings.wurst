@@ -7,6 +7,7 @@ let chimaerasFall = udg_ashenvaleChimaeraFallBuilding
 let auberdine = udg_darkshoreAuberdineBuildings
 let darnassus = udg_darnassusBuildings
 let teldrassil = udg_darnassusTeldrassilBuildings
+let stonetalon = udg_stonetalonEldretharBuildings
 
 //create group with neutral building cps
 public group neutralBuildingCps = CreateGroup()
@@ -26,6 +27,7 @@ function setupTables()
     cpBuildingGroups.put(udg_darkshoreAuberdine, auberdine)
     cpBuildingGroups.put(udg_darnassus, darnassus)
     cpBuildingGroups.put(udg_darnassusTeldrassil, teldrassil)
+    cpBuildingGroups.put(udg_stonetalonEldrethar, stonetalon)
 
     // add to hashmap which building groups correspond to which player  
     // Druids
@@ -35,6 +37,7 @@ function setupTables()
     cpBuildingOwners.put(auberdine, players[1])
     cpBuildingOwners.put(astranaar, players[1])
     cpBuildingOwners.put(teldrassil, players[1])
+    cpBuildingOwners.put(stonetalon, players[1])
 // add to hashmap which player slots have possible neutral units to assign
     for i = 0 to 23
         neutralBuildingPlayers.put(players[i], false) // set all to false

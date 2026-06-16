@@ -154,7 +154,7 @@ function driveMover(unit u, vec2 startPos, vec2 endPos, TrackNode headNodeParam,
     // old behaviour, retained so the mover still does *something* (and
     // so you can tell a fallback run from a real-path run).
     if headNode == null
-        print("HPA Nav: no usable path -> straight-line FALLBACK")
+        // print("HPA Nav: no usable path -> straight-line FALLBACK")
         let firstWaypoint = startPos + (endPos - startPos).norm() * 150.0
         headNode = new TrackNode(firstWaypoint.x, firstWaypoint.y)
         let tailNode = new TrackNode(endPos.x, endPos.y)
@@ -173,7 +173,7 @@ function driveMover(unit u, vec2 startPos, vec2 endPos, TrackNode headNodeParam,
         let firstIsFinal = currentTrackNode.nextNode == null
         let firstAttack = attackMoveAll or firstIsFinal
         u.issuePointOrderById(firstAttack ? ORDER_ATTACK : ORDER_MOVE, currentTargetVec)
-        print("HPA Nav: " + (firstAttack ? "attack-move" : "move") + " order -> world (" + currentTargetVec.x.toString() + ", " + currentTargetVec.y.toString() + ")")
+        // print("HPA Nav: " + (firstAttack ? "attack-move" : "move") + " order -> world (" + currentTargetVec.x.toString() + ", " + currentTargetVec.y.toString() + ")")
 
         var lastPos = u.getPos()
         var ticksStuck = 0
@@ -206,7 +206,7 @@ function driveMover(unit u, vec2 startPos, vec2 endPos, TrackNode headNodeParam,
                         // engages on arrival -- no more node-by-node.
                         let finalVec = vec2(next.x, next.y)
                         u.issuePointOrderById(ORDER_ATTACK, finalVec)
-                        print("HPA Nav: 2nd-to-last reached -> attack-move to final (" + finalVec.x.toString() + ", " + finalVec.y.toString() + ")")
+                        // print("HPA Nav: 2nd-to-last reached -> attack-move to final (" + finalVec.x.toString() + ", " + finalVec.y.toString() + ")")
                         destroy reached
                         destroy next
                         currentTrackNode = null
@@ -219,13 +219,13 @@ function driveMover(unit u, vec2 startPos, vec2 endPos, TrackNode headNodeParam,
                         let nextTarget = vec2(next.x, next.y)
                         let hopOid = attackMoveAll ? ORDER_ATTACK : ORDER_MOVE
                         u.issuePointOrderById(hopOid, nextTarget)
-                        print("HPA Nav: " + (attackMoveAll ? "attack-move" : "move") + " order -> world (" + nextTarget.x.toString() + ", " + nextTarget.y.toString() + ")")
+                        // print("HPA Nav: " + (attackMoveAll ? "attack-move" : "move") + " order -> world (" + nextTarget.x.toString() + ", " + nextTarget.y.toString() + ")")
                     else
                         // next == null: a single-node chain (we were already
                         // attack-moving to the only/final node) -> done.
                         destroy reached
                         currentTrackNode = null
-                        print("HPA Nav: final node reached")
+                        // print("HPA Nav: final node reached")
                         destroy cb
                 else
                     let isFinal = currentTrackNode.nextNode == null
@@ -244,11 +244,11 @@ function driveMover(unit u, vec2 startPos, vec2 endPos, TrackNode headNodeParam,
                         ticksStuck++
                         if ((not attackThis) and ticksStuck >= 4) or idle
                             u.issuePointOrderById(oid, targetVec)
-                            print("HPA Nav: re-issue " + label + " (stuck) -> world (" + targetVec.x.toString() + ", " + targetVec.y.toString() + ")")
+                            // print("HPA Nav: re-issue " + label + " (stuck) -> world (" + targetVec.x.toString() + ", " + targetVec.y.toString() + ")")
                             ticksStuck = 0
                     else if idle
                         u.issuePointOrderById(oid, targetVec)
-                        print("HPA Nav: re-issue " + label + " (idle) -> world (" + targetVec.x.toString() + ", " + targetVec.y.toString() + ")")
+                        // print("HPA Nav: re-issue " + label + " (idle) -> world (" + targetVec.x.toString() + ", " + targetVec.y.toString() + ")")
                         ticksStuck = 0
                     else
                         ticksStuck = 0

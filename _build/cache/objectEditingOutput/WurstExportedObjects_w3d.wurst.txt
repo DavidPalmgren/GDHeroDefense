@@ -231,6 +231,28 @@ import DoodadObjEditing
 	..setMaximumScale(0, 100.0)
 
 
+@compiletime function create_w3d_D00T()
+	new DoodadDefinition('D00T', 'BRrs')
+	..setName(0, "Web")
+	..setPathTexture(0, "")
+	..setModel(0, "war3mapImported\\web0.mdl")
+
+
+@compiletime function create_w3d_D00U()
+	new DoodadDefinition('D00U', 'BRrs')
+	..setName(0, "web2")
+	..setPathTexture(0, "")
+	..setModel(0, "war3mapImported\\web1.mdl")
+
+
+@compiletime function create_w3d_D00V()
+	new DoodadDefinition('D00V', 'APct')
+	..setName(0, "Maraudon Crystal")
+	..setModel(0, "war3mapImported\\Crystal Purple 5.mdl")
+	..setTilesets(0, "*")
+	..setMaximumScale(0, 8.0)
+
+
 // Original Table (contains all modified default/melee objects)
 // These are emitted when createObjectDefinition uses the same base/new id.
 
@@ -251,7 +273,7 @@ import DoodadObjEditing
 
 @compiletime function create_w3d_NRwr()
 	new DoodadDefinition('NRwr', 'NRwr')
-	..setTilesets(0, "N,G")
+	..setTilesets(0, "*")
 	..setPathTexture(0, "")
 
 
@@ -264,5 +286,68 @@ import DoodadObjEditing
 	new DoodadDefinition('AOlg', 'AOlg')
 	..setTilesets(0, "A,*")
 	..setMaximumScale(0, 10.0)
+
+
+@compiletime function create_w3d_BRrs()
+	new DoodadDefinition('BRrs', 'BRrs')
+	..setPathTexture(0, "")
+	..setMaximumScale(0, 4.0)
+
+
+@compiletime function create_w3d_BRrp()
+	new DoodadDefinition('BRrp', 'BRrp')
+	..setMaximumScale(0, 8.0)
+	..setPathTexture(0, "")
+
+
+@compiletime function create_w3d_ZRrs()
+	new DoodadDefinition('ZRrs', 'ZRrs')
+	..setPathTexture(0, "")
+	..setMaximumScale(0, 4.0)
+
+
+@compiletime function create_w3d_ZRrk()
+	new DoodadDefinition('ZRrk', 'ZRrk')
+	..setMaximumScale(0, 4.0)
+
+
+@compiletime function create_w3d_ORrk()
+	new DoodadDefinition('ORrk', 'ORrk')
+	..setMaximumScale(0, 4.0)
+
+
+@compiletime function create_w3d_BRrk()
+	new DoodadDefinition('BRrk', 'BRrk')
+	..setMaximumScale(0, 4.0)
+
+
+@compiletime function create_w3d_DRrk()
+	new DoodadDefinition('DRrk', 'DRrk')
+	..setMaximumScale(0, 4.0)
+
+
+@compiletime function create_w3d_NRrk()
+	new DoodadDefinition('NRrk', 'NRrk')
+	..setMaximumScale(0, 4.0)
+
+
+@compiletime function create_w3d_ARrk()
+	new DoodadDefinition('ARrk', 'ARrk')
+	..setMaximumScale(0, 4.0)
+
+
+@compiletime function create_w3d_IRrk()
+	new DoodadDefinition('IRrk', 'IRrk')
+	..setMaximumScale(0, 4.0)
+
+
+@compiletime function create_w3d_LRrk()
+	new DoodadDefinition('LRrk', 'LRrk')
+	..setMaximumScale(0, 4.0)
+
+
+@compiletime function create_w3d_GRrk()
+	new DoodadDefinition('GRrk', 'GRrk')
+	..setMaximumScale(0, 4.0)
 
 

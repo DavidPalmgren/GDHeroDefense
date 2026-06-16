@@ -42,7 +42,6 @@ function checkWarsongTrigger()
             spawnWave(Player(5), u.getOwner(), 'nckb', 2, warsong2, warsongFrontline.getCenter())
             spawnWave(Player(5), u.getOwner(), 'nchw', 10, warsong2, warsongBackline.getCenter())
             spawnWave(Player(5), u.getOwner(), 'Ogrh', 1, warsong2, warsongFrontline.getCenter())
-            //Grom placeholder
             for un in warsong2
                 un.issueTargetOrder("attack", u)
             nullTimer() ->
@@ -54,7 +53,7 @@ function checkWarsongTrigger()
 init
     doPeriodically(10.0) (CallbackPeriodic cb) ->
         if event_flag_astranaar == false
-            if udg_ashenvaleAstranaar.getOwner() == Player(18)
+            if udg_ashenvaleAstranaar.getOwner() == Player(2)
                 event_flag_astranaar = true
                 destroy cb 
                 
@@ -72,7 +71,7 @@ init
                     
                     print("Orc Warchief: " + "Glory to the |cffff9900Warsong|r" + "Astranaar will burn!")
                     for u in warsong1
-                        attackCp(u,false, players[18])
+                        attackCp(u,false, players[2])
     
 
     doAfter(30.0) ->  
