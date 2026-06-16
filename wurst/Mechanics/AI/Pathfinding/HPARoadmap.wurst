@@ -296,10 +296,10 @@ function connectStart(MacroNode s) returns int
     if linked == 0 and nearest != null
         s.edges.add(new MacroEdge(nearest, nearestD))
         linked++
-        print("HPA[Q]: start forced-attach to nearest in-range node " + nearest.worldPos.toString())
-    print("HPA[Q]: start " + s.worldPos.toString()
-        + " clearHere=" + isWorldPointClear(s.worldPos.x, s.worldPos.y).toString()
-        + " inRange=" + inRange.toString() + " linked=" + linked.toString())
+    //     print("HPA[Q]: start forced-attach to nearest in-range node " + nearest.worldPos.toString())
+    // print("HPA[Q]: start " + s.worldPos.toString()
+    //     + " clearHere=" + isWorldPointClear(s.worldPos.x, s.worldPos.y).toString()
+    //     + " inRange=" + inRange.toString() + " linked=" + linked.toString())
     return linked
 
 function connectTarget(MacroNode t) returns int
@@ -324,10 +324,10 @@ function connectTarget(MacroNode t) returns int
         nearest.edges.add(new MacroEdge(t, nearestD))
         g_targetLinks.add(nearest)
         linked++
-        print("HPA[Q]: target forced-attach from nearest in-range node " + nearest.worldPos.toString())
-    print("HPA[Q]: target " + t.worldPos.toString()
-        + " clearHere=" + isWorldPointClear(t.worldPos.x, t.worldPos.y).toString()
-        + " inRange=" + inRange.toString() + " linked=" + linked.toString())
+    //     print("HPA[Q]: target forced-attach from nearest in-range node " + nearest.worldPos.toString())
+    // print("HPA[Q]: target " + t.worldPos.toString()
+    //     + " clearHere=" + isWorldPointClear(t.worldPos.x, t.worldPos.y).toString()
+    //     + " inRange=" + inRange.toString() + " linked=" + linked.toString())
     return linked
 
 function unlinkTarget(MacroNode t)
@@ -420,9 +420,9 @@ public function getRoadPath(vec2 start, vec2 target) returns PathResult
     if sLinks == 0 or tLinks == 0
         // No attach point on one side -> A* can't even begin. Report which side
         // so the fix is obvious (add/extend markers near that endpoint).
-        print("HPA[Q]: cannot attach " + (sLinks == 0 ? "START" : "")
-            + ((sLinks == 0 and tLinks == 0) ? " and " : "")
-            + (tLinks == 0 ? "TARGET" : "") + " to the roadmap.")
+        // print("HPA[Q]: cannot attach " + (sLinks == 0 ? "START" : "")
+        //     + ((sLinks == 0 and tLinks == 0) ? " and " : "")
+        //     + (tLinks == 0 ? "TARGET" : "") + " to the roadmap.")
 
     let dist = roadAStar(s, t)
     HPAPath path = null

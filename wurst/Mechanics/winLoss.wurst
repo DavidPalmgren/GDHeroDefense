@@ -26,7 +26,7 @@ function setupDefeatCondition()
     t.addAction() ->
         if GetTriggerUnit() == udg_darnassusTeldrassil and udg_darnassusTeldrassil.getOwner() == players[3]
             print("The |cff9eff9eSentinels|r have fallen!")
-            CustomDefeatBJ(players[2], "Thanks for playing!")
+            CustomDefeatBJ(players[1], "Thanks for playing!")
 
 init
     setupDefeatCondition()
