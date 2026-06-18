@@ -45,6 +45,8 @@ init
             ..registerEnterRegion(darnassusPortRegion, null)
             ..addAction() ->
             checkNagaTrigger()
+    doAfter(900.0) -> 
+        print("Darnassus will fall in the next 5 minutes! Stop them before it's too late!")
     doAfter(1200.0)->
         print("Queen Azshara: Darnassus has fallen to the |cff540081Highborne|r, we shall usher in a new age!")
         KillDestructable(udg_darnassusGate)
