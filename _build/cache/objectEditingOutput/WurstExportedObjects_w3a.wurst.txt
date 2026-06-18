@@ -334,7 +334,7 @@ import AbilityObjEditing
 	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNSleep.blp")
 	..setBuffs(1, "BM01")
 	..setEffects(1, "BM01")
-	..setAreaofEffect(1, 400.0)
+	..setAreaofEffect(1, 300.0)
 	..setDurationNormal(1, 10.0)
 	..setDurationHero(1, 5.0)
 	..setFullDamageDealt(1, 0.0)
@@ -363,112 +363,7 @@ import AbilityObjEditing
 
 
 @compiletime function create_w3a_AM0d()
-	new AbilityDefinitionCriticalStrikecreep('AM0d')
-	..setName("Vicious Strike")
-	..setChancetoCriticalStrike(1, 15.0)
-	..setDamageMultiplier(1, 2.0)
-	..setTooltipNormal(1, "Vicious Strike")
-	..setTooltipNormalExtended(1, "Has a 15% chance to deal 2 times normal damage.")
-
-
-@compiletime function create_w3a_AM0e()
-	new AbilityDefinitionCriticalStrikecreep('AM0e')
-	..setName("Deadly Strike")
-	..setChancetoCriticalStrike(1, 15.0)
-	..setDamageMultiplier(1, 3.0)
-	..setTooltipNormal(1, "Deadly Strike")
-	..setTooltipNormalExtended(1, "Has a 15% chance to deal 3 times normal damage.")
-
-
-@compiletime function create_w3a_AM0g()
-	new AbilityDefinitionShadowStrikeCreep('AM0g')
-	..setName("Shadow Dagger")
-	..setInitialDamage(1, 120.0)
-	..setDecayingDamage(1, 20.0)
-	..setMovementSpeedFactor(1, 0.35)
-	..setCooldown(1, 10.0)
-	..setManaCost(1, 60)
-	..setCastRange(1, 500.0)
-
-
-@compiletime function create_w3a_AM0f()
-	new AbilityDefinitionCriticalStrikecreep('AM0f')
-	..setName("Lethal Strike")
-	..setChancetoCriticalStrike(1, 15.0)
-	..setDamageMultiplier(1, 4.5)
-	..setTooltipNormal(1, "Lethal Strike")
-	..setTooltipNormalExtended(1, "Has a 15% chance to deal 4.5 times normal damage.")
-
-
-@compiletime function create_w3a_AM0i()
-	new AbilityDefinitionEvasion('AM0i')
-	..setName("Shadow Reflexes")
-	..setChancetoEvade(1, 0.3)
-
-
-@compiletime function create_w3a_AM0h()
-	new AbilityDefinitionAuraCommandCreep('AM0h')
-	..setName("Lead the Hunt")
-	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNAuraOfDarkness.blp")
-	..setAttackDamageIncrease(1, 0.3)
-	..setAreaofEffect(1, 600.0)
-
-
-@compiletime function create_w3a_AM0j()
-	new AbilityDefinitionPitLordCleavingAttack('AM0j')
-	..setName("Flesh Guzzler")
-	..setDistributedDamageFactor(1, 0.2)
-	..setTooltipNormal(1, "Flesh Guzzler")
-	..setTooltipNormalExtended(1, "Attacks deal 20% splash damage to nearby ground enemies.")
-
-
-@compiletime function create_w3a_AM0k()
-	new AbilityDefinitionPitLordCleavingAttack('AM0k')
-	..setName("Gore Feeder")
-	..setDistributedDamageFactor(1, 0.3)
-	..setTooltipNormal(1, "Gore Feeder")
-	..setTooltipNormalExtended(1, "Attacks deal 30% splash damage to nearby ground enemies.")
-
-
-@compiletime function create_w3a_AM0m()
-	new AbilityDefinitionShadowStrikeCreep('AM0m')
-	..setName("Corrosive Bile")
-	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNAcidBomb.blp")
-	..setInitialDamage(1, 150.0)
-	..setDecayingDamage(1, 30.0)
-	..setMovementSpeedFactor(1, 0.4)
-	..setCooldown(1, 12.0)
-	..setManaCost(1, 75)
-	..setCastRange(1, 450.0)
-
-
-@compiletime function create_w3a_AM0l()
-	new AbilityDefinitionPitLordCleavingAttack('AM0l')
-	..setName("Soul Devourer")
-	..setDistributedDamageFactor(1, 0.45)
-	..setTooltipNormal(1, "Soul Devourer")
-	..setTooltipNormalExtended(1, "Attacks deal 45% splash damage to nearby ground enemies.")
-
-
-@compiletime function create_w3a_AM0n()
-	new AbilityDefinitionVampiricAuracreep('AM0n')
-	..setName("Devouring Essence")
-	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNVampiricAura.blp")
-	..setAttackDamageStolen(1, 0.3)
-	..setAreaofEffect(1, 600.0)
-
-
-@compiletime function create_w3a_AM0o()
-	new AbilityDefinitionUnholyAuracreep('AM0o')
-	..setName("Putrid Regrowth")
-	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNPlagueCloud.blp")
-	..setMovementSpeedIncrease(1, 0.1)
-	..setLifeRegenerationIncrease(1, 6.0)
-	..setAreaofEffect(1, 200.0)
-
-
-@compiletime function create_w3a_AM0p()
-	new AbilityDefinitionRainofFire('AM0p')
+	new AbilityDefinitionRainofFire('AM0d')
 	..setDamagePerSecond(1, 0.0)
 	..setNumberofWaves(1, 0)
 	..setBuffs(1, "")
@@ -482,8 +377,8 @@ import AbilityObjEditing
 	..setCooldown(1, 1.0)
 
 
-@compiletime function create_w3a_AM0q()
-	new AbilityDefinitionRejuvination('AM0q')
+@compiletime function create_w3a_AM0e()
+	new AbilityDefinitionRejuvination('AM0e')
 	..setName("Invigorate")
 	..setTooltipNormal(1, "Invigorate")
 	..setTooltipNormalExtended(1, "Increases health regeneration by 12.5 and mana regeneration by 1.6666666 for 12.0 seconds. Adds a seedling stack whilst active")
@@ -503,8 +398,8 @@ import AbilityObjEditing
 	..setManaPointsGained(1, 20.0)
 
 
-@compiletime function create_w3a_AM0r()
-	new AbilityDefinitionTaurenChieftainWarStomp('AM0r')
+@compiletime function create_w3a_AM0f()
+	new AbilityDefinitionTaurenChieftainWarStomp('AM0f')
 	..setName("Bloom")
 	..setTooltipNormal(1, "Bloom")
 	..setTooltipNormal(2, "Bloom")
@@ -547,8 +442,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM0s()
-	new AbilityDefinitionRoar('AM0s')
+@compiletime function create_w3a_AM0g()
+	new AbilityDefinitionRoar('AM0g')
 	..setName("Summon Treant")
 	..setTooltipNormal(1, "Summon Treant")
 	..setTooltipNormal(2, "Summon Treant")
@@ -592,8 +487,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM0t()
-	new AbilityDefinitionMountainKingThunderClap('AM0t')
+@compiletime function create_w3a_AM0h()
+	new AbilityDefinitionMountainKingThunderClap('AM0h')
 	..setName("Seed Burst")
 	..setTooltipNormal(1, "Seed Burst")
 	..setTooltipNormal(2, "Seed Burst")
@@ -642,8 +537,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM0u()
-	new AbilityDefinitionIllidanChannel('AM0u')
+@compiletime function create_w3a_AM0i()
+	new AbilityDefinitionIllidanChannel('AM0i')
 	..setBaseOrderID(1, "acidbomb")
 	..setBaseOrderID(2, "acidbomb")
 	..setBaseOrderID(3, "acidbomb")
@@ -698,8 +593,8 @@ import AbilityObjEditing
 	..setTooltipNormalExtended(3, "|cff3B97D3Target Type: |cffFFCC00Point Target|r\n|cff3B97D3Damage per Second:|r 35/50/|cffFFCC0065|r\n|cff3B97D3Movement Slow:|r 30%/35%/|cffFFCC0040%|r\n|cff3B97D3Denial Duration:|r |cffFFCC00|cffFFCC005s|r \n\n|cff919191Hurls a massive, spinning glaive exactly 300 units in the targeted direction. Upon arrival, the blade zones out the area, continuously grinding and slowing nearby enemies.|r")
 
 
-@compiletime function create_w3a_AM0v()
-	new AbilityDefinitionSlow('AM0v')
+@compiletime function create_w3a_AM0j()
+	new AbilityDefinitionSlow('AM0j')
 	..setHeroAbility(false)
 	..setManaCost(1, 0)
 	..setCooldown(1, 0.0)
@@ -720,8 +615,8 @@ import AbilityObjEditing
 	..setDurationHero(3, 1.5)
 
 
-@compiletime function create_w3a_AM0w()
-	new AbilityDefinitionHardenedSkin('AM0w')
+@compiletime function create_w3a_AM0k()
+	new AbilityDefinitionHardenedSkin('AM0k')
 	..setHeroAbility(true)
 	..setLevels(3)
 	..setButtonPositionNormalX(2)
@@ -760,8 +655,8 @@ import AbilityObjEditing
 	..setIncludeRangedDamage(3, false)
 
 
-@compiletime function create_w3a_AM0x()
-	new AbilityDefinitionWardenBlink('AM0x')
+@compiletime function create_w3a_AM0l()
+	new AbilityDefinitionWardenBlink('AM0l')
 	..setHeroAbility(true)
 	..setLevels(3)
 	..setButtonPositionNormalX(1)
@@ -789,8 +684,8 @@ import AbilityObjEditing
 	..setTooltipNormalExtended(3, "Short distance teleportation that allows the Warden to pass in and out of combat safely.")
 
 
-@compiletime function create_w3a_AM0y()
-	new AbilityDefinitionIllidanChannel('AM0y')
+@compiletime function create_w3a_AM0m()
+	new AbilityDefinitionIllidanChannel('AM0m')
 	..setLevels(3)
 	..setBaseOrderID(1, "acolyteharvest")
 	..setBaseOrderID(2, "acolyteharvest")
@@ -848,8 +743,8 @@ import AbilityObjEditing
 	..setTooltipNormalExtended(3, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Cooldown:|r 24/22/|cffFFCC0020|r\n|cff3B97D3Mana Cost:|r 100/125/|cffFFCC00150|r\n|cff3B97D3Cast Range:|r 1000/1100/|cffFFCC001200|r\n\n|cff919191Elune's Grace|r")
 
 
-@compiletime function create_w3a_AM0z()
-	new AbilityDefinitionSlowPoison('AM0z')
+@compiletime function create_w3a_AM0n()
+	new AbilityDefinitionSlowPoison('AM0n')
 	..setHeroAbility(true)
 	..setLevels(3)
 	..setButtonPositionNormalX(2)
@@ -869,12 +764,12 @@ import AbilityObjEditing
 	..setDamagePerSecond(1, 0.0)
 	..setDamagePerSecond(2, 0.0)
 	..setDamagePerSecond(3, 0.0)
-	..setBuffs(1, "AM0{")
-	..setBuffs(2, "AM0{")
-	..setBuffs(3, "AM0{")
-	..setEffects(1, "AM0|")
-	..setEffects(2, "AM0|")
-	..setEffects(3, "AM0|")
+	..setBuffs(1, "AM0o")
+	..setBuffs(2, "AM0o")
+	..setBuffs(3, "AM0o")
+	..setEffects(1, "AM0p")
+	..setEffects(2, "AM0p")
+	..setEffects(3, "AM0p")
 	..setDurationNormal(1, 8.0)
 	..setDurationNormal(2, 10.0)
 	..setDurationNormal(3, 12.0)
@@ -894,8 +789,8 @@ import AbilityObjEditing
 	..setTooltipNormalExtended(3, "|cff3B97D3Passive|r\n|cff3B97D3Movement Slow:|r 15%/20%/|cffFFCC0025%|r\n|cff3B97D3Attack Slow:|r 10%/15%/|cffFFCC0020%|r\n|cff3B97D3Magic Resist Reduced:|r 15%/20%/|cffFFCC0025%|r\n|cff3B97D3Duration (Units):|r 8s/10s/|cffFFCC0012s|r\n|cff3B97D3Duration (Heroes):|r 4s/5s/|cffFFCC006s|r\n\n|cff919191Enchants Tyrande's attacks with heavy moonlight, slowing struck enemies and fundamentally shattering their magic resistance.|r")
 
 
-@compiletime function create_w3a_AM0}()
-	new AbilityDefinitionAlchemistChemicalRage('AM0}')
+@compiletime function create_w3a_AM0q()
+	new AbilityDefinitionAlchemistChemicalRage('AM0q')
 	..setName("Moon Warrior")
 	..setTooltipNormal(1, "Moon Warrior")
 	..setTooltipNormalExtended(1, "Tyrande dismounts from her tiger, gaining +30 damage and +50% attack speed for 30 seconds while summoning her tiger into battle.")
@@ -926,8 +821,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM0~()
-	new AbilityDefinitionIllidanChannel('AM0~')
+@compiletime function create_w3a_AM0r()
+	new AbilityDefinitionIllidanChannel('AM0r')
 	..setLevels(3)
 	..setBaseOrderID(1, "whirlwind")
 	..setBaseOrderID(2, "whirlwind")
@@ -979,20 +874,20 @@ import AbilityObjEditing
 	..setDurationHero(2, 6.0)
 	..setDurationHero(3, 6.0)
 	..setTooltipLearn("|cffFFCC00Learn|r Starfall - [|cffffcc00Level %d|r]")
-	..setTooltipLearnExtended("|cff3B97D3Target Type:|r Instant Cast\n|cff3B97D3Area of Effect:|r |cffFFCC00500|r \n|cff3B97D3Cast Range:|r 1000/1100/1200\n|cff3B97D3Cooldown:|r 40/35/30\n|cff3B97D3Mana Cost:|r 125/150/175\n|cff3B97D3Duration - Normal:|r |cffFFCC006|r \n|cff3B97D3Duration - Hero:|r |cffFFCC006|r \n\n|cff919191Calls down stars in the target area dealing [100 / 150 / 200] damage in a 250 radius each. Stars fall faster the longer the spell channels.|r")
+	..setTooltipLearnExtended("|cff3B97D3Target Type:|r Instant Cast\n|cff3B97D3Area of Effect:|r |cffFFCC00500|r \n|cff3B97D3Cast Range:|r 1000/1100/1200\n|cff3B97D3Cooldown:|r 40/35/30\n|cff3B97D3Mana Cost:|r 125/150/175\n|cff3B97D3Duration Normal:|r |cffFFCC006|r \n|cff3B97D3Duration Hero:|r |cffFFCC006|r \n\n|cff919191Calls down stars in the target area dealing [50 / 75 / 100] damage in a 250 radius each. Stars fall faster the longer the spell channels.|r")
 	..setTooltipNormal(1, "Starfall  - Level 1")
-	..setTooltipNormalExtended(1, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Cast Range:|r |cffFFCC001000|r/1100/1200\n|cff3B97D3Cooldown:|r |cffFFCC0040|r/35/30\n|cff3B97D3Mana Cost:|r |cffFFCC00125|r/150/175\n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC006|r \n\n|cff919191Calls down stars in the target area dealing [100 / 150 / 200] damage in a 250 radius each. Stars fall faster the longer the spell channels.|r")
+	..setTooltipNormalExtended(1, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Cast Range:|r |cffFFCC001000|r/1100/1200\n|cff3B97D3Cooldown:|r |cffFFCC0040|r/35/30\n|cff3B97D3Mana Cost:|r |cffFFCC00125|r/150/175\n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Duration Hero:|r |cffFFCC00|cffFFCC006|r \n\n|cff919191Calls down stars in the target area dealing [50 / 75 / 100] damage in a 250 radius each. Stars fall faster the longer the spell channels.|r")
 	..setTooltipNormal(2, "Starfall  - Level 2")
-	..setTooltipNormalExtended(2, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Cast Range:|r 1000/|cffFFCC001100|r/1200\n|cff3B97D3Cooldown:|r 40/|cffFFCC0035|r/30\n|cff3B97D3Mana Cost:|r 125/|cffFFCC00150|r/175\n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC006|r \n\n|cff919191Calls down stars in the target area dealing [100 / 150 / 200] damage in a 250 radius each. Stars fall faster the longer the spell channels.|r")
+	..setTooltipNormalExtended(2, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Cast Range:|r 1000/|cffFFCC001100|r/1200\n|cff3B97D3Cooldown:|r 40/|cffFFCC0035|r/30\n|cff3B97D3Mana Cost:|r 125/|cffFFCC00150|r/175\n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Duration Hero:|r |cffFFCC00|cffFFCC006|r \n\n|cff919191Calls down stars in the target area dealing [50 / 75 / 100] damage in a 250 radius each. Stars fall faster the longer the spell channels.|r")
 	..setTooltipNormal(3, "Starfall  - Level 3")
-	..setTooltipNormalExtended(3, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Cast Range:|r 1000/1100/|cffFFCC001200|r\n|cff3B97D3Cooldown:|r 40/35/|cffFFCC0030|r\n|cff3B97D3Mana Cost:|r 125/150/|cffFFCC00175|r\n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC006|r \n\n|cff919191Calls down stars in the target area dealing [100 / 150 / 200] damage in a 250 radius each. Stars fall faster the longer the spell channels.|r")
+	..setTooltipNormalExtended(3, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Cast Range:|r 1000/1100/|cffFFCC001200|r\n|cff3B97D3Cooldown:|r 40/35/|cffFFCC0030|r\n|cff3B97D3Mana Cost:|r 125/150/|cffFFCC00175|r\n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Duration Hero:|r |cffFFCC00|cffFFCC006|r \n\n|cff919191Calls down stars in the target area dealing [50 / 75 / 100] damage in a 250 radius each. Stars fall faster the longer the spell channels.|r")
 	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNStarFall.blp")
 	..setIconResearch("ReplaceableTextures\\CommandButtons\\BTNStarFall.blp")
 	..setLevelSkipRequirement(2)
 
 
-@compiletime function create_w3a_AM1!()
-	new AbilityDefinitionRoar('AM1!')
+@compiletime function create_w3a_AM0s()
+	new AbilityDefinitionRoar('AM0s')
 	..setName("Hibernate")
 	..setTooltipNormal(1, "Hibernate")
 	..setTooltipNormal(2, "Hibernate")
@@ -1029,8 +924,8 @@ import AbilityObjEditing
 	..setHotkeyLearn("R")
 
 
-@compiletime function create_w3a_AM10()
-	new AbilityDefinitionMountainKingThunderBolt('AM10')
+@compiletime function create_w3a_AM0t()
+	new AbilityDefinitionMountainKingThunderBolt('AM0t')
 	..setLevels(3)
 	..setName("Mauling Charge")
 	..setTooltipNormal(1, "Mauling Charge")
@@ -1075,8 +970,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM12()
-	new AbilityDefinitionFireBolt('AM12')
+@compiletime function create_w3a_AM0v()
+	new AbilityDefinitionFireBolt('AM0v')
 	..setName("Crow Tackle")
 	..setTooltipNormal(1, "Crow Tackle")
 	..setTooltipNormalExtended(1, "Transforms into crow form and dashes at the target enemy dealing 200 damage on impact.")
@@ -1102,8 +997,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM13()
-	new AbilityDefinitionRoar('AM13')
+@compiletime function create_w3a_AM0w()
+	new AbilityDefinitionRoar('AM0w')
 	..setName("Spirit Wisps")
 	..setTooltipNormal(1, "Spirit Wisps")
 	..setTooltipNormalExtended(1, "Summons 3 spirit wisps that orbit the caster for 10 seconds, healing nearby damaged friendly units for 25 HP/s.")
@@ -1127,8 +1022,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM14()
-	new AbilityDefinitionIllidanChannel('AM14')
+@compiletime function create_w3a_AM0x()
+	new AbilityDefinitionIllidanChannel('AM0x')
 	..setLevels(1)
 	..setBaseOrderID(1, "ambush")
 	..setDisableOtherAbilities(1, false)
@@ -1150,8 +1045,8 @@ import AbilityObjEditing
 	..setTargetType(1, 2)
 
 
-@compiletime function create_w3a_AM15()
-	new AbilityDefinitionBloodMageFlameStrike('AM15')
+@compiletime function create_w3a_AM0y()
+	new AbilityDefinitionBloodMageFlameStrike('AM0y')
 	..setName("Throw Explosives")
 	..setTooltipNormal(1, "Throw Explosives")
 	..setTooltipNormalExtended(1, "Throws an explosive barrel to the target location. Explodes after 3 seconds dealing 400 damage to all nearby enemies.")
@@ -1180,8 +1075,8 @@ import AbilityObjEditing
 	..setArtEffect("")
 
 
-@compiletime function create_w3a_AM16()
-	new AbilityDefinitionIllidanChannel('AM16')
+@compiletime function create_w3a_AM0z()
+	new AbilityDefinitionIllidanChannel('AM0z')
 	..setLevels(3)
 	..setBaseOrderID(1, "ancestralspirit")
 	..setBaseOrderID(2, "ancestralspirit")
@@ -1214,8 +1109,8 @@ import AbilityObjEditing
 	..setHeroAbility(false)
 
 
-@compiletime function create_w3a_AM17()
-	new AbilityDefinitionDefenseBonusPlus1('AM17')
+@compiletime function create_w3a_AM0{()
+	new AbilityDefinitionDefenseBonusPlus1('AM0{')
 	..setName("Iron Skin")
 	..setDefenseBonus(1, 4)
 	..setBuffs(1, "BM01")
@@ -1228,8 +1123,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM18()
-	new AbilityDefinitionPassiveSimple('AM18')
+@compiletime function create_w3a_AM0|()
+	new AbilityDefinitionPassiveSimple('AM0|')
 	..setName("Iron Skin")
 	..setTooltipNormal(1, "Iron Skin")
 	..setTooltipNormalExtended(1, "Increases armor by 4 and has a 25% chance to retaliate.")
@@ -1240,8 +1135,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM19()
-	new AbilityDefinitionPassiveSimple('AM19')
+@compiletime function create_w3a_AM0}()
+	new AbilityDefinitionPassiveSimple('AM0}')
 	..setName("Recycle")
 	..setTooltipNormal(1, "Recycle")
 	..setTooltipNormalExtended(1, "On death, applies Invigorate to the nearest friendly unit.")
@@ -1253,8 +1148,8 @@ import AbilityObjEditing
 	..setRequirements("R003")
 
 
-@compiletime function create_w3a_AM1a()
-	new AbilityDefinitionHardenedSkin('AM1a')
+@compiletime function create_w3a_AM0~()
+	new AbilityDefinitionHardenedSkin('AM0~')
 	..setName("Thick Bark")
 	..setTooltipNormal(1, "Thick Bark")
 	..setTooltipNormalExtended(1, "Reduces each attack's damage by 10.0 minimum damage taken off 5.0% per hit.")
@@ -1269,6 +1164,263 @@ import AbilityObjEditing
 	..setRequirements("R000")
 
 
+@compiletime function create_w3a_AM1!()
+	new AbilityDefinitionStasisTrap('AM1!')
+	..setRequirements("RM05")
+	..setRequirementsLevels("1")
+
+
+@compiletime function create_w3a_AM10()
+	new AbilityDefinitionHealingWard('AM10')
+	..setRequirements("RM05")
+	..setRequirementsLevels("2")
+
+
+@compiletime function create_w3a_AM11()
+	new AbilityDefinitionIllidanChannel('AM11')
+	..setLevels(1)
+	..setBaseOrderID(1, "ancestralspirittarget")
+	..setDisableOtherAbilities(1, false)
+	..setArtDuration(1, 0.0)
+	..setArtCaster("")
+	..setArtEffect("")
+	..setArtSpecial("")
+	..setArtTarget("")
+	..setName("Mojopalm")
+	..setTooltipNormal(1, "Mojopalm")
+	..setTooltipNormalExtended(1, "Mojopalm, the proprietary concotion of Mojo incorperated. Side effects may include 2nd degree burns.")
+	..setRequirements("RM06")
+	..setCastRange(1, 600.0)
+	..setManaCost(1, 50)
+	..setCooldown(1, 15.0)
+	..setTargetType(1, 2)
+	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNLiquidFire.blp")
+	..setIconResearch("ReplaceableTextures\\CommandButtons\\BTNLiquidFire.blp")
+	..setFollowThroughTime(1, 0.0)
+	..setAreaofEffect(1, 200.0)
+	..setOptions(1, 3)
+
+
+@compiletime function create_w3a_AM12()
+	new AbilityDefinitionHeal('AM12')
+	..setName("Devout Healing")
+	..setTooltipNormal(1, "Devout Healing")
+	..setTooltipNormalExtended(1, "Channels the will of the Old Gods to heal a single ally for 50 health.")
+	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNHealingWave.blp")
+	..setButtonPositionNormalX(0)
+	..setButtonPositionNormalY(0)
+	..setCastRange(1, 600.0)
+	..setCooldown(1, 1.0)
+	..setManaCost(1, 10)
+	..setHitPointsGained(1, 50.0)
+	..setDurationNormal(1, 0.0)
+	..setDurationHero(1, 0.0)
+	..setRequirements("")
+	..setHeroAbility(false)
+	..setItemAbility(false)
+
+
+@compiletime function create_w3a_AM13()
+	new AbilityDefinitionDarkRangerSilence('AM13')
+	..setName("Maddening Whispers")
+	..setTooltipNormal(1, "Maddening Whispers")
+	..setTooltipNormalExtended(1, "Fills an enemy's mind with maddening whispers, silencing them for 4 seconds.")
+	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNSilence.blp")
+	..setButtonPositionNormalX(1)
+	..setButtonPositionNormalY(0)
+	..setCastRange(1, 700.0)
+	..setCooldown(1, 14.0)
+	..setManaCost(1, 75)
+	..setDurationNormal(1, 4.0)
+	..setDurationHero(1, 2.4)
+	..setBuffs(1, "BM09")
+	..setRequirements("")
+	..setHeroAbility(false)
+	..setItemAbility(false)
+
+
+@compiletime function create_w3a_AM14()
+	new AbilityDefinitionIllidanChannel('AM14')
+	..setLevels(1)
+	..setBaseOrderID(1, "animatedead")
+	..setDisableOtherAbilities(1, false)
+	..setFollowThroughTime(1, 0.0)
+	..setArtDuration(1, 0.0)
+	..setOptions(1, 1)
+	..setArtCaster("")
+	..setArtEffect("")
+	..setArtSpecial("")
+	..setArtTarget("")
+	..setCooldown(1, 40.0)
+	..setCastRange(1, 301.0)
+	..setTargetType(1, 1)
+
+
+@compiletime function create_w3a_AM15()
+	new AbilityDefinitionPitLordCleavingAttack('AM15')
+	..setName("Flesh Guzzler")
+	..setDistributedDamageFactor(1, 0.2)
+	..setTooltipNormal(1, "Flesh Guzzler")
+	..setTooltipNormalExtended(1, "Attacks deal 20% splash damage to nearby ground enemies.")
+
+
+@compiletime function create_w3a_AM16()
+	new AbilityDefinitionPitLordCleavingAttack('AM16')
+	..setName("Gore Feeder")
+	..setDistributedDamageFactor(1, 0.3)
+	..setTooltipNormal(1, "Gore Feeder")
+	..setTooltipNormalExtended(1, "Attacks deal 30% splash damage to nearby ground enemies.")
+
+
+@compiletime function create_w3a_AM18()
+	new AbilityDefinitionShadowStrikeCreep('AM18')
+	..setName("Corrosive Bile")
+	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNAcidBomb.blp")
+	..setInitialDamage(1, 150.0)
+	..setDecayingDamage(1, 30.0)
+	..setMovementSpeedFactor(1, 0.4)
+	..setCooldown(1, 12.0)
+	..setManaCost(1, 75)
+	..setCastRange(1, 450.0)
+
+
+@compiletime function create_w3a_AM17()
+	new AbilityDefinitionPitLordCleavingAttack('AM17')
+	..setName("Soul Devourer")
+	..setDistributedDamageFactor(1, 0.45)
+	..setTooltipNormal(1, "Soul Devourer")
+	..setTooltipNormalExtended(1, "Attacks deal 45% splash damage to nearby ground enemies.")
+
+
+@compiletime function create_w3a_AM19()
+	new AbilityDefinitionVampiricAuracreep('AM19')
+	..setName("Devouring Essence")
+	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNVampiricAura.blp")
+	..setAttackDamageStolen(1, 0.3)
+	..setAreaofEffect(1, 600.0)
+
+
+@compiletime function create_w3a_AM1a()
+	new AbilityDefinitionUnholyAuracreep('AM1a')
+	..setName("Putrid Regrowth")
+	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNPlagueCloud.blp")
+	..setMovementSpeedIncrease(1, 0.1)
+	..setLifeRegenerationIncrease(1, 6.0)
+	..setAreaofEffect(1, 200.0)
+
+
+@compiletime function create_w3a_AM1b()
+	new AbilityDefinitionCriticalStrikecreep('AM1b')
+	..setName("Vicious Strike")
+	..setChancetoCriticalStrike(1, 15.0)
+	..setDamageMultiplier(1, 2.0)
+	..setTooltipNormal(1, "Vicious Strike")
+	..setTooltipNormalExtended(1, "Has a 15% chance to deal 2 times normal damage.")
+
+
+@compiletime function create_w3a_AM1c()
+	new AbilityDefinitionCriticalStrikecreep('AM1c')
+	..setName("Deadly Strike")
+	..setChancetoCriticalStrike(1, 15.0)
+	..setDamageMultiplier(1, 3.0)
+	..setTooltipNormal(1, "Deadly Strike")
+	..setTooltipNormalExtended(1, "Has a 15% chance to deal 3 times normal damage.")
+
+
+@compiletime function create_w3a_AM1e()
+	new AbilityDefinitionShadowStrikeCreep('AM1e')
+	..setName("Shadow Dagger")
+	..setInitialDamage(1, 120.0)
+	..setDecayingDamage(1, 20.0)
+	..setMovementSpeedFactor(1, 0.35)
+	..setCooldown(1, 10.0)
+	..setManaCost(1, 60)
+	..setCastRange(1, 500.0)
+
+
+@compiletime function create_w3a_AM1d()
+	new AbilityDefinitionCriticalStrikecreep('AM1d')
+	..setName("Lethal Strike")
+	..setChancetoCriticalStrike(1, 15.0)
+	..setDamageMultiplier(1, 4.5)
+	..setTooltipNormal(1, "Lethal Strike")
+	..setTooltipNormalExtended(1, "Has a 15% chance to deal 4.5 times normal damage.")
+
+
+@compiletime function create_w3a_AM1g()
+	new AbilityDefinitionEvasion('AM1g')
+	..setName("Shadow Reflexes")
+	..setChancetoEvade(1, 0.3)
+
+
+@compiletime function create_w3a_AM1f()
+	new AbilityDefinitionAuraCommandCreep('AM1f')
+	..setName("Lead the Hunt")
+	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNAuraOfDarkness.blp")
+	..setAttackDamageIncrease(1, 0.3)
+	..setAreaofEffect(1, 600.0)
+
+
+@compiletime function create_w3a_AM1h()
+	new AbilityDefinitionBurrow('AM1h')
+	..setRequirements("")
+	..setIconResearch("ReplaceableTextures\\CommandButtons\\BTNCryptFiendBurrow.blp")
+	..setAlternateFormUnit(1, "HM02")
+	..setAlternateFormUnit(2, "HM02")
+	..setAlternateFormUnit(3, "HM02")
+	..setNormalFormUnit(1, "HM01")
+	..setNormalFormUnit(2, "HM01")
+	..setNormalFormUnit(3, "HM01")
+	..setHeroAbility(true)
+	..setLevels(3)
+	..setLevelSkipRequirement(2)
+
+
+@compiletime function create_w3a_AM1i()
+	new AbilityDefinitionPassiveSimple('AM1i')
+	..setTooltipLearn("Learn Impaling Strike")
+	..setTooltipLearnExtended("The Hero builds power by hitting 5 times he prepares for a devestating strike impaling all enemies in a line behind his target.")
+	..setTooltipNormal(1, "Impaling Strike")
+	..setTooltipNormalExtended(1, "The Hero builds power by hitting 5 times he prepares for a devestating strike impaling all enemies for 50in a line behind his target")
+	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNImpale.blp")
+	..setIconResearch("ReplaceableTextures\\CommandButtons\\BTNImpale.blp")
+	..setLevels(3)
+	..setLevelSkipRequirement(2)
+
+
+@compiletime function create_w3a_AM1j()
+	new AbilityDefinitionTinkererSummonFactoryLevel0('AM1j')
+	..setSpawnUnitID(1, "ucs3")
+	..setCooldown(1, 2.0)
+	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNCarrionScarabs.blp")
+	..setIconResearch("ReplaceableTextures\\CommandButtons\\BTNCarrionScarabs.blp")
+	..setDurationNormal(1, 6.0)
+	..setSpawnUnitDuration(1, 60.0)
+	..setDurationHero(1, 6.0)
+	..setManaCost(1, 125)
+	..setSpawnInterval(1, 0.5)
+	..setLeashRange(1, 2000.0)
+	..setMissileArt("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl")
+	..setMissileSpeed(500)
+	..setFactoryUnitID(1, "x01c")
+	..setLevelSkipRequirement(5)
+	..setLevels(1)
+	..setRequiredLevel(6)
+
+
+@compiletime function create_w3a_AM1k()
+	new AbilityDefinitionPassiveSimple('AM1k')
+	..setName("Hive-Minded")
+	..setTooltipNormal(1, "Hive-Minded")
+	..setTooltipNormalExtended(1, "The Silithid Swarmer gets stronger for each Silithid Swarmer in their immediate surrounding (+2 damage, +1 armor per nearby Swarmer within 500 range).")
+	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNBloodLust.blp")
+	..setIconResearch("ReplaceableTextures\\CommandButtons\\BTNBloodLust.blp")
+	..setButtonPositionNormalX(0)
+	..setButtonPositionNormalY(2)
+	..setHeroAbility(false)
+	..setItemAbility(false)
+
+
 // Original Table (contains all modified default/melee objects)
 // These are emitted when createObjectDefinition uses the same base/new id.
 
@@ -1280,5 +1432,10 @@ import AbilityObjEditing
 @compiletime function create_w3a_ANhs()
 	new AbilityDefinitionAlchemistHealingSpray('ANhs')
 	..setMissileArt("Abilities\\Spells\\Items\\AIhe\\AIheTarget.mdl")
+
+
+@compiletime function create_w3a_ANsy()
+	new AbilityDefinitionTinkererSummonFactoryLevel0('ANsy')
+	..setMissileArt("Abilities\\Spells\\Human\\FlameStrike\\FlameStrikeTarget.mdl")
 
 

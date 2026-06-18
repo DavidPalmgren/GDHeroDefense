@@ -9,6 +9,8 @@ import ZandalariTownHallID
 
 // Import your upgrades package to access the custom upgrade IDs
 import ZandalariBaseUpgrades
+import ZandalariApothecaryUpgrade
+import ZandalariApothecaryMojopalm
 
 // Generate Unique Engine IDs for Tier 3 Apex Forces
 public constant ZANDALARI_ALCHEMIST_ID  = compiletime(UNIT_ID_GEN.next())
@@ -27,6 +29,7 @@ public constant ZANDALARI_EXECUTIONER_ID = compiletime(UNIT_ID_GEN.next())
         ..setTooltipBasic("Train Mojo Apothecary")
         ..setTooltipExtended("An alchemical doctor who carries volatile vats of bubbling brew. Throws healing elixirs to allies and corrosive acid cocktails to melt enemy armor strips.")
         ..setIconGameInterface(Icons.bTNHeroAlchemist)
+        ..setNormalAbilities(commaList(MOJOPALM_ID))
         
         // Caster Stat Allocation
         ..setManaMaximum(400)
@@ -38,7 +41,7 @@ public constant ZANDALARI_EXECUTIONER_ID = compiletime(UNIT_ID_GEN.next())
         ..setLumberCost(0) // 0-Lumber Rule
         ..setBuildTime(5)
         ..setFoodCost(3)
-        ..setUpgradesUsed(commaList(ZANDALARI_DAMAGE_UPG_ID, ZANDALARI_ARMOR_UPG_ID, ZANDALARI_REGEN_UPG_ID))
+        ..setUpgradesUsed(commaList(ZANDALARI_DAMAGE_UPG_ID, ZANDALARI_ARMOR_UPG_ID, ZANDALARI_REGEN_UPG_ID, ZANDALARI_APOTHECARY_UPGRADE))
 
     // -------------------------------------------------------------------------
     // 2. RITUALIST CASTER: ZANCHUL BLOOD-WEAVER

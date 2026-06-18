@@ -1,0 +1,234 @@
+package QirajiBuildings
+
+import UnitObjEditing
+import ObjectIdGenerator
+import ObjectIds
+import Icons
+import UnitIds
+
+
+import QirajiBuildingIds
+import QirajiDevout
+import QirajiKidnapper
+// Unit Imports --------------------------------
+import Devourer
+import Ambusher
+import QirajiWorker
+import CryptLord
+import QirajiSwarmer
+
+
+// Upgrades ------------------------------------
+import ZandalariBaseUpgrades
+
+public constant UPG_TIME = 10 * 60
+
+
+@compiletime function genQirajiBuildings()
+
+  // =========================================================================
+  // TIER 1: HIVE NODE (Town Hall baseline)
+  // =========================================================================
+  new BuildingDefinition(QIRAJI_T1_HIVE_NODE, UnitIds.townhall)
+    ..setName("Hive Node")
+    ..setTooltipBasic("Build Hive Node")
+    ..setTooltipExtended("The primary nerve center of the Qiraji swarm. Used to harvest gold, house silithid workers, and establish a foundational creeping territory.")
+    ..setIconGameInterface(Icons.bTNNecropolis)
+    ..setGoldCost(250)
+    ..setLumberCost(0)
+    ..setRequirements("")
+    ..setUpgradesUsed("")
+    ..setUpgradesTo("")
+    ..setResearchesAvailable("")
+    ..setUnitsTrained(commaList(QIRAJI_WORKER_ID))
+    ..setItemsMade("")
+    ..setNormalAbilities("")
+    ..setUpgradesTo(commaList(QIRAJI_T2_SWARM_CORE))
+
+  // =========================================================================
+  // TIER 2: SWARM CORE (Keep baseline)
+  // =========================================================================
+  new BuildingDefinition(QIRAJI_T2_SWARM_CORE, UnitIds.keep)
+    ..setName("Swarm Core")
+    ..setTooltipBasic("Upgrade to Swarm Core")
+    ..setTooltipExtended("An evolved hive core that pulsates with the direct commands of the Qiraji hierarchy. Allows the generation of intermediate combat mutations.")
+    ..setIconGameInterface(Icons.bTNHallOfTheDead)
+    ..setGoldCost(185)
+    ..setLumberCost(0)
+    ..setBuildTime(UPG_TIME)
+    ..setRequirements("")
+    ..setUpgradesUsed("")
+    ..setUpgradesTo("")
+    ..setResearchesAvailable("")
+    ..setUnitsTrained(commaList(QIRAJI_WORKER_ID))
+    ..setItemsMade("")
+    ..setNormalAbilities("")
+    ..setUpgradesTo(commaList(QIRAJI_T3_HIVE_IMPERIAL))
+
+
+  // =========================================================================
+  // TIER 3: HIVE IMPERIAL (Castle baseline)
+  // =========================================================================
+  new BuildingDefinition(QIRAJI_T3_HIVE_IMPERIAL, UnitIds.castle)
+    ..setName("Hive Imperial")
+    ..setTooltipBasic("Upgrade to Hive Imperial")
+    ..setTooltipExtended("The absolute pinnacle of insectoid architecture. Direct psychic link to the Old Gods. Awakens cataclysmic war beasts and dangerous imperial vectors.")
+    ..setIconGameInterface(Icons.bTNBlackCitadel)
+    ..setGoldCost(225)
+    ..setLumberCost(0)
+    ..setBuildTime(UPG_TIME)
+    ..setRequirements("")
+    ..setUpgradesUsed("")
+    ..setUpgradesTo("")
+    ..setResearchesAvailable("")
+    ..setUnitsTrained(commaList(QIRAJI_WORKER_ID))
+    ..setItemsMade("")
+    ..setNormalAbilities("")
+
+  // =========================================================================
+  // HOUSING: SPAWNING SAC (Farm baseline)
+  // =========================================================================
+  new BuildingDefinition(QIRAJI_SPAWNING_SAC, UnitIds.farm)
+    ..setName("Spawning Sac")
+    ..setTooltipBasic("Build Spawning Sac")
+    ..setTooltipExtended("Pulsating biomaterial chambers that provide nutrient flow and genetic pathways to sustain larger numbers of the swarm.")
+    ..setIconGameInterface(Icons.bTNPigFarm)
+    ..setModelFile("Doodads\\Dungeon\\Terrain\\EggSack\\EggSack1.mdl")
+    ..setGroundTexture("ESMA")
+    ..setScalingValue(1.5)
+    ..setGoldCost(60)
+    ..setLumberCost(0)
+    ..setRequirements("")
+    ..setUpgradesUsed("")
+    ..setUpgradesTo("")
+    ..setResearchesAvailable("")
+    ..setUnitsTrained("")
+    ..setUnitsSold(commaList(QIRAJI_SWARMER_ID))
+    ..setItemsMade("")
+    ..setNormalAbilities("")
+
+  // =========================================================================
+  // PRODUCTION: HATCHERY (Barracks baseline)
+  // =========================================================================
+  new BuildingDefinition(QIRAJI_HATCHERY, 'hbar')
+    ..setName("Qiraji Hatchery")
+    ..setTooltipBasic("Build Qiraji Hatchery")
+    ..setTooltipExtended("An incubation chamber filled with hyper-evolution fluids. Rapidly forces the growth of frontline chitinous soldiers and biological shock units.")
+    ..setIconGameInterface(Icons.bTNCrypt)
+    ..setGoldCost(50)
+    ..setLumberCost(0)
+    ..setRequirements("")
+    ..setUpgradesUsed("")
+    ..setUpgradesTo("")
+    ..setResearchesAvailable("")
+    ..setUnitsTrained(commaList(DEVOURER_T1_ID,DEVOURER_T2_ID,DEVOURER_T3_ID, AMBUSHER_T1_ID,AMBUSHER_T2_ID,AMBUSHER_T3_ID, QIRAJI_KIDNAPPER_ID))
+    ..setItemsMade("")
+    ..setNormalAbilities("")
+
+  // =========================================================================
+  // HEROES: ALTAR OF THE OLD GODS (Altar of Kings baseline)
+  // =========================================================================
+  new BuildingDefinition(QIRAJI_ALTAR_OF_THE_OLD, UnitIds.altarofkings)
+    ..setName("Altar of the Old Gods")
+    ..setTooltipBasic("Build Altar of the Old Gods")
+    ..setTooltipExtended("A terrifying stone rift channeling ancient void whispers. Used to summon and restore high-ranking Qiraji Generals and Emperors.")
+    ..setIconGameInterface(Icons.bTNAltarOfKings)
+    ..setGoldCost(50)
+    ..setLumberCost(0)
+    ..setRequirements("")
+    ..setUpgradesUsed("")
+    ..setUpgradesTo("")
+    ..setResearchesAvailable("")
+    ..setUnitsTrained(commaList(CRYPT_LORD_HERO_ID))
+    ..setItemsMade("")
+
+  // =========================================================================
+  // FORGE/UPGRADES: CARAPACE CHAMBER (Blacksmith baseline)
+  // =========================================================================
+  new BuildingDefinition(QIRAJI_CARAPACE_CHAMBER, UnitIds.blacksmith)
+    ..setName("Carapace Chamber")
+    ..setTooltipBasic("Build Carapace Chamber")
+    ..setTooltipExtended("A specialized refinery where symbiotic organisms modify chitin shells, sharpening serrated appendages and hardening cellular plates.")
+    ..setIconGameInterface(Icons.bTNGraveYard)
+    ..setGoldCost(50)
+    ..setLumberCost(0)
+    ..setRequirements("")
+    ..setUpgradesUsed("")
+    ..setUpgradesTo("")
+    ..setResearchesAvailable(commaList(ZANDALARI_DAMAGE_UPG_ID, ZANDALARI_ARMOR_UPG_ID))
+    ..setUnitsTrained("")
+    ..setItemsMade("")
+    ..setNormalAbilities("")
+
+  // =========================================================================
+  // HARVEST/RESOURCES: RESECTION MILL (Lumber Mill baseline)
+  // =========================================================================
+  new BuildingDefinition(QIRAJI_RESECTION_MILL, 'hlum')
+    ..setName("Resection Mill")
+    ..setTooltipBasic("Build Resection Mill")
+    ..setTooltipExtended("Processes raw environmental wood into concentrated biomass pulp. Increases the extraction rate of lumber-alternative nutrients.")
+    ..setIconGameInterface(Icons.bTNSacrificialPit)
+    ..setGoldCost(50)
+    ..setLumberCost(0)
+    ..setRequirements("")
+    ..setUpgradesUsed("")
+    ..setUpgradesTo("")
+    ..setResearchesAvailable("")
+    ..setUnitsTrained("")
+    ..setItemsMade("")
+    ..setNormalAbilities("")
+
+  // =========================================================================
+  // TIER 2 MAGIC: OBSIDIAN TEMPLE (Arcane Sanctum baseline)
+  // =========================================================================
+  new BuildingDefinition(QIRAJI_OBSIDIAN_TEMPLE, UnitIds.arcanesanctum)
+    ..setName("Obsidian Temple")
+    ..setTooltipBasic("Build Obsidian Temple")
+    ..setTooltipExtended("Constructed out of spell-breaking dark glass. Breeds anti-magic mindslayers, Skillfull menders in Qiraji Devouts, and masters of psychic manipulation.")
+    ..setIconGameInterface(Icons.bTNTombOfRelics)
+    ..setGoldCost(50)
+    ..setLumberCost(0)
+    ..setRequirements("")
+    ..setUpgradesUsed("")
+    ..setUpgradesTo("")
+    ..setResearchesAvailable("")
+    ..setUnitsTrained(commaList(QIRAJI_DEVOUT_ID))
+    ..setItemsMade("")
+    ..setNormalAbilities("")
+
+  // =========================================================================
+  // TIER 3 SIEGE: FLESHWARPING PIT (Workshop baseline)
+  // =========================================================================
+  new BuildingDefinition(QIRAJI_FLESHWARPING_PIT, UnitIds.workshop)
+    ..setName("Fleshwarping Pit")
+    ..setTooltipBasic("Build Fleshwarping Pit")
+    ..setTooltipExtended("A bio-chemical melting pool dedicated to restructuring cellular frames into giant organic siege weapons and flying bio-artillery vectors.")
+    ..setIconGameInterface(Icons.bTNSlaughterHouse)
+    ..setGoldCost(50)
+    ..setLumberCost(0)
+    ..setRequirements("")
+    ..setUpgradesUsed("")
+    ..setUpgradesTo("")
+    ..setResearchesAvailable("")
+    ..setUnitsTrained("")
+    ..setItemsMade("")
+    ..setNormalAbilities("")
+
+  // =========================================================================
+  // DEFENSE BASE: CHITINOUS SPIRE (Scout Tower baseline)
+  // =========================================================================
+  new BuildingDefinition(QIRAJI_CHITINOUS_SPIRE, UnitIds.scouttower)
+    ..setName("Chitinous Spire")
+    ..setTooltipBasic("Build Chitinous Spire")
+    ..setTooltipExtended("This spire represents the titan constructs leftover presence in the area, the Qiraji are not entirely sure how this works but it seems to harm invaders.")
+    ..setIconGameInterface(Icons.bTNZiggurat)
+    ..setModelFile("Doodads\\Ruins\\Props\\RuinsObelisk\\RuinsObelisk0.mdl")
+    ..setGoldCost(50)
+    ..setLumberCost(0)
+    ..setRequirements("")
+    ..setUpgradesUsed("")
+    ..setUpgradesTo("")
+    ..setResearchesAvailable("")
+    ..setUnitsTrained("")
+    ..setItemsMade("")
+    ..setNormalAbilities("")

@@ -39,8 +39,8 @@ import BuffObjEditing
 	..setTargetAttachmentPoint0(1, "chest")
 
 
-@compiletime function create_w3h_AM0{()
-	new BuffDefinition('AM0{', 'Bspo')
+@compiletime function create_w3h_AM0o()
+	new BuffDefinition('AM0o', 'Bspo')
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNMoonStone.blp")
 	..setTooltipNormal(1, "Lunar Anchor")
 	..setTooltipNormalExtended(1, "This unit's magic resistance is shattered. Taking increased damage from spells.")
@@ -48,8 +48,8 @@ import BuffObjEditing
 	..setTargetAttachmentPoint0(1, "overhead")
 
 
-@compiletime function create_w3h_AM0|()
-	new BuffDefinition('AM0|', 'Bshp')
+@compiletime function create_w3h_AM0p()
+	new BuffDefinition('AM0p', 'Bshp')
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNMoonStone.blp")
 	..setTooltipNormal(1, "Lunar Anchor")
 	..setTooltipNormalExtended(1, "This hero's magic resistance is shattered. Taking increased damage from spells.")
@@ -97,6 +97,16 @@ import BuffObjEditing
 	..setTooltipNormal(1, "Iron Skin")
 	..setTooltipNormalExtended(1, "Increases armor by 4 and has a 25% chance to retaliate.")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\UI\\Cursor\\BTNAcorn.blp")
+
+
+@compiletime function create_w3h_BM09()
+	new BuffDefinition('BM09', 'Basl')
+	..setName(1, "Maddening Whispers")
+	..setTooltipNormal(1, "Maddening Whispers")
+	..setTooltipNormalExtended(1, "This unit has been silenced by the Old Gods' whispers and cannot cast spells.")
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNSilence.blp")
+	..setArtTarget(1, "")
+	..setArtSpecial(1, "")
 
 
 // Original Table (contains all modified default/melee objects)

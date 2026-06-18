@@ -55,15 +55,15 @@ public constant ZANDALARI_WORKER_ID = compiletime(UNIT_ID_GEN.next())
         ..setDefenseBase(0)
         ..setArmorType(ArmorType.Medium) // Corresponds to Medium armor in-game for tier 1 workers
 
-// init
-//     // Wait a brief 0.0 seconds to make sure the map is fully loaded and ready
-//     nullTimer() ->
-//         // 1. Get the exact center coordinates of your "TrollParty" editor region
-//         let x = GetRectCenterX(gg_rct_TrollParty)
-//         let y = GetRectCenterY(gg_rct_TrollParty)
+init
+    // Wait a brief 0.0 seconds to make sure the map is fully loaded and ready
+    nullTimer() ->
+        // 1. Get the exact center coordinates of your "TrollParty" editor region
+        let x = GetRectCenterX(gg_rct_TrollParty)
+        let y = GetRectCenterY(gg_rct_TrollParty)
         
-//         // 2. Define Player Red (Index 0)
-//         let playerRed = players[0]
+        // 2. Define Player Red (Index 0)
+        let playerRed = players[0]
         
-//         // 3. Spawn the custom Zandalari Freeman at the location facing south (270 degrees)
-//         CreateUnit(playerRed, ZANDALARI_WORKER_ID, x, y, 270.0)
+        // 3. Spawn the custom Zandalari Freeman at the location facing south (270 degrees)
+        CreateUnit(playerRed, ZANDALARI_WORKER_ID, x, y, 270.0)

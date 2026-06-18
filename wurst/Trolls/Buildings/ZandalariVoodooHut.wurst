@@ -10,6 +10,7 @@ import ZandalariTier2
 import ZandalariTier3
 import ZandalariTownHallID
 import ZandalariWitchDoctorUpgrade
+import ZandalariApothecaryUpgrade
 
 public constant ZANDALARI_VOODOO_HUT_ID = compiletime(UNIT_ID_GEN.next())
 
@@ -18,6 +19,8 @@ public constant ZANDALARI_VOODOO_HUT_ID = compiletime(UNIT_ID_GEN.next())
         ..setName("Zanchul Voodoo Hut")
         ..setTooltipBasic("Build [|cffffcc00Zanchul Voodoo Hut|r]")
         ..setTooltipExtended("The mystical heart of the empire. Trains Witch Doctors, Mojo Apothecaries, and Zanchul Blood-Weavers to turn the tide of battle with raw voodoo magic.")
+        ..setHotkey("X")
+
         
         // Visuals & Art
         ..setIconGameInterface(Icons.bTNSpiritLodge)
@@ -40,4 +43,4 @@ public constant ZANDALARI_VOODOO_HUT_ID = compiletime(UNIT_ID_GEN.next())
         ..setDefenseBase(5)
 
         ..setRequirements(commaList(ZANDALARI_T2_ID))
-        ..setResearchesAvailable(commaList(ZANDALARI_WITCHDOCTOR_UPG_ID))
+        ..setResearchesAvailable(commaList(ZANDALARI_WITCHDOCTOR_UPG_ID, ZANDALARI_APOTHECARY_UPGRADE))

@@ -1,0 +1,107 @@
+package QirajiKidnapper
+
+import UnitObjEditing
+import ObjectIds
+import UnitIds
+import AbilityObjEditing
+import ChannelAbilityPreset
+import AbilityTooltipGenerator
+import ObjectIdGenerator
+
+import ClosureEvents
+import ClosureTimers
+
+import QirajiBuildingIds
+
+public constant tgen = new AbilityTooltipGenerator()
+public constant LASSO_ID = compiletime(ABIL_ID_GEN.next())
+
+// Unique Object ID for the Kidnapper unit
+public constant int QIRAJI_KIDNAPPER_ID = compiletime(UNIT_ID_GEN.next())
+public constant real DURATION = 5.0
+
+@compiletime function createQirajiKidnapper()
+  
+  new ChannelAbilityPreset(LASSO_ID, 1, true, tgen)
+    ..presetCooldown(lvl -> lvl * 40.)
+    ..presetCastRange((int lvl) -> lvl + 300.)
+    //..presetBaseOrderID() (int lvl) ->
+    ..presetTargetTypes(Targettype.UNIT)
+    
+    
+      
+      
+
+  // Inherit from Ghoul as a structural canvas, then clean out its defaults entirely
+  new UnitDefinition(QIRAJI_KIDNAPPER_ID, UnitIds.ghoul)
+    ..setName("Qiraji Kidnapper")
+    ..setTooltipBasic("Train |cff00ff00Qiraji Kidnapper|r")
+    ..setTooltipExtended("Tier 2 fast striking skirmisher. Specialized in separating target priority units from their squads.")
+    
+    // ============================================================================
+    // PURGING BASE LEFTOVERS (GHOUL / UNDEAD REMNANTS)
+    // ============================================================================
+    ..setNormalAbilities(commaList(LASSO_ID))
+    ..setUpgradesUsed("")             // Strips Undead armor/attack upgrades
+    ..setRequirements(commaList(QIRAJI_T2_SWARM_CORE))             // Strips Graveyard dependency
+    ..setRequirementsLevels("")       // Clears leftover requirements level scaling
+    ..setUnitClassification("")       // Strips "Undead" classification tag
+    ..setStructuresBuilt("")          // Ensures no worker behavior is preserved
+    
+    // ============================================================================
+    // TIER 2 BALANCED VITALS & MOVEMENT
+    // ============================================================================
+    ..setHitPointsMaximumBase(640)    // High-mid tier 2 baseline pool
+    ..setHitPointsRegenerationRate(1.25)
+    ..setHitPointsRegenerationType("always")
+    ..setManaMaximum(0)
+    ..setDefenseBase(3)               // Medium early scaling protection
+    ..setDefenseUpgradeBonus(3)      // Vulnerable to pierce, strong vs melee
+    ..setSpeedBase(320)        // Very fast tracking speed to suit its name
+    ..setTurnRate(0.6)
+    
+    // ============================================================================
+    // TIER 2 ECONOMY CONFIGURATION
+    // ============================================================================
+    ..setGoldCost(195)                // Standard Tier 2 cost bracket
+    ..setLumberCost(0)                // FIXED: Explicitly zero cost for your map design
+    ..setFoodCost(3)                  // Consumes 3 food slots
+    ..setBuildTime(26)                // Time in seconds to gestate
+    
+    // ============================================================================
+    // ATTACK MATRIX (FAST MELEE DISRUPTOR)
+    // ============================================================================
+    ..setAttack1DamageBase(22)
+    ..setAttack1DamageNumberofDice(2)
+    ..setAttack1DamageSidesperDie(4)  // Calculates to 24 - 30 flat combat damage
+    ..setAttack1CooldownTime(1.35)    // Snappy, aggressive attack rate
+    ..setAttack1AttackType(AttackType.Pierce)
+    ..setAttack1WeaponType(WeaponType.Normal)
+    ..setAttack1Range(128)            // Standard melee threshold
+    
+    // ============================================================================
+    // COSMETICS & VISUAL IDENTIFIERS
+    // ============================================================================
+    ..setModelFile("Units\\Creeps\\NerubianWarrior\\NerubianWarrior.mdl")
+    ..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNNerubianWarrior.blp")
+    ..setScalingValue(1.10)             // Scaled slightly up to look imposing in a squad
+    ..setSelectionScale(1.20)
+
+
+init
+  EventListener.onTargetCast(LASSO_ID) (unit caster, unit target) ->
+    target.pause()
+    let eff = addEffect("Abilities\\Spells\\Human\\AerialShackles\\AerialShacklesTarget.mdl", target,"chest,mount" )
+    let moveTimer = doPeriodically(0.03) (CallbackPeriodic cb) ->  // much faster tick rate
+      let targetPos = target.getPos()
+      let casterPos = caster.getPos()
+
+      if casterPos.distanceTo(targetPos) > 200.
+        let moveDir = targetPos.angleTo(casterPos)
+        let pullSpeedPerSecond = 300.
+        let moveAmount = pullSpeedPerSecond * 0.03  // scaled to the new interval
+        target.setXY(targetPos.polarOffset(moveDir, moveAmount))
+    doAfter(DURATION) ->
+      target.unpause()
+      eff.destr()
+      destroy moveTimer

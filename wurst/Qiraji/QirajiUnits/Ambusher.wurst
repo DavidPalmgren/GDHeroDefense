@@ -6,6 +6,9 @@ import ObjectIdGenerator
 import ObjectIds
 import Icons
 
+import QirajiBuildingIds
+import ZandalariBaseUpgrades
+
 // ==========================================
 // 1. Generate unique IDs for Units & Spells
 // ==========================================
@@ -20,6 +23,11 @@ public constant T3_CRIT_ID   = compiletime(ABIL_ID_GEN.next())
 public constant T2_NUKE_ID   = compiletime(ABIL_ID_GEN.next())
 public constant T3_AURA_ID   = compiletime(ABIL_ID_GEN.next())
 public constant T3_EVADE_ID  = compiletime(ABIL_ID_GEN.next())
+
+
+// public constant QIRAJI_T1_HIVE_NODE      = compiletime(UNIT_ID_GEN.next())
+// public constant QIRAJI_T2_SWARM_CORE     = compiletime(UNIT_ID_GEN.next())
+// public constant QIRAJI_T3_HIVE_IMPERIAL  = compiletime(UNIT_ID_GEN.next())
 
 @compiletime function genAmbushersWithSpells()
     // ------------------------------------------
@@ -87,6 +95,8 @@ public constant T3_EVADE_ID  = compiletime(ABIL_ID_GEN.next())
         ..setScalingValue(1.0)
         // Bind Spells
         ..setNormalAbilities(commaList(T1_CRIT_ID))
+        ..setUpgradesUsed(commaList(ZANDALARI_DAMAGE_UPG_ID, ZANDALARI_ARMOR_UPG_ID))
+        ..setRequirements("")
 
     // TIER 2: Shadow Assassin
     new UnitDefinition(AMBUSHER_T2_ID, 'nban')
@@ -101,6 +111,10 @@ public constant T3_EVADE_ID  = compiletime(ABIL_ID_GEN.next())
         ..setScalingValue(1.15)
         // Bind Spells (Passive Scaling + Active Nuke)
         ..setNormalAbilities(commaList(T2_CRIT_ID, T2_NUKE_ID))
+        ..setRequirements(commaList(QIRAJI_T2_SWARM_CORE))
+        ..setUpgradesUsed(commaList(ZANDALARI_DAMAGE_UPG_ID, ZANDALARI_ARMOR_UPG_ID))
+
+
 
     // TIER 3: Shadow Stalker Captain
     new UnitDefinition(AMBUSHER_T3_ID, 'nban')
@@ -113,3 +127,6 @@ public constant T3_EVADE_ID  = compiletime(ABIL_ID_GEN.next())
         ..setScalingValue(1.35)
         // Bind Spells (Highest Passive Crit + Dodge tanking + Combat Aura for followers)
         ..setNormalAbilities(commaList(T3_CRIT_ID, T3_EVADE_ID, T3_AURA_ID))
+        ..setRequirements(commaList(QIRAJI_T3_HIVE_IMPERIAL))
+        ..setUpgradesUsed(commaList(ZANDALARI_DAMAGE_UPG_ID, ZANDALARI_ARMOR_UPG_ID))
+

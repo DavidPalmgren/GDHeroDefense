@@ -9,7 +9,7 @@ import AbilityTooltipGenerator
 public constant STARFALL_ID = compiletime(ABIL_ID_GEN.next())
 
 constant real STARFALL_RADIUS = 500.
-constant real STAR_DAMAGE = 100.
+constant real STAR_DAMAGE = 50.
 constant real STAR_AOE = 250.
 constant real CHANNEL_DURATION = 6.
 constant real BASE_INTERVAL = 1.0    // starts at 1 star per second
@@ -20,7 +20,7 @@ constant string CHANNEL_SFX = "Abilities\\Spells\\NightElf\\Starfall\\StarfallCa
 
 
 let tgen = new AbilityTooltipGenerator(
-    "Calls down stars in the target area dealing [100 / 150 / 200] damage in a " + 
+    "Calls down stars in the target area dealing [50 / 75 / 100] damage in a " + 
     STAR_AOE.toInt().toString() + " radius each. Stars fall faster the longer the spell channels."
 )
 

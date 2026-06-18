@@ -1,0 +1,57 @@
+package ZandalariApothecaryMojopalm
+
+import AbilityObjEditing
+import ObjectIdGenerator
+import ObjectIds
+import ChannelAbilityPreset
+import ClosureEvents
+import AbilityTooltipGenerator
+import DummyCaster
+import DummyDamage
+import Group
+import GroupUtils
+import ClosureTimers
+import ClosureForGroups
+
+import ZandalariApothecaryUpgrade 
+
+public constant MOJOPALM_ID = compiletime(ABIL_ID_GEN.next())
+public constant RADIUS = 200.
+public constant DAMAGE = 15.
+public constant DURATION = 5.
+
+public let tgen = new AbilityTooltipGenerator(Targettype.POINT, "We throw MOJO AND WORLD WILL BURN")
+
+@compiletime function newSpell()
+  new ChannelAbilityPreset(MOJOPALM_ID, 1, true, tgen)
+    ..setName("Mojopalm")
+    ..setTooltipNormal(1, "Mojopalm")
+    ..setTooltipNormalExtended(1, "Mojopalm, the proprietary concotion of Mojo incorperated. Side effects may include 2nd degree burns.")
+    ..setRequirements(commaList(ZANDALARI_APOTHECARY_UPGRADE))
+    ..setCastRange(1, 600.)
+    ..setManaCost(1, 50)
+    ..setCooldown(1, 15)
+    ..presetTargetTypes(Targettype.POINT) 
+    ..setIconNormal(Icons.bTNLiquidFire)
+    ..setIconResearch(Icons.bTNLiquidFire)
+    ..presetFollowThroughTime(lvl -> 0.0) 
+    ..presetAreaofEffect(lvl -> RADIUS)
+    ..presetOption(Option.TARGETIMAGE, true)
+
+init
+  EventListener.onPointCast(MOJOPALM_ID) (unit caster, vec2 target) ->
+    var elapsed = 0.0
+
+    // Spawn the looping fire model once on the ground at the impact coordinates
+    let groundFire = AddSpecialEffect("Abilities\\Spells\\Orc\\LiquidFire\\LiquidFire.mdx", target.x, target.y)
+
+    doPeriodically(1.0) cb ->
+      elapsed += 1.0
+
+      if elapsed >= DURATION
+        groundFire.destr() // Snuff out the ground fire zone when the timer finishes
+        destroy cb
+
+      forUnitsInRange(target, RADIUS) (unit u) ->
+        if u.isAlive() and u.isEnemyOf(caster.getOwner()) and not u.isType(UNIT_TYPE_STRUCTURE)
+          caster.damageTarget(u, DAMAGE, true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_NORMAL, null)

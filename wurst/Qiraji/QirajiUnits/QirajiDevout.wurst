@@ -1,0 +1,81 @@
+package QirajiDevout
+
+
+import AbilityObjEditing
+import BuffObjEditing
+import ObjectIdGenerator
+import Icons
+import ClosureEvents
+import ObjectIds
+
+
+public constant QIRAJI_DEVOUT_ID = compiletime(UNIT_ID_GEN.next())
+public constant SUPER_HEAL_ID = compiletime(ABIL_ID_GEN.next())
+public constant QIRAJI_SILENCE_ID = compiletime(ABIL_ID_GEN.next())
+public constant QIRAJI_SILENCE_BUFF_ID = compiletime(BUFF_ID_GEN.next())
+
+constant real SUPER_HEAL_AMOUNT = 50.
+constant real SILENCE_DURATION = 4.
+constant real SILENCE_RANGE = 700.
+
+@compiletime function setupUnit()
+    new UnitDefinition(QIRAJI_DEVOUT_ID, 'hmpr')  // based on Priest
+        ..setName("Qiraji Devout")
+        ..setNormalAbilities(commaList(SUPER_HEAL_ID, QIRAJI_SILENCE_ID))
+        ..setHitPointsMaximumBase(600)
+        ..setManaMaximum(400)
+        ..setArmorType(ArmorType.Small)
+        ..setLevel(8)
+
+@compiletime function genSuperHeal()
+    new AbilityDefinitionHeal(SUPER_HEAL_ID)
+        ..setName("Devout Healing")
+        ..setTooltipNormal(1, "Devout Healing")
+        ..setTooltipNormalExtended(1, "Channels the will of the Old Gods to heal a single ally for " + SUPER_HEAL_AMOUNT.toInt().toString() + " health.")
+        ..setIconNormal(Icons.bTNHealingWave)
+        ..setButtonPositionNormalX(0)
+        ..setButtonPositionNormalY(0)
+        ..setCastRange(1, 600.)
+        ..setCooldown(1, 1.)
+        ..setManaCost(1, 10)
+        ..setHitPointsGained(1, SUPER_HEAL_AMOUNT)
+        ..setDurationNormal(1, 0.)
+        ..setDurationHero(1, 0.)
+        ..setRequirements("")
+        ..setHeroAbility(false)
+        ..setItemAbility(false)
+
+@compiletime function genSilenceBuff()
+    new BuffDefinition(QIRAJI_SILENCE_BUFF_ID, 'Basl')
+        ..setName(1, "Maddening Whispers")
+        ..setTooltipNormal(1, "Maddening Whispers")
+        ..setTooltipNormalExtended(1, "This unit has been silenced by the Old Gods' whispers and cannot cast spells.")
+        ..setIcon(Icons.bTNSilence)
+        ..setArtTarget("")
+        ..setArtSpecial("")
+
+@compiletime function genSilence()
+    new AbilityDefinitionDarkRangerSilence(QIRAJI_SILENCE_ID)
+        ..setName("Maddening Whispers")
+        ..setTooltipNormal(1, "Maddening Whispers")
+        ..setTooltipNormalExtended(1, "Fills an enemy's mind with maddening whispers, silencing them for " + SILENCE_DURATION.toInt().toString() + " seconds.")
+        ..setIconNormal(Icons.bTNSilence)
+        ..setButtonPositionNormalX(1)
+        ..setButtonPositionNormalY(0)
+        ..setCastRange(1, SILENCE_RANGE)
+        ..setCooldown(1, 14.)
+        ..setManaCost(1, 75)
+        ..setDurationNormal(1, SILENCE_DURATION)
+        ..setDurationHero(1, SILENCE_DURATION * 0.6)
+        ..setBuffs(1, toRawCode(QIRAJI_SILENCE_BUFF_ID))
+        ..setRequirements("")
+        ..setHeroAbility(false)
+        ..setItemAbility(false)
+
+
+init
+    EventListener.onTargetCast(SUPER_HEAL_ID) (caster, target) ->
+        flashEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt.mdl", target, "origin")
+
+    EventListener.onTargetCast(QIRAJI_SILENCE_ID) (caster, target) ->
+        flashEffect("Abilities\\Spells\\Undead\\Curse\\CurseTarget.mdl", target, "origin")

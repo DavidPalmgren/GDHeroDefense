@@ -1,0 +1,73 @@
+package QirajiSwarmer
+
+import ObjectIdGenerator
+import AbilityObjEditing
+import UnitIds
+import Icons
+import ClosureTimers
+import HashMap
+import ObjectIds
+
+public constant QIRAJI_SWARMER_ID = compiletime(UNIT_ID_GEN.next())
+public constant QIRAJI_SWARMER_HIVE_MINDED_ID = compiletime(ABIL_ID_GEN.next())
+
+constant real HIVE_RANGE = 500.
+constant real DAMAGE_PER_SWARMER = 2.
+constant int ARMOR_PER_SWARMER = 1
+constant real UPDATE_INTERVAL = 0.5
+
+let currentDamageBonus = new HashMap<unit, real>()
+let currentArmorBonus = new HashMap<unit, int>()
+
+@compiletime function go()
+    new UnitDefinition(QIRAJI_SWARMER_ID, UnitIds.ghoul)
+        ..setName("Silithid Swarmer")
+        ..setTooltipBasic("Hatch Silithid Swarmer")
+        ..setTooltipExtended("Silithid Swarmers work best in a group, they might be weak alone but together they're a considerable threat")
+        ..setGoldCost(25)
+        ..setFoodCost(1)
+        ..setNormalAbilities(commaList(QIRAJI_SWARMER_HIVE_MINDED_ID))
+        ..setStockMaximum(1)
+
+    new AbilityDefinitionPassiveSimple(QIRAJI_SWARMER_HIVE_MINDED_ID)
+        ..setName("Hive-Minded")
+        ..setTooltipNormal(1, "Hive-Minded")
+        ..setTooltipNormalExtended(1, "The Silithid Swarmer gets stronger for each Silithid Swarmer in their immediate surrounding (+" + DAMAGE_PER_SWARMER.toInt().toString() + " damage, +" + ARMOR_PER_SWARMER.toString() + " armor per nearby Swarmer within " + HIVE_RANGE.toInt().toString() + " range).")
+        ..setIconNormal(Icons.bTNBloodLust)
+        ..setIconResearch(Icons.bTNBloodLust)
+        ..setButtonPositionNormalX(0)
+        ..setButtonPositionNormalY(2)
+        ..setHeroAbility(false)
+        ..setItemAbility(false)
+
+init
+    doPeriodically(UPDATE_INTERVAL) cb ->
+        //ENUM_GROUP.enumUnitsOfType('h' + QIRAJI_SWARMER_ID.toRawCode().substring(1, 4), null)
+        // Fallback
+        let g = CreateGroup()
+        g.enumUnitsInRect(bj_mapInitialPlayableArea)
+
+        for u from g
+            if u.isAlive() and u.getTypeId() == QIRAJI_SWARMER_ID
+                var nearbyCount = 0
+                let g2 = CreateGroup()
+                g2.enumUnitsInRange(u.getPos(), HIVE_RANGE)
+                for other from g2
+                    if other != u and other.isAlive() and other.getTypeId() == QIRAJI_SWARMER_ID
+                        nearbyCount++
+                g2.destr()
+
+                let newDamageBonus = DAMAGE_PER_SWARMER * nearbyCount.toReal()
+                let newArmorBonus = ARMOR_PER_SWARMER * nearbyCount
+                let oldDamageBonus = currentDamageBonus.has(u) ? currentDamageBonus.get(u) : 0.
+                let oldArmorBonus = currentArmorBonus.has(u) ? currentArmorBonus.get(u) : 0
+
+                if newDamageBonus != oldDamageBonus
+                    u.setBaseDamage(u.getBaseDamage(0) - oldDamageBonus.toInt() + newDamageBonus.toInt(), 0)
+                    currentDamageBonus.put(u, newDamageBonus)
+
+                if newArmorBonus != oldArmorBonus
+                    u.setArmor(u.getArmor() - oldArmorBonus + newArmorBonus)
+                    currentArmorBonus.put(u, newArmorBonus)
+
+        g.destr()

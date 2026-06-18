@@ -6,6 +6,10 @@ import ObjectIdGenerator
 import ObjectIds
 import Icons
 
+import QirajiBuildingIds
+import ZandalariBaseUpgrades
+
+
 // ==========================================
 // 1. Generate unique IDs for Units & Spells
 // ==========================================
@@ -89,6 +93,10 @@ public constant T3_REGEN_ID  = compiletime(ABIL_ID_GEN.next())
         ..setScalingValue(0.95) // Slightly adjusted base scale
         // Bind Spells
         ..setNormalAbilities(commaList(T1_CLEAVE_ID))
+        ..setRequirements("")
+        ..setUpgradesUsed(commaList(ZANDALARI_DAMAGE_UPG_ID, ZANDALARI_ARMOR_UPG_ID))
+
+
 
     // TIER 2: Plague Devourer (+50% Buffed from T1)
     new UnitDefinition(DEVOURER_T2_ID, 'uabo')
@@ -103,6 +111,10 @@ public constant T3_REGEN_ID  = compiletime(ABIL_ID_GEN.next())
         ..setScalingValue(1.15)        // 20% scale jump
         // Bind Spells
         ..setNormalAbilities(commaList(T2_CLEAVE_ID, T2_BILE_ID))
+        ..setRequirements(commaList(QIRAJI_T2_SWARM_CORE))
+        ..setUpgradesUsed(commaList(ZANDALARI_DAMAGE_UPG_ID, ZANDALARI_ARMOR_UPG_ID))
+
+
 
     // TIER 3: Insatiable Gulgothar (+50% Buffed from T2)
     new UnitDefinition(DEVOURER_T3_ID, 'uabo')
@@ -115,3 +127,6 @@ public constant T3_REGEN_ID  = compiletime(ABIL_ID_GEN.next())
         ..setScalingValue(1.40)        // Massive boss presence scale
         // Bind Spells (High Cleave + Lifesteal Aura + Fast Base Health Regeneration)
         ..setNormalAbilities(commaList(T3_CLEAVE_ID, T3_VAMP_ID, T3_REGEN_ID))
+        ..setRequirements(commaList(QIRAJI_T3_HIVE_IMPERIAL))
+        ..setUpgradesUsed(commaList(ZANDALARI_DAMAGE_UPG_ID, ZANDALARI_ARMOR_UPG_ID))
+

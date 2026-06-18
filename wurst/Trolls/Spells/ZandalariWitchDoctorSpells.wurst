@@ -1,0 +1,20 @@
+package ZandalariWitchDoctorSpells
+
+import AbilityObjEditing
+import ObjectIdGenerator
+import ObjectIds
+
+
+import ZandalariWitchDoctorUpgrade
+
+public constant STASIS_TRAP_ID = compiletime(ABIL_ID_GEN.next())
+public constant HEALING_WARD_ID = compiletime(ABIL_ID_GEN.next())
+
+@compiletime function genSpells()
+  new AbilityDefinitionStasisTrap(STASIS_TRAP_ID)
+    ..setRequirements(commaList(ZANDALARI_WITCHDOCTOR_UPG_ID))
+    ..setRequirementsLevels("1")
+  new AbilityDefinitionHealingWard(HEALING_WARD_ID)
+    ..setRequirements(commaList(ZANDALARI_WITCHDOCTOR_UPG_ID))
+    ..setRequirementsLevels("2")
+  

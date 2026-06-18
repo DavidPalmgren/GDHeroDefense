@@ -1,0 +1,169 @@
+package CryptLord
+
+import UnitObjEditing
+import ObjectIds
+import AbilityObjEditing
+import ObjectIdGenerator
+import ClosureEvents
+import ClosureTimers
+import Icons
+import OrderIds
+import UnitIds
+import AbilityIds
+import ClosureForGroups
+import Effect
+import EventHelper
+import Unit
+
+import DummyCaster
+
+public constant int CRYPT_LORD_HERO_ID = compiletime(HERO_ID_GEN.next())
+public constant int CRYPT_LORD_HERO_BURROW_ID = compiletime(HERO_ID_GEN.next())
+public constant int CRYPT_LORD_BURROW = compiletime(ABIL_ID_GEN.next())
+public constant int CRYPT_LORD_IMPALE = compiletime(ABIL_ID_GEN.next())
+public constant int CRYPT_LORD_SUMMON = compiletime(ABIL_ID_GEN.next())
+public constant int FACTORY_ID = compiletime(UNIT_ID_GEN.next())
+
+constant real SPELL_RADIUS = 275.0
+constant real KNOCKBACK_DISTANCE = 175.0
+constant real KNOCKBACK_DURATION = 0.35
+int CRYPT_LORD_ATK_CNT = 0
+
+@compiletime function createCryptLordHero()
+    new HeroDefinition(CRYPT_LORD_HERO_ID, UnitIds.cryptlord)
+        ..setName("Crypt Lord")
+        ..setProperNames("Sukhesh")
+        ..setProperNamesUsed(1)
+        ..setTooltipBasic("Summon |cff00ffffCrypt Lord|r")
+        ..setTooltipExtended("A massive, heavily armored behemoth. Excellent front-line vanguard.")
+        ..setHeroAbilities(commaList(CRYPT_LORD_BURROW, 'AUts', CRYPT_LORD_IMPALE,CRYPT_LORD_SUMMON))
+        ..setUpgradesUsed("Reuv")
+        ..setPrimaryAttribute("STR")
+        ..setStartingStrength(36)
+        ..setStrengthPerLevel(5.2)
+        ..setStartingAgility(18)
+        ..setAgilityPerLevel(5.1)
+        ..setStartingIntelligence(18)
+        ..setIntelligencePerLevel(3.8)
+        ..setGoldCost(50)
+        ..setLumberCost(0)
+        ..setFoodCost(5)
+        ..setDefenseBase(2)
+        ..setAttack1DamageBase(23)
+        ..setAttack1CooldownTime(1.90)
+        ..setAttack1Range(128)
+
+    new HeroDefinition(CRYPT_LORD_HERO_BURROW_ID, UnitIds.cryptlord)
+        ..setName("Crypt Lord (Burrowed)")
+        ..setTooltipBasic("Summon |cff00ffffCrypt Lord (Burrowed)|r")
+        ..setTooltipExtended("This unit is currently underground. It regenerates health rapidly but cannot move or attack.")
+        ..setSpeedBase(200)
+        ..setCollisionSize(0)
+        ..setHitPointsRegenerationRate(5.0)
+        ..setSelectionScale(1.50)
+        ..setNormalAbilities(commaList(CRYPT_LORD_BURROW, AbilityIds.inventory))
+        ..setHeroAbilities("")
+        ..setAttacksEnabled(0)
+        ..setAttack1DamageBase(0)
+        ..setAttack1DamageNumberofDice(0)
+        ..setAttack1DamageSidesperDie(0)
+
+    new AbilityDefinitionBurrow(CRYPT_LORD_BURROW)
+        ..setRequirements("")
+        ..setIconResearch("ReplaceableTextures\\CommandButtons\\BTNCryptFiendBurrow.blp")
+        ..setAlternateFormUnit(1, CRYPT_LORD_HERO_BURROW_ID.toRawCode())
+        ..setAlternateFormUnit(2, CRYPT_LORD_HERO_BURROW_ID.toRawCode())
+        ..setAlternateFormUnit(3, CRYPT_LORD_HERO_BURROW_ID.toRawCode())
+        ..setNormalFormUnit(1, CRYPT_LORD_HERO_ID.toRawCode())
+        ..setNormalFormUnit(2, CRYPT_LORD_HERO_ID.toRawCode())
+        ..setNormalFormUnit(3, CRYPT_LORD_HERO_ID.toRawCode())
+        ..setHeroAbility(true)
+        ..setLevels(3)
+        ..setLevelSkipRequirement(2)
+
+    new AbilityDefinitionPassiveSimple(CRYPT_LORD_IMPALE)
+      ..setTooltipLearn("Learn Impaling Strike")
+      ..setTooltipLearnExtended("The Hero builds power by hitting 5 times he prepares for a devestating strike impaling all enemies in a line behind his target.")
+      ..presetTooltipNormal(lvl -> "Impaling Strike")
+      ..presetTooltipNormalExtended(lvl -> "The Hero builds power by hitting 5 times he prepares for a devestating strike impaling all enemies for " + (lvl * 50).toString() +  "in a line behind his target")
+      ..setIconNormal(Icons.bTNImpale)
+      ..setIconResearch(Icons.bTNImpale)
+      ..setLevels(3)
+      ..setLevelSkipRequirement(2)
+
+    new UnitOrBuildingOrHeroDefinition(FACTORY_ID, 'nfac')
+      ..setModelFile("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl")
+
+
+    new AbilityDefinitionTinkererSummonFactoryLevel0(CRYPT_LORD_SUMMON)
+      ..setSpawnUnitID(1, "ucs3")
+      ..setCooldown(1, 2.)
+      ..setIconNormal(Icons.bTNCarrionScarabs)
+      ..setIconResearch(Icons.bTNCarrionScarabs)
+      ..setDurationNormal(1, 6.)
+      ..setSpawnUnitDuration(1, 60)
+      ..setDurationHero(1, 6.)
+      ..setManaCost(1, 125)
+      ..setSpawnInterval(1, 0.5)
+      ..setLeashRange(1, 2000)
+      ..setMissileArt("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl")
+      ..setMissileSpeed(500)
+      ..setFactoryUnitID(1, FACTORY_ID.toRawCode())
+      ..setLevelSkipRequirement(5)
+      ..setLevels(1)
+      ..setRequiredLevel(6)
+
+
+
+init
+    EventListener.add(EVENT_PLAYER_UNIT_DAMAGED) () ->
+        let victim = GetTriggerUnit()
+        let attacker = GetEventDamageSource()
+        let attackerId = attacker.getTypeId()
+        if attackerId == CRYPT_LORD_HERO_ID
+            if BlzGetEventIsAttack() and attacker.hasAbility(CRYPT_LORD_IMPALE)
+                let lvl = attacker.getAbilityLevel(CRYPT_LORD_IMPALE)
+                CRYPT_LORD_ATK_CNT++
+                print("Crypt Lord attacked! Total count: " + CRYPT_LORD_ATK_CNT.toString())
+                if CRYPT_LORD_ATK_CNT >= 5
+                    CRYPT_LORD_ATK_CNT = 0
+                    new DummyCaster()
+                        ..origin(attacker.getPos())
+                        ..owner(attacker.getOwner())
+                        ..delay(1.5)
+                        ..castPoint('AUim', lvl , OrderIds.impale, victim.getPos())
+
+
+    EventListener.add(EVENT_PLAYER_UNIT_ISSUED_ORDER, () -> begin
+        let orderId = GetIssuedOrderId()
+        let trigUnit = GetTriggerUnit()
+        if orderId == OrderIds.unburrow and trigUnit.getTypeId() == CRYPT_LORD_HERO_BURROW_ID
+            let pos = trigUnit.getPos()
+            // Level 1 -> 100 | Level 2 -> 150 | Level 3 -> 200
+            let skillLevel = trigUnit.getAbilityLevel(CRYPT_LORD_BURROW)
+            let finalDamage = 100.0 + (skillLevel - 1) * 50.0
+            let dustEff = addEffect("Abilities\\Spells\\Orc\\WarStomp\\WarStompCaster.mdl", pos)
+                ..setScale(1.50)
+            dustEff.destr()
+            let spikeEff = addEffect("Abilities\\Spells\\Undead\\Impale\\ImpaleTargetGround.mdl", pos)
+                ..setScale(1.20)
+            spikeEff.destr()
+            forUnitsInRange(pos, SPELL_RADIUS, (u) -> begin
+                if u.isAlive() and u.isEnemyOf(trigUnit.getOwner()) and not u.isType(UNIT_TYPE_STRUCTURE)
+                    trigUnit.damageTarget(u, finalDamage, false, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS)
+                    // B. CALCULATE KNOCKBACK VECTOR
+                    let targetPos = u.getPos()
+                    let angle = pos.angleTo(targetPos)
+                    let totalTicks = (KNOCKBACK_DURATION / 0.03).toInt()
+                    let distancePerTick = KNOCKBACK_DISTANCE / totalTicks
+                    u.setPathing(false)
+                    doPeriodicallyTimed(0.03, KNOCKBACK_DURATION, (cb) -> begin
+                        if u.isAlive()
+                            let currentPos = u.getPos()
+                            let nextPos = currentPos.polarOffset(angle, distancePerTick)
+                            u.setPos(nextPos)
+                        if cb.isLast()
+                            u.setPathing(true)
+                    end)
+            end)
+    end)

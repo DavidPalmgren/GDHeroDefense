@@ -1,0 +1,19 @@
+package QirajiBuildingIds
+
+import ObjectIdGenerator
+
+public constant QIRAJI_T1_HIVE_NODE      = compiletime(UNIT_ID_GEN.next())
+public constant QIRAJI_T2_SWARM_CORE     = compiletime(UNIT_ID_GEN.next())
+public constant QIRAJI_T3_HIVE_IMPERIAL  = compiletime(UNIT_ID_GEN.next())
+
+// Logistics & Production bases
+public constant QIRAJI_SPAWNING_SAC      = compiletime(UNIT_ID_GEN.next()) // Farm
+public constant QIRAJI_HATCHERY          = compiletime(UNIT_ID_GEN.next()) // Barracks
+public constant QIRAJI_ALTAR_OF_THE_OLD  = compiletime(UNIT_ID_GEN.next()) // Altar
+public constant QIRAJI_CARAPACE_CHAMBER  = compiletime(UNIT_ID_GEN.next()) // Blacksmith
+public constant QIRAJI_RESECTION_MILL    = compiletime(UNIT_ID_GEN.next()) // Lumber Mill
+
+// Advanced Tech hubs
+public constant QIRAJI_OBSIDIAN_TEMPLE   = compiletime(UNIT_ID_GEN.next()) // Arcane Sanctum
+public constant QIRAJI_FLESHWARPING_PIT  = compiletime(UNIT_ID_GEN.next()) // Workshop
+public constant QIRAJI_CHITINOUS_SPIRE   = compiletime(UNIT_ID_GEN.next()) // Scout Tower

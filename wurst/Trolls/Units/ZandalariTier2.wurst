@@ -9,6 +9,7 @@ import Icons
 import ZandalariBaseUpgrades
 import ZandalariUpgradeCenter
 import ZandalariWitchDoctorUpgrade
+import ZandalariWitchDoctorSpells
 
 // Generate Unique Engine IDs for Tier 2 forces
 public constant ZANDALARI_SIEGE_ID   = compiletime(UNIT_ID_GEN.next())
@@ -51,6 +52,7 @@ public constant ZANDALARI_FLYER_ID   = compiletime(UNIT_ID_GEN.next())
         ..setTooltipBasic("Train Witch Doctor")
         ..setTooltipExtended("Spiritual mystic of the council caste. Commands deep voodoo mojo to place healing wards and cast protective enchantments over injured allies.")
         ..setIconGameInterface(Icons.bTNWitchDoctor)
+        ..setNormalAbilities(commaList(STASIS_TRAP_ID,HEALING_WARD_ID))
 
         
         // Economy & Pacing Configuration

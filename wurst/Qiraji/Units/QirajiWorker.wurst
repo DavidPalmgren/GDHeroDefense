@@ -1,0 +1,48 @@
+package QirajiWorker
+
+import ObjectIdGenerator
+import AbilityObjEditing
+import ObjectIds
+import UnitIds
+import Icons
+import ClosureTimers
+
+import QirajiBuildingIds
+
+
+// Add this ID to the top of your file with your other IDs:
+public constant QIRAJI_WORKER_ID = compiletime(UNIT_ID_GEN.next())
+
+@compiletime function genQirajiWorker()
+  new UnitDefinition(QIRAJI_WORKER_ID, UnitIds.peasant)
+    ..setName("Silithid Drone")
+    ..setTooltipBasic("Train Silithid Drone")
+    ..setTooltipExtended("The basic workforce of the Qiraji swarm. Can harvest gold, harvest lumber, and morph into structural hive nodes.")
+    ..setIconGameInterface(Icons.bTNAcolyte)
+    
+    // --- LINKING THE BUILDINGS ---
+    // Excludes Swarm Core and Hive Imperial since those are mutated directly from the Hive Node
+    ..setStructuresBuilt(commaList(
+      QIRAJI_T1_HIVE_NODE,
+      QIRAJI_SPAWNING_SAC,
+      QIRAJI_HATCHERY,
+      QIRAJI_ALTAR_OF_THE_OLD,
+      QIRAJI_CARAPACE_CHAMBER,
+      QIRAJI_RESECTION_MILL,
+      QIRAJI_OBSIDIAN_TEMPLE,
+      QIRAJI_FLESHWARPING_PIT,
+      QIRAJI_CHITINOUS_SPIRE
+    ))
+
+init
+    // Wait a brief 0.0 seconds to make sure the map is fully loaded and ready
+  nullTimer() ->
+    // 1. Get the exact center coordinates of your "TrollParty" editor region
+    let x = GetRectCenterX(gg_rct_QirajiParty)
+    let y = GetRectCenterY(gg_rct_QirajiParty)
+    
+    // 2. Define Player Red (Index 0)
+    let playerRed = players[0]
+    
+    // 3. Spawn the custom Zandalari Freeman at the location facing south (270 degrees)
+    CreateUnit(playerRed, QIRAJI_WORKER_ID, x, y, 270.0)
