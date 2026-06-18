@@ -95,7 +95,10 @@ public constant T3_REGEN_ID  = compiletime(ABIL_ID_GEN.next())
         ..setNormalAbilities(commaList(T1_CLEAVE_ID))
         ..setRequirements("")
         ..setUpgradesUsed(commaList(ZANDALARI_DAMAGE_UPG_ID, ZANDALARI_ARMOR_UPG_ID))
-
+        ..setModelFile("SilithidDevourer.mdx")
+        ..setHotkey("A")
+        ..setButtonPositionX(0)
+        ..setButtonPositionY(1)
 
 
     // TIER 2: Plague Devourer (+50% Buffed from T1)
@@ -113,7 +116,10 @@ public constant T3_REGEN_ID  = compiletime(ABIL_ID_GEN.next())
         ..setNormalAbilities(commaList(T2_CLEAVE_ID, T2_BILE_ID))
         ..setRequirements(commaList(QIRAJI_T2_SWARM_CORE))
         ..setUpgradesUsed(commaList(ZANDALARI_DAMAGE_UPG_ID, ZANDALARI_ARMOR_UPG_ID))
-
+        ..setModelFile("SilithidDevourer.mdx")
+        ..setHotkey("S")
+        ..setButtonPositionX(1)
+        ..setButtonPositionY(1)
 
 
     // TIER 3: Insatiable Gulgothar (+50% Buffed from T2)
@@ -129,4 +135,7 @@ public constant T3_REGEN_ID  = compiletime(ABIL_ID_GEN.next())
         ..setNormalAbilities(commaList(T3_CLEAVE_ID, T3_VAMP_ID, T3_REGEN_ID))
         ..setRequirements(commaList(QIRAJI_T3_HIVE_IMPERIAL))
         ..setUpgradesUsed(commaList(ZANDALARI_DAMAGE_UPG_ID, ZANDALARI_ARMOR_UPG_ID))
-
+        ..setModelFile("SilithidDevourer.mdx")
+        ..setHotkey("D")
+        ..setButtonPositionX(2)
+        ..setButtonPositionY(1)

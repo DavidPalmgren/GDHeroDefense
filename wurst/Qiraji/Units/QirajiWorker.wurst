@@ -19,6 +19,7 @@ public constant QIRAJI_WORKER_ID = compiletime(UNIT_ID_GEN.next())
     ..setTooltipBasic("Train Silithid Drone")
     ..setTooltipExtended("The basic workforce of the Qiraji swarm. Can harvest gold, harvest lumber, and morph into structural hive nodes.")
     ..setIconGameInterface(Icons.bTNAcolyte)
+    ..setModelFile("NerubianWorkerV2.mdx")
     
     // --- LINKING THE BUILDINGS ---
     // Excludes Swarm Core and Hive Imperial since those are mutated directly from the Hive Node

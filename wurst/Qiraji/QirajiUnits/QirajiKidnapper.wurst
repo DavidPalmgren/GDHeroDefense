@@ -82,9 +82,10 @@ public constant real DURATION = 5.0
     // ============================================================================
     // COSMETICS & VISUAL IDENTIFIERS
     // ============================================================================
-    ..setModelFile("Units\\Creeps\\NerubianWarrior\\NerubianWarrior.mdl")
-    ..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNNerubianWarrior.blp")
-    ..setScalingValue(1.10)             // Scaled slightly up to look imposing in a squad
+    ..setModelFile("HeroNerubianWidow.mdx")
+    ..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNArachnathid.blp")
+    ..setScalingValue(0.8)
+                 // Scaled slightly up to look imposing in a squad
     ..setSelectionScale(1.20)
 
 

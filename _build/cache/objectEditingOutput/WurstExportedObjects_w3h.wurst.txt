@@ -30,6 +30,30 @@ import BuffObjEditing
 
 @compiletime function create_w3h_BM03()
 	new BuffDefinition('BM03', 'Basl')
+	..setName(1, "Maddening Whispers")
+	..setTooltipNormal(1, "Maddening Whispers")
+	..setTooltipNormalExtended(1, "This unit has been silenced by the Old Gods' whispers and cannot cast spells.")
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNSilence.blp")
+	..setArtTarget(1, "")
+	..setArtSpecial(1, "")
+
+
+@compiletime function create_w3h_BM04()
+	new BuffDefinition('BM04', 'BOae')
+	..setTooltipNormal(1, "Mother's Love")
+	..setTooltipNormalExtended(1, "This unit is under the protective care of a Swarm Mother, attack and movementspeed are increased. Swarmers grow healtheir.")
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNAmuletOftheWild.blp")
+
+
+@compiletime function create_w3h_BM05()
+	new BuffDefinition('BM05', 'Bbsk')
+	..setName(1, "Berserk")
+	..setTooltipNormal(1, "This unit is Enraged, It deals increased damage.")
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNUnholyFrenzy.blp")
+
+
+@compiletime function create_w3h_BM06()
+	new BuffDefinition('BM06', 'Basl')
 	..setName(1, "Invigorate")
 	..setTooltipNormal(1, "Invigorated")
 	..setTooltipNormalExtended(1, "This unit is invigorated, regenerating health and mana.")
@@ -39,8 +63,8 @@ import BuffObjEditing
 	..setTargetAttachmentPoint0(1, "chest")
 
 
-@compiletime function create_w3h_AM0o()
-	new BuffDefinition('AM0o', 'Bspo')
+@compiletime function create_w3h_AM16()
+	new BuffDefinition('AM16', 'Bspo')
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNMoonStone.blp")
 	..setTooltipNormal(1, "Lunar Anchor")
 	..setTooltipNormalExtended(1, "This unit's magic resistance is shattered. Taking increased damage from spells.")
@@ -48,8 +72,8 @@ import BuffObjEditing
 	..setTargetAttachmentPoint0(1, "overhead")
 
 
-@compiletime function create_w3h_AM0p()
-	new BuffDefinition('AM0p', 'Bshp')
+@compiletime function create_w3h_AM17()
+	new BuffDefinition('AM17', 'Bshp')
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNMoonStone.blp")
 	..setTooltipNormal(1, "Lunar Anchor")
 	..setTooltipNormalExtended(1, "This hero's magic resistance is shattered. Taking increased damage from spells.")
@@ -57,8 +81,8 @@ import BuffObjEditing
 	..setTargetAttachmentPoint0(1, "overhead")
 
 
-@compiletime function create_w3h_BM04()
-	new BuffDefinition('BM04', 'Basl')
+@compiletime function create_w3h_BM07()
+	new BuffDefinition('BM07', 'Basl')
 	..setName(1, "Moon Warrior")
 	..setTooltipNormal(1, "Moon Warrior")
 	..setTooltipNormalExtended(1, "Tyrande has dismounted, gaining bonus attack speed and damage.")
@@ -67,46 +91,36 @@ import BuffObjEditing
 	..setArtSpecial(1, "")
 
 
-@compiletime function create_w3h_BM05()
-	new BuffDefinition('BM05', 'Basl')
+@compiletime function create_w3h_BM08()
+	new BuffDefinition('BM08', 'Basl')
 	..setName(1, "Hibernate")
 	..setTooltipNormal(1, "Hibernate")
 	..setTooltipNormalExtended(1, "This unit is hibernating, rapidly regenerating health but unable to act.")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNSleep.blp")
 
 
-@compiletime function create_w3h_BM06()
-	new BuffDefinition('BM06', 'BNso')
+@compiletime function create_w3h_BM09()
+	new BuffDefinition('BM09', 'BNso')
 	..setName(1, "Mauled")
 	..setTooltipNormal(1, "Mauled")
 	..setTooltipNormalExtended(1, "This unit has been charged by Ursoc and is stunned.")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNStun.blp")
 
 
-@compiletime function create_w3h_BM07()
-	new BuffDefinition('BM07', 'Basl')
+@compiletime function create_w3h_BM0a()
+	new BuffDefinition('BM0a', 'Basl')
 	..setName(1, "Spirit Wisps")
 	..setTooltipNormal(1, "Spirit Wisps")
 	..setTooltipNormalExtended(1, "This unit is accompanied by healing spirit wisps.")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNWisp.blp")
 
 
-@compiletime function create_w3h_BM08()
-	new BuffDefinition('BM08', 'Basl')
+@compiletime function create_w3h_BM0b()
+	new BuffDefinition('BM0b', 'Basl')
 	..setName(1, "Iron Skin")
 	..setTooltipNormal(1, "Iron Skin")
 	..setTooltipNormalExtended(1, "Increases armor by 4 and has a 25% chance to retaliate.")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\UI\\Cursor\\BTNAcorn.blp")
-
-
-@compiletime function create_w3h_BM09()
-	new BuffDefinition('BM09', 'Basl')
-	..setName(1, "Maddening Whispers")
-	..setTooltipNormal(1, "Maddening Whispers")
-	..setTooltipNormalExtended(1, "This unit has been silenced by the Old Gods' whispers and cannot cast spells.")
-	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNSilence.blp")
-	..setArtTarget(1, "")
-	..setArtSpecial(1, "")
 
 
 // Original Table (contains all modified default/melee objects)

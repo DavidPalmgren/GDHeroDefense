@@ -1,0 +1,6 @@
+package QirajiSwarmerID
+
+
+import ObjectIdGenerator
+
+public constant QIRAJI_SWARMER_ID = compiletime(UNIT_ID_GEN.next())

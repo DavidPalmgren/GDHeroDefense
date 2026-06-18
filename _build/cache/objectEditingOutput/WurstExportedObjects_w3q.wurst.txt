@@ -186,20 +186,6 @@ import ObjEditingNatives
 	..setLvlDataString("ghk1", 1, 0, "")
 	..setLvlDataInt("gbpx", 0, 0, 0)
 	..setLvlDataInt("gbpy", 0, 0, 0)
-	..setLvlDataInt("gglb", 0, 0, 0)
-	..setLvlDataInt("glmb", 0, 0, 0)
-	..setLvlDataString("gnam", 1, 0, "Thick Bark")
-	..setLvlDataString("gtp1", 1, 0, "Thick Bark")
-	..setLvlDataString("gub1", 1, 0, "Researching this upgrade grants all Treants the Thick Bark passive, reducing incoming damage.")
-	..setLvlDataString("gar1", 1, 0, "ReplaceableTextures\\CommandButtons\\BTNEatTree.blp")
-	..setLvlDataInt("glvl", 0, 0, 1)
-
-
-@compiletime function create_w3q_RM02()
-	let def = createObjectDefinition("w3q", 'RM02', 'Rhse')
-	..setLvlDataString("ghk1", 1, 0, "")
-	..setLvlDataInt("gbpx", 0, 0, 0)
-	..setLvlDataInt("gbpy", 0, 0, 0)
 	..setLvlDataInt("glvl", 0, 0, 5)
 	..setLvlDataInt("gglb", 0, 0, 50)
 	..setLvlDataInt("gglm", 0, 0, 50)
@@ -233,8 +219,8 @@ import ObjEditingNatives
 	..setLvlDataString("gub1", 5, 0, "Refines the blades and spearheads of the tribe. Increases the attack damage of all Zandalari combatants by +3.")
 
 
-@compiletime function create_w3q_RM03()
-	let def = createObjectDefinition("w3q", 'RM03', 'Rhse')
+@compiletime function create_w3q_RM02()
+	let def = createObjectDefinition("w3q", 'RM02', 'Rhse')
 	..setLvlDataString("ghk1", 1, 0, "")
 	..setLvlDataInt("gbpx", 0, 0, 0)
 	..setLvlDataInt("gbpy", 0, 0, 0)
@@ -269,8 +255,8 @@ import ObjEditingNatives
 	..setLvlDataString("gub1", 5, 0, "Hardens the golden defensive array of your forces. Increases the armor rating of all Zandalari units by +1.")
 
 
-@compiletime function create_w3q_RM04()
-	let def = createObjectDefinition("w3q", 'RM04', 'Rhse')
+@compiletime function create_w3q_RM03()
+	let def = createObjectDefinition("w3q", 'RM03', 'Rhse')
 	..setLvlDataString("ghk1", 1, 0, "")
 	..setLvlDataInt("glvl", 0, 0, 3)
 	..setLvlDataInt("gbpx", 0, 0, 1)
@@ -304,6 +290,20 @@ import ObjEditingNatives
 	..setLvlDataString("gub1", 5, 0, "Awakens the deep, dormant properties of the Troll biology. Increases hit point regeneration for all Troll units by +1 HP per second.")
 
 
+@compiletime function create_w3q_RM04()
+	let def = createObjectDefinition("w3q", 'RM04', 'Rhse')
+	..setLvlDataString("ghk1", 1, 0, "")
+	..setLvlDataInt("gbpx", 0, 0, 0)
+	..setLvlDataInt("gbpy", 0, 0, 0)
+	..setLvlDataInt("gglb", 0, 0, 0)
+	..setLvlDataInt("glmb", 0, 0, 0)
+	..setLvlDataString("gnam", 1, 0, "Thick Bark")
+	..setLvlDataString("gtp1", 1, 0, "Thick Bark")
+	..setLvlDataString("gub1", 1, 0, "Researching this upgrade grants all Treants the Thick Bark passive, reducing incoming damage.")
+	..setLvlDataString("gar1", 1, 0, "ReplaceableTextures\\CommandButtons\\BTNEatTree.blp")
+	..setLvlDataInt("glvl", 0, 0, 1)
+
+
 @compiletime function create_w3q_RM05()
 	let def = createObjectDefinition("w3q", 'RM05', 'Rhse')
 	..setLvlDataInt("glvl", 0, 0, 2)
@@ -332,7 +332,7 @@ import ObjEditingNatives
 	..setLvlDataString("gar1", 1, 0, "ReplaceableTextures\\CommandButtons\\BTNWitchDoctorAdept.blp")
 	..setLvlDataString("gar1", 2, 0, "ReplaceableTextures\\CommandButtons\\BTNWitchDoctorMaster.blp")
 	..setLvlDataString("greq", 1, 0, "")
-	..setLvlDataString("greq", 2, 0, "x00f")
+	..setLvlDataString("greq", 2, 0, "x00~")
 	..setLvlDataString("gcls", 0, 0, "melee")
 	..setLvlDataString("gnam", 1, 0, "Witch Doctor Adept Training")
 	..setLvlDataString("gnam", 2, 0, "Witch Doctor Master Training")
@@ -369,7 +369,7 @@ import ObjEditingNatives
 	..setLvlDataString("gar1", 1, 0, "ReplaceableTextures\\CommandButtons\\BTNWitchDoctorAdept.blp")
 	..setLvlDataString("gar1", 2, 0, "ReplaceableTextures\\CommandButtons\\BTNWitchDoctorMaster.blp")
 	..setLvlDataString("greq", 1, 0, "")
-	..setLvlDataString("greq", 2, 0, "x00f")
+	..setLvlDataString("greq", 2, 0, "x00~")
 	..setLvlDataString("gcls", 0, 0, "melee")
 	..setLvlDataString("gnam", 1, 0, "Apothecary Adept Training")
 	..setLvlDataString("gnam", 2, 0, "Apothecary License Training")

@@ -1,0 +1,62 @@
+package QirajiSwarmMother
+
+import ObjectIdGenerator
+import AbilityObjEditing
+import UnitIds
+import Icons
+import ClosureTimers
+import HashMap
+import ObjectIds
+
+import BuffObjEditing
+import BuffIds
+
+import QirajiSwarmerID
+import QirajiBuildingIds
+
+public constant SWARM_MOTHER_ID = compiletime(UNIT_ID_GEN.next())
+public constant SWARM_MOTHER_MOTHERS_LOVE_ID = compiletime(ABIL_ID_GEN.next())
+public constant SWARM_MOTHER_INCUBATE = compiletime(ABIL_ID_GEN.next())
+public constant SWARM_MOTHER_MOTHERS_LOVE_BUFF_ID = compiletime(BUFF_ID_GEN.next())
+public constant SWARM_MOTHER_MOTHERS_LOVE_HP_BONUS = 40
+
+@compiletime function swarmMotherGo()
+  new UnitDefinition(SWARM_MOTHER_ID, UnitIds.broodmother)
+    ..setName("Swarm Mother")
+    ..setTooltipBasic("Train Swarm Mother")
+    ..setTooltipExtended("The Swarm Mother excels at rallying her children and, of course, making more.\n|cffbebebe\"Usually is not pleasant for the recipient\" - Anonymous Archaeologist.|r")
+    ..setNormalAbilities(commaList(SWARM_MOTHER_MOTHERS_LOVE_ID,SWARM_MOTHER_INCUBATE))
+    ..setManaInitialAmount(75)
+    ..setManaMaximum(200)
+    ..setManaRegeneration(0.67)
+    ..setHotkey("W")
+    ..setButtonPositionX(1)
+    ..setButtonPositionY(0)
+    ..setRequirements("")
+    ..setModelFile("BroodmotherNormalV2.mdx")
+    ..setScalingValue(0.8)
+    ..setBuildTime(7)
+    ..setLumberCost(0)
+    ..setGoldCost(60)
+
+  new BuffDefinition(SWARM_MOTHER_MOTHERS_LOVE_BUFF_ID, BuffIds.enduranceAura)
+    ..setTooltipNormal("Mother's Love")
+    ..setTooltipNormalExtended(1, "This unit is under the protective care of a Swarm Mother, attack and movementspeed are increased. Swarmers grow healtheir.")
+    ..setIcon(Icons.bTNAmuletOftheWild)
+
+  new AbilityDefinitionTaurenChieftainEnduranceAura(SWARM_MOTHER_MOTHERS_LOVE_ID)
+    ..setName("Mother's Love")
+    ..setTooltipNormal(1, "Mother's Love")
+    ..setTooltipNormalExtended(1, "Increases friendly units Attack and Movement speed by 10%, If the unit is a swarmer additionaly they receive 40 Max Hit points.")
+    ..setHeroAbility(false)
+    ..setLevels(1)
+    ..setAttackSpeedIncrease(1, 0.1)
+    ..setMovementSpeedIncrease(1, 0.1)
+    ..setAreaofEffect(1, 800)
+    ..setBuffs(1, SWARM_MOTHER_MOTHERS_LOVE_BUFF_ID.toRawCode())
+
+  new AbilityDefinitionParasite(SWARM_MOTHER_INCUBATE)
+    ..setName("Incubate")
+    ..setTooltipNormal(1, "Incubate")
+    ..setTooltipNormalExtended(1, "Pregnancy can be a very painfull experience. The targets of this spell will find that out shortly.")
+    ..setUnitType(1, QIRAJI_SWARMER_ID.toRawCode())

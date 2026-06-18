@@ -17,6 +17,8 @@ import Unit
 
 import DummyCaster
 
+import QirajiBuildingIds
+
 public constant int CRYPT_LORD_HERO_ID = compiletime(HERO_ID_GEN.next())
 public constant int CRYPT_LORD_HERO_BURROW_ID = compiletime(HERO_ID_GEN.next())
 public constant int CRYPT_LORD_BURROW = compiletime(ABIL_ID_GEN.next())
@@ -52,6 +54,8 @@ int CRYPT_LORD_ATK_CNT = 0
         ..setAttack1DamageBase(23)
         ..setAttack1CooldownTime(1.90)
         ..setAttack1Range(128)
+        ..setRequierementsForTier(2, QIRAJI_T2_SWARM_CORE.toRawCode())
+        ..setRequierementsForTier(3, QIRAJI_T3_HIVE_IMPERIAL.toRawCode())
 
     new HeroDefinition(CRYPT_LORD_HERO_BURROW_ID, UnitIds.cryptlord)
         ..setName("Crypt Lord (Burrowed)")

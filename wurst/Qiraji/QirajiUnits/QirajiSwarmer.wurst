@@ -8,7 +8,12 @@ import ClosureTimers
 import HashMap
 import ObjectIds
 
-public constant QIRAJI_SWARMER_ID = compiletime(UNIT_ID_GEN.next())
+import LinkedList
+
+import QirajiSwarmerID
+import QirajiSwarmMother
+import ZandalariBaseUpgrades
+
 public constant QIRAJI_SWARMER_HIVE_MINDED_ID = compiletime(ABIL_ID_GEN.next())
 
 constant real HIVE_RANGE = 500.
@@ -18,6 +23,7 @@ constant real UPDATE_INTERVAL = 0.5
 
 let currentDamageBonus = new HashMap<unit, real>()
 let currentArmorBonus = new HashMap<unit, int>()
+let currentHealthBonus = new LinkedList<unit>
 
 @compiletime function go()
     new UnitDefinition(QIRAJI_SWARMER_ID, UnitIds.ghoul)
@@ -28,6 +34,11 @@ let currentArmorBonus = new HashMap<unit, int>()
         ..setFoodCost(1)
         ..setNormalAbilities(commaList(QIRAJI_SWARMER_HIVE_MINDED_ID))
         ..setStockMaximum(1)
+        ..setModelFile("BroodmotherPurpleV2.mdx")
+        ..setScalingValue(0.4)
+        ..setHitPointsRegenerationType("always")
+        ..setUpgradesUsed(commaList(ZANDALARI_DAMAGE_UPG_ID, ZANDALARI_ARMOR_UPG_ID))
+
 
     new AbilityDefinitionPassiveSimple(QIRAJI_SWARMER_HIVE_MINDED_ID)
         ..setName("Hive-Minded")
@@ -59,8 +70,24 @@ init
 
                 let newDamageBonus = DAMAGE_PER_SWARMER * nearbyCount.toReal()
                 let newArmorBonus = ARMOR_PER_SWARMER * nearbyCount
+
                 let oldDamageBonus = currentDamageBonus.has(u) ? currentDamageBonus.get(u) : 0.
                 let oldArmorBonus = currentArmorBonus.has(u) ? currentArmorBonus.get(u) : 0
+
+                if u.hasAbility(SWARM_MOTHER_MOTHERS_LOVE_BUFF_ID) and not currentHealthBonus.has(u)
+                    currentHealthBonus.add(u)
+                    let newHitPoints = u.getMaxHP().toInt() + SWARM_MOTHER_MOTHERS_LOVE_HP_BONUS
+                    let hpRatio = u.getHP() / u.getMaxHP()
+                    u.setMaxHP(newHitPoints)
+                    u.setHP(hpRatio * newHitPoints)
+                    print("HP SET")
+                if not u.hasAbility(SWARM_MOTHER_MOTHERS_LOVE_BUFF_ID) and currentHealthBonus.has(u)
+                    currentHealthBonus.remove(u)
+                    let newHitPoints = u.getMaxHP().toInt() - SWARM_MOTHER_MOTHERS_LOVE_HP_BONUS
+                    let hpRatio = u.getHP() / u.getMaxHP()
+                    u.setMaxHP(newHitPoints)
+                    u.setHP(hpRatio * newHitPoints)
+                    print("HP UNSET")
 
                 if newDamageBonus != oldDamageBonus
                     u.setBaseDamage(u.getBaseDamage(0) - oldDamageBonus.toInt() + newDamageBonus.toInt(), 0)

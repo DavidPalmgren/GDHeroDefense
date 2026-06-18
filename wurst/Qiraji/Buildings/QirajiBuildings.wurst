@@ -15,7 +15,9 @@ import Devourer
 import Ambusher
 import QirajiWorker
 import CryptLord
-import QirajiSwarmer
+import QirajiSwarmerID
+import QirajiSwarmMother
+import QirajiWarrior
 
 
 // Upgrades ------------------------------------
@@ -92,7 +94,7 @@ public constant UPG_TIME = 10 * 60
     ..setName("Spawning Sac")
     ..setTooltipBasic("Build Spawning Sac")
     ..setTooltipExtended("Pulsating biomaterial chambers that provide nutrient flow and genetic pathways to sustain larger numbers of the swarm.")
-    ..setIconGameInterface(Icons.bTNPigFarm)
+    ..setIconGameInterface(Icons.bTNThunderLizardEgg)
     ..setModelFile("Doodads\\Dungeon\\Terrain\\EggSack\\EggSack1.mdl")
     ..setGroundTexture("ESMA")
     ..setScalingValue(1.5)
@@ -121,7 +123,7 @@ public constant UPG_TIME = 10 * 60
     ..setUpgradesUsed("")
     ..setUpgradesTo("")
     ..setResearchesAvailable("")
-    ..setUnitsTrained(commaList(DEVOURER_T1_ID,DEVOURER_T2_ID,DEVOURER_T3_ID, AMBUSHER_T1_ID,AMBUSHER_T2_ID,AMBUSHER_T3_ID, QIRAJI_KIDNAPPER_ID))
+    ..setUnitsTrained(commaList(DEVOURER_T1_ID,DEVOURER_T2_ID,DEVOURER_T3_ID, AMBUSHER_T1_ID,AMBUSHER_T2_ID, AMBUSHER_T3_ID))
     ..setItemsMade("")
     ..setNormalAbilities("")
 
@@ -174,7 +176,7 @@ public constant UPG_TIME = 10 * 60
     ..setUpgradesUsed("")
     ..setUpgradesTo("")
     ..setResearchesAvailable("")
-    ..setUnitsTrained("")
+    ..setUnitsTrained(commaList(QIRAJI_WARRIOR_ID))
     ..setItemsMade("")
     ..setNormalAbilities("")
 
@@ -188,11 +190,11 @@ public constant UPG_TIME = 10 * 60
     ..setIconGameInterface(Icons.bTNTombOfRelics)
     ..setGoldCost(50)
     ..setLumberCost(0)
-    ..setRequirements("")
+    ..setRequirements(commaList(QIRAJI_T2_SWARM_CORE))
     ..setUpgradesUsed("")
     ..setUpgradesTo("")
     ..setResearchesAvailable("")
-    ..setUnitsTrained(commaList(QIRAJI_DEVOUT_ID))
+    ..setUnitsTrained(commaList(QIRAJI_DEVOUT_ID, SWARM_MOTHER_ID, QIRAJI_KIDNAPPER_ID))
     ..setItemsMade("")
     ..setNormalAbilities("")
 

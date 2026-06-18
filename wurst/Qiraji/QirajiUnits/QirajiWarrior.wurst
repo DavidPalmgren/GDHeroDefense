@@ -1,0 +1,69 @@
+package QirajiWarrior
+
+import AbilityObjEditing
+
+import ObjectIdGenerator
+import ObjectIds
+import Icons
+import UnitIds
+import ClosureEvents
+import ClosureTimers
+import BuffObjEditing
+
+import ZandalariBaseUpgrades
+
+public constant QIRAJI_WARRIOR_ID = compiletime(UNIT_ID_GEN.next())
+public constant QIRAJI_WARRIOR_THUNDERCLAP = compiletime(ABIL_ID_GEN.next())
+public constant QIRAJI_WARRIOR_ENRAGE = compiletime(ABIL_ID_GEN.next())
+public constant QIRAJI_WARRIOR_ENRAGE_BUFF = compiletime(BUFF_ID_GEN.next())
+
+public constant ENRAGE_BONUS_DMG = 25
+
+@compiletime function qirajiWarrior()
+  new UnitDefinition(QIRAJI_WARRIOR_ID, UnitIds.nerubianwarrior)
+    ..setName("Qiraji Warrior")
+    ..setTooltipBasic("Qiraji Warrior")
+    ..setTooltipExtended("Powerfull individuals from the warrior caste, they posses thunderclap and can learn enrage")
+    ..setNormalAbilities(commaList(QIRAJI_WARRIOR_THUNDERCLAP,QIRAJI_WARRIOR_ENRAGE))
+    ..setModelFile("QuirajGladiator.mdx")
+    ..setHitPointsMaximumBase(1600)
+    ..setHitPointsRegenerationRate(1.5)
+    ..setLevel(6)
+    ..setAttack1DamageBase(30)
+    ..setAttack1DamageNumberofDice(2)
+    ..setAttack1DamageSidesperDie(7)
+    ..setBuildTime(10)
+    ..setLumberCost(0)
+    ..setArmorType(ArmorType.Medium)
+    ..setUpgradesUsed(commaList(ZANDALARI_DAMAGE_UPG_ID, ZANDALARI_ARMOR_UPG_ID))
+
+
+
+  new AbilityDefinitionMountainKingThunderClap(QIRAJI_WARRIOR_THUNDERCLAP)
+    ..setHeroAbility(false)
+    ..setLevels(1)
+    ..setAOEDamage(1, 90)
+    ..setAttackSpeedReduction(1, 0.3)
+
+  new AbilityDefinitionBerserk(QIRAJI_WARRIOR_ENRAGE)
+    ..setDamageTakenIncrease(1, 0)
+    ..setIconNormal(Icons.bTNUnholyFrenzy)
+    ..setName("Enrage")
+    ..setAttackSpeedIncrease(1, 0.4)
+    ..setMovementSpeedIncrease(1, 0.)
+    ..setBuffs(1, QIRAJI_WARRIOR_ENRAGE_BUFF.toRawCode())
+    ..setDurationHero(1, 12)
+    ..setDurationNormal(1,12)
+    ..setCooldown(1, 30)
+
+  new BuffDefinition(QIRAJI_WARRIOR_ENRAGE_BUFF, 'Bbsk')
+    ..setName("Berserk")
+    ..setTooltipNormal(1, "This unit is Enraged, It deals increased damage.")
+    ..setIcon(Icons.bTNUnholyFrenzy)
+
+init
+  EventListener.onCast(QIRAJI_WARRIOR_ENRAGE) (unit caster) ->
+    let dmgBase = caster.getBaseDamage(0)
+    caster.setBaseDamage(dmgBase + ENRAGE_BONUS_DMG, 0)
+    doAfter(12.0) -> 
+      caster.setBaseDamage(dmgBase, 0)
