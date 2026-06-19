@@ -1,0 +1,55 @@
+package QirajiBeetleBombardier
+
+import UnitObjEditing
+import ObjectIdGenerator
+import ObjectIds
+
+import ZandalariBaseUpgrades
+
+
+public constant QIRAJI_BOMBARDER_ID = compiletime(UNIT_ID_GEN.next())
+
+@compiletime function createQirajiBombarder()
+    let def = new UnitDefinition(QIRAJI_BOMBARDER_ID, 'hmtm') 
+    
+    
+    def..setName("Qiraji Bombarder")
+    ..setTooltipBasic("Train Qiraji Bombarder")
+    ..setTooltipExtended("Older brother of the Qiraji Spitter, A towering Silithid behemoth that acts as living biological artillery. Lobs massive, highly volatile globs of corrosive green spit across extreme distances to dissolve enemy defensive towers and melt packed crowds.")
+    ..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCryptFiend.blp") 
+    
+    
+    ..setModelFile("SilithidScarab_LobstrokkGreenSkin.mdx") 
+    ..setScalingValue(1.70)             
+    ..setSelectionScale(2.30)
+    ..setCollisionSize(48.0)            
+    ..setTargetedAs("ground")
+    
+    
+    ..setHitPointsMaximumBase(900)
+    ..setArmorType(ArmorType.Large)
+    ..setDefenseBase(3)
+    ..setSpeedBase(250)                 
+    ..setFoodCost(4)
+    ..setGoldCost(90)
+    ..setLumberCost(0)
+    ..setUpgradesUsed(commaList(ZANDALARI_ARMOR_UPG_ID,ZANDALARI_DAMAGE_UPG_ID))            
+    
+    ..setAttack1WeaponType(WeaponType.Artillery) 
+    ..setAttack1ProjectileArt("Abilities\\Weapons\\ChimaeraAcidMissile\\ChimaeraAcidMissile.mdl")          
+    ..setAttack1ProjectileSpeed(900)             
+    ..setAttack1ProjectileArc(0.75)              
+    ..setAttack1Range(1100)                      
+    ..setAttack1CooldownTime(3.40)               
+    ..setAttack1DamageBase(55)
+    ..setAttack1DamageNumberofDice(3)
+    ..setAttack1DamageSidesperDie(7)               
+    ..setAttack1AttackType(AttackType.Siege)     
+    ..setAttack1WeaponType(WeaponType.Artillery)     
+    ..setAttack1AreaofEffectSmallDamage(250)
+    ..setAttack1AreaofEffectMediumDamage(150)
+    ..setAttack1AreaofEffectFullDamage(75)
+    ..setAttack1DamageFactorMedium(0.50)
+    ..setAttack1DamageFactorSmall(0.25)
+    ..setAttack1AnimationBackswingPoint(0.7)
+    ..setAttack1AnimationDamagePoint(0.70)

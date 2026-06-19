@@ -1,0 +1,104 @@
+// package QirajiColosus
+
+// import AbilityObjEditing
+// import AbilityIds
+// import UnitObjEditing
+// import ObjectIds
+// import ObjectIdGenerator
+// import BuffObjEditing
+// import BuffIds
+// import UnitIds
+// import Icons
+
+// import ClosureEvents
+// import ClosureTimers
+
+// public constant QIRAJI_COLOSUS_ID     = compiletime(UNIT_ID_GEN.next())
+// public constant QIRAJI_COLOSUS_TRAMPLE_ID      = compiletime(ABIL_ID_GEN.next())
+// public constant QIRAJI_COLOSUS_TRAMPLE_BUFF_ID = compiletime(BUFF_ID_GEN.next())
+// public constant QIRAJI_COLOSUS_PHASE_ID        = compiletime(ABIL_ID_GEN.next())
+
+// // How often (seconds) we check which enemies are underfoot
+// constant real TRAMPLE_INTERVAL = 0.1
+// // Radius around the colosus center to hit units
+// constant real TRAMPLE_RADIUS   = 96.0
+// // Damage per second while being trampled (interval-scaled below)
+// constant real TRAMPLE_DPS      = 60.0
+
+// @compiletime function genColosus()
+//   new UnitDefinition(QIRAJI_COLOSUS_ID, UnitIds.kotobeastnorider)
+//     ..setHitPointsMaximumBase(1800)
+//     ..setDefenseBase(4)
+//     ..setSpeedBase(300)
+//     // Phased movement: unit walks over other units
+//     ..setPathingMap("PathTextures\\4x4Clear.tga")
+
+//   new BuffDefinition(QIRAJI_COLOSUS_TRAMPLE_BUFF_ID, BuffIds.auraofBlight)
+//     ..setName("Trample")
+//     ..setTooltipNormal(1, "Trampled")
+//     ..setTooltipNormalExtended(1, "This unit is being crushed underfoot.")
+
+//   // Slow aura: zero movement speed on trampled units
+//   new AbilityDefinitionAuraSlow(QIRAJI_COLOSUS_TRAMPLE_ID)
+//     ..setMovementSpeedFactor(1, 0.0)
+//     ..setAreaofEffect(1, TRAMPLE_RADIUS)
+//     ..setBuffs(1, QIRAJI_COLOSUS_TRAMPLE_BUFF_ID.toRawCode())
+//     ..setTargetsAllowed(1, "enemies,ground,vulnerable")
+
+//   // Crow Form trick: gives phased movement as an innate passive
+//   new AbilityDefinitionCrowForm(QIRAJI_COLOSUS_PHASE_ID)
+//     ..setName("Phase (internal)")
+//     ..setEditorSuffix("(Colosus passive)")
+//     ..setHeroAbility(false)
+//     ..setItemAbility(false)
+//     ..presetButtonPosNormal(0, 0)
+
+// init
+//   // For every Qiraji Colosus that exists, run a periodic trample check
+//   EventListener.onUnitEnteredRegion(bj_mapInitialPlayableArea) (unit colosus) ->
+//     if colosus.getTypeId() == QIRAJI_COLOSUS_ID
+//       // Grant the phase ability on spawn so the unit walks over others
+//       colosus.addAbility(QIRAJI_COLOSUS_PHASE_ID)
+//       startTrampleLoop(colosus)
+
+//   // Also handle units already present at map init
+//   forUnitsOfType(QIRAJI_COLOSUS_ID) (unit colosus) ->
+//     colosus.addAbility(QIRAJI_COLOSUS_PHASE_ID)
+//     startTrampleLoop(colosus)
+
+
+// function startTrampleLoop(unit colosus)
+//   doPeriodically(TRAMPLE_INTERVAL) (CallbackPeriodic cb) ->
+//     // Stop the loop when the unit dies or is removed
+//     if not colosus.isAlive()
+//       destroy cb
+//       return
+
+//     // Only deal damage while the colosus is actually moving
+//     if colosus.getCurrentOrder() == OrderIds.move
+//       or colosus.getCurrentOrder() == OrderIds.attack
+//       or colosus.getCurrentOrder() == OrderIds.attackground
+//       or colosus.getCurrentOrder() == OrderIds.patrol
+//       damageNearbyEnemies(colosus)
+
+
+// function damageNearbyEnemies(unit colosus)
+//   let pos    = colosus.getPos()
+//   let owner  = colosus.getOwner()
+//   let dmg    = TRAMPLE_DPS * TRAMPLE_INTERVAL
+
+//   forUnitsInRange(pos, TRAMPLE_RADIUS) (unit target) ->
+//     if target != colosus
+//       and target.isAlive()
+//       and target.isEnemyOf(owner)
+//       and not target.isType(UNIT_TYPE_FLYING)
+//       and not target.isInvulnerable()
+//       colosus.damageTarget(
+//         target,
+//         dmg,
+//         false,           // not spell damage
+//         false,           // no magic
+//         ATTACK_TYPE_NORMAL,
+//         DAMAGE_TYPE_PHYSICAL,
+//         WEAPON_TYPE_WHOKNOWS
+//       )

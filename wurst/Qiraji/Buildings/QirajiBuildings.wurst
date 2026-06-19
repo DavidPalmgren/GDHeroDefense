@@ -18,7 +18,11 @@ import CryptLord
 import QirajiSwarmerID
 import QirajiSwarmMother
 import QirajiWarrior
-
+import SilithidWasp
+import QirajiDrone
+import QirajiTank
+import QirajiSpitter
+import QirajiBeetleBombardier
 
 // Upgrades ------------------------------------
 import ZandalariBaseUpgrades
@@ -123,7 +127,7 @@ public constant UPG_TIME = 10 * 60
     ..setUpgradesUsed("")
     ..setUpgradesTo("")
     ..setResearchesAvailable("")
-    ..setUnitsTrained(commaList(DEVOURER_T1_ID,DEVOURER_T2_ID,DEVOURER_T3_ID, AMBUSHER_T1_ID,AMBUSHER_T2_ID, AMBUSHER_T3_ID))
+    ..setUnitsTrained(commaList(QIRAJI_WASP_ID, QIRAJI_TANK_ID, QIRAJI_DRONE_ID, QIRAJI_SPITTER_ID))
     ..setItemsMade("")
     ..setNormalAbilities("")
 
@@ -172,11 +176,11 @@ public constant UPG_TIME = 10 * 60
     ..setIconGameInterface(Icons.bTNSacrificialPit)
     ..setGoldCost(50)
     ..setLumberCost(0)
-    ..setRequirements("")
+    ..setRequirements(commaList(QIRAJI_T2_SWARM_CORE))
     ..setUpgradesUsed("")
     ..setUpgradesTo("")
     ..setResearchesAvailable("")
-    ..setUnitsTrained(commaList(QIRAJI_WARRIOR_ID))
+    ..setUnitsTrained(commaList(QIRAJI_KIDNAPPER_ID, DEVOURER_T2_ID, AMBUSHER_T2_ID))
     ..setItemsMade("")
     ..setNormalAbilities("")
 
@@ -194,7 +198,7 @@ public constant UPG_TIME = 10 * 60
     ..setUpgradesUsed("")
     ..setUpgradesTo("")
     ..setResearchesAvailable("")
-    ..setUnitsTrained(commaList(QIRAJI_DEVOUT_ID, SWARM_MOTHER_ID, QIRAJI_KIDNAPPER_ID))
+    ..setUnitsTrained(commaList(QIRAJI_DEVOUT_ID, SWARM_MOTHER_ID ))
     ..setItemsMade("")
     ..setNormalAbilities("")
 
@@ -208,11 +212,11 @@ public constant UPG_TIME = 10 * 60
     ..setIconGameInterface(Icons.bTNSlaughterHouse)
     ..setGoldCost(50)
     ..setLumberCost(0)
-    ..setRequirements("")
+    ..setRequirements(commaList(QIRAJI_T3_HIVE_IMPERIAL))
     ..setUpgradesUsed("")
     ..setUpgradesTo("")
     ..setResearchesAvailable("")
-    ..setUnitsTrained("")
+    ..setUnitsTrained(commaList(QIRAJI_BOMBARDER_ID, QIRAJI_WARRIOR_ID))
     ..setItemsMade("")
     ..setNormalAbilities("")
 
@@ -227,7 +231,7 @@ public constant UPG_TIME = 10 * 60
     ..setModelFile("Doodads\\Ruins\\Props\\RuinsObelisk\\RuinsObelisk0.mdl")
     ..setGoldCost(50)
     ..setLumberCost(0)
-    ..setRequirements("")
+    ..setRequirements(commaList(QIRAJI_CARAPACE_CHAMBER))
     ..setUpgradesUsed("")
     ..setUpgradesTo("")
     ..setResearchesAvailable("")

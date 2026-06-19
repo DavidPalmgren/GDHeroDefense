@@ -19,7 +19,7 @@ constant real SILENCE_DURATION = 4.
 constant real SILENCE_RANGE = 700.
 
 @compiletime function setupUnit()
-    new UnitDefinition(QIRAJI_DEVOUT_ID, 'hmpr')  // based on Priest
+    new UnitDefinition(QIRAJI_DEVOUT_ID, 'hmpr')  
         ..setName("Qiraji Devout")
         ..setTooltipExtended("Devout followers of Prophet Skeram, they heal those in need and silence any opposition.")
         ..setNormalAbilities(commaList(SUPER_HEAL_ID, QIRAJI_SILENCE_ID))

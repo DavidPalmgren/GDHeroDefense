@@ -280,6 +280,51 @@ import DoodadObjEditing
 	..setName(0, "Stone Arch")
 
 
+@compiletime function create_w3d_D00Z()
+	new DoodadDefinition('D00Z', 'AOgs')
+	..setName(0, "Sphinx")
+	..setModel(0, "sphinx.mdl")
+	..setTilesets(0, "*")
+	..setMaximumScale(0, 4.0)
+	..setPathTexture(0, "PathTextures\\4x4Unbuildable.tga")
+
+
+@compiletime function create_w3d_D010()
+	new DoodadDefinition('D010', 'AOgs')
+	..setName(0, "Sphinx (Black)")
+	..setModel(0, "sphinx.mdl")
+	..setTilesets(0, "*")
+	// TODO no wrapper: 	..setLvlDataInt("dvr1", 1, 0, 50)
+	// TODO no wrapper: 	..setLvlDataInt("dvg1", 1, 0, 50)
+	// TODO no wrapper: 	..setLvlDataInt("dvb1", 1, 0, 50)
+	..setMaximumScale(0, 4.0)
+	..setPathTexture(0, "PathTextures\\4x4Unbuildable.tga")
+
+
+@compiletime function create_w3d_D011()
+	new DoodadDefinition('D011', 'BRrs')
+	..setName(0, "Rock Spires (Barrens Medium)")
+	..setPathTexture(0, "")
+
+
+@compiletime function create_w3d_D012()
+	new DoodadDefinition('D012', 'NSct')
+	..setName(0, "Crypt (Large Dark)")
+	// TODO no wrapper: 	..setLvlDataInt("dvr1", 1, 0, 50)
+	// TODO no wrapper: 	..setLvlDataInt("dvg1", 1, 0, 50)
+	// TODO no wrapper: 	..setLvlDataInt("dvb1", 1, 0, 50)
+	..setMaximumScale(0, 3.0)
+
+
+@compiletime function create_w3d_D014()
+	new DoodadDefinition('D014', 'ZOba')
+	..setName(0, "Ruins Bloody Altar (Dark)")
+	..setMaximumScale(0, 4.0)
+	// TODO no wrapper: 	..setLvlDataInt("dvr1", 1, 0, 50)
+	// TODO no wrapper: 	..setLvlDataInt("dvg1", 1, 0, 50)
+	// TODO no wrapper: 	..setLvlDataInt("dvb1", 1, 0, 50)
+
+
 // Original Table (contains all modified default/melee objects)
 // These are emitted when createObjectDefinition uses the same base/new id.
 
@@ -323,14 +368,14 @@ import DoodadObjEditing
 
 @compiletime function create_w3d_BRrp()
 	new DoodadDefinition('BRrp', 'BRrp')
-	..setMaximumScale(0, 8.0)
+	..setMaximumScale(0, 3.0)
 	..setPathTexture(0, "")
 
 
 @compiletime function create_w3d_ZRrs()
 	new DoodadDefinition('ZRrs', 'ZRrs')
 	..setPathTexture(0, "")
-	..setMaximumScale(0, 4.0)
+	..setMaximumScale(0, 3.0)
 
 
 @compiletime function create_w3d_ZRrk()
@@ -376,5 +421,45 @@ import DoodadObjEditing
 @compiletime function create_w3d_GRrk()
 	new DoodadDefinition('GRrk', 'GRrk')
 	..setMaximumScale(0, 4.0)
+
+
+@compiletime function create_w3d_LOrb()
+	new DoodadDefinition('LOrb', 'LOrb')
+	..setMaximumScale(0, 4.0)
+
+
+@compiletime function create_w3d_ZSrb()
+	new DoodadDefinition('ZSrb', 'ZSrb')
+	..setMaximumScale(0, 3.0)
+
+
+@compiletime function create_w3d_LOsk()
+	new DoodadDefinition('LOsk', 'LOsk')
+	..setPathTexture(0, "")
+
+
+@compiletime function create_w3d_ZOob()
+	new DoodadDefinition('ZOob', 'ZOob')
+	..setMaximumScale(0, 4.0)
+
+
+@compiletime function create_w3d_BSrv()
+	new DoodadDefinition('BSrv', 'BSrv')
+	..setMaximumScale(0, 3.0)
+
+
+@compiletime function create_w3d_BSrc()
+	new DoodadDefinition('BSrc', 'BSrc')
+	..setMaximumScale(0, 3.0)
+
+
+@compiletime function create_w3d_BSar()
+	new DoodadDefinition('BSar', 'BSar')
+	..setMaximumScale(0, 3.0)
+
+
+@compiletime function create_w3d_BSrw()
+	new DoodadDefinition('BSrw', 'BSrw')
+	..setMaximumScale(0, 2.0)
 
 

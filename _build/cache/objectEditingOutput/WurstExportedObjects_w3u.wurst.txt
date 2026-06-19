@@ -76,7 +76,7 @@ import UnitObjEditing
 	..setTooltipExtended("Basic frontline unit. Can learn Thicker Bark to resist some damage and Recycle to invigorate a nearby unit on death. |n|n|cffffcc00Attacks land units.|r")
 	..setHotkey("Q")
 	..setAbilitySkinList("A000,Ault")
-	..setNormalAbilities("AM1k,AM1l,Ault")
+	..setNormalAbilities("AM1l,AM1m,Ault")
 
 
 @compiletime function create_w3u_E003()
@@ -109,7 +109,7 @@ import UnitObjEditing
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNGrizzlyBear.blp")
 	..setProperNamesUsed(1)
 	..setScalingValue(1.3)
-	..setHeroAbilities("AM1b,A002,AM1a,AHav")
+	..setHeroAbilities("AM1c,A002,AM1b,AHav")
 	..setNormalAbilities("A001,AInv,Ault")
 	..setStockMaximum(1)
 	..setStockReplenishInterval(0)
@@ -139,7 +139,7 @@ import UnitObjEditing
 	..setAttack1ProjectileArt("Abilities\\Weapons\\KeeperGroveMissile\\KeeperGroveMissile.mdl")
 	..setButtonPositionX(2)
 	..setHotkey("C")
-	..setNormalAbilities("AM1e,AInv,Ault,ACm2,Aien,Aadm,Aspo")
+	..setNormalAbilities("AM1f,AInv,Ault,ACm2,Aien,Aadm,Aspo")
 
 
 @compiletime function create_w3u_e005()
@@ -637,7 +637,7 @@ import UnitObjEditing
 	..setAttack1ProjectileArt("Abilities\\Weapons\\FarseerMissile\\FarseerMissile.mdl")
 	..setTooltipBasic("Train Moonkin")
 	..setTooltipExtended("Moonkin are wild experts of the arcane arts providing Brilliance Aura and can cast Arcane Blast doing massive aoe damage. |n|n|cffffcc00Attacks land and air units.|r")
-	..setNormalAbilities("AM0d,AM1h")
+	..setNormalAbilities("AM0d,AM1i")
 
 
 @compiletime function create_w3u_e00K()
@@ -785,7 +785,7 @@ import UnitObjEditing
 	..setTooltipExtended("Battle hardened elite archers of the Sentinels they posses the same upgrades as normal Archers but much more deadly. Can use Viper stings a piercing nuke. |n|n|cffffcc00Attacks land and air units.|r")
 	..setHotkey("W")
 	..setButtonPositionX(1)
-	..setNormalAbilities("AM1f")
+	..setNormalAbilities("AM1g")
 
 
 @compiletime function create_w3u_E00Q()
@@ -793,7 +793,7 @@ import UnitObjEditing
 	..setAttack1DamageBase(30)
 	..setName("TyrandeMoonWarrior 2")
 	..setModelFile("units\\nightelf\\Archer\\Archer.mdl")
-	..setHeroAbilities("AM18,AM19,AM14,AM15")
+	..setHeroAbilities("AM19,AM1a,AM15,AM16")
 
 
 @compiletime function create_w3u_n009()
@@ -834,7 +834,7 @@ import UnitObjEditing
 	..setAttack1CooldownTime(1.6)
 	..setName("TyrandeMoonWarrior 1")
 	..setModelFile("units\\nightelf\\Archer\\Archer.mdl")
-	..setHeroAbilities("AM18,AM19,AM14,AM15")
+	..setHeroAbilities("AM19,AM1a,AM15,AM16")
 
 
 @compiletime function create_w3u_E00T()
@@ -842,7 +842,7 @@ import UnitObjEditing
 	..setAttack1DamageBase(30)
 	..setName("TyrandeMoonWarrior 3")
 	..setModelFile("units\\nightelf\\Archer\\Archer.mdl")
-	..setHeroAbilities("AM18,AM19,AM14,AM15")
+	..setHeroAbilities("AM19,AM1a,AM15,AM16")
 
 
 @compiletime function create_w3u_n00A()
@@ -1225,6 +1225,8 @@ import UnitObjEditing
 	..setAttack1DamageBase(23)
 	..setAttack1CooldownTime(1.9)
 	..setAttack1Range(128)
+	// TODO no wrapper: 	..setLvlDataString("urq1", 1, 0, "x006")
+	// TODO no wrapper: 	..setLvlDataString("urq2", 1, 0, "x007")
 
 
 @compiletime function create_w3u_HM02()
@@ -1251,9 +1253,9 @@ import UnitObjEditing
 
 @compiletime function create_w3u_x00h()
 	new UnitDefinition('x00h', 'hpea')
-	..setName("Silithid Drone")
-	..setTooltipBasic("Train Silithid Drone")
-	..setTooltipExtended("The basic workforce of the Qiraji swarm. Can harvest gold, harvest lumber, and morph into structural hive nodes.")
+	..setName("Silithid Hive Tender")
+	..setTooltipBasic("Train Silithid Hive Tender")
+	..setTooltipExtended("The basic workforce of the Qiraji swarm.")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNAcolyte.blp")
 	..setModelFile("NerubianWorkerV2.mdx")
 	..setStructuresBuilt("x005,x008,x009,x00a,x00b,x00c,x00d,x00e,x00f")
@@ -1272,6 +1274,9 @@ import UnitObjEditing
 	..setUpgradesUsed("RM01,RM02")
 	..setRequirements("")
 	..setModelFile("BloodBeetle.mdx")
+	..setHotkey("Q")
+	..setButtonPositionX(0)
+	..setButtonPositionY(0)
 
 
 @compiletime function create_w3u_x00j()
@@ -1289,6 +1294,9 @@ import UnitObjEditing
 	..setRequirements("x006")
 	..setUpgradesUsed("RM01,RM02")
 	..setModelFile("BloodBeetle.mdx")
+	..setHotkey("W")
+	..setButtonPositionX(1)
+	..setButtonPositionY(0)
 
 
 @compiletime function create_w3u_x00k()
@@ -1304,6 +1312,9 @@ import UnitObjEditing
 	..setRequirements("x007")
 	..setUpgradesUsed("RM01,RM02")
 	..setModelFile("BloodBeetle.mdx")
+	..setHotkey("E")
+	..setButtonPositionX(2)
+	..setButtonPositionY(0)
 
 
 @compiletime function create_w3u_x00l()
@@ -1319,6 +1330,9 @@ import UnitObjEditing
 	..setRequirements("")
 	..setUpgradesUsed("RM01,RM02")
 	..setModelFile("SilithidDevourer.mdx")
+	..setHotkey("A")
+	..setButtonPositionX(0)
+	..setButtonPositionY(1)
 
 
 @compiletime function create_w3u_x00m()
@@ -1336,6 +1350,9 @@ import UnitObjEditing
 	..setRequirements("x006")
 	..setUpgradesUsed("RM01,RM02")
 	..setModelFile("SilithidDevourer.mdx")
+	..setHotkey("S")
+	..setButtonPositionX(1)
+	..setButtonPositionY(1)
 
 
 @compiletime function create_w3u_x00n()
@@ -1351,6 +1368,9 @@ import UnitObjEditing
 	..setRequirements("x007")
 	..setUpgradesUsed("RM01,RM02")
 	..setModelFile("SilithidDevourer.mdx")
+	..setHotkey("D")
+	..setButtonPositionX(2)
+	..setButtonPositionY(1)
 
 
 @compiletime function create_w3u_x00o()
@@ -1369,6 +1389,7 @@ import UnitObjEditing
 	..setGoldCost(60)
 	..setLumberCost(0)
 	..setBuildTime(5)
+	..setScalingValue(0.7)
 
 
 @compiletime function create_w3u_x00p()
@@ -1377,7 +1398,7 @@ import UnitObjEditing
 	..setTooltipBasic("Train |cff00ff00Qiraji Kidnapper|r")
 	..setTooltipExtended("Tier 2 fast striking skirmisher. Specialized in separating target priority units from their squads.")
 	..setNormalAbilities("AM0v")
-	..setUpgradesUsed("")
+	..setUpgradesUsed("RM02,RM01")
 	..setRequirements("x006")
 	..setRequirementsLevels("")
 	..setUnitClassification("")
@@ -1403,7 +1424,7 @@ import UnitObjEditing
 	..setAttack1Range(128)
 	..setModelFile("HeroNerubianWidow.mdx")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNArachnathid.blp")
-	..setScalingValue(1.1)
+	..setScalingValue(0.8)
 	..setSelectionScale(1.2)
 
 
@@ -1443,6 +1464,121 @@ import UnitObjEditing
 	..setBuildTime(10)
 	..setLumberCost(0)
 	..setArmorType("medium")
+	..setUpgradesUsed("RM01,RM02")
+
+
+@compiletime function create_w3u_x00t()
+	new UnitDefinition('x00t', 'ehip')
+	..setName("Qiraji Wasp")
+	..setTooltipBasic("Train Qiraji Wasp")
+	..setTooltipExtended("Powerfull anti air unit possesing poison sting and can learn take down.")
+	..setNormalAbilities("Apoi,AM0{")
+	..setGoldCost(50)
+	..setLumberCost(0)
+	..setBuildTime(5)
+	..setModelFile("SilithidWasp.mdx")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNSilithidWaspBoss.blp")
+	..setUpgradesUsed("RM02,RM01")
+
+
+@compiletime function create_w3u_x00u()
+	new UnitDefinition('x00u', 'nanw')
+	..setName("Qiraji Drone")
+	..setTooltipBasic("Train Qiraji Drone")
+	..setTooltipExtended("The thankless trash of the Qiraji forces.")
+	..setModelFile("Silithid_SpiderLordSkin.mdx")
+	..setGoldCost(30)
+	..setLumberCost(0)
+	..setBuildTime(3)
+	..setFoodCost(1)
+	..setHitPointsMaximumBase(520)
+	..setDefenseBase(4)
+	..setAttack1DamageBase(20)
+	..setUpgradesUsed("RM02,RM01")
+
+
+@compiletime function create_w3u_x00v()
+	new UnitDefinition('x00v', 'nanw')
+	..setName("Qiraji Reaver")
+	..setTooltipBasic("Train Qiraji Reaver")
+	..setTooltipExtended("The Qiraji Reaver is the bread and butter of the ceaseless Qiraji assault.")
+	..setModelFile("SilithidTank_SpiderLordSkin.mdx")
+	..setGoldCost(20)
+	..setFoodCost(1)
+	..setLumberCost(0)
+	..setBuildTime(3)
+	..setAnimationRunSpeed(100.0)
+	..setAnimationWalkSpeed(100.0)
+	..setDefenseBase(2)
+	..setAttack1DamageBase(27)
+	..setUpgradesUsed("RM02,RM01")
+
+
+@compiletime function create_w3u_x00w()
+	new UnitDefinition('x00w', 'ucry')
+	..setName("Qiraji Spitter")
+	..setTooltipBasic("Summon Qiraji Spitter")
+	..setTooltipExtended("A bloated Silithid swarmer that launches highly corrosive green acid globs at enemies. Can strike both ground and airborne targets. Excellent backline damage support for the Swarm Mother.")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCryptFiend.blp")
+	..setModelFile("SilithidScarab_LobstrokkBlueSkin.mdx")
+	..setScalingValue(0.9)
+	..setSelectionScale(1.1)
+	..setTargetedAs("ground")
+	..setHitPointsMaximumBase(425)
+	..setManaMaximum(0)
+	..setArmorType("medium")
+	..setDefenseBase(2)
+	..setSpeedBase(285)
+	..setAttack1WeaponType("missile")
+	..setAttack1ProjectileArt("Abilities\\Weapons\\ChimaeraAcidMissile\\ChimaeraAcidMissile.mdl")
+	..setAttack1ProjectileSpeed(1100)
+	..setAttack1ProjectileArc(0.18)
+	..setAttack1Range(550)
+	..setAttack1CooldownTime(1.35)
+	..setAttack1TargetsAllowed("ground,air,structure,debris,friend,neutral")
+	..setAttack1DamageBase(18)
+	..setAttack1AttackType("pierce")
+	..setAnimationCastBackswing(0.5)
+	..setRequirements("x00b")
+	..setUpgradesUsed("RM02,RM01")
+
+
+@compiletime function create_w3u_x00x()
+	new UnitDefinition('x00x', 'hmtm')
+	..setName("Qiraji Bombarder")
+	..setTooltipBasic("Train Qiraji Bombarder")
+	..setTooltipExtended("Older brother of the Qiraji Spitter, A towering Silithid behemoth that acts as living biological artillery. Lobs massive, highly volatile globs of corrosive green spit across extreme distances to dissolve enemy defensive towers and melt packed crowds.")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCryptFiend.blp")
+	..setModelFile("SilithidScarab_LobstrokkGreenSkin.mdx")
+	..setScalingValue(1.7)
+	..setSelectionScale(2.3)
+	..setCollisionSize(48.0)
+	..setTargetedAs("ground")
+	..setHitPointsMaximumBase(900)
+	..setArmorType("large")
+	..setDefenseBase(3)
+	..setSpeedBase(250)
+	..setFoodCost(4)
+	..setGoldCost(90)
+	..setLumberCost(0)
+	..setUpgradesUsed("RM02,RM01")
+	..setAttack1ProjectileArt("Abilities\\Weapons\\ChimaeraAcidMissile\\ChimaeraAcidMissile.mdl")
+	..setAttack1ProjectileSpeed(900)
+	..setAttack1ProjectileArc(0.75)
+	..setAttack1Range(1100)
+	..setAttack1CooldownTime(3.4)
+	..setAttack1DamageBase(55)
+	..setAttack1DamageNumberofDice(3)
+	..setAttack1DamageSidesperDie(7)
+	..setAttack1AttackType("siege")
+	..setAttack1WeaponType("artillery")
+	..setAttack1AreaofEffectSmallDamage(250)
+	..setAttack1AreaofEffectMediumDamage(150)
+	..setAttack1AreaofEffectFullDamage(75)
+	..setAttack1DamageFactorMedium(0.5)
+	..setAttack1DamageFactorSmall(0.25)
+	..setAttack1AnimationBackswingPoint(0.7)
+	..setAttack1AnimationDamagePoint(0.7)
 
 
 @compiletime function create_w3u_x005()
@@ -1503,7 +1639,7 @@ import UnitObjEditing
 	..setName("Spawning Sac")
 	..setTooltipBasic("Build Spawning Sac")
 	..setTooltipExtended("Pulsating biomaterial chambers that provide nutrient flow and genetic pathways to sustain larger numbers of the swarm.")
-	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNPigFarm.blp")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNThunderLizardEgg.blp")
 	..setModelFile("Doodads\\Dungeon\\Terrain\\EggSack\\EggSack1.mdl")
 	..setGroundTexture("ESMA")
 	..setScalingValue(1.5)
@@ -1531,7 +1667,7 @@ import UnitObjEditing
 	..setUpgradesUsed("")
 	..setUpgradesTo("")
 	..setResearchesAvailable("")
-	..setUnitsTrained("x00l,x00m,x00n,x00i,x00j,x00k,x00p")
+	..setUnitsTrained("x00x,x00t,x00v,x00u,x00w")
 	..setItemsMade("")
 	..setNormalAbilities("")
 
@@ -1577,11 +1713,11 @@ import UnitObjEditing
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNSacrificialPit.blp")
 	..setGoldCost(50)
 	..setLumberCost(0)
-	..setRequirements("")
+	..setRequirements("x006")
 	..setUpgradesUsed("")
 	..setUpgradesTo("")
 	..setResearchesAvailable("")
-	..setUnitsTrained("x00s")
+	..setUnitsTrained("x00p,x00m,x00j")
 	..setItemsMade("")
 	..setNormalAbilities("")
 
@@ -1611,11 +1747,11 @@ import UnitObjEditing
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNSlaughterHouse.blp")
 	..setGoldCost(50)
 	..setLumberCost(0)
-	..setRequirements("")
+	..setRequirements("x007")
 	..setUpgradesUsed("")
 	..setUpgradesTo("")
 	..setResearchesAvailable("")
-	..setUnitsTrained("")
+	..setUnitsTrained("x00x,x00s")
 	..setItemsMade("")
 	..setNormalAbilities("")
 
@@ -1629,7 +1765,7 @@ import UnitObjEditing
 	..setModelFile("Doodads\\Ruins\\Props\\RuinsObelisk\\RuinsObelisk0.mdl")
 	..setGoldCost(50)
 	..setLumberCost(0)
-	..setRequirements("")
+	..setRequirements("x00b")
 	..setUpgradesUsed("")
 	..setUpgradesTo("")
 	..setResearchesAvailable("")
@@ -1645,15 +1781,16 @@ import UnitObjEditing
 	..setTooltipExtended("Silithid Swarmers work best in a group, they might be weak alone but together they're a considerable threat")
 	..setGoldCost(25)
 	..setFoodCost(1)
-	..setNormalAbilities("AM0{")
+	..setNormalAbilities("AM0|")
 	..setStockMaximum(1)
 	..setModelFile("BroodmotherPurpleV2.mdx")
 	..setScalingValue(0.4)
 	..setHitPointsRegenerationType("always")
+	..setUpgradesUsed("RM01,RM02")
 
 
-@compiletime function create_w3u_x00t()
-	new UnitDefinition('x00t', 'even')
+@compiletime function create_w3u_x00y()
+	new UnitDefinition('x00y', 'even')
 	..setName("Vengeful Spirit")
 	..setNormalAbilities("")
 	..setHitPointsMaximumBase(300)
@@ -1662,8 +1799,8 @@ import UnitObjEditing
 	..setAttack1CooldownTime(1.2)
 
 
-@compiletime function create_w3u_x00x()
-	new BuildingDefinition('x00x', 'oalt')
+@compiletime function create_w3u_x00}()
+	new BuildingDefinition('x00}', 'oalt')
 	..setName("Zandalari Altar")
 	..setTooltipBasic("Build [|cffffcc00Zandalari Altar|r]")
 	..setTooltipExtended("A sacred temple of the high military caste. Summon and resurrect powerful Zandalari Heroes to lead your armies into battle.")
@@ -1676,8 +1813,8 @@ import UnitObjEditing
 	..setDefenseBase(5)
 
 
-@compiletime function create_w3u_x00y()
-	new BuildingDefinition('x00y', 'ofor')
+@compiletime function create_w3u_x00~()
+	new BuildingDefinition('x00~', 'ofor')
 	..setName("Mojo Crucible")
 	..setTooltipBasic("Build Mojo Crucible")
 	..setTooltipExtended("The technological and spiritual forge of the empire. Refines tribal alloys and extracts potent mojo to upgrade your forces.")
@@ -1689,8 +1826,8 @@ import UnitObjEditing
 	..setResearchesAvailable("RM01,RM02")
 
 
-@compiletime function create_w3u_x00z()
-	new UnitDefinition('x00z', 'ogru')
+@compiletime function create_w3u_x01!()
+	new UnitDefinition('x01!', 'ogru')
 	..setName("Zandalari Vanguard")
 	..setTooltipBasic("Train Zandalari Vanguard")
 	..setTooltipExtended("Frontline heavy infantry of the empire. Armed with a golden broadshield and heavy stone axe to absorb punishment.")
@@ -1702,8 +1839,8 @@ import UnitObjEditing
 	..setUpgradesUsed("RM01,RM02,RM03")
 
 
-@compiletime function create_w3u_x00{()
-	new UnitDefinition('x00{', 'ohun')
+@compiletime function create_w3u_x010()
+	new UnitDefinition('x010', 'ohun')
 	..setName("Zandalari Headhunter")
 	..setTooltipBasic("Train Zandalari Headhunter")
 	..setTooltipExtended("Savage ranged tracker who hurls deadly, long-range spears coated in sacrificial mojo.")
@@ -1713,11 +1850,11 @@ import UnitObjEditing
 	..setBuildTime(3)
 	..setFoodCost(2)
 	..setUpgradesUsed("RM01,RM02,RM03")
-	..setRequirements("x00y")
+	..setRequirements("x00~")
 
 
-@compiletime function create_w3u_x01!()
-	new UnitDefinition('x01!', 'odem')
+@compiletime function create_w3u_x014()
+	new UnitDefinition('x014', 'odem')
 	..setName("Thundering Demolisher")
 	..setTooltipBasic("Train Thundering Demolisher")
 	..setTooltipExtended("Heavy armored siege engine reinforced with golden plating. Fires massive, fire-tipped boulders to shatter enemy structures from afar.")
@@ -1727,16 +1864,16 @@ import UnitObjEditing
 	..setBuildTime(5)
 	..setFoodCost(3)
 	..setUpgradesUsed("RM01,RM02,RM03")
-	..setRequirements("x00y")
+	..setRequirements("x00~")
 
 
-@compiletime function create_w3u_x010()
-	new UnitDefinition('x010', 'odoc')
+@compiletime function create_w3u_x015()
+	new UnitDefinition('x015', 'odoc')
 	..setName("Witch Doctor")
 	..setTooltipBasic("Train Witch Doctor")
 	..setTooltipExtended("Spiritual mystic of the council caste. Commands deep voodoo mojo to place healing wards and cast protective enchantments over injured allies.")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNWitchDoctor.blp")
-	..setNormalAbilities("AM1m,AM1n")
+	..setNormalAbilities("AM1n,AM1o")
 	..setGoldCost(55)
 	..setLumberCost(0)
 	..setBuildTime(4)
@@ -1744,8 +1881,8 @@ import UnitObjEditing
 	..setUpgradesUsed("RM01,RM02,RM03,RM05")
 
 
-@compiletime function create_w3u_x011()
-	new UnitDefinition('x011', 'orae')
+@compiletime function create_w3u_x016()
+	new UnitDefinition('x016', 'orae')
 	..setName("Raptor Outrider")
 	..setTooltipBasic("Train Raptor Outrider")
 	..setTooltipExtended("Blistering fast skirmish cavalry mounted on a vicious Zandalari raptor. Specializes in flanking maneuvers and tracking fleeing targets.")
@@ -1757,8 +1894,8 @@ import UnitObjEditing
 	..setUpgradesUsed("RM01,RM02,RM03")
 
 
-@compiletime function create_w3u_x012()
-	new UnitDefinition('x012', 'otbr')
+@compiletime function create_w3u_x017()
+	new UnitDefinition('x017', 'otbr')
 	..setName("Pterrodax Rider")
 	..setTooltipBasic("Train Pterrodax Rider")
 	..setTooltipExtended("Swoops over the battlefield to rain down explosive jars of burning resin. Masters of aerial reconnaissance. Can only attack ground units.")
@@ -1771,16 +1908,16 @@ import UnitObjEditing
 	..setBuildTime(4)
 	..setFoodCost(3)
 	..setUpgradesUsed("RM01,RM02,RM03")
-	..setRequirements("x00y")
+	..setRequirements("x00~")
 
 
-@compiletime function create_w3u_x013()
-	new BuildingDefinition('x013', 'obar')
+@compiletime function create_w3u_x018()
+	new BuildingDefinition('x018', 'obar')
 	..setName("Rastari War-Pit")
 	..setTooltipBasic("Build Rastari War-Pit")
 	..setTooltipExtended("The martial heart of the empire. Trains Zandalari Vanguards and Headhunters to expand your territory.")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNOrcBattleStandard.blp")
-	..setUnitsTrained("x00z,x00{,x01!")
+	..setUnitsTrained("x01!,x010,x014")
 	..setGoldCost(50)
 	..setLumberCost(0)
 	..setBuildTime(50)
@@ -1788,13 +1925,13 @@ import UnitObjEditing
 	..setResearchesAvailable("RM03")
 
 
-@compiletime function create_w3u_x014()
-	new UnitDefinition('x014', 'oshm')
+@compiletime function create_w3u_x019()
+	new UnitDefinition('x019', 'oshm')
 	..setName("Mojo Apothecary")
 	..setTooltipBasic("Train Mojo Apothecary")
 	..setTooltipExtended("An alchemical doctor who carries volatile vats of bubbling brew. Throws healing elixirs to allies and corrosive acid cocktails to melt enemy armor strips.")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNHeroAlchemist.blp")
-	..setNormalAbilities("AM1o")
+	..setNormalAbilities("AM1p")
 	..setManaMaximum(400)
 	..setManaInitialAmount(100)
 	..setManaRegeneration(1.5)
@@ -1805,8 +1942,8 @@ import UnitObjEditing
 	..setUpgradesUsed("RM01,RM02,RM03,RM06")
 
 
-@compiletime function create_w3u_x015()
-	new UnitDefinition('x015', 'ospw')
+@compiletime function create_w3u_x01a()
+	new UnitDefinition('x01a', 'ospw')
 	..setName("Zanchul Blood-Weaver")
 	..setTooltipBasic("Train Zanchul Blood-Weaver")
 	..setTooltipExtended("A sinister practitioner of sacrificial voodoo magic. Channels forbidden rituals to siphon enemy vitality or links allied souls to split incoming pain.")
@@ -1821,8 +1958,8 @@ import UnitObjEditing
 	..setUpgradesUsed("RM01,RM02,RM03")
 
 
-@compiletime function create_w3u_x016()
-	new UnitDefinition('x016', 'okod')
+@compiletime function create_w3u_x01b()
+	new UnitDefinition('x01b', 'okod')
 	..setName("Direhorn Ironclad")
 	..setTooltipBasic("Train Direhorn Ironclad")
 	..setTooltipExtended("A colossal prehistoric warbeast covered in golden plates. Crushes ground forces underfoot while the Rastari riders hurl heavy barbed harpoons to impale flying enemies.")
@@ -1846,12 +1983,12 @@ import UnitObjEditing
 	..setBuildTime(7)
 	..setFoodCost(5)
 	..setUpgradesUsed("RM01,RM02,RM03")
-	..setRequirements("x00~")
+	..setRequirements("x013")
 	..setNormalAbilities("")
 
 
-@compiletime function create_w3u_x017()
-	new UnitDefinition('x017', 'ogru')
+@compiletime function create_w3u_x01c()
+	new UnitDefinition('x01c', 'ogru')
 	..setName("Rastari Executioner")
 	..setTooltipBasic("Train Rastari Executioner")
 	..setTooltipExtended("Elite heavy shock trooper of the high military caste. Wields a massive, ornate golden executioner's glaive. Natively possesses the Berserk ability to enter a murderous battle frenzy.")
@@ -1870,26 +2007,26 @@ import UnitObjEditing
 	..setUpgradesUsed("RM01,RM02,RM03")
 
 
-@compiletime function create_w3u_x018()
-	new BuildingDefinition('x018', 'obea')
+@compiletime function create_w3u_x01d()
+	new BuildingDefinition('x01d', 'obea')
 	..setName("Zandalari Menagerie")
 	..setTooltipBasic("Build [|cffffcc00Zandalari Menagerie|r]")
 	..setTooltipExtended("Breeds and equips the massive prehistoric fauna of Zandalar. Trains Raptor Outriders, Pterrodax Riders, and Direhorn Ironclads.")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNBeastiary.blp")
 	..setScalingValue(1.1)
-	..setUnitsTrained("x011,x012,x016")
+	..setUnitsTrained("x016,x017,x01b")
 	..setGoldCost(145)
 	..setLumberCost(0)
 	..setBuildTime(55)
 	..setHitPointsMaximumBase(1200)
 	..setArmorType("fort")
 	..setDefenseBase(5)
-	..setRequirements("x00}")
+	..setRequirements("x012")
 	..setResearchesAvailable("")
 
 
-@compiletime function create_w3u_x019()
-	new BuildingDefinition('x019', 'otrb')
+@compiletime function create_w3u_x01e()
+	new BuildingDefinition('x01e', 'otrb')
 	..setName("Loa Enclave")
 	..setTooltipBasic("Build Loa Enclave")
 	..setTooltipExtended("Provides tribal food to expand your maximum army capacity. Zandalari workers can garrison inside to unleash ranged mojo attacks against attackers.")
@@ -1905,8 +2042,8 @@ import UnitObjEditing
 	..setAttacksEnabled(0)
 
 
-@compiletime function create_w3u_x01a()
-	new BuildingDefinition('x01a', 'hwtw')
+@compiletime function create_w3u_x01f()
+	new BuildingDefinition('x01f', 'hwtw')
 	..setName("Zandalari Monument")
 	..setTooltipBasic("Build [|cffffcc00Zandalari Monument|r]")
 	..setTooltipExtended("A stone foundation erected in honor of the wild gods. Can be upgraded and dedicated to a specific Loa to unlock divine units and forbidden tech pathways.")
@@ -1918,14 +2055,14 @@ import UnitObjEditing
 	..setHitPointsMaximumBase(600)
 	..setArmorType("fort")
 	..setDefenseBase(2)
-	..setRequirements("x00~")
+	..setRequirements("x013")
 	..setResearchesAvailable("")
 	..setNormalAbilities("")
-	..setUpgradesTo("x01b,x01c,x01d")
+	..setUpgradesTo("x01g,x01h,x01i")
 
 
-@compiletime function create_w3u_x01b()
-	new BuildingDefinition('x01b', 'hwtw')
+@compiletime function create_w3u_x01g()
+	new BuildingDefinition('x01g', 'hwtw')
 	..setName("Altar of Rezan")
 	..setTooltipBasic("Dedicate to [|cffffcc00Rezan|r]")
 	..setTooltipExtended("Infuse the monument with the blinding golden light of the Devilsaur Loa. Unlocks high-impact holy melee forces and raw physical combat techniques.")
@@ -1945,8 +2082,8 @@ import UnitObjEditing
 	..setNormalAbilities("")
 
 
-@compiletime function create_w3u_x01c()
-	new BuildingDefinition('x01c', 'hwtw')
+@compiletime function create_w3u_x01h()
+	new BuildingDefinition('x01h', 'hwtw')
 	..setName("Altar of Bwonsamdi")
 	..setTooltipBasic("Dedicate to [|cffffcc00Bwonsamdi|r]")
 	..setTooltipExtended("Shroud the stone foundation in the dark, spectral mists of the Loa of Graves. Unlocks soul-manipulating ritualists and shadow manipulation technologies.")
@@ -1965,8 +2102,8 @@ import UnitObjEditing
 	..setNormalAbilities("")
 
 
-@compiletime function create_w3u_x01d()
-	new BuildingDefinition('x01d', 'hwtw')
+@compiletime function create_w3u_x01i()
+	new BuildingDefinition('x01i', 'hwtw')
 	..setName("Altar of Gonk")
 	..setTooltipBasic("Dedicate to [|cffffcc00Gonk|r]")
 	..setTooltipExtended("Attune the monolith to the echo of the Great Raptor. Unlocks versatile shape-shifting primal forces and army-wide movement velocity research nodes.")
@@ -1985,31 +2122,31 @@ import UnitObjEditing
 	..setNormalAbilities("")
 
 
-@compiletime function create_w3u_x01e()
-	new BuildingDefinition('x01e', 'osld')
+@compiletime function create_w3u_x01j()
+	new BuildingDefinition('x01j', 'osld')
 	..setName("Zanchul Voodoo Hut")
 	..setTooltipBasic("Build [|cffffcc00Zanchul Voodoo Hut|r]")
 	..setTooltipExtended("The mystical heart of the empire. Trains Witch Doctors, Mojo Apothecaries, and Zanchul Blood-Weavers to turn the tide of battle with raw voodoo magic.")
 	..setHotkey("X")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNSpiritLodge.blp")
-	..setUnitsTrained("x010,x014,x015")
+	..setUnitsTrained("x015,x019,x01a")
 	..setGoldCost(130)
 	..setLumberCost(0)
 	..setBuildTime(50)
 	..setHitPointsMaximumBase(1000)
 	..setArmorType("fort")
 	..setDefenseBase(5)
-	..setRequirements("x00}")
+	..setRequirements("x012")
 	..setResearchesAvailable("RM05,RM06")
 
 
-@compiletime function create_w3u_x01f()
-	new UnitDefinition('x01f', 'opeo')
+@compiletime function create_w3u_x01k()
+	new UnitDefinition('x01k', 'opeo')
 	..setName("Zandalari Freeman")
 	..setTooltipBasic("Train Zandalari Freeman")
 	..setTooltipExtended("The fundamental workforce of the empire. Can construct custom tribal structures and repair damaged installations.")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNPeon.blp")
-	..setStructuresBuilt("x019,x00y,x013,x018,x01e,x01a,x00|,x00x")
+	..setStructuresBuilt("x01e,x00~,x018,x01d,x01j,x01f,x011,x00}")
 	..setGoldCost(25)
 	..setLumberCost(0)
 	..setBuildTime(3)
@@ -2019,48 +2156,48 @@ import UnitObjEditing
 	..setArmorType("medium")
 
 
-@compiletime function create_w3u_x00|()
-	new BuildingDefinition('x00|', 'ogre')
+@compiletime function create_w3u_x011()
+	new BuildingDefinition('x011', 'ogre')
 	..setName("Zocalo Hearth")
 	..setTooltipBasic("Build Zocalo Hearth")
 	..setTooltipExtended("The economic and spiritual foundation of your settlement. Trains workers and accepts resource returns.")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNGreatHall.blp")
-	..setUpgradesTo("x00}")
-	..setUnitsTrained("x01f")
+	..setUpgradesTo("x012")
+	..setUnitsTrained("x01k")
 	..setGoldCost(150)
 	..setLumberCost(0)
 	..setBuildTime(60)
 	..setHitPointsMaximumBase(1500)
 
 
-@compiletime function create_w3u_x00}()
-	new BuildingDefinition('x00}', 'ostr')
+@compiletime function create_w3u_x012()
+	new BuildingDefinition('x012', 'ostr')
 	..setName("Zanchul Sanctum")
 	..setTooltipBasic("Upgrade to Zanchul Sanctum")
 	..setTooltipExtended("Elevates the settlement into a stone sanctuary. Unlocks mid-tier military structures and tech upgrades.")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNStrongHold.blp")
-	..setUpgradesTo("x00~")
-	..setUnitsTrained("x01f")
+	..setUpgradesTo("x013")
+	..setUnitsTrained("x01k")
 	..setGoldCost(200)
 	..setLumberCost(0)
 	..setBuildTime(120)
 	..setHitPointsMaximumBase(2000)
-	..setRequirements("x00x")
+	..setRequirements("x00}")
 
 
-@compiletime function create_w3u_x00~()
-	new BuildingDefinition('x00~', 'ofrt')
+@compiletime function create_w3u_x013()
+	new BuildingDefinition('x013', 'ofrt')
 	..setName("Dazar'alor Ziggurat")
 	..setTooltipBasic("Upgrade to Dazar'alor Ziggurat")
 	..setTooltipExtended("The ultimate golden pinnacle of Zandalari majesty. Unlocks high-tier units, ultimate tier researches, and Heroes.")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNFortress.blp")
-	..setUnitsTrained("x01f")
+	..setUnitsTrained("x01k")
 	..setUpgradesTo("")
 	..setGoldCost(250)
 	..setLumberCost(0)
 	..setBuildTime(180)
 	..setHitPointsMaximumBase(2500)
-	..setRequirements("x00x")
+	..setRequirements("x00}")
 
 
 // Original Table (contains all modified default/melee objects)
@@ -2193,8 +2330,8 @@ import UnitObjEditing
 	..setBuildTime(5)
 	..setGoldCost(50)
 	..setLumberCost(0)
-	..setNormalAbilities("AM0|,AInv,Ault")
-	..setHeroAbilities("AM0~,AM1!,AM0}")
+	..setNormalAbilities("AM0},AInv,Ault")
+	..setHeroAbilities("AM1!,AM10,AM0~")
 
 
 @compiletime function create_w3u_Emoo()
@@ -2204,7 +2341,7 @@ import UnitObjEditing
 	..setLumberCost(0)
 	..setIntelligencePerLevel(2.9)
 	..setProperNames("Tyrande")
-	..setHeroAbilities("AM18,AM19,AM14,AM15")
+	..setHeroAbilities("AM19,AM1a,AM15,AM16")
 
 
 @compiletime function create_w3u_edot()
@@ -2267,9 +2404,9 @@ import UnitObjEditing
 	..setLumberCost(0)
 	..setGoldCost(90)
 	..setBuildTime(12)
-	..setAttack1DamageBase(50)
 	..setHitPointsMaximumBase(1800)
 	..setUpgradesUsed("Rers,R009,Rema,Rehs,Repm,Reuv")
+	..setAttack1DamageBase(30)
 
 
 @compiletime function create_w3u_efdr()
@@ -2482,22 +2619,22 @@ import UnitObjEditing
 
 @compiletime function create_w3u_Ewar()
 	new HeroDefinition('Ewar', 'Ewar')
-	..setHeroAbilities("AM10,AM12,AM13,AEsv")
+	..setHeroAbilities("AM11,AM13,AM14,AEsv")
 
 
-@compiletime function create_w3u_x00v()
-	new UnitDefinition('x00v', 'x00v')
+@compiletime function create_w3u_x00{()
+	new UnitDefinition('x00{', 'x00{')
 	..setModelFile("TyrandeWhisperwind.mdx")
 
 
 @compiletime function create_w3u_edtm()
 	new UnitDefinition('edtm', 'edtm')
-	..setNormalAbilities("AM1d,Arav,Afa2,Ault")
+	..setNormalAbilities("AM1e,Arav,Afa2,Ault")
 
 
 @compiletime function create_w3u_Hblm()
 	new HeroDefinition('Hblm', 'Hblm')
-	..setNormalAbilities("AM1g")
+	..setNormalAbilities("AM1h")
 	..setLevel(6)
 	..setName("Ligga")
 

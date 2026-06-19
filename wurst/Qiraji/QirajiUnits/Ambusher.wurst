@@ -9,14 +9,14 @@ import Icons
 import QirajiBuildingIds
 import ZandalariBaseUpgrades
 
-// ==========================================
-// 1. Generate unique IDs for Units & Spells
-// ==========================================
+
+
+
 public constant AMBUSHER_T1_ID = compiletime(UNIT_ID_GEN.next())
 public constant AMBUSHER_T2_ID = compiletime(UNIT_ID_GEN.next())
 public constant AMBUSHER_T3_ID = compiletime(UNIT_ID_GEN.next())
 
-// Custom Spells
+
 public constant T1_CRIT_ID   = compiletime(ABIL_ID_GEN.next())
 public constant T2_CRIT_ID   = compiletime(ABIL_ID_GEN.next())
 public constant T3_CRIT_ID   = compiletime(ABIL_ID_GEN.next())
@@ -25,32 +25,32 @@ public constant T3_AURA_ID   = compiletime(ABIL_ID_GEN.next())
 public constant T3_EVADE_ID  = compiletime(ABIL_ID_GEN.next())
 
 
-// public constant QIRAJI_T1_HIVE_NODE      = compiletime(UNIT_ID_GEN.next())
-// public constant QIRAJI_T2_SWARM_CORE     = compiletime(UNIT_ID_GEN.next())
-// public constant QIRAJI_T3_HIVE_IMPERIAL  = compiletime(UNIT_ID_GEN.next())
+
+
+
 
 @compiletime function genAmbushersWithSpells()
-    // ------------------------------------------
-    // SPELL DEFINITIONS
-    // ------------------------------------------
     
-    // T1 Passive: Vicious Strike
+    
+    
+    
+    
     new AbilityDefinitionCriticalStrikecreep(T1_CRIT_ID)
         ..setName("Vicious Strike")
         ..setChancetoCriticalStrike(1, 15.0)
-        ..setDamageMultiplier(1, 2.0) // 2x Crit
+        ..setDamageMultiplier(1, 2.0) 
         ..setTooltipNormal(1, "Vicious Strike")
         ..setTooltipNormalExtended(1, "Has a 15% chance to deal 2 times normal damage.")
 
-    // T2 Passive: Deadly Strike (+50% stronger multiplier step than T1)
+    
     new AbilityDefinitionCriticalStrikecreep(T2_CRIT_ID)
         ..setName("Deadly Strike")
         ..setChancetoCriticalStrike(1, 15.0)
-        ..setDamageMultiplier(1, 3.0) // 3x Crit
+        ..setDamageMultiplier(1, 3.0) 
         ..setTooltipNormal(1, "Deadly Strike")
         ..setTooltipNormalExtended(1, "Has a 15% chance to deal 3 times normal damage.")
 
-    // T2 Active: Shadow Dagger (Single target tracking poison)
+    
     new AbilityDefinitionShadowStrikeCreep(T2_NUKE_ID)
         ..setName("Shadow Dagger")
         ..setInitialDamage(1, 120.0)
@@ -60,31 +60,31 @@ public constant T3_EVADE_ID  = compiletime(ABIL_ID_GEN.next())
         ..setManaCost(1, 60)
         ..setCastRange(1, 500.0)
 
-    // T3 Passive: Lethal Strike (+50% stronger multiplier step than T2)
+    
     new AbilityDefinitionCriticalStrikecreep(T3_CRIT_ID)
         ..setName("Lethal Strike")
         ..setChancetoCriticalStrike(1, 15.0)
-        ..setDamageMultiplier(1, 4.5) // 4.5x Crit
+        ..setDamageMultiplier(1, 4.5) 
         ..setTooltipNormal(1, "Lethal Strike")
         ..setTooltipNormalExtended(1, "Has a 15% chance to deal 4.5 times normal damage.")
 
-    // T3 Passive: Shadow Reflexes (Boss Durability)
+    
     new AbilityDefinitionEvasion(T3_EVADE_ID)
         ..setName("Shadow Reflexes")
-        ..setChancetoEvade(1, 0.30) // 30% dodge
+        ..setChancetoEvade(1, 0.30) 
 
-    // T3 Active Aura: Lead the Hunt (Increases nearby ambusher damage by 30%)
+    
     new AbilityDefinitionAuraCommandCreep(T3_AURA_ID)
         ..setName("Lead the Hunt")
         ..setIconNormal(Icons.bTNAuraOfDarkness)
         ..setAttackDamageIncrease(1, 0.30)
         ..setAreaofEffect(1, 600.0)
 
-    // ------------------------------------------
-    // UNIT DEFINITIONS
-    // ------------------------------------------
+    
+    
+    
 
-    // TIER 1: Shadow Ambusher
+    
     new UnitDefinition(AMBUSHER_T1_ID, 'nban')
         ..setName("Shadow Ambusher")
         ..setHitPointsMaximumBase(400)
@@ -93,7 +93,7 @@ public constant T3_EVADE_ID  = compiletime(ABIL_ID_GEN.next())
         ..setSpeedBase(310)
         ..setGoldBountyAwardedBase(12)
         ..setScalingValue(1.0)
-        // Bind Spells
+        
         ..setNormalAbilities(commaList(T1_CRIT_ID))
         ..setUpgradesUsed(commaList(ZANDALARI_DAMAGE_UPG_ID, ZANDALARI_ARMOR_UPG_ID))
         ..setRequirements("")
@@ -103,18 +103,18 @@ public constant T3_EVADE_ID  = compiletime(ABIL_ID_GEN.next())
         ..setButtonPositionY(0)
         
 
-    // TIER 2: Shadow Assassin
+    
     new UnitDefinition(AMBUSHER_T2_ID, 'nban')
         ..setName("Shadow Assassin")
-        ..setHitPointsMaximumBase(600)  // 400 * 1.5
-        ..setAttack1DamageBase(30)     // 20 * 1.5
+        ..setHitPointsMaximumBase(600)  
+        ..setAttack1DamageBase(30)     
         ..setDefenseBase(4)
         ..setSpeedBase(330)
         ..setGoldBountyAwardedBase(22)
-        ..setManaMaximum(200)          // Added mana pool to cast his active spell
+        ..setManaMaximum(200)          
         ..setManaInitialAmount(100)
         ..setScalingValue(1.15)
-        // Bind Spells (Passive Scaling + Active Nuke)
+        
         ..setNormalAbilities(commaList(T2_CRIT_ID, T2_NUKE_ID))
         ..setRequirements(commaList(QIRAJI_T2_SWARM_CORE))
         ..setUpgradesUsed(commaList(ZANDALARI_DAMAGE_UPG_ID, ZANDALARI_ARMOR_UPG_ID))
@@ -124,16 +124,16 @@ public constant T3_EVADE_ID  = compiletime(ABIL_ID_GEN.next())
         ..setButtonPositionY(0)
 
 
-    // TIER 3: Shadow Stalker Captain
+    
     new UnitDefinition(AMBUSHER_T3_ID, 'nban')
         ..setName("Shadow Stalker Captain")
-        ..setHitPointsMaximumBase(900)  // 600 * 1.5
-        ..setAttack1DamageBase(45)     // 30 * 1.5
+        ..setHitPointsMaximumBase(900)  
+        ..setAttack1DamageBase(45)     
         ..setDefenseBase(6)
         ..setSpeedBase(350)
         ..setGoldBountyAwardedBase(40)
         ..setScalingValue(1.35)
-        // Bind Spells (Highest Passive Crit + Dodge tanking + Combat Aura for followers)
+        
         ..setNormalAbilities(commaList(T3_CRIT_ID, T3_EVADE_ID, T3_AURA_ID))
         ..setRequirements(commaList(QIRAJI_T3_HIVE_IMPERIAL))
         ..setUpgradesUsed(commaList(ZANDALARI_DAMAGE_UPG_ID, ZANDALARI_ARMOR_UPG_ID))

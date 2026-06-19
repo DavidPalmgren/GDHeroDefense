@@ -7,7 +7,6 @@ import ChannelAbilityPreset
 import ClosureEvents
 import AbilityTooltipGenerator
 import DummyCaster
-import DummyDamage
 import Group
 import GroupUtils
 import ClosureTimers

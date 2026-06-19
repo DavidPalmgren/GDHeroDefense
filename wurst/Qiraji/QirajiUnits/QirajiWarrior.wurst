@@ -17,7 +17,7 @@ public constant QIRAJI_WARRIOR_THUNDERCLAP = compiletime(ABIL_ID_GEN.next())
 public constant QIRAJI_WARRIOR_ENRAGE = compiletime(ABIL_ID_GEN.next())
 public constant QIRAJI_WARRIOR_ENRAGE_BUFF = compiletime(BUFF_ID_GEN.next())
 
-public constant ENRAGE_BONUS_DMG = 25
+public constant ENRAGE_BONUS_DMG = 30
 
 @compiletime function qirajiWarrior()
   new UnitDefinition(QIRAJI_WARRIOR_ID, UnitIds.nerubianwarrior)

@@ -1,0 +1,40 @@
+package QirajiSpitter
+import UnitObjEditing
+import ObjectIdGenerator
+import UnitIds
+import ObjectIds
+
+import QirajiBuildingIds
+import ZandalariBaseUpgrades
+
+public constant QIRAJI_SPITTER_ID = compiletime(UNIT_ID_GEN.next())
+
+@compiletime function createQirajiSpitter()
+    let def = new UnitDefinition(QIRAJI_SPITTER_ID, UnitIds.cryptfiend)
+    
+    
+    def..setName("Qiraji Spitter")
+    ..setTooltipBasic("Summon Qiraji Spitter")
+    ..setTooltipExtended("A bloated Silithid swarmer that launches highly corrosive green acid globs at enemies. Can strike both ground and airborne targets. Excellent backline damage support for the Swarm Mother.")
+    ..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCryptFiend.blp")
+    ..setModelFile("SilithidScarab_LobstrokkBlueSkin.mdx") 
+    ..setScalingValue(0.90)
+    ..setSelectionScale(1.10)
+    ..setTargetedAs("ground")
+    ..setHitPointsMaximumBase(425)
+    ..setManaMaximum(0)
+    ..setArmorType(ArmorType.Medium)
+    ..setDefenseBase(2)
+    ..setSpeedBase(285)
+    ..setAttack1WeaponType(WeaponType.Missile)
+    ..setAttack1ProjectileArt("Abilities\\Weapons\\ChimaeraAcidMissile\\ChimaeraAcidMissile.mdl")
+    ..setAttack1ProjectileSpeed(1100)
+    ..setAttack1ProjectileArc(0.18)
+    ..setAttack1Range(550)
+    ..setAttack1CooldownTime(1.35)
+    ..setAttack1TargetsAllowed("ground,air,structure,debris,friend,neutral")
+    ..setAttack1DamageBase(18)
+    ..setAttack1AttackType(AttackType.Pierce)
+    ..setAnimationCastBackswing(0.50)    
+    ..setRequirements(commaList(QIRAJI_CARAPACE_CHAMBER))
+    ..setUpgradesUsed(commaList(ZANDALARI_ARMOR_UPG_ID,ZANDALARI_DAMAGE_UPG_ID))            

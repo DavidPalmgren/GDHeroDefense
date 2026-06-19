@@ -68,13 +68,13 @@ public constant ZANDALARI_REGEN_UPG_ID  = compiletime(UPGD_ID_GEN.next())
     // Loops from level 1 to 5 to generate clean tooltips automatically!
     // -------------------------------------------------------------------------
     for i = 1 to 5
-        damageUpg..setName(i, "Zandalari Golden Blades")
-                 ..setTooltip(i, "Upgrade to Zandalari Golden Blades - Level " + i.toString())
-                 ..setTooltipExtended(i, "Refines the blades and spearheads of the tribe. Increases the attack damage of all Zandalari combatants by +3.")
+        damageUpg..setName(i, "Damage Upgrade")
+                 ..setTooltip(i, "Upgrade to Damage Upgrade - Level " + i.toString())
+                 ..setTooltipExtended(i, "Refines the blades and spearheads of the tribe. Increases the attack damage of all non-casters by +3 dice.")
                  
-        armorUpg..setName(i, "Zandalari Imperial Scales")
-                ..setTooltip(i, "Upgrade to Zandalari Imperial Scales - Level " + i.toString())
-                ..setTooltipExtended(i, "Hardens the golden defensive array of your forces. Increases the armor rating of all Zandalari units by +1.")
+        armorUpg..setName(i, "Defense Upgrade")
+                ..setTooltip(i, "Upgrade to Defense Upgrade Scales - Level " + i.toString())
+                ..setTooltipExtended(i, "Hardens the golden defensive array of your forces. Increases the armor rating of all units non-casters by +1.")
         regenUpg..setName(i, "Regenerative Troll Blood")
                 ..setTooltip(i, "Upgrade to Regenerative Troll Blood - Level " + i.toString())
                 ..setTooltipExtended(i, "Awakens the deep, dormant properties of the Troll biology. Increases hit point regeneration for all Troll units by +1 HP per second.")

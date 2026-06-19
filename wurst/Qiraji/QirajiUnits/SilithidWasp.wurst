@@ -1,0 +1,58 @@
+package SilithidWasp
+
+import UnitIds
+import AbilityIds
+import Icons
+import UnitObjEditing
+import AbilityObjEditing
+import ObjectIdGenerator
+import ObjectIds
+import DummyDamage
+
+import ChannelAbilityPreset
+import AbilityTooltipGenerator
+
+import ClosureEvents
+import ClosureTimers
+
+import ZandalariBaseUpgrades
+
+let tgen = new AbilityTooltipGenerator(Targettype.UNIT, "Take down a flying unit")
+
+
+public constant QIRAJI_WASP_ID = compiletime(UNIT_ID_GEN.next())
+// public constant QIRAJI_WASP_POISON_STING = compiletime(ABIL_ID_GEN.next())
+public constant QIRAJI_WASP_TAKE_DOWN_ID = compiletime(ABIL_ID_GEN.next())
+
+@compiletime function genWasp()
+  new UnitDefinition(QIRAJI_WASP_ID, UnitIds.hippogryph)
+    ..setName("Qiraji Wasp")
+    ..setTooltipBasic("Train Qiraji Wasp")
+    ..setTooltipExtended("Powerfull anti air unit possesing poison sting and can learn take down.")
+    ..setNormalAbilities(commaList(AbilityIds.poisonSting, QIRAJI_WASP_TAKE_DOWN_ID))
+    ..setGoldCost(50)
+    ..setLumberCost(0)
+    ..setBuildTime(5)
+    ..setModelFile("SilithidWasp.mdx")
+    ..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNSilithidWaspBoss.blp")
+    ..setUpgradesUsed(commaList(ZANDALARI_ARMOR_UPG_ID,ZANDALARI_DAMAGE_UPG_ID))
+
+
+  // new AbilityDefinitionPoisonAttack(newAbilityId)
+  new ChannelAbilityPreset(QIRAJI_WASP_TAKE_DOWN_ID, 1, true, tgen)
+    ..setCastRange(1, 150)
+    ..setCooldown(1, 10)
+    ..presetTargetTypes(Targettype.UNIT)
+    ..setIconNormal(Icons.bTNAdvancedCreatureAttack)
+
+init
+  EventListener.onTargetCast(QIRAJI_WASP_TAKE_DOWN_ID) (unit caster, unit target) ->
+    let prev_height = target.getFlyHeight()
+    target.setField(UNIT_IF_TARGETED_AS, 1)
+    target.setFlyHeight(200, 0.6)
+    caster.damageTarget(target, 125, true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_FORCE, WEAPON_TYPE_CLAW_HEAVY_SLICE)
+    doAfter(7) ->
+      target.setField(UNIT_IF_TARGETED_AS, 4)
+      target.setFlyHeight(prev_height, 0.6)
+
+      

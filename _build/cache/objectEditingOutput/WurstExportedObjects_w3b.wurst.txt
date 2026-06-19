@@ -10,6 +10,38 @@ import DestructableObjEditing
 	..setMaximumScale(5.0)
 
 
+@compiletime function create_w3b_B001()
+	new DestructableDefinition('B001', 'ZTw3')
+	..setName("Stone Wall (Dark)")
+	..setVertexColorRed(50)
+	..setVertexColorGreen(50)
+	..setVertexColorBlue(50)
+
+
+@compiletime function create_w3b_B002()
+	new DestructableDefinition('B002', 'ZTw1')
+	..setName("Stone Wall (Dark)")
+	..setVertexColorRed(50)
+	..setVertexColorGreen(50)
+	..setVertexColorBlue(50)
+
+
+@compiletime function create_w3b_B003()
+	new DestructableDefinition('B003', 'ZTw0')
+	..setName("Stone Wall (Dark)")
+	..setVertexColorRed(50)
+	..setVertexColorGreen(50)
+	..setVertexColorBlue(50)
+
+
+@compiletime function create_w3b_B004()
+	new DestructableDefinition('B004', 'ZTw2')
+	..setName("Stone Wall (Dark)")
+	..setVertexColorRed(50)
+	..setVertexColorGreen(50)
+	..setVertexColorBlue(50)
+
+
 // Original Table (contains all modified default/melee objects)
 // These are emitted when createObjectDefinition uses the same base/new id.
 

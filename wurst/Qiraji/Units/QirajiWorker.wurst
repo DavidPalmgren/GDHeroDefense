@@ -15,9 +15,9 @@ public constant QIRAJI_WORKER_ID = compiletime(UNIT_ID_GEN.next())
 
 @compiletime function genQirajiWorker()
   new UnitDefinition(QIRAJI_WORKER_ID, UnitIds.peasant)
-    ..setName("Silithid Drone")
-    ..setTooltipBasic("Train Silithid Drone")
-    ..setTooltipExtended("The basic workforce of the Qiraji swarm. Can harvest gold, harvest lumber, and morph into structural hive nodes.")
+    ..setName("Silithid Hive Tender")
+    ..setTooltipBasic("Train Silithid Hive Tender")
+    ..setTooltipExtended("The basic workforce of the Qiraji swarm.")
     ..setIconGameInterface(Icons.bTNAcolyte)
     ..setModelFile("NerubianWorkerV2.mdx")
     

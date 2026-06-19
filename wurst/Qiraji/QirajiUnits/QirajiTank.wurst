@@ -1,0 +1,31 @@
+package QirajiTank
+
+import AbilityObjEditing
+import UnitObjEditing
+import ObjectIdGenerator
+import ObjectIds
+import Icons
+import UnitIds
+
+
+import QirajiBuildingIds
+import ZandalariBaseUpgrades
+
+public constant QIRAJI_TANK_ID = compiletime(UNIT_ID_GEN.next())
+
+@compiletime function genDrone()
+  new UnitDefinition(QIRAJI_TANK_ID, UnitIds.warriorarachnathid)
+    ..setName("Qiraji Reaver")
+    ..setTooltipBasic("Train Qiraji Reaver")
+    ..setTooltipExtended("The Qiraji Reaver is the bread and butter of the ceaseless Qiraji assault.")
+    ..setModelFile("SilithidTank_SpiderLordSkin.mdx")
+    ..setGoldCost(20)
+    ..setFoodCost(1)
+    ..setLumberCost(0)
+    ..setBuildTime(3)
+    ..setAnimationRunSpeed(100)
+    ..setAnimationWalkSpeed(100)
+    
+    ..setDefenseBase(2)
+    ..setAttack1DamageBase(27)
+    ..setUpgradesUsed(commaList(ZANDALARI_ARMOR_UPG_ID,ZANDALARI_DAMAGE_UPG_ID))

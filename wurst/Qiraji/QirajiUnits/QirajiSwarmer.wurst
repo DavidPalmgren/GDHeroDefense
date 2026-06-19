@@ -53,8 +53,6 @@ let currentHealthBonus = new LinkedList<unit>
 
 init
     doPeriodically(UPDATE_INTERVAL) cb ->
-        //ENUM_GROUP.enumUnitsOfType('h' + QIRAJI_SWARMER_ID.toRawCode().substring(1, 4), null)
-        // Fallback
         let g = CreateGroup()
         g.enumUnitsInRect(bj_mapInitialPlayableArea)
 
@@ -80,14 +78,14 @@ init
                     let hpRatio = u.getHP() / u.getMaxHP()
                     u.setMaxHP(newHitPoints)
                     u.setHP(hpRatio * newHitPoints)
-                    print("HP SET")
+
                 if not u.hasAbility(SWARM_MOTHER_MOTHERS_LOVE_BUFF_ID) and currentHealthBonus.has(u)
                     currentHealthBonus.remove(u)
                     let newHitPoints = u.getMaxHP().toInt() - SWARM_MOTHER_MOTHERS_LOVE_HP_BONUS
                     let hpRatio = u.getHP() / u.getMaxHP()
                     u.setMaxHP(newHitPoints)
                     u.setHP(hpRatio * newHitPoints)
-                    print("HP UNSET")
+
 
                 if newDamageBonus != oldDamageBonus
                     u.setBaseDamage(u.getBaseDamage(0) - oldDamageBonus.toInt() + newDamageBonus.toInt(), 0)

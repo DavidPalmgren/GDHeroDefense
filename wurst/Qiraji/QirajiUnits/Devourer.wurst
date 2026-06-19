@@ -10,14 +10,14 @@ import QirajiBuildingIds
 import ZandalariBaseUpgrades
 
 
-// ==========================================
-// 1. Generate unique IDs for Units & Spells
-// ==========================================
+
+
+
 public constant DEVOURER_T1_ID = compiletime(UNIT_ID_GEN.next())
 public constant DEVOURER_T2_ID = compiletime(UNIT_ID_GEN.next())
 public constant DEVOURER_T3_ID = compiletime(UNIT_ID_GEN.next())
 
-// Custom Spells
+
 public constant T1_CLEAVE_ID = compiletime(ABIL_ID_GEN.next())
 public constant T2_CLEAVE_ID = compiletime(ABIL_ID_GEN.next())
 public constant T3_CLEAVE_ID = compiletime(ABIL_ID_GEN.next())
@@ -26,25 +26,25 @@ public constant T3_VAMP_ID   = compiletime(ABIL_ID_GEN.next())
 public constant T3_REGEN_ID  = compiletime(ABIL_ID_GEN.next())
 
 @compiletime function genDevourersWithSpells()
-    // ------------------------------------------
-    // SPELL DEFINITIONS
-    // ------------------------------------------
     
-    // T1 Passive: Flesh Guzzler (Cleaving Attack)
+    
+    
+    
+    
     new AbilityDefinitionPitLordCleavingAttack(T1_CLEAVE_ID)
         ..setName("Flesh Guzzler")
-        ..setDistributedDamageFactor(1, 0.20) // 20% splash damage
+        ..setDistributedDamageFactor(1, 0.20) 
         ..setTooltipNormal(1, "Flesh Guzzler")
         ..setTooltipNormalExtended(1, "Attacks deal 20% splash damage to nearby ground enemies.")
 
-    // T2 Passive: Gore Feeder (+50% stronger splash step than T1)
+    
     new AbilityDefinitionPitLordCleavingAttack(T2_CLEAVE_ID)
         ..setName("Gore Feeder")
-        ..setDistributedDamageFactor(1, 0.30) // 30% splash damage
+        ..setDistributedDamageFactor(1, 0.30) 
         ..setTooltipNormal(1, "Gore Feeder")
         ..setTooltipNormalExtended(1, "Attacks deal 30% splash damage to nearby ground enemies.")
 
-    // T2 Active: Corrosive Bile (Targeted armor/speed melting projectile)
+    
     new AbilityDefinitionShadowStrikeCreep(T2_BILE_ID)
         ..setName("Corrosive Bile")
         ..setIconNormal(Icons.bTNAcidBomb)
@@ -55,34 +55,34 @@ public constant T3_REGEN_ID  = compiletime(ABIL_ID_GEN.next())
         ..setManaCost(1, 75)
         ..setCastRange(1, 450.0)
 
-    // T3 Passive: Soul Devourer (+50% stronger splash step than T2)
+    
     new AbilityDefinitionPitLordCleavingAttack(T3_CLEAVE_ID)
         ..setName("Soul Devourer")
-        ..setDistributedDamageFactor(1, 0.45) // 45% splash damage
+        ..setDistributedDamageFactor(1, 0.45) 
         ..setTooltipNormal(1, "Soul Devourer")
         ..setTooltipNormalExtended(1, "Attacks deal 45% splash damage to nearby ground enemies.")
 
-    // T3 Passive: Devouring Essence (Sustains nearby units via combat)
+    
     new AbilityDefinitionVampiricAuracreep(T3_VAMP_ID)
         ..setName("Devouring Essence")
         ..setIconNormal(Icons.bTNVampiricAura)
-        ..setAttackDamageStolen(1, 0.30) // 30% Lifesteal
+        ..setAttackDamageStolen(1, 0.30) 
         ..setAreaofEffect(1, 600.0)
 
-    // T3 Passive: Putrid Regrowth (Aggressive health regeneration)
+    
     new AbilityDefinitionUnholyAuracreep(T3_REGEN_ID)
         ..setName("Putrid Regrowth")
         ..setIconNormal(Icons.bTNPlagueCloud)
         ..setMovementSpeedIncrease(1, 0.10)
-        ..setLifeRegenerationIncrease(1, 6.0) // Heavy baseline regen bump
+        ..setLifeRegenerationIncrease(1, 6.0) 
         ..setAreaofEffect(1, 200.0)
 
 
-    // ------------------------------------------
-    // UNIT DEFINITIONS
-    // ------------------------------------------
+    
+    
+    
 
-    // TIER 1: Rotting Devourer (Baseline stats)
+    
     new UnitDefinition(DEVOURER_T1_ID, 'uabo')
         ..setName("Rotting Devourer")
         ..setHitPointsMaximumBase(500)
@@ -90,8 +90,8 @@ public constant T3_REGEN_ID  = compiletime(ABIL_ID_GEN.next())
         ..setDefenseBase(3)
         ..setSpeedBase(280)
         ..setGoldBountyAwardedBase(16)
-        ..setScalingValue(0.95) // Slightly adjusted base scale
-        // Bind Spells
+        ..setScalingValue(0.95) 
+        
         ..setNormalAbilities(commaList(T1_CLEAVE_ID))
         ..setRequirements("")
         ..setUpgradesUsed(commaList(ZANDALARI_DAMAGE_UPG_ID, ZANDALARI_ARMOR_UPG_ID))
@@ -101,37 +101,38 @@ public constant T3_REGEN_ID  = compiletime(ABIL_ID_GEN.next())
         ..setButtonPositionY(1)
 
 
-    // TIER 2: Plague Devourer (+50% Buffed from T1)
+    
     new UnitDefinition(DEVOURER_T2_ID, 'uabo')
         ..setName("Plague Devourer")
-        ..setHitPointsMaximumBase(750)  // 500 * 1.5
-        ..setAttack1DamageBase(36)     // 24 * 1.5
+        ..setHitPointsMaximumBase(750)  
+        ..setAttack1DamageBase(36)     
         ..setDefenseBase(5)
         ..setSpeedBase(295)
         ..setGoldBountyAwardedBase(32)
-        ..setManaMaximum(200)          // Added mana pool for active projectile casting
+        ..setManaMaximum(200)          
         ..setManaInitialAmount(100)
-        ..setScalingValue(1.15)        // 20% scale jump
-        // Bind Spells
+        ..setScalingValue(1.15)        
+        
         ..setNormalAbilities(commaList(T2_CLEAVE_ID, T2_BILE_ID))
         ..setRequirements(commaList(QIRAJI_T2_SWARM_CORE))
         ..setUpgradesUsed(commaList(ZANDALARI_DAMAGE_UPG_ID, ZANDALARI_ARMOR_UPG_ID))
         ..setModelFile("SilithidDevourer.mdx")
+        ..setIconGameInterface("BTNSilithidDevourer.blp")
         ..setHotkey("S")
         ..setButtonPositionX(1)
         ..setButtonPositionY(1)
 
 
-    // TIER 3: Insatiable Gulgothar (+50% Buffed from T2)
+    
     new UnitDefinition(DEVOURER_T3_ID, 'uabo')
         ..setName("Insatiable Gulgothar")
-        ..setHitPointsMaximumBase(1125) // 750 * 1.5
-        ..setAttack1DamageBase(54)     // 36 * 1.5
+        ..setHitPointsMaximumBase(1125) 
+        ..setAttack1DamageBase(54)     
         ..setDefenseBase(7)
         ..setSpeedBase(310)
         ..setGoldBountyAwardedBase(60)
-        ..setScalingValue(1.40)        // Massive boss presence scale
-        // Bind Spells (High Cleave + Lifesteal Aura + Fast Base Health Regeneration)
+        ..setScalingValue(1.40)        
+        
         ..setNormalAbilities(commaList(T3_CLEAVE_ID, T3_VAMP_ID, T3_REGEN_ID))
         ..setRequirements(commaList(QIRAJI_T3_HIVE_IMPERIAL))
         ..setUpgradesUsed(commaList(ZANDALARI_DAMAGE_UPG_ID, ZANDALARI_ARMOR_UPG_ID))

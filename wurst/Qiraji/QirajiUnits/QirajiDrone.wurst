@@ -1,0 +1,27 @@
+package QirajiDrone
+
+import ObjectIdGenerator
+import ObjectIds
+import UnitIds
+import UnitObjEditing
+
+import ZandalariBaseUpgrades
+
+
+public constant QIRAJI_DRONE_ID = compiletime(UNIT_ID_GEN.next())
+
+@compiletime function genDrone()
+  new UnitDefinition(QIRAJI_DRONE_ID, UnitIds.warriorarachnathid)
+    ..setName("Qiraji Drone")
+    ..setTooltipBasic("Train Qiraji Drone")
+    ..setTooltipExtended("The thankless trash of the Qiraji forces.")
+    ..setModelFile("Silithid_SpiderLordSkin.mdx")
+    ..setGoldCost(30)
+    ..setLumberCost(0)
+    ..setBuildTime(3)
+    ..setFoodCost(1)
+
+    ..setHitPointsMaximumBase(520)
+    ..setDefenseBase(4)
+    ..setAttack1DamageBase(20)
+    ..setUpgradesUsed(commaList(ZANDALARI_ARMOR_UPG_ID,ZANDALARI_DAMAGE_UPG_ID))
