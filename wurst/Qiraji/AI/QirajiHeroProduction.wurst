@@ -1,52 +1,52 @@
-package QirajiHeroProduction
+// package QirajiHeroProduction
 
-import ClosureEvents
-import UnitIds
+// import ClosureEvents
+// import UnitIds
 
-import QirajiBuildingIds
-import CryptLord
+// import QirajiBuildingIds
+// import CryptLord
 
-constant int ABIL_CARAPACE = 'Ausr'
+// constant int ABIL_CARAPACE = 'Ausr'
 
-int array qirajiSkillBuild
+// int array qirajiSkillBuild
 
-function initializeSkillBlueprint()
-  // Level 1-5 Baseline Progression
-  qirajiSkillBuild[1] = CRYPT_LORD_BURROW
-  qirajiSkillBuild[2] = ABIL_CARAPACE
-  qirajiSkillBuild[3] = CRYPT_LORD_IMPALE
-  qirajiSkillBuild[4] = ABIL_CARAPACE
-  qirajiSkillBuild[5] = CRYPT_LORD_IMPALE
+// function initializeSkillBlueprint()
+//   // Level 1-5 Baseline Progression
+//   qirajiSkillBuild[1] = CRYPT_LORD_BURROW
+//   qirajiSkillBuild[2] = ABIL_CARAPACE
+//   qirajiSkillBuild[3] = CRYPT_LORD_IMPALE
+//   qirajiSkillBuild[4] = ABIL_CARAPACE
+//   qirajiSkillBuild[5] = CRYPT_LORD_IMPALE
 
-  // Level 6 Ultimate Milestone
-  qirajiSkillBuild[6] = CRYPT_LORD_SUMMON
+//   // Level 6 Ultimate Milestone
+//   qirajiSkillBuild[6] = CRYPT_LORD_SUMMON
 
-  // Level 7-10 Late Game Maxing
-  qirajiSkillBuild[7] = ABIL_CARAPACE
-  qirajiSkillBuild[8] = CRYPT_LORD_IMPALE
-  qirajiSkillBuild[9] = CRYPT_LORD_BURROW
-  qirajiSkillBuild[10] = CRYPT_LORD_BURROW
+//   // Level 7-10 Late Game Maxing
+//   qirajiSkillBuild[7] = ABIL_CARAPACE
+//   qirajiSkillBuild[8] = CRYPT_LORD_IMPALE
+//   qirajiSkillBuild[9] = CRYPT_LORD_BURROW
+//   qirajiSkillBuild[10] = CRYPT_LORD_BURROW
 
-init
-  initializeSkillBlueprint()
+// init
+//   initializeSkillBlueprint()
 
-  EventListener.add(EVENT_PLAYER_UNIT_CONSTRUCT_FINISH) ->
-    let u = GetTriggerUnit()
-    let id = u.getTypeId()
+//   EventListener.add(EVENT_PLAYER_UNIT_CONSTRUCT_FINISH) ->
+//     let u = GetTriggerUnit()
+//     let id = u.getTypeId()
 
-    if id == QIRAJI_ALTAR_OF_THE_OLD
-      printTimed("|cff00ffffAI HERO PRODUCTION:|r Swarm Altar complete! Training faction Hero.", 5.)
-      u.issueImmediateOrderById(CRYPT_LORD_HERO_ID)
+//     if id == QIRAJI_ALTAR_OF_THE_OLD
+//       printTimed("|cff00ffffAI HERO PRODUCTION:|r Swarm Altar complete! Training faction Hero.", 5.)
+//       u.issueImmediateOrderById(CRYPT_LORD_HERO_ID)
 
-  EventListener.add(EVENT_PLAYER_HERO_LEVEL) ->
-    let hero = GetTriggerUnit()
-    if hero.getTypeId() == CRYPT_LORD_HERO_ID
-      let currentLevel = hero.getLevel()
-      if currentLevel <= 10
-        let targetSkillId = qirajiSkillBuild[currentLevel]
+//   EventListener.add(EVENT_PLAYER_HERO_LEVEL) ->
+//     let hero = GetTriggerUnit()
+//     if hero.getTypeId() == CRYPT_LORD_HERO_ID
+//       let currentLevel = hero.getLevel()
+//       if currentLevel <= 10
+//         let targetSkillId = qirajiSkillBuild[currentLevel]
         
-        if targetSkillId != 0
-          SelectHeroSkill(hero, targetSkillId)
+//         if targetSkillId != 0
+//           SelectHeroSkill(hero, targetSkillId)
           
-          printTimed("|cff00ff00AI HERO LEVEL UP:|r Hero reached Level " + 
-                     currentLevel.toString() + "! Learned assigned ability.", 4.)
+//           printTimed("|cff00ff00AI HERO LEVEL UP:|r Hero reached Level " + 
+//                      currentLevel.toString() + "! Learned assigned ability.", 4.)

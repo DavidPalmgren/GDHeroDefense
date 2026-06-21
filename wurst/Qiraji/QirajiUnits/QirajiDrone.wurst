@@ -4,11 +4,15 @@ import ObjectIdGenerator
 import ObjectIds
 import UnitIds
 import UnitObjEditing
-
+import UpgradeObjEditing
+import AbilityObjEditing
 import ZandalariBaseUpgrades
+import Icons
 
 
 public constant QIRAJI_DRONE_ID = compiletime(UNIT_ID_GEN.next())
+public constant QIRAJI_FORTITUDE_SPELL_ID = compiletime(ABIL_ID_GEN.next())
+public constant QIRAJI_FORTITUDE_UPGRADE_ID = compiletime(UPGD_ID_GEN.next())
 
 @compiletime function genDrone()
   new UnitDefinition(QIRAJI_DRONE_ID, UnitIds.warriorarachnathid)
@@ -24,4 +28,33 @@ public constant QIRAJI_DRONE_ID = compiletime(UNIT_ID_GEN.next())
     ..setHitPointsMaximumBase(520)
     ..setDefenseBase(4)
     ..setAttack1DamageBase(20)
-    ..setUpgradesUsed(commaList(ZANDALARI_ARMOR_UPG_ID,ZANDALARI_DAMAGE_UPG_ID))
+    ..setUpgradesUsed(commaList(ZANDALARI_ARMOR_UPG_ID,ZANDALARI_DAMAGE_UPG_ID, QIRAJI_FORTITUDE_UPGRADE_ID))
+    ..setNormalAbilities(commaList(QIRAJI_FORTITUDE_SPELL_ID))
+    ..setHotkey("W")
+    ..setButtonPositionX(1)
+    ..setButtonPositionY(0)
+
+  new AbilityDefinitionPassiveSimple(QIRAJI_FORTITUDE_SPELL_ID)
+    ..setName("Adaptation: Fortitude")
+    ..setTooltipNormal(1,"Adaptation: Fortitude")
+    ..setTooltipNormalExtended(1, "Increase the Health and Health Regeneration of all Qiraji Drones by 100/2")
+    ..setHeroAbility(false)
+    ..setLevels(1)
+    ..setRequirements(commaList(QIRAJI_FORTITUDE_UPGRADE_ID))
+    ..setIconNormal(Icons.bTNAdvancedCreatureCarapace)
+
+
+  new UpgradeDefinition(QIRAJI_FORTITUDE_UPGRADE_ID)
+    ..setName(1, "Adaptation: Fortitude")
+    ..setTooltip(1, "Research Adaptation: Fortitude")
+    ..setTooltipExtended(1, "Increase the Health and Health Regeneration of all Qiraji Drones by 100/2.")
+    ..addEffectAbilityLevelBonus(1, 1, QIRAJI_FORTITUDE_SPELL_ID.toRawCode())
+    ..addEffectHitPointBonus(100, 100)
+    ..addEffectHitPointRegeneration(2, 2)
+    ..setIcon(1,Icons.bTNAdvancedCreatureCarapace)
+
+    ..setTimeBase(40)
+    ..setGoldCostBase(80)
+    ..setHotkey(1,"S")
+    ..setButtonPositionX(1)
+    ..setButtonPositionY(2)

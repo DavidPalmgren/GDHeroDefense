@@ -6,14 +6,17 @@ import ObjectIdGenerator
 import ObjectIds
 import Icons
 import UnitIds
+import UpgradeObjEditing
 
 
 import QirajiBuildingIds
 import ZandalariBaseUpgrades
 
 public constant QIRAJI_TANK_ID = compiletime(UNIT_ID_GEN.next())
+public constant QIRAJI_TANK_SPEED_SPELL_ID = compiletime(ABIL_ID_GEN.next())
+public constant QIRAJI_TANK_SPEED_UPGRADE_ID = compiletime(UPGD_ID_GEN.next())
 
-@compiletime function genDrone()
+@compiletime function genReaver()
   new UnitDefinition(QIRAJI_TANK_ID, UnitIds.warriorarachnathid)
     ..setName("Qiraji Reaver")
     ..setTooltipBasic("Train Qiraji Reaver")
@@ -23,9 +26,40 @@ public constant QIRAJI_TANK_ID = compiletime(UNIT_ID_GEN.next())
     ..setFoodCost(1)
     ..setLumberCost(0)
     ..setBuildTime(3)
-    ..setAnimationRunSpeed(100)
-    ..setAnimationWalkSpeed(100)
+    ..setAnimationRunSpeed(200)
+    ..setAnimationWalkSpeed(200)
+    ..setSpeedBase(300)
+    ..setAttack1CooldownTime(0.9)
+    ..setHotkey("Q")
+    ..setButtonPositionX(0)
+    ..setButtonPositionY(0)
     
     ..setDefenseBase(2)
     ..setAttack1DamageBase(27)
-    ..setUpgradesUsed(commaList(ZANDALARI_ARMOR_UPG_ID,ZANDALARI_DAMAGE_UPG_ID))
+    ..setUpgradesUsed(commaList(ZANDALARI_ARMOR_UPG_ID,ZANDALARI_DAMAGE_UPG_ID,QIRAJI_TANK_SPEED_UPGRADE_ID))
+    ..setNormalAbilities(commaList(QIRAJI_TANK_SPEED_SPELL_ID))
+
+  new AbilityDefinitionPassiveSimple(QIRAJI_TANK_SPEED_SPELL_ID)
+    ..setName("Adaptation: Speed")
+    ..setTooltipNormal(1,"Adaptation: Speed")
+    ..setTooltipNormalExtended(1, "Adapted for speed, increases movement and attack speed. by 20%")
+    ..setHeroAbility(false)
+    ..setLevels(1)
+    ..setRequirements(commaList(QIRAJI_TANK_SPEED_UPGRADE_ID))
+    ..setIconNormal(Icons.bTNScrollOfHaste)
+
+
+  new UpgradeDefinition(QIRAJI_TANK_SPEED_UPGRADE_ID)
+    ..setName(1, "Adaptation: Speed")
+    ..setTooltip(1, "Research Adaptation: Speed")
+    ..setTooltipExtended(1, "Increase the movement and attacking speed of all Qiraji Reavers. 20%")
+    ..addEffectAbilityLevelBonus(1, 1, QIRAJI_TANK_SPEED_SPELL_ID.toRawCode())
+    ..addEffectMovementSpeedBonusPercent(0.2, 0.2)
+    ..addEffectAttackSpeedBonus(0.2, 0.2)
+    ..setIcon(1,Icons.bTNScrollOfHaste)
+    ..setTimeBase(40)
+    ..setGoldCostBase(80)
+
+    ..setHotkey(1,"A")
+    ..setButtonPositionX(0)
+    ..setButtonPositionY(2)

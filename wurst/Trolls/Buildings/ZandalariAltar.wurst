@@ -12,7 +12,7 @@ public constant ZANDALARI_ALTAR_ID = compiletime(UNIT_ID_GEN.next())
     new BuildingDefinition(ZANDALARI_ALTAR_ID, 'oalt') // Inherits Altar of Storms baseline properties
         ..setName("Zandalari Altar")
         ..setTooltipBasic("Build [|cffffcc00Zandalari Altar|r]")
-        ..setTooltipExtended("A sacred temple of the high military caste. Summon and resurrect powerful Zandalari Heroes to lead your armies into battle.")
+        ..setTooltipExtended("A sacred temple of mighty heroes. Summon and resurrect powerful Zandalari Heroes to lead your armies into battle.")
         
         // Visuals & Art
         ..setIconGameInterface(Icons.bTNAltarOfStorms)

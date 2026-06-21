@@ -1,0 +1,34 @@
+package QirajiFarmManagement
+
+import QirajiBuildingIds
+import QirajiPlacement 
+import QirajiWorkersUnion // Imported: Checking worker labor statuses
+
+constant int FOOD_BUFFER = 6       
+constant int MAP_MAX_FOOD = 100     
+  
+
+int farmBuildCooldown = 0
+
+public function manageQirajiSupply(player aiPlayer)
+    if farmBuildCooldown > 0
+        farmBuildCooldown--
+        return
+
+    let foodUsed = aiPlayer.getCurrentSupply()
+    let foodCap = aiPlayer.getMaxSupply()
+    print("Food used" + foodUsed.toString())
+    print("Food Cap" + foodCap.toString())
+
+    if foodCap < MAP_MAX_FOOD and (foodCap - foodUsed) <= FOOD_BUFFER
+        // Instantly fetches a worker that isn't already tied up in a construction contract
+        let builder = getAvailableQirajiWorker(aiPlayer)
+        
+        if builder != null
+            let baseCenter = gg_rct_QirajiSpawn.getCenter()
+            let buildSite = findValidBuildSite(baseCenter, 2, 2, 1024.0,128)
+            
+            if buildSite != baseCenter
+                printTimed("|cffffcc00QIRAJI AI:|r Low biomass capacity! Manifesting FARM.", 4.)
+                scatterIdleUnitsNear(buildSite, builder, aiPlayer, 300.0)
+                builder.issuePointOrderById(QIRAJI_SPAWNING_SAC, buildSite)

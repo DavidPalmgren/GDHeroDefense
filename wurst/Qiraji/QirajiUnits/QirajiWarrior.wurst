@@ -26,6 +26,7 @@ public constant ENRAGE_BONUS_DMG = 30
     ..setTooltipExtended("Powerfull individuals from the warrior caste, they posses thunderclap and can learn enrage")
     ..setNormalAbilities(commaList(QIRAJI_WARRIOR_THUNDERCLAP,QIRAJI_WARRIOR_ENRAGE))
     ..setModelFile("QuirajGladiator.mdx")
+    ..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNQirajiWarrior.blp")
     ..setHitPointsMaximumBase(1600)
     ..setHitPointsRegenerationRate(1.5)
     ..setLevel(6)

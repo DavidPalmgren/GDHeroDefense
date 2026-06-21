@@ -16,4 +16,5 @@ public constant QIRAJI_RESECTION_MILL    = compiletime(UNIT_ID_GEN.next()) // Lu
 // Advanced Tech hubs
 public constant QIRAJI_OBSIDIAN_TEMPLE   = compiletime(UNIT_ID_GEN.next()) // Arcane Sanctum
 public constant QIRAJI_FLESHWARPING_PIT  = compiletime(UNIT_ID_GEN.next()) // Workshop
+public constant QIRAJI_CONSTRUCT_OF_THE_OLD  = compiletime(UNIT_ID_GEN.next()) // Workshop
 public constant QIRAJI_CHITINOUS_SPIRE   = compiletime(UNIT_ID_GEN.next()) // Scout Tower

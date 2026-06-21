@@ -1,0 +1,27 @@
+package QirajiTrainUnits
+
+import ClosureTimers
+import ClosureForGroups
+import QirajiBuildingIds
+import QirajiTank
+
+// Which unit each production building trains
+
+
+public function startQirajiTrainLoop(player aiPlayer)
+    let foodCap  = GetPlayerState(aiPlayer, PLAYER_STATE_RESOURCE_FOOD_CAP)
+    let foodUsed = GetPlayerState(aiPlayer, PLAYER_STATE_RESOURCE_FOOD_USED)
+
+    // Stop training if we are at or near the food cap
+    if foodUsed >= foodCap - 1
+        return
+
+    // Issue train order to every idle hatchery
+    forUnitsOfPlayer(aiPlayer) (unit u) ->
+        if u.isAlive()
+            and u.getTypeId() == QIRAJI_HATCHERY
+            and u.getCurrentOrder() == 0
+            u.issueImmediateOrderById(QIRAJI_TANK_ID)
+            u.issueImmediateOrderById(QIRAJI_TANK_ID)
+            u.issueImmediateOrderById(QIRAJI_TANK_ID)
+

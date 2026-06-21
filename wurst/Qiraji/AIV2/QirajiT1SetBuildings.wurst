@@ -1,0 +1,48 @@
+package QirajiT1SetBuildings
+
+import QirajiBuildingIds
+import QirajiPlacement
+import QirajiWorkersUnion // Imported: Protecting busy drones
+
+constant int DESIRED_BARRACKS = 2
+
+
+
+public function manageQirajiBarracks(player aiPlayer)
+
+    var currentBarracksCount = 0
+    let colonyUnits = CreateGroup()
+    colonyUnits.enumUnitsOfPlayer(aiPlayer, null)
+    
+    for u from colonyUnits
+        if u.getTypeId() == QIRAJI_HATCHERY and u.isAlive()
+            currentBarracksCount++
+    colonyUnits.destr()
+
+    printTimed("Barracks count: " + currentBarracksCount.toString() + "/" + DESIRED_BARRACKS.toString(), 8.)
+
+    if currentBarracksCount >= DESIRED_BARRACKS
+        printTimed("Barracks quota met, skipping.", 8.)
+        return
+
+    let builder = getAvailableQirajiWorker(aiPlayer)
+    printTimed("Builder found: " + (builder != null).toString(), 8.)
+    if builder == null
+        return
+
+    let baseCenter = gg_rct_QirajiSpawn.getCenter()
+    printTimed("Base center: " + baseCenter.x.toString() + "," + baseCenter.y.toString(), 8.)
+    
+    let buildSite = findValidBuildSite(baseCenter, 4, 4, 2024.0, 128.0)
+    printTimed("Build site: " + buildSite.x.toString() + "," + buildSite.y.toString(), 8.)
+
+    if buildSite.x == -1.0
+        printTimed("No valid build site found!", 8.)
+        return
+
+    printTimed("Issuing build order to: " + builder.getName() + " typeId: " + builder.getTypeId().toString(), 8.)
+    scatterIdleUnitsNear(buildSite, builder, aiPlayer, 300.0)
+    let orderResult = builder.issuePointOrderById(QIRAJI_HATCHERY, buildSite)
+    printTimed("Order result: " + orderResult.toString(), 8.)
+    printTimed("Builder owner: " + builder.getOwner().getName(), 8.)
+    printTimed("aiPlayer: " + aiPlayer.getName(), 8.)

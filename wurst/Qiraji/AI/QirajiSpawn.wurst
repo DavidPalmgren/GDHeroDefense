@@ -1,35 +1,35 @@
-package QirajiSpawn
+// package QirajiSpawn
 
-import QirajiBuildingIds
+// import QirajiBuildingIds
 
-// Ensure these point to where your worker configuration lives
-import QirajiWorker 
+// // Ensure these point to where your worker configuration lives
+// import QirajiWorker 
 
-/** Spawns a baseline worker force inside the QirajiSpawn rect and starts the AI */
-public function initializeQirajiFaction(player aiPlayer)
-  // 1. Grant starting resources so the AI can afford infrastructure
-  aiPlayer.setGold(10000)
-  aiPlayer.setLumber(10000)
+// /** Spawns a baseline worker force inside the QirajiSpawn rect and starts the AI */
+// public function initializeQirajiFaction(player aiPlayer)
+//   // 1. Grant starting resources so the AI can afford infrastructure
+//   aiPlayer.setGold(10000)
+//   aiPlayer.setLumber(10000)
 
-  // 2. Pull coordinates directly from your World Editor region
-  let spawnRect = gg_rct_QirajiSpawn
-  let startPos = spawnRect.getCenter() 
-  // Note: You can access startPos.x and startPos.y directly from this vector!
+//   // 2. Pull coordinates directly from your World Editor region
+//   let spawnRect = gg_rct_QirajiSpawn
+//   let startPos = spawnRect.getCenter() 
+//   // Note: You can access startPos.x and startPos.y directly from this vector!
 
-  printTimed("|cff00ffffQIRAJI SPAWN:|r Initializing Silithid Swarm at designated region center.", 5.)
+//   printTimed("|cff00ffffQIRAJI SPAWN:|r Initializing Silithid Swarm at designated region center.", 5.)
 
-  // 3. Spawn a baseline crew of 5 Silithid Drones centered around the region
-  unit primaryBuilder = null
+//   // 3. Spawn a baseline crew of 5 Silithid Drones centered around the region
+//   unit primaryBuilder = null
 
-  for i = 1 to 5
-    let offsetPos = startPos + vec2(GetRandomReal(-128, 128), GetRandomReal(-128, 128))
-    let drone = CreateUnit(aiPlayer, QIRAJI_WORKER_ID, offsetPos.x, offsetPos.y, GetRandomReal(0, 360))
+//   for i = 1 to 5
+//     let offsetPos = startPos + vec2(GetRandomReal(-128, 128), GetRandomReal(-128, 128))
+//     let drone = CreateUnit(aiPlayer, QIRAJI_WORKER_ID, offsetPos.x, offsetPos.y, GetRandomReal(0, 360))
     
-    if i == 1
-      primaryBuilder = drone
+//     if i == 1
+//       primaryBuilder = drone
 
-  // 4. INSTANT JUMP-START: Immediately order the first drone to create the Hive Node
-  if primaryBuilder != null and primaryBuilder.isAlive()
-    let buildSite = startPos + vec2(GetRandomReal(-64, 64), GetRandomReal(-64, 64))
-    printTimed("|cffffcc00QIRAJI SPAWN:|r Issuing priority command to Hive Node genesis vector.", 4.)
-    primaryBuilder.issuePointOrderById(QIRAJI_T1_HIVE_NODE, buildSite)
+//   // 4. INSTANT JUMP-START: Immediately order the first drone to create the Hive Node
+//   if primaryBuilder != null and primaryBuilder.isAlive()
+//     let buildSite = startPos + vec2(GetRandomReal(-64, 64), GetRandomReal(-64, 64))
+//     printTimed("|cffffcc00QIRAJI SPAWN:|r Issuing priority command to Hive Node genesis vector.", 4.)
+//     primaryBuilder.issuePointOrderById(QIRAJI_T1_HIVE_NODE, buildSite)

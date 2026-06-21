@@ -1,207 +1,207 @@
-package QirajiMainLoop
+// package QirajiMainLoop
 
-import ClosureTimers
-import ClosureForGroups
-import QirajiBuildingIds
-import QirajiWorker
+// import ClosureTimers
+// import ClosureForGroups
+// import QirajiBuildingIds
+// import QirajiWorker
 
-// Financial and layout configurations
-constant int GOLD_COST_T1 = 250
-constant int GOLD_COST_T2 = 185
-constant int GOLD_COST_T3 = 225
-constant int GOLD_COST_FARM = 150
-constant int GOLD_COST_BARRACKS = 210
-constant int GOLD_COST_ALTAR = 250
+// // Financial and layout configurations
+// constant int GOLD_COST_T1 = 250
+// constant int GOLD_COST_T2 = 185
+// constant int GOLD_COST_T3 = 225
+// constant int GOLD_COST_FARM = 150
+// constant int GOLD_COST_BARRACKS = 210
+// constant int GOLD_COST_ALTAR = 250
 
-constant int MAX_BARRACKS = 4
-constant int MAX_ALTARS = 1
+// constant int MAX_BARRACKS = 4
+// constant int MAX_ALTARS = 1
 
-// Centralized state container to pass metrics down the execution pipeline
-class MacroState
-  int barracksCount = 0
-  int altarCount = 0
-  bool hasT1 = false
-  bool hasT2 = false
-  bool hasT3 = false
-  bool hasTownhall = false
-  vec2 townhallPos = vec2(0, 0)
-  vec2 expansionAnchor = vec2(0, 0) // Dynamically chosen building to expand out from
-  unit availableWorker = null       // Holds our dynamically sampled candidate worker
-  bool workerIsBusy = false         // Prevents order conflicts on the same frame loop
+// // Centralized state container to pass metrics down the execution pipeline
+// class MacroState
+//   int barracksCount = 0
+//   int altarCount = 0
+//   bool hasT1 = false
+//   bool hasT2 = false
+//   bool hasT3 = false
+//   bool hasTownhall = false
+//   vec2 townhallPos = vec2(0, 0)
+//   vec2 expansionAnchor = vec2(0, 0) // Dynamically chosen building to expand out from
+//   unit availableWorker = null       // Holds our dynamically sampled candidate worker
+//   bool workerIsBusy = false         // Prevents order conflicts on the same frame loop
 
-// ============================================================================
-// HELPER UTILITIES: PATHING & BREATHING ROOM ENFORCEMENT
-// ============================================================================
+// // ============================================================================
+// // HELPER UTILITIES: PATHING & BREATHING ROOM ENFORCEMENT
+// // ============================================================================
 
-/** Scans a radius around a point to ensure it is not crowded by other buildings */
-function isLocationCrowded(vec2 candidatePos, player aiPlayer) returns bool
-  var isCrowded = false
+// /** Scans a radius around a point to ensure it is not crowded by other buildings */
+// function isLocationCrowded(vec2 candidatePos, player aiPlayer) returns bool
+//   var isCrowded = false
 
-  // 240 units is roughly 3 full grid squares of padding space
-  forUnitsInRange(candidatePos, 240.) (unit u) ->
-    if not isCrowded and u.isAlive() and u.getOwner() == aiPlayer
-      let id = u.getTypeId()
-      // If any structural entity is detected inside our buffer bubble, flag it
-      if id == QIRAJI_T1_HIVE_NODE or id == QIRAJI_T2_SWARM_CORE or id == QIRAJI_T3_HIVE_IMPERIAL or
-         id == QIRAJI_HATCHERY or id == QIRAJI_ALTAR_OF_THE_OLD or id == QIRAJI_SPAWNING_SAC
-        isCrowded = true
+//   // 240 units is roughly 3 full grid squares of padding space
+//   forUnitsInRange(candidatePos, 240.) (unit u) ->
+//     if not isCrowded and u.isAlive() and u.getOwner() == aiPlayer
+//       let id = u.getTypeId()
+//       // If any structural entity is detected inside our buffer bubble, flag it
+//       if id == QIRAJI_T1_HIVE_NODE or id == QIRAJI_T2_SWARM_CORE or id == QIRAJI_T3_HIVE_IMPERIAL or
+//          id == QIRAJI_HATCHERY or id == QIRAJI_ALTAR_OF_THE_OLD or id == QIRAJI_SPAWNING_SAC
+//         isCrowded = true
 
-  return isCrowded
+//   return isCrowded
 
-/** Searches for a clear terrain location using a dynamic anchor point */
-function calculateValidBuildTarget(vec2 anchorPos, player aiPlayer) returns vec2
-  var finalTarget = anchorPos
-  var spotIsValid = false
+// /** Searches for a clear terrain location using a dynamic anchor point */
+// function calculateValidBuildTarget(vec2 anchorPos, player aiPlayer) returns vec2
+//   var finalTarget = anchorPos
+//   var spotIsValid = false
 
-  // Iteratively scan up to 20 randomized expansion vectors
-  for i = 1 to 20
-    // Shorter distances (220-400) because we are chaining off existing base edges
-    let randomDistance = GetRandomReal(220, 400)
-    let randomAngle = GetRandomReal(0, 360).fromDeg() 
-    let candidate = anchorPos.polarOffset(randomAngle, randomDistance)
+//   // Iteratively scan up to 20 randomized expansion vectors
+//   for i = 1 to 20
+//     // Shorter distances (220-400) because we are chaining off existing base edges
+//     let randomDistance = GetRandomReal(220, 400)
+//     let randomAngle = GetRandomReal(0, 360).fromDeg() 
+//     let candidate = anchorPos.polarOffset(randomAngle, randomDistance)
 
-    // 1. Verify map terrain allows placement (not a cliff, deep water, etc.)
-    if not IsTerrainPathable(candidate.x, candidate.y, PATHING_TYPE_BUILDABILITY)
-      // 2. FIXED: Verify the location has strict spacing/breathing room from other buildings
-      if not isLocationCrowded(candidate, aiPlayer)
-        finalTarget = candidate
-        spotIsValid = true
-        break
+//     // 1. Verify map terrain allows placement (not a cliff, deep water, etc.)
+//     if not IsTerrainPathable(candidate.x, candidate.y, PATHING_TYPE_BUILDABILITY)
+//       // 2. FIXED: Verify the location has strict spacing/breathing room from other buildings
+//       if not isLocationCrowded(candidate, aiPlayer)
+//         finalTarget = candidate
+//         spotIsValid = true
+//         break
 
-  // Emergency safety fallback: if completely blocked, leapfrog way out into open space
-  if not spotIsValid
-    finalTarget = anchorPos.polarOffset(GetRandomReal(0, 360).fromDeg(), GetRandomReal(500, 750))
+//   // Emergency safety fallback: if completely blocked, leapfrog way out into open space
+//   if not spotIsValid
+//     finalTarget = anchorPos.polarOffset(GetRandomReal(0, 360).fromDeg(), GetRandomReal(500, 750))
 
-  return finalTarget
+//   return finalTarget
 
-// ============================================================================
-// SUB-MODULE 1: TOWNHALL EMERGENCY RECOVERY & UPGRADES
-// ============================================================================
-function manageTownhallLogic(player aiPlayer, MacroState state)
-  let currentGold = aiPlayer.getGold()
+// // ============================================================================
+// // SUB-MODULE 1: TOWNHALL EMERGENCY RECOVERY & UPGRADES
+// // ============================================================================
+// function manageTownhallLogic(player aiPlayer, MacroState state)
+//   let currentGold = aiPlayer.getGold()
 
-  // Case A: Total Eradication - Reconstruct baseline base node if resources allow
-  if not state.hasTownhall
-    if currentGold >= GOLD_COST_T1 and state.availableWorker != null and not state.workerIsBusy
-      let buildTarget = aiPlayer.getStartLocation() + vec2(GetRandomReal(-64, 64), GetRandomReal(-64, 64))
+//   // Case A: Total Eradication - Reconstruct baseline base node if resources allow
+//   if not state.hasTownhall
+//     if currentGold >= GOLD_COST_T1 and state.availableWorker != null and not state.workerIsBusy
+//       let buildTarget = aiPlayer.getStartLocation() + vec2(GetRandomReal(-64, 64), GetRandomReal(-64, 64))
       
-      printTimed("|cffff5555QIRAJI MACRO WARNING:|r Base lost! Instructing drone to revive Hive Node.", 5.)
-      state.availableWorker.issuePointOrderById(QIRAJI_T1_HIVE_NODE, buildTarget)
-      state.workerIsBusy = true 
+//       printTimed("|cffff5555QIRAJI MACRO WARNING:|r Base lost! Instructing drone to revive Hive Node.", 5.)
+//       state.availableWorker.issuePointOrderById(QIRAJI_T1_HIVE_NODE, buildTarget)
+//       state.workerIsBusy = true 
 
-  // Case B: Base Upgrades (Morphing structures do not consume worker units!)
-  else
-    forUnitsOfPlayer(aiPlayer) (unit structure) ->
-      if structure.isAlive() and structure.getCurrentOrder() == 0
-        let id = structure.getTypeId()
-        if id == QIRAJI_T1_HIVE_NODE and currentGold >= GOLD_COST_T2 and not state.hasT2 and not state.hasT3
-          printTimed("|cffffcc00QIRAJI MACRO TECH:|r Evolving Hive Node -> Swarm Core (Tier 2)!", 5.)
-          structure.issueImmediateOrderById(QIRAJI_T2_SWARM_CORE)
-        else if id == QIRAJI_T2_SWARM_CORE and currentGold >= GOLD_COST_T3 and not state.hasT3
-          printTimed("|cffffcc00QIRAJI MACRO TECH:|r Evolving Swarm Core -> Hive Imperial (Tier 3)!", 5.)
-          structure.issueImmediateOrderById(QIRAJI_T3_HIVE_IMPERIAL)
+//   // Case B: Base Upgrades (Morphing structures do not consume worker units!)
+//   else
+//     forUnitsOfPlayer(aiPlayer) (unit structure) ->
+//       if structure.isAlive() and structure.getCurrentOrder() == 0
+//         let id = structure.getTypeId()
+//         if id == QIRAJI_T1_HIVE_NODE and currentGold >= GOLD_COST_T2 and not state.hasT2 and not state.hasT3
+//           printTimed("|cffffcc00QIRAJI MACRO TECH:|r Evolving Hive Node -> Swarm Core (Tier 2)!", 5.)
+//           structure.issueImmediateOrderById(QIRAJI_T2_SWARM_CORE)
+//         else if id == QIRAJI_T2_SWARM_CORE and currentGold >= GOLD_COST_T3 and not state.hasT3
+//           printTimed("|cffffcc00QIRAJI MACRO TECH:|r Evolving Swarm Core -> Hive Imperial (Tier 3)!", 5.)
+//           structure.issueImmediateOrderById(QIRAJI_T3_HIVE_IMPERIAL)
 
-// ============================================================================
-// SUB-MODULE 2: AUXILIARY PRODUCTION STRUCTURES
-// ============================================================================
-function manageTier1Infrastructure(player aiPlayer, MacroState state)
-  // Skip execution if we are missing a base footprint or if our candidate worker was already claimed
-  if state.expansionAnchor == vec2(0, 0) or state.availableWorker == null or state.workerIsBusy
-    return
+// // ============================================================================
+// // SUB-MODULE 2: AUXILIARY PRODUCTION STRUCTURES
+// // ============================================================================
+// function manageTier1Infrastructure(player aiPlayer, MacroState state)
+//   // Skip execution if we are missing a base footprint or if our candidate worker was already claimed
+//   if state.expansionAnchor == vec2(0, 0) or state.availableWorker == null or state.workerIsBusy
+//     return
 
-  let currentGold = aiPlayer.getGold()
-  let foodCap = GetPlayerState(aiPlayer, PLAYER_STATE_RESOURCE_FOOD_CAP)
-  let foodUsed = GetPlayerState(aiPlayer, PLAYER_STATE_RESOURCE_FOOD_USED)
-  let foodBuffer = foodCap - foodUsed
+//   let currentGold = aiPlayer.getGold()
+//   let foodCap = GetPlayerState(aiPlayer, PLAYER_STATE_RESOURCE_FOOD_CAP)
+//   let foodUsed = GetPlayerState(aiPlayer, PLAYER_STATE_RESOURCE_FOOD_USED)
+//   let foodBuffer = foodCap - foodUsed
   
-  let needsSupply = (foodBuffer < 6) and (foodCap < 100)
+//   let needsSupply = (foodBuffer < 6) and (foodCap < 100)
 
-  var targetBuildingId = 0
-  var targetBuildingCost = 0
-  var debugLogString = ""
+//   var targetBuildingId = 0
+//   var targetBuildingCost = 0
+//   var debugLogString = ""
 
-  // Establish priority matrix
-  if needsSupply
-    targetBuildingId = QIRAJI_SPAWNING_SAC
-    targetBuildingCost = GOLD_COST_FARM
-    debugLogString = "Silithid Hatchery (Farm)"
-  else if state.altarCount < MAX_ALTARS
-    targetBuildingId = QIRAJI_ALTAR_OF_THE_OLD
-    targetBuildingCost = GOLD_COST_ALTAR
-    debugLogString = "Swarm Altar"
-  else if state.barracksCount < MAX_BARRACKS
-    targetBuildingId = QIRAJI_HATCHERY
-    targetBuildingCost = GOLD_COST_BARRACKS
-    debugLogString = "Spawning Grounds (Barracks #" + (state.barracksCount + 1).toString() + ")"
+//   // Establish priority matrix
+//   if needsSupply
+//     targetBuildingId = QIRAJI_SPAWNING_SAC
+//     targetBuildingCost = GOLD_COST_FARM
+//     debugLogString = "Silithid Hatchery (Farm)"
+//   else if state.altarCount < MAX_ALTARS
+//     targetBuildingId = QIRAJI_ALTAR_OF_THE_OLD
+//     targetBuildingCost = GOLD_COST_ALTAR
+//     debugLogString = "Swarm Altar"
+//   else if state.barracksCount < MAX_BARRACKS
+//     targetBuildingId = QIRAJI_HATCHERY
+//     targetBuildingCost = GOLD_COST_BARRACKS
+//     debugLogString = "Spawning Grounds (Barracks #" + (state.barracksCount + 1).toString() + ")"
 
-  // Deploy construction command to our verified, safe target vector
-  if targetBuildingId != 0 and currentGold >= targetBuildingCost
-    // FIXED: Branch out from our randomized structural anchor point instead of the Townhall
-    let safeBuildTarget = calculateValidBuildTarget(state.expansionAnchor, aiPlayer)
+//   // Deploy construction command to our verified, safe target vector
+//   if targetBuildingId != 0 and currentGold >= targetBuildingCost
+//     // FIXED: Branch out from our randomized structural anchor point instead of the Townhall
+//     let safeBuildTarget = calculateValidBuildTarget(state.expansionAnchor, aiPlayer)
 
-    printTimed("|cff00ffffQIRAJI MACRO BUILD:|r Ordering worker to construct: " + debugLogString, 4.)
-    state.availableWorker.issuePointOrderById(targetBuildingId, safeBuildTarget)
-    state.workerIsBusy = true
+//     printTimed("|cff00ffffQIRAJI MACRO BUILD:|r Ordering worker to construct: " + debugLogString, 4.)
+//     state.availableWorker.issuePointOrderById(targetBuildingId, safeBuildTarget)
+//     state.workerIsBusy = true
 
-// ============================================================================
-// MASTER CONTROLLER ENGINE
-// ============================================================================
-/** Initializes the unified macro loop engine for the faction */
-public function startQirajiMacroAI(player aiPlayer)
-  printTimed("|cff00ff00QIRAJI ENGINE:|r Centralized AI controller loop activated.", 5.)
+// // ============================================================================
+// // MASTER CONTROLLER ENGINE
+// // ============================================================================
+// /** Initializes the unified macro loop engine for the faction */
+// public function startQirajiMacroAI(player aiPlayer)
+//   printTimed("|cff00ff00QIRAJI ENGINE:|r Centralized AI controller loop activated.", 5.)
 
-  doPeriodically(5.0) cb ->
-    let state = new MacroState()
-    var eligibleWorkerCount = 0
-    var eligibleAnchorCount = 0
+//   doPeriodically(5.0) cb ->
+//     let state = new MacroState()
+//     var eligibleWorkerCount = 0
+//     var eligibleAnchorCount = 0
 
-    // 1. Unified Player Scan Phase
-    forUnitsOfPlayer(aiPlayer) (unit u) ->
-      if u.isAlive()
-        let id = u.getTypeId()
+//     // 1. Unified Player Scan Phase
+//     forUnitsOfPlayer(aiPlayer) (unit u) ->
+//       if u.isAlive()
+//         let id = u.getTypeId()
         
-        // Register structural markers
-        let isStructure = (id == QIRAJI_T1_HIVE_NODE or id == QIRAJI_T2_SWARM_CORE or 
-                           id == QIRAJI_T3_HIVE_IMPERIAL or id == QIRAJI_HATCHERY or 
-                           id == QIRAJI_ALTAR_OF_THE_OLD or id == QIRAJI_SPAWNING_SAC)
+//         // Register structural markers
+//         let isStructure = (id == QIRAJI_T1_HIVE_NODE or id == QIRAJI_T2_SWARM_CORE or 
+//                            id == QIRAJI_T3_HIVE_IMPERIAL or id == QIRAJI_HATCHERY or 
+//                            id == QIRAJI_ALTAR_OF_THE_OLD or id == QIRAJI_SPAWNING_SAC)
         
-        if isStructure
-          // FIXED: Reservoir sampling distributes selection evenly among all existing buildings.
-          // This allows new structures to naturally build adjacent to old structures!
-          eligibleAnchorCount++
-          if state.expansionAnchor == vec2(0, 0) or GetRandomInt(1, eligibleAnchorCount) == 1
-            state.expansionAnchor = u.getPos()
+//         if isStructure
+//           // FIXED: Reservoir sampling distributes selection evenly among all existing buildings.
+//           // This allows new structures to naturally build adjacent to old structures!
+//           eligibleAnchorCount++
+//           if state.expansionAnchor == vec2(0, 0) or GetRandomInt(1, eligibleAnchorCount) == 1
+//             state.expansionAnchor = u.getPos()
 
-          // Track operational townhall metrics specifically
-          if id == QIRAJI_T1_HIVE_NODE or id == QIRAJI_T2_SWARM_CORE or id == QIRAJI_T3_HIVE_IMPERIAL
-            state.hasTownhall = true
-            state.townhallPos = u.getPos()
-            if id == QIRAJI_T1_HIVE_NODE
-              state.hasT1 = true
-            else if id == QIRAJI_T2_SWARM_CORE
-              state.hasT2 = true
-            else if id == QIRAJI_T3_HIVE_IMPERIAL
-              state.hasT3 = true
+//           // Track operational townhall metrics specifically
+//           if id == QIRAJI_T1_HIVE_NODE or id == QIRAJI_T2_SWARM_CORE or id == QIRAJI_T3_HIVE_IMPERIAL
+//             state.hasTownhall = true
+//             state.townhallPos = u.getPos()
+//             if id == QIRAJI_T1_HIVE_NODE
+//               state.hasT1 = true
+//             else if id == QIRAJI_T2_SWARM_CORE
+//               state.hasT2 = true
+//             else if id == QIRAJI_T3_HIVE_IMPERIAL
+//               state.hasT3 = true
           
-          // Count production buildings
-          else if id == QIRAJI_HATCHERY
-            state.barracksCount++
-          else if id == QIRAJI_ALTAR_OF_THE_OLD
-            state.altarCount++
+//           // Count production buildings
+//           else if id == QIRAJI_HATCHERY
+//             state.barracksCount++
+//           else if id == QIRAJI_ALTAR_OF_THE_OLD
+//             state.altarCount++
         
-        // Trace and extract a verified candidate worker
-        else if id == QIRAJI_WORKER_ID
-          let activeOrder = u.getCurrentOrder()
+//         // Trace and extract a verified candidate worker
+//         else if id == QIRAJI_WORKER_ID
+//           let activeOrder = u.getCurrentOrder()
           
-          // Workers are only eligible if they are completely idle (0)
-          if activeOrder == 0
-            eligibleWorkerCount++
-            if state.availableWorker == null or GetRandomInt(1, eligibleWorkerCount) == 1
-              state.availableWorker = u
+//           // Workers are only eligible if they are completely idle (0)
+//           if activeOrder == 0
+//             eligibleWorkerCount++
+//             if state.availableWorker == null or GetRandomInt(1, eligibleWorkerCount) == 1
+//               state.availableWorker = u
 
-    // 2. Linear Priority Pipeline Calls
-    manageTownhallLogic(aiPlayer, state)
-    manageTier1Infrastructure(aiPlayer, state)
+//     // 2. Linear Priority Pipeline Calls
+//     manageTownhallLogic(aiPlayer, state)
+//     manageTier1Infrastructure(aiPlayer, state)
 
-    // 3. Clean up instance memory storage safely at the end of every tick interval
-    destroy state
+//     // 3. Clean up instance memory storage safely at the end of every tick interval
+//     destroy state

@@ -20,9 +20,12 @@ import QirajiSwarmMother
 import QirajiWarrior
 import SilithidWasp
 import QirajiDrone
-import QirajiTank
+import QirajiTank // Reaver/tank bla bla
 import QirajiSpitter
 import QirajiBeetleBombardier
+
+import QirajiColosus
+import QirajiAnubisath
 
 // Upgrades ------------------------------------
 import ZandalariBaseUpgrades
@@ -46,7 +49,7 @@ public constant UPG_TIME = 10 * 60
     ..setUpgradesUsed("")
     ..setUpgradesTo("")
     ..setResearchesAvailable("")
-    ..setUnitsTrained(commaList(QIRAJI_WORKER_ID))
+    ..setUnitsTrained(commaList(QIRAJI_WORKER_ID, QIRAJI_COLOSUS_ID))
     ..setItemsMade("")
     ..setNormalAbilities("")
     ..setUpgradesTo(commaList(QIRAJI_T2_SWARM_CORE))
@@ -120,13 +123,14 @@ public constant UPG_TIME = 10 * 60
     ..setName("Qiraji Hatchery")
     ..setTooltipBasic("Build Qiraji Hatchery")
     ..setTooltipExtended("An incubation chamber filled with hyper-evolution fluids. Rapidly forces the growth of frontline chitinous soldiers and biological shock units.")
-    ..setIconGameInterface(Icons.bTNCrypt)
+    ..setIconGameInterface("ReplaceableTexture\\CommandButtons\\BTNTwilightHammerBBeastiary.blp")
+    ..setModelFile("TwilightHammerBBeastiary(TC).mdx")
     ..setGoldCost(50)
     ..setLumberCost(0)
     ..setRequirements("")
     ..setUpgradesUsed("")
     ..setUpgradesTo("")
-    ..setResearchesAvailable("")
+    ..setResearchesAvailable(commaList(QIRAJI_TANK_SPEED_UPGRADE_ID,QIRAJI_FORTITUDE_UPGRADE_ID))
     ..setUnitsTrained(commaList(QIRAJI_WASP_ID, QIRAJI_TANK_ID, QIRAJI_DRONE_ID, QIRAJI_SPITTER_ID))
     ..setItemsMade("")
     ..setNormalAbilities("")
@@ -138,7 +142,8 @@ public constant UPG_TIME = 10 * 60
     ..setName("Altar of the Old Gods")
     ..setTooltipBasic("Build Altar of the Old Gods")
     ..setTooltipExtended("A terrifying stone rift channeling ancient void whispers. Used to summon and restore high-ranking Qiraji Generals and Emperors.")
-    ..setIconGameInterface(Icons.bTNAltarOfKings)
+    ..setIconGameInterface("ReplaceableTexture\\CommandButtons\\BTNTwilightHammerBAlater.blp")
+    ..setModelFile("TwilightHammerBAlater(TC).mdx")
     ..setGoldCost(50)
     ..setLumberCost(0)
     ..setRequirements("")
@@ -155,7 +160,8 @@ public constant UPG_TIME = 10 * 60
     ..setName("Carapace Chamber")
     ..setTooltipBasic("Build Carapace Chamber")
     ..setTooltipExtended("A specialized refinery where symbiotic organisms modify chitin shells, sharpening serrated appendages and hardening cellular plates.")
-    ..setIconGameInterface(Icons.bTNGraveYard)
+    ..setIconGameInterface("ReplaceableTexture\\CommandButtons\\BTNTwilightHammerBSmithy.blp")
+    ..setModelFile("TwilightHammerBSmithy(TC).mdx")
     ..setGoldCost(50)
     ..setLumberCost(0)
     ..setRequirements("")
@@ -172,7 +178,7 @@ public constant UPG_TIME = 10 * 60
   new BuildingDefinition(QIRAJI_RESECTION_MILL, 'hlum')
     ..setName("Resection Mill")
     ..setTooltipBasic("Build Resection Mill")
-    ..setTooltipExtended("Processes raw environmental wood into concentrated biomass pulp. Increases the extraction rate of lumber-alternative nutrients.")
+    ..setTooltipExtended("Trains Qiraji Kidnappers, Devourers and ambushers")
     ..setIconGameInterface(Icons.bTNSacrificialPit)
     ..setGoldCost(50)
     ..setLumberCost(0)
@@ -216,7 +222,25 @@ public constant UPG_TIME = 10 * 60
     ..setUpgradesUsed("")
     ..setUpgradesTo("")
     ..setResearchesAvailable("")
-    ..setUnitsTrained(commaList(QIRAJI_BOMBARDER_ID, QIRAJI_WARRIOR_ID))
+    ..setUnitsTrained(commaList(QIRAJI_BOMBARDER_ID, QIRAJI_WARRIOR_ID, QIRAJI_COLOSUS_ID))
+    ..setItemsMade("")
+    ..setNormalAbilities("")
+
+  // =========================================================================
+  // TIER 3.5 PINNACLE UNITS (Workshop baseline)
+  // =========================================================================
+  new BuildingDefinition(QIRAJI_CONSTRUCT_OF_THE_OLD, UnitIds.workshop)
+    ..setName("Construct of the Old Gods")
+    ..setTooltipBasic("Build Construct of the Old Gods")
+    ..setTooltipExtended("A pinnacle structure of the black empire channeling the might of C'thun the Qiraji will make even stronger creations.")
+    ..setIconGameInterface(Icons.bTNSlaughterHouse)
+    ..setGoldCost(100)
+    ..setLumberCost(0)
+    ..setRequirements(commaList(QIRAJI_T3_HIVE_IMPERIAL))
+    ..setUpgradesUsed("")
+    ..setUpgradesTo("")
+    ..setResearchesAvailable("")
+    ..setUnitsTrained(commaList(ANUBISATH_ID))
     ..setItemsMade("")
     ..setNormalAbilities("")
 

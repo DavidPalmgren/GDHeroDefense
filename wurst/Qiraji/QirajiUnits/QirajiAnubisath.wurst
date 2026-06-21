@@ -1,0 +1,42 @@
+package QirajiAnubisath
+
+import AbilityObjEditing
+import UnitObjEditing
+import ObjectIdGenerator
+import ObjectIds
+import Icons
+import AbilityIds
+
+import UnitIds
+
+
+import QirajiBuildingIds
+import ZandalariBaseUpgrades
+
+public constant ANUBISATH_ID = compiletime(UNIT_ID_GEN.next())
+public constant ANUBISATH_SOLAR_BEAM_ID = compiletime(ABIL_ID_GEN.next())
+
+@compiletime function anubGen()
+  new UnitDefinition(ANUBISATH_ID, UnitIds.granitegolem)
+    ..setName("Anubisath")
+    ..setTooltipBasic("Train Anubisath")
+    ..setTooltipExtended("The anubisaths are titan-forged giants made of obsidian, unfortunately the curruption of C'thun proved to much for the loyal construct of order.")
+    ..setHitPointsMaximumBase(2200)
+    ..setHitPointsRegenerationRate(0.3)
+    ..setAttack1DamageBase(40)
+    ..setManaInitialAmount(125)
+    ..setManaMaximum(400)
+    ..setManaRegeneration(0.67)
+    ..setArmorType(ArmorType.Fortified)
+    ..setUpgradesUsed(commaList(ZANDALARI_ARMOR_UPG_ID,ZANDALARI_DAMAGE_UPG_ID))
+    ..setNormalAbilities(commaList(ANUBISATH_SOLAR_BEAM_ID, AbilityIds.spellImmunity, AbilityIds.devourMagic))
+
+    ..setModelFile("AQanubisath.mdx")
+
+
+  new AbilityDefinitionFingerofDeath(ANUBISATH_SOLAR_BEAM_ID)
+    ..setDamage(1, 500)
+    ..setCooldown(1, 7)
+    ..setCastRange(1, 400)
+    ..setArtTarget("Shining Flare.mdx")
+    ..setManaCost(1, 100)

@@ -1,0 +1,60 @@
+package QirajiWorkersUnion
+
+import QirajiWorker
+import OrderIds
+
+public function unit.isAvailable() returns boolean
+    // Rule 1: A dead worker cannot fulfill the production quota
+    if not this.isAlive() or this.getTypeId() != QIRAJI_WORKER_ID
+        return false
+        
+    let currentOrder = this.getCurrentOrder()
+    
+    // Rule 2: Check if they are doing baseline, interruptible labor tasks
+    // 0 = Idle / No Order
+    if currentOrder == 0 
+        return true
+        
+    if currentOrder == OrderId("stop") or currentOrder == OrderId("holdposition")
+        return true
+        
+    // Harvesting or standard moving means they are safe to pull for a construction job
+    if currentOrder == OrderId("harvest") or currentOrder == OrderId("smart") or currentOrder == OrderId("move")
+        return true
+        
+    // If their current order matches a building rawcode or an active construction state, they are BUSY.
+    return false
+
+/** Scatters all idle units away from a build site so the builder can path through. */
+public function scatterIdleUnitsNear(vec2 pos, unit builder, player aiPlayer, real scatterRadius)
+    let g = CreateGroup()
+    g.enumUnitsInRange(pos, scatterRadius)
+
+    for u from g
+        if u != builder
+            and u.isAlive()
+            and u.getOwner() == aiPlayer
+            and u.getCurrentOrder() == 0
+            and not u.isType(UNIT_TYPE_STRUCTURE)
+            let fleeAngle = GetRandomReal(0, 360).fromDeg()
+            let fleePos   = pos.polarOffset(fleeAngle, GetRandomReal(200, 350))
+            u.issuePointOrder("move", fleePos)
+
+    g.destr()
+
+/** Helper function to safely fetch a union-approved worker from the local sector. */
+public function getAvailableQirajiWorker(player aiPlayer) returns unit
+    let workers = CreateGroup()
+    workers.enumUnitsOfPlayer(aiPlayer, null)
+    
+    unit chosenWorker = null
+    for w from workers
+        if w.isAvailable()
+            print("Available worker")
+            chosenWorker = w
+            break
+            
+    workers.destr()
+    if chosenWorker == null
+        print("No woker null ret")
+    return chosenWorker

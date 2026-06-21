@@ -16,6 +16,7 @@ import ClosureEvents
 import ClosureTimers
 
 import ZandalariBaseUpgrades
+import QirajiBuildingIds
 
 let tgen = new AbilityTooltipGenerator(Targettype.UNIT, "Take down a flying unit")
 
@@ -36,6 +37,11 @@ public constant QIRAJI_WASP_TAKE_DOWN_ID = compiletime(ABIL_ID_GEN.next())
     ..setModelFile("SilithidWasp.mdx")
     ..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNSilithidWaspBoss.blp")
     ..setUpgradesUsed(commaList(ZANDALARI_ARMOR_UPG_ID,ZANDALARI_DAMAGE_UPG_ID))
+    ..setRequirements(commaList(QIRAJI_T2_SWARM_CORE))
+
+    ..setHotkey("R")
+    ..setButtonPositionX(3)
+    ..setButtonPositionY(0)
 
 
   // new AbilityDefinitionPoisonAttack(newAbilityId)

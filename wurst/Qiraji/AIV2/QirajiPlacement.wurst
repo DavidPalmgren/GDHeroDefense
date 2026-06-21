@@ -1,0 +1,99 @@
+package QirajiPlacement
+
+// WC3 ground truth:
+// 1 building tile  = 128 world units
+// 1 pathing cell   = 32 world units  (4 pathing cells per tile)
+// Build grid snaps to 128-unit boundaries (even tile buildings)
+// or 128-unit boundary + 64 offset (odd tile buildings)
+
+constant real PATHING_CELL  = 32.0
+constant real TILE_SIZE     = 128.0
+constant real HALF_TILE     = 64.0
+
+public function snapToBuildGrid(real coord, int tileCount) returns real
+    if tileCount mod 2 == 0
+        return (coord / TILE_SIZE).round().toReal() * TILE_SIZE
+    else
+        return (coord / TILE_SIZE).floor().toReal() * TILE_SIZE + HALF_TILE
+
+public function isFootprintBuildable(vec2 center, int tileWidth, int tileHeight) returns boolean
+    let cellsX = tileWidth  * 4
+    let cellsY = tileHeight * 4
+    let startX = center.x - (tileWidth  * TILE_SIZE / 2.0) + (PATHING_CELL / 2.0)
+    let startY = center.y - (tileHeight * TILE_SIZE / 2.0) + (PATHING_CELL / 2.0)
+
+    for col = 0 to cellsX - 1
+        for row = 0 to cellsY - 1
+            let tx = startX + col * PATHING_CELL
+            let ty = startY + row * PATHING_CELL
+            if IsTerrainPathable(tx, ty, PATHING_TYPE_BUILDABILITY)
+                return false
+
+    return true
+
+public function isFootprintClearOfStructures(vec2 center, int tileWidth, int tileHeight, real padding) returns boolean
+    let hw     = tileWidth  * TILE_SIZE / 2.0
+    let hh     = tileHeight * TILE_SIZE / 2.0
+    let radius = SquareRoot(hw * hw + hh * hh) + padding
+
+    let g = CreateGroup()
+    g.enumUnitsInRange(center, radius)
+
+    var clear = true
+    for u from g
+        if u.isAlive() and u.isType(UNIT_TYPE_STRUCTURE)
+            clear = false
+            break
+
+    g.destr()
+    return clear
+
+/** Returns true when no alive non-structure unit is standing in the footprint.
+    Uses the exact footprint half-diagonal — no padding, we only care about
+    units physically inside the build area. */
+public function isFootprintClearOfUnits(vec2 center, int tileWidth, int tileHeight) returns boolean
+    let hw     = tileWidth  * TILE_SIZE / 2.0
+    let hh     = tileHeight * TILE_SIZE / 2.0
+    let radius = SquareRoot(hw * hw + hh * hh)
+
+    let g = CreateGroup()
+    g.enumUnitsInRange(center, radius)
+
+    var clear = true
+    for u from g
+        if u.isAlive() and not u.isType(UNIT_TYPE_STRUCTURE)
+            clear = false
+            break
+
+    g.destr()
+    return clear
+
+public function findValidBuildSite(
+    vec2 basePos,
+    int  tileWidth,
+    int  tileHeight,
+    real maxRadius,
+    real padding
+) returns vec2
+    let snappedBase = vec2(
+        snapToBuildGrid(basePos.x, tileWidth),
+        snapToBuildGrid(basePos.y, tileHeight)
+    )
+
+    let maxRings = (maxRadius / TILE_SIZE).toInt()
+
+    for ring = 0 to maxRings
+        for dx = -ring to ring
+            for dy = -ring to ring
+                if dx.abs() != ring and dy.abs() != ring
+                    continue
+
+                let candidate = snappedBase + vec2(dx * TILE_SIZE, dy * TILE_SIZE)
+
+                if isFootprintBuildable(candidate, tileWidth, tileHeight)
+                    and isFootprintClearOfStructures(candidate, tileWidth, tileHeight, padding)
+                    and isFootprintClearOfUnits(candidate, tileWidth, tileHeight)
+                    return candidate
+
+    printTimed("|cffff0000[QirajiPlacement]|r No valid site found within " + maxRadius.toString() + " range.", 6.)
+    return vec2(-1.0, -1.0)

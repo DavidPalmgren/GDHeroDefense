@@ -1,68 +1,68 @@
-package QirajiUnitProduction
+// package QirajiUnitProduction
 
-import ClosureTimers
-import ClosureForGroups
-import QirajiBuildingIds
-import ClosureEvents
+// import ClosureTimers
+// import ClosureForGroups
+// import QirajiBuildingIds
+// import ClosureEvents
 
-// --- COHORT UNIT ID REGISTRATION ---
-import Ambusher
-import Devourer
+// // --- COHORT UNIT ID REGISTRATION ---
+// import Ambusher
+// import Devourer
 
-// A global array to store the current tech tier (1, 2, or 3) for every player ID
-int array playerQirajiTier
+// // A global array to store the current tech tier (1, 2, or 3) for every player ID
+// int array playerQirajiTier
 
-/** Starts the non-stop automated army production loop for a specific AI player */
-public function startQirajiUnitProduction(player aiPlayer)
-  // Initialize them at Tier 1 just in case
-  playerQirajiTier[aiPlayer.getId()] = 1
-  printTimed("|cff00ff00QIRAJI AI:|r Automated production loop started for " + aiPlayer.getName(), 5.)
+// /** Starts the non-stop automated army production loop for a specific AI player */
+// public function startQirajiUnitProduction(player aiPlayer)
+//   // Initialize them at Tier 1 just in case
+//   playerQirajiTier[aiPlayer.getId()] = 1
+//   printTimed("|cff00ff00QIRAJI AI:|r Automated production loop started for " + aiPlayer.getName(), 5.)
 
-  doPeriodically(2.0) cb ->
-    // 1. Instantly look up the pre-calculated tier from our global array
-    let currentTier = playerQirajiTier[aiPlayer.getId()]
+//   doPeriodically(2.0) cb ->
+//     // 1. Instantly look up the pre-calculated tier from our global array
+//     let currentTier = playerQirajiTier[aiPlayer.getId()]
 
-    // 2. Map production profiles based on the detected tier
-    var targetAmbusher = AMBUSHER_T1_ID
-    var targetDevourer = DEVOURER_T1_ID
+//     // 2. Map production profiles based on the detected tier
+//     var targetAmbusher = AMBUSHER_T1_ID
+//     var targetDevourer = DEVOURER_T1_ID
 
-    if currentTier == 2
-      targetAmbusher = AMBUSHER_T2_ID
-      targetDevourer = DEVOURER_T2_ID
-    else if currentTier == 3
-      targetAmbusher = AMBUSHER_T3_ID
-      targetDevourer = DEVOURER_T3_ID
+//     if currentTier == 2
+//       targetAmbusher = AMBUSHER_T2_ID
+//       targetDevourer = DEVOURER_T2_ID
+//     else if currentTier == 3
+//       targetAmbusher = AMBUSHER_T3_ID
+//       targetDevourer = DEVOURER_T3_ID
 
-    // 3. Scan the map for all Hatcheries owned by this specific AI player
-    forUnitsOfPlayer(aiPlayer) (unit structure) ->
-      if structure.getTypeId() == QIRAJI_HATCHERY and structure.isAlive()
-        if structure.getCurrentOrder() == 0
-          let roll = GetRandomInt(1, 100)
-          let finalUnitId = (roll <= 50) ? targetAmbusher : targetDevourer
+//     // 3. Scan the map for all Hatcheries owned by this specific AI player
+//     forUnitsOfPlayer(aiPlayer) (unit structure) ->
+//       if structure.getTypeId() == QIRAJI_HATCHERY and structure.isAlive()
+//         if structure.getCurrentOrder() == 0
+//           let roll = GetRandomInt(1, 100)
+//           let finalUnitId = (roll <= 50) ? targetAmbusher : targetDevourer
           
-          // DEBUG: Print exactly which unit type and tier is being queued up
-          let unitTypeName = (roll <= 50) ? "Ambusher" : "Devourer"
-          printTimed("|cff8080ffAI PROD:|r Hatchery is idle. Training Tier " + currentTier.toString() + " " + unitTypeName, 1.5)
+//           // DEBUG: Print exactly which unit type and tier is being queued up
+//           let unitTypeName = (roll <= 50) ? "Ambusher" : "Devourer"
+//           printTimed("|cff8080ffAI PROD:|r Hatchery is idle. Training Tier " + currentTier.toString() + " " + unitTypeName, 1.5)
           
-          structure.issueImmediateOrderById(finalUnitId)
+//           structure.issueImmediateOrderById(finalUnitId)
 
-init
-  // Track when a player finishes building their first Tier 1 Hive Node from scratch
-  EventListener.add(EVENT_PLAYER_UNIT_CONSTRUCT_FINISH) ->
-    let u = GetTriggerUnit()
-    if u.getTypeId() == QIRAJI_T1_HIVE_NODE
-      let pid = u.getOwner().getId()
-      playerQirajiTier[pid] = 1
-      printTimed("|cffffcc00AI TECH TRACKER:|r " + u.getOwner().getName() + " established Tier 1 (Hive Node)", 6.)
+// init
+//   // Track when a player finishes building their first Tier 1 Hive Node from scratch
+//   EventListener.add(EVENT_PLAYER_UNIT_CONSTRUCT_FINISH) ->
+//     let u = GetTriggerUnit()
+//     if u.getTypeId() == QIRAJI_T1_HIVE_NODE
+//       let pid = u.getOwner().getId()
+//       playerQirajiTier[pid] = 1
+//       printTimed("|cffffcc00AI TECH TRACKER:|r " + u.getOwner().getName() + " established Tier 1 (Hive Node)", 6.)
 
-  // Track when a town hall finishes mutating into Tier 2 or Tier 3
-  EventListener.add(EVENT_PLAYER_UNIT_UPGRADE_FINISH) ->
-    let u = GetTriggerUnit()
-    let pid = u.getOwner().getId()
+//   // Track when a town hall finishes mutating into Tier 2 or Tier 3
+//   EventListener.add(EVENT_PLAYER_UNIT_UPGRADE_FINISH) ->
+//     let u = GetTriggerUnit()
+//     let pid = u.getOwner().getId()
     
-    if u.getTypeId() == QIRAJI_T2_SWARM_CORE
-      playerQirajiTier[pid] = 2
-      printTimed("|cffffcc00AI TECH TRACKER:|r " + u.getOwner().getName() + " upgraded to Tier 2 (Swarm Core)", 6.)
-    else if u.getTypeId() == QIRAJI_T3_HIVE_IMPERIAL
-      playerQirajiTier[pid] = 3
-      printTimed("|cffffcc00AI TECH TRACKER:|r " + u.getOwner().getName() + " upgraded to Tier 3 (Hive Imperial)", 6.)
+//     if u.getTypeId() == QIRAJI_T2_SWARM_CORE
+//       playerQirajiTier[pid] = 2
+//       printTimed("|cffffcc00AI TECH TRACKER:|r " + u.getOwner().getName() + " upgraded to Tier 2 (Swarm Core)", 6.)
+//     else if u.getTypeId() == QIRAJI_T3_HIVE_IMPERIAL
+//       playerQirajiTier[pid] = 3
+//       printTimed("|cffffcc00AI TECH TRACKER:|r " + u.getOwner().getName() + " upgraded to Tier 3 (Hive Imperial)", 6.)

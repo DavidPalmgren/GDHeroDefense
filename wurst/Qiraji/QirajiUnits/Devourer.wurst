@@ -5,10 +5,10 @@ import UnitObjEditing
 import ObjectIdGenerator
 import ObjectIds
 import Icons
+import UnitIds
 
 import QirajiBuildingIds
 import ZandalariBaseUpgrades
-
 
 
 
@@ -45,12 +45,11 @@ public constant T3_REGEN_ID  = compiletime(ABIL_ID_GEN.next())
         ..setTooltipNormalExtended(1, "Attacks deal 30% splash damage to nearby ground enemies.")
 
     
-    new AbilityDefinitionShadowStrikeCreep(T2_BILE_ID)
+    new AbilityDefinitionAlchemistAcidBomb(T2_BILE_ID)
         ..setName("Corrosive Bile")
         ..setIconNormal(Icons.bTNAcidBomb)
-        ..setInitialDamage(1, 150.0)
-        ..setDecayingDamage(1, 30.0)
-        ..setMovementSpeedFactor(1, 0.40)
+        ..setHeroAbility(false)
+        ..setArmorPenalty(1, 3)
         ..setCooldown(1, 12.0)
         ..setManaCost(1, 75)
         ..setCastRange(1, 450.0)
@@ -102,16 +101,17 @@ public constant T3_REGEN_ID  = compiletime(ABIL_ID_GEN.next())
 
 
     
-    new UnitDefinition(DEVOURER_T2_ID, 'uabo')
+    new UnitDefinition(DEVOURER_T2_ID, UnitIds.spiderling)
         ..setName("Plague Devourer")
         ..setHitPointsMaximumBase(750)  
-        ..setAttack1DamageBase(36)     
+        ..setAttack1DamageBase(26)     
         ..setDefenseBase(5)
         ..setSpeedBase(295)
         ..setGoldBountyAwardedBase(32)
         ..setManaMaximum(200)          
         ..setManaInitialAmount(100)
-        ..setScalingValue(1.15)        
+        ..setManaRegeneration(0.8)
+        ..setScalingValue(1.)
         
         ..setNormalAbilities(commaList(T2_CLEAVE_ID, T2_BILE_ID))
         ..setRequirements(commaList(QIRAJI_T2_SWARM_CORE))
