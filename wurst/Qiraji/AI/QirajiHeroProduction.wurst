@@ -10,6 +10,8 @@ import CryptLord
 constant int ABIL_CARAPACE = 'Ausr'
 
 int array qirajiSkillBuild
+// Keep a global reference to the AI's hero so we can easily track if they are alive
+unit qirajiFactionHero = null
 
 function initializeSkillBlueprint()
   // Level 1-5 Baseline Progression
@@ -28,17 +30,29 @@ function initializeSkillBlueprint()
   qirajiSkillBuild[9] = CRYPT_LORD_BURROW
   qirajiSkillBuild[10] = CRYPT_LORD_BURROW
 
+/** Attempts to order a living altar to train/revive the hero. Returns true if successful. */
+function tryTrainHero(player owner) returns bool
+  let altars = CreateGroup()
+  altars.enumUnitsOfPlayer(owner, null)
+
+  var ordered = false
+  for altar from altars
+    if altar.getTypeId() == QIRAJI_ALTAR_OF_THE_OLD and altar.isAlive() and not ordered
+      // Ensure the altar isn't already actively training/reviving something
+      if altar.getCurrentOrder() == 0
+        ordered = altar.issueImmediateOrderById(CRYPT_LORD_HERO_ID)
+  
+  altars.destr()
+  return ordered
+
 init
   initializeSkillBlueprint()
 
-  // 1. Initial training when Altar is built
-  EventListener.add(EVENT_PLAYER_UNIT_CONSTRUCT_FINISH) ->
-    let u = GetTriggerUnit()
-    let id = u.getTypeId()
-
-    if id == QIRAJI_ALTAR_OF_THE_OLD
-      // printTimed("|cff00ffffAI HERO PRODUCTION:|r Swarm Altar complete! Training faction Hero.", 5.)
-      u.issueImmediateOrderById(CRYPT_LORD_HERO_ID)
+  // 1. Track the hero when they are successfully created/revived
+  EventListener.add(EVENT_PLAYER_UNIT_TRAIN_FINISH) ->
+    let trained = GetTrainedUnit()
+    if trained.getTypeId() == CRYPT_LORD_HERO_ID
+      qirajiFactionHero = trained
 
   // 2. Automatic Skill Allocation
   EventListener.add(EVENT_PLAYER_HERO_LEVEL) ->
@@ -50,29 +64,19 @@ init
         
         if targetSkillId != 0
           SelectHeroSkill(hero, targetSkillId)
-          // printTimed("|cff00ff00AI HERO LEVEL UP:|r Hero reached Level " + 
-          //            currentLevel.toString() + "! Learned assigned ability.", 4.)
 
-  // 3. Retrain/Revive on Death
-  EventListener.add(EVENT_PLAYER_UNIT_DEATH) ->
-    let dyingHero = GetTriggerUnit()
-    
-    if dyingHero.getTypeId() == CRYPT_LORD_HERO_ID
-      let owner = dyingHero.getOwner()
-      // printTimed("|cffcc0000AI HERO fallen:|r " + dyingHero.getName() + " died. Seeking Altar for resurrection...", 5.)
+  // 3. Persistent production manager loop
+  // This replaces the fragile one-time events and forces production if resource/food blocked
+  doPeriodically(5.0) (cb) ->
+    // Assuming player 1 (index 0) is your AI player. Adjust the player index as needed!
+    let aiPlayer = players[0] 
 
-      // Wait 3 seconds before finding the altar and issuing the revive order
-      doAfter(3.0) ->
-        let altars = CreateGroup()
-        altars.enumUnitsOfPlayer(owner, null)
+    // Conditions to request a hero:
+    // - The hero variable was never assigned (initial game state)
+    // - The hero exists but is dead, and isn't currently queuing a revival
+    let needsInitialTrain = (qirajiFactionHero == null)
+    let needsRevive = (qirajiFactionHero != null and not qirajiFactionHero.isAlive())
 
-        var altarOrdered = false
-        for altar from altars
-          if altar.getTypeId() == QIRAJI_ALTAR_OF_THE_OLD and altar.isAlive() and not altarOrdered
-            // Reviving heroes uses the same Order ID as training them
-            let success = altar.issueImmediateOrderById(CRYPT_LORD_HERO_ID)
-            if success
-              // printTimed("|cff00ffffAI HERO PRODUCTION:|r Altar has begun reviving the Hero.", 5.)
-              altarOrdered = true
-        
-        altars.destr()
+    if needsInitialTrain or needsRevive
+      // Try to train. If resources open up and it succeeds, it returns true.
+      tryTrainHero(aiPlayer)

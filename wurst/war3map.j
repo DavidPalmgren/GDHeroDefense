@@ -83,7 +83,7 @@ globals
     rect                    gg_rct_QirajiParty         = null
     rect                    gg_rct_QirajiSpawn         = null
     trigger                 gg_trg_testGate            = null
-    trigger                 gg_trg_Untitled_Trigger_001 = null
+    trigger                 gg_trg_heroLimits          = null
     trigger                 gg_trg_enemyForcesInit     = null
     trigger                 gg_trg_XaviusKilled        = null
     trigger                 gg_trg_auberdine           = null
@@ -1322,16 +1322,17 @@ function InitTrig_testGate takes nothing returns nothing
 endfunction
 
 //===========================================================================
-// Trigger: Untitled Trigger 001
+// Trigger: heroLimits
 //===========================================================================
-function Trig_Untitled_Trigger_001_Actions takes nothing returns nothing
+function Trig_heroLimits_Actions takes nothing returns nothing
+    call SetPlayerMaxHeroesAllowed( 3, Player(11) )
     call MeleeStartingHeroLimit(  )
 endfunction
 
 //===========================================================================
-function InitTrig_Untitled_Trigger_001 takes nothing returns nothing
-    set gg_trg_Untitled_Trigger_001 = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_Untitled_Trigger_001, function Trig_Untitled_Trigger_001_Actions )
+function InitTrig_heroLimits takes nothing returns nothing
+    set gg_trg_heroLimits = CreateTrigger(  )
+    call TriggerAddAction( gg_trg_heroLimits, function Trig_heroLimits_Actions )
 endfunction
 
 //===========================================================================
@@ -1522,7 +1523,7 @@ endfunction
 //===========================================================================
 function InitCustomTriggers takes nothing returns nothing
     call InitTrig_testGate(  )
-    call InitTrig_Untitled_Trigger_001(  )
+    call InitTrig_heroLimits(  )
     call InitTrig_enemyForcesInit(  )
     call InitTrig_XaviusKilled(  )
     call InitTrig_auberdine(  )
@@ -1537,7 +1538,7 @@ endfunction
 //===========================================================================
 function RunInitializationTriggers takes nothing returns nothing
     call ConditionalTriggerExecute( gg_trg_testGate )
-    call ConditionalTriggerExecute( gg_trg_Untitled_Trigger_001 )
+    call ConditionalTriggerExecute( gg_trg_heroLimits )
     call ConditionalTriggerExecute( gg_trg_enemyForcesInit )
     call ConditionalTriggerExecute( gg_trg_auberdine )
     call ConditionalTriggerExecute( gg_trg_stonetalon )

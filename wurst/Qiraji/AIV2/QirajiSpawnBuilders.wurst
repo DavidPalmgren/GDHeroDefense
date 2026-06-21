@@ -5,7 +5,7 @@ import QirajiWorker
 import QirajiPlacement // Imported: Grabs our newly built layout scanner
 
 public function qirajiSpawnBuildersSetBase(player aiPlayer)
-    aiPlayer.setGold(10000)
+    aiPlayer.setGold(1500)
     aiPlayer.setLumber(10000)
     SetPlayerState(aiPlayer, PLAYER_STATE_FOOD_CAP_CEILING, 200)
     let spawnRect = gg_rct_QirajiSpawn

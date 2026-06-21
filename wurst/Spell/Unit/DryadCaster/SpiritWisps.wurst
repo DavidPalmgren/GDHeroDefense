@@ -56,7 +56,6 @@ constant real UPDATE_INTERVAL = 0.05
 
 init
     EventListener.onCast(SPIRIT_WISPS_ID) (caster) ->
-        // Spawn 3 wisps evenly spaced around caster
         let wisps = new LinkedList<unit>()
 
         for i = 0 to WISP_COUNT - 1
@@ -64,63 +63,71 @@ init
             let spawnPos = caster.getPos().polarOffset(angle(startAngle), ORBIT_RADIUS)
             let wisp = createUnit(caster.getOwner(), WISP_UNIT_ID, spawnPos, angle(0.))
             wisp.addAbility('Aloc')
-            wisp.setVertexColor(50, 255, 50, 255) // light blue tint
+            wisp.setVertexColor(50, 255, 50, 255)
             wisp.setScale(0.5)
-            //let _sfx = wisp.addEffect("Doodads\\Cinematic\\GlowingRunes\\GlowingRunes2.mdl", "origin")
             wisps.add(wisp)
 
         let moveTimer = doPeriodically(UPDATE_INTERVAL) cb ->
+            // Allocate once per tick, destroy at end of tick
             let wispTargets = new LinkedList<unit>()
+            let casterPos   = caster.getPos()
+
+            // Snapshot nearby units into a local list — never reuse ENUM_GROUP mid-loop
+            let nearby = new LinkedList<unit>()
+            let g = CreateGroup()
+            g.enumUnitsInRange(casterPos, WISP_RADIUS)
+            for u from g
+                if u.isAlive() and u.getOwner().isAllyOf(caster.getOwner()) and u.getHP() < u.getMaxHP()
+                    nearby.add(u)
+
             for wisp in wisps
-                let casterPos = caster.getPos()
                 unit nearestInjured = null
-                real nearestDist = 99999.
+                var nearestDist = REAL_MAX
 
-                ENUM_GROUP.enumUnitsInRange(casterPos, WISP_RADIUS, null)
-
-                for u in ENUM_GROUP
-                    if u.isAlive() and u.getOwner().isAllyOf(caster.getOwner()) and u.getHP() < u.getMaxHP()
+                for u in nearby
+                    if not wispTargets.has(u)
                         let dist = wisp.getPos().distanceTo(u.getPos())
-                        if dist < nearestDist and not wispTargets.has(u)
-                            nearestDist = dist
+                        if dist < nearestDist
+                            nearestDist    = dist
                             nearestInjured = u
-                            wispTargets.add(u)
+
+                if nearestInjured != null
+                    wispTargets.add(nearestInjured)
 
                 vec2 targetPos
                 if nearestInjured != null
-                    // Drift toward injured unit but not all the way — stop nearby
                     targetPos = nearestInjured.getPos().polarOffset(
                         wisp.getPos().angleTo(nearestInjured.getPos()),
-                        -50.  // hover just outside the unit
+                        -50.
                     )
                 else
-                    // No injured units — wander randomly near caster
                     let randomAngle = angle(GetRandomReal(0., 2. * bj_PI))
-                    let randomDist = GetRandomReal(50., ORBIT_RADIUS)
+                    let randomDist  = GetRandomReal(50., ORBIT_RADIUS)
                     targetPos = casterPos.polarOffset(randomAngle, randomDist)
 
-                // Move wisp smoothly toward target
-                let moveDir = wisp.getPos().angleTo(targetPos)
+                let moveDir   = wisp.getPos().angleTo(targetPos)
                 let moveSpeed = 200. * UPDATE_INTERVAL
-                let newPos = wisp.getPos().polarOffset(moveDir, moveSpeed)
+                let newPos    = wisp.getPos().polarOffset(moveDir, moveSpeed)
 
-                // Keep wisps tethered to caster — dont let them stray too far
                 if newPos.distanceTo(casterPos) > WISP_RADIUS
                     wisp.setXY(casterPos.polarOffset(newPos.angleTo(casterPos), -WISP_RADIUS + 20.))
                 else
                     wisp.setXY(newPos)
 
-        // Heal timer — heals damaged friendlies in range every second
+            // Destroy both lists every tick — this was the leak
+            destroy wispTargets
+            destroy nearby
+
         let healTimer = doPeriodically(HEAL_INTERVAL) cb ->
-            ENUM_GROUP.enumUnitsInRange(caster.getPos(), WISP_RADIUS, null)
-            for u in ENUM_GROUP
+            let g = CreateGroup()
+            g.enumUnitsInRange(caster.getPos(), WISP_RADIUS)
+            for u from g
                 if u.isAlive() and u.getOwner().isAllyOf(caster.getOwner()) and u.getHP() < u.getMaxHP()
                     u.addHP(WISP_HEAL)
                     flashEffect("Abilities\\Spells\\Items\\AIhe\\AIheTarget.mdl", u, "origin")
 
-        // After duration clean everything up
         doAfter(WISP_DURATION) ->
-            destroy moveTimer  // was orbitTimer
+            destroy moveTimer
             destroy healTimer
             for wisp in wisps
                 wisp.kill()

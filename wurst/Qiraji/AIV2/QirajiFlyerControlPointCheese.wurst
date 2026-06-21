@@ -1,5 +1,5 @@
 package QirajiFlyerControlPointCheese
-// BUGGED LOOK AT CLOSURES BELOW
+
 import ClosureTimers
 import ClosureForGroups
 import LinkedList
@@ -12,6 +12,9 @@ constant int  FLYER_MINIMUM     = 10  // Minimum to maintain at all times
 constant real CHECK_INTERVAL    = 5.0
 
 var cheeseAttackLaunched = false
+
+// Moving this to package level makes it mutable inside closures!
+var sentToFirst = true 
 
 function countFlyers(player aiPlayer) returns int
     let flyers = new LinkedList<unit>()
@@ -35,9 +38,7 @@ function hasT2(player aiPlayer) returns bool
 
 function trainFlyers(player aiPlayer)
     forUnitsOfPlayer(aiPlayer) (unit u) ->
-        if u.isAlive()
-            and u.getTypeId() == QIRAJI_HATCHERY
-            and u.getCurrentOrder() == 0
+        if u.isAlive() and u.getTypeId() == QIRAJI_HATCHERY and u.getCurrentOrder() == 0
             u.issueImmediateOrderById(FLYER_ID)
 
 public function startQirajiFlyerCheese(player aiPlayer)
@@ -50,11 +51,8 @@ public function startQirajiFlyerCheese(player aiPlayer)
         let foodUsed = GetPlayerState(aiPlayer, PLAYER_STATE_RESOURCE_FOOD_USED)
         let flyerCount = countFlyers(aiPlayer)
 
-        //printTimed("[FlyerCheese] Flyers: " + flyerCount.toString(), 6.)
-
         // Always maintain minimum flyer count
         if flyerCount < FLYER_MINIMUM and foodUsed < foodCap - 1
-            //printTimed("[FlyerCheese] Below minimum — training flyers.", 6.)
             trainFlyers(aiPlayer)
             return
 
@@ -66,12 +64,13 @@ public function startQirajiFlyerCheese(player aiPlayer)
                 return
 
             // We have 20 flyers — send them at both control points
-            //printTimed("[FlyerCheese] 20 flyers ready — launching cheese attack!", 6.)
             cheeseAttackLaunched = true
 
             let target1 = udg_feralasGrotto.getPos()
             let target2 = udg_stonetalonPeak.getPos()
-            var sentToFirst = true
+            
+            // Reset state before splitting the attack paths
+            sentToFirst = true 
 
             forUnitsOfPlayer(aiPlayer) (unit u) ->
                 if u.isAlive() and u.getTypeId() == FLYER_ID
