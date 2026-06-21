@@ -11,11 +11,17 @@ import QirajiRatsInChat
 import QirajiNextTier
 import QirajiFlyerControlPointCheese
 
+public function startQirajiGoldIncome(player aiPlayer)
+    doPeriodically(60.0) cb ->
+        aiPlayer.addGold(100)
+        printTimed("[QirajiIncome] +300 gold delivered. Total: " + aiPlayer.getGold().toString(), 5.)
+
 init
     
     doAfter(0.5) ->
         // players[11] corresponds to Player 12 (Dark Green)
         let qirajiAIPlayer = players[11]
+        startQirajiGoldIncome(qirajiAIPlayer) // base income of 100gpm
         
         // Step 1: Spawn initial Workers
         qirajiSpawnBuildersSetBase(qirajiAIPlayer)

@@ -50,6 +50,7 @@ int CRYPT_LORD_ATK_CNT = 0
         ..setGoldCost(0)
         ..setLumberCost(0)
         ..setFoodCost(5)
+        ..setBuildTime(5)
         ..setDefenseBase(2)
         ..setAttack1DamageBase(23)
         ..setAttack1CooldownTime(1.90)
