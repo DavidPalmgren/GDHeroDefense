@@ -1,0 +1,60 @@
+package QirajiRatsInChat
+
+import ClosureTimers
+import ClosureForGroups
+import LinkedList
+import QirajiBuildingIds
+import QirajiWorker
+import QirajiSwarmerID
+
+constant real DETECTION_RADIUS = 4000.0
+constant real RECALL_RADIUS    = 8000.0
+constant int  SWARMER_ID       = QIRAJI_SWARMER_ID
+
+public var baseIsUnderAttack = false
+
+public function startQirajiBaseDefense(player aiPlayer)
+    let baseCenter = gg_rct_QirajiSpawn.getCenter()
+
+    doPeriodically(3.0) cb ->
+        // Find all enemies in detection radius
+        let enemies = new LinkedList<unit>()
+        forUnitsInRange(baseCenter, DETECTION_RADIUS) (unit u) ->
+            if u.isAlive()
+                and not u.isType(UNIT_TYPE_STRUCTURE)
+                and u.getOwner().isEnemyOf(aiPlayer)
+                enemies.add(u)
+
+        //printTimed("[QirajiDefense] Enemies detected: " + enemies.size().toString(), 6.)
+
+        if enemies.size() == 0
+            baseIsUnderAttack = false
+            destroy enemies
+            return
+
+        baseIsUnderAttack = true
+
+        // Pick first alive enemy as target
+        let target = enemies.get(0)
+        destroy enemies
+
+        //printTimed("[QirajiDefense] Target: " + target.getPos().x.toString()
+        //    + "," + target.getPos().y.toString(), 6.)
+
+        // Every combat unit we own attacks that target
+        forUnitsOfPlayer(aiPlayer) (unit u) ->
+            if u.isAlive()
+                and not u.isType(UNIT_TYPE_STRUCTURE)
+                and u.getTypeId() != QIRAJI_WORKER_ID
+                let dist = baseCenter.distanceTo(u.getPos())
+                if dist <= RECALL_RADIUS
+                    u.issueTargetOrder("attack", target)
+
+        // Emergency swarmers
+        let foodCap  = GetPlayerState(aiPlayer, PLAYER_STATE_RESOURCE_FOOD_CAP)
+        let foodUsed = GetPlayerState(aiPlayer, PLAYER_STATE_RESOURCE_FOOD_USED)
+        if foodUsed < foodCap - 1
+            forUnitsOfPlayer(aiPlayer) (unit u) ->
+                if u.isAlive() and u.getTypeId() == QIRAJI_SPAWNING_SAC
+                    u.issueImmediateOrder("stop")
+                    u.issueImmediateOrderById(SWARMER_ID)

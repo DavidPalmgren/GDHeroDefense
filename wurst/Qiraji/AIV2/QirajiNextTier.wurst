@@ -1,0 +1,17 @@
+package QirajiNextTier
+
+import ClosureTimers
+import ClosureForGroups
+import QirajiBuildingIds
+
+constant real TIER_UP_DELAY = 300.0 // seconds before attempting next tier
+
+public function startQirajiTierProgression(player aiPlayer)
+    doPeriodically(TIER_UP_DELAY) cb ->
+        forUnitsOfPlayer(aiPlayer) (unit u) ->
+            if u.isAlive() and u.getCurrentOrder() == 0
+                let id = u.getTypeId()
+                if id == QIRAJI_T1_HIVE_NODE
+                    u.issueImmediateOrderById(QIRAJI_T2_SWARM_CORE)
+                else if id == QIRAJI_T2_SWARM_CORE
+                    u.issueImmediateOrderById(QIRAJI_T3_HIVE_IMPERIAL)

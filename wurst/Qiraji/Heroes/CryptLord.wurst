@@ -19,7 +19,7 @@ import DummyCaster
 
 import QirajiBuildingIds
 
-public constant int CRYPT_LORD_HERO_ID = compiletime(HERO_ID_GEN.next())
+public constant int CRYPT_LORD_HERO_ID = UnitIds.cryptlord // compiletime(HERO_ID_GEN.next()) TEMPORARY WE DO THIS TO FIX UNLIMITED HEROES
 public constant int CRYPT_LORD_HERO_BURROW_ID = compiletime(HERO_ID_GEN.next())
 public constant int CRYPT_LORD_BURROW = compiletime(ABIL_ID_GEN.next())
 public constant int CRYPT_LORD_IMPALE = compiletime(ABIL_ID_GEN.next())

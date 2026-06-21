@@ -2,33 +2,57 @@ package QirajiFarmManagement
 
 import QirajiBuildingIds
 import QirajiPlacement 
-import QirajiWorkersUnion // Imported: Checking worker labor statuses
+import QirajiWorkersUnion 
 
-constant int FOOD_BUFFER = 6       
-constant int MAP_MAX_FOOD = 100     
-  
+constant int FOOD_BUFFER = 30 
+constant int MAP_MAX_FOOD = 200     
 
-int farmBuildCooldown = 0
+
 
 public function manageQirajiSupply(player aiPlayer)
-    if farmBuildCooldown > 0
-        farmBuildCooldown--
-        return
 
     let foodUsed = aiPlayer.getCurrentSupply()
     let foodCap = aiPlayer.getMaxSupply()
-    print("Food used" + foodUsed.toString())
-    print("Food Cap" + foodCap.toString())
+    //print("Food used: " + foodUsed.toString())
+    //print("Food Cap: " + foodCap.toString())
 
+
+
+    // 80 < 100 |                  80 -67 = 13 <= 30
     if foodCap < MAP_MAX_FOOD and (foodCap - foodUsed) <= FOOD_BUFFER
-        // Instantly fetches a worker that isn't already tied up in a construction contract
-        let builder = getAvailableQirajiWorker(aiPlayer)
+        let baseCenter = gg_rct_QirajiSpawn.getCenter()
         
-        if builder != null
-            let baseCenter = gg_rct_QirajiSpawn.getCenter()
-            let buildSite = findValidBuildSite(baseCenter, 2, 2, 1024.0,128)
+        var firstFarmSite = ZERO2
+        var farmsOrdered = 0
+        
+        // --- DUAL CONSTRUCTION LOOP ---
+        for i = 1 to 2
+            let builder = getAvailableQirajiWorker(aiPlayer)
             
-            if buildSite != baseCenter
-                printTimed("|cffffcc00QIRAJI AI:|r Low biomass capacity! Manifesting FARM.", 4.)
-                scatterIdleUnitsNear(buildSite, builder, aiPlayer, 300.0)
-                builder.issuePointOrderById(QIRAJI_SPAWNING_SAC, buildSite)
+            if builder != null
+                // If it's the first farm, search around the base center.
+                // If it's the second farm, shift the search center relative to the first farm to create a neat cluster.
+                let searchOrigin = (farmsOrdered == 0) ? baseCenter : firstFarmSite + vec2(352.0, 352.0)
+                
+                var buildSite = findValidBuildSite(searchOrigin, 2, 2, 1024.0, 128.0)
+                
+                // --- ANTI-COLLISION GUARD ---
+                // A 2x2 building with 128 padding needs its center to be at least 352 units away from another structure
+                if farmsOrdered == 1 and buildSite.distanceTo(firstFarmSite) < 352.0
+                    // Fallback: Nudge the search into the opposite quadrant if the first choice was too close
+                    let alternateOrigin = firstFarmSite + vec2(-352.0, -352.0)
+                    buildSite = findValidBuildSite(alternateOrigin, 2, 2, 1024.0, 128.0)
+                
+                // Validate that a clean site was actually discovered
+                if buildSite != baseCenter and (farmsOrdered == 0 or buildSite.distanceTo(firstFarmSite) >= 352.0)
+                    // printTimed("|cffffcc00QIRAJI AI:|r Low biomass capacity! Manifesting FARM [" + i.toString() + "].", 4.)
+                    
+                    scatterIdleUnitsNear(buildSite, builder, aiPlayer, 300.0)
+                    builder.issuePointOrderById(QIRAJI_SPAWNING_SAC, buildSite)
+                    
+                    // Track the first site so the next iteration can reference it
+                    if farmsOrdered == 0
+                        firstFarmSite = buildSite
+                        
+                    farmsOrdered++
+                    

@@ -1,0 +1,87 @@
+package QirajiFlyerControlPointCheese
+// BUGGED LOOK AT CLOSURES BELOW
+import ClosureTimers
+import ClosureForGroups
+import LinkedList
+import QirajiBuildingIds
+import SilithidWasp
+
+constant int  FLYER_ID          = QIRAJI_WASP_ID
+constant int  FLYER_CAP         = 20  // How many we want before attacking
+constant int  FLYER_MINIMUM     = 10  // Minimum to maintain at all times
+constant real CHECK_INTERVAL    = 5.0
+
+var cheeseAttackLaunched = false
+
+function countFlyers(player aiPlayer) returns int
+    let flyers = new LinkedList<unit>()
+    forUnitsOfPlayer(aiPlayer) (unit u) ->
+        if u.isAlive() and u.getTypeId() == FLYER_ID
+            flyers.add(u)
+    let count = flyers.size()
+    destroy flyers
+    return count
+
+function hasT2(player aiPlayer) returns bool
+    let found = new LinkedList<unit>()
+    forUnitsOfPlayer(aiPlayer) (unit u) ->
+        if u.isAlive()
+            and (u.getTypeId() == QIRAJI_T2_SWARM_CORE
+             or  u.getTypeId() == QIRAJI_T3_HIVE_IMPERIAL)
+            found.add(u)
+    let result = found.size() > 0
+    destroy found
+    return result
+
+function trainFlyers(player aiPlayer)
+    forUnitsOfPlayer(aiPlayer) (unit u) ->
+        if u.isAlive()
+            and u.getTypeId() == QIRAJI_HATCHERY
+            and u.getCurrentOrder() == 0
+            u.issueImmediateOrderById(FLYER_ID)
+
+public function startQirajiFlyerCheese(player aiPlayer)
+    doPeriodically(CHECK_INTERVAL) cb ->
+        // Only activate once we hit tier 2
+        if not hasT2(aiPlayer)
+            return
+
+        let foodCap  = GetPlayerState(aiPlayer, PLAYER_STATE_RESOURCE_FOOD_CAP)
+        let foodUsed = GetPlayerState(aiPlayer, PLAYER_STATE_RESOURCE_FOOD_USED)
+        let flyerCount = countFlyers(aiPlayer)
+
+        //printTimed("[FlyerCheese] Flyers: " + flyerCount.toString(), 6.)
+
+        // Always maintain minimum flyer count
+        if flyerCount < FLYER_MINIMUM and foodUsed < foodCap - 1
+            //printTimed("[FlyerCheese] Below minimum — training flyers.", 6.)
+            trainFlyers(aiPlayer)
+            return
+
+        // Build up to cap before launching
+        if not cheeseAttackLaunched
+            if flyerCount < FLYER_CAP
+                if foodUsed < foodCap - 1
+                    trainFlyers(aiPlayer)
+                return
+
+            // We have 20 flyers — send them at both control points
+            //printTimed("[FlyerCheese] 20 flyers ready — launching cheese attack!", 6.)
+            cheeseAttackLaunched = true
+
+            let target1 = udg_feralasGrotto.getPos()
+            let target2 = udg_stonetalonPeak.getPos()
+            var sentToFirst = true
+
+            forUnitsOfPlayer(aiPlayer) (unit u) ->
+                if u.isAlive() and u.getTypeId() == FLYER_ID
+                    if sentToFirst
+                        u.issuePointOrder("attack", target1)
+                        sentToFirst = false
+                    else
+                        u.issuePointOrder("attack", target2)
+                        sentToFirst = true
+
+        // After launch keep training to maintain minimum
+        if flyerCount < FLYER_MINIMUM and foodUsed < foodCap - 1
+            trainFlyers(aiPlayer)

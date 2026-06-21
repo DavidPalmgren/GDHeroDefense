@@ -7,13 +7,14 @@ import ObjectIds
 import Icons
 import UnitIds
 import UpgradeObjEditing
-
+import ClosureEvents
 
 import QirajiBuildingIds
 import ZandalariBaseUpgrades
 
 public constant QIRAJI_TANK_ID = compiletime(UNIT_ID_GEN.next())
 public constant QIRAJI_TANK_SPEED_SPELL_ID = compiletime(ABIL_ID_GEN.next())
+public constant QIRAJI_TANK_WEB_ID = compiletime(ABIL_ID_GEN.next())
 public constant QIRAJI_TANK_SPEED_UPGRADE_ID = compiletime(UPGD_ID_GEN.next())
 
 @compiletime function genReaver()
@@ -23,7 +24,7 @@ public constant QIRAJI_TANK_SPEED_UPGRADE_ID = compiletime(UPGD_ID_GEN.next())
     ..setTooltipExtended("The Qiraji Reaver is the bread and butter of the ceaseless Qiraji assault.")
     ..setModelFile("SilithidTank_SpiderLordSkin.mdx")
     ..setGoldCost(20)
-    ..setFoodCost(1)
+    ..setFoodCost(2)
     ..setLumberCost(0)
     ..setBuildTime(3)
     ..setAnimationRunSpeed(200)
@@ -33,11 +34,14 @@ public constant QIRAJI_TANK_SPEED_UPGRADE_ID = compiletime(UPGD_ID_GEN.next())
     ..setHotkey("Q")
     ..setButtonPositionX(0)
     ..setButtonPositionY(0)
+    ..setCollisionSize(8)
+  
+
     
     ..setDefenseBase(2)
     ..setAttack1DamageBase(27)
     ..setUpgradesUsed(commaList(ZANDALARI_ARMOR_UPG_ID,ZANDALARI_DAMAGE_UPG_ID,QIRAJI_TANK_SPEED_UPGRADE_ID))
-    ..setNormalAbilities(commaList(QIRAJI_TANK_SPEED_SPELL_ID))
+    ..setNormalAbilities(commaList(QIRAJI_TANK_SPEED_SPELL_ID, QIRAJI_TANK_WEB_ID))
 
   new AbilityDefinitionPassiveSimple(QIRAJI_TANK_SPEED_SPELL_ID)
     ..setName("Adaptation: Speed")
@@ -47,6 +51,9 @@ public constant QIRAJI_TANK_SPEED_UPGRADE_ID = compiletime(UPGD_ID_GEN.next())
     ..setLevels(1)
     ..setRequirements(commaList(QIRAJI_TANK_SPEED_UPGRADE_ID))
     ..setIconNormal(Icons.bTNScrollOfHaste)
+
+  new AbilityDefinitionWeb(QIRAJI_TANK_WEB_ID)
+    ..setRequirements("")
 
 
   new UpgradeDefinition(QIRAJI_TANK_SPEED_UPGRADE_ID)
@@ -63,3 +70,11 @@ public constant QIRAJI_TANK_SPEED_UPGRADE_ID = compiletime(UPGD_ID_GEN.next())
     ..setHotkey(1,"A")
     ..setButtonPositionX(0)
     ..setButtonPositionY(2)
+
+init
+  registerPlayerUnitEvent(EVENT_PLAYER_UNIT_TRAIN_FINISH) () ->
+    // 1. Use GetTrainedUnit() because GetTriggerUnit() is the building doing the training.
+    let trainedUnit = GetTrainedUnit() 
+    if trainedUnit.getTypeId() == QIRAJI_TANK_ID
+      // 2. Issue the order "web" to toggle the autocast state to ON.
+      trainedUnit.issueImmediateOrder("webon")

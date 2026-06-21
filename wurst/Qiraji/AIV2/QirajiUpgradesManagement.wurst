@@ -1,0 +1,93 @@
+package QirajiUpgradesManagement
+
+import ClosureForGroups
+import LinkedList
+
+import QirajiPlacement
+import QirajiWorkersUnion
+import QirajiBuildingIds
+import ZandalariBaseUpgrades
+import QirajiDrone
+import QirajiTank
+
+constant int DESIRED_BLACKSMITHS = 2
+constant int COOLDOWN_TICKS      = 4
+
+int blacksmithBuildCooldown  = 0
+int consecutiveFailures      = 0
+
+public function manageQirajiBlacksmiths(player aiPlayer)
+    if blacksmithBuildCooldown > 0
+        blacksmithBuildCooldown--
+        return
+
+    var currentCount = 0
+    let colonyUnits = CreateGroup()
+    colonyUnits.enumUnitsOfPlayer(aiPlayer, null)
+
+    for u from colonyUnits
+        if u.getTypeId() == QIRAJI_CARAPACE_CHAMBER and u.isAlive()
+            currentCount++
+    colonyUnits.destr()
+
+    if currentCount >= DESIRED_BLACKSMITHS
+        return
+
+    let builder = getAvailableQirajiWorker(aiPlayer)
+    if builder == null
+        return
+
+    let baseCenter = gg_rct_QirajiSpawn.getCenter()
+    let buildSite  = findValidBuildSite(baseCenter, 3, 3, 1024.0, 64.0)
+
+    if buildSite.x == -1.0
+        consecutiveFailures++
+        blacksmithBuildCooldown = COOLDOWN_TICKS * consecutiveFailures
+        return
+
+    consecutiveFailures = 0
+    scatterIdleUnitsNear(buildSite, builder, aiPlayer, 300.0)
+    builder.issuePointOrderById(QIRAJI_CARAPACE_CHAMBER, buildSite)
+    blacksmithBuildCooldown = COOLDOWN_TICKS
+
+    
+public function manageBlacksmithResearch(player aiPlayer)
+    let smiths = new LinkedList<unit>()
+
+    forUnitsOfPlayer(aiPlayer) (unit u) ->
+        if u.isAlive()
+            and u.getTypeId() == QIRAJI_CARAPACE_CHAMBER
+            and u.getCurrentOrder() == 0
+            smiths.add(u)
+
+    if smiths.size() >= 1
+        if GetPlayerTechCount(aiPlayer, ZANDALARI_DAMAGE_UPG_ID, true) < 5
+            smiths.get(0).issueImmediateOrderById(ZANDALARI_DAMAGE_UPG_ID)
+
+    if smiths.size() >= 2
+        if GetPlayerTechCount(aiPlayer, ZANDALARI_ARMOR_UPG_ID, true) < 5
+            smiths.get(1).issueImmediateOrderById(ZANDALARI_ARMOR_UPG_ID)
+
+    destroy smiths
+
+public function manageHatcheryUpgrades(player aiPlayer)
+    // Count total tanks and drones
+    let combatants = new LinkedList<unit>()
+    forUnitsOfPlayer(aiPlayer) (unit u) ->
+        if u.isAlive()
+            and (u.getTypeId() == QIRAJI_TANK_ID or u.getTypeId() == QIRAJI_DRONE_ID)
+            combatants.add(u)
+
+    let total = combatants.size()
+    destroy combatants
+
+    if total < 40
+        return
+
+    // Issue upgrade order to every idle hatchery
+    forUnitsOfPlayer(aiPlayer) (unit u) ->
+        if u.isAlive()
+            and u.getTypeId() == QIRAJI_HATCHERY
+            //print("Queing up HATCHERY RESEARCHES")
+            u.issueImmediateOrderById(QIRAJI_TANK_SPEED_UPGRADE_ID)
+            u.issueImmediateOrderById(QIRAJI_FORTITUDE_UPGRADE_ID)

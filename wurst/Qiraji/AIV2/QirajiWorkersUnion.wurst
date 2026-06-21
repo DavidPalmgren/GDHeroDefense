@@ -50,11 +50,11 @@ public function getAvailableQirajiWorker(player aiPlayer) returns unit
     unit chosenWorker = null
     for w from workers
         if w.isAvailable()
-            print("Available worker")
+            //print("Available worker")
             chosenWorker = w
             break
             
     workers.destr()
     if chosenWorker == null
-        print("No woker null ret")
+        //print("No woker null ret")
     return chosenWorker

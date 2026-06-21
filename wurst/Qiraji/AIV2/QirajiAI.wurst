@@ -5,22 +5,37 @@ import QirajiSpawnBuilders
 import QirajiFarmManagement // Imported: Connects the supply monitor module
 import QirajiT1SetBuildings
 import QirajiTrainUnits
+import QirajiUpgradesManagement
+import QirajiAttackSimple
+import QirajiRatsInChat
+import QirajiNextTier
+import QirajiFlyerControlPointCheese
 
 init
+    
     doAfter(0.5) ->
         // players[11] corresponds to Player 12 (Dark Green)
         let qirajiAIPlayer = players[11]
         
         // Step 1: Spawn initial Workers
         qirajiSpawnBuildersSetBase(qirajiAIPlayer)
+        startQirajiTierProgression(qirajiAIPlayer)
+        startQirajiBaseDefense(qirajiAIPlayer)
+        startQirajiAttackLoop(qirajiAIPlayer)
         
         // Step 2: Boot up the centralized monitoring loops
         doPeriodically(5.0) (CallbackPeriodic cb) ->
             manageQirajiBarracks(qirajiAIPlayer)
+            manageQirajiAltar(qirajiAIPlayer)
             startQirajiTrainLoop(qirajiAIPlayer)
+            manageQirajiBlacksmiths(qirajiAIPlayer)
+            manageBlacksmithResearch(qirajiAIPlayer)
             if qirajiAIPlayer.getMaxSupply() >= 200 and qirajiAIPlayer.getCurrentSupply() >= 200
                 // Clean up loop handle if the AI completely maxes its capabilities
                 print("Destroying the loop")
                 destroy cb
             else
                 manageQirajiSupply(qirajiAIPlayer)
+            
+            // T2
+            startQirajiFlyerCheese(qirajiAIPlayer)

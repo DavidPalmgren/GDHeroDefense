@@ -7,10 +7,11 @@ import QirajiPlacement // Imported: Grabs our newly built layout scanner
 public function qirajiSpawnBuildersSetBase(player aiPlayer)
     aiPlayer.setGold(10000)
     aiPlayer.setLumber(10000)
+    SetPlayerState(aiPlayer, PLAYER_STATE_FOOD_CAP_CEILING, 200)
     let spawnRect = gg_rct_QirajiSpawn
     let startPos = spawnRect.getCenter() 
 
-    printTimed("|cff00ffffQIRAJI SPAWN:|r Initializing Silithid Swarm at designated region center.", 5.)
+    //printTimed("|cff00ffffQIRAJI SPAWN:|r Initializing Silithid Swarm at designated region center.", 5.)
 
     unit primaryBuilder = null
 
@@ -24,6 +25,6 @@ public function qirajiSpawnBuildersSetBase(player aiPlayer)
     if primaryBuilder != null and primaryBuilder.isAlive()
         let buildSite = findValidBuildSite(startPos, 5, 5, 512.0,64)
         
-        printTimed("|cffffcc00QIRAJI SPAWN:|r Issuing priority command to Hive Node genesis vector.", 4.)
+        //printTimed("|cffffcc00QIRAJI SPAWN:|r Issuing priority command to Hive Node genesis vector.", 4.)
         
         primaryBuilder.issuePointOrderById(QIRAJI_T1_HIVE_NODE, buildSite)
