@@ -1,0 +1,155 @@
+package QirajiAttackGroups
+
+import ClosureTimers
+import ClosureForGroups
+import LinkedList
+import OrderIds
+import HashMap
+import QirajiWorker
+
+public constant MAX_SQUAD_SIZE = 12 
+public let activeSquads = new LinkedList<Squad>()
+public let unitEffects = new HashMap<unit, effect>()
+
+public let squadVisuals = new LinkedList<string>()
+    ..add("Abilities\\Spells\\Other\\TalkToMe\\TalkToMe.mdl")                 
+    ..add("Abilities\\Spells\\Human\\InnerFire\\InnerFireTarget.mdl")         
+    ..add("Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl")           
+    ..add("Abilities\\Spells\\Undead\\UnholyFrenzy\\UnholyFrenzyTarget.mdl")   
+    ..add("Abilities\\Spells\\NightElf\\ShadowStrike\\ShadowStrikeTarget.mdl") 
+
+// 1. Define the tactical roles for the squads
+public enum SquadRole
+    KOS      // High-aggro, attacks anything nearby
+    SIEGE    // Focused entirely on capturing/holding CPs
+    RESERVE  // Defends the base until a distress call is made
+
+public class Squad
+    LinkedList<unit> members = new LinkedList<unit>()
+    unit targetCP = null
+    string fxPath = ""
+    SquadRole role = SquadRole.KOS // Default role
+
+    construct()
+        let index = activeSquads.size() mod squadVisuals.size()
+        fxPath = squadVisuals.get(index)
+    
+    function addUnit(unit u)
+        members.add(u)
+        let fx = u.addEffect(fxPath, "overhead")
+        unitEffects.put(u, fx)
+        
+        // KOS role dynamically expands the vision/aggro range of units inside it
+        if role == SquadRole.KOS
+            u.setAcquireRange(1200.)
+        else
+            u.setAcquireRange(600.)
+        
+    function isFull() returns boolean
+        return members.size() >= MAX_SQUAD_SIZE
+        
+    // 2. The Merge Function
+    // Absorbs another squad's members into this one up to the MAX_SQUAD_SIZE
+    function merge(Squad otherSquad)
+        let iter = otherSquad.members.iterator()
+        while iter.hasNext() and not this.isFull()
+            let u = iter.next()
+            
+            // Remove the unit from the old squad's tracking
+            iter.remove()
+            if unitEffects.has(u)
+                unitEffects.get(u).destr()
+                unitEffects.remove(u)
+                
+            // Add the unit to this squad (automatically applies this squad's visual effect)
+            this.addUnit(u)
+        iter.close()
+        
+        // If the other squad is now completely empty, dissolve it out of existence
+        if otherSquad.members.isEmpty()
+            activeSquads.remove(otherSquad)
+            destroy otherSquad
+
+    function cleanDead()
+        let iter = members.iterator()
+        while iter.hasNext()
+            let u = iter.next()
+            if not u.isAlive() or u.getOwner() != players[PLAYER_NEUTRAL_AGGRESSIVE]
+                if unitEffects.has(u)
+                    unitEffects.get(u).destr()
+                    unitEffects.remove(u)
+                iter.remove()
+        iter.close()
+
+    function getStrength() returns int
+        var totalLevel = 0
+        for u in members
+            if u.isAlive()
+                totalLevel += u.getLevel()
+        return totalLevel
+
+    function orderAttack()
+        // RESERVE units do not execute standard attack pathing loops
+        if role == SquadRole.RESERVE
+            return
+
+        if targetCP == null or not targetCP.isAlive()
+            return
+            
+        var delay = 0.0
+        let targetPos = targetCP.getPos()
+        
+        for u in members
+            let combatant = u
+            let order = combatant.getCurrentOrder()
+            if order == 0 or order == OrderIds.stop
+                doAfter(delay) ->
+                    let spread = targetPos.polarOffset(GetRandomReal(0, 360).fromDeg(), GetRandomReal(0, 300))
+                    combatant.issuePointOrder("attack", spread)
+                    
+            delay += 0.1
+
+    ondestroy
+        for u in members
+            if unitEffects.has(u)
+                unitEffects.get(u).destr()
+                unitEffects.remove(u)
+        destroy members
+
+// --- RECRUITMENT LOGIC ---
+
+public function assignToSquad(unit u)
+    Squad targetSquad = null
+    
+    for sq in activeSquads
+        if not sq.isFull()
+            targetSquad = sq
+            break
+            
+    if targetSquad == null
+        targetSquad = new Squad()
+        // Cycle roles as squads are created, or configure manually
+        let roleIndex = activeSquads.size() mod 3
+        if roleIndex == 0
+            targetSquad.role = SquadRole.KOS
+        else if roleIndex == 1
+            targetSquad.role = SquadRole.SIEGE
+        else
+            targetSquad.role = SquadRole.RESERVE
+            
+        activeSquads.add(targetSquad)
+        
+    targetSquad.addUnit(u)
+
+function isUnitRecruited(unit u) returns boolean
+    for sq in activeSquads
+        if sq.members.has(u)
+            return true
+    return false
+
+public function startRecruitmentLoop(player aiPlayer)
+    doPeriodically(10.0) cb ->
+        forUnitsOfPlayer(aiPlayer) (unit u) ->
+            if u.isAlive() and not u.isType(UNIT_TYPE_STRUCTURE) and not isUnitRecruited(u)
+                if u.getTypeId() != QIRAJI_WORKER_ID
+                    assignToSquad(u)

@@ -6,6 +6,7 @@ import QirajiBuildingIds
 import QirajiTank
 import QirajiDrone
 import QirajiSpitter
+import ClosureEvents
 
 // Which unit each production building trains
 
@@ -29,3 +30,6 @@ public function startQirajiTrainLoop(player aiPlayer)
 
 public function selectUnitToTrain(player aiPlayer)
   
+// init
+//     EventListener.add(EVENT_PLAYER_UNIT_TRAIN_FINISH, listener) -> 
+        

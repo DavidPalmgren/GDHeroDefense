@@ -10,11 +10,11 @@ import OrderIds
 import QirajiRatsInChat
 
 // Longer interval gives units time to actually path and arrive
-constant real ATTACK_INTERVAL = 25.0
+constant real ATTACK_INTERVAL = 5.0
 // How far units spread around the target to avoid pathing congestion
-constant real DESTINATION_SPREAD = 150.0
+constant real DESTINATION_SPREAD = 350.0
 // Delay between each unit order to avoid flooding the pathfinder
-constant real ORDER_STAGGER = 0.05
+constant real ORDER_STAGGER = 0.1
 
 unit currentTargetCP = null
 
@@ -23,6 +23,7 @@ public function startQirajiAttackLoop(player aiPlayer)
         if baseIsUnderAttack
             //printTimed("[QirajiAttack] Base under attack — holding attack orders.", 8.)
             return
+        
           
         let baseCenter = gg_rct_QirajiSpawn.getCenter()
 

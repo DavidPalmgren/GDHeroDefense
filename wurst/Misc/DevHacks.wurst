@@ -1,0 +1,11 @@
+package DevHacks
+
+
+// ============================================================================
+// SECURITY TOGGLE: Set to false before compiling the public release!
+// ============================================================================
+
+init
+  CreateFogModifierRect(players[0], FOG_OF_WAR_VISIBLE, bj_mapInitialPlayableArea, true, false).start()
+  players[0].setGold(10000)
+  players[0].setLumber(10000)

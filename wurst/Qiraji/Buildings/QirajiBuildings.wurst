@@ -24,6 +24,8 @@ import QirajiTank // Reaver/tank bla bla
 import QirajiSpitter
 import QirajiBeetleBombardier
 
+import QirajiMindFlayer
+
 import QirajiColosus
 import QirajiAnubisath
 
@@ -49,7 +51,7 @@ public constant UPG_TIME = 10 * 60
     ..setUpgradesUsed("")
     ..setUpgradesTo("")
     ..setResearchesAvailable("")
-    ..setUnitsTrained(commaList(QIRAJI_WORKER_ID, QIRAJI_COLOSUS_ID))
+    ..setUnitsTrained(commaList(QIRAJI_WORKER_ID, QIRAJI_MIND_FLAYER))
     ..setItemsMade("")
     ..setNormalAbilities("")
     ..setUpgradesTo(commaList(QIRAJI_T2_SWARM_CORE))
@@ -105,7 +107,7 @@ public constant UPG_TIME = 10 * 60
     ..setModelFile("Doodads\\Dungeon\\Terrain\\EggSack\\EggSack1.mdl")
     ..setGroundTexture("ESMA")
     ..setScalingValue(1.5)
-    ..setGoldCost(60)
+    ..setGoldCost(25)
     ..setLumberCost(0)
     ..setRequirements("")
     ..setUpgradesUsed("")

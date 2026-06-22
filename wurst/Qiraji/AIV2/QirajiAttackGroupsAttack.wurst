@@ -1,0 +1,128 @@
+package QirajiAttackGroupsAttack
+
+import ClosureTimers
+import ClosureForGroups
+import LinkedList
+import QirajiAttackGroups
+import OrderIds
+
+constant real ATTACK_LOOP_INTERVAL = 5.0
+constant int MIN_ATTACK_SIZE = 12
+
+// If the enemy strength is 100, a threshold of 0.8 means the squad needs 
+// at least 80 strength to consider it a "winnable" fight.
+constant real CONFIDENCE_THRESHOLD = 0.8 
+// How wide of an area around the target we scan for defenders
+constant real THREAT_SCAN_RADIUS = 1500.0
+
+public function startSquadAttackBrain(player aiPlayer)
+    doPeriodically(ATTACK_LOOP_INTERVAL) cb ->
+        let enemyControlPoints = new LinkedList<unit>()
+        let g = CreateGroup()
+        GroupEnumUnitsInRect(g, bj_mapInitialPlayableArea, null)
+        for u from g
+            if u.getOwner() != aiPlayer and u.getIcon() == "ReplaceableTextures\\CommandButtons\\BTNCOP.blp" and u.isAlive()
+                enemyControlPoints.add(u)
+        g.destr()
+
+        let squadIter = activeSquads.iterator()
+        while squadIter.hasNext()
+            let sq = squadIter.next()
+            
+            // 1. Clean dead based on the dynamic AI player instead of hardcoded NEUTRAL_AGGRESSIVE
+            let iter = sq.members.iterator()
+            while iter.hasNext()
+                let u = iter.next()
+                if not u.isAlive() or u.getOwner() != aiPlayer
+                    if unitEffects.has(u)
+                        unitEffects.get(u).destr()
+                        unitEffects.remove(u)
+                    iter.remove()
+            iter.close()
+            
+            // 2. Handle squad execution states smoothly
+            if sq.members.isEmpty()
+                squadIter.remove()
+                destroy sq
+            else
+                // Squad commands run as long as they have met the minimum attack threshold
+                if sq.members.size() >= MIN_ATTACK_SIZE
+                    switch sq.role
+                        case KOS
+                            executeClosestTargetAttack(sq, aiPlayer, enemyControlPoints)
+                        case SIEGE
+                            executeClosestTargetAttack(sq, aiPlayer, enemyControlPoints)
+                        case RESERVE
+                            executeDefensiveHold(sq)
+                else
+                    // Gathering phase: Tell units under the threshold to wait together at base
+                    executeDefensiveHold(sq)
+        
+        destroy enemyControlPoints
+
+// --- NEW HELPER FUNCTION ---
+// Scans an area and calculates the total level of all enemy defenders
+function getEnemyStrengthInArea(vec2 targetPos, player aiPlayer) returns int
+    var enemyStrength = 0
+    let g = CreateGroup()
+    GroupEnumUnitsInRange(g, targetPos.x, targetPos.y, THREAT_SCAN_RADIUS, null)
+    
+    for u from g
+        // We count living enemies. We DO count structures (like towers) because they are a threat!
+        if u.isAlive() and u.isEnemyOf(aiPlayer)
+            // Optional: If you want to ignore worker units, you can add an exclusion here
+            enemyStrength += u.getLevel()
+            
+    g.destr()
+    return enemyStrength
+
+
+function executeClosestTargetAttack(Squad sq, player aiPlayer, LinkedList<unit> enemyCPs)
+    let squadCenter = sq.members.getFirst().getPos()
+    unit closestTarget = null
+    var closestDist = REAL_MAX
+    
+    // Strategy: Find closest CP via straight-line distance
+    for cp in enemyCPs
+        let dist = squadCenter.distanceTo(cp.getPos())
+        if dist < closestDist
+            closestDist = dist
+            closestTarget = cp
+            
+    // Backup Strategy: Find closest Unit via straight-line distance
+    if closestTarget == null
+        let backupGroup = CreateGroup()
+        GroupEnumUnitsInRect(backupGroup, bj_mapInitialPlayableArea, null)
+        for u from backupGroup
+            if u.getOwner() != aiPlayer and u.isAlive() and not u.isType(UNIT_TYPE_STRUCTURE)
+                let dist = squadCenter.distanceTo(u.getPos())
+                if dist < closestDist
+                    closestDist = dist
+                    closestTarget = u
+        backupGroup.destr()
+
+    // THE TACTICAL DECISION
+    if closestTarget != null
+        let squadStrength = sq.getStrength()
+        let enemyStrength = getEnemyStrengthInArea(closestTarget.getPos(), aiPlayer)
+        
+        // Do we have enough strength to take this fight?
+        if squadStrength >= (enemyStrength * CONFIDENCE_THRESHOLD)
+            // We win these! Push the target.
+            printTimed("Squad Attacking! Str " + squadStrength.toString() + " vs " + enemyStrength.toString(), 5.)
+
+            sq.targetCP = closestTarget
+            sq.orderAttack()
+        else
+            // Too heavily defended! Fall back and wait for merges or reinforcements.
+            printTimed("Squad retreating! Str " + squadStrength.toString() + " vs " + enemyStrength.toString(), 5.)
+            executeDefensiveHold(sq)
+    else
+        executeDefensiveHold(sq)
+
+function executeDefensiveHold(Squad sq)
+    let baseCenter = gg_rct_QirajiSpawn.getCenter()
+    for u in sq.members
+        let order = u.getCurrentOrder()
+        if order == 0 or order == OrderIds.stop
+            u.issuePointOrder("attack", baseCenter)

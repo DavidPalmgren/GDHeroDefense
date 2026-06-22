@@ -69,7 +69,7 @@ init
   // This replaces the fragile one-time events and forces production if resource/food blocked
   doPeriodically(5.0) (cb) ->
     // Assuming player 1 (index 0) is your AI player. Adjust the player index as needed!
-    let aiPlayer = players[0] 
+    let aiPlayer = players[11] 
 
     // Conditions to request a hero:
     // - The hero variable was never assigned (initial game state)

@@ -20,6 +20,8 @@ public constant QIRAJI_WORKER_ID = compiletime(UNIT_ID_GEN.next())
     ..setTooltipExtended("The basic workforce of the Qiraji swarm.")
     ..setIconGameInterface(Icons.bTNAcolyte)
     ..setModelFile("NerubianWorkerV2.mdx")
+    ..setCollisionSize(8)
+    ..setGoldCost(10)
     
     // --- LINKING THE BUILDINGS ---
     // Excludes Swarm Core and Hive Imperial since those are mutated directly from the Hive Node

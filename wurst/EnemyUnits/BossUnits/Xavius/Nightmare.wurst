@@ -12,13 +12,13 @@ import BuffIds
 import HashMap
 
 import InstantDummyCaster
-
+import HashSet
 import Orders
 
 public constant NIGHTMARE_ID = compiletime(ABIL_ID_GEN.next())
 public constant NIGHTMARE_BUFF_ID = compiletime(BUFF_ID_GEN.next())
 
-constant real NIGHTMARE_RADIUS = 300.
+constant real NIGHTMARE_RADIUS = 100.
 constant real NIGHTMARE_DURATION = 10.
 //constant string NIGHTMARE_SFX = Abilities.sleepTarget
 constant string CORRUPT_SFX = "Abilities\\Spells\\Undead\\UndeadDismember\\UndeadDismemberTarget.mdl"
@@ -59,23 +59,28 @@ init
         let targetPos = EventData.getSpellTargetPos()
         flashEffect(NIGHTMARE_SFX, targetPos)
 
+        // 1. Create a set to track which players we have already warned
+        let warnedPlayers = new HashSet<player>()
+
         ENUM_GROUP.enumUnitsInRange(targetPos, NIGHTMARE_RADIUS, null)
         for u in ENUM_GROUP
-            if u.isAlive() and u.getOwner().isEnemyOf(caster.getOwner()) and not u.isType(UNIT_TYPE_HERO)
-            and not u.isType(UNIT_TYPE_MAGIC_IMMUNE)
+            if u.isAlive() and u.getOwner().isEnemyOf(caster.getOwner()) and not u.isType(UNIT_TYPE_HERO) and not u.isType(UNIT_TYPE_MAGIC_IMMUNE)
                 let target = u
-                let _originalOwner = u.getOwner()
+                let targetOwner = u.getOwner()
 
-                
-                let _result = InstantDummyCaster.castTarget(players[PLAYER_NEUTRAL_AGGRESSIVE], 'AUsl', 1, Orders.sleep, u)
+                // 2. Check if the player has been warned yet. If not, print and add to the set.
+                if not warnedPlayers.has(targetOwner)
+                    targetOwner.print("Your units fall into the nightmare! You must wake them quickly or they will be overcome with the corruption.")
+                    warnedPlayers.add(targetOwner)
+
+                let _result = InstantDummyCaster.castTarget(players[PLAYER_NEUTRAL_AGGRESSIVE], 'AUsl', 1, Orders.sleep, target)
                 flashEffect(NIGHTMARE_SFX, target, "origin")
                 sleepingUnits.put(target, true)
                 flashEffect(NIGHTMARE_SFX, target, "origin")
-                
+                SetUnitVertexColor(target, 150, 0, 255, 255)
 
                 doAfter(NIGHTMARE_DURATION) ->
                     if sleepingUnits.has(target) and sleepingUnits.get(target)
-
                         target.setOwner(caster.getOwner(), true)
                         UnitRemoveAbility(target, 'BUsl')
                         UnitRemoveAbility(target, 'BUsp')
@@ -83,15 +88,21 @@ init
                             
                         sleepingUnits.remove(target)
                         flashEffect(CORRUPT_SFX, target, "origin")
+                        SetUnitVertexColor(target, 255, 255, 255, 255)
                     else
                         // Was woken — clean up
+                        SetUnitVertexColor(target, 255, 255, 255, 255)
                         sleepingUnits.remove(target)
+        
+        // 3. Destroy the set after the loop finishes to prevent memory leaks
+        destroy warnedPlayers
 
     // Detect when a sleeping unit gets damaged (woken up)
     EventListener.add(EVENT_PLAYER_UNIT_DAMAGED) ->
         let damaged = EventData.getTriggerUnit()
         if sleepingUnits.has(damaged) and sleepingUnits.get(damaged)
+            SetUnitVertexColor(damaged, 255, 255, 255, 255)
+
 
             sleepingUnits.put(damaged, false)  // mark as woken
             flashEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt.mdl", damaged, "origin")
-            

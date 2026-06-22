@@ -1,0 +1,58 @@
+package QirajiMindFlayer
+
+import ObjectIdGenerator
+import UnitObjEditing
+import AbilityObjEditing
+import UnitIds
+import ChannelAbilityPreset
+import AbilityIds
+import OrderIds
+import ClosureEvents
+import ClosureForGroups
+import ClosureTimers
+
+public constant QIRAJI_MIND_FLAYER = compiletime(UNIT_ID_GEN.next())
+public constant QIRAJI_MIND_FLAYER_MADNESS = compiletime(ABIL_ID_GEN.next())
+public constant RADIUS = 250.
+public constant MADNESS_DURATION = 3.5
+
+@compiletime function genMindFlayer()
+    new UnitDefinition(QIRAJI_MIND_FLAYER, UnitIds.facelessoneterror)
+        ..setName("Mind Flayer")
+        ..setHitPointsMaximumBase(800)
+        ..setAttack1DamageBase(30)
+        ..setSpeedBase(290)
+        ..setCollisionSize(8)
+        ..setNormalAbilities(commaList(QIRAJI_MIND_FLAYER_MADNESS))
+        ..setManaMaximum(400)
+        ..setManaInitialAmount(400)
+        ..setGoldCost(70)
+        ..setFoodCost(5)
+        ..setBuildTime(9)
+    new ChannelAbilityPreset(QIRAJI_MIND_FLAYER_MADNESS, 1, true)
+        ..presetBaseOrderID((cast) -> "flamestrike")
+        ..setCastRange(1, 400)
+        ..presetTargetTypes(Targettype.POINT)
+        ..setAreaofEffect(1, RADIUS)
+        ..presetOption(Option.TARGETIMAGE, true)
+        ..presetManaCost((lvl) -> 100)
+        ..presetCooldown((lvl) -> 20.)
+        ..setHeroAbility(false)
+
+init
+    EventListener.onPointCast(QIRAJI_MIND_FLAYER_MADNESS, (unit caster, vec2 target) -> begin
+        let cloudFx = addEffect("BlackCloudOfFog.mdx", target)
+        cloudFx.setScale(1.2)
+        doAfter(MADNESS_DURATION, () -> begin
+            cloudFx.destr()
+        end)
+        forUnitsInRange(target, RADIUS, (unit u) -> begin
+            if u.isAlive() and u.isEnemyOf(caster.getOwner()) and not u.isType(UNIT_TYPE_STRUCTURE)
+                let originalOwner = u.getOwner()
+                u.setOwner(players[PLAYER_NEUTRAL_AGGRESSIVE], true)
+                doAfter(MADNESS_DURATION, () -> begin
+                    if u.isAlive()
+                        u.setOwner(originalOwner, true)
+                end)
+        end)
+    end)

@@ -47,7 +47,7 @@ constant real UPDATE_INTERVAL = 0.05
         ..setDurationNormal(1, 10.)
         ..setDurationHero(1, 0.)
         ..setBuffs(1, toRawCode(WISP_BUFF_ID))
-        ..setRequirements("")
+        ..setRequirements(commaList('A006')) // Invoke Spirits
         ..setRequirementsLevels("")
         ..setRequiredLevel(1)
         ..setLevelSkipRequirement(2)

@@ -28,6 +28,7 @@ let currentHealthBonus = new LinkedList<unit>
 @compiletime function go()
     new UnitDefinition(QIRAJI_SWARMER_ID, UnitIds.ghoul)
         ..setName("Silithid Swarmer")
+        ..setAcquisitionRange(900.)
         ..setTooltipBasic("Hatch Silithid Swarmer")
         ..setTooltipExtended("Silithid Swarmers work best in a group, they might be weak alone but together they're a considerable threat")
         ..setGoldCost(25)

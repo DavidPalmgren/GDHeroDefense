@@ -23,7 +23,7 @@ constant DAMAGE = 150.0
 
 @compiletime function giveAbilToHero()
     new UnitDefinition('n004', 'n004')
-        ..setNormalAbilities(commaList(GPROJECTILE_ID, ARCANE_BLAST_ID))
+        ..setNormalAbilities(commaList('A004', ARCANE_BLAST_ID))
 
 init
     EventListener.onPointCast(ARCANE_BLAST_ID) (caster, targetPos) ->
