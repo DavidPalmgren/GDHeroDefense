@@ -1134,7 +1134,7 @@ import UnitObjEditing
 	new BuildingDefinition('h016', 'hhou')
 	..setPlacementRequires("")
 	..setPathingMap("")
-	..setName("Silithus")
+	..setName("Upper City (Silithus)")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCOP.blp")
 	..setModelFile("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
 	..setArtSpecial("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
@@ -1240,6 +1240,84 @@ import UnitObjEditing
 
 @compiletime function create_w3u_e008()
 	new BuildingDefinition('e008', 'eaoe')
+
+
+@compiletime function create_w3u_n00C()
+	new UnitDefinition('n00C', 'ncen')
+	..setCollisionSize(12.0)
+	..setName("Neferset Warrior")
+	..setModelFile("war3mapImported\\Hero_RamkahenSentinel.mdl")
+	..setPortraitModelFile("war3mapImported\\Hero_RamkahenSentinel_Portrait.mdl")
+
+
+@compiletime function create_w3u_n00D()
+	new UnitDefinition('n00D', 'ncim')
+	..setCollisionSize(12.0)
+	..setName("Ramkahen Defector")
+	..setModelFile("war3mapImported\\Hero_Ramkahen_Huntress.mdl")
+	..setPortraitModelFile("war3mapImported\\Hero_Ramkahen_Huntress_Portrait.mdl")
+	..setTintingColorGreen(255)
+	..setTintingColorBlue(255)
+
+
+@compiletime function create_w3u_h01F()
+	new BuildingDefinition('h01F', 'hhou')
+	..setPlacementRequires("")
+	..setPathingMap("")
+	..setName("Graverobber's Camp (Uldum)")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCOP.blp")
+	..setModelFile("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setArtSpecial("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setUseClickHelper(true)
+	..setGroundTexture("")
+
+
+@compiletime function create_w3u_h01G()
+	new BuildingDefinition('h01G', 'hhou')
+	..setPlacementRequires("")
+	..setPathingMap("")
+	..setName("Oasis (Tanaris)")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCOP.blp")
+	..setModelFile("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setArtSpecial("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setUseClickHelper(true)
+	..setGroundTexture("")
+
+
+@compiletime function create_w3u_h01H()
+	new BuildingDefinition('h01H', 'hhou')
+	..setPlacementRequires("")
+	..setPathingMap("")
+	..setName("Un'Goro Falls")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCOP.blp")
+	..setModelFile("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setArtSpecial("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setUseClickHelper(true)
+	..setGroundTexture("")
+
+
+@compiletime function create_w3u_h01I()
+	new BuildingDefinition('h01I', 'hhou')
+	..setPlacementRequires("")
+	..setPathingMap("")
+	..setName("Lower City (Silithus)")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCOP.blp")
+	..setModelFile("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setArtSpecial("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setUseClickHelper(true)
+	..setGroundTexture("")
+
+
+@compiletime function create_w3u_h01J()
+	new BuildingDefinition('h01J', 'hhou')
+	..setPlacementRequires("")
+	..setPathingMap("")
+	..setName("Hatchery (Silithus)")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCOP.blp")
+	..setModelFile("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setArtSpecial("buildings\\other\\CircleOfPower\\CircleOfPower.mdl")
+	..setUseClickHelper(true)
+	..setGroundTexture("")
 
 
 @compiletime function create_w3u_x001()

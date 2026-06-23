@@ -73,8 +73,13 @@ globals
     unit                    udg_uldumLostCity          = null
     unit                    udg_uldumRamkahen          = null
     unit                    udg_uldumNefersetCity      = null
-    unit                    udg_silithus               = null
+    unit                    udg_silithusUpperCity      = null
     unit                    udg_silithusQirajiCaves    = null
+    unit                    udg_uldumGraverobbersCamp  = null
+    unit                    udg_ungoroFalls            = null
+    unit                    udg_tanarisOasis           = null
+    unit                    udg_silithusLowerCity      = null
+    unit                    udg_silithusHatchery       = null
 
     // Generated
     rect                    gg_rct_Astranaar1          = null
@@ -176,16 +181,21 @@ globals
     unit                    gg_unit_h00N_0368          = null
     unit                    gg_unit_e005_0305          = null
     unit                    gg_unit_h00W_0365          = null
-    destructable            gg_dest_LTe2_0270          = null
-    unit                    gg_unit_h016_0423          = null
-    unit                    gg_unit_h017_0503          = null
-    unit                    gg_unit_h01A_0535          = null
-    unit                    gg_unit_h018_0532          = null
-    unit                    gg_unit_h019_0477          = null
-    unit                    gg_unit_h01B_0536          = null
-    unit                    gg_unit_h01C_0422          = null
     unit                    gg_unit_h01D_0117          = null
     unit                    gg_unit_h01E_0399          = null
+    unit                    gg_unit_h01C_0422          = null
+    unit                    gg_unit_h016_0423          = null
+    unit                    gg_unit_h019_0477          = null
+    unit                    gg_unit_h017_0503          = null
+    unit                    gg_unit_h018_0532          = null
+    unit                    gg_unit_h01A_0535          = null
+    unit                    gg_unit_h01B_0536          = null
+    unit                    gg_unit_h01F_0717          = null
+    unit                    gg_unit_h01G_0718          = null
+    unit                    gg_unit_h01H_0719          = null
+    destructable            gg_dest_LTe2_0270          = null
+    unit                    gg_unit_h01I_0233          = null
+    unit                    gg_unit_h01J_0721          = null
 endglobals
 
 function InitGlobals takes nothing returns nothing
@@ -573,8 +583,6 @@ function CreateUnitsForPlayer3 takes nothing returns nothing
     set gg_unit_earc_0246 = BlzCreateUnitWithSkin( p, 'earc', -10306.9, 24954.9, 126.500, 'earc' )
     set gg_unit_esen_0247 = BlzCreateUnitWithSkin( p, 'esen', -11055.2, 25073.4, 141.088, 'esen' )
     set gg_unit_esen_0249 = BlzCreateUnitWithSkin( p, 'esen', -10870.8, 25279.2, 145.498, 'esen' )
-    set u = BlzCreateUnitWithSkin( p, 'nsc3', -7958.8, 13274.6, 66.731, 'nsc3' )
-    call SetUnitAcquireRange( u, 200.0 )
 endfunction
 
 //===========================================================================
@@ -737,6 +745,7 @@ function CreateNeutralHostileBuildings takes nothing returns nothing
     set gg_unit_h014_0185 = BlzCreateUnitWithSkin( p, 'h014', -11677.1, 9525.1, 270.000, 'h014' )
     set gg_unit_h00Q_0197 = BlzCreateUnitWithSkin( p, 'h00Q', 1917.4, 13090.1, 270.000, 'h00Q' )
     set u = BlzCreateUnitWithSkin( p, 'nmh1', 2464.0, -15904.0, 270.000, 'nmh1' )
+    set gg_unit_h01I_0233 = BlzCreateUnitWithSkin( p, 'h01I', -13328.4, -16840.0, 270.000, 'h01I' )
     set u = BlzCreateUnitWithSkin( p, 'ncnt', -15008.0, -3232.0, 270.000, 'ncnt' )
     set u = BlzCreateUnitWithSkin( p, 'ncmw', -5344.0, 11424.0, 270.000, 'ncmw' )
     set u = BlzCreateUnitWithSkin( p, 'ncnt', -14816.0, -3680.0, 270.000, 'ncnt' )
@@ -759,7 +768,7 @@ function CreateNeutralHostileBuildings takes nothing returns nothing
     set gg_unit_h00Y_0370 = BlzCreateUnitWithSkin( p, 'h00Y', -14511.1, -1729.7, 270.000, 'h00Y' )
     set gg_unit_h01E_0399 = BlzCreateUnitWithSkin( p, 'h01E', -5371.2, -13104.6, 270.000, 'h01E' )
     set gg_unit_h01C_0422 = BlzCreateUnitWithSkin( p, 'h01C', 2286.9, -12089.2, 270.000, 'h01C' )
-    set gg_unit_h016_0423 = BlzCreateUnitWithSkin( p, 'h016', -12817.0, -18837.7, 270.000, 'h016' )
+    set gg_unit_h016_0423 = BlzCreateUnitWithSkin( p, 'h016', -12817.0, -19221.7, 270.000, 'h016' )
     set gg_unit_h00G_0444 = BlzCreateUnitWithSkin( p, 'h00G', -12721.8, -5393.3, 270.000, 'h00G' )
     set gg_unit_h00Z_0445 = BlzCreateUnitWithSkin( p, 'h00Z', -14387.7, -8880.8, 270.000, 'h00Z' )
     set gg_unit_h010_0446 = BlzCreateUnitWithSkin( p, 'h010', -10129.6, -4742.2, 270.000, 'h010' )
@@ -770,6 +779,11 @@ function CreateNeutralHostileBuildings takes nothing returns nothing
     set gg_unit_h018_0532 = BlzCreateUnitWithSkin( p, 'h018', -6125.7, -21427.5, 270.000, 'h018' )
     set gg_unit_h01A_0535 = BlzCreateUnitWithSkin( p, 'h01A', -2630.5, -21241.5, 270.000, 'h01A' )
     set gg_unit_h01B_0536 = BlzCreateUnitWithSkin( p, 'h01B', 953.1, -17266.5, 270.000, 'h01B' )
+    set u = BlzCreateUnitWithSkin( p, 'nmg1', -4704.0, -16992.0, 270.000, 'nmg1' )
+    set gg_unit_h01F_0717 = BlzCreateUnitWithSkin( p, 'h01F', -8067.4, -17030.9, 270.000, 'h01F' )
+    set gg_unit_h01G_0718 = BlzCreateUnitWithSkin( p, 'h01G', 372.6, -14781.9, 270.000, 'h01G' )
+    set gg_unit_h01H_0719 = BlzCreateUnitWithSkin( p, 'h01H', -6985.7, -11725.4, 270.000, 'h01H' )
+    set gg_unit_h01J_0721 = BlzCreateUnitWithSkin( p, 'h01J', -9514.9, -17424.6, 270.000, 'h01J' )
 endfunction
 
 //===========================================================================
@@ -830,8 +844,7 @@ function CreateNeutralHostile takes nothing returns nothing
     call TriggerRegisterUnitEvent( t, u, EVENT_UNIT_DEATH )
     call TriggerRegisterUnitEvent( t, u, EVENT_UNIT_CHANGE_OWNER )
     call TriggerAddAction( t, function Unit000043_DropItems )
-    set u = BlzCreateUnitWithSkin( p, 'nthl', -2314.3, -14471.9, -11.742, 'nthl' )
-    call SetUnitState( u, UNIT_STATE_MANA, 0 )
+    set u = BlzCreateUnitWithSkin( p, 'nthl', -2314.3, -14471.9, 348.258, 'nthl' )
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'ngh1', 1311.2, 15547.8, 135.758, 'ngh1' )
     call SetUnitAcquireRange( u, 200.0 )
@@ -856,10 +869,8 @@ function CreateNeutralHostile takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'nsts', 3290.7, 26065.2, 221.507, 'nsts' )
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nltl', -2215.6, -14697.2, 31.319, 'nltl' )
-    call SetUnitState( u, UNIT_STATE_MANA, 0 )
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nltl', -2152.3, -14277.5, 330.699, 'nltl' )
-    call SetUnitState( u, UNIT_STATE_MANA, 0 )
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nbzd', 1066.8, -17359.1, 159.373, 'nbzd' )
     call SetUnitAcquireRange( u, 200.0 )
@@ -1038,7 +1049,6 @@ function CreateNeutralHostile takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'ngrk', 59.9, 10240.5, 160.822, 'ngrk' )
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nkog', -277.5, -17348.1, 90.245, 'nkog' )
-    call SetUnitState( u, UNIT_STATE_MANA, 0 )
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nkot', -449.7, -17321.1, 55.595, 'nkot' )
     call SetUnitAcquireRange( u, 200.0 )
@@ -1064,19 +1074,19 @@ function CreateNeutralHostile takes nothing returns nothing
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nmrl', 2438.6, -15583.7, 159.131, 'nmrl' )
     call SetUnitAcquireRange( u, 200.0 )
-    set u = BlzCreateUnitWithSkin( p, 'nlrv', -10736.6, 10755.4, 151.012, 'nlrv' )
-    call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nmrl', 2244.9, -15552.3, 140.673, 'nmrl' )
     call SetUnitAcquireRange( u, 200.0 )
-    set u = BlzCreateUnitWithSkin( p, 'nwe1', -2444.2, -14233.1, -2.252, 'nwe1' )
+    set u = BlzCreateUnitWithSkin( p, 'nslv', -5282.1, -11329.4, 248.472, 'nslv' )
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nspr', -2321.8, 8856.7, 68.585, 'nspr' )
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nlds', -10459.4, 7983.6, 93.069, 'nlds' )
     call SetUnitAcquireRange( u, 200.0 )
-    set u = BlzCreateUnitWithSkin( p, 'nwe1', -2584.6, -14651.7, 39.951, 'nwe1' )
+    set u = BlzCreateUnitWithSkin( p, 'nslr', -5461.7, -11360.7, 272.651, 'nslr' )
     call SetUnitAcquireRange( u, 200.0 )
-    set u = BlzCreateUnitWithSkin( p, 'nwe1', -2189.4, -15035.0, 76.766, 'nwe1' )
+    set u = BlzCreateUnitWithSkin( p, 'nslh', -5170.8, -11484.9, 249.850, 'nslh' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nsll', -6940.6, -11895.9, 319.697, 'nsll' )
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nstl', -5634.5, 11701.7, 239.774, 'nstl' )
     call SetUnitAcquireRange( u, 200.0 )
@@ -1088,9 +1098,21 @@ function CreateNeutralHostile takes nothing returns nothing
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nstl', -7356.8, 10241.5, 33.651, 'nstl' )
     call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nltl', -7211.9, -11819.9, 298.925, 'nltl' )
+    call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nsts', -7166.8, 10266.0, 69.337, 'nsts' )
     call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nltl', -6886.5, -11606.3, 297.192, 'nltl' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'ntrg', -4959.1, -13679.8, 306.677, 'ntrg' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'ntrt', -4725.5, -13516.0, 283.248, 'ntrt' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'ntrt', -5202.9, -13806.8, 327.614, 'ntrt' )
+    call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'ncks', -10731.8, -2865.3, 163.124, 'ncks' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nsel', -7137.7, -13108.5, 65.129, 'nsel' )
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'ncer', -10893.6, -2926.9, 145.682, 'ncer' )
     call SetUnitAcquireRange( u, 200.0 )
@@ -1164,6 +1186,10 @@ function CreateNeutralHostile takes nothing returns nothing
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'ncer', -15010.1, 7052.3, 247.704, 'ncer' )
     call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nsel', -7039.7, -13311.9, 247.628, 'nsel' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nsel', -7259.2, -13303.0, 33.253, 'nsel' )
+    call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nmrr', -9206.0, 5182.2, 318.372, 'nmrr' )
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nmrr', -9064.9, 5227.2, 280.148, 'nmrr' )
@@ -1185,6 +1211,28 @@ function CreateNeutralHostile takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'ngrw', -1767.8, 13579.1, 307.387, 'ngrw' )
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nmrr', -8917.8, 5282.6, 246.762, 'nmrr' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nhhr', -6469.3, -21112.6, 71.240, 'nhhr' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nhhr', -6135.8, -21302.7, 92.571, 'nhhr' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nhhr', -5858.8, -20950.7, 115.348, 'nhhr' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'ngst', 114.5, -14735.5, 298.024, 'ngst' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'ngrk', 274.4, -14886.0, 302.397, 'ngrk' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'ngrk', 282.9, -14668.4, 224.304, 'ngrk' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'ngrk', 105.3, -14502.1, 286.994, 'ngrk' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'n00D', -5853.9, -15498.7, 325.546, 'n00D' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'n00D', -6581.9, -15714.8, 294.684, 'n00D' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'n00D', -5784.9, -15305.1, 338.030, 'n00D' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'n00C', -5919.0, -21510.5, 111.629, 'n00C' )
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nmrm', -9103.5, 5415.2, 280.850, 'nmrm' )
     call SetUnitAcquireRange( u, 200.0 )
@@ -1257,6 +1305,8 @@ function CreateNeutralHostile takes nothing returns nothing
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nrel', -9446.3, 17825.5, 255.792, 'nrel' )
     call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nsc3', -7958.8, 13274.6, 66.730, 'nsc3' )
+    call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'ncks', -12714.0, -5228.4, 240.882, 'ncks' )
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'ncim', -12897.5, -5079.9, 267.724, 'ncim' )
@@ -1297,19 +1347,81 @@ function CreateNeutralHostile takes nothing returns nothing
     call SetUnitAcquireRange( u, 200.0 )
     set u = BlzCreateUnitWithSkin( p, 'nmrm', -6974.6, 20690.3, 52.457, 'nmrm' )
     call SetUnitAcquireRange( u, 200.0 )
-    set u = BlzCreateUnitWithSkin( p, 'nmrr', -10650.6, -16750.2, 75.423, 'nmrr' )
-    set u = BlzCreateUnitWithSkin( p, 'nmrr', -10768.5, -16571.7, 105.263, 'nmrr' )
-    set u = BlzCreateUnitWithSkin( p, 'nmrr', -10737.8, -16439.6, 103.648, 'nmrr' )
-    set u = BlzCreateUnitWithSkin( p, 'nmrr', -10618.0, -16434.2, 212.965, 'nmrr' )
-    set u = BlzCreateUnitWithSkin( p, 'nmrr', -10583.5, -16519.3, 180.247, 'nmrr' )
-    set u = BlzCreateUnitWithSkin( p, 'nmrr', -10598.5, -16592.4, 28.368, 'nmrr' )
-    set u = BlzCreateUnitWithSkin( p, 'nmrr', -10536.6, -16638.8, 198.342, 'nmrr' )
-    set u = BlzCreateUnitWithSkin( p, 'nmrr', -9856.1, -17514.8, 154.374, 'nmrr' )
-    set u = BlzCreateUnitWithSkin( p, 'nmrr', -9873.8, -17762.1, 59.636, 'nmrr' )
-    set u = BlzCreateUnitWithSkin( p, 'nmrr', -12899.1, -16198.2, 321.571, 'nmrr' )
-    set u = BlzCreateUnitWithSkin( p, 'nmrr', -12538.4, -16253.5, 255.312, 'nmrr' )
-    set u = BlzCreateUnitWithSkin( p, 'nmrr', -12912.9, -16541.2, 16.581, 'nmrr' )
-    set u = BlzCreateUnitWithSkin( p, 'nmrr', -12629.8, -16558.2, 70.001, 'nmrr' )
+    set u = BlzCreateUnitWithSkin( p, 'nmrr', -11649.6, -14368.5, 75.423, 'nmrr' )
+    set u = BlzCreateUnitWithSkin( p, 'nmrr', -11767.5, -14190.0, 105.263, 'nmrr' )
+    set u = BlzCreateUnitWithSkin( p, 'nmrr', -11736.7, -14057.9, 103.648, 'nmrr' )
+    set u = BlzCreateUnitWithSkin( p, 'nmrr', -11616.9, -14052.6, 212.965, 'nmrr' )
+    set u = BlzCreateUnitWithSkin( p, 'nmrr', -11582.5, -14137.6, 180.247, 'nmrr' )
+    set u = BlzCreateUnitWithSkin( p, 'nmrr', -11597.4, -14210.8, 28.368, 'nmrr' )
+    set u = BlzCreateUnitWithSkin( p, 'nmrr', -11535.5, -14257.1, 198.342, 'nmrr' )
+    set u = BlzCreateUnitWithSkin( p, 'nmrr', -11420.9, -14157.9, 154.374, 'nmrr' )
+    set u = BlzCreateUnitWithSkin( p, 'nmrr', -11438.6, -14405.2, 59.636, 'nmrr' )
+    set u = BlzCreateUnitWithSkin( p, 'nmrr', -12317.6, -14015.4, 321.571, 'nmrr' )
+    set u = BlzCreateUnitWithSkin( p, 'nmrr', -11957.0, -14070.7, 255.312, 'nmrr' )
+    set u = BlzCreateUnitWithSkin( p, 'nmrr', -12331.4, -14358.4, 16.581, 'nmrr' )
+    set u = BlzCreateUnitWithSkin( p, 'nmrr', -12048.4, -14375.4, 70.001, 'nmrr' )
+    set u = BlzCreateUnitWithSkin( p, 'n00C', -6275.0, -21528.1, 81.687, 'n00C' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'n00C', -6443.8, -20718.8, 65.233, 'n00C' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'n00C', -6113.8, -20633.3, 108.045, 'n00C' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'n00C', -6611.3, -16064.1, 299.147, 'n00C' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'n00C', -5601.8, -15468.0, 339.861, 'n00C' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'n00C', -6404.5, -15964.0, 299.147, 'n00C' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nsgg', -1716.4, -18614.8, 224.620, 'nsgg' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nsel', -3638.7, -21085.9, 310.747, 'nsel' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nsel', -2531.0, -20198.4, 101.901, 'nsel' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nsel', -2525.9, -20980.6, 140.441, 'nsel' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nsel', -2908.5, -21298.6, 106.955, 'nsel' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'ntrt', -3567.5, -20222.4, 316.043, 'ntrt' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nsgb', -2546.5, -21328.3, 151.330, 'nsgb' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nhyh', -3728.9, -21295.0, 295.541, 'nhyh' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nmbg', -4453.2, -16994.7, 24.957, 'nmbg' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nhyh', -2142.7, -20264.5, 225.007, 'nhyh' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nhyh', -2812.5, -20086.6, 94.958, 'nhyh' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nhyh', -3773.0, -20813.3, 107.581, 'nhyh' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nmbg', -4429.3, -16889.5, 354.509, 'nmbg' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nmbg', -4366.2, -16951.9, 23.921, 'nmbg' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nmbg', -4379.0, -17085.6, 56.941, 'nmbg' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nmsn', -4530.7, -16875.6, 353.634, 'nmsn' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nlsn', -4736.9, -18719.0, 335.687, 'nlsn' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nltc', -4846.4, -18925.3, 355.154, 'nltc' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nltc', -4507.1, -18663.2, 274.490, 'nltc' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nwzg', -8350.3, -16791.6, 296.574, 'nwzg' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nass', -8394.3, -16957.9, 324.777, 'nass' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nass', -8218.3, -16752.7, 341.389, 'nass' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nbrg', -8292.4, -17014.8, 315.922, 'nbrg' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'nbrg', -8085.5, -16825.3, 65.799, 'nbrg' )
+    call SetUnitAcquireRange( u, 200.0 )
+    set u = BlzCreateUnitWithSkin( p, 'ndrv', -10751.3, 10754.2, 48.780, 'ndrv' )
+    call SetUnitAcquireRange( u, 200.0 )
 endfunction
 
 //===========================================================================
@@ -1349,6 +1461,9 @@ function CreateNeutralPassiveBuildings takes nothing returns nothing
     set gg_unit_edos_0342 = BlzCreateUnitWithSkin( p, 'edos', -6848.0, 9536.0, 270.000, 'edos' )
     set u = BlzCreateUnitWithSkin( p, 'o000', 1216.0, -11840.0, 270.000, 'o000' )
     set u = BlzCreateUnitWithSkin( p, 'o000', 2304.0, -12800.0, 270.000, 'o000' )
+    set u = BlzCreateUnitWithSkin( p, 'ntn2', -8544.0, -16672.0, 270.000, 'ntn2' )
+    set u = BlzCreateUnitWithSkin( p, 'ntn2', -8224.0, -16608.0, 270.000, 'ntn2' )
+    set u = BlzCreateUnitWithSkin( p, 'ntn2', -8544.0, -16992.0, 270.000, 'ntn2' )
 endfunction
 
 //===========================================================================
@@ -1624,15 +1739,20 @@ function Trig_ControlPointInitialVariables_Actions takes nothing returns nothing
     set udg_feralasGrotto = gg_unit_h010_0446
     set udg_feralasFeathermoon = gg_unit_h00Z_0445
     set udg_feralas = gg_unit_h00G_0444
-    set udg_silithus = gg_unit_h016_0423
+    set udg_silithusUpperCity = gg_unit_h016_0423
     set udg_silithusQirajiCaves = gg_unit_h017_0503
     set udg_uldumLostCity = gg_unit_h01A_0535
     set udg_uldumNefersetCity = gg_unit_h018_0532
     set udg_uldumRamkahen = gg_unit_h019_0477
+    set udg_uldumGraverobbersCamp = gg_unit_h01F_0717
     set udg_tanarisCavernsofTime = gg_unit_h01B_0536
     set udg_tanarisSteamwheedlePort = gg_unit_h01C_0422
     set udg_tanarisZulFarak = gg_unit_h01D_0117
+    set udg_tanarisOasis = gg_unit_h01G_0718
     set udg_ungoroCrater = gg_unit_h01E_0399
+    set udg_ungoroFalls = gg_unit_h01H_0719
+    set udg_silithusLowerCity = gg_unit_h01I_0233
+    set udg_silithusHatchery = gg_unit_h01J_0721
 endfunction
 
 //===========================================================================

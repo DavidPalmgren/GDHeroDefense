@@ -326,6 +326,48 @@ import DoodadObjEditing
 	// TODO no wrapper: 	..setLvlDataInt("dvb1", 1, 0, 50)
 
 
+@compiletime function create_w3d_D013()
+	new DoodadDefinition('D013', 'ZSrb')
+	..setMaximumScale(0, 3.0)
+	..setName(0, "Pyramid")
+	..setTilesets(0, "Z,*")
+	..setModel(0, "buildings\\other\\NerubianZiggurat\\NerubianZiggurat.mdl")
+
+
+@compiletime function create_w3d_D015()
+	new DoodadDefinition('D015', 'ZSrb')
+	..setMaximumScale(0, 3.0)
+	..setName(0, "Ruins (No Collision)")
+	..setPathTexture(0, "")
+
+
+@compiletime function create_w3d_D016()
+	new DoodadDefinition('D016', 'ZPms')
+	// TODO no wrapper: 	..setLvlDataUnreal("dfxr", 0, 0, -1.0)
+	..setMaximumScale(0, 10.0)
+	..setMinimumScale(0, 0.01)
+	..setName(0, "Mushrooms (SunkenRuins)")
+	..setPathTexture(0, "none")
+	..setTilesets(0, "*")
+
+
+@compiletime function create_w3d_D017()
+	new DoodadDefinition('D017', 'ZSrb')
+	..setMaximumScale(0, 3.0)
+	..setName(0, "Black Ziggaraut")
+	..setTilesets(0, "Z,*")
+	..setModel(0, "buildings\\other\\NerubianZiggurat\\NerubianZiggurat.mdl")
+	// TODO no wrapper: 	..setLvlDataInt("dvr1", 1, 0, 50)
+	// TODO no wrapper: 	..setLvlDataInt("dvr1", 2, 0, 50)
+	// TODO no wrapper: 	..setLvlDataInt("dvr1", 3, 0, 50)
+	// TODO no wrapper: 	..setLvlDataInt("dvg1", 1, 0, 30)
+	// TODO no wrapper: 	..setLvlDataInt("dvg1", 2, 0, 30)
+	// TODO no wrapper: 	..setLvlDataInt("dvg1", 3, 0, 30)
+	// TODO no wrapper: 	..setLvlDataInt("dvb1", 2, 0, 50)
+	// TODO no wrapper: 	..setLvlDataInt("dvb1", 1, 0, 50)
+	// TODO no wrapper: 	..setLvlDataInt("dvb1", 3, 0, 50)
+
+
 // Original Table (contains all modified default/melee objects)
 // These are emitted when createObjectDefinition uses the same base/new id.
 
