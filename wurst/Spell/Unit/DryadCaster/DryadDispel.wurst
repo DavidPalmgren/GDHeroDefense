@@ -1,0 +1,20 @@
+package DryadDispel
+
+import ObjectIds
+import ObjectIdGenerator
+import AbilityObjEditing
+import AbilityIds
+import Icons
+
+public constant DRYAD_CASTER_DISPEL = compiletime(ABIL_ID_GEN.next())
+
+
+@compiletime function genDryadDispel()
+  new AbilityDefinitionDispelMagic(DRYAD_CASTER_DISPEL)
+    ..setName("Cleansing Pollen")
+    ..setIconNormal(Icons.bTNDryadDispelMagic)
+    ..setIconResearch(Icons.bTNDryadDispelMagic)
+    ..setAreaofEffect(1, 200)
+    ..setRequirements(commaList('R005')) // Invoke Spirits
+    ..setRequirementsLevels("1")
+  
