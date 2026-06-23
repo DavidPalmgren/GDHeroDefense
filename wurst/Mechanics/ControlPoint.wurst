@@ -115,7 +115,12 @@ function setupAllControlPoints()
     addControlPoint(udg_ungoroFalls, 10)
     addControlPoint(udg_tanarisCavernsofTime, 10)
     addControlPoint(udg_tanarisSteamwheedlePort, 10)
-    addControlPoint(udg_tanarisZulFarak, 10)
+    addControlPoint(udg_duskwallowStonemaulGates, 10)
+    addControlPoint(udg_duskwallowStonemaulKeep, 10)
+    addControlPoint(udg_duskwallowTheramoreIsle, 10)
+    addControlPoint(udg_duskwallowTrollsLanding, 10)
+    addControlPoint(udg_thousandNeedles, 10)
+    addControlPoint(udg_thousandNeedlesKhan, 10)
 
 init
     setupAllControlPoints()

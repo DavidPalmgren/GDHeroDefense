@@ -1398,8 +1398,8 @@ import AbilityObjEditing
 	..setDurationNormal(1, 10.0)
 	..setDurationHero(1, 0.0)
 	..setBuffs(1, "BM0b")
-	..setRequirements("A006")
-	..setRequirementsLevels("")
+	..setRequirements("R005")
+	..setRequirementsLevels("2")
 	..setRequiredLevel(1)
 	..setLevelSkipRequirement(2)
 	..setHeroAbility(false)
@@ -1407,7 +1407,17 @@ import AbilityObjEditing
 
 
 @compiletime function create_w3a_AM1o()
-	new AbilityDefinitionIllidanChannel('AM1o')
+	new AbilityDefinitionDispelMagic('AM1o')
+	..setName("Cleansing Pollen")
+	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNDryadDispelMagic.blp")
+	..setIconResearch("ReplaceableTextures\\CommandButtons\\BTNDryadDispelMagic.blp")
+	..setAreaofEffect(1, 200.0)
+	..setRequirements("R005")
+	..setRequirementsLevels("1")
+
+
+@compiletime function create_w3a_AM1p()
+	new AbilityDefinitionIllidanChannel('AM1p')
 	..setLevels(1)
 	..setBaseOrderID(1, "antimagicshell")
 	..setDisableOtherAbilities(1, false)
@@ -1429,8 +1439,8 @@ import AbilityObjEditing
 	..setTargetType(1, 2)
 
 
-@compiletime function create_w3a_AM1p()
-	new AbilityDefinitionBloodMageFlameStrike('AM1p')
+@compiletime function create_w3a_AM1q()
+	new AbilityDefinitionBloodMageFlameStrike('AM1q')
 	..setName("Throw Explosives")
 	..setTooltipNormal(1, "Throw Explosives")
 	..setTooltipNormalExtended(1, "Throws an explosive barrel to the target location. Explodes after 3 seconds dealing 400 damage to all nearby enemies.")
@@ -1459,8 +1469,8 @@ import AbilityObjEditing
 	..setArtEffect("")
 
 
-@compiletime function create_w3a_AM1q()
-	new AbilityDefinitionIllidanChannel('AM1q')
+@compiletime function create_w3a_AM1r()
+	new AbilityDefinitionIllidanChannel('AM1r')
 	..setLevels(3)
 	..setBaseOrderID(1, "webon")
 	..setBaseOrderID(2, "webon")
@@ -1493,8 +1503,8 @@ import AbilityObjEditing
 	..setHeroAbility(false)
 
 
-@compiletime function create_w3a_AM1r()
-	new AbilityDefinitionDefenseBonusPlus1('AM1r')
+@compiletime function create_w3a_AM1s()
+	new AbilityDefinitionDefenseBonusPlus1('AM1s')
 	..setName("Iron Skin")
 	..setDefenseBonus(1, 4)
 	..setBuffs(1, "BM01")
@@ -1507,8 +1517,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM1s()
-	new AbilityDefinitionPassiveSimple('AM1s')
+@compiletime function create_w3a_AM1t()
+	new AbilityDefinitionPassiveSimple('AM1t')
 	..setName("Iron Skin")
 	..setTooltipNormal(1, "Iron Skin")
 	..setTooltipNormalExtended(1, "Increases armor by 4 and has a 25% chance to retaliate.")
@@ -1519,8 +1529,8 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-@compiletime function create_w3a_AM1t()
-	new AbilityDefinitionPassiveSimple('AM1t')
+@compiletime function create_w3a_AM1u()
+	new AbilityDefinitionPassiveSimple('AM1u')
 	..setName("Recycle")
 	..setTooltipNormal(1, "Recycle")
 	..setTooltipNormalExtended(1, "On death, applies Invigorate to the nearest friendly unit.")
@@ -1532,8 +1542,8 @@ import AbilityObjEditing
 	..setRequirements("R003")
 
 
-@compiletime function create_w3a_AM1u()
-	new AbilityDefinitionHardenedSkin('AM1u')
+@compiletime function create_w3a_AM1v()
+	new AbilityDefinitionHardenedSkin('AM1v')
 	..setName("Thick Bark")
 	..setTooltipNormal(1, "Thick Bark")
 	..setTooltipNormalExtended(1, "Reduces each attack's damage by 10.0 minimum damage taken off 5.0% per hit.")
@@ -1548,20 +1558,20 @@ import AbilityObjEditing
 	..setRequirements("R000")
 
 
-@compiletime function create_w3a_AM1v()
-	new AbilityDefinitionStasisTrap('AM1v')
+@compiletime function create_w3a_AM1w()
+	new AbilityDefinitionStasisTrap('AM1w')
 	..setRequirements("RM07")
 	..setRequirementsLevels("1")
 
 
-@compiletime function create_w3a_AM1w()
-	new AbilityDefinitionHealingWard('AM1w')
+@compiletime function create_w3a_AM1x()
+	new AbilityDefinitionHealingWard('AM1x')
 	..setRequirements("RM07")
 	..setRequirementsLevels("2")
 
 
-@compiletime function create_w3a_AM1x()
-	new AbilityDefinitionIllidanChannel('AM1x')
+@compiletime function create_w3a_AM1y()
+	new AbilityDefinitionIllidanChannel('AM1y')
 	..setLevels(1)
 	..setBaseOrderID(1, "weboff")
 	..setDisableOtherAbilities(1, false)
@@ -1596,5 +1606,9 @@ import AbilityObjEditing
 @compiletime function create_w3a_ANhs()
 	new AbilityDefinitionAlchemistHealingSpray('ANhs')
 	..setMissileArt("Abilities\\Spells\\Items\\AIhe\\AIheTarget.mdl")
+
+
+@compiletime function create_w3a_Agra()
+	new AbilityDefinitionGrabTree('Agra')
 
 

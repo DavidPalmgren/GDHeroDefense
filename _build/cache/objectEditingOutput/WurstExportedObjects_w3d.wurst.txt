@@ -264,16 +264,6 @@ import DoodadObjEditing
 	..setTilesets(0, "Y,X,J,*")
 
 
-@compiletime function create_w3d_D00X()
-	new DoodadDefinition('D00X', 'YSw0')
-	..setModel(0, "Doodads\\LordaeronSummer\\Terrain\\StoneWall135\\StoneWall135.mdl")
-	// TODO no wrapper: 	..setLvlDataUnreal("dfxr", 0, 0, -1.0)
-	..setMinimumScale(0, 0.1)
-	..setName(0, "Troll Wall")
-	..setPathTexture(0, "")
-	..setTilesets(0, "Y,X,J,*")
-
-
 @compiletime function create_w3d_D00Y()
 	new DoodadDefinition('D00Y', 'EG00')
 	..setModel(0, "Doodads\\Cityscape\\Structures\\Archway1\\Archway1.mdl")
@@ -366,6 +356,22 @@ import DoodadObjEditing
 	// TODO no wrapper: 	..setLvlDataInt("dvb1", 2, 0, 50)
 	// TODO no wrapper: 	..setLvlDataInt("dvb1", 1, 0, 50)
 	// TODO no wrapper: 	..setLvlDataInt("dvb1", 3, 0, 50)
+
+
+@compiletime function create_w3d_D018()
+	new DoodadDefinition('D018', 'ZSrb')
+	..setMaximumScale(0, 3.0)
+	..setName(0, "Khan's Tent")
+	..setTilesets(0, "Z,*")
+	..setModel(0, "buildings\\other\\CentaurTent2\\CentaurTent2.mdl")
+
+
+@compiletime function create_w3d_D019()
+	new DoodadDefinition('D019', 'ZSrb')
+	..setMaximumScale(0, 3.0)
+	..setName(0, "Stonemaul Keep")
+	..setTilesets(0, "Z,*")
+	..setModel(0, "buildings\\other\\Mercenary\\Mercenary.mdl")
 
 
 // Original Table (contains all modified default/melee objects)

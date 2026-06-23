@@ -68,6 +68,12 @@ import DestructableObjEditing
 	..setMaximumScale(4.0)
 
 
+@compiletime function create_w3b_B007()
+	new DestructableDefinition('B007', 'LTbs')
+	..setName("Custom Wall")
+	..setModel("war3mapImported\\Wooden Log Wall.mdl")
+
+
 // Original Table (contains all modified default/melee objects)
 // These are emitted when createObjectDefinition uses the same base/new id.
 
