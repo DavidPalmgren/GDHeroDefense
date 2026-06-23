@@ -8,6 +8,7 @@ let auberdine = udg_darkshoreAuberdineBuildings
 let darnassus = udg_darnassusBuildings
 let teldrassil = udg_darnassusTeldrassilBuildings
 let stonetalon = udg_stonetalonEldretharBuildings
+let enclave = udg_silithusEnclaveBuildings
 
 //create group with neutral building cps
 public group neutralBuildingCps = CreateGroup()
@@ -28,12 +29,14 @@ function setupTables()
     cpBuildingGroups.put(udg_darnassus, darnassus)
     cpBuildingGroups.put(udg_darnassusTeldrassil, teldrassil)
     cpBuildingGroups.put(udg_stonetalonEldrethar, stonetalon)
+    cpBuildingGroups.put(udg_silithusCenarionEnclave, enclave)
 
-    // add to hashmap which building groups correspond to which player  
+// add to hashmap which building groups correspond to which player  
     // Druids
     cpBuildingOwners.put(chimaerasFall, players[0])
+    cpBuildingOwners.put(enclave, players[0])
     // Sentinels
-    cpBuildingOwners.put(darnassus, players[0])
+    cpBuildingOwners.put(darnassus, players[1])
     cpBuildingOwners.put(auberdine, players[1])
     cpBuildingOwners.put(astranaar, players[1])
     cpBuildingOwners.put(teldrassil, players[1])

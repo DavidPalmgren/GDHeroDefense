@@ -52,7 +52,7 @@ function setupCaptureOnHalf(unit target)
                 cpOwners.put(u, newOwner)
                 SetUnitOwner(u, newOwner, true)
                 SetUnitState(u, UNIT_STATE_LIFE, maxHp)
-                if cpBuildingGroups.has(u) and cpBuildingOwners.get(cpBuildingGroups.get(u)) == newOwner // need to test this
+                if cpBuildingGroups.has(u) and cpBuildingOwners.get(cpBuildingGroups.get(u)) == newOwner
                     assignBuilding(cpBuildingGroups.get(u), newOwner)
             else
                 SetUnitState(u, UNIT_STATE_LIFE, maxHp)
@@ -106,6 +106,7 @@ function setupAllControlPoints()
     addControlPoint(udg_silithusLowerCity, 10)
     addControlPoint(udg_silithusHatchery, 10)
     addControlPoint(udg_silithusQirajiCaves, 10)
+    addControlPoint(udg_silithusCenarionEnclave, 10)
     addControlPoint(udg_uldumNefersetCity, 10)
     addControlPoint(udg_uldumLostCity, 10)
     addControlPoint(udg_uldumRamkahen, 10)

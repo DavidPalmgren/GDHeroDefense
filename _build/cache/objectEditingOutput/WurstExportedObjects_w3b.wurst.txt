@@ -61,6 +61,13 @@ import DestructableObjEditing
 	// TODO no wrapper: 	..setReal("bgsc", 1.0)
 
 
+@compiletime function create_w3b_B006()
+	new DestructableDefinition('B006', 'LOcg')
+	..setName("Gong")
+	..setModel("war3mapImported\\ImprovedGong.mdl")
+	..setMaximumScale(4.0)
+
+
 // Original Table (contains all modified default/melee objects)
 // These are emitted when createObjectDefinition uses the same base/new id.
 
@@ -132,6 +139,10 @@ import DestructableObjEditing
 
 @compiletime function create_w3b_ATg1()
 	new DestructableDefinition('ATg1', 'ATg1')
+	..setHitPoints(20000.0)
 	..setMaximumScale(2.0)
+	..setVertexColorGreen(70)
+	..setVertexColorRed(70)
+	..setVertexColorBlue(70)
 
 
