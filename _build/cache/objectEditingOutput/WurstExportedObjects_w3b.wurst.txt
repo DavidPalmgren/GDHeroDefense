@@ -1,5 +1,6 @@
 package WurstExportedObjects_w3b
 import ObjEditingNatives
+import ObjEditingCommons
 import DestructableObjEditing
 
 // Modified Table (contains all custom objects)
@@ -16,6 +17,7 @@ import DestructableObjEditing
 	..setVertexColorRed(50)
 	..setVertexColorGreen(50)
 	..setVertexColorBlue(50)
+	..setMaximumScale(2.0)
 
 
 @compiletime function create_w3b_B002()
@@ -24,6 +26,7 @@ import DestructableObjEditing
 	..setVertexColorRed(50)
 	..setVertexColorGreen(50)
 	..setVertexColorBlue(50)
+	..setMaximumScale(2.0)
 
 
 @compiletime function create_w3b_B003()
@@ -32,6 +35,7 @@ import DestructableObjEditing
 	..setVertexColorRed(50)
 	..setVertexColorGreen(50)
 	..setVertexColorBlue(50)
+	..setMaximumScale(2.0)
 
 
 @compiletime function create_w3b_B004()
@@ -40,6 +44,21 @@ import DestructableObjEditing
 	..setVertexColorRed(50)
 	..setVertexColorGreen(50)
 	..setVertexColorBlue(50)
+	..setMaximumScale(2.0)
+
+
+@compiletime function create_w3b_B005()
+	new DestructableDefinition('B005', 'DTes')
+	..setHitPoints(9999.0)
+	// TODO no wrapper: 	..setInt("bgse", 0)
+	..setTargetedAs("invulnerable")
+	..setVertexColorBlue(0)
+	..setVertexColorGreen(120)
+	..setVertexColorRed(250)
+	..setMaximumScale(2.0)
+	..setMinimumScale(0.5)
+	..setName("Silithid Egg Sack")
+	// TODO no wrapper: 	..setReal("bgsc", 1.0)
 
 
 // Original Table (contains all modified default/melee objects)
@@ -109,5 +128,10 @@ import DestructableObjEditing
 @compiletime function create_w3b_LTe2()
 	new DestructableDefinition('LTe2', 'LTe2')
 	..setHitPoints(60000.0)
+
+
+@compiletime function create_w3b_ATg1()
+	new DestructableDefinition('ATg1', 'ATg1')
+	..setMaximumScale(2.0)
 
 

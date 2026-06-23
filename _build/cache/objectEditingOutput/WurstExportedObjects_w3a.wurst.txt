@@ -1,5 +1,6 @@
 package WurstExportedObjects_w3a
 import ObjEditingNatives
+import ObjEditingCommons
 import AbilityObjEditing
 
 // Modified Table (contains all custom objects)
@@ -56,7 +57,7 @@ import AbilityObjEditing
 	..setMissileSpeed(1100)
 	..setRequirements("R001")
 	..setCheckDependencies(true)
-	..setRace("nightelf")
+	..setRace(Race.Nightelf)
 	..setDamageBonus(1, 15.0)
 	..setName("Impetus")
 	..setMissileArt("war3mapImported\\VirgasArc_v1.mdx")
@@ -74,7 +75,7 @@ import AbilityObjEditing
 
 @compiletime function create_w3a_A005()
 	new AbilityDefinitionTinkererDemolishLevel0('A005')
-	..setRace("nightelf")
+	..setRace(Race.Nightelf)
 	..setHeroAbility(false)
 	..setRequirements("R004")
 	..setButtonPositionNormalX(0)
@@ -84,7 +85,7 @@ import AbilityObjEditing
 	new AbilityDefinitionBladeMasterCriticalStrike('A006')
 	..setChancetoCriticalStrike(1, 5.0)
 	..setChancetoCriticalStrike(2, 10.0)
-	..setRace("nightelf")
+	..setRace(Race.Nightelf)
 	..setHeroAbility(false)
 	..setRequirements("R008")
 	..setTooltipNormalExtended(1, "Gives a 5% chance to do 2 times normal damage on an attack.")
@@ -171,7 +172,7 @@ import AbilityObjEditing
 	..setEditorSuffix("(OnUnitEnterLeave)")
 	..setArtCaster("")
 	..setIconNormal("")
-	..setRace("unknown")
+	..setRace(Race.Unknown)
 
 
 @compiletime function create_w3a_AM03()
@@ -1257,13 +1258,13 @@ import AbilityObjEditing
 	..setDurationHero(2, 6.0)
 	..setDurationHero(3, 6.0)
 	..setTooltipLearn("|cffFFCC00Learn|r Starfall - [|cffffcc00Level %d|r]")
-	..setTooltipLearnExtended("|cff3B97D3Target Type:|r Instant Cast\n|cff3B97D3Area of Effect:|r |cffFFCC00500|r \n|cff3B97D3Cast Range:|r 1000/1100/1200\n|cff3B97D3Cooldown:|r 40/35/30\n|cff3B97D3Mana Cost:|r 125/150/175\n|cff3B97D3Duration Normal:|r |cffFFCC006|r \n|cff3B97D3Duration Hero:|r |cffFFCC006|r \n\n|cff919191Calls down stars in the target area dealing [50 / 75 / 100] damage in a 250 radius each. Stars fall faster the longer the spell channels.|r")
+	..setTooltipLearnExtended("|cff3B97D3Target Type:|r Instant Cast\n|cff3B97D3Area of Effect:|r |cffFFCC00500|r \n|cff3B97D3Cast Range:|r 1000/1100/1200\n|cff3B97D3Cooldown:|r 40/35/30\n|cff3B97D3Mana Cost:|r 125/150/175\n|cff3B97D3Duration - Normal:|r |cffFFCC006|r \n|cff3B97D3Duration - Hero:|r |cffFFCC006|r \n\n|cff919191Calls down stars in the target area dealing [50 / 75 / 100] damage in a 250 radius each. Stars fall faster the longer the spell channels.|r")
 	..setTooltipNormal(1, "Starfall  - Level 1")
-	..setTooltipNormalExtended(1, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Cast Range:|r |cffFFCC001000|r/1100/1200\n|cff3B97D3Cooldown:|r |cffFFCC0040|r/35/30\n|cff3B97D3Mana Cost:|r |cffFFCC00125|r/150/175\n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Duration Hero:|r |cffFFCC00|cffFFCC006|r \n\n|cff919191Calls down stars in the target area dealing [50 / 75 / 100] damage in a 250 radius each. Stars fall faster the longer the spell channels.|r")
+	..setTooltipNormalExtended(1, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Cast Range:|r |cffFFCC001000|r/1100/1200\n|cff3B97D3Cooldown:|r |cffFFCC0040|r/35/30\n|cff3B97D3Mana Cost:|r |cffFFCC00125|r/150/175\n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC006|r \n\n|cff919191Calls down stars in the target area dealing [50 / 75 / 100] damage in a 250 radius each. Stars fall faster the longer the spell channels.|r")
 	..setTooltipNormal(2, "Starfall  - Level 2")
-	..setTooltipNormalExtended(2, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Cast Range:|r 1000/|cffFFCC001100|r/1200\n|cff3B97D3Cooldown:|r 40/|cffFFCC0035|r/30\n|cff3B97D3Mana Cost:|r 125/|cffFFCC00150|r/175\n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Duration Hero:|r |cffFFCC00|cffFFCC006|r \n\n|cff919191Calls down stars in the target area dealing [50 / 75 / 100] damage in a 250 radius each. Stars fall faster the longer the spell channels.|r")
+	..setTooltipNormalExtended(2, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Cast Range:|r 1000/|cffFFCC001100|r/1200\n|cff3B97D3Cooldown:|r 40/|cffFFCC0035|r/30\n|cff3B97D3Mana Cost:|r 125/|cffFFCC00150|r/175\n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC006|r \n\n|cff919191Calls down stars in the target area dealing [50 / 75 / 100] damage in a 250 radius each. Stars fall faster the longer the spell channels.|r")
 	..setTooltipNormal(3, "Starfall  - Level 3")
-	..setTooltipNormalExtended(3, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Cast Range:|r 1000/1100/|cffFFCC001200|r\n|cff3B97D3Cooldown:|r 40/35/|cffFFCC0030|r\n|cff3B97D3Mana Cost:|r 125/150/|cffFFCC00175|r\n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Duration Hero:|r |cffFFCC00|cffFFCC006|r \n\n|cff919191Calls down stars in the target area dealing [50 / 75 / 100] damage in a 250 radius each. Stars fall faster the longer the spell channels.|r")
+	..setTooltipNormalExtended(3, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Cast Range:|r 1000/1100/|cffFFCC001200|r\n|cff3B97D3Cooldown:|r 40/35/|cffFFCC0030|r\n|cff3B97D3Mana Cost:|r 125/150/|cffFFCC00175|r\n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC006|r \n\n|cff919191Calls down stars in the target area dealing [50 / 75 / 100] damage in a 250 radius each. Stars fall faster the longer the spell channels.|r")
 	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNStarFall.blp")
 	..setIconResearch("ReplaceableTextures\\CommandButtons\\BTNStarFall.blp")
 	..setLevelSkipRequirement(2)

@@ -1,5 +1,6 @@
 package WurstExportedObjects_w3q
 import ObjEditingNatives
+import ObjEditingCommons
 
 // Modified Table (contains all custom objects)
 
@@ -65,9 +66,11 @@ import ObjEditingNatives
 	..setLvlDataInt("gglb", 0, 0, 50)
 	..setLvlDataString("gnam", 1, 0, "Demolish")
 	..setLvlDataString("gnam", 2, 0, "Demolish")
-	..setLvlDataString("gtp1", 1, 0, "Demo crew, signup now.")
+	..setLvlDataString("gtp1", 1, 0, "Demolish")
 	..setLvlDataString("gub1", 1, 0, "Doubles the amount of damage that Druid of the Claw deals to buildings (Bear form).")
 	..setLvlDataString("gar1", 1, 0, "ReplaceableTextures\\PassiveButtons\\PASBTNDemolish.blp")
+	..setLvlDataString("ghk1", 1, 0, "Z")
+	..setLvlDataInt("gbpy", 0, 0, 2)
 
 
 @compiletime function create_w3q_R005()
@@ -173,6 +176,11 @@ import ObjEditingNatives
 	..setLvlDataString("gub1", 3, 0, "Increases the damage of all units")
 	..setLvlDataString("gub1", 4, 0, "Increases the damage of all units")
 	..setLvlDataString("gub1", 5, 0, "Increases the damage of all units")
+	..setLvlDataString("ghk1", 1, 0, "Q")
+	..setLvlDataString("ghk1", 2, 0, "Q")
+	..setLvlDataString("ghk1", 3, 0, "Q")
+	..setLvlDataString("ghk1", 4, 0, "Q")
+	..setLvlDataString("ghk1", 5, 0, "Q")
 
 
 @compiletime function create_w3q_R00A()
@@ -509,6 +517,13 @@ import ObjEditingNatives
 	..setLvlDataString("gub1", 4, 0, "Increases the armor of all units.")
 	..setLvlDataString("gub1", 5, 0, "Increases the armor of all units.")
 	..setLvlDataString("gnam", 1, 0, "Armor Upgrade")
+	..setLvlDataString("ghk1", 1, 0, "W")
+	..setLvlDataString("ghk1", 2, 0, "W")
+	..setLvlDataString("ghk1", 3, 0, "W")
+	..setLvlDataString("ghk1", 4, 0, "W")
+	..setLvlDataString("ghk1", 5, 0, "W")
+	..setLvlDataInt("gbpy", 0, 0, 0)
+	..setLvlDataInt("gbpx", 0, 0, 1)
 
 
 @compiletime function create_w3q_Reht()
