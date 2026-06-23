@@ -1,0 +1,19 @@
+package WarClub
+
+import AbilityObjEditing
+import ClosureEvents
+import ClosureTimers
+
+public constant GRAB_TREE_ID = 'Agra' 
+
+@compiletime function genAbil()
+    new AbilityDefinitionGrabTree(GRAB_TREE_ID)
+
+init
+    EventListener.add(EVENT_PLAYER_UNIT_SPELL_EFFECT) ->
+        if EventData.getSpellAbilityId() == GRAB_TREE_ID
+            let targetTree = EventData.getSpellTargetDestructable()
+            
+            if targetTree != null
+                doAfter(0.1) ->
+                    targetTree.restoreLife(targetTree.getMaxLife(), true)

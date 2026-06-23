@@ -9,12 +9,11 @@ import ObjectIds
 import Invigorate
 import InstantDummyCaster
 import Orders
-
-
 import public ObjEditingCommons
 
-
 public constant RECYCLE_ID = compiletime(ABIL_ID_GEN.next())
+// Add your tech ID as a constant so it's easy to reference
+public constant RECYCLE_TECH_ID = 'R003'
 
 @compiletime function genAbility()
     new AbilityDefinitionPassiveSimple(RECYCLE_ID)
@@ -26,25 +25,26 @@ public constant RECYCLE_ID = compiletime(ABIL_ID_GEN.next())
         ..setButtonPositionNormalY(2)
         ..setHeroAbility(false)
         ..setItemAbility(false)
-        ..setRequirements(commaList('R003'))
-
-
+        ..setRequirements(commaList(RECYCLE_TECH_ID))
 
 init
     EventListener.add(EVENT_PLAYER_UNIT_DEATH) ->
         let dying = EventData.getDyingUnit()
-        if dying.hasAbility(RECYCLE_ID)
+        let owner = dying.getOwner()
+        
+        // CHECK BOTH: Does the unit have the ability AND does the owner have the upgrade?
+        if dying.hasAbility(RECYCLE_ID) and GetPlayerTechCount(owner, RECYCLE_TECH_ID, true) > 0
             let pos = dying.getPos()
             unit closest = null
             real closestDist = 99999.
 
             ENUM_GROUP.enumUnitsInRange(pos, 99999., null)
             for u in ENUM_GROUP
-                if u != dying and u.isAlive() and u.getOwner().isAllyOf(dying.getOwner())
+                if u != dying and u.isAlive() and u.getOwner().isAllyOf(owner)
                     let dist = pos.distanceTo(u.getPos())
                     if dist < closestDist
                         closestDist = dist
                         closest = u
 
             if closest != null
-                let _result = InstantDummyCaster.castTarget(dying.getOwner(), INVIGORATE_ID, 1, Orders.rejuvination, closest)
+                let _result = InstantDummyCaster.castTarget(owner, INVIGORATE_ID, 1, Orders.rejuvination, closest)

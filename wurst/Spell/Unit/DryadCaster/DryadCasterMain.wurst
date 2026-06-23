@@ -5,6 +5,8 @@ import UnitObjEditing
 import ObjectIds
 import AbilityIds
 
+import DryadDispel
+
 public constant DRYAD_CASTER_ID = 'e004'
 
 @compiletime function addSpells()
@@ -15,6 +17,9 @@ public constant DRYAD_CASTER_ID = 'e004'
           AbilityIds.ultravision,
           AbilityIds.spellImmunity,
           AbilityIds.inventory2SlotUnitNightElf,
-          AbilityIds.abolishMagic,
-          AbilityIds.slowPoison
+          AbilityIds.slowPoison,
+          DRYAD_CASTER_DISPEL
           ))
+          ..setManaRegeneration(0.67)
+          ..setHitPointsMaximumBase(300)
+          ..setAttack1DamageBase(15)
