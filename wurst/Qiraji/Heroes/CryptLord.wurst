@@ -130,7 +130,7 @@ init
             if BlzGetEventIsAttack() and attacker.hasAbility(CRYPT_LORD_IMPALE)
                 let lvl = attacker.getAbilityLevel(CRYPT_LORD_IMPALE)
                 CRYPT_LORD_ATK_CNT++
-                print("Crypt Lord attacked! Total count: " + CRYPT_LORD_ATK_CNT.toString())
+                //print("The Crypt Lord attacked! Total count: " + CRYPT_LORD_ATK_CNT.toString())
                 if CRYPT_LORD_ATK_CNT >= 5
                     CRYPT_LORD_ATK_CNT = 0
                     new DummyCaster()

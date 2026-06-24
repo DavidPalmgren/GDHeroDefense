@@ -1,0 +1,86 @@
+package V2QirajiBuild
+
+import QirajiBuildingIds
+import QirajiWorkersUnion 
+
+/** Helper utility to check if a specific World Editor region is already 
+    occupied by a living building of a specific type. */
+function isSiteEmpty(rect siteRect, int buildingTypeId, player aiPlayer) returns bool
+    let checkGroup = CreateGroup()
+    checkGroup.enumUnitsInRect(siteRect, null)
+    
+    var isEmpty = true
+    for u from checkGroup
+        if u.getTypeId() == buildingTypeId and u.isAlive() and u.getOwner() == aiPlayer
+            isEmpty = false
+            break
+            
+    checkGroup.destr()
+    return isEmpty
+
+// ============================================================================
+public function manageQirajiBarracksV2(player aiPlayer)
+    rect targetSite = null
+
+    // Evaluate structural footprints sequentially
+    if isSiteEmpty(gg_rct_Barracks1, QIRAJI_HATCHERY, aiPlayer)
+        targetSite = gg_rct_Barracks1
+    else if isSiteEmpty(gg_rct_Barracks2, QIRAJI_HATCHERY, aiPlayer)
+        targetSite = gg_rct_Barracks2
+
+    // If both slots are successfully filled, exit macro thread
+    if targetSite == null
+        return
+
+    let builder = getAvailableQirajiWorker(aiPlayer)
+    if builder == null
+        return
+
+    let buildSite = targetSite.getCenter()
+    
+    // Clear out any stray units blocking the exact coordinate placement zone
+    scatterIdleUnitsNear(buildSite, builder, aiPlayer, 256.0)
+    builder.issuePointOrderById(QIRAJI_HATCHERY, buildSite)
+
+// ============================================================================
+public function manageQirajiBlacksmithsV2(player aiPlayer)
+    rect targetSite = null
+
+    // FIX: Changed from Altar to Forge ID. 
+    // (Note: Replace QIRAJI_FORGE with whatever your actual blacksmith rawcode ID is!)
+    if isSiteEmpty(gg_rct_Smith1, QIRAJI_CARAPACE_CHAMBER, aiPlayer)
+        targetSite = gg_rct_Smith1
+    else if isSiteEmpty(gg_rct_Smith2, QIRAJI_CARAPACE_CHAMBER, aiPlayer)
+        targetSite = gg_rct_Smith2
+
+    if targetSite == null
+        return
+
+    let builder = getAvailableQirajiWorker(aiPlayer)
+    if builder == null
+        return
+
+    let buildSite = targetSite.getCenter()
+    
+    scatterIdleUnitsNear(buildSite, builder, aiPlayer, 256.0)
+    builder.issuePointOrderById(QIRAJI_CARAPACE_CHAMBER, buildSite)
+
+// ============================================================================
+public function manageQirajiAltarV2(player aiPlayer)
+    rect targetSite = null
+
+    // Maps the Altar of the Old directly onto your dedicated Altar region
+    if isSiteEmpty(gg_rct_Altar, QIRAJI_ALTAR_OF_THE_OLD, aiPlayer)
+        targetSite = gg_rct_Altar
+
+    if targetSite == null
+        return
+
+    let builder = getAvailableQirajiWorker(aiPlayer)
+    if builder == null
+        return
+
+    let buildSite = targetSite.getCenter()
+    
+    scatterIdleUnitsNear(buildSite, builder, aiPlayer, 256.0)
+    builder.issuePointOrderById(QIRAJI_ALTAR_OF_THE_OLD, buildSite)

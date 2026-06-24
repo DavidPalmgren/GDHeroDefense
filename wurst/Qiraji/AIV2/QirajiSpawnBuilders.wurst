@@ -2,29 +2,32 @@ package QirajiSpawnBuilders
 
 import QirajiBuildingIds
 import QirajiWorker 
-import QirajiPlacement // Imported: Grabs our newly built layout scanner
+// Note: QirajiPlacement can be safely removed if no other functions in this package use it!
 
 public function qirajiSpawnBuildersSetBase(player aiPlayer)
     aiPlayer.setGold(1500)
     aiPlayer.setLumber(10000)
     SetPlayerState(aiPlayer, PLAYER_STATE_FOOD_CAP_CEILING, 200)
+
+    // --- 1. Instant Town Center (TC) Materialization ---
+    let tcRect = gg_rct_QirajiTC
+    let tcPos = tcRect.getCenter()
+    
+    // Create the primary Hive Node directly at the center of the QirajiTC region
+    let hiveNode = CreateUnit(aiPlayer, QIRAJI_T1_HIVE_NODE, tcPos.x, tcPos.y, 270.0)
+    
+    if hiveNode == null
+        print("|cffff0000[ERROR] Failed to spawn QIRAJI_T1_HIVE_NODE at QirajiTC region!|r")
+
+    // --- 2. Worker Swarm Generation ---
     let spawnRect = gg_rct_QirajiSpawn
     let startPos = spawnRect.getCenter() 
 
-    //printTimed("|cff00ffffQIRAJI SPAWN:|r Initializing Silithid Swarm at designated region center.", 5.)
-
-    unit primaryBuilder = null
-
     for i = 1 to 5
+        // Cluster them slightly offset from each other so they don't lock up
         let offsetPos = startPos + vec2(GetRandomReal(-128, 128), GetRandomReal(-128, 128))
         let drone = CreateUnit(aiPlayer, QIRAJI_WORKER_ID, offsetPos.x, offsetPos.y, GetRandomReal(0, 360))
         
-        if i == 1
-            primaryBuilder = drone
-
-    if primaryBuilder != null and primaryBuilder.isAlive()
-        let buildSite = findValidBuildSite(startPos, 5, 5, 512.0,64)
-        
-        //printTimed("|cffffcc00QIRAJI SPAWN:|r Issuing priority command to Hive Node genesis vector.", 4.)
-        
-        primaryBuilder.issuePointOrderById(QIRAJI_T1_HIVE_NODE, buildSite)
+        // Optional: Send the drones to gather resources or rally to the new TC
+        if drone != null and hiveNode != null
+            drone.issueTargetOrder("smart", hiveNode)

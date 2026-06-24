@@ -13,6 +13,8 @@ import QirajiFlyerControlPointCheese
 import QirajiAttackGroups
 import QirajiAttackGroupsAttack
 
+import V2QirajiBuild
+
 public function startQirajiGoldIncome(player aiPlayer)
     doPeriodically(60.0) cb ->
         aiPlayer.addGold(100)
@@ -30,15 +32,16 @@ init
         startQirajiTierProgression(qirajiAIPlayer)
         //startQirajiBaseDefense(qirajiAIPlayer)
         //startQirajiAttackLoop(qirajiAIPlayer)
-        //startRecruitmentLoop(qirajiAIPlayer)
-        //startSquadAttackBrain(qirajiAIPlayer)
+        startRecruitmentLoop(qirajiAIPlayer)
+        startSquadAttackBrain(qirajiAIPlayer)
         
         // Step 2: Boot up the centralized monitoring loops
         doPeriodically(5.0) (CallbackPeriodic cb) ->
-            manageQirajiBarracks(qirajiAIPlayer)
+            manageQirajiBarracksV2(qirajiAIPlayer)
             manageQirajiAltar(qirajiAIPlayer)
             startQirajiTrainLoop(qirajiAIPlayer)
-            manageQirajiBlacksmiths(qirajiAIPlayer)
+            manageQirajiBlacksmithsV2(qirajiAIPlayer)
+            manageQirajiAltarV2(qirajiAIPlayer)
             manageBlacksmithResearch(qirajiAIPlayer)
             if qirajiAIPlayer.getMaxSupply() >= 200 and qirajiAIPlayer.getCurrentSupply() >= 200
                 // Clean up loop handle if the AI completely maxes its capabilities

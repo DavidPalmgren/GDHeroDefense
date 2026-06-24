@@ -1,96 +1,265 @@
 package QirajiAttackGroupsAttack
 
+import HashMap
 import ClosureTimers
-import ClosureForGroups
 import LinkedList
 import QirajiAttackGroups
 import OrderIds
+import ControlPointExtension
+import ControlPoint
+import QirajiColumbus
 
 constant real ATTACK_LOOP_INTERVAL = 5.0
 constant int MIN_ATTACK_SIZE = 12
-
-// If the enemy strength is 100, a threshold of 0.8 means the squad needs 
-// at least 80 strength to consider it a "winnable" fight.
 constant real CONFIDENCE_THRESHOLD = 0.8 
-// How wide of an area around the target we scan for defenders
 constant real THREAT_SCAN_RADIUS = 1500.0
 
-public function startSquadAttackBrain(player aiPlayer)
-    doPeriodically(ATTACK_LOOP_INTERVAL) cb ->
-        let enemyControlPoints = new LinkedList<unit>()
-        let g = CreateGroup()
-        GroupEnumUnitsInRect(g, bj_mapInitialPlayableArea, null)
-        for u from g
-            if u.getOwner() != aiPlayer and u.getIcon() == "ReplaceableTextures\\CommandButtons\\BTNCOP.blp" and u.isAlive()
-                enemyControlPoints.add(u)
-        g.destr()
+// For squads of 12+ units, we use a wider arrival zone so unit pathing collisions don't clog the lane
+// and so the navigator does not advance while the whole squad is still clustered around a control point.
+constant real SQUAD_ARRIVAL_THRESHOLD = 600.0
 
-        let squadIter = activeSquads.iterator()
-        while squadIter.hasNext()
-            let sq = squadIter.next()
+// Registry to track which squads are currently navigating the subway nodes
+public let activeSquadNavigators = new HashMap<Squad, SquadNavigator>()
+
+public class MapPoint
+    vec2 pos
+    construct(vec2 pos)
+        this.pos = pos
+
+// ============================================================================
+// NEW CLASS: Handles multi-unit lane-by-lane waypoint movement using attack-move
+// ============================================================================
+class SquadNavigator
+    Squad squad = null
+    LinkedList<int> pathNodeIds = null
+    CallbackPeriodic movementTimer = null
+    vec2 currentTargetPos = vec2(0, 0)
+    int currentTargetNodeId = -1
+    real timeOnCurrentWaypoint = 0.0
+
+    construct(Squad sq, LinkedList<int> path)
+        this.squad = sq
+        this.pathNodeIds = path
+        
+        // Register this navigator so the AI brain doesn't interrupt its march
+        activeSquadNavigators.put(sq, this)
+        
+        doAfter(0.05) ->
+            this.startNavigation()
+
+    function startNavigation()
+        if pathNodeIds == null or pathNodeIds.isEmpty()
+            print("|cffff0000[SQUAD NAV]|r No path nodes available for squad transit")
+            this.cleanupAndDestroy()
+        else
+            this.findNextValidTarget()
             
-            // 1. Clean dead based on the dynamic AI player instead of hardcoded NEUTRAL_AGGRESSIVE
-            let iter = sq.members.iterator()
-            while iter.hasNext()
-                let u = iter.next()
+            if currentTargetPos.x == 0.0 and currentTargetPos.y == 0.0
+                print("|cffff0000[SQUAD NAV]|r Could not resolve an initial squad transit target")
+                this.cleanupAndDestroy()
+            else
+                print("|cff00ffff[SQUAD NAV]|r Squad starting transit toward " + (currentTargetNodeId != -1 ? getControlPointLabel(currentTargetNodeId) : currentTargetPos.toString()))
+                timeOnCurrentWaypoint = 0.0
+                this.issueSquadAttackOrder()
+                // Track squad progress frequently so the lane attack orders stay steady while the squad is moving.
+                movementTimer = doPeriodically(0.5) (CallbackPeriodic cb) ->
+                    this.onTimerTick()
+
+    function issueSquadAttackOrder()
+        if squad == null or squad.members.isEmpty()
+            return
+
+        for u in squad.members
+            if u.isAlive()
+                // Use "attack" instead of "move" so combat squads fight down the lanes!
+                u.issuePointOrder("attack", currentTargetPos)
+
+    function onTimerTick()
+        if squad == null or squad.members.isEmpty()
+            this.cleanupAndDestroy()
+            return
+
+        // Calculate the spatial center mass of the surviving squad units
+        var totalX = 0.0
+        var totalY = 0.0
+        var livingCount = 0
+        
+        for u in squad.members
+            if u.isAlive()
+                totalX += u.getPos().x
+                totalY += u.getPos().y
+                livingCount++
+
+        if livingCount == 0
+            this.cleanupAndDestroy()
+            return
+
+        let squadCenter = vec2(totalX / livingCount, totalY / livingCount)
+        var spreadCount = 0
+
+        for u in squad.members
+            if u.isAlive() and u.getPos().distanceToSq(currentTargetPos) > SQUAD_ARRIVAL_THRESHOLD * SQUAD_ARRIVAL_THRESHOLD
+                spreadCount++
+
+        timeOnCurrentWaypoint += 0.5
+
+        // Reissue the attack order regularly so the squad keeps moving smoothly down the lane.
+        this.issueSquadAttackOrder()
+
+        // Give the squad a short dwell time at each waypoint before advancing so a single noisy tick
+        // does not immediately consume the next path node while the group is still clustered.
+        if timeOnCurrentWaypoint < 1.0
+            return
+
+        // Treat the waypoint as cleared only once the squad center has moved beyond the threshold
+        // or enough units have already spread out past it, which avoids advancing while the whole
+        // squad is still clustered around the control point and blocked by pathing.
+        if squadCenter.distanceToSq(currentTargetPos) <= SQUAD_ARRIVAL_THRESHOLD * SQUAD_ARRIVAL_THRESHOLD and spreadCount < livingCount / 2
+            return
+
+        printTimed("|cff00ffff[SQUAD NAV]|r Waypoint cleared! Advancing down subway line...", 2.)
+        this.findNextValidTarget()
+        
+        if not (currentTargetPos.x == 0.0 and currentTargetPos.y == 0.0)
+            printTimed("|cff00ffff[SQUAD NAV]|r Next transit target set to " + (currentTargetNodeId != -1 ? getControlPointLabel(currentTargetNodeId) : currentTargetPos.toString()), 2.)
+            this.issueSquadAttackOrder()
+        else
+            printTimed("|cff00ff00[SQUAD NAV]|r Final objective reached! Releasing squad control.", 5.)
+            this.cleanupAndDestroy()
+
+    function findNextValidTarget()
+        currentTargetPos = vec2(0, 0)
+        currentTargetNodeId = -1
+        timeOnCurrentWaypoint = 0.0
+        var found = false
+        
+        // Extract nodes from the tail end of your BFS path stack array
+        while not pathNodeIds.isEmpty() and not found
+            let lastIndex = pathNodeIds.size() - 1
+            let nextNodeId = pathNodeIds.get(lastIndex)
+            pathNodeIds.removeAt(lastIndex)
+            
+            let targetUnit = cpRegistry.get(nextNodeId)
+            if targetUnit != null
+                currentTargetPos = targetUnit.getPos()
+                currentTargetNodeId = nextNodeId
+                print("|cff00ffff[SQUAD NAV]|r Route step resolved to " + getControlPointLabel(nextNodeId))
+                found = true
+
+    function cleanupAndDestroy()
+        if movementTimer != null
+            destroy movementTimer
+            movementTimer = null
+        
+        if squad != null
+            activeSquadNavigators.remove(squad)
+            
+        destroy this
+
+    ondestroy
+        if pathNodeIds != null
+            destroy pathNodeIds
+
+// ============================================================================
+// AI Core Brain Process Thread
+// ============================================================================
+public function startSquadAttackBrain(player aiPlayer)
+    printTimed("|cff00ffff[AI BRAIN]|r Combat thread running for " + aiPlayer.getName(), 4.)
+    
+    doPeriodically(ATTACK_LOOP_INTERVAL) cb ->
+        let enemyControlPoints = getEnemyControlPoints(aiPlayer)
+
+        // --- THE FIX: Backwards index loop avoids iterator compilation traps ---
+        var i = activeSquads.size() - 1
+        while i >= 0
+            let sq = activeSquads.get(i)
+            
+            // 1. Clean dead squad units via safe backwards index loop
+            var j = sq.members.size() - 1
+            while j >= 0
+                let u = sq.members.get(j)
                 if not u.isAlive() or u.getOwner() != aiPlayer
                     if unitEffects.has(u)
                         unitEffects.get(u).destr()
                         unitEffects.remove(u)
-                    iter.remove()
-            iter.close()
+                    sq.members.removeAt(j) // Direct, type-safe removal by index
+                j--
             
-            // 2. Handle squad execution states smoothly
+            // 2. Handle core structural execution states
             if sq.members.isEmpty()
-                squadIter.remove()
+                // If a navigating squad was destroyed, its entry cleans up automatically here
+                if activeSquadNavigators.has(sq)
+                    let nav = activeSquadNavigators.get(sq)
+                    nav.cleanupAndDestroy()
+                    
+                activeSquads.removeAt(i) // Safely drops the squad without breaking any loops
                 destroy sq
             else
-                // Squad commands run as long as they have met the minimum attack threshold
-                if sq.members.size() >= MIN_ATTACK_SIZE
-                    switch sq.role
-                        case KOS
-                            //executeClosestTargetAttack(sq, aiPlayer, enemyControlPoints)
-                        case SIEGE
-                            //executeClosestTargetAttack(sq, aiPlayer, enemyControlPoints)
-                        case RESERVE
-                            executeDefensiveHold(sq)
+                // Keep the current route attack order alive while the squad is already mid-transit.
+                if activeSquadNavigators.has(sq)
+                    let nav = activeSquadNavigators.get(sq)
+                    nav.issueSquadAttackOrder()
+                    printTimed("    |cff565656[AI TICK]|r Squad is mid-transit. Refreshing attack order.", 1.5)
                 else
-                    // Gathering phase: Tell units under the threshold to wait together at base
-                    executeDefensiveHold(sq)
+                    if sq.members.size() >= MIN_ATTACK_SIZE
+                        switch sq.role
+                            case KOS
+                                executeClosestTargetAttack(sq, aiPlayer, enemyControlPoints)
+                            case SIEGE
+                                executeClosestTargetAttack(sq, aiPlayer, enemyControlPoints)
+                            case RESERVE
+                                executeDefensiveHold(sq)
+                    else
+                        executeDefensiveHold(sq)
+            i--
         
         destroy enemyControlPoints
 
-// --- NEW HELPER FUNCTION ---
-// Scans an area and calculates the total level of all enemy defenders
 function getEnemyStrengthInArea(vec2 targetPos, player aiPlayer) returns int
     var enemyStrength = 0
     let g = CreateGroup()
     GroupEnumUnitsInRange(g, targetPos.x, targetPos.y, THREAT_SCAN_RADIUS, null)
-    
     for u from g
-        // We count living enemies. We DO count structures (like towers) because they are a threat!
         if u.isAlive() and u.isEnemyOf(aiPlayer)
-            // Optional: If you want to ignore worker units, you can add an exclusion here
             enemyStrength += u.getLevel()
-            
     g.destr()
     return enemyStrength
 
-
 function executeClosestTargetAttack(Squad sq, player aiPlayer, LinkedList<unit> enemyCPs)
+    if sq.members.isEmpty()
+        return
+        
     let squadCenter = sq.members.getFirst().getPos()
-    unit closestTarget = null
-    var closestDist = REAL_MAX
+    let startCpId = getClosestControlPointIdToPos(squadCenter)
     
-    // Strategy: Find closest CP via straight-line distance
-    for cp in enemyCPs
-        let dist = squadCenter.distanceTo(cp.getPos())
-        if dist < closestDist
-            closestDist = dist
-            closestTarget = cp
-            
-    // Backup Strategy: Find closest Unit via straight-line distance
+    unit closestTarget = null
+    LinkedList<int> bestPath = null
+    int targetCpId = -1
+
+    // Geometric Filter Setup
+    if startCpId != -1
+        unit geoClosestCP = null
+        var minDistance = 999999.0
+        
+        for cp in enemyCPs
+            let dist = squadCenter.distanceTo(cp.getPos())
+            if dist < minDistance
+                minDistance = dist
+                geoClosestCP = cp
+                
+        if geoClosestCP != null
+            let enemyId = getControlPointId(geoClosestCP)
+            if enemyId != -1
+                let path = calculateSubwayPath(startCpId, enemyId)
+                if path != null
+                    closestTarget = geoClosestCP
+                    targetCpId = enemyId
+                    bestPath = path
+
+    // Backup Fallback
     if closestTarget == null
+        print("Backup called")
+        var closestDist = 999999.0
         let backupGroup = CreateGroup()
         GroupEnumUnitsInRect(backupGroup, bj_mapInitialPlayableArea, null)
         for u from backupGroup
@@ -101,24 +270,28 @@ function executeClosestTargetAttack(Squad sq, player aiPlayer, LinkedList<unit> 
                     closestTarget = u
         backupGroup.destr()
 
-    // THE TACTICAL DECISION
+    // Tactical Routing Engine Integration
     if closestTarget != null
         let squadStrength = sq.getStrength()
         let enemyStrength = getEnemyStrengthInArea(closestTarget.getPos(), aiPlayer)
         
-        // Do we have enough strength to take this fight?
         if squadStrength >= (enemyStrength * CONFIDENCE_THRESHOLD)
-            // We win these! Push the target.
-            printTimed("Squad Attacking! Str " + squadStrength.toString() + " vs " + enemyStrength.toString(), 5.)
-
             sq.targetCP = closestTarget
-            sq.orderAttack()
+            
+            if targetCpId != -1 and bestPath != null
+                printTimed("|cff00ff00[ROUTE ENGAGED]|r Handing squad over to the route navigator for the selected control point.", 4.)
+                // Pass ownership of the squad and the path directly to our new squad navigator engine
+                new SquadNavigator(sq, bestPath)
+            else
+                // If straight-line fallback target, just perform basic attack order
+                printTimed("|cffffaa00[ATTACK COMMITTED]|r No subway route was available, so the squad is marching directly to the target control point.", 4.)
+                sq.orderAttack()
         else
-            // Too heavily defended! Fall back and wait for merges or reinforcements.
-            printTimed("Squad retreating! Str " + squadStrength.toString() + " vs " + enemyStrength.toString(), 5.)
             executeDefensiveHold(sq)
     else
         executeDefensiveHold(sq)
+
+    // Note: Do not clean up 'bestPath' here! SquadNavigator assumes lifecycle ownership of the list.
 
 function executeDefensiveHold(Squad sq)
     let baseCenter = gg_rct_QirajiSpawn.getCenter()

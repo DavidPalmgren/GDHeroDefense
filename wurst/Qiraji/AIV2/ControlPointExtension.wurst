@@ -1,0 +1,79 @@
+package ControlPointExtension
+
+import ControlPoint
+import LinkedList
+
+// Example 1: Simple lookup and property access
+function displayControlPointInfo(int id)
+    let cp = cpRegistry.get(id)
+    
+    if cp != null
+        let uName = cp.getName()
+        let uPos = cp.getPos()
+        print("Control point " + id.toString() + ": " + uName + " at " + uPos.toString())
+    else
+        print("Control point with ID " + id.toString() + " not found.")
+
+
+public function listControlPoints()
+    // You can still iterate if you need to process everyone, 
+    // but now you have the power of direct access for specific targets.
+    for cp in controlPoints
+        print("Control point: " + cp.getName())
+
+public function getControlPointId(unit cp) returns int
+    var i = 1
+    while i <= 55
+        if cpRegistry.get(i) == cp
+            return i
+        i++
+    return -1
+
+public function getAllControlPoints() returns LinkedList<unit>
+    let points = new LinkedList<unit>()
+    var i = 1
+    while i <= 55
+        let cp = cpRegistry.get(i)
+        if cp != null and cp.isAlive()
+            points.add(cp)
+        i++
+    return points
+
+public function getEnemyControlPoints(player aiPlayer) returns LinkedList<unit>
+    let points = new LinkedList<unit>()
+    var i = 1
+    while i <= 55
+        let cp = cpRegistry.get(i)
+        if cp != null and cp.isAlive() and cp.getOwner() != aiPlayer
+            points.add(cp)
+        i++
+    return points
+
+public function getControlPointLabel(int id) returns string
+    let cp = cpRegistry.get(id)
+    if cp != null
+        let name = cp.getName()
+        if name != null and name != ""
+            return name + " (" + id.toString() + ")"
+    return "station " + id.toString()
+
+// Finds the nearest subway station ID to any arbitrary coordinate on the map
+public function getClosestControlPointIdToPos(vec2 pos) returns int
+    int closestId = -1
+    var closestDist = 999999.0
+    var i = 1
+    while i <= 55
+        let cp = cpRegistry.get(i)
+        if cp != null
+            let dist = pos.distanceTo(cp.getPos())
+            if dist < closestDist
+                closestDist = dist
+                closestId = i
+        i++
+    return closestId
+
+init
+    // Usage Examples:
+    listControlPoints()
+    displayControlPointInfo(1)
+    displayControlPointInfo(55)

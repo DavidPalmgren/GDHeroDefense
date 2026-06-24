@@ -119,27 +119,25 @@ public class Squad
 // --- RECRUITMENT LOGIC ---
 
 public function assignToSquad(unit u)
-    Squad targetSquad = null
-    
-    for sq in activeSquads
-        if not sq.isFull()
-            targetSquad = sq
-            break
-            
-    if targetSquad == null
-        targetSquad = new Squad()
-        // Cycle roles as squads are created, or configure manually
-        let roleIndex = activeSquads.size() mod 3
-        if roleIndex == 0
-            targetSquad.role = SquadRole.KOS
-        else if roleIndex == 1
-            targetSquad.role = SquadRole.SIEGE
-        else
-            targetSquad.role = SquadRole.RESERVE
-            
-        activeSquads.add(targetSquad)
-        
-    targetSquad.addUnit(u)
+    if activeSquads.isEmpty()
+        let newSquad = new Squad()
+        newSquad.role = SquadRole.KOS
+        activeSquads.add(newSquad)
+
+    let squad = activeSquads.getFirst()
+
+    if activeSquads.size() > 1
+        var i = activeSquads.size() - 1
+        while i > 0
+            let extraSquad = activeSquads.get(i)
+            if extraSquad != squad
+                squad.merge(extraSquad)
+            i--
+
+    if squad.isFull()
+        return
+
+    squad.addUnit(u)
 
 function isUnitRecruited(unit u) returns boolean
     for sq in activeSquads

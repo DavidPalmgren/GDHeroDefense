@@ -33,7 +33,7 @@ public function manageQirajiBarracks(player aiPlayer)
     let baseCenter = gg_rct_QirajiSpawn.getCenter()
 // printTimed("Base center: " + baseCenter.x.toString() + "," + baseCenter.y.toString(), 8.)
     
-    let buildSite = findValidBuildSite(baseCenter, 4, 4, 2024.0, 128.0)
+    let buildSite = findValidBuildSite(baseCenter, 4, 4, 3024.0, 64.0)
 // printTimed("Build site: " + buildSite.x.toString() + "," + buildSite.y.toString(), 8.)
 
     if buildSite.x == -1.0
