@@ -1,0 +1,185 @@
+package Explorer
+
+import Table
+import LinkedList
+import ClosureTimers
+
+constant real SCOUT_TIMEOUT      = 180.0
+constant real ARRIVAL_THRESHOLD  = 150.0
+constant real SCOUT_SPEED        = 522.0
+constant real CHECK_INTERVAL     = 1.0
+constant real MAX_SCOUT_DISTANCE = 2500.0
+constant real DISPATCH_STAGGER   = 0.1
+
+let pathNetwork        = new Table()
+let registeredWarriors = new LinkedList<WarriorCommander>()
+
+// Log buffer — flushed to file periodically
+let logBuffer = new LinkedList<string>()
+
+function writeLog(string msg)
+    printTimed(msg, 10.)
+    logBuffer.add(msg)
+
+function flushLogToFile()
+    PreloadGenStart()
+    for line in logBuffer
+        Preload(line)
+    PreloadGenEnd("war3mapExplorer.txt")
+
+public class PathExplorer
+    unit scout
+    unit sourceCP
+    unit targetCP
+    CallbackPeriodic cb
+    int ticks
+
+    construct(unit scout, unit sourceCP, unit targetCP)
+        this.scout    = scout
+        this.sourceCP = sourceCP
+        this.targetCP = targetCP
+        this.ticks    = 0
+        scout.issuePointOrder("move", targetCP.getPos())
+
+        writeLog("[Explorer] Scout dispatched from ("
+            + sourceCP.getPos().x.toString() + "," + sourceCP.getPos().y.toString()
+            + ") to ("
+            + targetCP.getPos().x.toString() + "," + targetCP.getPos().y.toString()
+            + ")")
+
+        this.cb = doPeriodically(CHECK_INTERVAL) cbInner ->
+            validatePath()
+
+    function validatePath()
+        ticks++
+        let elapsed = ticks.toReal() * CHECK_INTERVAL
+
+        if not scout.isAlive()
+            writeLog("[Explorer] Scout died — path not recorded.")
+            cleanup()
+            return
+
+        let dist = scout.getPos().distanceTo(targetCP.getPos())
+
+        if ticks mod 15 == 0
+            writeLog("[Explorer] Progress — dist: " + dist.toString()
+                + " | elapsed: " + elapsed.toString() + "s")
+
+        if dist < ARRIVAL_THRESHOLD
+            pathNetwork.saveInt(sourceCP.getHandleId(), targetCP.getHandleId())
+            writeLog("[Explorer] CONFIRMED: ("
+                + sourceCP.getPos().x.toString() + "," + sourceCP.getPos().y.toString()
+                + ") -> ("
+                + targetCP.getPos().x.toString() + "," + targetCP.getPos().y.toString()
+                + ") in " + elapsed.toString() + "s")
+            cleanup()
+            return
+
+        if elapsed >= SCOUT_TIMEOUT
+            writeLog("[Explorer] TIMEOUT — final dist: " + dist.toString())
+            cleanup()
+
+    function cleanup()
+        destroy cb
+        destroy this
+
+public class WarriorCommander
+    unit warrior
+    unit goal
+
+    construct(unit warrior, unit goal)
+        this.warrior = warrior
+        this.goal    = goal
+        registeredWarriors.add(this)
+        writeLog("[WarriorCmd] Registered: " + warrior.getName())
+
+    function update()
+        if not warrior.isAlive()
+            writeLog("[WarriorCmd] Warrior died — removing.")
+            registeredWarriors.remove(this)
+            destroy this
+            return
+
+        let currentCP = getNearestCP(warrior.getPos())
+
+        if currentCP != null and pathNetwork.hasInt(currentCP.getHandleId())
+            let nextHandle = pathNetwork.loadInt(currentCP.getHandleId())
+            let nextCP     = getUnitByHandleId(nextHandle)
+
+            if nextCP != null and nextCP.isAlive()
+                warrior.issuePointOrder("move", nextCP.getPos())
+            else
+                warrior.issuePointOrder("attack", goal.getPos())
+        else
+            warrior.issuePointOrder("attack", goal.getPos())
+
+function getUnitByHandleId(int handleId) returns unit
+    unit found = null
+    let g = CreateGroup()
+    GroupEnumUnitsInRect(g, bj_mapInitialPlayableArea, null)
+    for u from g
+        if u.getHandleId() == handleId
+            found = u
+            break
+    g.destr()
+    return found
+
+function getNearestCP(vec2 pos) returns unit
+    unit best    = null
+    var bestDist = 1500.0
+    let g = CreateGroup()
+    GroupEnumUnitsInRect(g, bj_mapInitialPlayableArea, null)
+    for u from g
+        if u.getIcon() == "ReplaceableTextures\\CommandButtons\\BTNCOP.blp"
+            let d = pos.distanceTo(u.getPos())
+            if d < bestDist
+                bestDist = d
+                best     = u
+    g.destr()
+    return best
+
+public function registerWarrior(unit u, unit goal)
+    new WarriorCommander(u, goal)
+
+public function dispatchScout(unit source, unit target)
+    let wisp = createUnit(source.getOwner(), 'ewsp', source.getPos(), angle(0))
+    wisp.setMoveSpeed(SCOUT_SPEED)
+    wisp.setInvulnerable(true)
+    new PathExplorer(wisp, source, target)
+
+init
+    let cps = new LinkedList<unit>()
+    let g   = CreateGroup()
+    GroupEnumUnitsInRect(g, bj_mapInitialPlayableArea, null)
+    for u from g
+        if u.getIcon() == "ReplaceableTextures\\CommandButtons\\BTNCOP.blp"
+            cps.add(u)
+    g.destr()
+
+    writeLog("[Explorer] Found " + cps.size().toString() + " control points.")
+
+    var scoutCount    = 0
+    var dispatchDelay = 0.0
+
+    for source in cps
+        for target in cps
+            if source != target
+                and source.getPos().distanceTo(target.getPos()) < MAX_SCOUT_DISTANCE
+                let s = source
+                let t = target
+                doAfter(dispatchDelay) ->
+                    dispatchScout(s, t)
+                dispatchDelay += DISPATCH_STAGGER
+                scoutCount++
+
+    writeLog("[Explorer] Dispatched " + scoutCount.toString() + " scouts.")
+    destroy cps
+
+    // Flush log to file every 60 seconds
+    doPeriodically(60.0) cb ->
+        flushLogToFile()
+        writeLog("[Explorer] Log flushed to war3mapExplorer.txt")
+
+    doPeriodically(2.0) cb ->
+        for wc in registeredWarriors
+            wc.update()

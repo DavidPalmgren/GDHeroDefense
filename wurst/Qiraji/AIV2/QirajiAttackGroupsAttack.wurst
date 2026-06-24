@@ -49,9 +49,9 @@ public function startSquadAttackBrain(player aiPlayer)
                 if sq.members.size() >= MIN_ATTACK_SIZE
                     switch sq.role
                         case KOS
-                            executeClosestTargetAttack(sq, aiPlayer, enemyControlPoints)
+                            //executeClosestTargetAttack(sq, aiPlayer, enemyControlPoints)
                         case SIEGE
-                            executeClosestTargetAttack(sq, aiPlayer, enemyControlPoints)
+                            //executeClosestTargetAttack(sq, aiPlayer, enemyControlPoints)
                         case RESERVE
                             executeDefensiveHold(sq)
                 else

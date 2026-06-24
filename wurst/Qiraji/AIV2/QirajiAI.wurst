@@ -30,8 +30,8 @@ init
         startQirajiTierProgression(qirajiAIPlayer)
         //startQirajiBaseDefense(qirajiAIPlayer)
         //startQirajiAttackLoop(qirajiAIPlayer)
-        startRecruitmentLoop(qirajiAIPlayer)
-        startSquadAttackBrain(qirajiAIPlayer)
+        //startRecruitmentLoop(qirajiAIPlayer)
+        //startSquadAttackBrain(qirajiAIPlayer)
         
         // Step 2: Boot up the centralized monitoring loops
         doPeriodically(5.0) (CallbackPeriodic cb) ->
