@@ -17,45 +17,35 @@ public constant ZANDALARI_ALTAR_BWONSAMDI_ID   = compiletime(UNIT_ID_GEN.next())
 public constant ZANDALARI_ALTAR_GONK_ID        = compiletime(UNIT_ID_GEN.next())
 
 // --- DUMMY CONFIGURATION KEYS ---
-// (Replace these placeholders with your actual Unit/Upgrade IDs once coded!)
-constant REZAN_UNIT_ID   = 'u001' // e.g., Solar Prelate (Paladin-style warrior)
-constant REZAN_TECH_ID   = 'R001' // e.g., Golden Judgement
-constant BWONSAMDI_UNIT_ID = 'u002' // e.g., Deathstalker / Necrolyte
-constant BWONSAMDI_TECH_ID = 'R002' // e.g., Soul Reap
-constant GONK_UNIT_ID    = 'u003' // e.g., Raptor Druid
-constant GONK_TECH_ID    = 'R003' // e.g., Wildstrider Haste
+constant REZAN_UNIT_ID     = 'u001' 
+constant REZAN_TECH_ID     = 'R001' 
+constant BWONSAMDI_UNIT_ID = 'u002' 
+constant BWONSAMDI_TECH_ID = 'R002' 
+constant GONK_UNIT_ID      = 'u003' 
+constant GONK_TECH_ID      = 'R003' 
 
 constant REZAN_GHOST_ID = 'ndtr' // dark troll for now
-
-// https://www.hiveworkshop.com/threads/zandalar-doodad-pack-vol-1.331416/
-// Middle circle platform then ill display an invis/invul mob there to show the loa worshipped
 
 @compiletime function genZandalariLoaSystem()
 
     // =========================================================================
     // BASE BUILDING: ZANDALARI MONUMENT
     // =========================================================================
-    new BuildingDefinition(ZANDALARI_MONUMENT_ID, 'hwtw') // Based on Voodoo Lounge for a clean footprint
+    new BuildingDefinition(ZANDALARI_MONUMENT_ID, 'hwtw')
         ..setName("Zandalari Monument")
         ..setTooltipBasic("Build [|cffffcc00Zandalari Monument|r]")
         ..setTooltipExtended("A stone foundation erected in honor of the wild gods. Can be upgraded and dedicated to a specific Loa to unlock divine units and forbidden tech pathways.")
-        
         ..setIconGameInterface(Icons.bTNVoodooLounge)
         ..setModelFile("Doodads\\Ruins\\Props\\Ruins_NagaCircle\\Ruins_NagaCircle.mdl")
-        
-        // Base Setup (Cheap cost to get the foundation down)
         ..setGoldCost(80)
-        ..setLumberCost(0) // 0-Lumber Rule
+        ..setLumberCost(0) 
         ..setBuildTime(30)
         ..setHitPointsMaximumBase(600)
         ..setArmorType(ArmorType.Fortified)
         ..setDefenseBase(2)
-
         ..setRequirements(commaList(ZANDALARI_T3_ID))
         ..setResearchesAvailable("")
         ..setNormalAbilities("")
-
-        // UPGRADE PATHWAYS: This opens up 3 choices on the worker's construction node!
         ..setUpgradesTo(commaList(
             ZANDALARI_ALTAR_REZAN_ID, 
             ZANDALARI_ALTAR_BWONSAMDI_ID, 
@@ -69,27 +59,20 @@ constant REZAN_GHOST_ID = 'ndtr' // dark troll for now
         ..setName("Altar of Rezan")
         ..setTooltipBasic("Dedicate to [|cffffcc00Rezan|r]")
         ..setTooltipExtended("Infuse the monument with the blinding golden light of the Devilsaur Loa. Unlocks high-impact holy melee forces and raw physical combat techniques.")
-        ..setIconGameInterface(Icons.bTNAttack) // Golden sword/crest visual match
+        ..setIconGameInterface(Icons.bTNAttack) 
         ..setModelFile("Doodads\\Ruins\\Props\\Ruins_NagaCircle\\Ruins_NagaCircle.mdl")
-
-        ..setButtonPositionX(0) // Column 1 (Far Left)
-        ..setButtonPositionY(0) // Row 1 (Top)
-        
-        // Unlocked Assets
+        ..setButtonPositionX(0) 
+        ..setButtonPositionY(0) 
         ..setUnitsTrained(commaList(REZAN_UNIT_ID))
         ..setResearchesAvailable(commaList(UPG_REZAN_GOLDEN_TRIBUTE))
-        
-        // Upgrade Financials (Player pays this additional amount to mutate)
         ..setGoldCost(150)
-        ..setLumberCost(0) // 0-Lumber Rule
+        ..setLumberCost(0) 
         ..setBuildTime(45)
-        ..setHitPointsMaximumBase(1100) // Structure hardens upon blessing
+        ..setHitPointsMaximumBase(1100) 
         ..setDefenseBase(5)
         ..setRequirements(commaList(""))
         ..setUpgradesTo("")
         ..setNormalAbilities("")
-
-
 
     // =========================================================================
     // PATH 2: ALTAR OF BWONSAMDI
@@ -98,26 +81,19 @@ constant REZAN_GHOST_ID = 'ndtr' // dark troll for now
         ..setName("Altar of Bwonsamdi")
         ..setTooltipBasic("Dedicate to [|cffffcc00Bwonsamdi|r]")
         ..setTooltipExtended("Shroud the stone foundation in the dark, spectral mists of the Loa of Graves. Unlocks soul-manipulating ritualists and shadow manipulation technologies.")
-        ..setIconGameInterface(Icons.bTNAnimateDead) // Deathly aesthetic
-        ..setButtonPositionX(1) // Column 2
-        ..setButtonPositionY(0) // Row 1 (Top)
-        
-        // Unlocked Assets
+        ..setIconGameInterface(Icons.bTNAnimateDead) 
+        ..setButtonPositionX(1) 
+        ..setButtonPositionY(0) 
         ..setUnitsTrained(commaList(BWONSAMDI_UNIT_ID))
         ..setResearchesAvailable(commaList(BWONSAMDI_TECH_ID))
-        
-        // Upgrade Financials
         ..setGoldCost(150)
-        ..setLumberCost(0) // 0-Lumber Rule
+        ..setLumberCost(0) 
         ..setBuildTime(45)
         ..setHitPointsMaximumBase(1100)
         ..setDefenseBase(5)
         ..setRequirements(commaList(""))
         ..setUpgradesTo("")
         ..setNormalAbilities("")
-
-
-
 
     // =========================================================================
     // PATH 3: ALTAR OF GONK
@@ -126,17 +102,13 @@ constant REZAN_GHOST_ID = 'ndtr' // dark troll for now
         ..setName("Altar of Gonk")
         ..setTooltipBasic("Dedicate to [|cffffcc00Gonk|r]")
         ..setTooltipExtended("Attune the monolith to the echo of the Great Raptor. Unlocks versatile shape-shifting primal forces and army-wide movement velocity research nodes.")
-        ..setIconGameInterface(Icons.bTNNatureTouchGrow) // Primal/Wild nature match
-        ..setButtonPositionX(2) // Column 3
-        ..setButtonPositionY(0) // Row 1 (Top)
-        
-        // Unlocked Assets
+        ..setIconGameInterface(Icons.bTNNatureTouchGrow) 
+        ..setButtonPositionX(2) 
+        ..setButtonPositionY(0) 
         ..setUnitsTrained(commaList(GONK_UNIT_ID))
         ..setResearchesAvailable(commaList(GONK_TECH_ID))
-        
-        // Upgrade Financials
         ..setGoldCost(150)
-        ..setLumberCost(0) // 0-Lumber Rule
+        ..setLumberCost(0) 
         ..setBuildTime(45)
         ..setHitPointsMaximumBase(1100)
         ..setDefenseBase(5)
@@ -144,41 +116,30 @@ constant REZAN_GHOST_ID = 'ndtr' // dark troll for now
         ..setUpgradesTo("")
         ..setNormalAbilities("")
 
-
 init
-    // Scenario 1: A worker builds the Altar directly from scratch
     registerPlayerUnitEvent(EVENT_PLAYER_UNIT_CONSTRUCT_FINISH) ->
         let finishedBuilding = GetTriggerUnit()
         if finishedBuilding.getTypeId() == ZANDALARI_ALTAR_REZAN_ID
             onRezanAltarCompleted(finishedBuilding)
 
-    // Scenario 2: A base Monument finishes mutating into the Altar of Rezan
     registerPlayerUnitEvent(EVENT_PLAYER_UNIT_UPGRADE_FINISH) ->
         let upgradedBuilding = GetTriggerUnit()
         if upgradedBuilding.getTypeId() == ZANDALARI_ALTAR_REZAN_ID
             onRezanAltarCompleted(upgradedBuilding)
 
-// =========================================================================
-// YOUR CUSTOM LOGIC GOES HERE
-// =========================================================================
+
 function onRezanAltarCompleted(unit altar)
-    let buildingOwner = altar.getOwner()
-    
-    // Get the exact center coordinates of the completed building
     let x = altar.getX()
     let y = altar.getY()
     
-    // 1. Create the permanent visual holy flare
     AddSpecialEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt.mdx", x, y)
         ..destr() 
     
-    // 2. Spawn the avatar right in the center of the building facing south (270 degrees)
-    let ghostUnit = CreateUnit(buildingOwner, REZAN_GHOST_ID, x, y, 270.0)
+    let ghostUnit = CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), REZAN_GHOST_ID, x, y, 270.0)
     
-    // 3. Make the unit transparent (Ghost-like)
-    // Arguments: Red (0-255), Green (0-255), Blue (0-255), Alpha/Transparency (0-255)
-    // An alpha value of 120 makes it beautifully semi-transparent and ethereal
     ghostUnit.setVertexColor(255, 255, 255, 120)
-    
-    // 4. Add absolute invulnerability so it acts purely as a visual celestial entity
+
     ghostUnit.setInvulnerable(true)
+
+    SetUnitPathing(ghostUnit, false)
+    ghostUnit.setPos(x,y)

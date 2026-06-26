@@ -1,0 +1,26 @@
+package ZandalariEnsnare
+
+import AbilityObjEditing
+import UpgradeObjEditing
+import ObjectIds
+import ObjectIdGenerator
+import Icons
+
+public constant ZANDALARI_ENSNARE = compiletime(ABIL_ID_GEN.next())
+public constant ZANDALARI_ENSNARE_UPGD = compiletime(UPGD_ID_GEN.next())
+
+
+@compiletime function gen()
+  new AbilityDefinitionEnsnare(ZANDALARI_ENSNARE)
+    ..setName("Ensnare")
+    ..setTooltipNormal(1, "Ensnare")
+    ..setTooltipNormalExtended(1, "Allows the unit to ground enemy flying units.")
+    ..setRequirements(commaList(ZANDALARI_ENSNARE_UPGD))
+  
+  new UpgradeDefinition(ZANDALARI_ENSNARE_UPGD)
+    ..setName(1, "Ensnare")
+    ..setTooltip(1, "Ensnare")
+    ..setTooltipExtended(1, "Allows Raptor Outriders cast ensnare, grounding an enemy flying units and rooting ground units.")
+    ..setIcon(1, Icons.bTNEnsnare)
+    ..setGoldCostBase(50)
+    ..setTimeBase(25)

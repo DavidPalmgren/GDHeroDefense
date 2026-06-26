@@ -1,0 +1,112 @@
+package ZandalariBloodMage2
+
+import AbilityObjEditing
+import BuffObjEditing
+import ObjectIdGenerator
+import ObjectIds
+import RegisterEvents
+import ClosureTimers
+import HashMap
+import UpgradeObjEditing
+
+public constant SPELL_BLOOD_LINK_ID = compiletime(ABIL_ID_GEN.next())
+public constant BUFF_BLOOD_LINK_ID  = compiletime(BUFF_ID_GEN.next())
+public constant UPGD_BLOOD_LINK_ID = compiletime(UPGD_ID_GEN.next())
+
+let activeBloodLinks = new HashMap<unit, int>()
+
+// https://www.hiveworkshop.com/threads/witch-doctor-ritual.299160/ <--- sick
+@compiletime function genBloodLinkAssets()
+
+    new UpgradeDefinition(UPGD_BLOOD_LINK_ID)
+        ..setName(1, "Blood Anchor")
+        ..setTooltip(1, "Blood Anchor")
+        ..setTooltipExtended(1, "Allows the Blood Mage to cast Blood Anchor, Tethering dying units to life for just a bit longer.")
+        ..setGoldCostBase(50)
+        ..setTimeBase(45)
+        ..setHotkey(1, "Z")
+        ..setButtonPositionX(0)
+        ..setButtonPositionY(2)
+        ..setIcon(1,"ReplaceableTextures\\CommandButtons\\BTNSacrifice.blp")
+
+
+    new BuffDefinition(BUFF_BLOOD_LINK_ID, 'Bspl')
+        ..setIcon("ReplaceableTextures\\CommandButtons\\BTNSacrifice.blp")
+        ..setTooltipNormal(1, "Blood Anchor")
+        ..setTooltipNormalExtended(1, "This unit's life force is anchored to a blood ritual. If it dies, it will temporarily reanimate as a gore soaked berserker.")
+
+    new AbilityDefinitionSpiritLink(SPELL_BLOOD_LINK_ID)
+        ..setName("Blood Anchor")
+        ..setTooltipNormal(1, "Cast [|cffcc0000Blood Anchor|r]")
+        ..setTooltipNormalExtended(1, "Fires a blood line that links up to 4 allied units. Strips away native damage-sharing mechanics, dealing 10 instant magic damage instead. Linked units that perish are temporarily reanimated for 10 seconds with massive bonus damage and attack speed.")
+        
+        ..setMaximumNumberofTargets(1, 4)
+        ..setDurationHero(1, 20)
+        ..setDurationNormal(1, 20)
+        ..setDistributedDamageFactor(1, 0.0)
+
+        ..setBuffs(1, BUFF_BLOOD_LINK_ID.toRawCode())
+        
+        ..setManaCost(1, 90)
+        ..setCooldown(1, 25.0)
+        ..setCastRange(1, 750.0)
+        ..setTargetsAllowed(1, "allies,friend,self,air,ground,organic")
+
+        ..setRequirements(commaList(UPGD_BLOOD_LINK_ID))
+
+init
+    registerPlayerUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT) ->
+        if GetSpellAbilityId() == SPELL_BLOOD_LINK_ID
+            let caster = GetTriggerUnit()
+            let mainTarget = GetSpellTargetUnit()
+            let p = caster.getOwner()
+            
+            let targetGroup = CreateGroup()
+            targetGroup.enumUnitsInRange(mainTarget.getPos(), 600.0, null)
+            
+            var processedTargets = 0
+            for u from targetGroup
+                if processedTargets < 4 and u.isAlive() and u.isAllyOf(p) and not u.isType(UNIT_TYPE_STRUCTURE)
+                    processedTargets++
+                    
+                    let currentCount = activeBloodLinks.has(u) ? activeBloodLinks.get(u) : 0
+                    activeBloodLinks.put(u, currentCount + 1)
+                    
+                    doAfter(20.0) ->
+                        if activeBloodLinks.has(u)
+                            let newCount = activeBloodLinks.get(u) - 1
+                            if newCount <= 0
+                                activeBloodLinks.remove(u)
+                            else
+                                activeBloodLinks.put(u, newCount)
+                    
+                    caster.damageTarget(u, 10.0, false, false, ATTACK_TYPE_MAGIC, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+                    
+                    AddSpecialEffect("Objects\\Spawnmodels\\Other\\HumanBloodSplat\\HumanBloodSplat.mdl", u.getX(), u.getY()).destr()
+            
+            targetGroup.destr()
+
+    registerPlayerUnitEvent(EVENT_PLAYER_UNIT_DEATH) ->
+        let dyingUnit = GetTriggerUnit()
+
+        if activeBloodLinks.has(dyingUnit)
+            activeBloodLinks.remove(dyingUnit)
+            
+            let uId = dyingUnit.getTypeId()
+            let owner = dyingUnit.getOwner()
+            let spawnPos = dyingUnit.getPos()
+            let facingAngle = 0.0
+            
+            let zombie = CreateUnit(owner, uId, spawnPos.x, spawnPos.y, facingAngle)
+            
+            zombie.setVertexColor(255, 0, 0, 255)
+            
+            let currentBaseDmg = BlzGetUnitBaseDamage(zombie, 0)
+            BlzSetUnitBaseDamage(zombie, currentBaseDmg + 30, 0)
+            
+            let currentCooldown = BlzGetUnitAttackCooldown(zombie, 0)
+            if currentCooldown > 0.1
+                BlzSetUnitAttackCooldown(zombie, currentCooldown * 0.65, 0)
+            
+            AddSpecialEffectTarget("Abilities\\Spells\\Undead\\UnholyFrenzy\\UnholyFrenzyTarget.mdl", zombie, "overhead").destr()
+            zombie.setTimedLife(10.0)

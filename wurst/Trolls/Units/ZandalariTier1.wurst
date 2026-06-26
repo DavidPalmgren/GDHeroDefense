@@ -35,6 +35,8 @@ public constant ZANDALARI_HEADHUNTER_ID = compiletime(UNIT_ID_GEN.next())
         ..setLumberCost(0)
         ..setBuildTime(3) // 3 seconds flat!
         ..setFoodCost(2)
+        ..setHitPointsMaximumBase(600)
+        ..setHitPointsRegenerationRate(1)
         
         // Link the 3 custom upgrades we built earlier
         ..setUpgradesUsed(commaList(

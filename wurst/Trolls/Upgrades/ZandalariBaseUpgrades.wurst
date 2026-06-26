@@ -73,7 +73,7 @@ public constant ZANDALARI_REGEN_UPG_ID  = compiletime(UPGD_ID_GEN.next())
                  ..setTooltipExtended(i, "Refines the blades and spearheads of the tribe. Increases the attack damage of all non-casters by +2 dice.")
                  
         armorUpg..setName(i, "Defense Upgrade")
-                ..setTooltip(i, "Upgrade to Defense Upgrade Scales - Level " + i.toString())
+                ..setTooltip(i, "Upgrade to Defense Upgrade - Level " + i.toString())
                 ..setTooltipExtended(i, "Hardens the golden defensive array of your forces. Increases the armor rating of all units non-casters by +1.")
         regenUpg..setName(i, "Regenerative Troll Blood")
                 ..setTooltip(i, "Upgrade to Regenerative Troll Blood - Level " + i.toString())

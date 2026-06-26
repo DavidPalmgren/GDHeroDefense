@@ -1,14 +1,7 @@
 package ZandalariApothecaryMojopalm
 
-import AbilityObjEditing
-import ObjectIdGenerator
-import ObjectIds
-import ChannelAbilityPreset
 import ClosureEvents
 import AbilityTooltipGenerator
-import DummyCaster
-import Group
-import GroupUtils
 import ClosureTimers
 import ClosureForGroups
 
@@ -41,14 +34,13 @@ init
   EventListener.onPointCast(MOJOPALM_ID) (unit caster, vec2 target) ->
     var elapsed = 0.0
 
-    // Spawn the looping fire model once on the ground at the impact coordinates
     let groundFire = AddSpecialEffect("Abilities\\Spells\\Orc\\LiquidFire\\LiquidFire.mdx", target.x, target.y)
 
     doPeriodically(1.0) cb ->
       elapsed += 1.0
 
       if elapsed >= DURATION
-        groundFire.destr() // Snuff out the ground fire zone when the timer finishes
+        groundFire.destr()
         destroy cb
 
       forUnitsInRange(target, RADIUS) (unit u) ->

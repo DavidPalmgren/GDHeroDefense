@@ -1,0 +1,169 @@
+package BerserkersFury
+
+import ObjectIdGenerator
+import AbilityObjEditing
+import RegisterEvents
+import ClosureTimers
+import HashMap
+import LinkedList
+
+public constant BERSERKERS_FURY = compiletime(ABIL_ID_GEN.next())
+
+constant int MAX_LEVELS = 4
+constant real MAX_BONUS_THRESHOLD = 0.90
+
+function getMaxAttackSpeed(int idx) returns real
+    switch idx
+        case 0
+            return 0.40
+        case 1
+            return 0.80
+        case 2
+            return 1.20
+        case 3
+            return 1.4
+        default
+            return 0.0
+
+function getMaxHpRegen(int idx) returns real
+    switch idx
+        case 0
+            return 15.0
+        case 1
+            return 18.0
+        case 2
+            return 22.0
+        case 3
+            return 30.0
+        default
+            return 0.0
+
+function getMaxHealAmp(int idx) returns real
+    switch idx
+        case 0
+            return 0.30
+        case 1
+            return 0.60
+        case 2
+            return 0.90
+        case 3
+            return 1.20
+        default
+            return 0.0
+
+let passiveUsers   = new LinkedList<unit>()
+let lastRegenBonus = new HashMap<unit, real>()
+let baseCooldown   = new HashMap<unit, real>()
+let debugThrottler = new HashMap<unit, int>() // Tracks time to limit debug messages to once per second
+
+@compiletime function gen()
+    let def = new AbilityDefinitionPaladinDevotionAura(BERSERKERS_FURY)
+        ..setHeroAbility(true)
+        ..setLevels(MAX_LEVELS)
+        ..setName("Berserker's Fury")
+        ..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNBerserkForrestTroll.blp")
+        ..setTargetsAllowed(1, "self")
+        ..setArmorBonus(1, 0.0)
+        ..setAreaofEffect(1, 10.0)
+        ..setBuffs(1, "")
+
+    for int i = 1 to MAX_LEVELS
+        let idx = i - 1
+        let learnTooltip = "Learn [|cffff3300Berserker's Fury|r] - Level " + i.toString()
+        let extendedTooltip = "The hero's blood boils as they take damage. Grants up to |cff00ff00+"
+            + getMaxHpRegen(idx).toString(0) + " HP/s|r regeneration, |cff00ff00+"
+            + (getMaxAttackSpeed(idx) * 100).toString(0) + "%|r attack speed, and increases all incoming healing by up to |cff00ff00+"
+            + (getMaxHealAmp(idx) * 100).toString(0) + "%|r based on missing health. Max power reached at 10% health."
+
+        def..setTooltipNormal(i, learnTooltip)
+        def..setTooltipNormalExtended(i, extendedTooltip)
+        def..setArmorBonus(i, 0.0)
+        def..setAreaofEffect(i, 10.0)
+
+public function unit.getHealingMultiplier() returns real
+    let lvl = this.getAbilityLevel(BERSERKERS_FURY)
+    if lvl <= 0 or not this.isAlive()
+        return 1.0
+
+    let idx = (lvl - 1).clamp(0, MAX_LEVELS - 1)
+    let missingHpRatio = 1.0 - (this.getHP() / this.getMaxHP())
+    let factor = (missingHpRatio / MAX_BONUS_THRESHOLD).clamp(0.0, 1.0)
+
+    return 1.0 + (getMaxHealAmp(idx) * factor)
+
+function updatePassiveStats()
+    let toRemove = new LinkedList<unit>()
+
+    for u in passiveUsers
+        if u == null or not u.isAlive() or u.getAbilityLevel(BERSERKERS_FURY) <= 0
+            if u != null and u.isAlive()
+                // Restore base regeneration rate cleanly
+                u.setField(UNIT_RF_HIT_POINTS_REGENERATION_RATE,
+                    u.getField(UNIT_RF_HIT_POINTS_REGENERATION_RATE) - lastRegenBonus.get(u))
+                // Restore native base attack cooldown speed cleanly
+                if baseCooldown.has(u)
+                    BlzSetUnitAttackCooldown(u, baseCooldown.get(u), 0)
+            toRemove.add(u)
+        else
+            let lvl = u.getAbilityLevel(BERSERKERS_FURY)
+            let idx = (lvl - 1).clamp(0, MAX_LEVELS - 1)
+
+            // 1. Calculate health scaling factor
+            let currentHp = u.getHP()
+            let maxHp = u.getMaxHP()
+            let missingHpRatio = 1.0 - (currentHp / maxHp)
+            let factor = (missingHpRatio / MAX_BONUS_THRESHOLD).clamp(0.0, 1.0)
+
+            // 2. Safely capture the original attack speed cooldown value on discovery
+            if not baseCooldown.has(u)
+                baseCooldown.put(u, BlzGetUnitAttackCooldown(u, 0))
+
+            // 3. Handle Health Regeneration Updates
+            let oldRegen = lastRegenBonus.has(u) ? lastRegenBonus.get(u) : 0.0
+            let rawBaseRegen = u.getField(UNIT_RF_HIT_POINTS_REGENERATION_RATE) - oldRegen
+            let newRegenBonus = getMaxHpRegen(idx) * factor
+
+            u.setField(UNIT_RF_HIT_POINTS_REGENERATION_RATE, rawBaseRegen + newRegenBonus)
+            lastRegenBonus.put(u, newRegenBonus)
+
+            // 4. Handle Attack Speed Updates (Decreasing Cooldown Duration = Faster Attacks)
+            let nativeCd = baseCooldown.get(u)
+            let currentSpeedBonus = getMaxAttackSpeed(idx) * factor
+            let targetCd = nativeCd / (1.0 + currentSpeedBonus)
+            BlzSetUnitAttackCooldown(u, targetCd, 0)
+
+            // 5. Throttled Live Debug Output System (Runs once every 1.0 seconds / 10 ticks)
+            let ticks = debugThrottler.has(u) ? debugThrottler.get(u) : 0
+            if ticks >= 10
+                debugThrottler.put(u, 0)
+                let hpPercent = (currentHp / maxHp * 100).toString(0)
+                let speedPctStr = (currentSpeedBonus * 100).toString(0)
+                // FIX: Changed 'this' to 'u'
+                let healAmpStr = ((u.getHealingMultiplier() - 1.0) * 100).toString(0)
+                
+                // print("|cffffcc00[Berserker Debug]|r HP: " + hpPercent + "% | +Regen: " + 
+                //     newRegenBonus.toString(1) + " HP/s | +Atk Speed: " + speedPctStr + "% | +Heal Amp: " + healAmpStr + "%")
+            else
+                debugThrottler.put(u, ticks + 1)
+            
+    for u in toRemove
+        passiveUsers.remove(u)
+        lastRegenBonus.remove(u)
+        baseCooldown.remove(u)
+        debugThrottler.remove(u)
+    destroy toRemove
+
+// ============================================================================
+// INITIALIZATION INITIALIZER
+// ============================================================================
+
+init
+    registerPlayerUnitEvent(EVENT_PLAYER_HERO_SKILL) ->
+        let u = GetLearningUnit()
+        if GetLearnedSkill() == BERSERKERS_FURY and not passiveUsers.has(u)
+            passiveUsers.add(u)
+            lastRegenBonus.put(u, 0.0)
+            debugThrottler.put(u, 0)
+
+    doPeriodically(0.10) cb ->
+        updatePassiveStats()

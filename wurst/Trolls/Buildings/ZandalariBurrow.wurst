@@ -18,7 +18,7 @@ public constant ZANDALARI_BURROW_ID = compiletime(UNIT_ID_GEN.next())
         ..setUpgradesUsed("")
         
         // Economy Configuration
-        ..setGoldCost(50)
+        ..setGoldCost(40)
         ..setLumberCost(0) // 0 Lumber constraint unlocked
         
         // Core Stats

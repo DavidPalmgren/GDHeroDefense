@@ -112,9 +112,12 @@ globals
     rect                    gg_rct_Smith2              = null
     rect                    gg_rct_Smith1              = null
     rect                    gg_rct_Altar               = null
+    rect                    gg_rct_a                   = null
+    rect                    gg_rct_b                   = null
     trigger                 gg_trg_testGate            = null
     trigger                 gg_trg_heroLimits          = null
     trigger                 gg_trg_enemyForcesInit     = null
+    trigger                 gg_trg_Untitled_Trigger_001 = null
     trigger                 gg_trg_XaviusKilled        = null
     trigger                 gg_trg_auberdine           = null
     trigger                 gg_trg_stonetalon          = null
@@ -232,9 +235,6 @@ globals
     unit                    gg_unit_o004_0820          = null
     destructable            gg_dest_LTe2_0270          = null
     destructable            gg_dest_LTg2_15693         = null
-    rect                    gg_rct_a                   = null
-    rect                    gg_rct_b                   = null
-    trigger                 gg_trg_Untitled_Trigger_001 = null
 endglobals
 
 function InitGlobals takes nothing returns nothing
@@ -461,6 +461,11 @@ function CreateUnitsForPlayer0 takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'h00J', -3063.2, 21437.8, 145.200, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', -2605.4, 22038.3, 260.263, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', -2492.5, 21826.5, 204.132, 'h00J' )
+    set u = BlzCreateUnitWithSkin( p, 'Oshd', 2069.6, -13675.0, 58.600, 'Oshd' )
+    call SetHeroStr( u, 15, true )
+    call SetHeroAgi( u, 20, true )
+    call SetHeroInt( u, 99, true )
+    call SetUnitState( u, UNIT_STATE_MANA, 255 )
     set u = BlzCreateUnitWithSkin( p, 'h00J', -1975.7, 22289.5, 65.030, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', -1855.4, 22062.0, 222.084, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'n009', -11153.4, -11700.0, 234.642, 'n009' )
@@ -468,8 +473,17 @@ function CreateUnitsForPlayer0 takes nothing returns nothing
     call SetUnitColor( u, ConvertPlayerColor(0) )
     set u = BlzCreateUnitWithSkin( p, 'h00J', -1129.7, 22568.8, 197.277, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', -1101.8, 22227.9, 345.157, 'h00J' )
+    set u = BlzCreateUnitWithSkin( p, 'ogru', 2573.3, -13589.8, 168.410, 'ogru' )
+    set life = GetUnitState( u, UNIT_STATE_LIFE )
+    call SetUnitState( u, UNIT_STATE_LIFE, 0.01 * life )
+    set u = BlzCreateUnitWithSkin( p, 'ogru', 2553.7, -13740.5, 118.260, 'ogru' )
+    set life = GetUnitState( u, UNIT_STATE_LIFE )
+    call SetUnitState( u, UNIT_STATE_LIFE, 0.01 * life )
     set u = BlzCreateUnitWithSkin( p, 'h00J', -292.7, 22534.8, 116.327, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', -321.1, 22198.2, 136.652, 'h00J' )
+    set u = BlzCreateUnitWithSkin( p, 'ogru', 2533.1, -14096.8, 250.960, 'ogru' )
+    set life = GetUnitState( u, UNIT_STATE_LIFE )
+    call SetUnitState( u, UNIT_STATE_LIFE, 0.01 * life )
     set u = BlzCreateUnitWithSkin( p, 'h00J', 496.0, 22538.7, 253.682, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', 487.3, 22257.9, 301.738, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', 1272.7, 22415.3, 105.900, 'h00J' )
@@ -482,6 +496,9 @@ function CreateUnitsForPlayer0 takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'h00J', 2985.7, 20720.5, 288.114, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', 3653.7, 20397.8, 166.360, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', 3377.6, 20184.1, 136.575, 'h00J' )
+    set u = BlzCreateUnitWithSkin( p, 'ogru', 2504.3, -14304.6, 343.180, 'ogru' )
+    set life = GetUnitState( u, UNIT_STATE_LIFE )
+    call SetUnitState( u, UNIT_STATE_LIFE, 0.01 * life )
     set u = BlzCreateUnitWithSkin( p, 'h00J', 4023.1, 19794.3, 163.262, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', 3635.2, 19586.3, 185.279, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', 4271.1, 19174.0, 302.913, 'h00J' )

@@ -1,0 +1,37 @@
+package VolJin
+
+import ObjectIdGenerator
+import ObjectIds
+import UnitIds
+import UnitObjEditing
+import ClosureTimers
+import ClosureForGroups
+
+import HexingStrike
+import HealingWave
+import BerserkersFury
+import DeathsGrasp
+
+public constant VOLJIN_ID = compiletime(UNIT_ID_GEN.next())
+
+@compiletime function gen()
+  new HeroDefinition(UnitIds.shadowhunter, UnitIds.shadowhunter)
+    ..setNormalAbilities(commaList(HEXING_STRIKE_ABIL ))
+    ..setHeroAbilities(commaList(HEALING_WAVE, BERSERKERS_FURY, DEATHS_GRASP))
+    ..setManaInitialAmount(5000)
+    ..setManaRegeneration(20)
+
+init
+  nullTimer() ->
+
+    let x = GetRectCenterX(gg_rct_TrollParty)
+    let y = GetRectCenterY(gg_rct_TrollParty)
+    
+    let playerRed = players[0]
+
+    CreateUnit(playerRed, VOLJIN_ID, x-50, y-50, 270.0) // change id lata
+
+
+    forUnitsInRect(GetPlayableMapRect()) (unit u) ->
+      if u.getTypeId() == UnitIds.shadowhunter
+        SetHeroLevel(u, 9, false)
