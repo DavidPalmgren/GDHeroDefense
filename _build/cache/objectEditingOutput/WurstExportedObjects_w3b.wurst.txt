@@ -1,5 +1,6 @@
 package WurstExportedObjects_w3b
 import ObjEditingNatives
+import ObjEditingCommons
 import DestructableObjEditing
 
 // Modified Table (contains all custom objects)
@@ -71,6 +72,26 @@ import DestructableObjEditing
 	new DestructableDefinition('B007', 'LTbs')
 	..setName("Custom Wall")
 	..setModel("war3mapImported\\Wooden Log Wall.mdl")
+	..setMaximumScale(3.0)
+
+
+@compiletime function create_w3b_B008()
+	new DestructableDefinition('B008', 'LTbs')
+	..setTargetedAs("")
+	// TODO no wrapper: 	..setInt("bgse", 0)
+	// TODO no wrapper: 	..setInt("bfvi", 1)
+	..setName("ShadowCanopy")
+	// TODO no wrapper: 	..setString("bgpm", "Abilities\\Spells\\Orc\\AncestralSpirit\\AncestralSpiritCaster.mdl")
+	..setVertexColorBlue(0)
+	..setVertexColorRed(0)
+	..setVertexColorGreen(0)
+	..setShadow("ShadowAncientofLore")
+	..setPath("")
+	..setModel("Abilities\\Weapons\\ChimaeraLightningMissile\\ChimaeraLightningMissile.mdl")
+	// TODO no wrapper: 	..setInt("buch", 1)
+	..setFixedRotation(90.0)
+	..setMinimumScale(1.0)
+	..setMaximumScale(1.0)
 
 
 // Original Table (contains all modified default/melee objects)

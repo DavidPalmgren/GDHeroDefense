@@ -122,6 +122,7 @@ function setupAllControlPoints()
     addControlPoint(53, udg_duskwallowTrollsLanding, 10)
     addControlPoint(54, udg_thousandNeedles, 10)
     addControlPoint(55, udg_thousandNeedlesKhan, 10)
+    addControlPoint(56, udg_tanarisZulFarak, 10)
 
 init
     setupAllControlPoints()

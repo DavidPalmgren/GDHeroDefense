@@ -1,5 +1,6 @@
 package WurstExportedObjects_w3d
 import ObjEditingNatives
+import ObjEditingCommons
 import DoodadObjEditing
 
 // Modified Table (contains all custom objects)
@@ -373,6 +374,32 @@ import DoodadObjEditing
 	..setModel(0, "buildings\\other\\Mercenary\\Mercenary.mdl")
 
 
+@compiletime function create_w3d_D00X()
+	new DoodadDefinition('D00X', 'ZPfw')
+	..setModel(0, "Doodads\\LordaeronSummer\\Structures\\BridgeLog\\BridgeLog.mdl")
+	..setMaximumScale(0, 10.0)
+	..setMinimumScale(0, 0.01)
+	..setName(0, "Wooden Bridge")
+	// TODO no wrapper: 	..setLvlDataInt("dvar", 0, 0, 1)
+
+
+@compiletime function create_w3d_D01A()
+	new DoodadDefinition('D01A', 'DObw')
+	..setMaximumScale(0, 10.0)
+	..setMinimumScale(0, 0.01)
+	// TODO no wrapper: 	..setLvlDataInt("donw", 0, 0, 1)
+	..setPathTexture(0, "")
+	..setTilesets(0, "*")
+
+
+@compiletime function create_w3d_D01B()
+	new DoodadDefinition('D01B', 'ZSrb')
+	..setMaximumScale(0, 3.0)
+	..setName(0, "Tauren House")
+	..setTilesets(0, "Z,*")
+	..setModel(0, "buildings\\orc\\SpiritLodge\\SpiritLodge.mdl")
+
+
 // Original Table (contains all modified default/melee objects)
 // These are emitted when createObjectDefinition uses the same base/new id.
 
@@ -513,6 +540,11 @@ import DoodadObjEditing
 
 @compiletime function create_w3d_DRfc()
 	new DoodadDefinition('DRfc', 'DRfc')
+	..setMaximumScale(0, 3.0)
+
+
+@compiletime function create_w3d_BOtt()
+	new DoodadDefinition('BOtt', 'BOtt')
 	..setMaximumScale(0, 3.0)
 
 
