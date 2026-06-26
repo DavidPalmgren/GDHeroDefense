@@ -9,9 +9,11 @@ import Icons
 // Import your upgrades package to access the custom upgrade IDs
 import ZandalariBaseUpgrades
 import ZandalariUpgradeCenter
+import ZandalariThrillOfTheHunt
+import ZandalariUnitIds
 
 // Generate Unique Engine IDs for both combatants
-public constant ZANDALARI_WARRIOR_ID    = compiletime(UNIT_ID_GEN.next())
+
 public constant ZANDALARI_HEADHUNTER_ID = compiletime(UNIT_ID_GEN.next())
 
 @compiletime function genZandalariUnits()
@@ -26,6 +28,7 @@ public constant ZANDALARI_HEADHUNTER_ID = compiletime(UNIT_ID_GEN.next())
         ..setTooltipExtended("Frontline heavy infantry of the empire. Armed with a golden broadshield and heavy stone axe to absorb punishment.")
         ..setIconGameInterface(Icons.bTNGrunt)
         //..setNormalAbilities(commaList(ABIL_ZANDALARI_ENSNARE))
+        ..setNormalAbilities(commaList(ZANDALARI_TOTH_ABILITY))
         
         // Economy & Rapid-Spawn Configuration
         ..setGoldCost(30)

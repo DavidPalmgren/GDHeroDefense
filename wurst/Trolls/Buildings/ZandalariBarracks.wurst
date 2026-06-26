@@ -6,6 +6,8 @@ import ObjectIds
 import Icons
 
 import ZandalariBaseUpgrades
+import ZandalariThrillOfTheHunt
+import ZandalariUnitIds
 // import ZandalariEnsnare
 
 // Import your units package to access the custom unit IDs
@@ -35,4 +37,4 @@ public constant ZANDALARI_BARRACKS_ID = compiletime(UNIT_ID_GEN.next())
         ..setBuildTime(50)
         ..setHitPointsMaximumBase(1200)
 
-        ..setResearchesAvailable(commaList(ZANDALARI_REGEN_UPG_ID))
+        ..setResearchesAvailable(commaList(ZANDALARI_REGEN_UPG_ID,ZANDALARI_TOTH_UPGD ))

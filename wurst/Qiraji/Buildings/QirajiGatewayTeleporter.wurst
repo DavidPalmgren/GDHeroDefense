@@ -1,0 +1,28 @@
+// package QirajiGatewayTeleporter
+
+// import ClosureTimers
+// import UnitIds
+
+// // --- Configuration ---
+// let GATEWAY_UNIT_ID = 'nwgt' // Standard Neutral Passive Way Gate
+
+// // Target destination coordinates
+// let TELEPORT_DESTINATION_X = 4500.0
+// let TELEPORT_DESTINATION_Y = 43500.0
+
+// init
+//     // Wait a brief moment for map units to initialize safely
+//     doAfter(1.0) ->
+//         let gatewayGroup = CreateGroup()
+//         gatewayGroup.enumUnitsOfType(GATEWAY_UNIT_ID, null)
+        
+//         for u from gatewayGroup
+//             // FIX: Using the correct native JASS functions
+//             WaygateActivate(u, true)
+//             WaygateSetDestination(u, TELEPORT_DESTINATION_X, TELEPORT_DESTINATION_Y)
+            
+//             // Visual flair
+//             u.setAnimation("birth") 
+//             print("|cff00ff00[Teleporter System]|r Gateway activated successfully!")
+        
+//         gatewayGroup.destr()

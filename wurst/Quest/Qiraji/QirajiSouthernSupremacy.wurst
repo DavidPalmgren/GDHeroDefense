@@ -1,0 +1,76 @@
+package QirajiSouthernSupremacy
+
+import ControlPoint
+import ControlPointExtension
+import ClosureTimers
+import UpgradeObjEditing
+import Icons
+import PortalNetwork
+
+// --- Configuration Constants ---
+// 'RQSS' is our unique 4-character RawCode for this specific quest upgrade
+public let SOUTHERN_SUPREMACY_RESEARCH_ID = 'RQSS'
+
+let START_CP_ID = 37
+let END_CP_ID = 49
+let TOTAL_REQUIRED_NODES = (END_CP_ID - START_CP_ID) + 1
+
+player targetQirajiAI = null
+bool qirajiHasUnlockedSupremacy = false
+
+// ============================================================================
+// OBJECT GENERATION: This automatically builds your upgrade during compilation
+// ============================================================================
+@compiletime function createSouthernSupremacyUpgrade()
+    // 'Rame' (Iron Mail Armor) is used as a generic, bug-free template base
+    new UpgradeDefinition(SOUTHERN_SUPREMACY_RESEARCH_ID, 1)
+        ..setLevels(1)
+        ..setName(1, "[Quest] Southern Supremacy")
+        ..setTooltip(1, "Unlock [Quest] Southern Supremacy")
+        ..setTooltipExtended(1, "The Qiraji have unified the South. Advanced biological mutation pathways are permanently unlocked.")
+        ..setIcon(1, "ReplaceableTexture\\CommandButtons\\BTNSandScepter.blp") 
+        ..setGoldCostBase(0)
+        ..setLumberCostBase(0)
+
+// ============================================================================
+// GAMEPLAY LOGIC
+// ============================================================================
+
+/** Sweeps the southern node block exclusively looking at the Qiraji AI's holdings */
+function verifySouthernSupremacy() returns bool
+    // Performance optimization: escape immediately if already awarded or setup is missing
+    if qirajiHasUnlockedSupremacy or targetQirajiAI == null
+        return true
+
+    var ownedCount = 0
+    var cpId = START_CP_ID
+    
+    // Explicit while loop prevents compiler/parser hiccups
+    while cpId <= END_CP_ID
+        let cpUnit = cpRegistry.get(cpId)
+        if cpUnit != null and cpUnit.isAlive()
+            if cpUnit.getOwner() == targetQirajiAI
+                ownedCount++
+        cpId++
+
+    // If the Qiraji AI hits the exact threshold required, trigger permanent reward
+    if ownedCount == TOTAL_REQUIRED_NODES
+        qirajiHasUnlockedSupremacy = true
+        SetPlayerTechResearched(targetQirajiAI, SOUTHERN_SUPREMACY_RESEARCH_ID, 1)
+        spawnSilithusFeralasWayGates() // <----- Calling portal spawn here fnow
+        
+        print("|cff00ff00[SOUTHERN SUPREMACy]|r The Qiraji AI has successfully unified the South! Permanent evolution tier unlocked.")
+        return true // Signals the background thread wrapper to terminate
+        
+    return false
+
+/** Initializes the tracking engine targeted exclusively at your specific Qiraji AI player instance */
+public function startSouthernSupremacyMonitor(player qirajiAiPlayer)
+    targetQirajiAI = qirajiAiPlayer
+    qirajiHasUnlockedSupremacy = false
+    
+    // Check nodes every 3 seconds
+    doPeriodically(60.0) (CallbackPeriodic cb) ->
+        if verifySouthernSupremacy()
+            // Instantly purges the clock thread out of memory once unlocked. It cannot revoke.
+            destroy cb

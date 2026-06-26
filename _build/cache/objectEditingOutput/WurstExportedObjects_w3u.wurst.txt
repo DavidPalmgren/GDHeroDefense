@@ -1505,6 +1505,17 @@ import UnitObjEditing
 	..setGroundTexture("")
 
 
+@compiletime function create_w3u_n00E()
+	new BuildingDefinition('n00E', 'nwgt')
+	..setName("Tunnel")
+	..setModelFile("units\\undead\\CryptFiend\\CryptFiend.mdl")
+
+
+@compiletime function create_w3u_u000()
+	new UnitDefinition('u000', 'ucry')
+	..setName("Burrow")
+
+
 @compiletime function create_w3u_x001()
 	new UnitDefinition('x001', 'ewsp')
 	..setName("Effect Dummy Unit")
@@ -2300,8 +2311,8 @@ import UnitObjEditing
 	..setDefenseBase(5)
 
 
-@compiletime function create_w3u_x014()
-	new BuildingDefinition('x014', 'ofor')
+@compiletime function create_w3u_x018()
+	new BuildingDefinition('x018', 'ofor')
 	..setName("Mojo Crucible")
 	..setTooltipBasic("Build Mojo Crucible")
 	..setTooltipExtended("The technological and spiritual forge of the empire. Refines tribal alloys and extracts potent mojo to upgrade your forces.")
@@ -2313,12 +2324,13 @@ import UnitObjEditing
 	..setResearchesAvailable("RM01,RM02")
 
 
-@compiletime function create_w3u_x015()
-	new UnitDefinition('x015', 'ogru')
+@compiletime function create_w3u_x017()
+	new UnitDefinition('x017', 'ogru')
 	..setName("Zandalari Vanguard")
 	..setTooltipBasic("Train Zandalari Vanguard")
 	..setTooltipExtended("Frontline heavy infantry of the empire. Armed with a golden broadshield and heavy stone axe to absorb punishment.")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNGrunt.blp")
+	..setNormalAbilities("AM1w")
 	..setGoldCost(30)
 	..setLumberCost(0)
 	..setBuildTime(3)
@@ -2326,8 +2338,8 @@ import UnitObjEditing
 	..setUpgradesUsed("RM01,RM02,RM03")
 
 
-@compiletime function create_w3u_x016()
-	new UnitDefinition('x016', 'ohun')
+@compiletime function create_w3u_x019()
+	new UnitDefinition('x019', 'ohun')
 	..setName("Zandalari Headhunter")
 	..setTooltipBasic("Train Zandalari Headhunter")
 	..setTooltipExtended("Savage ranged tracker who hurls deadly, long-range spears coated in sacrificial mojo.")
@@ -2337,7 +2349,7 @@ import UnitObjEditing
 	..setBuildTime(3)
 	..setFoodCost(2)
 	..setUpgradesUsed("RM01,RM02,RM03")
-	..setRequirements("x014")
+	..setRequirements("x018")
 
 
 @compiletime function create_w3u_x01a()
@@ -2351,7 +2363,7 @@ import UnitObjEditing
 	..setBuildTime(5)
 	..setFoodCost(3)
 	..setUpgradesUsed("RM01,RM02,RM03")
-	..setRequirements("x014")
+	..setRequirements("x018")
 
 
 @compiletime function create_w3u_x01b()
@@ -2360,12 +2372,12 @@ import UnitObjEditing
 	..setTooltipBasic("Train Witch Doctor")
 	..setTooltipExtended("Spiritual mystic of the council caste. Commands deep voodoo mojo to place healing wards and cast protective enchantments over injured allies.")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNWitchDoctor.blp")
-	..setNormalAbilities("AM1w,AM1x")
+	..setNormalAbilities("AM1x,AM1y")
 	..setGoldCost(55)
 	..setLumberCost(0)
 	..setBuildTime(4)
 	..setFoodCost(2)
-	..setUpgradesUsed("RM01,RM02,RM03,RM07")
+	..setUpgradesUsed("RM01,RM02,RM03,RM08")
 
 
 @compiletime function create_w3u_x01c()
@@ -2395,7 +2407,7 @@ import UnitObjEditing
 	..setBuildTime(4)
 	..setFoodCost(3)
 	..setUpgradesUsed("RM01,RM02,RM03")
-	..setRequirements("x014")
+	..setRequirements("x018")
 
 
 @compiletime function create_w3u_x01e()
@@ -2404,12 +2416,12 @@ import UnitObjEditing
 	..setTooltipBasic("Build Rastari War-Pit")
 	..setTooltipExtended("The martial heart of the empire. Trains Zandalari Vanguards and Headhunters to expand your territory.")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNOrcBattleStandard.blp")
-	..setUnitsTrained("x015,x016,x01a")
+	..setUnitsTrained("x017,x019,x01a")
 	..setGoldCost(50)
 	..setLumberCost(0)
 	..setBuildTime(50)
 	..setHitPointsMaximumBase(1200)
-	..setResearchesAvailable("RM03")
+	..setResearchesAvailable("RM03,RM07")
 
 
 @compiletime function create_w3u_x01f()
@@ -2418,7 +2430,7 @@ import UnitObjEditing
 	..setTooltipBasic("Train Mojo Apothecary")
 	..setTooltipExtended("An alchemical doctor who carries volatile vats of bubbling brew. Throws healing elixirs to allies and corrosive acid cocktails to melt enemy armor strips.")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNHeroAlchemist.blp")
-	..setNormalAbilities("AM1y")
+	..setNormalAbilities("AM1z")
 	..setManaMaximum(400)
 	..setManaInitialAmount(100)
 	..setManaRegeneration(1.5)
@@ -2426,7 +2438,7 @@ import UnitObjEditing
 	..setLumberCost(0)
 	..setBuildTime(5)
 	..setFoodCost(3)
-	..setUpgradesUsed("RM01,RM02,RM03,RM08")
+	..setUpgradesUsed("RM01,RM02,RM03,RM09")
 
 
 @compiletime function create_w3u_x01g()
@@ -2470,7 +2482,7 @@ import UnitObjEditing
 	..setBuildTime(7)
 	..setFoodCost(5)
 	..setUpgradesUsed("RM01,RM02,RM03")
-	..setRequirements("x019")
+	..setRequirements("x016")
 	..setNormalAbilities("")
 
 
@@ -2508,7 +2520,7 @@ import UnitObjEditing
 	..setHitPointsMaximumBase(1200)
 	..setArmorType("fort")
 	..setDefenseBase(5)
-	..setRequirements("x018")
+	..setRequirements("x015")
 	..setResearchesAvailable("")
 
 
@@ -2542,7 +2554,7 @@ import UnitObjEditing
 	..setHitPointsMaximumBase(600)
 	..setArmorType("fort")
 	..setDefenseBase(2)
-	..setRequirements("x019")
+	..setRequirements("x016")
 	..setResearchesAvailable("")
 	..setNormalAbilities("")
 	..setUpgradesTo("x01m,x01n,x01o")
@@ -2558,7 +2570,7 @@ import UnitObjEditing
 	..setButtonPositionX(0)
 	..setButtonPositionY(0)
 	..setUnitsTrained("u001")
-	..setResearchesAvailable("RM09")
+	..setResearchesAvailable("RM0a")
 	..setGoldCost(150)
 	..setLumberCost(0)
 	..setBuildTime(45)
@@ -2623,8 +2635,8 @@ import UnitObjEditing
 	..setHitPointsMaximumBase(1000)
 	..setArmorType("fort")
 	..setDefenseBase(5)
-	..setRequirements("x018")
-	..setResearchesAvailable("RM07,RM08")
+	..setRequirements("x015")
+	..setResearchesAvailable("RM08,RM09")
 
 
 @compiletime function create_w3u_x01q()
@@ -2633,7 +2645,7 @@ import UnitObjEditing
 	..setTooltipBasic("Train Zandalari Freeman")
 	..setTooltipExtended("The fundamental workforce of the empire. Can construct custom tribal structures and repair damaged installations.")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNPeon.blp")
-	..setStructuresBuilt("x01k,x014,x01e,x01j,x01p,x01l,x017,x013")
+	..setStructuresBuilt("x01k,x018,x01e,x01j,x01p,x01l,x014,x013")
 	..setGoldCost(25)
 	..setLumberCost(0)
 	..setBuildTime(3)
@@ -2643,13 +2655,13 @@ import UnitObjEditing
 	..setArmorType("medium")
 
 
-@compiletime function create_w3u_x017()
-	new BuildingDefinition('x017', 'ogre')
+@compiletime function create_w3u_x014()
+	new BuildingDefinition('x014', 'ogre')
 	..setName("Zocalo Hearth")
 	..setTooltipBasic("Build Zocalo Hearth")
 	..setTooltipExtended("The economic and spiritual foundation of your settlement. Trains workers and accepts resource returns.")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNGreatHall.blp")
-	..setUpgradesTo("x018")
+	..setUpgradesTo("x015")
 	..setUnitsTrained("x01q")
 	..setGoldCost(150)
 	..setLumberCost(0)
@@ -2657,13 +2669,13 @@ import UnitObjEditing
 	..setHitPointsMaximumBase(1500)
 
 
-@compiletime function create_w3u_x018()
-	new BuildingDefinition('x018', 'ostr')
+@compiletime function create_w3u_x015()
+	new BuildingDefinition('x015', 'ostr')
 	..setName("Zanchul Sanctum")
 	..setTooltipBasic("Upgrade to Zanchul Sanctum")
 	..setTooltipExtended("Elevates the settlement into a stone sanctuary. Unlocks mid-tier military structures and tech upgrades.")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNStrongHold.blp")
-	..setUpgradesTo("x019")
+	..setUpgradesTo("x016")
 	..setUnitsTrained("x01q")
 	..setGoldCost(200)
 	..setLumberCost(0)
@@ -2672,8 +2684,8 @@ import UnitObjEditing
 	..setRequirements("x013")
 
 
-@compiletime function create_w3u_x019()
-	new BuildingDefinition('x019', 'ofrt')
+@compiletime function create_w3u_x016()
+	new BuildingDefinition('x016', 'ofrt')
 	..setName("Dazar'alor Ziggurat")
 	..setTooltipBasic("Upgrade to Dazar'alor Ziggurat")
 	..setTooltipExtended("The ultimate golden pinnacle of Zandalari majesty. Unlocks high-tier units, ultimate tier researches, and Heroes.")

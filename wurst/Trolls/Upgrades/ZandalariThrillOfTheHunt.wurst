@@ -1,0 +1,67 @@
+package ZandalariThrillOfTheHunt
+
+
+import UpgradeObjEditing
+import ObjectIdGenerator
+import Icons
+import ObjectIds
+import ClosureEvents
+import EventHelper
+import AbilityObjEditing
+import Effect
+import EffectUtils
+
+import ClosureTimers
+import Unit
+import ZandalariTownHallID
+import ZandalariUnitIds
+
+
+// Generate Unique IDs for the global upgrade keys
+public constant ZANDALARI_TOTH_UPGD = compiletime(UPGD_ID_GEN.next())
+public constant ZANDALARI_TOTH_ABILITY = compiletime(ABIL_ID_GEN.next())
+
+
+@compiletime function genZandalariUpgrades()
+
+    new AbilityDefinitionPassiveSimple(ZANDALARI_TOTH_ABILITY)
+      ..setName("Thrill of battle")
+      ..setTooltipNormal(1, "Thrill of battle")
+      ..setTooltipNormalExtended(1, "Allows Headhunters and Warriors to rapidly regenerate health on killing a unit.")
+      ..setIconNormal("ReplaceableTextures\\CommandButtons\\PASInto_The_Fray.blp")
+      ..setRequirements(commaList(ZANDALARI_TOTH_UPGD))
+    
+    new UpgradeDefinition(ZANDALARI_TOTH_UPGD, 1)
+        ..setGoldCostBase(50)
+        ..setGoldCostIncrement(50)
+        ..setLumberCostBase(0)
+        ..setLumberCostIncrement(0)
+        ..setButtonPositionX(0)
+        ..setButtonPositionY(2)
+        ..setTimeBase(45)
+        ..setTimeIncrement(60)
+        ..addEffectAbilityLevelBonus(1, 1, ZANDALARI_TOTH_ABILITY.toRawCode())
+        ..setIcon(1, "ReplaceableTextures\\CommandButtons\\PASInto_The_Fray.blp")
+        ..setRequirements(1, "")
+
+        ..setClass(UpgradeClass.Melee)
+        ..setName(1, "Thrill of the hunt")
+        ..setTooltip(1, "Thrill of the hunt")
+        ..setTooltipExtended(1, "Allows Headhunters and Warriors to rapidly regenerate health on killing a unit.")
+
+init
+    EventListener.add(EVENT_PLAYER_UNIT_DEATH) -> 
+        let killer = GetKillingUnit()
+        if killer.getTypeId() == ZANDALARI_WARRIOR_ID
+            doPeriodicallyCounted(1, 5) (CallbackCounted cb) ->
+                killer.setHP(killer.getHP() + 20)
+            let sfx = killer.addEffect("Abilities\\Spells\\Items\\HealingSalve\\HealingSalveTarget.mdl", "head")
+            doAfter(5.0) ->
+                sfx.destr()
+                print("The burning debuff has faded.")
+
+    
+    // 2. Wait 5 seconds, then safely remove the visual asset from the unit
+
+          
+      

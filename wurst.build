@@ -13,7 +13,7 @@ buildMapData:
       model: MyModel.mdx # Use 'model' to specify a custom model as loading screen
       background: Generic # Use 'background' to use an existing loading screen
       title: BigSausageDefense
-      subTitle: By Viki and Dirty Dave
+      subTitle: By LGBTQQIP2SAA rep Viki and Dirty Dave
       text: beta
   optionsFlags:
     hideMinimapPreview: false

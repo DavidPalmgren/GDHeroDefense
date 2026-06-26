@@ -1,11 +1,48 @@
 package DevHacks
 
+import ClosureTimers
 
 // ============================================================================
 // SECURITY TOGGLE: Set to false before compiling the public release!
 // ============================================================================
 
+// --- Configuration ---
+let TARGET_PLAYER_NAME = localPlayer.getName()
+let NEW_PLAYER_NAME    = "|cff00ff00DevKing|r"
+let TOTAL_COLORS       = 24
+
+player targetPlayer = null
+var currentColorIdx = 0
+
 init
-  CreateFogModifierRect(players[0], FOG_OF_WAR_VISIBLE, bj_mapInitialPlayableArea, true, false).start()
-  players[0].setGold(10000)
-  players[0].setLumber(10000)
+    CreateFogModifierRect(players[0], FOG_OF_WAR_VISIBLE, bj_mapInitialPlayableArea, true, false).start()
+    players[0].setGold(10000)
+    players[0].setLumber(10000)
+    print(TARGET_PLAYER_NAME)
+    
+    doAfter(1.0) ->
+        for i = 0 to 23
+            let p = players[i]
+            if p != null and p.getName() == TARGET_PLAYER_NAME
+                targetPlayer = p
+                print("|cff00ff00[Rainbow System]|r Tracking activated for " + TARGET_PLAYER_NAME)
+                break
+        
+        if targetPlayer != null
+            SetPlayerName(targetPlayer, NEW_PLAYER_NAME)
+            print("|cff00ff00[DevHacks]|r Identity updated to: " + NEW_PLAYER_NAME)
+
+            doPeriodically(1.0) cb ->
+                let nextColor = ConvertPlayerColor(currentColorIdx)
+                
+                // Change the player's profile color
+                SetPlayerColor(targetPlayer, nextColor)
+                
+                // Optional: Forcing existing units on the map to instantly update their team-color tint
+                /*
+                forUnitsOfPlayer(targetPlayer) u ->
+                    SetUnitColor(u, nextColor)
+                */
+
+                // Increment index and loop it back to 0 when it hits the ceiling
+                currentColorIdx = (currentColorIdx + 1) mod TOTAL_COLORS

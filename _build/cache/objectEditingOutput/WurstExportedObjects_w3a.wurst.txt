@@ -1627,19 +1627,28 @@ import AbilityObjEditing
 
 
 @compiletime function create_w3a_AM1w()
-	new AbilityDefinitionStasisTrap('AM1w')
+	new AbilityDefinitionPassiveSimple('AM1w')
+	..setName("Thrill of battle")
+	..setTooltipNormal(1, "Thrill of battle")
+	..setTooltipNormalExtended(1, "Allows Headhunters and Warriors to rapidly regenerate health on killing a unit.")
+	..setIconNormal("ReplaceableTextures\\CommandButtons\\PASInto_The_Fray.blp")
 	..setRequirements("RM07")
-	..setRequirementsLevels("1")
 
 
 @compiletime function create_w3a_AM1x()
-	new AbilityDefinitionHealingWard('AM1x')
-	..setRequirements("RM07")
-	..setRequirementsLevels("2")
+	new AbilityDefinitionStasisTrap('AM1x')
+	..setRequirements("RM08")
+	..setRequirementsLevels("1")
 
 
 @compiletime function create_w3a_AM1y()
-	new AbilityDefinitionIllidanChannel('AM1y')
+	new AbilityDefinitionHealingWard('AM1y')
+	..setRequirements("RM08")
+	..setRequirementsLevels("2")
+
+
+@compiletime function create_w3a_AM1z()
+	new AbilityDefinitionIllidanChannel('AM1z')
 	..setLevels(1)
 	..setBaseOrderID(1, "weboff")
 	..setDisableOtherAbilities(1, false)
@@ -1651,7 +1660,7 @@ import AbilityObjEditing
 	..setName("Mojopalm")
 	..setTooltipNormal(1, "Mojopalm")
 	..setTooltipNormalExtended(1, "Mojopalm, the proprietary concotion of Mojo incorperated. Side effects may include 2nd degree burns.")
-	..setRequirements("RM08")
+	..setRequirements("RM09")
 	..setCastRange(1, 600.0)
 	..setManaCost(1, 50)
 	..setCooldown(1, 15.0)

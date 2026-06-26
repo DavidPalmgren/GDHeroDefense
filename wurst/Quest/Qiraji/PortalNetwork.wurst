@@ -1,0 +1,30 @@
+package PortalNetwork
+
+import ClosureTimers
+
+
+let PORTAL_UNIT_ID = 'nwgt'
+
+public function spawnSilithusFeralasWayGates()
+    let ax = GetRectCenterX(gg_rct_a)
+    let ay = GetRectCenterY(gg_rct_a)
+    
+    let bx = GetRectCenterX(gg_rct_b)
+    let by = GetRectCenterY(gg_rct_b)
+
+    let portalA = CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), PORTAL_UNIT_ID, ax, ay, 0.0)
+    let portalB = CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), PORTAL_UNIT_ID, bx, by, 0.0)
+
+    let exitA_X = ax
+    let exitA_Y = ay - 200.0
+    
+    let exitB_X = bx
+    let exitB_Y = by - 200.0
+
+    WaygateActivate(portalA, true)
+    WaygateSetDestination(portalA, exitB_X, exitB_Y)
+    SetUnitAnimation(portalA, "birth") 
+
+    WaygateActivate(portalB, true)
+    WaygateSetDestination(portalB, exitA_X, exitA_Y)
+    SetUnitAnimation(portalB, "birth") 

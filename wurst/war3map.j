@@ -106,6 +106,12 @@ globals
     rect                    gg_rct_TrollParty          = null
     rect                    gg_rct_QirajiParty         = null
     rect                    gg_rct_QirajiSpawn         = null
+    rect                    gg_rct_QirajiTC            = null
+    rect                    gg_rct_Barracks1           = null
+    rect                    gg_rct_Barracks2           = null
+    rect                    gg_rct_Smith2              = null
+    rect                    gg_rct_Smith1              = null
+    rect                    gg_rct_Altar               = null
     trigger                 gg_trg_testGate            = null
     trigger                 gg_trg_heroLimits          = null
     trigger                 gg_trg_enemyForcesInit     = null
@@ -158,8 +164,14 @@ globals
     unit                    gg_unit_h008_0141          = null
     unit                    gg_unit_edos_0342          = null
     unit                    gg_unit_h007_0011          = null
+    unit                    gg_unit_h01U_0853          = null
+    unit                    gg_unit_h01R_0852          = null
+    unit                    gg_unit_h01Q_0851          = null
     unit                    gg_unit_h00V_0367          = null
     unit                    gg_unit_h010_0446          = null
+    unit                    gg_unit_h01P_0850          = null
+    unit                    gg_unit_h01T_0849          = null
+    unit                    gg_unit_h01S_0848          = null
     unit                    gg_unit_h00H_0077          = null
     unit                    gg_unit_eate_0066          = null
     unit                    gg_unit_h00B_0076          = null
@@ -172,6 +184,7 @@ globals
     unit                    gg_unit_e00J_0074          = null
     unit                    gg_unit_h00R_0078          = null
     unit                    gg_unit_e007_0079          = null
+    unit                    gg_unit_h004_0279          = null
     unit                    gg_unit_h012_0369          = null
     unit                    gg_unit_h00Z_0445          = null
     unit                    gg_unit_h00G_0444          = null
@@ -211,27 +224,17 @@ globals
     unit                    gg_unit_h018_0532          = null
     unit                    gg_unit_h01A_0535          = null
     unit                    gg_unit_h01B_0536          = null
+    unit                    gg_unit_o005_0821          = null
     unit                    gg_unit_h01F_0717          = null
     unit                    gg_unit_h01G_0718          = null
     unit                    gg_unit_h01H_0719          = null
     unit                    gg_unit_o003_0785          = null
     unit                    gg_unit_o004_0820          = null
-    unit                    gg_unit_o005_0821          = null
-    unit                    gg_unit_h01S_0848          = null
-    unit                    gg_unit_h01T_0849          = null
-    unit                    gg_unit_h01P_0850          = null
-    unit                    gg_unit_h01Q_0851          = null
-    unit                    gg_unit_h01R_0852          = null
-    unit                    gg_unit_h01U_0853          = null
     destructable            gg_dest_LTe2_0270          = null
     destructable            gg_dest_LTg2_15693         = null
-    unit                    gg_unit_h004_0279          = null
-    rect                    gg_rct_QirajiTC            = null
-    rect                    gg_rct_Barracks1           = null
-    rect                    gg_rct_Barracks2           = null
-    rect                    gg_rct_Smith2              = null
-    rect                    gg_rct_Smith1              = null
-    rect                    gg_rct_Altar               = null
+    rect                    gg_rct_a                   = null
+    rect                    gg_rct_b                   = null
+    trigger                 gg_trg_Untitled_Trigger_001 = null
 endglobals
 
 function InitGlobals takes nothing returns nothing
@@ -460,6 +463,9 @@ function CreateUnitsForPlayer0 takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'h00J', -2492.5, 21826.5, 204.132, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', -1975.7, 22289.5, 65.030, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', -1855.4, 22062.0, 222.084, 'h00J' )
+    set u = BlzCreateUnitWithSkin( p, 'n009', -11153.4, -11700.0, 234.642, 'n009' )
+    set u = BlzCreateUnitWithSkin( p, 'E000', -11079.9, -11716.0, 357.023, 'E000' )
+    call SetUnitColor( u, ConvertPlayerColor(0) )
     set u = BlzCreateUnitWithSkin( p, 'h00J', -1129.7, 22568.8, 197.277, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', -1101.8, 22227.9, 345.157, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', -292.7, 22534.8, 116.327, 'h00J' )
@@ -1611,6 +1617,7 @@ function CreateNeutralPassiveBuildings takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'o000', 1216.0, -11840.0, 270.000, 'o000' )
     set u = BlzCreateUnitWithSkin( p, 'o000', 2304.0, -12800.0, 270.000, 'o000' )
     set u = BlzCreateUnitWithSkin( p, 'nct1', -32.0, -9824.0, 270.000, 'nct1' )
+    set u = BlzCreateUnitWithSkin( p, 'n00E', -1088.0, 18176.0, 270.000, 'n00E' )
     set u = BlzCreateUnitWithSkin( p, 'ntn2', -8544.0, -16672.0, 270.000, 'ntn2' )
     set u = BlzCreateUnitWithSkin( p, 'ntn2', -8224.0, -16608.0, 270.000, 'ntn2' )
     set u = BlzCreateUnitWithSkin( p, 'ntn2', -8544.0, -16992.0, 270.000, 'ntn2' )
@@ -1687,7 +1694,7 @@ function CreateRegions takes nothing returns nothing
     set gg_rct_DarnassusHighborneSpawn = Rect( -9728.0, 25664.0, -9088.0, 26176.0 )
     set gg_rct_BarrensGate = Rect( -1216.0, 5536.0, -512.0, 5856.0 )
     set gg_rct_BarrensGate2 = Rect( -4480.0, 2304.0, -3840.0, 3136.0 )
-    set gg_rct_TrollParty = Rect( 672.0, -14496.0, 1536.0, -13568.0 )
+    set gg_rct_TrollParty = Rect( 992.0, -14400.0, 1856.0, -13472.0 )
     set gg_rct_QirajiParty = Rect( -11552.0, -20096.0, -10816.0, -19360.0 )
     set gg_rct_QirajiSpawn = Rect( -12384.0, -16896.0, -10528.0, -15712.0 )
     set gg_rct_QirajiTC = Rect( -13568.0, -16512.0, -13088.0, -16000.0 )
@@ -1698,6 +1705,8 @@ function CreateRegions takes nothing returns nothing
     set gg_rct_Altar = Rect( -12992.0, -17056.0, -12672.0, -16704.0 )
     set we = AddWeatherEffect( gg_rct_Altar, 'FDbh' )
     call EnableWeatherEffect( we, true )
+    set gg_rct_a = Rect( -10880.0, -11936.0, -10592.0, -11648.0 )
+    set gg_rct_b = Rect( -9440.0, -9824.0, -9152.0, -9536.0 )
 endfunction
 
 //***************************************************************************
@@ -1754,6 +1763,18 @@ endfunction
 function InitTrig_enemyForcesInit takes nothing returns nothing
     set gg_trg_enemyForcesInit = CreateTrigger(  )
     call TriggerAddAction( gg_trg_enemyForcesInit, function Trig_enemyForcesInit_Actions )
+endfunction
+
+//===========================================================================
+// Trigger: Untitled Trigger 001
+//===========================================================================
+function Trig_Untitled_Trigger_001_Actions takes nothing returns nothing
+endfunction
+
+//===========================================================================
+function InitTrig_Untitled_Trigger_001 takes nothing returns nothing
+    set gg_trg_Untitled_Trigger_001 = CreateTrigger(  )
+    call TriggerAddAction( gg_trg_Untitled_Trigger_001, function Trig_Untitled_Trigger_001_Actions )
 endfunction
 
 //===========================================================================
@@ -1978,6 +1999,7 @@ function InitCustomTriggers takes nothing returns nothing
     call InitTrig_testGate(  )
     call InitTrig_heroLimits(  )
     call InitTrig_enemyForcesInit(  )
+    call InitTrig_Untitled_Trigger_001(  )
     call InitTrig_XaviusKilled(  )
     call InitTrig_auberdine(  )
     call InitTrig_stonetalon(  )

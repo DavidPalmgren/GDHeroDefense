@@ -11,7 +11,8 @@ import QirajiRatsInChat
 import QirajiNextTier
 import QirajiFlyerControlPointCheese
 import QirajiAttackGroups
-import QirajiAttackGroupsAttack
+import QirajiColumbusAttack
+import QirajiSouthernSupremacy
 
 import V2QirajiBuild
 
@@ -23,9 +24,12 @@ public function startQirajiGoldIncome(player aiPlayer)
 init
     
     doAfter(0.5) ->
-        // players[11] corresponds to Player 12 (Dark Green)
-        let qirajiAIPlayer = players[11]
+        // 1 time called throwaways and own loop here
+        let qirajiAIPlayer = players[15]
         startQirajiGoldIncome(qirajiAIPlayer) // base income of 100gpm
+        startSubwayAttackSupervisor()
+        // [QUEST]
+        startSouthernSupremacyMonitor(qirajiAIPlayer) //60s loop check for reserach
         
         // Step 1: Spawn initial Workers
         qirajiSpawnBuildersSetBase(qirajiAIPlayer)
@@ -33,9 +37,8 @@ init
         //startQirajiBaseDefense(qirajiAIPlayer)
         //startQirajiAttackLoop(qirajiAIPlayer)
         startRecruitmentLoop(qirajiAIPlayer)
-        startSquadAttackBrain(qirajiAIPlayer)
         
-        // Step 2: Boot up the centralized monitoring loops
+        // Centralized monitoring loops
         doPeriodically(5.0) (CallbackPeriodic cb) ->
             manageQirajiBarracksV2(qirajiAIPlayer)
             manageQirajiAltar(qirajiAIPlayer)
