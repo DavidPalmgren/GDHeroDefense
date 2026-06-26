@@ -1,0 +1,221 @@
+package DeathsGrasp
+
+// https://www.hiveworkshop.com/threads/withering-presence.360573/
+// https://www.hiveworkshop.com/threads/spirit-guardians.355354/
+
+import ObjectIdGenerator
+import AbilityObjEditing
+import UnitObjEditing
+import RegisterEvents
+import ClosureTimers
+import HashMap
+import UnitIds
+import Lightning
+import SoundUtils
+import BuffObjEditing
+import AbilityIds
+import Icons
+import ObjectIds
+
+// Unique Identifiers
+public constant DEATHS_GRASP  = compiletime(ABIL_ID_GEN.next())
+public constant GRASP_SERVANT = compiletime(UNIT_ID_GEN.next())
+constant real array SLOW_AMOUNT = [0.20, 0.30, 0.40, 0.50]  // 20% to 50% slow
+constant real SLOW_CHECK_INTERVAL = 0.25  // Check for enemies every 0.25s
+
+// Add buff/ability IDs
+public constant GRASP_SLOW_BUFF = compiletime(BUFF_ID_GEN.next())
+public constant GRASP_SLOW_ABIL = compiletime(ABIL_ID_GEN.next())
+// ============================================================================
+// TUNABLE BASE VALUES & SCALING CONFIGURATION
+// ============================================================================
+constant int MAX_LEVELS = 4
+
+// Spell Scaling Profiles [Level 1, Level 2, Level 3, Level 4]
+constant real array ZONE_RADIUS   = [350.0, 400.0, 450.0, 500.0]
+constant real array ZONE_DURATION = [12.0, 14.0, 16.0, 18.0]
+constant int array  MANA_COST     = [110, 125, 140, 155]
+constant real array COOLDOWN      = [24.0, 21.0, 18.0, 15.0]
+
+// Custom Summon Combat Profiles
+constant int array  SERVANT_DAMAGE = [22, 36, 52, 70]
+constant int array  SERVANT_HP     = [600, 850, 1150, 1400]
+
+// Visuals & Sounds
+constant string FX_CENTER_AURA = "Abilities\\Spells\\Undead\\AnimateDead\\AnimateDeadTarget.mdl"
+constant string FX_SNAP_BACK   = "Abilities\\Spells\\Undead\\DeathCoil\\DeathCoilSpecialArt.mdl"
+constant string LIGHTNING_TYPE = "SPIR" // Spirit Link appearance
+
+// ============================================================================
+// OBJECT GENERATION (Compiletime)
+// ============================================================================
+
+@compiletime function gen()
+    let abDef = new AbilityDefinitionSilenceCreep(DEATHS_GRASP)
+        ..setHeroAbility(true)
+        ..setLevels(MAX_LEVELS)
+        ..setName("Death's Grasp")
+        ..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNAuraOfDarkness.blp")
+        ..setIconResearch("ReplaceableTextures\\CommandButtons\\BTNAuraOfDarkness.blp")
+        ..setBuffs(1, "")
+        ..setDurationHero(1, 0.01)
+        ..setDurationNormal(1, 0.01)
+        ..setCastRange(1, 500)
+        ..setCastRange(2, 500)
+        ..setCastRange(3, 500)
+        ..setCastRange(4, 500)
+
+    new BuffDefinition(GRASP_SLOW_BUFF, 'Bslo')
+        ..setName(1, "Death's Grasp")
+        ..setTooltipNormal(1, "Death's Grasp")
+        ..setTooltipNormalExtended(1, "Slowed by the cursed zone.")
+        ..setIcon(Icons.bTNAuraOfDarkness)
+
+    // Create once, set all levels on the same instance
+    let slowDef = new AbilityDefinitionSlowCreep(GRASP_SLOW_ABIL)
+        ..setName("Death's Grasp Slow")
+        ..setLevels(MAX_LEVELS)
+        ..setHeroAbility(false)
+        ..setItemAbility(false)
+
+    for i = 1 to MAX_LEVELS
+        slowDef
+            ..setMovementSpeedFactor(i, SLOW_AMOUNT[i - 1])
+            ..setAttackSpeedFactor(i, 0.0)
+            ..setDurationNormal(i, SLOW_CHECK_INTERVAL * 2.0)
+            ..setDurationHero(i, SLOW_CHECK_INTERVAL * 2.0)
+            ..setBuffs(i, GRASP_SLOW_BUFF.toRawCode())
+
+    new UnitDefinition(GRASP_SERVANT, UnitIds.ghost)
+        ..setName("Grasp Servant")
+        ..setModelFile("units\\undead\\Abomination\\Abomination.mdl")
+        ..setAttack1CooldownTime(1.35)
+        ..setAttack1Range(128)
+        ..setAttack1WeaponType(WeaponType.Normal)
+        ..setSpeedBase(320)
+        ..setSelectionScale(1.1)
+        ..setScalingValue(1.15)
+        ..setCollisionSize(0.0)
+        ..setHitPointsMaximumBase(SERVANT_HP[0])
+        ..setAttack1DamageBase(SERVANT_DAMAGE[0])
+
+    for i = 1 to MAX_LEVELS
+        let idx = i - 1
+        let extendedTooltip = "Creates a cursed region with a radius of |cff00ff00"
+            + ZONE_RADIUS[idx].toString(0)
+            + "|r for |cff00ff00" + ZONE_DURATION[idx].toString(0)
+            + "s|r. Spawns an ethereal servant tethered to the center. "
+            + "The servant possesses |cff00ff00" + SERVANT_HP[idx].toString()
+            + " HP|r and deals |cff00ff00" + SERVANT_DAMAGE[idx].toString()
+            + "|r chaos damage, but cannot escape the boundary edge."
+
+        abDef
+            ..setTooltipNormal(i, "Cast [|cffff0000Death's Grasp|r] - Level " + i.toString())
+            ..setTooltipNormalExtended(i, extendedTooltip)
+            ..setAreaofEffect(i, ZONE_RADIUS[idx])
+            ..setManaCost(i, MANA_COST[idx])
+            ..setCooldown(i, COOLDOWN[idx])
+
+// ============================================================================
+// SYSTEM ENGINE RUNTIME (Tether Control Tracking)
+// ============================================================================
+
+class TetherInstance
+    vec2 center
+    unit servant
+    lightning tetherLine
+    effect centerFloorAura
+    real radius
+    real duration
+    real timeElapsed = 0.0
+    int abilityLevel   // Store level for slow scaling
+    CallbackPeriodic updateLoop
+    CallbackPeriodic slowLoop
+
+    construct(vec2 castPoint, player owner, int level)
+        let idx = (level - 1).clamp(0, MAX_LEVELS - 1)
+        this.center       = castPoint
+        this.radius       = ZONE_RADIUS[idx]
+        this.duration     = ZONE_DURATION[idx]
+        this.abilityLevel = level
+
+        this.servant = createUnit(owner, GRASP_SERVANT, castPoint, angle(0.0))
+        this.servant.setMaxHP(SERVANT_HP[idx])
+        this.servant.setHP(SERVANT_HP[idx].toReal())
+        this.servant.setBaseDamage(SERVANT_DAMAGE[idx], 0)
+
+        this.centerFloorAura = addEffect(FX_CENTER_AURA, castPoint)
+        this.tetherLine      = addLightning(LIGHTNING_TYPE, true, castPoint.toVec3(), this.servant.getPos().toVec3())
+
+        let _this = this
+        this.updateLoop = doPeriodically(0.05) (CallbackPeriodic cb) ->
+            _this.tick()
+
+        // Slow loop runs independently at a lower rate
+        this.slowLoop = doPeriodically(SLOW_CHECK_INTERVAL) (CallbackPeriodic cb) ->
+            _this.applyAreaSlow()
+
+    function applyAreaSlow()
+        let owner = this.servant.getOwner()
+        let idx   = (this.abilityLevel - 1).clamp(0, MAX_LEVELS - 1)
+        let slowFactor = 1.0 - SLOW_AMOUNT[idx]
+        let g = CreateGroup()
+        GroupEnumUnitsInRange(g, this.center.x, this.center.y, this.radius, null)
+        for u from g
+            if u.isAlive()
+                and u.getOwner().isEnemyOf(owner)
+                and not u.isType(UNIT_TYPE_STRUCTURE)
+                let slowedSpeed = (u.getDefaultMovespeed() * slowFactor)
+                if u.getMoveSpeed() > slowedSpeed
+                    u.setMoveSpeed(slowedSpeed)
+        g.destr()
+
+    function tick()
+        this.timeElapsed += 0.05
+
+        if this.timeElapsed >= this.duration or not this.servant.isAlive()
+            destroy this
+            return
+
+        let currentPos  = this.servant.getPos()
+        let distSq      = this.center.distanceToSq(currentPos)
+        let maxRadiusSq = this.radius * this.radius
+
+        if distSq > maxRadiusSq
+            let dir         = this.center.angleTo(currentPos)
+            let boundaryPos = this.center.polarOffset(dir, this.radius)
+            this.servant.setPos(boundaryPos)
+            flashEffect(FX_SNAP_BACK, boundaryPos)
+
+        this.tetherLine.move(true, this.center.toVec3(), this.servant.getPos().toVec3())
+
+    ondestroy
+        if this.servant != null and this.servant.isAlive()
+            this.servant.kill()
+        if this.centerFloorAura != null
+            this.centerFloorAura.destr()
+        if this.tetherLine != null
+            this.tetherLine.destr()
+        if this.updateLoop != null
+            destroy this.updateLoop
+        if this.slowLoop != null
+            destroy this.slowLoop
+        let g = CreateGroup()
+        GroupEnumUnitsInRange(g, this.center.x, this.center.y, this.radius, null)
+        for u from g
+            if u.isAlive() and not u.isType(UNIT_TYPE_STRUCTURE)
+                u.setMoveSpeed(u.getDefaultMovespeed())
+        g.destr()
+
+// ============================================================================
+// SYSTEM REGISTRATION
+// ============================================================================
+
+init
+    registerPlayerUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT) ->
+        if GetSpellAbilityId() == DEATHS_GRASP
+            let caster = GetTriggerUnit()
+            let targetPoint = vec2(GetSpellTargetX(), GetSpellTargetY())
+            let level = caster.getAbilityLevel(DEATHS_GRASP)
+            
+            new TetherInstance(targetPoint, caster.getOwner(), level)

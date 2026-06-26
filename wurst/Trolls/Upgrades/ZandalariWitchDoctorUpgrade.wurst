@@ -42,3 +42,7 @@ public constant ZANDALARI_WITCHDOCTOR_UPG_ID = compiletime(UPGD_ID_GEN.next())
         ..setTooltip(2, "Witch Doctor Master Training")
         ..setTooltipExtended(2, "Increases Witch Doctors' mana capacity, mana regeneration rate, hit points, attack dice, and gives them the ability to cast Stasis Trap.")
         ..setTooltipExtended(2, "Increases Witch Doctors' mana capacity, mana regeneration rate, hit points, attack dice, and gives them the ability to cast Healing Ward.")
+
+        ..setHotkey(1, "Z")
+        ..setButtonPositionX(0)
+        ..setButtonPositionY(2)

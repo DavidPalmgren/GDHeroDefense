@@ -9,6 +9,7 @@ import Icons
 import ZandalariTier2
 import ZandalariTier3
 import ZandalariTownHallID
+import ZandalariEnsnare
 
 // https://www.hiveworkshop.com/threads/warbeast-kraal.343974/
 
@@ -22,7 +23,7 @@ public constant ZANDALARI_BESTIARY_ID = compiletime(UNIT_ID_GEN.next())
         
         // Visuals & Art
         ..setIconGameInterface(Icons.bTNBeastiary)
-        ..setScalingValue(1.10) // Slightly scaled up to fit the massive Direhorns clearing the gates
+        ..setScalingValue(1.10)
         
         // Unit Production Pipeline
         ..setUnitsTrained(commaList(
@@ -31,16 +32,16 @@ public constant ZANDALARI_BESTIARY_ID = compiletime(UNIT_ID_GEN.next())
             ZANDALARI_DINO_TANK_ID // Direhorn Ironclad (Tier 3 Super-Heavy Tank)
         ))
         
-        // Cost & Logistics (Enforcing the 0-Lumber Rule)
-        ..setGoldCost(145)
+
+        ..setGoldCost(60)
         ..setLumberCost(0)
         ..setBuildTime(55)
         
-        // Durability Stats
+
         ..setHitPointsMaximumBase(1200)
         ..setArmorType(ArmorType.Fortified)
         ..setDefenseBase(5)
 
         ..setRequirements(commaList(ZANDALARI_T2_ID))
-        ..setResearchesAvailable("")
+        ..setResearchesAvailable(commaList(ZANDALARI_ENSNARE_UPGD))
 

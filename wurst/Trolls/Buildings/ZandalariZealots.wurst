@@ -1,4 +1,40 @@
 package ZandalariZealots
 
-// https://www.hiveworkshop.com/threads/templeofsacrifice.228114/
-// Zealots and other religous trolls in this tier 3 unit training building
+import UnitObjEditing
+import ObjectIdGenerator
+import ObjectIds
+import Icons
+
+
+import ZandalariTownHallID
+import ZandalariTier3
+import ZandalariBloodMage2
+
+public constant ZANDALARI_TEMPLE_SACRIFICE_ID = compiletime(UNIT_ID_GEN.next())
+
+@compiletime function genZandalariZealotStructures()
+    new BuildingDefinition(ZANDALARI_TEMPLE_SACRIFICE_ID, 'obar') 
+        ..setName("Temple of Sacrifice")
+        ..setTooltipBasic("Build [|cffffcc00Temple of Sacrifice|r]")
+        ..setTooltipExtended("The apex of Zandalari religious devotion. Trains elite Zealots, fanatical Shadow Preachers, and blood-binding ritualists to channel the devastating wrath of the Loa.")
+        
+        ..setIconGameInterface(Icons.bTNSacrifice)
+        //..setModelFile("buildings\\other\\TempleOfSacrifice\\TempleOfSacrifice.mdl") 
+        
+        ..setRequirements(commaList(ZANDALARI_T3_ID))
+        ..setUnitsTrained(commaList(
+          ZANDALARI_BLOOD_MAGE_ID,
+          ZANDALARI_EXECUTIONER_ID
+        ))
+        ..setResearchesAvailable(commaList(UPGD_BLOOD_LINK_ID))
+        
+
+        ..setGoldCost(80)
+        ..setLumberCost(0)
+        ..setBuildTime(60)
+        ..setHitPointsMaximumBase(1600)
+        ..setArmorType(ArmorType.Fortified)
+        ..setDefenseBase(8)
+
+        ..setPathingMap("PathTextures\\4x4SimpleSolid.tga")
+        ..setPlacementRequires("scalable")

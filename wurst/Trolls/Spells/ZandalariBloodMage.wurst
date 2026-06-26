@@ -1,0 +1,51 @@
+package ZandalariBloodMage
+
+import RegisterEvents
+import ChannelAbilityPreset
+
+public constant SPELL_SUMMON_BLOOD_ELEM_ID = compiletime(ABIL_ID_GEN.next())
+public constant UNIT_BLOOD_ELEMENTAL_ID    = compiletime(UNIT_ID_GEN.next())
+
+@compiletime function genBloodMageAssets()
+    new ChannelAbilityPreset(SPELL_SUMMON_BLOOD_ELEM_ID,1, false)
+        ..setName("Ritual of Blood")
+        ..setTooltipNormal(1, "Cast [|cffcc0000Ritual of Blood|r]")
+        ..setTooltipNormalExtended(1, "Channels a high-intensity blood ritual for 6 seconds. If completed without interruption, manifests a violent Blood Elemental to assault enemies.")
+        
+        ..setFollowThroughTime(1, 6.0)
+        ..setTargetType(1, 0)
+        ..setOptions(1, 1)
+        
+        ..setManaCost(1, 125)
+        ..setCooldown(1, 45.0)
+        ..setHeroAbility(true)
+        ..setArtCaster("Abilities\\Spells\\Undead\\AnimateDead\\AnimateDeadTarget.mdl")
+
+    new UnitDefinition(UNIT_BLOOD_ELEMENTAL_ID, 'hwt3')
+        ..setName("Blood Elemental")
+        ..setScalingValue(1.25)
+        
+        ..setTintingColorRed(255)
+        ..setTintingColorGreen(20)
+        ..setTintingColorBlue(20)
+        ..setCollisionSize(16)
+        
+        ..setHitPointsMaximumBase(550)
+        ..setHitPointsRegenerationRate(3.0)
+        ..setAttack1DamageBase(31)
+        ..setAttack1CooldownTime(1.35)
+
+init
+    registerPlayerUnitEvent(EVENT_PLAYER_UNIT_SPELL_FINISH) ->
+        if GetSpellAbilityId() == SPELL_SUMMON_BLOOD_ELEM_ID
+            let caster = GetTriggerUnit()
+            let p = caster.getOwner()
+            let spawnPos = caster.getPos().polarOffset(caster.getFacingAngle(), 150.0)
+            let facingDegrees = 0.0
+            let u = CreateUnit(p, UNIT_BLOOD_ELEMENTAL_ID, spawnPos.x, spawnPos.y, facingDegrees)
+            
+            u.setVertexColor(255,0,0,255)
+            u.setTimedLife(30.0)
+            
+            AddSpecialEffect("Objects\\Spawnmodels\\Other\\HumanBloodFootstep\\HumanBloodFootstep.mdl", spawnPos.x, spawnPos.y)..destr()
+            AddSpecialEffect("Abilities\\Spells\\Undead\\AnimateDead\\AnimateDeadTarget.mdl", spawnPos.x, spawnPos.y)..destr()

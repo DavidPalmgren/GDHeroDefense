@@ -1,0 +1,95 @@
+package ZandalariExecutioner
+
+import ObjectIdGenerator
+import ObjectIds
+import AbilityObjEditing
+import BuffObjEditing
+import RegisterEvents
+
+// --- ENGINE GENERATED OBJECT KEYS ---
+public constant SPELL_EXECUTIONER_ID  = compiletime(ABIL_ID_GEN.next())
+public constant SPELL_TENDON_CLEAVE_ID = compiletime(ABIL_ID_GEN.next())
+public constant BUFF_TENDON_CLEAVE_ID  = compiletime(BUFF_ID_GEN.next())
+
+// ============================================================================
+// OBJECT GENERATION (Compile-time)
+// ============================================================================
+@compiletime function genExecutionerAssets()
+    // 1. PASSIVE: Executioner
+    new AbilityDefinitionEvasion(SPELL_EXECUTIONER_ID)
+        ..setName("Executioner")
+        ..setTooltipNormal(1, "Executioner [|cffcc0000Passive|r]")
+        ..setTooltipNormalExtended(1, "The executioner's basic attacks deal more damage the lower health an opponent has. Scales linearly from 0 to 30 bonus physical damage based on missing health.")
+        ..setChancetoEvade(1, 0.0)
+        ..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNCleave.blp")
+
+    // 2. DEBUFF: Tendon Cleave Slow Buff Indicator
+    new BuffDefinition(BUFF_TENDON_CLEAVE_ID, 'Btcg')
+        ..setIcon("ReplaceableTextures\\CommandButtons\\BTNAttack.blp")
+        ..setTooltipNormal(1, "Maimed (Tendon Cleave)")
+        ..setTooltipNormalExtended(1, "This unit's tendons have been severed. Movement speed and attack speed reduced by 20%.")
+
+    // 3. ACTIVE: Tendon Cleave (Based on Thunder Clap)
+    new AbilityDefinitionMountainKingThunderClap(SPELL_TENDON_CLEAVE_ID)
+        ..setName("Tendon Cleave")
+        ..setTooltipNormal(1, "Cast [|cffcc0000Tendon Cleave|r]")
+        ..setTooltipNormalExtended(1, "The Executioner performs a brutal spinning sweep, severing the tendons of all nearby enemies. Deals 40 physical damage and reduces their movement and attack speed by 20% for 3 seconds.")
+        ..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNAttack.blp")
+        
+        // Match mechanical requirements
+        ..setAOEDamage(1, 40.0)
+        ..setMovementSpeedReduction(1, 0.20) // 20% Slow
+        ..setAttackSpeedReduction(1, 0.20)   // 20% Slow
+        ..setDurationHero(1, 3.0)
+        ..setDurationNormal(1, 3.0)
+        ..setAreaofEffect(1, 225.0)
+        
+        // Configuration & Balancing
+        ..setCooldown(1, 11.0)
+        ..setManaCost(1, 65)
+        ..setTargetsAllowed(1, "enemies,ground,organic")
+        ..setBuffs(1, BUFF_TENDON_CLEAVE_ID.toRawCode())
+        
+        // Strip default visual data so we can override it via code
+        ..setArtCaster("")
+        ..setArtEffect("")
+        ..setArtSpecial("")
+        ..setAnimationNames("abort") // Prevents standard spellcast channel overrides
+
+// ============================================================================
+// GAMEPLAY LOGIC (Runtime)
+// ============================================================================
+init
+    // PASSIVE EFFECT: Missing Health Execute Damage Matrix
+    registerPlayerUnitEvent(EVENT_PLAYER_UNIT_DAMAGING) ->
+        let victim = GetTriggerUnit()
+        let attacker = GetEventDamageSource()
+        
+        if attacker.hasAbility(SPELL_EXECUTIONER_ID) and BlzGetEventDamageType() == DAMAGE_TYPE_NORMAL
+            let currentHp = victim.getHP()
+            let maxHp = victim.getMaxHP()
+            
+            if maxHp > 0.0
+                let missingHealthRatio = 1.0 - (currentHp / maxHp)
+                let bonusDamage = 30.0 * missingHealthRatio
+                
+                BlzSetEventDamage(GetEventDamage() + bonusDamage)
+                
+                if missingHealthRatio > 0.5
+                    AddSpecialEffectTarget("Objects\\Spawnmodels\\Other\\HumanBloodSplat\\HumanBloodSplat.mdl", victim, "chest").destr()
+
+    // ACTIVE EFFECT: Force Animation & Cast Flourish Visuals
+    registerPlayerUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT) ->
+        if GetSpellAbilityId() == SPELL_TENDON_CLEAVE_ID
+            let caster = GetTriggerUnit()
+            
+            // Force the engine to execute the model's spinning animation sequence instantly
+            caster.setAnimation("spin")
+            
+            // Spawn a sharp physical horizontal blade slash around the caster's chest origin
+            AddSpecialEffectTarget("Abilities\\Spells\\Other\\Cleave\\CleaveAttackTarget.mdl", caster, "chest").destr()
+            
+            // Spawn an optional violent burst on the floor to frame the 325 AoE perimeter
+            let groundFX = AddSpecialEffect("Abilities\\Spells\\Orc\\WarStomp\\WarStompCaster.mdl", caster.getX(), caster.getY())
+            groundFX.setScale(0.75) // Shrink it down slightly to match our tight cleave radius
+            groundFX.destr()

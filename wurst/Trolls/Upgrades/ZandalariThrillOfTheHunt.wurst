@@ -3,21 +3,13 @@ package ZandalariThrillOfTheHunt
 
 import UpgradeObjEditing
 import ObjectIdGenerator
-import Icons
 import ObjectIds
 import ClosureEvents
-import EventHelper
 import AbilityObjEditing
-import Effect
-import EffectUtils
-
 import ClosureTimers
-import Unit
-import ZandalariTownHallID
 import ZandalariUnitIds
 
 
-// Generate Unique IDs for the global upgrade keys
 public constant ZANDALARI_TOTH_UPGD = compiletime(UPGD_ID_GEN.next())
 public constant ZANDALARI_TOTH_ABILITY = compiletime(ABIL_ID_GEN.next())
 
@@ -60,8 +52,6 @@ init
                 sfx.destr()
                 print("The burning debuff has faded.")
 
-    
-    // 2. Wait 5 seconds, then safely remove the visual asset from the unit
 
           
       

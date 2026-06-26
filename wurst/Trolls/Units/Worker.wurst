@@ -19,9 +19,10 @@ import ZandalariVoodooHut
 import ZandalariLoaShrines
 import ZandalariTownHallID
 import ZandalariAltar
+import ZandalariZealots
 
 
-
+import ZandalariTier3
 
 public constant ZANDALARI_WORKER_ID = compiletime(UNIT_ID_GEN.next())
 
@@ -41,7 +42,8 @@ public constant ZANDALARI_WORKER_ID = compiletime(UNIT_ID_GEN.next())
             ZANDALARI_VOODOO_HUT_ID,      // Zanchul Voodoo Hut
             ZANDALARI_MONUMENT_ID,        // Zandalari Monument (Foundation Shrines)
             ZANDALARI_T1_ID,               // TOWN HALL
-            ZANDALARI_ALTAR_ID
+            ZANDALARI_ALTAR_ID,
+            ZANDALARI_TEMPLE_SACRIFICE_ID
         ))
         
         // Economy Configuration (0-Lumber Rule Applied)
@@ -67,3 +69,4 @@ init
         
         // 3. Spawn the custom Zandalari Freeman at the location facing south (270 degrees)
         CreateUnit(playerRed, ZANDALARI_WORKER_ID, x, y, 270.0)
+        CreateUnit(playerRed, ZANDALARI_BLOOD_MAGE_ID, x, y, 270.0)

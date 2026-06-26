@@ -1,0 +1,50 @@
+package HexingStrike
+
+import AbilityObjEditing
+import ObjectIdGenerator
+import RegisterEvents
+import InstantDummyCaster
+import OrderIds
+
+public constant HEXING_STRIKE_ABIL = compiletime(ABIL_ID_GEN.next())
+public constant DUMMY_HEX_ABIL     = compiletime(ABIL_ID_GEN.next())
+
+@compiletime function gen()
+    // 1. THE PASSIVE ICON CONTAINER
+    new AbilityDefinitionPassiveSimple(HEXING_STRIKE_ABIL)
+        ..setName("Hexing Strike")
+        ..setTooltipLearn("Hexing Strike")
+        ..setTooltipLearnExtended("The strikes of Vol'jin channel voodoo, giving him a 27% chance to turn an enemy into a critter.")
+        ..setHeroAbility(false)
+        ..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNHex.blp")
+        ..setTooltipNormal(1, "Hexing Strike")
+        ..setTooltipNormalExtended(1, "The strikes of Vol'jin channel voodoo giving him a 27% chance to turn an enemy into a critter for a short duration.")
+
+    // 2. THE ACTUATOR SPELL (Hidden Shadow Hunter Hex clone)
+    new AbilityDefinitionShadowHunterHex(DUMMY_HEX_ABIL)
+        ..setName("Hexing Strike (Actuator)")
+        ..setDurationHero(1, 1.5)
+        ..setDurationNormal(1, 3.5)
+        ..setManaCost(1, 0)
+        ..setCooldown(1, 0.0)
+        ..setCastRange(1, 99999.0)
+        ..setTargetsAllowed(1, "enemies,organic,ground,air")
+ 
+init
+    registerPlayerUnitEvent(EVENT_PLAYER_UNIT_DAMAGING) ->
+        let attacker = GetEventDamageSource()
+        let victim = GetTriggerUnit()
+        
+        if attacker.hasAbility(HEXING_STRIKE_ABIL) and BlzGetEventDamageType() == DAMAGE_TYPE_NORMAL
+            if victim.isAlive() and not victim.isType(UNIT_TYPE_STRUCTURE) and not victim.isAllyOf(attacker.getOwner())
+                
+                if GetRandomReal(0.0, 100.0) <= 27.0
+                    InstantDummyCaster.castTarget(
+                        attacker.getOwner(), 
+                        DUMMY_HEX_ABIL, 
+                        1, 
+                        OrderIds.hex, 
+                        victim, 
+                        attacker.getPos()
+                    )
+                    attacker.damageTarget(victim, 25.0, false, false, ATTACK_TYPE_MAGIC, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)

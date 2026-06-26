@@ -36,7 +36,6 @@ class ProbeTracker
         targetPos = target
         timeElapsed = 0.0
         
-        // Player(15) is Neutral Passive
         probeUnit = CreateUnit(Player(15), WISP_UNIT_ID, start.x, start.y, 0.0)
         if probeUnit != null
             probeUnit..setInvulnerable(true)

@@ -1,0 +1,268 @@
+package HealingWave
+
+import ObjectIdGenerator
+import AbilityObjEditing
+import RegisterEvents
+import ClosureTimers
+import ClosureForGroups
+import Reference
+import LinkedList
+import Lightning
+import HashMap
+
+public constant HEALING_WAVE = compiletime(ABIL_ID_GEN.next())
+public constant HARMING_WAVE = compiletime(ABIL_ID_GEN.next())
+
+// ============================================================================
+// TUNABLE BASE VALUES & SCALING CONFIGURATION
+// ============================================================================
+constant int MAX_LEVELS = 4
+
+// Healing Wave Properties [Level 1, Level 2, Level 3, Level 4]
+constant real array HEAL_AMOUNT   = [120.0, 150.0, 180.0, 220.0]
+constant int array  HEAL_BOUNCES  = [4, 4, 5, 5]
+constant int array  HEAL_MANA     = [90, 100, 110, 120]
+constant real array HEAL_COOLDOWN = [12.0, 11.0, 10.0, 9.0]
+
+// Harming Wave Properties [Level 1, Level 2, Level 3, Level 4]
+constant real array HARM_AMOUNT   = [120.0, 150.0, 180.0, 220.0]
+constant int array  HARM_BOUNCES  = [4, 4, 5, 5]
+constant int array  HARM_MANA     = [45, 50, 55, 60]
+
+// ============================================================================
+// SYSTEM RUNTIME STORAGE
+// ============================================================================
+let casterHealPool = new HashMap<unit, real>()
+let casterCastTime = new HashMap<unit, real>() 
+
+@compiletime function gen()
+    let healDef = new AbilityDefinitionPaladinHolyLight(HEALING_WAVE)
+        ..setHeroAbility(true)
+        ..setLevels(MAX_LEVELS)
+        ..setName("Voodoo Restoration Wave")
+        ..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNHealingWave.blp")
+        ..setCastRange(1, 700.0)
+        ..setTargetsAllowed(1, "friend,ground,air,organic")
+        ..setEffects(1, "")
+        ..setArtTarget("")
+
+    let harmDef = new AbilityDefinitionDeathKnightDeathCoil(HARMING_WAVE)
+        ..setHeroAbility(true)
+        ..setLevels(MAX_LEVELS)
+        ..setName("Voodoo Corruption Wave")
+        ..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNDarkSummoning.blp")
+        ..setCooldown(1, 1.0) 
+        ..setCastRange(1, 700.0)
+        ..setTargetsAllowed(1, "enemies,ground,air,organic")
+        ..setEffects(1, "")
+        ..setArtTarget("")
+
+    for int i = 1 to MAX_LEVELS
+        let idx = i - 1
+        
+        healDef..setTooltipNormal(i, "Cast [|cff00ff00Voodoo Restoration Wave|r] - Level " + i.toString())
+               ..setTooltipNormalExtended(i, "Launches a surging wave of spiritual energy that bounces across up to " + HEAL_BOUNCES[idx].toString() + " injured allies, healing each for " + HEAL_AMOUNT[idx].toString(0) + " health. Unlocks Voodoo Corruption Wave on completion.")
+               ..setAmountHealedDamaged(i, 0.0)
+               ..setManaCost(i, HEAL_MANA[idx])
+               ..setCooldown(i, HEAL_COOLDOWN[idx])
+
+        harmDef..setTooltipNormal(i, "Cast [|cffff0000Voodoo Corruption Wave|r] - Level " + i.toString())
+               ..setTooltipNormalExtended(i, "Unleashes a dark cascading wave that bounces across up to " + HARM_BOUNCES[idx].toString() + " enemy targets. Max damage capped strictly by total effective healing from your last Restoration Wave.")
+               ..setAmountHealedDamaged(i, 0.0)
+               ..setManaCost(i, HARM_MANA[idx])
+
+// ============================================================================
+// GAMEPLAY & CALCULATION LOGIC
+// ============================================================================
+
+function completeHealWave(unit caster, real finalHealingCollected)
+    caster.getOwner().print("Spell Cast Complete! Stored Damage Energy: |cff00ff00" + finalHealingCollected.toString(0), 5.0)
+    casterHealPool.put(caster, finalHealingCollected)
+    
+    let currentLvl = caster.getAbilityLevel(HEALING_WAVE)
+    caster.removeAbility(HEALING_WAVE)
+    caster.addAbility(HARMING_WAVE)
+    caster.setAbilityLevel(HARMING_WAVE, currentLvl) 
+
+function bounceHeal(unit caster, unit currentTarget, real currentHeal, int bouncesLeft, Reference<real> totalHealing, LinkedList<unit> hitTargets)
+    if currentTarget == null or bouncesLeft <= 0
+        completeHealWave(caster, totalHealing.val)
+        destroy totalHealing
+        destroy hitTargets
+        return
+
+    let maxHp = currentTarget.getMaxHP()
+    let currentHp = currentTarget.getHP()
+    let missingHp = maxHp - currentHp
+    let effectiveHeal = currentHeal < missingHp ? currentHeal : missingHp
+    
+    if effectiveHeal > 0
+        currentTarget.setHP(currentHp + effectiveHeal)
+        totalHealing.val += effectiveHeal 
+
+    let healFx = currentTarget.addEffect("Abilities\\Spells\\Orc\\HealingWave\\HealingWaveTarget.mdl", "origin")
+    doAfter(1.5) ->
+        healFx.setScale(0.0)
+        healFx.destr() 
+
+    if bouncesLeft > 1
+        let nextTarget = new Reference<unit>(null)
+        let minDistance = new Reference<real>(999999.0)
+        
+        forUnitsInRange(currentTarget.getPos(), 600.0) u ->
+            if u.isAlive() and u.isAllyOf(caster.getOwner()) and not hitTargets.has(u) and u.getHP() < u.getMaxHP() and not u.isType(UNIT_TYPE_STRUCTURE)
+                let dist = currentTarget.getPos().distanceToSq(u.getPos())
+                if dist < minDistance.val
+                    minDistance.val = dist
+                    nextTarget.val = u
+        
+        if nextTarget.val != null
+            hitTargets.add(nextTarget.val)
+            
+            let beam = addLightning("HWPB", true, currentTarget.getPos().withZ(60), nextTarget.val.getPos().withZ(60))
+            doAfter(0.4) ->
+                beam.destr()
+            
+            let nextHealPower = currentHeal * 0.85 
+            doAfter(0.5) ->
+                bounceHeal(caster, nextTarget.val, nextHealPower, bouncesLeft - 1, totalHealing, hitTargets)
+                
+            destroy nextTarget
+            destroy minDistance
+        else
+            completeHealWave(caster, totalHealing.val)
+            destroy nextTarget
+            destroy minDistance
+            destroy totalHealing
+            destroy hitTargets
+    else
+        completeHealWave(caster, totalHealing.val)
+        destroy totalHealing
+        destroy hitTargets
+
+// ============================================================================
+// SISTER SPELL LOGIC
+// ============================================================================
+
+function completeHarmWave(unit caster)
+    casterHealPool.put(caster, 0.0)
+    
+    let currentLvl = caster.getAbilityLevel(HARMING_WAVE)
+    caster.removeAbility(HARMING_WAVE)
+    caster.addAbility(HEALING_WAVE)
+    caster.setAbilityLevel(HEALING_WAVE, currentLvl) 
+
+    let idx = (currentLvl - 1).clamp(0, MAX_LEVELS - 1)
+    let baseCooldownMax = HEAL_COOLDOWN[idx]
+
+    let originalCastTime = casterCastTime.has(caster) ? casterCastTime.get(caster) : 0.0
+    let timeElapsed = TimerGetElapsed(bj_gameStartedTimer) - originalCastTime 
+    let remainingCooldown = baseCooldownMax - timeElapsed
+
+    if remainingCooldown > 0
+        caster.startAbilityCooldown(HEALING_WAVE, remainingCooldown)
+        caster.getOwner().print("Dark Energy Depleted! Reverting to Restoration Wave. CD: |cffff0000" + remainingCooldown.toString(1) + "s", 5.0)
+    else
+        caster.getOwner().print("Dark Energy Depleted! Reverting to Restoration Wave. Ready to Cast!", 5.0)
+
+function bounceHarm(unit caster, unit currentTarget, real currentDamagePower, real remainingPool, int bouncesLeft, LinkedList<unit> hitTargets)
+    if currentTarget == null or bouncesLeft <= 0 or remainingPool <= 0
+        completeHarmWave(caster)
+        destroy hitTargets
+        return
+
+    let theoreticalDamage = currentDamagePower < remainingPool ? currentDamagePower : remainingPool
+    let targetHp = currentTarget.getHP()
+    
+    let actualDamageDealt = theoreticalDamage < targetHp ? theoreticalDamage : targetHp
+    let updatedPool = remainingPool - actualDamageDealt
+
+    if actualDamageDealt > 0
+        caster.damageTarget(currentTarget, actualDamageDealt)
+
+    let harmFx = currentTarget.addEffect("Abilities\\Spells\\Undead\\DeathCoil\\DeathCoilSpecialArt.mdl", "origin")
+    doAfter(1.5) ->
+        harmFx.setScale(0.0)
+        harmFx.destr()
+
+    if bouncesLeft > 1 and updatedPool > 0
+        let nextTarget = new Reference<unit>(null)
+        let minDistance = new Reference<real>(999999.0)
+        
+        forUnitsInRange(currentTarget.getPos(), 600.0) u ->
+            if u.isAlive() and u.isEnemyOf(caster.getOwner()) and not hitTargets.has(u) and not u.isType(UNIT_TYPE_STRUCTURE)
+                let dist = currentTarget.getPos().distanceToSq(u.getPos())
+                if dist < minDistance.val
+                    minDistance.val = dist
+                    nextTarget.val = u
+        
+        if nextTarget.val != null
+            hitTargets.add(nextTarget.val)
+            
+            let beam = addLightning("CLPB", true, currentTarget.getPos().withZ(60), nextTarget.val.getPos().withZ(60))
+            doAfter(0.4) ->
+                beam.destr()
+            
+            let nextDamagePower = currentDamagePower * 0.85 
+            doAfter(0.5) ->
+                bounceHarm(caster, nextTarget.val, nextDamagePower, updatedPool, bouncesLeft - 1, hitTargets)
+                
+            destroy nextTarget
+            destroy minDistance
+        else
+            completeHarmWave(caster)
+            destroy nextTarget
+            destroy minDistance
+            destroy hitTargets
+    else
+        completeHarmWave(caster)
+        destroy hitTargets
+
+// ============================================================================
+// SYSTEM REGISTRATION INITIALIZER
+// ============================================================================
+
+init
+    // FIX: Intercept Hero Skill levels while the skill is morphed out
+    registerPlayerUnitEvent(EVENT_PLAYER_HERO_SKILL) ->
+        if GetLearnedSkill() == HEALING_WAVE
+            let u = GetLearningUnit()
+            let harmLvl = u.getAbilityLevel(HARMING_WAVE)
+            
+            // If they leveled up HEALING_WAVE while HARMING_WAVE was active
+            if harmLvl > 0
+                if harmLvl < MAX_LEVELS
+                    let newLvl = harmLvl + 1
+                    u.setAbilityLevel(HARMING_WAVE, newLvl)
+                    u.removeAbility(HEALING_WAVE) // Instantly clear out the native duplicate level 1
+                    u.getOwner().print("|cff00ff00Voodoo Wave upgraded to Level " + newLvl.toString() + "!|r")
+                else
+                    // Safety check if they try to level it up past the absolute configuration cap
+                    u.setSkillPoints(u.getSkillPoints() + 1) // Refund the skill point
+                    u.removeAbility(HEALING_WAVE)
+                    u.getOwner().print("|cffff0000Voodoo Wave is already at maximum level!|r")
+
+    registerPlayerUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT) ->
+        let spellId = GetSpellAbilityId()
+        let caster = GetTriggerUnit()
+        let firstTarget = GetSpellTargetUnit()
+        
+        if spellId == HEALING_WAVE
+            let currentLvl = caster.getAbilityLevel(HEALING_WAVE)
+            let idx = (currentLvl - 1).clamp(0, MAX_LEVELS - 1)
+            
+            casterCastTime.put(caster, TimerGetElapsed(bj_gameStartedTimer)) 
+            
+            let totalHealing = new Reference<real>(0.0)
+            let hitTargets = new LinkedList<unit>()..add(firstTarget)
+            
+            bounceHeal(caster, firstTarget, HEAL_AMOUNT[idx], HEAL_BOUNCES[idx], totalHealing, hitTargets)
+            
+        else if spellId == HARMING_WAVE
+            let currentLvl = caster.getAbilityLevel(HARMING_WAVE)
+            let idx = (currentLvl - 1).clamp(0, MAX_LEVELS - 1)
+            
+            let storedBudget = casterHealPool.has(caster) ? casterHealPool.get(caster) : 0.0
+            let hitTargets = new LinkedList<unit>()..add(firstTarget)
+            
+            bounceHarm(caster, firstTarget, HARM_AMOUNT[idx], storedBudget, HARM_BOUNCES[idx], hitTargets)
