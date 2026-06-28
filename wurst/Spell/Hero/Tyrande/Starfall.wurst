@@ -1,95 +1,108 @@
 package Starfall
 
-
 import ClosureEvents
 import ClosureTimers
 import AbilityTooltipGenerator
-
+import Icons
 
 public constant STARFALL_ID = compiletime(ABIL_ID_GEN.next())
 
-constant real STARFALL_RADIUS = 500.
-constant real STAR_DAMAGE = 50.
-constant real STAR_AOE = 250.
+constant real STARFALL_RADIUS  = 500.
+constant real STAR_AOE         = 250.
 constant real CHANNEL_DURATION = 6.
-constant real BASE_INTERVAL = 1.0    // starts at 1 star per second
-constant real MIN_INTERVAL = 0.15   // ramps up to ~6 stars per second
-constant string STAR_SFX = "Abilities\\Spells\\NightElf\\Starfall\\StarfallTarget.mdl"
-constant string IMPACT_SFX = "Abilities\\Spells\\NightElf\\Starfall\\StarfallCaster.mdl"
+constant real BASE_INTERVAL    = 1.0
+constant real MIN_INTERVAL     = 0.15
+constant string STAR_SFX    = "Abilities\\Spells\\NightElf\\Starfall\\StarfallTarget.mdl"
+constant string IMPACT_SFX  = "Abilities\\Spells\\NightElf\\Starfall\\StarfallCaster.mdl"
 constant string CHANNEL_SFX = "Abilities\\Spells\\NightElf\\Starfall\\StarfallCaster.mdl"
 
-
 let tgen = new AbilityTooltipGenerator(
-    "Calls down stars in the target area dealing [50 / 75 / 100] damage in a " + 
-    STAR_AOE.toInt().toString() + " radius each. Stars fall faster the longer the spell channels."
-)
+    Targettype.POINT,
+    "Calls down stars in the target area. Stars fall faster the longer the spell channels.")
 
 @compiletime function genAbility()
-    new ChannelAbilityPreset(STARFALL_ID, 3, true, tgen)
+    let def = new ChannelAbilityPreset(STARFALL_ID, 4, true, tgen)
         ..setHeroAbility(true)
         ..presetButtonPosNormal(0, 2)
         ..presetButtonPosResearch(0, 0)
         ..presetTargetTypes(Targettype.POINT)
-        ..presetOption(Option.TARGETIMAGE, true) // Enables circle indicator
-
+        ..presetOption(Option.TARGETIMAGE, true)
         ..tooltipStartListen()
         ..presetHotkey("Q")
         ..setName("Starfall")
-        ..setTooltipLearn("Learn Starfall")
-        ..setTooltipLearnExtended("Channel a starfall that ramps up in intensity over time.")
-        
         ..presetAreaofEffect(lvl -> STARFALL_RADIUS)
-        ..presetCastRange(lvl -> 900. + (lvl * 100.))   // Ranks up: 1000, 1100, 1200 range
-        ..presetCooldown(lvl -> 45. - (lvl * 5.))       // Ranks up: 40s, 35s, 30s cooldown
-        ..presetManaCost(lvl -> 100 + (lvl * 25))       // Ranks up: 125, 150, 175 mana
+        ..presetCastRange(lvl -> 900. + (lvl * 100.))
+        ..presetCooldown(lvl -> 45. - (lvl * 5.))
+        ..presetManaCost(lvl -> 100 + (lvl * 25))
         ..presetDurationNormal(lvl -> CHANNEL_DURATION)
         ..presetDurationHero(lvl -> CHANNEL_DURATION)
-        ..tooltipStopListen()
-
         ..setIconNormal(Icons.bTNStarFall)
         ..setIconResearch(Icons.bTNStarFall)
         ..setLevelSkipRequirement(2)
+        ..setLevels(4)
 
+    tgen
+        ..addProperty("Name",        lvl -> "Starfall")
+        ..addProperty("Levels",      lvl -> "4")
+        ..addProperty("Hotkey",      lvl -> "Q")
+        ..addProperty("Damage",      lvl -> (50 + ((lvl - 1) * 25)).toString() + " per star")
+        ..addProperty("Impact AOE",  lvl -> STAR_AOE.toString(0))
+        ..addProperty("Cast Range",  lvl -> (900 + (lvl * 100)).toString())
+        ..addProperty("Cooldown",    lvl -> (45 - (lvl * 5)).toString() + "s")
+    tgen.applyToDef(def)
+
+
+// State class to hold mutable values across closure ticks
+class StarfallState
+    real elapsed          = 0.
+    real currentInterval  = BASE_INTERVAL
+    real timeSinceLastStar = 0.
+    real damage
+    vec2 targetPos
+    unit caster
+    effect channelSfx
+
+    construct(unit caster, vec2 targetPos, int lvl)
+        this.caster     = caster
+        this.targetPos  = targetPos
+        this.damage     = 50. + ((lvl - 1) * 25.)
+        this.channelSfx = caster.addEffect(CHANNEL_SFX, "overhead")
+
+    function tick() returns bool
+        elapsed           += 0.05
+        timeSinceLastStar += 0.05
+        currentInterval    = BASE_INTERVAL - ((BASE_INTERVAL - MIN_INTERVAL) * (elapsed / CHANNEL_DURATION))
+
+        if timeSinceLastStar >= currentInterval
+            timeSinceLastStar = 0.
+            let randomAngle = angle(GetRandomReal(0., 2. * bj_PI))
+            let randomDist  = GetRandomReal(0., STARFALL_RADIUS)
+            let starPos     = targetPos.polarOffset(randomAngle, randomDist)
+            let dmg         = damage
+            let c           = caster
+
+            flashEffect(STAR_SFX, starPos)
+
+            doAfter(0.5) ->
+                flashEffect(IMPACT_SFX, starPos)
+                ENUM_GROUP.enumUnitsInRange(starPos, STAR_AOE, null)
+                for u in ENUM_GROUP
+                    if u.isAlive() and u.getOwner().isEnemyOf(c.getOwner())
+                        c.damageTarget(u, dmg, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+
+        return elapsed >= CHANNEL_DURATION
+
+    function cleanup()
+        channelSfx.destr()
+        destroy this
 
 init
     EventListener.onCast(STARFALL_ID) (caster) ->
         let targetPos = EventData.getSpellTargetPos()
-        let lvl = caster.getAbilityLevel(STARFALL_ID)
-        
+        let lvl       = caster.getAbilityLevel(STARFALL_ID)
+        let state     = new StarfallState(caster, targetPos, lvl)
 
-        let currentDamage = STAR_DAMAGE + ((lvl - 1) * 25.0)
-
-        let channelSfx = caster.addEffect(CHANNEL_SFX, "overhead")
-
-        var elapsed = 0.
-        var currentInterval = BASE_INTERVAL
-        var timeSinceLastStar = 0.
-
-        let _channelTimer = doPeriodically(0.05) cb ->
-            elapsed += 0.05
-            timeSinceLastStar += 0.05
-
-            currentInterval = BASE_INTERVAL - ((BASE_INTERVAL - MIN_INTERVAL) * (elapsed / CHANNEL_DURATION))
-
-            if timeSinceLastStar >= currentInterval
-                timeSinceLastStar = 0.
-
-                let randomAngle = angle(GetRandomReal(0., 2. * bj_PI))
-                let randomDist = GetRandomReal(0., STARFALL_RADIUS)
-                let starPos = targetPos.polarOffset(randomAngle, randomDist)
-
-                flashEffect(STAR_SFX, starPos)
-
-                doAfter(0.5) ->
-                    flashEffect(IMPACT_SFX, starPos)
-                    ENUM_GROUP.enumUnitsInRange(starPos, STAR_AOE, null)
-                    for u in ENUM_GROUP
-                        if u.isAlive() and u.getOwner().isEnemyOf(caster.getOwner())
-                            caster.damageTarget(u, currentDamage, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-
-            if elapsed >= CHANNEL_DURATION
+        doPeriodically(0.05) cb ->
+            if state.tick()
+                state.cleanup()
                 destroy cb
-                channelSfx.destr()
-
-        doAfter(CHANNEL_DURATION + 0.1) ->
-            channelSfx.destr()

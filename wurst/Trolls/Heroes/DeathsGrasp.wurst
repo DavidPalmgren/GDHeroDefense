@@ -1,8 +1,5 @@
 package DeathsGrasp
 
-// https://www.hiveworkshop.com/threads/withering-presence.360573/
-// https://www.hiveworkshop.com/threads/spirit-guardians.355354/
-
 import ObjectIdGenerator
 import AbilityObjEditing
 import UnitObjEditing
@@ -16,68 +13,55 @@ import BuffObjEditing
 import AbilityIds
 import Icons
 import ObjectIds
+import AbilityTooltipGenerator
+import ChannelAbilityPreset
 
-// Unique Identifiers
 public constant DEATHS_GRASP  = compiletime(ABIL_ID_GEN.next())
 public constant GRASP_SERVANT = compiletime(UNIT_ID_GEN.next())
-constant real array SLOW_AMOUNT = [0.20, 0.30, 0.40, 0.50]  // 20% to 50% slow
-constant real SLOW_CHECK_INTERVAL = 0.25  // Check for enemies every 0.25s
 
-// Add buff/ability IDs
+constant real array SLOW_AMOUNT       = [0.20, 0.30, 0.40, 0.50]
+constant real SLOW_CHECK_INTERVAL     = 0.25
+
 public constant GRASP_SLOW_BUFF = compiletime(BUFF_ID_GEN.next())
 public constant GRASP_SLOW_ABIL = compiletime(ABIL_ID_GEN.next())
-// ============================================================================
-// TUNABLE BASE VALUES & SCALING CONFIGURATION
-// ============================================================================
+
 constant int MAX_LEVELS = 4
 
-// Spell Scaling Profiles [Level 1, Level 2, Level 3, Level 4]
-constant real array ZONE_RADIUS = [300.0, 350.0, 400.0, 450.0]
+constant real array ZONE_RADIUS   = [300.0, 350.0, 400.0, 450.0]
 constant real array ZONE_DURATION = [12.0, 14.0, 16.0, 18.0]
-constant int array  MANA_COST     = [110, 125, 140, 155]
+constant int  array MANA_COST     = [110, 125, 140, 155]
 constant real array COOLDOWN      = [24.0, 21.0, 18.0, 15.0]
+constant int  array SERVANT_DAMAGE = [22, 36, 52, 70]
+constant int  array SERVANT_HP     = [600, 850, 1150, 1400]
 
-// Custom Summon Combat Profiles
-constant int array  SERVANT_DAMAGE = [22, 36, 52, 70]
-constant int array  SERVANT_HP     = [600, 850, 1150, 1400]
-
-// Visuals & Sounds
 constant string FX_CENTER_AURA = "Abilities\\Spells\\Undead\\AnimateDead\\AnimateDeadTarget.mdl"
 constant string FX_SNAP_BACK   = "Abilities\\Spells\\Undead\\DeathCoil\\DeathCoilSpecialArt.mdl"
-constant string LIGHTNING_TYPE = "SPIR" // Spirit Link appearance
+constant string LIGHTNING_TYPE = "SPIR"
 
-// ============================================================================
-// OBJECT GENERATION (Compiletime)
-// ============================================================================
+let tgen = new AbilityTooltipGenerator(
+    Targettype.POINT,
+    "Conjures a cursed zone at the target location, spawning an ethereal servant tethered to its center. "
+    + "Enemies inside are slowed and the servant cannot escape the boundary edge.")
 
 @compiletime function gen()
-    let abDef = new AbilityDefinitionSilenceCreep(DEATHS_GRASP)
+    let abDef = new ChannelAbilityPreset(DEATHS_GRASP, MAX_LEVELS, true, tgen)
         ..setHeroAbility(true)
-        ..setLevels(MAX_LEVELS)
-        ..setName("Death's Grasp")
-        ..setHotkeyLearn("W")
-        ..setHotkeyNormal("W")
-        ..setButtonPositionNormalX(1)
-        ..setButtonPositionNormalY(2)
         ..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNBlackPlague.blp")
         ..setIconResearch("ReplaceableTextures\\CommandButtons\\BTNBlackPlague.blp")
-        ..setBuffs(1, "")
-        ..setDurationHero(1, 1)
-        ..setDurationHero(2, 1)
-        ..setDurationHero(3, 1)
-        ..setDurationHero(4, 1)
-        ..setDurationNormal(1, 1)
-        ..setDurationNormal(2, 1)
-        ..setDurationNormal(3, 1)
-        ..setDurationNormal(4, 1)
-        ..setCastRange(1, 500)
-        ..setCastRange(2, 500)
-        ..setCastRange(3, 500)
-        ..setCastRange(4, 500)
-        ..setCooldown(1, 1)
-        ..setCooldown(2, 1)
-        ..setCooldown(3, 1)
-        ..setCooldown(4, 1)
+        ..setButtonPositionNormalX(1)
+        ..setButtonPositionNormalY(2)
+        ..presetButtonPosResearch(1, 0)
+        ..presetTargetTypes(Targettype.POINT)
+        ..presetOption(Option.TARGETIMAGE, true)
+        ..tooltipStartListen()
+        ..presetHotkey("W")
+        ..setName("Death's Grasp")
+        ..presetCastRange(lvl -> 500.)
+        ..presetManaCost(lvl -> MANA_COST[lvl - 1])
+        ..presetCooldown(lvl -> COOLDOWN[lvl - 1])
+        ..presetAreaofEffect(lvl -> ZONE_RADIUS[lvl - 1])
+        ..presetDurationNormal(lvl -> 1.)
+        ..presetDurationHero(lvl -> 1.)
 
     new BuffDefinition(GRASP_SLOW_BUFF, 'Bslo')
         ..setName(1, "Death's Grasp")
@@ -85,7 +69,6 @@ constant string LIGHTNING_TYPE = "SPIR" // Spirit Link appearance
         ..setTooltipNormalExtended(1, "Slowed by the cursed zone.")
         ..setIcon(Icons.bTNAuraOfDarkness)
 
-    // Create once, set all levels on the same instance
     let slowDef = new AbilityDefinitionSlowCreep(GRASP_SLOW_ABIL)
         ..setName("Death's Grasp Slow")
         ..setLevels(MAX_LEVELS)
@@ -114,24 +97,18 @@ constant string LIGHTNING_TYPE = "SPIR" // Spirit Link appearance
         ..setHitPointsMaximumBase(SERVANT_HP[0])
         ..setAttack1DamageBase(SERVANT_DAMAGE[0])
 
-    for i = 1 to MAX_LEVELS
-        let idx = i - 1
-        let extendedTooltip = "Creates a cursed region with a radius of |cff00ff00"
-            + ZONE_RADIUS[idx].toString(0)
-            + "|r for |cff00ff00" + ZONE_DURATION[idx].toString(0)
-            + "s|r. Spawns an ethereal servant tethered to the center. "
-            + "The servant possesses |cff00ff00" + SERVANT_HP[idx].toString()
-            + " HP|r and deals |cff00ff00" + SERVANT_DAMAGE[idx].toString()
-            + "|r chaos damage, but cannot escape the boundary edge."
+    tgen
+        ..addProperty("Name",           lvl -> "Death's Grasp")
+        ..addProperty("Levels",         lvl -> MAX_LEVELS.toString())
+        ..addProperty("Hotkey",         lvl -> "W")
+        ..addProperty("Duration",       lvl -> ZONE_DURATION[lvl - 1].toString(0) + "s")
+        ..addProperty("Slow",           lvl -> (SLOW_AMOUNT[lvl - 1] * 100).toString(0) + "%")
+        ..addProperty("Servant HP",     lvl -> SERVANT_HP[lvl - 1].toString())
+        ..addProperty("Servant Damage", lvl -> SERVANT_DAMAGE[lvl - 1].toString())
+        ..addProperty("Cooldown",       lvl -> COOLDOWN[lvl - 1].toString(0) + "s")
+        ..removeProperty("Duration Hero")
+        ..applyToDef(abDef)
 
-        abDef
-            ..setTooltipNormal(i, "Cast [|cffff0000Death's Grasp|r] - Level " + i.toString())
-            ..setTooltipNormalExtended(i, extendedTooltip)
-            ..setTooltipLearn("[|cffff0000Death's Grasp|r]")
-            ..setTooltipLearnExtended(extendedTooltip)
-            ..setAreaofEffect(i, ZONE_RADIUS[idx])
-            ..setManaCost(i, MANA_COST[idx])
-            ..setCooldown(i, 1)
 
 // ============================================================================
 // SYSTEM ENGINE RUNTIME (Tether Control Tracking)

@@ -1,30 +1,37 @@
 package UrsocCharge
 
-import AbilityObjEditing
-import ObjectIdGenerator
-import Icons
 import ClosureEvents
 import InstantDummyCaster
 import Orders
 import BuffObjEditing
-import ObjectIds
-import CustomIcons
 
-public constant URSOC_CHARGE_ID = compiletime(ABIL_ID_GEN.next())
-public constant CHARGE_STUN_ID = compiletime(ABIL_ID_GEN.next())
+
+import AbilityTooltipGenerator
+
+public constant URSOC_CHARGE_ID    = compiletime(ABIL_ID_GEN.next())
+public constant CHARGE_STUN_ID     = compiletime(ABIL_ID_GEN.next())
 public constant CHARGE_STUN_BUFF_ID = compiletime(BUFF_ID_GEN.next())
 
-constant real CHARGE_DAMAGE = 100.
-constant real CHARGE_STUN_DURATION = 1.
-constant real CHARGE_SPEED = 900.
-constant string CHARGE_SFX = "Abilities\\Spells\\Human\\Charge\\ChargeTarget.mdl"
-constant string IMPACT_SFX = "Abilities\\Spells\\Human\\Thunderclap\\ThunderClapCaster.mdl"
-constant string CHARGE_CUSTOM_ICON = "ReplaceableTextures\\CommandButtons\\BTNCharge.blp"
+
+constant int MAX_LEVELS = 4
+
+constant real array CHARGE_DAMAGE = [100., 175., 250., 350.]
+constant real array STUN_DURATION = [2., 3., 4., 5.]
+constant real array HERO_STUN     = [1., 1.5, 2., 2.5]
+constant real array CAST_RANGE    = [700., 800., 900., 1000.]
+constant real array COOLDOWN      = [12., 10., 8., 6.]
+constant int  array MANA          = [60, 70, 80, 90]
+
+constant real   CHARGE_SPEED  = 900.
+constant string CHARGE_SFX    = "Abilities\\Spells\\Human\\Charge\\ChargeTarget.mdl"
+constant string IMPACT_SFX    = "Abilities\\Spells\\Human\\Thunderclap\\ThunderClapCaster.mdl"
+constant string CHARGE_CUSTOM_ICON   = "ReplaceableTextures\\CommandButtons\\BTNCharge.blp"
 constant string DISABLED_CUSTOM_ICON = "ReplaceableTextures\\CommandButtonsDisabled\\DISBTNCharge.blp"
 
-
-
-
+let tgen = new AbilityTooltipGenerator(
+    Targettype.UNIT,
+    "Ursoc charges at the target enemy, dealing damage and stunning them on impact. "
+    + "Stun duration is halved on heroes.")
 
 @compiletime function genBuff()
     new BuffDefinition(CHARGE_STUN_BUFF_ID, 'BNso')
@@ -33,76 +40,55 @@ constant string DISABLED_CUSTOM_ICON = "ReplaceableTextures\\CommandButtonsDisab
         ..setTooltipNormalExtended(1, "This unit has been charged by Ursoc and is stunned.")
         ..setIcon(Icons.bTNStun)
 
-// @compiletime function genStunAbility()
-//     new AbilityDefinitionStunCreep(CHARGE_STUN_ID)
-//         ..setDurationNormal(1, CHARGE_STUN_DURATION)
-//         ..setDurationHero(1, CHARGE_STUN_DURATION * 0.5)
-//         ..setBuffs(1, toRawCode(CHARGE_STUN_BUFF_ID))
-//         ..setHeroAbility(false)
-//         ..setItemAbility(false)
-
 @compiletime function genAbility()
-    new AbilityDefinitionMountainKingThunderBolt(URSOC_CHARGE_ID)
-        ..setLevels(3)
-        ..setName("Mauling Charge")
-        ..setTooltipNormal(1, "Mauling Charge")
-        ..setTooltipNormal(2, "Mauling Charge")
-        ..setTooltipNormal(3, "Mauling Charge")
-        ..setTooltipNormalExtended(1, "Ursoc charges at the target enemy dealing 100 damage and stunning for 2 seconds, half on heroes.")
-        ..setTooltipNormalExtended(2, "Ursoc charges at the target enemy dealing 175 damage and stunning for 3 seconds, half on heroes.")
-        ..setTooltipNormalExtended(3, "Ursoc charges at the target enemy dealing 250 damage and stunning for 4 seconds, half on heroes.")
-        ..setTooltipLearn("Learn Mauling Charge - [|cffffcc00Level %d|r]")
-        ..setTooltipLearnExtended("Ursoc charges at the target enemy dealing damage and stunning them. |n|n|cffffcc00Level 1|r - <AHtb,DataA1> damage, <AHtb,Dur1> second stun. |n|cffffcc00Level 2|r - <AHtb,DataA2> damage, <AHtb,Dur2> second stun. |n|cffffcc00Level 3|r - <AHtb,DataA3> damage, <AHtb,Dur3> second stun.")
+    let aDef = new AbilityDefinitionMountainKingThunderBolt(URSOC_CHARGE_ID)
+        ..setHeroAbility(true)
+        ..setItemAbility(false)
         ..setIconNormal(CHARGE_CUSTOM_ICON)
         ..setIconResearch(CHARGE_CUSTOM_ICON)
         ..setIconTurnOff(DISABLED_CUSTOM_ICON)
         ..setButtonPositionNormalX(0)
         ..setButtonPositionNormalY(0)
-        // Level 1
-        ..setCooldown(1, 12.)
-        ..setManaCost(1, 60)
-        ..setDamage(1, 100)
-        ..setDurationNormal(1, 2.)
-        ..setDurationHero(1, 1.)
-        ..setCastRange(1, 700.)
-        // Level 2
-        ..setCooldown(2, 10.)
-        ..setManaCost(2, 70)
-        ..setDamage(2, 175)
-        ..setDurationNormal(2, 3.)
-        ..setDurationHero(2, 1.5)
-        ..setCastRange(2, 800.)
-        // Level 3
-        ..setCooldown(3, 8.)
-        ..setManaCost(3, 80)
-        ..setDamage(3, 250)
-        ..setDurationNormal(3, 4.)
-        ..setDurationHero(3, 2.)
-        ..setCastRange(3, 900.)
-        ..setBuffs(1, toRawCode(CHARGE_STUN_BUFF_ID))
-        ..setBuffs(2, toRawCode(CHARGE_STUN_BUFF_ID))
-        ..setBuffs(3, toRawCode(CHARGE_STUN_BUFF_ID))
         ..setRequirements("")
         ..setRequirementsLevels("")
         ..setRequiredLevel(1)
         ..setLevelSkipRequirement(2)
-        ..setHeroAbility(true)
-        ..setItemAbility(false)
+        ..setLevels(MAX_LEVELS)
+
+    for i = 1 to MAX_LEVELS
+        aDef
+            ..setCooldown(i, COOLDOWN[i - 1])
+            ..setManaCost(i, MANA[i - 1])
+            ..setDamage(i, CHARGE_DAMAGE[i - 1])
+            ..setDurationNormal(i, STUN_DURATION[i - 1])
+            ..setDurationHero(i, HERO_STUN[i - 1])
+            ..setCastRange(i, CAST_RANGE[i - 1])
+            ..setBuffs(i, toRawCode(CHARGE_STUN_BUFF_ID))
+
+    tgen
+        ..addProperty("Name",       lvl -> "Mauling Charge")
+        ..addProperty("Levels",     lvl -> MAX_LEVELS.toString())
+        ..addProperty("Hotkey",     lvl -> "Q")
+        ..addProperty("Damage",     lvl -> CHARGE_DAMAGE[lvl - 1].toString(0))
+        ..addProperty("Stun",       lvl -> STUN_DURATION[lvl - 1].toString(0) + "s (" + HERO_STUN[lvl - 1].toString(1) + "s vs heroes)")
+        ..addProperty("Range",      lvl -> CAST_RANGE[lvl - 1].toString(0))
+        ..addProperty("Cooldown",   lvl -> COOLDOWN[lvl - 1].toString(0) + "s")
+        ..addProperty("Mana",       lvl -> MANA[lvl - 1].toString())
+        ..applyToDef(aDef)
 
 init
     EventListener.onCast(URSOC_CHARGE_ID) (caster) ->
-        let target = EventData.getSpellTargetUnit()
+        let target    = EventData.getSpellTargetUnit()
         let targetPos = target.getPos()
+        let level     = caster.getAbilityLevel(URSOC_CHARGE_ID)
 
-        // Move caster instantly, subject to change
         caster.setXY(targetPos)
-
         flashEffect(CHARGE_SFX, targetPos)
         flashEffect(IMPACT_SFX, targetPos)
 
         caster.damageTarget(
             target,
-            CHARGE_DAMAGE,
+            CHARGE_DAMAGE[level - 1],
             false,
             false,
             ATTACK_TYPE_NORMAL,
@@ -110,5 +96,4 @@ init
             WEAPON_TYPE_WHOKNOWS
         )
 
-        // Stun via dummy cast
         InstantDummyCaster.castTarget(caster.getOwner(), CHARGE_STUN_ID, 1, Orders.thunderbolt, target)

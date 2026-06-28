@@ -9,31 +9,34 @@ import Reference
 import LinkedList
 import Lightning
 import HashMap
+import AbilityTooltipGenerator
 
 public constant HEALING_WAVE = compiletime(ABIL_ID_GEN.next())
 public constant HARMING_WAVE = compiletime(ABIL_ID_GEN.next())
 
-// ============================================================================
-// TUNABLE BASE VALUES & SCALING CONFIGURATION
-// ============================================================================
 constant int MAX_LEVELS = 4
 
-// Healing Wave Properties [Level 1, Level 2, Level 3, Level 4]
 constant real array HEAL_AMOUNT   = [120.0, 150.0, 180.0, 220.0]
 constant int array  HEAL_BOUNCES  = [4, 4, 5, 5]
 constant int array  HEAL_MANA     = [90, 100, 110, 120]
 constant real array HEAL_COOLDOWN = [12.0, 11.0, 10.0, 9.0]
 
-// Harming Wave Properties [Level 1, Level 2, Level 3, Level 4]
 constant real array HARM_AMOUNT   = [120.0, 150.0, 180.0, 220.0]
 constant int array  HARM_BOUNCES  = [4, 4, 5, 5]
 constant int array  HARM_MANA     = [45, 50, 55, 60]
 
-// ============================================================================
-// SYSTEM RUNTIME STORAGE
-// ============================================================================
 let casterHealPool = new HashMap<unit, real>()
-let casterCastTime = new HashMap<unit, real>() 
+let casterCastTime = new HashMap<unit, real>()
+
+let healTgen = new AbilityTooltipGenerator(
+    Targettype.UNIT,
+    "Launches a surging wave of spiritual energy that bounces across injured allies, "
+    + "healing each for a set amount. Unlocks Voodoo Corruption Wave on completion.")
+
+let harmTgen = new AbilityTooltipGenerator(
+    Targettype.UNIT,
+    "Unleashes a dark cascading wave that bounces across enemy targets. "
+    + "Max damage capped strictly by total effective healing from your last Restoration Wave.")
 
 @compiletime function gen()
     let healDef = new AbilityDefinitionPaladinHolyLight(HEALING_WAVE)
@@ -42,45 +45,60 @@ let casterCastTime = new HashMap<unit, real>()
         ..setName("Voodoo Restoration Wave")
         ..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNHealingWave.blp")
         ..setIconResearch("ReplaceableTextures\\CommandButtons\\BTNHealingWave.blp")
-        ..setCastRange(1, 700.0)
         ..setTargetsAllowed(1, "friend,ground,air,organic,self")
         ..setEffects(1, "")
         ..setArtTarget("")
-        ..setHotkeyLearn("Q")
-        ..setHotkeyNormal("Q")
         ..setButtonPositionNormalX(0)
         ..setButtonPositionNormalY(2)
         ..setButtonPositionResearchX(0)
         ..setButtonPositionResearchY(0)
+        ..setHotkeyNormal("Q")
+
 
     let harmDef = new AbilityDefinitionDeathKnightDeathCoil(HARMING_WAVE)
         ..setHeroAbility(true)
         ..setLevels(MAX_LEVELS)
         ..setName("Voodoo Corruption Wave")
         ..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNDarkSummoning.blp")
-        ..setCooldown(1, 1.0) 
-        ..setCastRange(1, 700.0)
         ..setTargetsAllowed(1, "enemies,ground,air,organic")
         ..setEffects(1, "")
         ..setArtTarget("")
-        ..setHotkeyLearn("Q")
         ..setHotkeyNormal("Q")
         ..setButtonPositionNormalX(0)
         ..setButtonPositionNormalY(2)
 
-    for int i = 1 to MAX_LEVELS
+    for i = 1 to MAX_LEVELS
         let idx = i - 1
-        
-        healDef..setTooltipNormal(i, "Cast [|cff00ff00Voodoo Restoration Wave|r] - Level " + i.toString())
-               ..setTooltipNormalExtended(i, "Launches a surging wave of spiritual energy that bounces across up to " + HEAL_BOUNCES[idx].toString() + " injured allies, healing each for " + HEAL_AMOUNT[idx].toString(0) + " health. Unlocks Voodoo Corruption Wave on completion.")
-               ..setAmountHealedDamaged(i, 0.0)
-               ..setManaCost(i, HEAL_MANA[idx])
-               ..setCooldown(i, HEAL_COOLDOWN[idx])
+        healDef
+            ..setAmountHealedDamaged(i, 0.0)
+            ..setManaCost(i, HEAL_MANA[idx])
+            ..setCooldown(i, HEAL_COOLDOWN[idx])
+            ..setCastRange(i, 700.0)
 
-        harmDef..setTooltipNormal(i, "Cast [|cffff0000Voodoo Corruption Wave|r] - Level " + i.toString())
-               ..setTooltipNormalExtended(i, "Unleashes a dark cascading wave that bounces across up to " + HARM_BOUNCES[idx].toString() + " enemy targets. Max damage capped strictly by total effective healing from your last Restoration Wave.")
-               ..setAmountHealedDamaged(i, 0.0)
-               ..setManaCost(i, HARM_MANA[idx])
+        harmDef
+            ..setAmountHealedDamaged(i, 0.0)
+            ..setManaCost(i, HARM_MANA[idx])
+            ..setCooldown(i, 1.0)
+            ..setCastRange(i, 700.0)
+
+    healTgen
+        ..addProperty("Name",     lvl -> "Voodoo Restoration Wave")
+        ..addProperty("Levels",   lvl -> MAX_LEVELS.toString())
+        ..addProperty("Hotkey",   lvl -> "Q")
+        ..addProperty("Healing",  lvl -> HEAL_AMOUNT[lvl - 1].toString(0))
+        ..addProperty("Bounces",  lvl -> HEAL_BOUNCES[lvl - 1].toString())
+        ..addProperty("Mana",     lvl -> HEAL_MANA[lvl - 1].toString())
+        ..addProperty("Switchero",     lvl -> "Voodoo Corruption Wave")
+        .applyToDef(healDef)
+    harmTgen
+        ..addProperty("Name",     lvl -> "Voodoo Corruption Wave")
+        ..addProperty("Levels",   lvl -> MAX_LEVELS.toString())
+        ..addProperty("Hotkey",   lvl -> "Q")
+        ..addProperty("Damage",  lvl -> "Healing done by Voodoo Restoration Wave")
+        ..addProperty("Max Bounces",  lvl -> HEAL_BOUNCES[lvl - 1].toString())
+        ..addProperty("Mana",     lvl -> HARM_MANA[lvl - 1].toString())
+        ..addProperty("Switchero",     lvl -> "Voodoo Restoration Wave")
+        .applyToDef(harmDef)
 
 // ============================================================================
 // GAMEPLAY & CALCULATION LOGIC
@@ -172,9 +190,6 @@ function completeHarmWave(unit caster)
 
     if remainingCooldown > 0
         caster.startAbilityCooldown(HEALING_WAVE, remainingCooldown)
-        caster.getOwner().print("Dark Energy Depleted! Reverting to Restoration Wave. CD: |cffff0000" + remainingCooldown.toString(1) + "s", 5.0)
-    else
-        caster.getOwner().print("Dark Energy Depleted! Reverting to Restoration Wave. Ready to Cast!", 5.0)
 
 function bounceHarm(unit caster, unit currentTarget, real currentDamagePower, real remainingPool, int bouncesLeft, LinkedList<unit> hitTargets)
     if currentTarget == null or bouncesLeft <= 0 or remainingPool <= 0

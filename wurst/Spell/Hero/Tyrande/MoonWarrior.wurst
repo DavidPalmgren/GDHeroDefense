@@ -7,29 +7,28 @@ import Icons
 import ClosureEvents
 import ClosureTimers
 import ObjectIds
+import AbilityTooltipGenerator
 
-
-public constant MOON_WARRIOR_ID = compiletime(ABIL_ID_GEN.next())
+public constant MOON_WARRIOR_ID      = compiletime(ABIL_ID_GEN.next())
 public constant MOON_WARRIOR_BUFF_ID = compiletime(BUFF_ID_GEN.next())
-public constant TYRANDE_MODEL_ID = compiletime(UNIT_ID_GEN.next())
+public constant TYRANDE_MODEL_ID     = compiletime(UNIT_ID_GEN.next())
 
+constant int TYRANDE_MOUNTED_ID = 'Emoo'
+constant int TIGER_UNIT_ID      = 'n009'
 
-// Replace these with your actual unit IDs
-constant int TYRANDE_MOUNTED_ID = 'Emoo'    // Tyrande on tiger model
-constant int TIGER_UNIT_ID = 'n009'         // summonable tiger unit
+constant real array TIGER_DURATION    = [30.0, 40.0, 50.0]
+constant real array BONUS_ATTACK_SPEED = [0.50, 0.75, 1.00]
+constant real array BONUS_DAMAGE       = [30.0, 50.0, 70.0]
+constant int  array MANA_COST          = [75, 85, 95]
+constant real array COOLDOWN           = [60.0, 50.0, 40.0]
 
-constant real TIGER_DURATION = 30.          
-constant real BONUS_ATTACK_SPEED = 0.50     // VISUAL ONLY
-constant real BONUS_DAMAGE = 30.            // VISUAL ONLY
 constant string DISMOUNT_SFX = "Abilities\\Spells\\NightElf\\Blink\\BlinkCaster.mdl"
-constant string SUMMON_SFX = "Abilities\\Spells\\NightElf\\Roar\\RoarCaster.mdl"
-constant string VANISH_SFX = "Abilities\\Spells\\NightElf\\Blink\\BlinkCaster.mdl"
+constant string SUMMON_SFX   = "Abilities\\Spells\\NightElf\\Roar\\RoarCaster.mdl"
+constant string VANISH_SFX   = "Abilities\\Spells\\NightElf\\Blink\\BlinkCaster.mdl"
 
-
-
-
-
-
+let tgen = new AbilityTooltipGenerator(
+    Targettype.PASSIVE,
+    "Tyrande dismounts from her tiger, gaining bonus damage and attack speed while summoning her tiger into battle.")
 
 @compiletime function genBuff()
     new BuffDefinition(MOON_WARRIOR_BUFF_ID, 'Basl')
@@ -40,66 +39,65 @@ constant string VANISH_SFX = "Abilities\\Spells\\NightElf\\Blink\\BlinkCaster.md
         ..setArtTarget("")
         ..setArtSpecial("")
 
-
 @compiletime function genAbility()
-    new AbilityDefinitionAlchemistChemicalRage(MOON_WARRIOR_ID)
+    let aDef = new AbilityDefinitionAlchemistChemicalRage(MOON_WARRIOR_ID)
         ..setName("Moon Warrior")
-        ..setTooltipNormal(1, "Moon Warrior")
-        ..setTooltipNormalExtended(1, "Tyrande dismounts from her tiger, gaining +" + BONUS_DAMAGE.toInt().toString() + " damage and +" + (BONUS_ATTACK_SPEED * 100).toInt().toString() + "% attack speed for " + TIGER_DURATION.toInt().toString() + " seconds while summoning her tiger into battle.")
-        ..setTooltipLearn("Learn Moon Warrior")
-        ..setTooltipLearnExtended("Dismount from your tiger and summon it into battle.")
         ..setIconNormal(Icons.bTNPriestessOfTheMoon)
         ..setIconResearch(Icons.bTNPriestessOfTheMoon)
-        ..setAlternateFormUnit(1, "E00S") // base +30dmg atk cooldown from 2.460 -> 1.6 needs to be set in editor
-        ..setAlternateFormUnit(2, "E00Q") //maybe more levels later.
-        ..setAlternateFormUnit(3, "E00T") //maybe more levels later
         ..setButtonPositionNormalX(3)
         ..setButtonPositionNormalY(2)
         ..presetButtonPosResearch(3, 0)
-        ..setCooldown(1, 60.)
-        ..setManaCost(1, 75)
         ..setAreaofEffect(1, 0.)
-        ..setDurationNormal(1, 0.35)
-        ..setDurationHero(1, 30.)
         ..setBuffs(1, toRawCode(MOON_WARRIOR_BUFF_ID))
         ..setEffects(1, "")
         ..setRequirements("")
         ..setRequirementsLevels("")
         ..setRequiredLevel(6)
-        ..setLevels(1)
+        ..setLevels(3)
         ..setLevelSkipRequirement(2)
         ..setHeroAbility(true)
         ..setItemAbility(false)
 
+    for i = 1 to 3
+        aDef
+            ..setCooldown(i, COOLDOWN[i - 1])
+            ..setManaCost(i, MANA_COST[i - 1])
+            ..setDurationNormal(i, 0.35)
+            ..setDurationHero(i, TIGER_DURATION[i - 1])
+            ..setBuffs(i, toRawCode(MOON_WARRIOR_BUFF_ID))
 
+    tgen
+        ..addProperty("Name",         lvl -> "Moon Warrior")
+        ..addProperty("Levels",       lvl -> "3")
+        ..addProperty("Hotkey",       lvl -> "R")
+        ..addProperty("Duration",     lvl -> TIGER_DURATION[lvl - 1].toString(0) + "s")
+        ..addProperty("Bonus Damage", lvl -> "+" + BONUS_DAMAGE[lvl - 1].toString(0))
+        ..addProperty("Attack Speed", lvl -> "+" + (BONUS_ATTACK_SPEED[lvl - 1] * 100).toString(0) + "%")
+        ..addProperty("Mana",         lvl -> MANA_COST[lvl - 1].toString())
+        ..addProperty("Cooldown",     lvl -> COOLDOWN[lvl - 1].toString(0) + "s")
+        ..applyToDef(aDef)
 
 init
-    // 1. Handling the Spell Cast & Natural Timeout
     EventListener.onCast(MOON_WARRIOR_ID) (caster) ->
         if caster.getTypeId() == TYRANDE_MOUNTED_ID
-            let pos = caster.getPos()
-            let owner = caster.getOwner()
+            let pos      = caster.getPos()
+            let owner    = caster.getOwner()
+            let level    = caster.getAbilityLevel(MOON_WARRIOR_ID)
+            let duration = TIGER_DURATION[level - 1]
 
             flashEffect(DISMOUNT_SFX, pos)
 
             let tiger = createUnit(owner, TIGER_UNIT_ID, pos.polarOffset(caster.getFacingAngle(), 100.), caster.getFacingAngle())
             flashEffect(SUMMON_SFX, tiger.getPos())
 
-            doAfter(TIGER_DURATION) ->
+            doAfter(duration) ->
                 if tiger.isAlive()
                     flashEffect(VANISH_SFX, tiger.getPos())
                     tiger.remove()
 
-    // 2. NEW: Intercepting Combat Death 
     registerPlayerUnitEvent(EVENT_PLAYER_UNIT_DEATH) ->
         let dyingUnit = GetTriggerUnit()
-        
         if dyingUnit.getTypeId() == TIGER_UNIT_ID
-
             flashEffect(VANISH_SFX, dyingUnit.getPos())
-            
-
-            dyingUnit.setVertexColor(0, 0, 0, 0) 
-            
-            // Vaporize the corpse out of the game's memory completely
+            dyingUnit.setVertexColor(0, 0, 0, 0)
             dyingUnit.remove()

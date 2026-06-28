@@ -21,16 +21,16 @@ let tgen = new AbilityTooltipGenerator(
 
 
 @compiletime function genSpinningGlaive()
-    tgen.addProperty("Levels", lvl -> "3")
+    tgen.addProperty("Levels", lvl -> "4")
     tgen.addProperty("Name", lvl -> "Spinning Glaive")
     tgen.addProperty("Hotkey", lvl -> "Q")
     tgen.addProperty("Damage per Second", lvl -> (20 + (lvl * 15)).toString())
     tgen.addProperty("Movement Slow", lvl -> (25 + (lvl * 5)).toString() + "%")
-    tgen.addProperty("Denial Duration", lvl -> "5s")
+    tgen.addProperty("Duration", lvl -> "5s")
 
     let def = new ChannelAbilityPreset(SPINNING_GLAIVE_ID, 3, true, tgen)
         ..setHeroAbility(true)
-        ..setLevels(3)
+        ..setLevels(4)
         ..presetButtonPosNormal(0, 2)
         ..presetButtonPosResearch(0, 0)
         ..presetHotkey("Q")

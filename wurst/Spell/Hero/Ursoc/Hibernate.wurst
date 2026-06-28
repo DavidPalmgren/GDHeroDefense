@@ -1,21 +1,28 @@
 package Hibernate
-import AbilityObjEditing
-import ObjectIdGenerator
+
 import BuffObjEditing
-import Icons
 import ClosureEvents
 import ClosureTimers
+import AbilityTooltipGenerator
 
-public constant HIBERNATE_ID = compiletime(ABIL_ID_GEN.next())
+
+public constant HIBERNATE_ID      = compiletime(ABIL_ID_GEN.next())
 public constant HIBERNATE_BUFF_ID = compiletime(BUFF_ID_GEN.next())
 
-constant real HIBERNATE_DURATION = 4.
-constant real HEAL_INTERVAL = 0.1
-constant real ARMOR_BONUS = 20.
+constant int    MAX_LEVELS        = 4
+constant real   HIBERNATE_DURATION = 4.
+constant real   HEAL_INTERVAL     = 0.1
+constant real   ARMOR_BONUS       = 20.
 
-// Per level index
-constant real array HP_PCT = [0.30, 0.40, 0.50]
-constant real array HP_FLAT = [125., 175., 250.]
+constant real array HP_PCT  = [0.30, 0.40, 0.50, 0.60]
+constant real array HP_FLAT = [125., 175., 250., 325.]
+constant real array COOLDOWN = [20., 18., 16., 14.]
+constant int  array MANA     = [50, 50, 60, 70]
+
+let tgen = new AbilityTooltipGenerator(
+    Targettype.PASSIVE,
+    "Ursoc enters a deep hibernation, rapidly regenerating health and gaining bonus armor. "
+    + "Cannot act while hibernating.")
 
 @compiletime function genBuff()
     new BuffDefinition(HIBERNATE_BUFF_ID, 'Basl')
@@ -25,54 +32,52 @@ constant real array HP_FLAT = [125., 175., 250.]
         ..setIcon(Icons.bTNSleep)
 
 @compiletime function genAbility()
-    new AbilityDefinitionRoar(HIBERNATE_ID)
-        ..setName("Hibernate")
-        ..setTooltipNormal(1, "Hibernate")
-        ..setTooltipNormal(2, "Hibernate")
-        ..setTooltipNormal(3, "Hibernate")
-        ..setTooltipNormalExtended(1, "Ursoc hibernates for " + HIBERNATE_DURATION.toInt().toString() + "s, healing " + (HP_PCT[0] * 100).toInt().toString() + "% max HP + " + HP_FLAT[0].toInt().toString() + " and gaining +" + ARMOR_BONUS.toInt().toString() + " armor. Cannot act while hibernating.")
-        ..setTooltipNormalExtended(2, "Ursoc hibernates for " + HIBERNATE_DURATION.toInt().toString() + "s, healing " + (HP_PCT[1] * 100).toInt().toString() + "% max HP + " + HP_FLAT[1].toInt().toString() + " and gaining +" + ARMOR_BONUS.toInt().toString() + " armor. Cannot act while hibernating.")
-        ..setTooltipNormalExtended(3, "Ursoc hibernates for " + HIBERNATE_DURATION.toInt().toString() + "s, healing " + (HP_PCT[2] * 100).toInt().toString() + "% max HP + " + HP_FLAT[2].toInt().toString() + " and gaining +" + ARMOR_BONUS.toInt().toString() + " armor. Cannot act while hibernating.")
-        ..setTooltipLearn("Learn Hibernate")
-        ..setTooltipLearnExtended("Ursoc hibernates for 4 seconds, rapidly healing and gaining bonus armor. Cannot act while hibernating.")
+    let aDef = new ChannelAbilityPreset(HIBERNATE_ID, MAX_LEVELS, true, tgen)
+        ..setHeroAbility(true)
+        ..setItemAbility(false)
         ..setIconNormal(Icons.bTNSleep)
         ..setIconResearch(Icons.bTNSleep)
         ..setButtonPositionNormalX(1)
         ..setButtonPositionNormalY(0)
-        ..setCooldown(1, 20.)
-        ..setCooldown(2, 18.)
-        ..setCooldown(3, 16.)
-        ..setManaCost(1, 50)
-        ..setManaCost(2, 50)
-        ..setManaCost(3, 50)
-        ..setDamageIncrease(1, 0)
-        ..setDamageIncrease(2, 0)
-        ..setDamageIncrease(3, 0)
-        ..setAreaofEffect(1, 0.)
-        ..setDurationNormal(1, 0.)
-        ..setDurationHero(1, 0.)
-        ..setBuffs(1, "")
-        ..setLevels(3)
+        ..presetButtonPosResearch(1, 0)
+        ..presetTargetTypes(Targettype.NONE)
         ..setRequiredLevel(1)
         ..setLevelSkipRequirement(2)
         ..setRequirements("")
         ..setRequirementsLevels("")
-        ..setHeroAbility(true)
-        ..setItemAbility(false)
-        ..setHotkeyLearn("R")
+        ..tooltipStartListen()
+        ..presetHotkey("R")
+        ..setName("Hibernate")
+        ..presetManaCost(lvl -> MANA[lvl - 1])
+        ..presetCooldown(lvl -> COOLDOWN[lvl - 1])
+        ..presetDurationNormal(lvl -> 0.)
+        ..presetDurationHero(lvl -> 0.)
+        ..presetAreaofEffect(lvl -> 0.)
+
+    for i = 1 to MAX_LEVELS
+        aDef
+            ..setBuffs(i, "")
+
+    tgen
+        ..addProperty("Name",       lvl -> "Hibernate")
+        ..addProperty("Levels",     lvl -> MAX_LEVELS.toString())
+        ..addProperty("Hotkey",     lvl -> "R")
+        ..addProperty("Duration",   lvl -> HIBERNATE_DURATION.toString(0) + "s")
+        ..addProperty("HP Healed",  lvl -> (HP_PCT[lvl - 1] * 100).toString(0) + "% max HP + " + HP_FLAT[lvl - 1].toString(0))
+        ..addProperty("Armor",      lvl -> "+" + ARMOR_BONUS.toString(0))
+        ..addProperty("Mana",       lvl -> MANA[lvl - 1].toString())
+        ..addProperty("Cooldown",   lvl -> COOLDOWN[lvl - 1].toString(0) + "s")
+        ..applyToDef(aDef)
 
 init
     EventListener.onCast(HIBERNATE_ID) (caster) ->
-        // Get spell level (1-based)
-        let level = caster.getAbilityLevel(HIBERNATE_ID) - 1
-
-        let totalHeal = (caster.getMaxHP() * HP_PCT[level]) + HP_FLAT[level]
+        let level      = caster.getAbilityLevel(HIBERNATE_ID) - 1
+        let totalHeal  = (caster.getMaxHP() * HP_PCT[level]) + HP_FLAT[level]
         let healPerTick = totalHeal / (HIBERNATE_DURATION / HEAL_INTERVAL)
 
         caster.setArmor(caster.getArmor() + ARMOR_BONUS)
         caster.pause()
         caster.setPathing(false)
-
         UnitAddAbility(caster, HIBERNATE_BUFF_ID)
 
         let sfx = addEffect("Abilities\\Spells\\NightElf\\Rejuvenation\\RejuvenationTarget.mdl", caster, "origin")
@@ -80,8 +85,7 @@ init
         let healTimer = doPeriodically(HEAL_INTERVAL) cb ->
             if caster.isAlive()
                 caster.addHP(healPerTick)
-        
-        // Cleanup
+
         doAfter(HIBERNATE_DURATION) ->
             destroy healTimer
             caster.unpause()

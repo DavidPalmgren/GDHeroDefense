@@ -1,16 +1,15 @@
 package BerserkersFury
 
-import ObjectIdGenerator
-import AbilityObjEditing
 import RegisterEvents
 import ClosureTimers
 import HashMap
 import LinkedList
-import Icons
+
+import AbilityTooltipGenerator
 
 public constant BERSERKERS_FURY = compiletime(ABIL_ID_GEN.next())
 
-constant int MAX_LEVELS = 4
+constant int  MAX_LEVELS          = 4
 constant real MAX_BONUS_THRESHOLD = 0.90
 
 function getMaxAttackSpeed(int idx) returns real
@@ -22,7 +21,7 @@ function getMaxAttackSpeed(int idx) returns real
         case 2
             return 1.20
         case 3
-            return 1.4
+            return 1.40
         default
             return 0.0
 
@@ -55,7 +54,12 @@ function getMaxHealAmp(int idx) returns real
 let passiveUsers   = new LinkedList<unit>()
 let lastRegenBonus = new HashMap<unit, real>()
 let baseCooldown   = new HashMap<unit, real>()
-let debugThrottler = new HashMap<unit, int>() // Tracks time to limit debug messages to once per second
+let debugThrottler = new HashMap<unit, int>()
+
+let tgen = new AbilityTooltipGenerator(
+    Targettype.PASSIVE,
+    "The hero's blood boils as they take damage, growing stronger the closer they are to death. "
+    + "Max power reached at 10% HP.")
 
 @compiletime function gen()
     let def = new AbilityDefinitionPaladinDevotionAura(BERSERKERS_FURY)
@@ -65,26 +69,21 @@ let debugThrottler = new HashMap<unit, int>() // Tracks time to limit debug mess
         ..setIconNormal(Icons.bTNBerserkForTrolls)
         ..setIconResearch(Icons.bTNBerserkForTrolls)
         ..setTargetsAllowed(1, "self")
-        ..setArmorBonus(1, 0.0)
-        ..setAreaofEffect(1, 10.0)
         ..setBuffs(1, "")
 
     for i = 1 to MAX_LEVELS
-        let idx = i - 1
-        let learnTooltip = "Learn [|cffff3300Berserker's Fury|r] - Level " + i.toString()
-        let extendedTooltip = "The hero's blood boils as they take damage. Grants up to |cff00ff00+"
-            + getMaxHpRegen(idx).toString(0) + " HP/s|r regeneration, |cff00ff00+"
-            + (getMaxAttackSpeed(idx) * 100).toString(0) + "%|r attack speed, and increases all incoming healing by up to |cff00ff00+"
-            + (getMaxHealAmp(idx) * 100).toString(0) + "%|r based on missing health. Max power reached at 10% health."
+        def
+            ..setArmorBonus(i, 0.0)
+            ..setAreaofEffect(i, 10.0)
 
-        def..setTooltipNormal(i, learnTooltip)
-        def..setTooltipNormalExtended(i, extendedTooltip)
-        def..setTooltipLearn(learnTooltip)
-        def..setTooltipLearnExtended(extendedTooltip)
-        def..setArmorBonus(i, 0.0)
-        def..setAreaofEffect(i, 10.0)
-        def..setHotkeyLearn("E")
-        def..setHotkeyNormal("E")
+    tgen
+        ..addProperty("Name",               lvl -> "Berserker's Fury")
+        ..addProperty("Levels",             lvl -> MAX_LEVELS.toString())
+        ..addProperty("Hotkey",             lvl -> "E")
+        ..addProperty("HP Regen",           lvl -> "+" + getMaxHpRegen(lvl - 1).toString(0) + " HP/s")
+        ..addProperty("Attack Speed",       lvl -> "+" + (getMaxAttackSpeed(lvl - 1) * 100).toString(0) + "%")
+        ..addProperty("Heal Amplification", lvl -> "+" + (getMaxHealAmp(lvl - 1) * 100).toString(0) + "%")
+        ..applyToDef(def)
 
 public function unit.getHealingMultiplier() returns real
     let lvl = this.getAbilityLevel(BERSERKERS_FURY)
@@ -142,10 +141,10 @@ function updatePassiveStats()
             let ticks = debugThrottler.has(u) ? debugThrottler.get(u) : 0
             if ticks >= 10
                 debugThrottler.put(u, 0)
-                let hpPercent = (currentHp / maxHp * 100).toString(0)
-                let speedPctStr = (currentSpeedBonus * 100).toString(0)
+                let _hpPercent = (currentHp / maxHp * 100).toString(0)
+                let _speedPctStr = (currentSpeedBonus * 100).toString(0)
                 // FIX: Changed 'this' to 'u'
-                let healAmpStr = ((u.getHealingMultiplier() - 1.0) * 100).toString(0)
+                let _healAmpStr = ((u.getHealingMultiplier() - 1.0) * 100).toString(0)
                 
                 // print("|cffffcc00[Berserker Debug]|r HP: " + hpPercent + "% | +Regen: " + 
                 //     newRegenBonus.toString(1) + " HP/s | +Atk Speed: " + speedPctStr + "% | +Heal Amp: " + healAmpStr + "%")

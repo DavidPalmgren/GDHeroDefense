@@ -7,55 +7,57 @@ import ClosureTimers
 import ClosureForGroups
 import ChannelAbilityPreset
 import HashMap
+import AbilityTooltipGenerator
 
 public constant BLOOD_PACT = compiletime(ABIL_ID_GEN.next())
 
 constant int    MAX_LEVELS      = 3
 constant real   IMMUNE_DURATION = 5.0
-constant real   MIN_HP_LEFT     = 1.0   // HP remaining after sacrifice
+constant real   MIN_HP_LEFT     = 1.0
 constant real   AOE_RADIUS      = 400.0
 
-// How much of the sacrificed HP is converted to damage
 constant real array DAMAGE_FACTOR = [1.0, 1.25, 1.5]
 constant int  array MANA_COST     = [150, 175, 200]
 constant real array COOLDOWN      = [120.0, 100.0, 80.0]
 constant real array CAST_RANGE    = [600.0, 650.0, 700.0]
 
+let tgen = new AbilityTooltipGenerator(
+    Targettype.POINT,
+    "Vol'jin sacrifices his current HP, dealing a portion of it as damage to all enemies in the target area. "
+    + "Vol'jin becomes immune to death for " + IMMUNE_DURATION.toString(0) + "s after the sacrifice.")
+
 @compiletime function gen()
-    let def = new ChannelAbilityPreset(BLOOD_PACT, MAX_LEVELS, true)
+    let def = new ChannelAbilityPreset(BLOOD_PACT, MAX_LEVELS, true, tgen)
         ..setHeroAbility(true)
-        ..setName("Blood Pact")
         ..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNBTNpowerofblood.blp")
         ..setIconResearch("ReplaceableTextures\\CommandButtons\\BTNBTNpowerofblood.blp")
-        ..setHotkeyNormal("R")
-        ..setHotkeyLearn("R")
         ..setButtonPositionNormalX(3)
         ..setButtonPositionNormalY(2)
-        ..setTooltipLearn("[|cffff0000Blood Pact|r]")
-        ..setTargetType(1, 2)           // 2 = point target with AOE indicator
-        ..setRequiredLevel(6)        // Level 6 for rank 1    // Level 18 for rank 3
-        ..setLevelSkipRequirement(5) // Skip 6 levels between each rank
-        ..presetOption(Option.TARGETIMAGE, true) 
-
+        ..setTargetType(1, 2)
+        ..setRequiredLevel(6)
+        ..setLevelSkipRequirement(5)
+        ..presetOption(Option.TARGETIMAGE, true)
+        ..tooltipStartListen()
+        ..presetHotkey("R")
+        ..setName("Blood Pact")
+        ..presetAreaofEffect(lvl -> AOE_RADIUS)
+        ..presetManaCost(lvl -> MANA_COST[lvl - 1])
+        ..presetCooldown(lvl -> COOLDOWN[lvl - 1])
+        ..presetCastRange(lvl -> CAST_RANGE[lvl - 1])
 
     for i = 1 to MAX_LEVELS
-        let idx       = i - 1
-        let damagePct = (DAMAGE_FACTOR[idx] * 100).toString(0)
-        let tooltip   = "Vol'jin sacrifices his current HP, dealing |cffff0000" + damagePct
-            + "%|r of the sacrificed health as damage to all enemies in the target area. "
-            + "Vol'jin becomes immune to death for |cff00ff00" + IMMUNE_DURATION.toString(0)
-            + "s|r after the sacrifice."
+        def
+            ..setDurationNormal(i, 0.1)
+            ..setDurationHero(i, 0.1)
+            ..setDisableOtherAbilities(i, false)
 
-        def..setTooltipNormal(i, "Cast [|cffff0000Blood Pact|r]")
-           ..setTooltipNormalExtended(i, tooltip)
-           ..setTooltipLearnExtended(tooltip)
-           ..setManaCost(i, MANA_COST[idx])
-           ..setCooldown(i, COOLDOWN[idx])
-           ..setCastRange(i, CAST_RANGE[idx])
-           ..setAreaofEffect(i, AOE_RADIUS)
-           ..setDurationNormal(i, 0.1)
-           ..setDurationHero(i, 0.1)
-           ..setDisableOtherAbilities(i, false)
+    tgen
+        ..addProperty("Damage",          lvl -> (DAMAGE_FACTOR[lvl - 1] * 100).toString(0) + "% of sacrificed HP")
+        ..addProperty("Death Immunity",  lvl -> IMMUNE_DURATION.toString(0) + "s")
+        ..addProperty("Cooldown",        lvl -> COOLDOWN[lvl - 1].toString(0) + "s")
+        ..addProperty("Cast Range",      lvl -> CAST_RANGE[lvl - 1].toString(0))
+        ..applyToDef(def)
+
 
 // Tracks units currently immune to death from Blood Pact
 let immuneUnits = new HashMap<unit, bool>()

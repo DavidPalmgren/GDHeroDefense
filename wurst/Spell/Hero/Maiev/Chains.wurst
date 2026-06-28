@@ -1,0 +1,184 @@
+package Chains
+
+import AbilityObjEditing
+import ObjectIdGenerator
+import ClosureEvents
+import ClosureTimers
+import ClosureForGroups
+import AbilityTooltipGenerator
+import ChannelAbilityPreset
+import Lightning
+
+public constant SOUL_CHAINS_ID = compiletime(ABIL_ID_GEN.next())
+
+constant int   MAX_LEVELS     = 3
+constant real  CHAIN_DURATION = 5.0
+constant real  CHAIN_RADIUS   = 300.0  // Max distance from warden
+constant real  PULL_DAMAGE    = 300.0
+constant real  CHECK_INTERVAL = 0.05
+
+// Helper functions (Fixed: No colons, proper real literals)
+function getAoERadius(int idx) returns real
+    switch idx
+        case 0
+            return 350.0
+        case 1
+            return 425.0
+        case 2
+            return 500.0
+        default
+            return 0.0
+
+function getCastRange(int idx) returns real
+    switch idx
+        case 0
+            return 600.0
+        case 1
+            return 700.0
+        case 2
+            return 800.0
+        default
+            return 0.0
+
+function getCooldown(int idx) returns real
+    switch idx
+        case 0
+            return 90.0
+        case 1
+            return 75.0
+        case 2
+            return 60.0
+        default
+            return 0.0
+
+function getMana(int idx) returns int
+    switch idx
+        case 0
+            return 150
+        case 1
+            return 175
+        case 2
+            return 200
+        default
+            return 0
+
+constant string LIGHTNING_TYPE = "CLPB"
+constant string CHAIN_SFX       = "Abilities\\Spells\\Undead\\AnimateDead\\AnimateDeadTarget.mdl"
+constant string PULL_SFX        = "Abilities\\Spells\\Undead\\DeathCoil\\DeathCoilSpecialArt.mdl"
+
+@compiletime function gen()
+    let tgen = new AbilityTooltipGenerator(
+        Targettype.POINT,
+        "Binds all enemies in the target area with soul chains, preventing them from moving more than "
+        + CHAIN_RADIUS.toString(0) + " units from the Warden. "
+        + "After " + CHAIN_DURATION.toString(0) + "s the chains detonate, dealing "
+        + PULL_DAMAGE.toString(0) + " damage and pulling all bound units to the Warden."
+    )
+    let aDef = new ChannelAbilityPreset(SOUL_CHAINS_ID, MAX_LEVELS, true, tgen)
+        ..setHeroAbility(true)
+        ..setLevels(MAX_LEVELS)
+        ..presetButtonPosNormal(3, 2)
+        ..presetButtonPosResearch(3, 0)
+        ..presetTargetTypes(Targettype.POINT)
+        ..presetOption(Option.TARGETIMAGE, true)
+        ..setRequiredLevel(6)
+        ..setLevelSkipRequirement(5)
+        ..tooltipStartListen()
+        ..presetHotkey("R")
+        ..setName("Soul Chains")
+        ..presetCastRange(lvl -> getCastRange(lvl - 1))
+        ..presetCooldown(lvl -> getCooldown(lvl - 1))
+        ..presetManaCost(lvl -> getMana(lvl - 1))
+        ..presetAreaofEffect(lvl -> getAoERadius(lvl - 1))
+        ..presetDurationNormal(lvl -> 0.0)
+        ..presetDurationHero(lvl -> 0.0)
+        ..tooltipStopListen()
+
+    tgen
+        ..addProperty("Name",       lvl -> "Soul Chains")
+        ..addProperty("Levels",     lvl -> MAX_LEVELS.toString())
+        ..addProperty("Hotkey",     lvl -> "R")
+        ..addProperty("Leash",      lvl -> CHAIN_RADIUS.toString(0) + " units from Warden")
+        ..addProperty("Duration",   lvl -> CHAIN_DURATION.toString(0) + "s")
+        ..addProperty("Damage", lvl -> PULL_DAMAGE.toString(0))
+        ..addProperty("Cooldown",   lvl -> getCooldown(lvl - 1).toString(0) + "s")
+        ..applyToDef(aDef)
+
+// Tracks one chained unit
+class ChainInstance
+    unit warden
+    unit target
+    lightning line
+    CallbackPeriodic timerLoop  // Fixed: 'loop' is a reserved Jass/Wurst keyword!
+    real elapsed = 0.0
+
+    construct(unit warden, unit target)
+        this.warden = warden
+        this.target = target
+        this.line   = addLightning(LIGHTNING_TYPE, true, warden.getPos().withZ(0.0), target.getPos().withZ(0.0))
+
+        flashEffect(CHAIN_SFX, target, "origin")
+
+        // Modern Wurst implicitly captures 'this', so we don't strictly need '_this'
+        this.timerLoop = doPeriodically(CHECK_INTERVAL) cb ->
+            this.tick() 
+
+    function tick()
+        this.elapsed += CHECK_INTERVAL
+        
+        if not warden.isAlive() or not target.isAlive()
+            destroy this
+            return
+
+        if this.elapsed >= CHAIN_DURATION
+            this.detonate()
+            destroy this
+            return
+
+        let wardenPos = warden.getPos()
+        let targetPos = target.getPos()
+        let dist      = wardenPos.distanceTo(targetPos)
+
+        if dist > CHAIN_RADIUS
+            let dir      = wardenPos.angleTo(targetPos)
+            let clamped  = wardenPos.polarOffset(dir, CHAIN_RADIUS)
+            target.setXY(clamped)
+
+        line.move(true, warden.getPos().withZ(0.0), target.getPos().withZ(0.0))
+
+    function detonate()
+        if target.isAlive() and warden.isAlive()
+            let wardenPos = warden.getPos()
+            warden.damageTarget(
+                target,
+                PULL_DAMAGE,
+                false,
+                false,
+                ATTACK_TYPE_HERO,
+                DAMAGE_TYPE_MAGIC,
+                WEAPON_TYPE_WHOKNOWS
+            )
+            
+            let targetPos = target.getPos()
+            let dir = targetPos.angleTo(wardenPos)
+            let dist = targetPos.distanceTo(wardenPos)
+            let pullDist = (dist - 50.0).clamp(0.0, dist)
+            
+            target.setXY(targetPos.polarOffset(dir, pullDist))
+            flashEffect(PULL_SFX, target, "origin")
+
+    ondestroy
+        if line != null
+            line.destr()
+        if timerLoop != null
+            destroy timerLoop // Correctly destroys the CallbackPeriodic instance
+
+init
+    EventListener.onCast(SOUL_CHAINS_ID) (caster) ->
+        let targetPos = EventData.getSpellTargetPos()
+        let level     = caster.getAbilityLevel(SOUL_CHAINS_ID)
+        let aoe       = getAoERadius(level - 1)
+
+        forUnitsInRange(targetPos, aoe) (unit u) ->
+            if u.isAlive() and u.getOwner().isEnemyOf(caster.getOwner()) and not u.isType(UNIT_TYPE_STRUCTURE) and u != caster
+                new ChainInstance(caster, u)

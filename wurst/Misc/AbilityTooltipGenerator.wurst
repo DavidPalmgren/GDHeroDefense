@@ -39,6 +39,10 @@ public class AbilityTooltipGenerator implements TooltipGenerator
 	override function addProperty(string title, StringLevelClosure lc)
 		propMap.put(title, lc)
 
+	function removeProperty(string title)
+		if propMap.has(title)
+			propMap.remove(title)
+
 	override function applyToDef(AbilityDefinition def)
 		levels = propMap.has("Levels") ? fixValue(propMap.getAndRemove("Levels").run(0)).toInt() : 1
 		name = propMap.has("Name") ? propMap.getAndRemove("Name").run(0) : "unnamed"

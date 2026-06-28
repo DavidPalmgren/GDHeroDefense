@@ -9,6 +9,7 @@ import AbilityIds
 import SpinningGlaive
 import VengefulRetribution
 import ModifiedBlink
+import Chains
 
 
 public constant MAIEV_ID = compiletime(UNIT_ID_GEN.next())
@@ -16,4 +17,4 @@ public constant MAIEV_ID = compiletime(UNIT_ID_GEN.next())
 
 @compiletime function defineHero()
   new HeroDefinition('Ewar', 'Ewar')
-    ..setHeroAbilities(commaList(SPINNING_GLAIVE_ID,VENGEFUL_PASSIVE_ID, MODIFIED_BLINK_ID, AbilityIds.wardenSpiritofVengeance))
+    ..setHeroAbilities(commaList(SPINNING_GLAIVE_ID,VENGEFUL_PASSIVE_ID, MODIFIED_BLINK_ID, SOUL_CHAINS_ID))

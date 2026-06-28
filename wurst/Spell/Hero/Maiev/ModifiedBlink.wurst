@@ -2,26 +2,72 @@ package ModifiedBlink
 
 import AbilityObjEditing
 import ObjectIdGenerator
+import ClosureEvents
+import ClosureForGroups
+import AbilityTooltipGenerator
+import Icons
+import ClosureTimers
 
-// The "tgen" compiletime ID generator for this ability
 public constant MODIFIED_BLINK_ID = compiletime(ABIL_ID_GEN.next())
 
-@compiletime function genModifiedBlink()
-    new AbilityDefinitionWardenBlink(MODIFIED_BLINK_ID)
+constant int MAX_LEVELS = 4
+
+constant real array CAST_RANGE = [400., 600., 800., 1000.]
+constant real array COOLDOWN   = [12., 9., 6., 4.]
+constant int  array MANA       = [50, 50, 45, 40]
+constant real array FOK_DAMAGE = [50., 85., 130., 185.]
+constant real array FOK_RADIUS = [250., 275., 300., 325.]
+
+let tgen = new AbilityTooltipGenerator(
+    Targettype.POINT,
+    "Blinks to the target location, releasing a burst of blades on arrival that damages nearby enemies.")
+
+@compiletime function gen()
+    let aDef = new AbilityDefinitionWardenBlink(MODIFIED_BLINK_ID)
         ..setHeroAbility(true)
-        ..setLevels(3)
-        
-        // Configured for the 'W' Grid Slot
-        ..presetButtonPosNormal(1, 2)      // Column 1, Row 2 (W Slot)
-        ..presetButtonPosResearch(1, 0)    // Column 1, Row 0
+        ..setLevels(MAX_LEVELS)
+        ..presetButtonPosNormal(1, 2)
+        ..presetButtonPosResearch(1, 0)
+        ..tooltipStartListen()
         ..presetHotkey("W")
-        
-        // Standard Blink defaults scaling per level
         ..setName("Blink")
-        ..presetCastRange(lvl -> 200.0 + (lvl * 200.0)) // 400 / 600 / 800
-        ..presetCooldown(lvl -> 15.0 - (lvl * 3.0))     // 12 / 9 / 6 seconds
-        ..presetManaCost(lvl -> 50)                     // Flat 50 mana
-        
-        // Set tooltips to match the standard W hotkey layout
-        ..presetTooltipNormal(lvl -> "Blink - [|cffffcc00Level " + lvl.toString() + "|r]")
-        ..presetTooltipNormalExtended(lvl -> "Short distance teleportation that allows the Warden to pass in and out of combat safely.")
+        ..presetCastRange(lvl -> CAST_RANGE[lvl - 1])
+        ..presetCooldown(lvl -> COOLDOWN[lvl - 1])
+        ..presetManaCost(lvl -> MANA[lvl - 1])
+        ..tooltipStopListen()
+
+    tgen
+        ..addProperty("Name",      lvl -> "Blink")
+        ..addProperty("Levels",    lvl -> MAX_LEVELS.toString())
+        ..addProperty("Hotkey",    lvl -> "W")
+        ..addProperty("Range",     lvl -> CAST_RANGE[lvl - 1].toString(0))
+        ..addProperty("Damage", lvl -> FOK_DAMAGE[lvl - 1].toString(0))
+        ..addProperty("Area of Effect", lvl -> FOK_RADIUS[lvl - 1].toString(0))
+        ..addProperty("Cooldown",  lvl -> COOLDOWN[lvl - 1].toString(0) + "s")
+        ..addProperty("Mana",      lvl -> MANA[lvl - 1].toString())
+        ..applyToDef(aDef)
+
+init
+    EventListener.onCast(MODIFIED_BLINK_ID) (caster) ->
+        let level    = caster.getAbilityLevel(MODIFIED_BLINK_ID)
+        let blinkPos = EventData.getSpellTargetPos()
+        let damage   = FOK_DAMAGE[level - 1]
+        let radius   = FOK_RADIUS[level - 1]
+
+        doAfter(0.1) ->
+            flashEffect("Abilities\\Spells\\NightElf\\Blink\\BlinkCaster.mdl", blinkPos)
+
+            forUnitsInRange(blinkPos, radius) (unit target) ->
+                if target.isAlive()
+                    and target.getOwner().isEnemyOf(caster.getOwner())
+                    and not target.isType(UNIT_TYPE_STRUCTURE)
+                    caster.damageTarget(
+                        target,
+                        damage,
+                        false,
+                        false,
+                        ATTACK_TYPE_NORMAL,
+                        DAMAGE_TYPE_MAGIC,
+                        WEAPON_TYPE_WHOKNOWS
+                    )
+                    flashEffect("Abilities\\Spells\\NightElf\\FanOfKnives\\FanOfKnivesTarget.mdl", target, "origin")

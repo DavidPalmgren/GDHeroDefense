@@ -3,15 +3,16 @@ package ElunesGrace
 import AbilityTooltipGenerator
 import ClosureEvents
 
-
-public constant ELUNES_GRACE_ID = compiletime(ABIL_ID_GEN.next()) 
-constant real RANGE = 900.
+public constant ELUNES_GRACE_ID = compiletime(ABIL_ID_GEN.next())
+constant real RANGE    = 900.
 constant real BASE_AOE = 400.
 
-let tgen = new AbilityTooltipGenerator("Elune's Grace")
+let tgen = new AbilityTooltipGenerator(
+    Targettype.POINT,
+    "Tyrande calls upon Elune's light, healing wounded allies in the target area.")
 
 @compiletime function generateAbility()
-    new ChannelAbilityPreset(ELUNES_GRACE_ID, 3, true, tgen)
+    let def = new ChannelAbilityPreset(ELUNES_GRACE_ID, 4, true, tgen)
         ..setHeroAbility(false)
         ..presetButtonPosNormal(1, 2)
         ..presetButtonPosResearch(1, 0)
@@ -26,17 +27,27 @@ let tgen = new AbilityTooltipGenerator("Elune's Grace")
         ..presetManaCost(lvl -> 100 + ((lvl - 1) * 25))
         ..presetCastRange((int lvl) -> RANGE + (lvl * 100.))
         ..setLevelSkipRequirement(0)
-        ..tooltipStopListen()
+
+    // Add properties to tgen before stopping listen
+    tgen.addProperty("Healing",    lvl -> (150 + (lvl * 50)).toString() + " HP")
+    tgen.addProperty("Radius",     lvl -> (BASE_AOE + (lvl * 25.)).toString(0))
+    tgen.addProperty("Cast Range", lvl -> (RANGE + (lvl * 100.)).toString(0))
+    tgen.addProperty("Cooldown",   lvl -> (24 - ((lvl - 1.) * 2)).toString(0) + "s")
+    tgen.addProperty("Mana",       lvl -> (100 + ((lvl - 1) * 25)).toString())
+    tgen.applyToDef(def)
+
 
 init
     EventListener.onPointCast(ELUNES_GRACE_ID) (unit caster, vec2 target) ->
-        let lvl = caster.getAbilityLevel(ELUNES_GRACE_ID)
+        let lvl        = caster.getAbilityLevel(ELUNES_GRACE_ID)
         let currentAoE = BASE_AOE + (lvl * 25.)
         let healAmount = 150.0 + (lvl * 50.0)
-        
+
         ENUM_GROUP.enumUnitsInRange(target, currentAoE)
         for u in ENUM_GROUP
-            if u.isAlive() and u.isAllyOf(caster.getOwner()) and not u.isType(UNIT_TYPE_STRUCTURE) and not u.isType(UNIT_TYPE_MECHANICAL)
+            if u.isAlive()
+                and u.isAllyOf(caster.getOwner())
+                and not u.isType(UNIT_TYPE_STRUCTURE)
+                and not u.isType(UNIT_TYPE_MECHANICAL)
                 u.setHP(u.getHP() + healAmount)
-
                 flashEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt.mdl", u.getPos())
