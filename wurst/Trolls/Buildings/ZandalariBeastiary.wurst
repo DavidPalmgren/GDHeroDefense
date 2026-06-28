@@ -22,7 +22,8 @@ public constant ZANDALARI_BESTIARY_ID = compiletime(UNIT_ID_GEN.next())
         ..setTooltipExtended("Breeds and equips the massive prehistoric fauna of Zandalar. Trains Raptor Outriders, Pterrodax Riders, and Direhorn Ironclads.")
         
         // Visuals & Art
-        ..setIconGameInterface(Icons.bTNBeastiary)
+        ..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNRuinsBeastiary.blp")
+        ..setModelFile("BeastiaryGurubashiV1.02.mdx")
         ..setScalingValue(1.10)
         
         // Unit Production Pipeline

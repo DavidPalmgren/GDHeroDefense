@@ -24,7 +24,8 @@ public constant ZANDALARI_BARRACKS_ID = compiletime(UNIT_ID_GEN.next())
         ..setName("Rastari War-Pit")
         ..setTooltipBasic("Build Rastari War-Pit")
         ..setTooltipExtended("The martial heart of the empire. Trains Zandalari Vanguards and Headhunters to expand your territory.")
-        ..setIconGameInterface(Icons.bTNOrcBattleStandard)
+        ..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNRuinsBarracks.blp")
+        ..setModelFile("BarracksGurubashiV1.01.mdx")
         
         // LINKED: This tells the engine to sell your two custom units here
         ..setUnitsTrained(commaList(ZANDALARI_WARRIOR_ID, ZANDALARI_HEADHUNTER_ID, ZANDALARI_SIEGE_ID))

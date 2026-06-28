@@ -15,7 +15,8 @@ public constant ZANDALARI_ALTAR_ID = compiletime(UNIT_ID_GEN.next())
         ..setTooltipExtended("A sacred temple of mighty heroes. Summon and resurrect powerful Zandalari Heroes to lead your armies into battle.")
         
         // Visuals & Art
-        ..setIconGameInterface(Icons.bTNAltarOfStorms)
+        ..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNRuinsAltar.blp")
+        ..setModelFile("AltarOfLoaGurubashiV1.01.mdx")
         
         // --- YOUR REQUESTED MODIFICATIONS ---
         ..setGoldCost(50)   // Updated Gold Cost

@@ -4,6 +4,7 @@ import UnitObjEditing
 import ObjectIdGenerator
 import ObjectIds
 import Icons
+import PathingMaps
 
 
 import ZandalariTownHallID
@@ -18,7 +19,8 @@ public constant ZANDALARI_TEMPLE_SACRIFICE_ID = compiletime(UNIT_ID_GEN.next())
         ..setTooltipBasic("Build [|cffffcc00Temple of Sacrifice|r]")
         ..setTooltipExtended("The apex of Zandalari religious devotion. Trains elite Zealots, fanatical Shadow Preachers, and blood-binding ritualists to channel the devastating wrath of the Loa.")
         
-        ..setIconGameInterface(Icons.bTNSacrifice)
+        ..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNTempleOfSacrifice.blp")
+        ..setModelFile("TempleOfSacrifice.mdx")
         //..setModelFile("buildings\\other\\TempleOfSacrifice\\TempleOfSacrifice.mdl") 
         
         ..setRequirements(commaList(ZANDALARI_T3_ID))

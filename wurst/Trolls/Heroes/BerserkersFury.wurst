@@ -6,6 +6,7 @@ import RegisterEvents
 import ClosureTimers
 import HashMap
 import LinkedList
+import Icons
 
 public constant BERSERKERS_FURY = compiletime(ABIL_ID_GEN.next())
 
@@ -28,13 +29,13 @@ function getMaxAttackSpeed(int idx) returns real
 function getMaxHpRegen(int idx) returns real
     switch idx
         case 0
-            return 15.0
+            return 4.0
         case 1
-            return 18.0
+            return 7.0
         case 2
-            return 22.0
+            return 11.0
         case 3
-            return 30.0
+            return 16.0
         default
             return 0.0
 
@@ -61,13 +62,14 @@ let debugThrottler = new HashMap<unit, int>() // Tracks time to limit debug mess
         ..setHeroAbility(true)
         ..setLevels(MAX_LEVELS)
         ..setName("Berserker's Fury")
-        ..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNBerserkForrestTroll.blp")
+        ..setIconNormal(Icons.bTNBerserkForTrolls)
+        ..setIconResearch(Icons.bTNBerserkForTrolls)
         ..setTargetsAllowed(1, "self")
         ..setArmorBonus(1, 0.0)
         ..setAreaofEffect(1, 10.0)
         ..setBuffs(1, "")
 
-    for int i = 1 to MAX_LEVELS
+    for i = 1 to MAX_LEVELS
         let idx = i - 1
         let learnTooltip = "Learn [|cffff3300Berserker's Fury|r] - Level " + i.toString()
         let extendedTooltip = "The hero's blood boils as they take damage. Grants up to |cff00ff00+"
@@ -77,8 +79,12 @@ let debugThrottler = new HashMap<unit, int>() // Tracks time to limit debug mess
 
         def..setTooltipNormal(i, learnTooltip)
         def..setTooltipNormalExtended(i, extendedTooltip)
+        def..setTooltipLearn(learnTooltip)
+        def..setTooltipLearnExtended(extendedTooltip)
         def..setArmorBonus(i, 0.0)
         def..setAreaofEffect(i, 10.0)
+        def..setHotkeyLearn("E")
+        def..setHotkeyNormal("E")
 
 public function unit.getHealingMultiplier() returns real
     let lvl = this.getAbilityLevel(BERSERKERS_FURY)

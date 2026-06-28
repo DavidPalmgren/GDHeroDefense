@@ -32,7 +32,7 @@ public constant GRASP_SLOW_ABIL = compiletime(ABIL_ID_GEN.next())
 constant int MAX_LEVELS = 4
 
 // Spell Scaling Profiles [Level 1, Level 2, Level 3, Level 4]
-constant real array ZONE_RADIUS   = [350.0, 400.0, 450.0, 500.0]
+constant real array ZONE_RADIUS = [300.0, 350.0, 400.0, 450.0]
 constant real array ZONE_DURATION = [12.0, 14.0, 16.0, 18.0]
 constant int array  MANA_COST     = [110, 125, 140, 155]
 constant real array COOLDOWN      = [24.0, 21.0, 18.0, 15.0]
@@ -55,15 +55,29 @@ constant string LIGHTNING_TYPE = "SPIR" // Spirit Link appearance
         ..setHeroAbility(true)
         ..setLevels(MAX_LEVELS)
         ..setName("Death's Grasp")
-        ..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNAuraOfDarkness.blp")
-        ..setIconResearch("ReplaceableTextures\\CommandButtons\\BTNAuraOfDarkness.blp")
+        ..setHotkeyLearn("W")
+        ..setHotkeyNormal("W")
+        ..setButtonPositionNormalX(1)
+        ..setButtonPositionNormalY(2)
+        ..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNBlackPlague.blp")
+        ..setIconResearch("ReplaceableTextures\\CommandButtons\\BTNBlackPlague.blp")
         ..setBuffs(1, "")
-        ..setDurationHero(1, 0.01)
-        ..setDurationNormal(1, 0.01)
+        ..setDurationHero(1, 1)
+        ..setDurationHero(2, 1)
+        ..setDurationHero(3, 1)
+        ..setDurationHero(4, 1)
+        ..setDurationNormal(1, 1)
+        ..setDurationNormal(2, 1)
+        ..setDurationNormal(3, 1)
+        ..setDurationNormal(4, 1)
         ..setCastRange(1, 500)
         ..setCastRange(2, 500)
         ..setCastRange(3, 500)
         ..setCastRange(4, 500)
+        ..setCooldown(1, 1)
+        ..setCooldown(2, 1)
+        ..setCooldown(3, 1)
+        ..setCooldown(4, 1)
 
     new BuffDefinition(GRASP_SLOW_BUFF, 'Bslo')
         ..setName(1, "Death's Grasp")
@@ -88,10 +102,11 @@ constant string LIGHTNING_TYPE = "SPIR" // Spirit Link appearance
 
     new UnitDefinition(GRASP_SERVANT, UnitIds.ghost)
         ..setName("Grasp Servant")
-        ..setModelFile("units\\undead\\Abomination\\Abomination.mdl")
+        ..setModelFile("MojoMask_v5A.mdx")
         ..setAttack1CooldownTime(1.35)
         ..setAttack1Range(128)
         ..setAttack1WeaponType(WeaponType.Normal)
+        ..setAttack1AttackType(AttackType.Chaos)
         ..setSpeedBase(320)
         ..setSelectionScale(1.1)
         ..setScalingValue(1.15)
@@ -112,9 +127,11 @@ constant string LIGHTNING_TYPE = "SPIR" // Spirit Link appearance
         abDef
             ..setTooltipNormal(i, "Cast [|cffff0000Death's Grasp|r] - Level " + i.toString())
             ..setTooltipNormalExtended(i, extendedTooltip)
+            ..setTooltipLearn("[|cffff0000Death's Grasp|r]")
+            ..setTooltipLearnExtended(extendedTooltip)
             ..setAreaofEffect(i, ZONE_RADIUS[idx])
             ..setManaCost(i, MANA_COST[idx])
-            ..setCooldown(i, COOLDOWN[idx])
+            ..setCooldown(i, 1)
 
 // ============================================================================
 // SYSTEM ENGINE RUNTIME (Tether Control Tracking)
@@ -154,6 +171,10 @@ class TetherInstance
         // Slow loop runs independently at a lower rate
         this.slowLoop = doPeriodically(SLOW_CHECK_INTERVAL) (CallbackPeriodic cb) ->
             _this.applyAreaSlow()
+
+    function getDuration() returns real
+        return this.duration
+        
 
     function applyAreaSlow()
         let owner = this.servant.getOwner()
@@ -214,8 +235,15 @@ class TetherInstance
 init
     registerPlayerUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT) ->
         if GetSpellAbilityId() == DEATHS_GRASP
-            let caster = GetTriggerUnit()
+            let caster     = GetTriggerUnit()
             let targetPoint = vec2(GetSpellTargetX(), GetSpellTargetY())
-            let level = caster.getAbilityLevel(DEATHS_GRASP)
-            
-            new TetherInstance(targetPoint, caster.getOwner(), level)
+            let level      = caster.getAbilityLevel(DEATHS_GRASP)
+            let idx        = (level - 1).clamp(0, MAX_LEVELS - 1)
+            let scale      = ZONE_RADIUS[idx] / 300.0
+
+            let aoeEffect = addEffect("WitheringPresence.mdx", targetPoint)
+            aoeEffect.setScale(ZONE_RADIUS[idx] / 300.0)
+
+            let instance = new TetherInstance(targetPoint, caster.getOwner(), level)
+            doAfter(instance.getDuration()) ->
+                aoeEffect.destr()

@@ -77,6 +77,7 @@ public constant ZANDALARI_FLYER_ID   = compiletime(UNIT_ID_GEN.next())
         ..setTooltipBasic("Train Raptor Outrider")
         ..setTooltipExtended("Blistering fast skirmish cavalry mounted on a vicious Zandalari raptor. Specializes in flanking maneuvers and tracking fleeing targets.")
         ..setIconGameInterface(Icons.bTNRaider)
+        ..setUnitSoundSet("ForestTroll")
         ..setNormalAbilities(commaList(ZANDALARI_ENSNARE))
         
         ..setGoldCost(55)

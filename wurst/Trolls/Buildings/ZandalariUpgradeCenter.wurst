@@ -16,17 +16,14 @@ public constant ZANDALARI_UPGRADE_CENTER_ID = compiletime(UNIT_ID_GEN.next())
         ..setName("Mojo Crucible")
         ..setTooltipBasic("Build Mojo Crucible")
         ..setTooltipExtended("The technological and spiritual forge of the empire. Refines tribal alloys and extracts potent mojo to upgrade your forces.")
-        ..setIconGameInterface(Icons.bTNWorkshop) // cant find icon lets move on
+        ..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNTrollHut.blp") // cant find icon lets move on
+        ..setModelFile("WCIITrollLumberMill.mdx")
         
-        // PURGE DEFAULT UPGRADES: Passing an empty string completely wipes out 
-        // Spiked Barricades, Reinforced Defenses, and Orc weapon/armor configurations.
         ..setResearchesAvailable("")
-        
-        // Economy Configuration (0-Lumber Rule Applied)
+
         ..setGoldCost(50)
         ..setLumberCost(0)
-        
-        // Base Structural Stats
+
         ..setBuildTime(30)
         ..setHitPointsMaximumBase(1000)
         // Upgrades

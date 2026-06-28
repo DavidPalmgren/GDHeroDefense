@@ -11,15 +11,19 @@ import HexingStrike
 import HealingWave
 import BerserkersFury
 import DeathsGrasp
+import BloodPact
 
 public constant VOLJIN_ID = compiletime(UNIT_ID_GEN.next())
 
 @compiletime function gen()
   new HeroDefinition(UnitIds.shadowhunter, UnitIds.shadowhunter)
     ..setNormalAbilities(commaList(HEXING_STRIKE_ABIL ))
-    ..setHeroAbilities(commaList(HEALING_WAVE, BERSERKERS_FURY, DEATHS_GRASP))
+    ..setHeroAbilities(commaList(HEALING_WAVE, BERSERKERS_FURY, DEATHS_GRASP, BLOOD_PACT))
     ..setManaInitialAmount(5000)
     ..setManaRegeneration(20)
+    ..setGoldCost(50)
+    ..setLumberCost(0)
+    ..setBuildTime(5)
 
 init
   nullTimer() ->
@@ -29,7 +33,7 @@ init
     
     let playerRed = players[0]
 
-    CreateUnit(playerRed, VOLJIN_ID, x-50, y-50, 270.0) // change id lata
+    CreateUnit(playerRed, UnitIds.shadowhunter, x-50, y-50, 270.0) // change id lata
 
 
     forUnitsInRect(GetPlayableMapRect()) (unit u) ->

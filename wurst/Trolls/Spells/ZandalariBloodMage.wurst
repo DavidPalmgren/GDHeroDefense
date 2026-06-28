@@ -2,6 +2,7 @@ package ZandalariBloodMage
 
 import RegisterEvents
 import ChannelAbilityPreset
+import AttachmentPoints
 
 public constant SPELL_SUMMON_BLOOD_ELEM_ID = compiletime(ABIL_ID_GEN.next())
 public constant UNIT_BLOOD_ELEMENTAL_ID    = compiletime(UNIT_ID_GEN.next())
@@ -19,7 +20,9 @@ public constant UNIT_BLOOD_ELEMENTAL_ID    = compiletime(UNIT_ID_GEN.next())
         ..setManaCost(1, 125)
         ..setCooldown(1, 45.0)
         ..setHeroAbility(true)
-        ..setArtCaster("Abilities\\Spells\\Undead\\AnimateDead\\AnimateDeadTarget.mdl")
+        ..setArtCaster("BoilingBlood_effect.mdx")
+        ..setCasterAttachmentPoint("chest")
+        
 
     new UnitDefinition(UNIT_BLOOD_ELEMENTAL_ID, 'hwt3')
         ..setName("Blood Elemental")
@@ -29,6 +32,7 @@ public constant UNIT_BLOOD_ELEMENTAL_ID    = compiletime(UNIT_ID_GEN.next())
         ..setTintingColorGreen(20)
         ..setTintingColorBlue(20)
         ..setCollisionSize(16)
+        ..setAttack1ProjectileArt("BoilingBlood_missile.mdx")
         
         ..setHitPointsMaximumBase(550)
         ..setHitPointsRegenerationRate(3.0)
@@ -47,5 +51,5 @@ init
             u.setVertexColor(255,0,0,255)
             u.setTimedLife(30.0)
             
-            AddSpecialEffect("Objects\\Spawnmodels\\Other\\HumanBloodFootstep\\HumanBloodFootstep.mdl", spawnPos.x, spawnPos.y)..destr()
+            AddSpecialEffect("Objects\\Spawnmodels\\Human\\HumanBlood\\HumanBloodFootman.mdl", spawnPos.x, spawnPos.y)..destr()
             AddSpecialEffect("Abilities\\Spells\\Undead\\AnimateDead\\AnimateDeadTarget.mdl", spawnPos.x, spawnPos.y)..destr()

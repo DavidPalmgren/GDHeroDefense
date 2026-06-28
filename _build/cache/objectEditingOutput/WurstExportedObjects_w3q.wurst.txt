@@ -1,6 +1,5 @@
 package WurstExportedObjects_w3q
 import ObjEditingNatives
-import ObjEditingCommons
 
 // Modified Table (contains all custom objects)
 
@@ -22,6 +21,7 @@ import ObjEditingCommons
 	let def = createObjectDefinition("w3q", 'R001', 'Resi')
 	..setLvlDataInt("gglb", 0, 0, 90)
 	..setLvlDataString("greq", 1, 0, "etoe,edob")
+	..setLvlDataInt("glmb", 0, 0, 0)
 	..setLvlDataString("gnam", 1, 0, "Impetus")
 	..setLvlDataString("gar1", 1, 0, "ReplaceableTextures\\CommandButtons\\BTNSearingArrows.blp")
 	..setLvlDataString("gtp1", 1, 0, "Research Impetus")
@@ -619,5 +619,15 @@ import ObjEditingCommons
 @compiletime function create_w3q_Reuv()
 	let def = createObjectDefinition("w3q", 'Reuv', 'Reuv')
 	..setLvlDataInt("gglb", 0, 0, 35)
+
+
+@compiletime function create_w3q_Redc()
+	let def = createObjectDefinition("w3q", 'Redc', 'Redc')
+	..setLvlDataInt("glmb", 0, 0, 0)
+
+
+@compiletime function create_w3q_Redt()
+	let def = createObjectDefinition("w3q", 'Redt', 'Redt')
+	..setLvlDataInt("glmb", 0, 0, 0)
 
 

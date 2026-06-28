@@ -32,10 +32,12 @@ public constant ZANDALARI_EXECUTIONER_ID = compiletime(UNIT_ID_GEN.next())
         ..setTooltipBasic("Train Mojo Apothecary")
         ..setTooltipExtended("An alchemical doctor who carries volatile vats of bubbling brew. Throws healing elixirs to allies and corrosive acid cocktails to melt enemy armor strips.")
         ..setIconGameInterface(Icons.bTNHeroAlchemist)
+        ..setModelFile("WitchDoctor.mdx")
         ..setNormalAbilities(commaList(MOJOPALM_ID))
         ..setHotkey("W")
         ..setButtonPositionX(1)
         ..setButtonPositionY(0)
+        ..setUnitSoundSet("IceTrollShadowPriest")
 
         
         // Caster Stat Allocation
@@ -54,20 +56,27 @@ public constant ZANDALARI_EXECUTIONER_ID = compiletime(UNIT_ID_GEN.next())
     // 2. RITUALIST CASTER: ZANCHUL BLOOD-WEAVER
     // -------------------------------------------------------------------------
     // https://www.hiveworkshop.com/threads/blood-troll-mage.326962/
+    // Funnily this is jacc's model
+    // https://www.hiveworkshop.com/threads/blood-missile.180418/ attack missile and effects
     new UnitDefinition(ZANDALARI_BLOOD_MAGE_ID, 'ospw') // Inherits Spirit Walker high-tier master slot
         ..setName("Zanchul Blood-Weaver")
         ..setTooltipBasic("Train Zanchul Blood-Weaver")
         ..setTooltipExtended("A sinister practitioner of sacrificial voodoo magic. Channels forbidden rituals to siphon enemy vitality or links allied souls to this world even in death.")
-        ..setIconGameInterface(Icons.bTNIceTrollBeserker1)
+        ..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNBloodTrollMage.blp")
+        ..setModelFile("BloodTrollMage.mdx")
+        ..setUnitSoundSet("ForestTrollShadowPriest")
+        ..setAttack1ProjectileArt("BoilingBlood_missile.mdx")
         ..setNormalAbilities(commaList(SPELL_SUMMON_BLOOD_ELEM_ID, SPELL_BLOOD_LINK_ID))
         ..setHotkey("Q")
         ..setButtonPositionY(0)
         ..setButtonPositionX(0)
+        ..setCollisionSize(16)
         
         // Caster Stat Allocation
         ..setManaMaximum(300)
         ..setManaInitialAmount(200)
         ..setManaRegeneration(0.67)
+
         
         // Economy
         ..setGoldCost(70)
@@ -132,7 +141,8 @@ public constant ZANDALARI_EXECUTIONER_ID = compiletime(UNIT_ID_GEN.next())
         ..setIconGameInterface(Icons.bTNHeroBlademaster) // Elite, menacing swordfighter aesthetic
         
         // NATIVE ABILITY: Assigns the standard Orc Berserk active skill ('Absk')
-        ..setNormalAbilities(commaList(SPELL_EXECUTIONER_ID, SPELL_TENDON_CLEAVE_ID)) 
+        ..setNormalAbilities(commaList(SPELL_EXECUTIONER_ID, SPELL_TENDON_CLEAVE_ID))
+        ..setUnitSoundSet("IceTroll")
         
         // Elite Combat Attributes (Significantly beefier than standard infantry)
         ..setHitPointsMaximumBase(750)

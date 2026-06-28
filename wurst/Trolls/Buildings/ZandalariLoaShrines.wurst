@@ -35,7 +35,7 @@ constant REZAN_GHOST_ID = 'ndtr' // dark troll for now
         ..setName("Zandalari Monument")
         ..setTooltipBasic("Build [|cffffcc00Zandalari Monument|r]")
         ..setTooltipExtended("A stone foundation erected in honor of the wild gods. Can be upgraded and dedicated to a specific Loa to unlock divine units and forbidden tech pathways.")
-        ..setIconGameInterface(Icons.bTNVoodooLounge)
+        ..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNDemonicCircleRenowed.blp")
         ..setModelFile("Doodads\\Ruins\\Props\\Ruins_NagaCircle\\Ruins_NagaCircle.mdl")
         ..setGoldCost(80)
         ..setLumberCost(0) 

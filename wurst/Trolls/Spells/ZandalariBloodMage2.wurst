@@ -82,7 +82,7 @@ init
                     
                     caster.damageTarget(u, 10.0, false, false, ATTACK_TYPE_MAGIC, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
                     
-                    AddSpecialEffect("Objects\\Spawnmodels\\Other\\HumanBloodSplat\\HumanBloodSplat.mdl", u.getX(), u.getY()).destr()
+                    AddSpecialEffect("Objects\\Spawnmodels\\Human\\HumanBlood\\HumanBloodFootman.mdl", u.getX(), u.getY()).destr()
             
             targetGroup.destr()
 
@@ -108,5 +108,5 @@ init
             if currentCooldown > 0.1
                 BlzSetUnitAttackCooldown(zombie, currentCooldown * 0.65, 0)
             
-            AddSpecialEffectTarget("Abilities\\Spells\\Undead\\UnholyFrenzy\\UnholyFrenzyTarget.mdl", zombie, "overhead").destr()
+            AddSpecialEffectTarget("BoilingBlood_buff.mdx", zombie, "overhead").destr()
             zombie.setTimedLife(10.0)
