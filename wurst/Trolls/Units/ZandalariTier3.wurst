@@ -94,29 +94,29 @@ public constant ZANDALARI_EXECUTIONER_ID = compiletime(UNIT_ID_GEN.next())
         ..setTooltipBasic("Train Direhorn Ironclad")
         ..setTooltipExtended("A colossal prehistoric warbeast covered in golden plates. Crushes ground forces underfoot while the Rastari riders hurl heavy barbed harpoons to impale flying enemies.")
         ..setIconGameInterface(Icons.bTNRiderlessKodo)
+        ..setModelFile("ThroneOfWar.mdx")
         
-        // Core Tank Statistics
         ..setHitPointsMaximumBase(1100)
         ..setDefenseBase(5)
+        ..setAttacksEnabled(3)
         
-        // DUAL WEAPON IMPLEMENTATION (Ground Melee + Air Ranged)
-        ..setAttacksEnabled(3) // Enables both Attack 1 and Attack 2 simultaneously
-        
-        // Attack 1: Ground Melee Stomp
-        ..setAttack1TargetsAllowed("ground,structure,debris")
+        ..setAttack1TargetsAllowed("ground,structure,debris,air")
         ..setAttack1AttackType(AttackType.Normal)
-        ..setAttack1DamageBase(42)
-        ..setAttack1Range(128) // Melee engagement
         
-        // Attack 2: Sky-Piercing Harpoon (Anti-Air)
-        // Multi target spears thrown or spell instead lets see
-        ..setAttack2TargetsAllowed("air") // Targets airborne forces exclusively
+        ..setAttack1DamageBase(42)
+        ..setAttack1Range(128)
+        
+        ..setAttack2TargetsAllowed("air")
         ..setAttack2AttackType(AttackType.Pierce)
         ..setAttack2WeaponType(WeaponType.Missile)
         ..setAttack2DamageBase(35)
         ..setAttack2Range(550)
         ..setAttack2ProjectileArt("Abilities\\Weapons\\Rifle\\RifleMissile.mdl")
         ..setAttack2ProjectileSpeed(1400)
+        ..setAttack2MaximumNumberofTargets(6)
+        ..setNormalAbilities("Aatk,Aol1")
+        ..setAttack2CooldownTime(1.5)
+        ..setAttack2ShowUI(true)
         
         // Economy & Supply Node Allocation
         ..setGoldCost(110)
@@ -131,7 +131,6 @@ public constant ZANDALARI_EXECUTIONER_ID = compiletime(UNIT_ID_GEN.next())
         ))
 
         ..setRequirements(commaList(ZANDALARI_T3_ID))
-        ..setNormalAbilities("")
 
 
     new UnitDefinition(ZANDALARI_EXECUTIONER_ID, 'ogru') // Based on Grunt skeleton for heavy two-handed swing animations
