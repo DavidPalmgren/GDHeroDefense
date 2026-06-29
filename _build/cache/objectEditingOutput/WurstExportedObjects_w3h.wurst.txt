@@ -131,25 +131,25 @@ import BuffObjEditing
 
 
 @compiletime function create_w3h_BM0d()
-	new BuffDefinition('BM0d', 'Bspl')
+	new BuffDefinition('BM0d', 'Bslo')
+	..setName(1, "Death's Grasp")
+	..setTooltipNormal(1, "Death's Grasp")
+	..setTooltipNormalExtended(1, "Slowed by the cursed zone.")
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNAuraOfDarkness.blp")
+
+
+@compiletime function create_w3h_BM0e()
+	new BuffDefinition('BM0e', 'Bspl')
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNSacrifice.blp")
 	..setTooltipNormal(1, "Blood Anchor")
 	..setTooltipNormalExtended(1, "This unit's life force is anchored to a blood ritual. If it dies, it will temporarily reanimate as a gore soaked berserker.")
 
 
-@compiletime function create_w3h_BM0e()
-	new BuffDefinition('BM0e', 'Btcg')
+@compiletime function create_w3h_BM0f()
+	new BuffDefinition('BM0f', 'Btcg')
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNAttack.blp")
 	..setTooltipNormal(1, "Maimed (Tendon Cleave)")
 	..setTooltipNormalExtended(1, "This unit's tendons have been severed. Movement speed and attack speed reduced by 20%.")
-
-
-@compiletime function create_w3h_BM0f()
-	new BuffDefinition('BM0f', 'Bslo')
-	..setName(1, "Death's Grasp")
-	..setTooltipNormal(1, "Death's Grasp")
-	..setTooltipNormalExtended(1, "Slowed by the cursed zone.")
-	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNAuraOfDarkness.blp")
 
 
 // Original Table (contains all modified default/melee objects)

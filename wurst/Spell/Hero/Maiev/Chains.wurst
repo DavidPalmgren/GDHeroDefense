@@ -13,7 +13,7 @@ public constant SOUL_CHAINS_ID = compiletime(ABIL_ID_GEN.next())
 
 constant int   MAX_LEVELS     = 3
 constant real  CHAIN_DURATION = 5.0
-constant real  CHAIN_RADIUS   = 300.0  // Max distance from warden
+constant real  CHAIN_RADIUS   = 500.0  // Max distance from warden
 constant real  PULL_DAMAGE    = 300.0
 constant real  CHECK_INTERVAL = 0.05
 
@@ -104,12 +104,11 @@ constant string PULL_SFX        = "Abilities\\Spells\\Undead\\DeathCoil\\DeathCo
         ..addProperty("Cooldown",   lvl -> getCooldown(lvl - 1).toString(0) + "s")
         ..applyToDef(aDef)
 
-// Tracks one chained unit
 class ChainInstance
     unit warden
     unit target
     lightning line
-    CallbackPeriodic timerLoop  // Fixed: 'loop' is a reserved Jass/Wurst keyword!
+    CallbackPeriodic timerLoop
     real elapsed = 0.0
 
     construct(unit warden, unit target)
@@ -119,7 +118,6 @@ class ChainInstance
 
         flashEffect(CHAIN_SFX, target, "origin")
 
-        // Modern Wurst implicitly captures 'this', so we don't strictly need '_this'
         this.timerLoop = doPeriodically(CHECK_INTERVAL) cb ->
             this.tick() 
 
@@ -148,30 +146,44 @@ class ChainInstance
 
     function detonate()
         if target.isAlive() and warden.isAlive()
-            let wardenPos = warden.getPos()
-            warden.damageTarget(
-                target,
-                PULL_DAMAGE,
-                false,
-                false,
-                ATTACK_TYPE_HERO,
-                DAMAGE_TYPE_MAGIC,
-                WEAPON_TYPE_WHOKNOWS
-            )
-            
-            let targetPos = target.getPos()
-            let dir = targetPos.angleTo(wardenPos)
-            let dist = targetPos.distanceTo(wardenPos)
-            let pullDist = (dist - 50.0).clamp(0.0, dist)
-            
-            target.setXY(targetPos.polarOffset(dir, pullDist))
+            // 1. Damage and SFX
+            warden.damageTarget(target, PULL_DAMAGE, false, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
             flashEffect(PULL_SFX, target, "origin")
+            
+            // 2. Setup movement variables
+            let duration = 0.5 
+            let totalTicks = (duration / CHECK_INTERVAL).toInt()
+            let totalDist = target.getPos().distanceTo(warden.getPos()) - 50.0
+            let moveStep = totalDist / totalTicks.toReal()
+            
+            // 3. Use an integer counter (which is easier to manage in closures)
+            var ticksPassed = 0
+            
+            doPeriodically(CHECK_INTERVAL) (CallbackPeriodic cb) ->
+                ticksPassed += 1
+                
+                if ticksPassed >= totalTicks or not target.isAlive()
+                    destroy cb
+                else
+                    let currentPos = target.getPos()
+                    let targetPos = warden.getPos()
+                    let distToTarget = currentPos.distanceTo(targetPos)
+                    
+                    // Use .min() as an extension method on the real value
+                    
+                    var actualStep = moveStep
+                    if actualStep > (distToTarget - 50.0)
+                        actualStep = (distToTarget - 50.0)
+                    
+                    if actualStep > 0
+                        let angle = currentPos.angleTo(targetPos)
+                        target.setXY(currentPos.polarOffset(angle, actualStep))
 
     ondestroy
         if line != null
             line.destr()
         if timerLoop != null
-            destroy timerLoop // Correctly destroys the CallbackPeriodic instance
+            destroy timerLoop
 
 init
     EventListener.onCast(SOUL_CHAINS_ID) (caster) ->

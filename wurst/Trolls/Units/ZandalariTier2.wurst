@@ -10,6 +10,7 @@ import ZandalariUpgradeCenter
 import ZandalariWitchDoctorUpgrade
 import ZandalariWitchDoctorSpells
 import ZandalariTownHallID
+import UnitIds
 
 import ZandalariEnsnare
 
@@ -76,9 +77,10 @@ public constant ZANDALARI_FLYER_ID   = compiletime(UNIT_ID_GEN.next())
         ..setName("Raptor Outrider")
         ..setTooltipBasic("Train Raptor Outrider")
         ..setTooltipExtended("Blistering fast skirmish cavalry mounted on a vicious Zandalari raptor. Specializes in flanking maneuvers and tracking fleeing targets.")
-        ..setIconGameInterface(Icons.bTNRaider)
+        ..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNTigerSharkRider.blp")
         ..setUnitSoundSet("ForestTroll")
         ..setNormalAbilities(commaList(ZANDALARI_ENSNARE))
+        ..setModelFile("EliteHeadhunterScoutAWRV2.mdx")
         
         ..setGoldCost(55)
         ..setLumberCost(0)
@@ -94,18 +96,19 @@ public constant ZANDALARI_FLYER_ID   = compiletime(UNIT_ID_GEN.next())
     // 3. LIGHT AIR UNIT: Pterrodax Rider
     // -------------------------------------------------------------------------
     // https://www.hiveworkshop.com/threads/zandalari-troll-pterrodax-rider.353747/
-    new UnitDefinition(ZANDALARI_FLYER_ID, 'otbr') // Inherits flying & rider baselines from the Batrider
+    new UnitDefinition(ZANDALARI_FLYER_ID, UnitIds.windrider) // Inherits flying & rider baselines from the Batrider
       ..setName("Pterrodax Rider")
       ..setTooltipBasic("Train Pterrodax Rider")
       ..setTooltipExtended("Swoops over the battlefield to rain down explosive jars of burning resin. Masters of aerial reconnaissance. Can only attack ground units.")
-      ..setIconGameInterface(Icons.bTNWyvernRider)
+      ..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNOwlrider.blp")
+      ..setModelFile("Green_dax_rider.mdx")
       
       ..setAttacksEnabled(1)
       ..setAttack1TargetsAllowed("ground,debris,item,ward,structure")
       
       ..setNormalAbilities("") 
       
-      ..setGoldCost(70)
+      ..setGoldCost(60)
       ..setLumberCost(0)
       ..setBuildTime(4)
       ..setFoodCost(3)

@@ -4,6 +4,7 @@ import UnitObjEditing
 import ObjectIdGenerator
 import ObjectIds
 import Icons
+import VolJin
 
 // Generate Unique Engine ID for your Hero Altar
 public constant ZANDALARI_ALTAR_ID = compiletime(UNIT_ID_GEN.next())
@@ -24,6 +25,7 @@ public constant ZANDALARI_ALTAR_ID = compiletime(UNIT_ID_GEN.next())
         
         // Economy & Logistics (Enforcing your map's 0-Lumber Rule)
         ..setLumberCost(0)
+        ..setUnitsTrained(commaList(VOLJIN_ID))
         
         // Durability Stats
         ..setHitPointsMaximumBase(900)
