@@ -1,5 +1,6 @@
 package WurstExportedObjects_w3h
 import ObjEditingNatives
+import ObjEditingCommons
 import BuffObjEditing
 
 // Modified Table (contains all custom objects)
