@@ -53,6 +53,16 @@ buildMapData:
     race: ORC
     controller: USER
     fixedStartLoc: true
+  - id: 15
+    name: Qiraji 1
+    race: ORC
+    controller: COMPUTER
+    fixedStartLoc: false
+  - id: 16
+    name: Qiraji 2
+    race: ORC
+    controller: COMPUTER
+    fixedStartLoc: false
   forces:
   - name: Druids
     playerIds:
@@ -77,6 +87,16 @@ buildMapData:
     - 3
     - 4
     - 5
+    flags:
+      allied: true
+      alliedVictory: true
+      sharedVision: true
+      sharedControl: false
+      sharedControlAdvanced: false
+  - name: Qiraji
+    playerIds:
+    - 15
+    - 16
     flags:
       allied: true
       alliedVictory: true

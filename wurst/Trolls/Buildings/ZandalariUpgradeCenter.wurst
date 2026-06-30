@@ -2,7 +2,6 @@ package ZandalariUpgradeCenter
 
 import UnitObjEditing
 import ObjectIdGenerator
-import Icons
 
 import ObjectIds
 import ZandalariBaseUpgrades

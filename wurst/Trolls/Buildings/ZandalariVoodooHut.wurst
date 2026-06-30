@@ -28,14 +28,13 @@ public constant ZANDALARI_VOODOO_HUT_ID = compiletime(UNIT_ID_GEN.next())
         // Unit Production Pipeline (Combines Tier 2 and Tier 3 Casters)
         ..setUnitsTrained(commaList(
             ZANDALARI_HEALER_ID,     // Zanchul Ward-Weaver (Tier 2)
-            ZANDALARI_ALCHEMIST_ID,   // Mojo Apothecary (Tier 3)
-            ZANDALARI_BLOOD_MAGE_ID  // Zanchul Blood-Weaver (Tier 3)
+            ZANDALARI_ALCHEMIST_ID   // Mojo Apothecary (Tier 3)
         ))
         
         // Cost & Logistics (0-Lumber Rule Applied)
         ..setGoldCost(130)
         ..setLumberCost(0)
-        ..setBuildTime(50)
+        ..setBuildTime(30)
         
         // Durability Stats
         ..setHitPointsMaximumBase(1000)

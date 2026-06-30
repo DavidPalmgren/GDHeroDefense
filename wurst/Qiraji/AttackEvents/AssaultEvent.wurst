@@ -44,3 +44,6 @@ public class AssaultEvent
 
         doAfter(attackDelay) ->
             onAttackStart.call()
+
+        doAfter(10.0) ->
+            tunnel.remove()

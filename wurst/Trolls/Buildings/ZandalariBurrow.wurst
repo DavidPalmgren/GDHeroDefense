@@ -2,7 +2,6 @@ package ZandalariBurrow
 
 import UnitObjEditing
 import ObjectIdGenerator
-import Icons
 
 public constant ZANDALARI_BURROW_ID = compiletime(UNIT_ID_GEN.next())
 
@@ -23,7 +22,7 @@ public constant ZANDALARI_BURROW_ID = compiletime(UNIT_ID_GEN.next())
         ..setLumberCost(0) // 0 Lumber constraint unlocked
         
         // Core Stats
-        ..setBuildTime(20)
+        ..setBuildTime(15)
         ..setFoodProduced(10)
         ..setHitPointsMaximumBase(600)
         ..setDefenseUpgradeBonus(2)

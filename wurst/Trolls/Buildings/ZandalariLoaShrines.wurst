@@ -4,7 +4,6 @@ import UnitObjEditing
 import ObjectIdGenerator
 import ObjectIds
 import Icons
-import UnitIds
 
 import ZandalariLoaShrinesUpgrades
 import ZandalariTownHallID

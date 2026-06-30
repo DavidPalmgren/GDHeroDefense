@@ -3,9 +3,6 @@ package ZandalariZealots
 import UnitObjEditing
 import ObjectIdGenerator
 import ObjectIds
-import Icons
-import PathingMaps
-
 
 import ZandalariTownHallID
 import ZandalariTier3
@@ -33,10 +30,9 @@ public constant ZANDALARI_TEMPLE_SACRIFICE_ID = compiletime(UNIT_ID_GEN.next())
 
         ..setGoldCost(80)
         ..setLumberCost(0)
-        ..setBuildTime(60)
+        ..setBuildTime(30)
         ..setHitPointsMaximumBase(1600)
         ..setArmorType(ArmorType.Fortified)
         ..setDefenseBase(8)
 
-        ..setPathingMap("PathTextures\\4x4SimpleSolid.tga")
         ..setPlacementRequires("scalable")

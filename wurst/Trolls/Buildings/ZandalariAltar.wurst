@@ -3,7 +3,6 @@ package ZandalariAltar
 import UnitObjEditing
 import ObjectIdGenerator
 import ObjectIds
-import Icons
 import VolJin
 
 // Generate Unique Engine ID for your Hero Altar

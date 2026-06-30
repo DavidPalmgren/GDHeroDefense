@@ -3,7 +3,6 @@ package ZandalariBeastiary
 import UnitObjEditing
 import ObjectIdGenerator
 import ObjectIds
-import Icons
 
 // Pulling in our previously defined unit IDs
 import ZandalariTier2
@@ -36,7 +35,7 @@ public constant ZANDALARI_BESTIARY_ID = compiletime(UNIT_ID_GEN.next())
 
         ..setGoldCost(60)
         ..setLumberCost(0)
-        ..setBuildTime(55)
+        ..setBuildTime(25)
         
 
         ..setHitPointsMaximumBase(1200)

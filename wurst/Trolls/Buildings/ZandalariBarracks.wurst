@@ -3,7 +3,7 @@ package ZandalariBarracks
 import UnitObjEditing
 import ObjectIdGenerator
 import ObjectIds
-import Icons
+
 
 import ZandalariBaseUpgrades
 import ZandalariThrillOfTheHunt
@@ -35,7 +35,7 @@ public constant ZANDALARI_BARRACKS_ID = compiletime(UNIT_ID_GEN.next())
         ..setLumberCost(0)
         
         // Base Structural Stats
-        ..setBuildTime(50)
+        ..setBuildTime(20)
         ..setHitPointsMaximumBase(1200)
 
         ..setResearchesAvailable(commaList(ZANDALARI_REGEN_UPG_ID,ZANDALARI_TOTH_UPGD ))
