@@ -21,7 +21,7 @@ constant real BLEED_DURATION = 12.
 constant real BLEED_INTERVAL = 2.
 constant int BLEED_TICKS = (BLEED_DURATION / BLEED_INTERVAL).toInt()
 
-constant string SWIPE_SFX = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarCaster.mdl"
+constant string SWIPE_SFX = "ReapersClawsRed.mdx"
 constant string HIT_SFX = "Abilities\\Spells\\Other\\Stampede\\StampedeMissileDeath.mdl"
 constant string BLEED_SFX = "Buff_Bleed.mdx"
 

@@ -1,0 +1,59 @@
+package Avatar
+
+import AbilityTooltipGenerator
+
+public constant URSOC_AVATAR_ID = compiletime(ABIL_ID_GEN.next())
+
+constant int MAX_LEVELS = 3
+
+constant real array HIT_POINT_BONUS = [450., 750., 1100.]
+constant real array DAMAGE_BONUS = [18., 32., 50.]
+constant real array ARMOR_BONUS = [6., 10., 15.]
+constant real array MAGIC_REDUCTION = [0.30, 0.40, 0.50]
+constant real array DURATION = [20., 25., 30.]
+constant real array COOLDOWN = [120., 100., 80.]
+constant int array MANA = [150, 175, 200]
+
+let tgen = new AbilityTooltipGenerator(
+    Targettype.NONE,
+    "Ursoc channels the ancient bear god, becoming larger, harder to kill, and deadlier in melee.")
+
+@compiletime function genAbility()
+    let aDef = new AbilityDefinitionMountainKingAvatar(URSOC_AVATAR_ID)
+        ..setName("Avatar of Ursoc")
+        ..setHeroAbility(true)
+        ..setItemAbility(false)
+        ..setLevels(MAX_LEVELS)
+        ..setIconNormal(Icons.bTNAvatar)
+        ..setIconResearch(Icons.bTNAvatar)
+        ..setButtonPositionNormalX(3)
+        ..setButtonPositionNormalY(0)
+        ..setButtonPositionResearchX(3)
+        ..setButtonPositionResearchY(0)
+        ..setRequiredLevel(6)
+        ..setLevelSkipRequirement(6)
+        ..setRequirements("")
+        ..setRequirementsLevels("")
+        ..tooltipStartListen()
+        ..presetHotkey("T")
+        ..presetHitPointBonus(lvl -> HIT_POINT_BONUS[lvl - 1])
+        ..presetDamageBonus(lvl -> DAMAGE_BONUS[lvl - 1])
+        ..presetDefenseBonus(lvl -> ARMOR_BONUS[lvl - 1])
+        ..presetMagicDamageReduction(lvl -> MAGIC_REDUCTION[lvl - 1])
+        ..presetDurationNormal(lvl -> DURATION[lvl - 1])
+        ..presetDurationHero(lvl -> DURATION[lvl - 1])
+        ..presetCooldown(lvl -> COOLDOWN[lvl - 1])
+        ..presetManaCost(lvl -> MANA[lvl - 1])
+
+    tgen
+        ..addProperty("Name", lvl -> "Avatar of Ursoc")
+        ..addProperty("Levels", lvl -> MAX_LEVELS.toString())
+        ..addProperty("Hotkey", lvl -> "T")
+        ..addProperty("Health", lvl -> "+" + HIT_POINT_BONUS[lvl - 1].toString(0))
+        ..addProperty("Damage", lvl -> "+" + DAMAGE_BONUS[lvl - 1].toString(0))
+        ..addProperty("Armor", lvl -> "+" + ARMOR_BONUS[lvl - 1].toString(0))
+        ..addProperty("Magic Reduction", lvl -> (MAGIC_REDUCTION[lvl - 1] * 100.).toString(0) + "%")
+        ..addProperty("Duration", lvl -> DURATION[lvl - 1].toString(0) + "s")
+        ..addProperty("Cooldown", lvl -> COOLDOWN[lvl - 1].toString(0) + "s")
+        ..addProperty("Mana", lvl -> MANA[lvl - 1].toString())
+        ..applyToDef(aDef)

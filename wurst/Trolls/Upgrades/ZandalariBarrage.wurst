@@ -15,8 +15,12 @@ public constant ZANDALARI_BARRAGE_ABIL_ID = compiletime(ABIL_ID_GEN.next())
     new UpgradeDefinition(ZANDALARI_BARRAGE_UPG_ID)
         ..setName(1, "Rastari Harpoon Volley")
         ..setLevels(1)
+        ..setIcon(1,"ReplaceableTextures\\CommandButtons\\PASMultishot.blp")
+
 
     new AbilityDefinitionRocketAttack(ZANDALARI_BARRAGE_ABIL_ID)
+        ..setIconNormal("ReplaceableTextures\\CommandButtons\\PASMultishot.blp")
+        ..setIconResearch("ReplaceableTextures\\CommandButtons\\PASMultishot.blp")
         ..setName("Anti air")
         ..setDamagePerTarget(1, 25)
         ..setMaximumNumberofTargets(1, 6)

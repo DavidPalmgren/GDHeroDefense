@@ -1,0 +1,35 @@
+package QirajiAttackEventTimers
+
+import ClosureTimers
+import TimerUtils
+
+import QirajiSilithusEvent
+import QirajiUngoroEvent
+import QirajiTanarisEvent
+
+public function startEventCountdown(string title, real eventFiresAt, CallbackSingle onComplete)
+    let countdownDuration = 3 * 60.
+
+    doAfter(eventFiresAt - countdownDuration) ->
+        let t = getTimer()
+        t.start(countdownDuration, null)
+
+        let td = CreateTimerDialog(t)
+        TimerDialogSetTitle(td, title)
+        TimerDialogDisplay(td, true)
+
+        doAfter(countdownDuration) ->
+            TimerDialogDisplay(td, false)
+            DestroyTimerDialog(td)
+            t.release()
+            onComplete.call()
+
+init
+    startEventCountdown("Silithus Assault:", 800.) ->
+        initSilithusEvent()
+
+    startEventCountdown("Ungoro Assault:", 800.) ->
+        initUngoroEvent()
+
+    startEventCountdown("Tanaris Assault:", 600.) ->
+        initTanarisEvent()

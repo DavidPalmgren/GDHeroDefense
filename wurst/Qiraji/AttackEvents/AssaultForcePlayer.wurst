@@ -1,0 +1,3 @@
+package AssaultForcePlayer
+
+public constant QIRAJI_ASSAULT_FORCE_PLAYER = players[16]

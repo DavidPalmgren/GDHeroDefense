@@ -1,0 +1,15 @@
+package AssaultTunnel
+
+import UnitObjEditing
+import ObjectIdGenerator
+
+public constant TUNNEL_UNIT_ID = compiletime(UNIT_ID_GEN.next())
+
+@compiletime function gen()
+    new BuildingDefinition(TUNNEL_UNIT_ID, 'hbar')
+        ..setCollisionSize(0.)
+        ..setName("Qiraji Tunnel")
+        ..setPathingMap("")
+        ..setModelFile("SpawnerCaveDungeonVer2.mdx")
+        ..setScalingValue(3.0)
+        ..setGroundTexture("")

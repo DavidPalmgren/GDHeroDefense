@@ -67,6 +67,12 @@ let tgen = new AbilityTooltipGenerator(Targettype.NONE, "Cenarius calls upon the
       ..setSpeedBase(0)
       ..setNormalAbilities("")
       ..setCollisionSize(0)
+      ..setModelFile("TreeTentacleRE.mdx")
+      ..setAttack1Range(250)
+      ..setAttack1DamageBase(30)
+      ..setArmorSoundType(ArmorSoundType.Wood)
+      ..setAttack1WeaponSound(WeaponSound.WoodHeavyBash)
+
 
     new UnitDefinition(YSERA_ID, UnitIds.greendragon)
         ..setName("Ysera the Dreamer")

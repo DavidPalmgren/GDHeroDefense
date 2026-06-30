@@ -8,6 +8,7 @@ import ClosureForGroups
 import AbilityTooltipGenerator
 import ChannelAbilityPreset
 import Lightning
+import Icons
 
 public constant SOUL_CHAINS_ID = compiletime(ABIL_ID_GEN.next())
 
@@ -63,7 +64,7 @@ function getMana(int idx) returns int
             return 0
 
 constant string LIGHTNING_TYPE = "CLPB"
-constant string CHAIN_SFX       = "Abilities\\Spells\\Undead\\AnimateDead\\AnimateDeadTarget.mdl"
+constant string CHAIN_SFX       = "Chains_Buff.mdx"
 constant string PULL_SFX        = "Abilities\\Spells\\Undead\\DeathCoil\\DeathCoilSpecialArt.mdl"
 
 @compiletime function gen()
@@ -92,6 +93,9 @@ constant string PULL_SFX        = "Abilities\\Spells\\Undead\\DeathCoil\\DeathCo
         ..presetAreaofEffect(lvl -> getAoERadius(lvl - 1))
         ..presetDurationNormal(lvl -> 0.0)
         ..presetDurationHero(lvl -> 0.0)
+        ..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNArrowChain.blp")
+        ..setIconResearch("ReplaceableTextures\\CommandButtons\\BTNArrowChain.blp")
+        
         ..tooltipStopListen()
 
     tgen

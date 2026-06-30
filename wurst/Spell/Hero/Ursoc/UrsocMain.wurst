@@ -9,6 +9,7 @@ import AbilityIds
 import UrsocCharge
 import Hibernate
 import Thrash
+import Avatar
 
 public constant URSOC_CHARACTER_ID = 'E003'
 public constant URSOCS_WRATH_ID = 'A001'
@@ -20,7 +21,7 @@ public constant URSOCS_WRATH_ID = 'A001'
           URSOC_CHARGE_ID,
           THRASH_ID,
           HIBERNATE_ID,
-          AbilityIds.avatar
+          URSOC_AVATAR_ID
           ))
         ..setNormalAbilities(commaList(
           URSOCS_WRATH_ID,

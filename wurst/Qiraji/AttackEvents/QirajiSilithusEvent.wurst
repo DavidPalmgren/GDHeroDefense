@@ -1,0 +1,23 @@
+package QirajiSilithusEvent
+
+import AssaultEvent
+import QirajiAttackLogic
+import QirajiBeetleBombardier
+import QirajiTank
+import SilithidWasp
+import QirajiDevout
+import QirajiDrone
+import QirajiColosus
+
+import AssaultTunnel
+
+public function initSilithusEvent()
+    let silithusEvent = new AssaultEvent(gg_rct_QirajiEventSilithus, gg_rct_QirajiEventSilithusAtkMap, TUNNEL_UNIT_ID)
+        ..addUnit(QIRAJI_BOMBARDER_ID, 3)
+        ..addUnit(QIRAJI_TANK_ID, 25)
+        ..addUnit(QIRAJI_DRONE_ID, 10)
+        ..addUnit(QIRAJI_WASP_ID, 8)
+        ..addUnit(QIRAJI_DEVOUT_ID, 4)
+        ..addUnit(QIRAJI_COLOSUS_ID, 1)
+    silithusEvent.launch(5., 1.) ->
+        startQirajiAttackLogic(gg_rct_QirajiEventSilithusAtkMap)

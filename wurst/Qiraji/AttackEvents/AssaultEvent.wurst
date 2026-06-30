@@ -1,0 +1,46 @@
+package AssaultEvent
+
+import ClosureTimers
+import AssaultForcePlayer
+
+public tuple unitSpawn(int id, int count)
+
+constant MAX_UNIT_TYPES = 16
+
+public class AssaultEvent
+    private rect spawnArea
+    private rect attackArea
+    private int unitTypeCount
+    private int tunnelUnitId
+    private int array[MAX_UNIT_TYPES] unitIds
+    private int array[MAX_UNIT_TYPES] unitCounts
+
+    construct(rect spawnArea, rect attackArea, int tunnelUnitId)
+        this.spawnArea = spawnArea
+        this.attackArea = attackArea
+        this.tunnelUnitId = tunnelUnitId
+        this.unitTypeCount = 0
+
+    function addUnit(int id, int count)
+        unitIds[unitTypeCount] = id
+        unitCounts[unitTypeCount] = count
+        unitTypeCount++
+
+    private function spawnUnits()
+        for i = 0 to unitTypeCount - 1
+            for j = 1 to unitCounts[i]
+                let pos = spawnArea.randomPoint()
+                createUnit(QIRAJI_ASSAULT_FORCE_PLAYER, unitIds[i], pos, GetRandomReal(0, 360).asAngleDegrees())
+
+
+    function launch(real tunnelDelay, real attackDelay, CallbackSingle onAttackStart)
+        let pos = spawnArea.getCenter()
+        let tunnel = createUnit(QIRAJI_ASSAULT_FORCE_PLAYER, tunnelUnitId, pos, GetRandomReal(0, 360).asAngleDegrees())
+        tunnel.setAnimation("birth")
+
+        doAfter(tunnelDelay) ->
+            tunnel.setAnimation("decay")
+            spawnUnits()
+
+        doAfter(attackDelay) ->
+            onAttackStart.call()

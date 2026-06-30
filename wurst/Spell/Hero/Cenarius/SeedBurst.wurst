@@ -1,87 +1,81 @@
 package SeedBurst
 
-
 import ClosureEvents
-import ClosureTimers
-import LinkedList
-
+import ClosureForGroups
 import AbilityTooltipGenerator
+import Invigorate
 
 public constant SEED_BURST_ID = compiletime(ABIL_ID_GEN.next())
 
-// Per level values
-constant real array BURST_DAMAGE = [75., 100., 125.]
-constant real array BURST_RADIUS = [256., 320., 350.]
+constant int MAX_LEVELS = 4
 
-constant real BURST_DELAY = 0.15
-constant string BURST_SFX = "Abilities\\Spells\\Other\\Entangle\\EntangledTarget.mdl"
-constant string EXPLOSION_SFX = "Abilities\\Weapons\\GryphonRider\\GryphonRiderMissileArt.mdl"
-constant int INVIGORATE_BUFF_ID = 'Brej'
+constant real array BURST_DAMAGE = [75., 110., 150., 200.]
+constant real array BURST_RADIUS = [256., 300., 350., 400.]
+constant real array COOLDOWN = [12., 10., 8., 6.]
+constant int array MANA = [65, 80, 95, 110]
 
-let tgen = new AbilityTooltipGenerator(Targettype.NONE, "Detonates all invigorated units for massive damage in a small aoe around the targets.")
-class Vec2Wrapper
-    vec2 pos
-    construct(vec2 p)
-        pos = p
+constant string BURST_SFX = "NatureBlast.mdx"
+constant string EXPLOSION_SFX = "NatureBlast.mdx"
+
+let tgen = new AbilityTooltipGenerator(
+    Targettype.NONE,
+    "Consumes Invigorate from all affected units, detonating each seed for area damage.")
 
 @compiletime function genAbility()
-    let def = new ChannelAbilityPreset(SEED_BURST_ID, 4, true, tgen)
+    let def = new ChannelAbilityPreset(SEED_BURST_ID, MAX_LEVELS, true, tgen)
         ..setName("Seed Burst")
         ..setTooltipLearn("Learn Seed Burst - [|cffffcc00Level %d|r]")
-        ..setTooltipLearnExtended("Consumes all invigorated units, detonating each one for damage to nearby enemies. Damage and radius increases per level.")
+        ..setTooltipLearnExtended("Consumes Invigorate from all affected units, detonating each one for area damage. Damage and radius increase per level.")
         ..setIconNormal(Icons.bTNEntanglingRoots)
         ..setIconResearch(Icons.bTNEntanglingRoots)
-        ..setButtonPositionNormalX(0)
-        ..setButtonPositionNormalY(1)
-        // Level 1
-        ..presetCooldown(lvl -> 14 - (lvl * 2.0))
-        ..presetManaCost(lvl -> 50 + (lvl * 15))
-
-        ..setBuffs(1, "")
+        ..presetButtonPosNormal(0, 1)
+        ..presetButtonPosResearch(0, 0)
+        ..presetTargetTypes(Targettype.NONE)
+        ..tooltipStartListen()
+        ..presetHotkey("E")
+        ..presetCooldown(lvl -> COOLDOWN[lvl - 1])
+        ..presetManaCost(lvl -> MANA[lvl - 1])
+        ..presetAreaofEffect(lvl -> BURST_RADIUS[lvl - 1])
+        ..presetDurationNormal(lvl -> 0.)
+        ..presetDurationHero(lvl -> 0.)
         ..setRequirements("")
         ..setRequirementsLevels("")
         ..setRequiredLevel(1)
         ..setLevelSkipRequirement(2)
-        ..setLevels(4)
         ..setHeroAbility(true)
         ..setItemAbility(false)
 
+    for i = 1 to MAX_LEVELS
+        def.setBuffs(i, "")
+
     tgen
         ..addProperty("Name", lvl -> "Seed Burst")
-        ..addProperty("Damage", lvl -> (50.0 + (lvl * 25.0)).toString())
-        ..addProperty("Cooldown", lvl -> (14 - (lvl * 2.0)).toString())
-        ..addProperty("Mana Cost", lvl -> (50 + (lvl * 15)).toString())
-            
+        ..addProperty("Levels", lvl -> MAX_LEVELS.toString())
+        ..addProperty("Hotkey", lvl -> "E")
+        ..addProperty("Damage", lvl -> BURST_DAMAGE[lvl - 1].toString(0))
+        ..addProperty("Area of Effect", lvl -> BURST_RADIUS[lvl - 1].toString(0))
+        ..addProperty("Cooldown", lvl -> COOLDOWN[lvl - 1].toString(0) + "s")
+        ..addProperty("Mana", lvl -> MANA[lvl - 1].toString())
         ..applyToDef(def)
-            
-        
+
+function detonateSeed(unit caster, player owner, vec2 explodePos, real damage, real radius)
+    flashEffect(BURST_SFX, explodePos)
+    flashEffect(EXPLOSION_SFX, explodePos)
+
+    forUnitsInRange(explodePos, radius) (unit target) ->
+        if target.isAlive()
+            and target.getOwner().isEnemyOf(owner)
+            and not target.isType(UNIT_TYPE_STRUCTURE)
+            caster.damageTarget(target, damage, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 
 init
     EventListener.onCast(SEED_BURST_ID) (caster) ->
-        // Get 0-based level index
         let level = caster.getAbilityLevel(SEED_BURST_ID) - 1
+        let owner = caster.getOwner()
+        let damage = BURST_DAMAGE[level]
+        let radius = BURST_RADIUS[level]
 
-        let targets = new LinkedList<Vec2Wrapper>()
-        ENUM_GROUP.enumUnitsInRect(bj_mapInitialPlayableArea, null)
-        for u in ENUM_GROUP
+        forUnitsInRect(bj_mapInitialPlayableArea) (unit u) ->
             if u.hasAbility(INVIGORATE_BUFF_ID)
-                targets.add(new Vec2Wrapper(u.getPos()))
+                detonateSeed(caster, owner, u.getPos(), damage, radius)
                 u.removeAbility(INVIGORATE_BUFF_ID)
-
-        var delay = 0.
-        for wrapper in targets
-            let explodePos = wrapper.pos
-            let damage = BURST_DAMAGE[level]
-            let radius = BURST_RADIUS[level]
-            doAfter(delay) ->
-                flashEffect(BURST_SFX, explodePos)
-                flashEffect(EXPLOSION_SFX, explodePos)
-                ENUM_GROUP.enumUnitsInRange(explodePos, radius, null)
-                for u in ENUM_GROUP
-                    if u.isAlive() and u.getOwner().isEnemyOf(caster.getOwner())
-                        caster.damageTarget(u, damage, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-            delay += BURST_DELAY
-
-        for wrapper in targets
-            destroy wrapper
-        destroy targets

@@ -1,0 +1,85 @@
+package QirajiAttackLogic
+
+import ClosureTimers
+import ControlPoint
+import AssaultForcePlayer
+
+constant real AI_TICK_INTERVAL = 5.
+constant real CLUSTER_SCAN_RADIUS = 800.
+
+function isEnemyOf(unit u, player forPlayer) returns boolean
+    return u != null and u.isAlive() and IsPlayerEnemy(forPlayer, u.getOwner())
+
+function findEnemyBuilding(rect r, player forPlayer) returns unit
+    unit best = null
+    let g = CreateGroup()
+    g.enumUnitsInRect(r, null)
+    for u in g
+        if isEnemyOf(u, forPlayer) and u.isType(UNIT_TYPE_STRUCTURE)
+            if not IsUnitInGroup(u, controlPoints)
+                best = u
+                break
+    g.destr()
+    return best
+
+function findBiggestEnemyArmyCluster(rect r, player forPlayer) returns unit
+    let g = CreateGroup()
+    g.enumUnitsInRect(r, null)
+
+    unit bestCenter = null
+    int bestCount = 0
+
+    for u in g
+        if isEnemyOf(u, forPlayer)
+            var count = 0
+            for other in g
+                if isEnemyOf(other, forPlayer) and u.getPos().distanceTo(other.getPos()) <= CLUSTER_SCAN_RADIUS
+                    count++
+            if count > bestCount
+                bestCount = count
+                bestCenter = u
+
+    g.destr()
+    return bestCenter
+
+function findEnemyControlPoint(rect r, player forPlayer) returns unit
+    unit best = null
+    var bestDist = 999999.
+    let center = r.getCenter()
+
+    for cp in controlPoints
+        if RectContainsCoords(r, cp.getX(), cp.getY())
+            let owner = cpOwners.get(cp)
+            if owner != forPlayer
+                let dist = center.distanceTo(cp.getPos())
+                if dist < bestDist
+                    bestDist = dist
+                    best = cp
+
+    return best
+
+function issueAttackOrders(group srcGroup, player forPlayer, rect targetArea)
+    var target = findEnemyBuilding(targetArea, forPlayer)
+
+    if target == null
+        target = findBiggestEnemyArmyCluster(targetArea, forPlayer)
+
+    if target == null
+        target = findEnemyControlPoint(targetArea, forPlayer)
+
+    if target != null
+        for u in srcGroup
+            if u.isAlive()
+                u.issueTargetOrder("attack", target)
+    else
+        let center = targetArea.getCenter()
+        for u in srcGroup
+            if u.isAlive()
+                u.issuePointOrder("attack", center)
+
+public function startQirajiAttackLogic(rect targetArea)
+    doPeriodically(AI_TICK_INTERVAL) (CallbackPeriodic cb) ->
+        let forces = CreateGroup()
+        forces.enumUnitsOfPlayer(QIRAJI_ASSAULT_FORCE_PLAYER, null)
+        issueAttackOrders(forces, QIRAJI_ASSAULT_FORCE_PLAYER, targetArea)
+        forces.destr()

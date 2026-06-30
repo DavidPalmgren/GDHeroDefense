@@ -78,7 +78,7 @@ function registerPath(int fromId, int toId)
     let neighbors = navigationMap.get(fromId)
     if not neighbors.has(toId)
         neighbors.add(toId)
-        print("|cff00ffffQirajiColumbus|r Registered subway link: " + fromId.toString() + " -> " + toId.toString())
+        //print("|cff00ffffQirajiColumbus|r Registered subway link: " + fromId.toString() + " -> " + toId.toString())
 
 function buildNavigationMapText() returns string
     var output = "Qiraji route graph\n"
@@ -100,20 +100,20 @@ function buildNavigationMapText() returns string
 function printReadableNavigationMap()
     let rendered = buildNavigationMapText()
     if rendered == "Qiraji route graph\n"
-        print("|cffff0000QirajiColumbus|r No navigation links were recorded yet.")
+        //print("|cffff0000QirajiColumbus|r No navigation links were recorded yet.")
         return
 
-    print("|cff00ffffQirajiColumbus|r Cached route graph:")
+    //print("|cff00ffffQirajiColumbus|r Cached route graph:")
     let lines = rendered.split("\n")
     for line in lines
         if line != ""
-            print(line)
+            //print(line)
 
 function saveNavigationMap()
     let output = buildNavigationMapText()
 
     new File(ROUTE_CACHE_FILE)..write(localPlayer, output)..close()
-    print("|cff00ff00QirajiColumbus|r Saved probe explorer results to " + ROUTE_CACHE_FILE)
+    //print("|cff00ff00QirajiColumbus|r Saved probe explorer results to " + ROUTE_CACHE_FILE)
     printReadableNavigationMap()
 
 function loadNavigationMap() returns bool
@@ -135,11 +135,11 @@ function loadNavigationMap() returns bool
                             nodeList.add(neighbor.toInt())
                     navigationMap.put(srcId, nodeList)
 
-    print("|cff00ff00QirajiColumbus|r Loaded probe explorer results from " + ROUTE_CACHE_FILE)
+    //print("|cff00ff00QirajiColumbus|r Loaded probe explorer results from " + ROUTE_CACHE_FILE)
     return true
 
 public function beginAutomatedMapping()
-    print("|cff00ff00QirajiColumbus: Initializing Subway Mapping Probes...|r")
+    //print("|cff00ff00QirajiColumbus: Initializing Subway Mapping Probes...|r")
     
     // Explicit while loops eliminate ANTLR parser crashes completely
     var srcId = 1
@@ -162,13 +162,13 @@ public function beginAutomatedMapping()
         srcId++
                 
     if activeProbesCount == 0
-        print("|cffff0000Mapping failed: No valid control point pairs found within range.|r")
+        //print("|cffff0000Mapping failed: No valid control point pairs found within range.|r")
 
 function checkMappingCompletion()
     if activeProbesCount == 0 and not mappingComplete
         mappingComplete = true
-        print("|cff00ffffSubway Breadcrumb Map Complete! Proceeding to Peasant Test...|r")
-        print("|cffffaa00QirajiColumbus|r Navigation graph ready: " + navigationMap.size().toString() + " source nodes registered")
+        //print("|cff00ffffSubway Breadcrumb Map Complete! Proceeding to Peasant Test...|r")
+        //print("|cffffaa00QirajiColumbus|r Navigation graph ready: " + navigationMap.size().toString() + " source nodes registered")
         saveNavigationMap()
         startPeasantPathingTest()
 
@@ -191,17 +191,17 @@ class WaypointNavigator
 
     function startNavigation()
         if pathNodeIds == null or pathNodeIds.isEmpty()
-            print("|cffff0000QirajiColumbus|r Waypoint navigator started with no path nodes")
+            //print("|cffff0000QirajiColumbus|r Waypoint navigator started with no path nodes")
             this.cleanupAndDestroy()
         else
             this.findNextValidTarget()
             
             // Safe alternative to vector '==' operator checking
             if currentTargetPos.x == 0.0 and currentTargetPos.y == 0.0
-                print("|cffff0000QirajiColumbus|r Waypoint navigator could not resolve a valid target from the path")
+                //print("|cffff0000QirajiColumbus|r Waypoint navigator could not resolve a valid target from the path")
                 this.cleanupAndDestroy()
             else
-                print("|cff00ffffQirajiColumbus|r Starting waypoint navigator for target " + (currentTargetNodeId != -1 ? getControlPointLabel(currentTargetNodeId) : currentTargetPos.toString()))
+                //print("|cff00ffffQirajiColumbus|r Starting waypoint navigator for target " + (currentTargetNodeId != -1 ? getControlPointLabel(currentTargetNodeId) : currentTargetPos.toString()))
                 traveler.issuePointOrder("move", currentTargetPos)
                 
                 // Fix 2: Keep the trailing closure fully isolated to a single function delegate call 
@@ -218,10 +218,10 @@ class WaypointNavigator
                 this.findNextValidTarget()
                 
                 if not (currentTargetPos.x == 0.0 and currentTargetPos.y == 0.0)
-                    print("|cff00ffffQirajiColumbus|r Reached route target, advancing to the next station " + (currentTargetNodeId != -1 ? getControlPointLabel(currentTargetNodeId) : currentTargetPos.toString()))
+                    //print("|cff00ffffQirajiColumbus|r Reached route target, advancing to the next station " + (currentTargetNodeId != -1 ? getControlPointLabel(currentTargetNodeId) : currentTargetPos.toString()))
                     traveler.issuePointOrder("move", currentTargetPos)
                 else
-                    print("|cff00ff00Test Peasant successfully completed the subway circuit!|r")
+                    //print("|cff00ff00Test Peasant successfully completed the subway circuit!|r")
                     this.cleanupAndDestroy()
 
     function findNextValidTarget()
@@ -238,7 +238,7 @@ class WaypointNavigator
             if targetUnit != null
                 currentTargetPos = targetUnit.getPos()
                 currentTargetNodeId = nextNodeId
-                print("|cff00ffffQirajiColumbus|r Route target resolved to " + getControlPointLabel(nextNodeId))
+                //print("|cff00ffffQirajiColumbus|r Route target resolved to " + getControlPointLabel(nextNodeId))
                 found = true
 
     function cleanupAndDestroy()
@@ -301,7 +301,7 @@ function startPeasantPathingTest()
     let startTestNode = 41 // Silithus: Cenarion Enclave
     let endTestNode = 32   // Feralas: Feathermoon Stronghold
 
-    print("|cff00ffffInitiating Direct Subway Route Test (ID: 41 -> ID: 32)...|r")
+    //print("|cff00ffffInitiating Direct Subway Route Test (ID: 41 -> ID: 32)...|r")
 
     let path = calculateSubwayPath(startTestNode, endTestNode)
     let startUnit = cpRegistry.get(startTestNode)
@@ -323,12 +323,12 @@ function startPeasantPathingTest()
                 pathStr = pathStr + " -> "
             idx--
             
-        print("|cff00ff00Route Calculated:|r " + pathStr)
+        //print("|cff00ff00Route Calculated:|r " + pathStr)
         
         // Pass the traveler off to the safe navigator engine
         new WaypointNavigator(peasant, path)
     else
-        print("|cffff0000Pathing test broken: Navigation network returned null or registry missing anchors.|r")
+        //print("|cffff0000Pathing test broken: Navigation network returned null or registry missing anchors.|r")
         if path != null
             destroy path
 
@@ -336,7 +336,7 @@ init
     doAfter(1.0) ->
         if loadNavigationMap()
             mappingComplete = true
-            print("|cff00ffffSubway Breadcrumb Map loaded from cache. Skipping probe rerun.|r")
-            startPeasantPathingTest()
+            //print("|cff00ffffSubway Breadcrumb Map loaded from cache. Skipping probe rerun.|r")
+            //startPeasantPathingTest()
         else
             beginAutomatedMapping()

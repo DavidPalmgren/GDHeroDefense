@@ -1,6 +1,5 @@
 package WurstExportedObjects_w3d
 import ObjEditingNatives
-import ObjEditingCommons
 import DoodadObjEditing
 
 // Modified Table (contains all custom objects)

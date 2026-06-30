@@ -97,33 +97,20 @@ public function unit.getHealingMultiplier() returns real
     return 1.0 + (getMaxHealAmp(idx) * factor)
 
 function updatePassiveStats()
-    let toRemove = new LinkedList<unit>()
-
     for u in passiveUsers
-        if u == null or not u.isAlive() or u.getAbilityLevel(BERSERKERS_FURY) <= 0
-            if u != null and u.isAlive()
-                // Restore base regeneration rate cleanly
-                u.setField(UNIT_RF_HIT_POINTS_REGENERATION_RATE,
-                    u.getField(UNIT_RF_HIT_POINTS_REGENERATION_RATE) - lastRegenBonus.get(u))
-                // Restore native base attack cooldown speed cleanly
-                if baseCooldown.has(u)
-                    BlzSetUnitAttackCooldown(u, baseCooldown.get(u), 0)
-            toRemove.add(u)
+        let lvl = u.getAbilityLevel(BERSERKERS_FURY)
+        if lvl <= 0
+            skip // ability was removed somehow, skip — death handles cleanup
         else
-            let lvl = u.getAbilityLevel(BERSERKERS_FURY)
             let idx = (lvl - 1).clamp(0, MAX_LEVELS - 1)
-
-            // 1. Calculate health scaling factor
             let currentHp = u.getHP()
             let maxHp = u.getMaxHP()
             let missingHpRatio = 1.0 - (currentHp / maxHp)
             let factor = (missingHpRatio / MAX_BONUS_THRESHOLD).clamp(0.0, 1.0)
 
-            // 2. Safely capture the original attack speed cooldown value on discovery
             if not baseCooldown.has(u)
                 baseCooldown.put(u, BlzGetUnitAttackCooldown(u, 0))
 
-            // 3. Handle Health Regeneration Updates
             let oldRegen = lastRegenBonus.has(u) ? lastRegenBonus.get(u) : 0.0
             let rawBaseRegen = u.getField(UNIT_RF_HIT_POINTS_REGENERATION_RATE) - oldRegen
             let newRegenBonus = getMaxHpRegen(idx) * factor
@@ -131,32 +118,18 @@ function updatePassiveStats()
             u.setField(UNIT_RF_HIT_POINTS_REGENERATION_RATE, rawBaseRegen + newRegenBonus)
             lastRegenBonus.put(u, newRegenBonus)
 
-            // 4. Handle Attack Speed Updates (Decreasing Cooldown Duration = Faster Attacks)
             let nativeCd = baseCooldown.get(u)
             let currentSpeedBonus = getMaxAttackSpeed(idx) * factor
-            let targetCd = nativeCd / (1.0 + currentSpeedBonus)
-            BlzSetUnitAttackCooldown(u, targetCd, 0)
+            BlzSetUnitAttackCooldown(u, nativeCd / (1.0 + currentSpeedBonus), 0)
 
-            // 5. Throttled Live Debug Output System (Runs once every 1.0 seconds / 10 ticks)
             let ticks = debugThrottler.has(u) ? debugThrottler.get(u) : 0
             if ticks >= 10
                 debugThrottler.put(u, 0)
                 let _hpPercent = (currentHp / maxHp * 100).toString(0)
                 let _speedPctStr = (currentSpeedBonus * 100).toString(0)
-                // FIX: Changed 'this' to 'u'
                 let _healAmpStr = ((u.getHealingMultiplier() - 1.0) * 100).toString(0)
-                
-                // print("|cffffcc00[Berserker Debug]|r HP: " + hpPercent + "% | +Regen: " + 
-                //     newRegenBonus.toString(1) + " HP/s | +Atk Speed: " + speedPctStr + "% | +Heal Amp: " + healAmpStr + "%")
             else
                 debugThrottler.put(u, ticks + 1)
-            
-    for u in toRemove
-        passiveUsers.remove(u)
-        lastRegenBonus.remove(u)
-        baseCooldown.remove(u)
-        debugThrottler.remove(u)
-    destroy toRemove
 
 // ============================================================================
 // INITIALIZATION INITIALIZER
@@ -169,6 +142,27 @@ init
             passiveUsers.add(u)
             lastRegenBonus.put(u, 0.0)
             debugThrottler.put(u, 0)
+
+    registerPlayerUnitEvent(EVENT_PLAYER_HERO_REVIVE_FINISH) ->
+        let u = GetRevivingUnit()
+        if u.getAbilityLevel(BERSERKERS_FURY) > 0 and not passiveUsers.has(u)
+            passiveUsers.add(u)
+            lastRegenBonus.put(u, 0.0)
+            debugThrottler.put(u, 0)
+
+    registerPlayerUnitEvent(EVENT_PLAYER_UNIT_DEATH) ->
+        let u = GetDyingUnit()
+        if passiveUsers.has(u)
+            // Restore fields while unit is still valid
+            u.setField(UNIT_RF_HIT_POINTS_REGENERATION_RATE,
+                u.getField(UNIT_RF_HIT_POINTS_REGENERATION_RATE) - lastRegenBonus.get(u))
+            if baseCooldown.has(u)
+                BlzSetUnitAttackCooldown(u, baseCooldown.get(u), 0)
+
+            passiveUsers.remove(u)
+            lastRegenBonus.remove(u)
+            baseCooldown.remove(u)
+            debugThrottler.remove(u)
 
     doPeriodically(0.10) cb ->
         updatePassiveStats()

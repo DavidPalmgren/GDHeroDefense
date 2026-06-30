@@ -1,75 +1,127 @@
 package SummonTreant
 
 import AbilityObjEditing
+import UnitObjEditing
 import Icons
 import ObjectIdGenerator
 import ClosureEvents
 import ClosureTimers
 import Invigorate
 import AbilityTooltipGenerator
+import Recycle
+import ThickBark
+import ObjectIds
+import AbilityIds
 
 public constant SUMMON_TREANT_ID = compiletime(ABIL_ID_GEN.next())
 
-public constant int TREANT_UNIT_ID = 'e002'
+public constant int TREANT_BASE_UNIT_ID = 'e002'
+public constant int TREANT_LEVEL_1_ID = compiletime(UNIT_ID_GEN.next())
+public constant int TREANT_LEVEL_2_ID = compiletime(UNIT_ID_GEN.next())
+public constant int TREANT_LEVEL_3_ID = compiletime(UNIT_ID_GEN.next())
+public constant int TREANT_LEVEL_4_ID = compiletime(UNIT_ID_GEN.next())
+
+constant int MAX_LEVELS = 4
 
 // Per level values
-constant real array TREANT_DURATION = [15., 20., 25.]
-constant real array TREANT_COOLDOWN = [14., 12., 10.]
-constant real array TREANT_MANA = [40., 55., 70.]
+constant real array TREANT_DURATION = [15., 20., 25., 30.]
+constant real array TREANT_COOLDOWN = [14., 12., 10., 8.]
+constant int array TREANT_MANA = [40, 55, 70, 85]
 // Bonus treants added on top of seedling count per level
-constant int array BONUS_TREANTS = [0, 1, 2]
+constant int array BONUS_TREANTS = [0, 1, 2, 3]
+
+constant int array TREANT_HIT_POINTS = [420, 575, 750, 950]
+constant int array TREANT_DAMAGE_BASE = [18, 26, 36, 48]
+constant int array TREANT_DAMAGE_DICE = [2, 2, 3, 3]
+constant int array TREANT_DAMAGE_SIDES = [4, 6, 6, 8]
+constant int array TREANT_ARMOR = [1, 3, 5, 8]
+constant real array TREANT_ATTACK_COOLDOWN = [1.55, 1.45, 1.35, 1.25]
+constant real array TREANT_SCALE = [0.90, 1.00, 1.10, 1.22]
+
+function getTreantUnitId(int levelIndex) returns int
+    switch levelIndex
+        case 0
+            return TREANT_LEVEL_1_ID
+        case 1
+            return TREANT_LEVEL_2_ID
+        case 2
+            return TREANT_LEVEL_3_ID
+        default
+            return TREANT_LEVEL_4_ID
+
+@compiletime function genTreantUnits()
+    for i = 0 to MAX_LEVELS - 1
+        new UnitDefinition(getTreantUnitId(i), TREANT_BASE_UNIT_ID)
+            ..setName("Cenarian Treant")
+            ..setNameEditorSuffix("Level " + (i + 1).toString())
+            ..setTooltipBasic("Cenarian Treant")
+            ..setTooltipExtended("A temporary servant of Cenarius, strengthened by the level of Summon Treant.")
+            ..setNormalAbilities(commaList(RECYCLE_ID, THICK_BARK_ID, AbilityIds.ultravision))
+            ..setRequirements("")
+            ..setRequirementsLevels("")
+            ..setGoldCost(0)
+            ..setLumberCost(0)
+            ..setFoodCost(0)
+            ..setFoodProduced(0)
+            ..setStockMaximum(0)
+            ..setStockReplenishInterval(0)
+            ..setBuildTime(1)
+            ..setHitPointsMaximumBase(TREANT_HIT_POINTS[i])
+            ..setHitPointsRegenerationRate(1.0 + i.toReal())
+            ..setDefenseBase(TREANT_ARMOR[i])
+            ..setAttack1DamageBase(TREANT_DAMAGE_BASE[i])
+            ..setAttack1DamageNumberofDice(TREANT_DAMAGE_DICE[i])
+            ..setAttack1DamageSidesperDie(TREANT_DAMAGE_SIDES[i])
+            ..setAttack1CooldownTime(TREANT_ATTACK_COOLDOWN[i])
+            ..setScalingValue(TREANT_SCALE[i])
 
 @compiletime function genAbility()
     let tgen = new AbilityTooltipGenerator(
         Targettype.NONE,
         "Summons Treants based on active seedling stacks. Higher levels increase duration and add bonus Treants."
     )
+    tgen.addProperty("Name", lvl -> "Summon Treant")
+    tgen.addProperty("Levels", lvl -> MAX_LEVELS.toString())
+    tgen.addProperty("Hotkey", lvl -> "W")
     tgen.addProperty("Duration", lvl -> TREANT_DURATION[lvl - 1].toInt().toString() + "s")
     tgen.addProperty("Cooldown", lvl -> TREANT_COOLDOWN[lvl - 1].toInt().toString() + "s")
-    tgen.addProperty("Mana Cost", lvl -> TREANT_MANA[lvl - 1].toInt().toString())
+    tgen.addProperty("Mana Cost", lvl -> TREANT_MANA[lvl - 1].toString())
     tgen.addProperty("Bonus Treants", lvl -> BONUS_TREANTS[lvl - 1].toString())
+    tgen.addProperty("Treant HP", lvl -> TREANT_HIT_POINTS[lvl - 1].toString())
+    tgen.addProperty("Treant Damage", lvl -> TREANT_DAMAGE_BASE[lvl - 1].toString() + " + " + TREANT_DAMAGE_DICE[lvl - 1].toString() + "d" + TREANT_DAMAGE_SIDES[lvl - 1].toString())
+    tgen.addProperty("Treant Armor", lvl -> TREANT_ARMOR[lvl - 1].toString())
+    tgen.removeProperty("Damage Increase")
+    tgen.removeProperty("Area of Effect")
+    tgen.removeProperty("Duration Normal")
+    tgen.removeProperty("Duration Hero")
 
-    new AbilityDefinitionRoar(SUMMON_TREANT_ID)
+    let def = new AbilityDefinitionRoar(SUMMON_TREANT_ID)
         ..registerTooltipGenerator(tgen)
         ..tooltipStartListen()
         ..setName("Summon Treant")
-        ..setHotkeyNormal("W")
-        ..setLevels(3)
-        ..tooltipStopListen()
+        ..presetHotkey("W")
+        ..setLevels(MAX_LEVELS)
         ..setIconNormal(Icons.bTNEnt)
         ..setIconResearch(Icons.bTNEnt)
         ..setButtonPositionNormalX(2)
         ..setButtonPositionNormalY(1)
-        // Level 1
-        ..setCooldown(1, TREANT_COOLDOWN[0])
-        ..setManaCost(1, TREANT_MANA[0].toInt())
-        ..setDamageIncrease(1, 0)
-        ..setAreaofEffect(1, 0.)
-        ..setDurationNormal(1, 0.)
-        ..setDurationHero(1, 0.)
-        ..setBuffs(1, "")
-        // Level 2
-        ..setCooldown(2, TREANT_COOLDOWN[1])
-        ..setManaCost(2, TREANT_MANA[1].toInt())
-        ..setDamageIncrease(2, 0)
-        ..setAreaofEffect(2, 0.)
-        ..setDurationNormal(2, 0.)
-        ..setDurationHero(2, 0.)
-        ..setBuffs(2, "")
-        // Level 3
-        ..setCooldown(3, TREANT_COOLDOWN[2])
-        ..setManaCost(3, TREANT_MANA[2].toInt())
-        ..setDamageIncrease(3, 0)
-        ..setAreaofEffect(3, 0.)
-        ..setDurationNormal(3, 0.)
-        ..setDurationHero(3, 0.)
-        ..setBuffs(3, "")
+        ..presetCooldown(lvl -> TREANT_COOLDOWN[lvl - 1])
+        ..presetManaCost(lvl -> TREANT_MANA[lvl - 1])
+        ..presetDamageIncrease(lvl -> 0.)
+        ..presetAreaofEffect(lvl -> 0.)
+        ..presetDurationNormal(lvl -> 0.)
+        ..presetDurationHero(lvl -> 0.)
         ..setRequirements("")
         ..setRequirementsLevels("")
         ..setRequiredLevel(1)
         ..setLevelSkipRequirement(2)
         ..setHeroAbility(true)
         ..setItemAbility(false)
+
+    for i = 1 to MAX_LEVELS
+        def.setBuffs(i, "")
+
+    tgen.applyToDef(def)
 
 init
     EventListener.onCast(SUMMON_TREANT_ID) (caster) ->
@@ -79,12 +131,13 @@ init
         let level = caster.getAbilityLevel(SUMMON_TREANT_ID) - 1
         let duration = TREANT_DURATION[level]
         let totalTreants = getSeedlingCount() + BONUS_TREANTS[level]
+        let treantId = getTreantUnitId(level)
         let pos = caster.getPos()
 
         seedlingCount = 0
 
         for i = 1 to totalTreants
-            let treant = createUnit(caster.getOwner(), TREANT_UNIT_ID, pos, angle(0.))
+            let treant = createUnit(caster.getOwner(), treantId, pos, angle(0.))
             doAfter(duration) ->
                 if treant.isAlive()
                     treant.kill()
