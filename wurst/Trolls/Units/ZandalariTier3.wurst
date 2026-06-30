@@ -14,6 +14,7 @@ import ZandalariApothecaryMojopalm
 import ZandalariBloodMage
 import ZandalariBloodMage2
 import ZandalariExecutioner
+import ZandalariBarrage
 
 // Generate Unique Engine IDs for Tier 3 Apex Forces
 public constant ZANDALARI_ALCHEMIST_ID  = compiletime(UNIT_ID_GEN.next())
@@ -89,7 +90,7 @@ public constant ZANDALARI_EXECUTIONER_ID = compiletime(UNIT_ID_GEN.next())
     // 3. APEX DINOSAUR TANK (WITH ANTI-AIR): DIREHORN IRONCLAD
     // -------------------------------------------------------------------------
     // https://www.hiveworkshop.com/threads/zandalari-throne-of-war.345255/
-    new UnitDefinition(ZANDALARI_DINO_TANK_ID, 'okod') // Inherits the massive Kodo Beast scale/collision footprint
+    new UnitDefinition(ZANDALARI_DINO_TANK_ID, 'hrtt') // Inherits the massive Kodo Beast scale/collision footprint
         ..setName("Direhorn Ironclad")
         ..setTooltipBasic("Train Direhorn Ironclad")
         ..setTooltipExtended("A colossal prehistoric warbeast covered in golden plates. Crushes ground forces underfoot while the Rastari riders hurl heavy barbed harpoons to impale flying enemies.")
@@ -98,9 +99,9 @@ public constant ZANDALARI_EXECUTIONER_ID = compiletime(UNIT_ID_GEN.next())
         
         ..setHitPointsMaximumBase(1100)
         ..setDefenseBase(5)
-        ..setAttacksEnabled(3)
+        ..setSpeedBase(290)
         
-        ..setAttack1TargetsAllowed("ground,structure,debris,air")
+        ..setAttack1TargetsAllowed("ground,structure,debris")
         ..setAttack1AttackType(AttackType.Normal)
         
         ..setAttack1DamageBase(42)
@@ -111,12 +112,13 @@ public constant ZANDALARI_EXECUTIONER_ID = compiletime(UNIT_ID_GEN.next())
         ..setAttack2WeaponType(WeaponType.Missile)
         ..setAttack2DamageBase(35)
         ..setAttack2Range(550)
-        ..setAttack2ProjectileArt("Abilities\\Weapons\\Rifle\\RifleMissile.mdl")
+        ..setAttack2ProjectileArt("Abilities\\Weapons\\Dryadmissile\\Dryadmissile.mdl")
         ..setAttack2ProjectileSpeed(1400)
         ..setAttack2MaximumNumberofTargets(6)
-        ..setNormalAbilities("Aatk,Aol1")
+        ..setNormalAbilities(commaList(ZANDALARI_BARRAGE_ABIL_ID))
         ..setAttack2CooldownTime(1.5)
         ..setAttack2ShowUI(true)
+        ..setAttacksEnabled(3)
         
         // Economy & Supply Node Allocation
         ..setGoldCost(110)

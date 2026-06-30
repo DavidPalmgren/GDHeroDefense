@@ -53,8 +53,8 @@ let tgen = new AbilityTooltipGenerator(
         ..setRequirements("")
         ..setRequirementsLevels("")
         ..setRequiredLevel(6)
+        ..setLevelSkipRequirement(6)
         ..setLevels(3)
-        ..setLevelSkipRequirement(2)
         ..setHeroAbility(true)
         ..setItemAbility(false)
 

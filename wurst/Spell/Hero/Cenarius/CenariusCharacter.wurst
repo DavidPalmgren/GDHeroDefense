@@ -4,6 +4,8 @@ import Invigorate
 import SummonTreant
 import Bloom
 import SeedBurst
+import Manifestation
+
 
 import UnitIds
 import ClosureEvents
@@ -19,7 +21,7 @@ public constant CENARIUS_CHARACTER_ID = UnitIds.keeperofthegrove // "Ekee"
 
 @compiletime function addHeroSpells()
     new HeroDefinition('Ekee', 'Ekee')
-        ..setHeroAbilities(commaList(SUMMON_TREANT_ID, SEED_BURST_ID, HEALING_CLOUD_ID))
+        ..setHeroAbilities(commaList(SUMMON_TREANT_ID, SEED_BURST_ID, HEALING_CLOUD_ID, MANIFESTATION_ABIL_ID))
 
 init
     EventListener.onCast(INVIGORATE_ID) (caster) ->

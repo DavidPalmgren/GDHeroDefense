@@ -6,6 +6,7 @@ import ObjectIdGenerator
 import ClosureEvents
 import ClosureTimers
 import Invigorate
+import AbilityTooltipGenerator
 
 public constant SUMMON_TREANT_ID = compiletime(ABIL_ID_GEN.next())
 
@@ -19,21 +20,26 @@ constant real array TREANT_MANA = [40., 55., 70.]
 constant int array BONUS_TREANTS = [0, 1, 2]
 
 @compiletime function genAbility()
+    let tgen = new AbilityTooltipGenerator(
+        Targettype.NONE,
+        "Summons Treants based on active seedling stacks. Higher levels increase duration and add bonus Treants."
+    )
+    tgen.addProperty("Duration", lvl -> TREANT_DURATION[lvl - 1].toInt().toString() + "s")
+    tgen.addProperty("Cooldown", lvl -> TREANT_COOLDOWN[lvl - 1].toInt().toString() + "s")
+    tgen.addProperty("Mana Cost", lvl -> TREANT_MANA[lvl - 1].toInt().toString())
+    tgen.addProperty("Bonus Treants", lvl -> BONUS_TREANTS[lvl - 1].toString())
+
     new AbilityDefinitionRoar(SUMMON_TREANT_ID)
+        ..registerTooltipGenerator(tgen)
+        ..tooltipStartListen()
         ..setName("Summon Treant")
-        ..setTooltipNormal(1, "Summon Treant")
-        ..setTooltipNormal(2, "Summon Treant")
-        ..setTooltipNormal(3, "Summon Treant")
-        ..setTooltipNormalExtended(1, "Summons one Treant per seedling stack for " + TREANT_DURATION[0].toInt().toString() + "s.")
-        ..setTooltipNormalExtended(2, "Summons one Treant per seedling stack + 1 bonus Treant for " + TREANT_DURATION[1].toInt().toString() + "s.")
-        ..setTooltipNormalExtended(3, "Summons one Treant per seedling stack + 2 bonus Treants for " + TREANT_DURATION[2].toInt().toString() + "s.")
-        ..setTooltipLearn("Learn Summon Treant - [|cffffcc00Level %d|r]")
-        ..setTooltipLearnExtended("Summons Treants based on active seedling stacks. Higher levels increase duration and add bonus Treants.")
+        ..setHotkeyNormal("W")
+        ..setLevels(3)
+        ..tooltipStopListen()
         ..setIconNormal(Icons.bTNEnt)
         ..setIconResearch(Icons.bTNEnt)
         ..setButtonPositionNormalX(2)
         ..setButtonPositionNormalY(1)
-        ..setLevels(3)
         // Level 1
         ..setCooldown(1, TREANT_COOLDOWN[0])
         ..setManaCost(1, TREANT_MANA[0].toInt())

@@ -1,0 +1,143 @@
+package Thrash
+
+import ClosureEvents
+import ClosureForGroups
+import ClosureTimers
+import LinkedList
+import AbilityTooltipGenerator
+
+public constant THRASH_ID = compiletime(ABIL_ID_GEN.next())
+
+constant int MAX_LEVELS = 4
+constant int MAX_STACKS = 3
+
+constant real array INITIAL_DAMAGE = [45., 75., 115., 165.]
+constant real array BLEED_DAMAGE = [20., 32., 48., 68.]
+constant real array COOLDOWN = [8., 7., 6., 5.]
+constant int array MANA = [45, 50, 55, 60]
+
+constant real THRASH_RADIUS = 325.
+constant real BLEED_DURATION = 12.
+constant real BLEED_INTERVAL = 2.
+constant int BLEED_TICKS = (BLEED_DURATION / BLEED_INTERVAL).toInt()
+
+constant string SWIPE_SFX = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarCaster.mdl"
+constant string HIT_SFX = "Abilities\\Spells\\Other\\Stampede\\StampedeMissileDeath.mdl"
+constant string BLEED_SFX = "Buff_Bleed.mdx"
+
+let activeBleeds = new LinkedList<ThrashBleed>()
+
+let tgen = new AbilityTooltipGenerator(
+    Targettype.NONE,
+    "Ursoc thrashes nearby enemies, dealing immediate damage and leaving a stacking bleed.")
+
+@compiletime function genAbility()
+    let aDef = new ChannelAbilityPreset(THRASH_ID, MAX_LEVELS, true, tgen)
+        ..setHeroAbility(true)
+        ..setItemAbility(false)
+        ..setIconNormal(Icons.bTNClawsOfAttack)
+        ..setIconResearch(Icons.bTNClawsOfAttack)
+        ..presetButtonPosNormal(1, 0)
+        ..presetButtonPosResearch(1, 0)
+        ..presetTargetTypes(Targettype.NONE)
+        ..setRequiredLevel(1)
+        ..setLevelSkipRequirement(2)
+        ..setRequirements("")
+        ..setRequirementsLevels("")
+        ..tooltipStartListen()
+        ..presetHotkey("W")
+        ..setName("Thrash")
+        ..presetManaCost(lvl -> MANA[lvl - 1])
+        ..presetCooldown(lvl -> COOLDOWN[lvl - 1])
+        ..presetAreaofEffect(lvl -> THRASH_RADIUS)
+        ..presetDurationNormal(lvl -> 0.)
+        ..presetDurationHero(lvl -> 0.)
+
+    tgen
+        ..addProperty("Name", lvl -> "Thrash")
+        ..addProperty("Levels", lvl -> MAX_LEVELS.toString())
+        ..addProperty("Hotkey", lvl -> "W")
+        ..addProperty("Initial Damage", lvl -> INITIAL_DAMAGE[lvl - 1].toString(0))
+        ..addProperty("Bleed", lvl -> BLEED_DAMAGE[lvl - 1].toString(0) + " every " + BLEED_INTERVAL.toString(0) + "s")
+        ..addProperty("Stacks", lvl -> MAX_STACKS.toString())
+        ..addProperty("Duration", lvl -> BLEED_DURATION.toString(0) + "s")
+        ..addProperty("Area of Effect", lvl -> THRASH_RADIUS.toString(0))
+        ..addProperty("Cooldown", lvl -> COOLDOWN[lvl - 1].toString(0) + "s")
+        ..addProperty("Mana", lvl -> MANA[lvl - 1].toString())
+        ..applyToDef(aDef)
+
+class ThrashBleed
+    unit caster
+    unit target
+    player owner
+    int stacks = 1
+    int ticksLeft = BLEED_TICKS
+    real tickDamage
+    CallbackPeriodic bleedTimer
+    effect bleedSfx
+
+    construct(unit caster, unit target, real tickDamage)
+        this.caster = caster
+        this.target = target
+        this.owner = caster.getOwner()
+        this.tickDamage = tickDamage
+        this.bleedSfx = target.addEffect(BLEED_SFX, "overhead")
+        activeBleeds.add(this)
+
+        this.bleedTimer = doPeriodically(BLEED_INTERVAL) cb ->
+            this.tick()
+
+    function refresh(real tickDamage)
+        this.tickDamage = tickDamage
+        this.ticksLeft = BLEED_TICKS
+        if this.stacks < MAX_STACKS
+            this.stacks += 1
+
+    function tick()
+        if not target.isAlive()
+            destroy this
+            return
+
+        caster.damageTarget(target, tickDamage * stacks.toReal(), false, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS)
+        flashEffect(HIT_SFX, target, "chest")
+
+        ticksLeft -= 1
+        if ticksLeft <= 0
+            destroy this
+
+    ondestroy
+        activeBleeds.remove(this)
+        if bleedTimer != null
+            destroy bleedTimer
+            bleedTimer = null
+        if bleedSfx != null
+            bleedSfx.destr()
+            bleedSfx = null
+
+function getActiveBleed(unit caster, unit target) returns ThrashBleed
+    return activeBleeds.find(bleed -> bleed.caster == caster and bleed.target == target)
+
+function applyThrashBleed(unit caster, unit target, real tickDamage)
+    let bleed = getActiveBleed(caster, target)
+    if bleed == null
+        new ThrashBleed(caster, target, tickDamage)
+    else
+        bleed.refresh(tickDamage)
+
+init
+    EventListener.onCast(THRASH_ID) (caster) ->
+        let level = caster.getAbilityLevel(THRASH_ID) - 1
+        let owner = caster.getOwner()
+        let initialDamage = INITIAL_DAMAGE[level]
+        let bleedDamage = BLEED_DAMAGE[level]
+
+        flashEffect(SWIPE_SFX, caster, "origin")
+
+        forUnitsInRange(caster.getPos(), THRASH_RADIUS) (unit target) ->
+            if target.isAlive()
+                and target.getOwner().isEnemyOf(owner)
+                and not target.isType(UNIT_TYPE_STRUCTURE)
+                and not target.isType(UNIT_TYPE_FLYING)
+                caster.damageTarget(target, initialDamage, false, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS)
+                flashEffect(HIT_SFX, target, "chest")
+                applyThrashBleed(caster, target, bleedDamage)

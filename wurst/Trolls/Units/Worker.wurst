@@ -33,6 +33,7 @@ public constant ZANDALARI_WORKER_ID = compiletime(UNIT_ID_GEN.next())
         ..setTooltipExtended("The fundamental workforce of the empire. Can construct custom tribal structures and repair damaged installations.")
         ..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNTrollGatherer(Black).blp")
         ..setModelFile("TrollGathererAlternateV2.mdx")
+        ..setNormalAbilities("Arep")
         
         // BINDING BUILD LIST: This places all your custom structures onto the worker UI card!
         ..setStructuresBuilt(commaList(

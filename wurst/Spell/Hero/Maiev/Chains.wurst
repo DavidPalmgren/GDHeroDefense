@@ -82,7 +82,7 @@ constant string PULL_SFX        = "Abilities\\Spells\\Undead\\DeathCoil\\DeathCo
         ..presetTargetTypes(Targettype.POINT)
         ..presetOption(Option.TARGETIMAGE, true)
         ..setRequiredLevel(6)
-        ..setLevelSkipRequirement(5)
+        ..setLevelSkipRequirement(6)
         ..tooltipStartListen()
         ..presetHotkey("R")
         ..setName("Soul Chains")

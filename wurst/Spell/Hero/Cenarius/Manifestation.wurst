@@ -1,0 +1,237 @@
+package Manifestation
+
+import ClosureTimers
+import AbilityTooltipGenerator
+import Doodads
+import ClosureEvents
+import UnitIds
+import BuffIds
+import BuffObjEditing
+import ClosureForGroups
+import GroupUtils
+import InstantDummyCaster
+import Group
+import Orders
+
+import Invigorate
+
+let doodadsMix = [Doodads.ashenBush0, Doodads.ruins_Flower0]
+
+public constant MANIFESTATION_ABIL_ID = compiletime(ABIL_ID_GEN.next())
+
+public constant TREE_ID = compiletime(UNIT_ID_GEN.next())
+public constant YSERA_ID = compiletime(UNIT_ID_GEN.next())
+public constant MALORNE_ID = compiletime(UNIT_ID_GEN.next())
+
+public constant YSERAS_PRESENCE_ABIL_ID = compiletime(ABIL_ID_GEN.next())
+public constant YSERAS_PRESENCE_BUFF_ID = compiletime(BUFF_ID_GEN.next())
+
+public constant MALORNE_PRESENCE_ABIL_ID = compiletime(ABIL_ID_GEN.next())
+public constant MALORNE_PRESENCE_BUFF_ID = compiletime(BUFF_ID_GEN.next())
+
+
+let tgen = new AbilityTooltipGenerator(Targettype.NONE, "Cenarius calls upon the Emerald Dream, manifesting a lush forest of ancient trees that invigorate the battlefield. As the spell grows in power, the spirits of the Dream take form to aid in the protection of nature.")
+
+@compiletime function createCenariusUltimate()
+    let abil = new ChannelAbilityPreset(MANIFESTATION_ABIL_ID, 3, true)
+        ..setName("Emerald Manifestation")
+        ..setHotkeyLearn("R")
+        ..setHotkeyNormal("R")
+        
+        ..setIconNormal(Icons.bTNHornOfCenarius)
+        ..setIconResearch(Icons.bTNHornOfCenarius)
+        
+        ..presetAreaofEffect(lvl -> (800.0 + (lvl * 200.0)))
+
+            
+        ..setDurationNormal(1, 15.0)
+        ..setDurationNormal(2, 20.0)
+        ..setDurationNormal(3, 25.0)
+        ..setLevels(3)
+        ..setHeroAbility(true)
+        ..setRequiredLevel(6)
+        ..setLevelSkipRequirement(6)
+
+    tgen
+        ..addProperty("Name", lvl -> "Emerald Manifestation")
+        ..addProperty("Levels",       lvl -> "3")
+        ..addProperty("Area of Effect", lvl -> (800 + (lvl * 200)).toString())
+        ..addProperty("Duration", lvl -> (10 + (lvl * 5)).toString())
+        ..addProperty("Mana Cost", lvl -> (120 + (lvl * 10)).toString())
+        ..applyToDef(abil)
+            
+            
+        
+
+    new UnitDefinition(TREE_ID, 'efon')
+      ..setSpeedBase(0)
+      ..setNormalAbilities("")
+      ..setCollisionSize(0)
+
+    new UnitDefinition(YSERA_ID, UnitIds.greendragon)
+        ..setName("Ysera the Dreamer")
+        ..setHitPointsMaximumBase(800)
+        ..setNormalAbilities("Ahea," + YSERAS_PRESENCE_ABIL_ID.toRawCode())
+        ..setAttack1AttackType(AttackType.Chaos)
+        ..setArmorType(ArmorType.Hero)
+        ..setArmorSoundType(ArmorSoundType.Flesh)
+
+
+
+    new UnitDefinition(MALORNE_ID, 'hkni') //https://www.hiveworkshop.com/repositories/models.530/?order=last_edit_date&search=malorne&description=1
+        ..setName("Malorne the White Stag")
+        ..setHitPointsMaximumBase(1500)
+        ..setDefenseBase(8)
+        ..setScalingValue(3.0)
+        ..setArmorType(ArmorType.Hero)
+        ..setArmorSoundType(ArmorSoundType.Flesh)
+        ..setAttack1WeaponSound(WeaponSound.WoodHeavyBash)
+
+        ..setPortraitModelFile("units\\critters\\BlackStagMale\\BlackStagMale")
+        ..setModelFile("units\\critters\\BlackStagMale\\BlackStagMale")
+        ..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNStag.blp")
+        
+        
+        // Attack Configuration
+        ..setAttacksEnabled(1)
+        ..setAttack1TargetsAllowed("ground,structure,debris,ward")
+        ..setAttack1AttackType(AttackType.Chaos)
+        ..setAttack1DamageBase(70)
+        ..setAttack1WeaponType(WeaponType.Normal) // Melee
+        ..setAttack1Range(150)
+        ..setAttack1CooldownTime(1.5)
+        ..setAttack1ProjectileArt("") // No projectile for melee
+        ..setNormalAbilities(commaList(MALORNE_PRESENCE_ABIL_ID))
+
+    new AbilityDefinitionDeathKnightUnholyAura(YSERAS_PRESENCE_ABIL_ID)
+        ..setName("Ysera's presence")
+        ..setIconNormal(Icons.bTNGreenDragon)
+        ..setTooltipNormal(1, "Ysera's presence")
+        ..setTooltipNormalExtended(1, "Ysera's presence massively increases health regeneration.")
+        ..setLifeRegenerationIncrease(1, 15)
+        ..setMovementSpeedIncrease(1, 0)
+        ..setBuffs(1, YSERAS_PRESENCE_BUFF_ID.toRawCode())
+
+    new BuffDefinition(YSERAS_PRESENCE_BUFF_ID, BuffIds.unholyAura)
+        ..setIcon(Icons.bTNGreenDragon)
+        ..setName(1, "Ysera's presence")
+        ..setTooltipNormal(1, "Ysera's presence")
+        ..setTooltipNormalExtended(1, "Ysera's presence massively increases health regeneration.")
+
+
+    new BuffDefinition(MALORNE_PRESENCE_BUFF_ID, BuffIds.devotionAura)
+        ..setName("Malorne's presence")
+        ..setIconNormal(1, Icons.bTNAcorn)
+        ..setTooltipNormal(1, "Malorne's presence")
+        ..setTooltipNormalExtended(1,"Malorne's presence invigorates nearby allies healing them and providing protection increasing armor")
+
+
+    new AbilityDefinitionPaladinDevotionAura(MALORNE_PRESENCE_ABIL_ID)
+        ..setIconNormal(Icons.bTNAcorn)
+        ..setName("Malorne's presence")
+        ..setTooltipNormal(1, "Malorne's presence")
+        ..setTooltipNormalExtended(1, "Malorne's presence invigorates nearby allies healing them and providing protection increasing armor")
+        ..setBuffs(1, MALORNE_PRESENCE_BUFF_ID.toRawCode())
+        ..setArmorBonus(1, 4)
+
+
+public function spawnEmeraldDreamVisuals(vec2 center, int level, real radius)
+    addEffect("Abilities\\Spells\\NightElf\\Tranquility\\TranquilityTarget.mdl", center)
+        ..setScale(3.0)
+        ..destr()
+    
+    let duration = 10.0 + (level * 5.0)
+    let interval = 0.5
+    let maxTicks = (duration / interval).toInt()
+    
+    let treeCount = level * 20 
+    for i = 0 to treeCount
+        let angle = GetRandomReal(0, 2 * PI)
+        let dist = GetRandomReal(0, radius)
+        let pos = center + vec2(dist * Cos(angle), dist * Sin(angle))
+        
+        let u = createUnit(players[0], TREE_ID, pos, 0 .asAngleDegrees())
+        
+        var currentScale = 0.1
+        let targetScale = 0.7
+        let growSteps = 15
+        let scaleStep = (targetScale - 0.1) / growSteps.toReal()
+        
+        u.setScale(currentScale)
+        u.setAnimation("Birth")
+        
+        doPeriodically(0.1) (CallbackPeriodic cb) ->
+            if currentScale < targetScale
+                currentScale += scaleStep
+                u.setScale(currentScale)
+            else
+                destroy cb
+
+        doAfter(duration) () ->
+            u.remove()
+
+    let grassCount = level * 60
+    for i = 0 to grassCount
+        let angle = GetRandomReal(0, 2 * PI)
+        let dist = GetRandomReal(0, radius)
+        let pos = center + vec2(dist * Cos(angle), dist * Sin(angle))
+        
+        let grass = addEffect("Doodads\\LordaeronSummer\\Plants\\GrassTuft\\GrassTuft0.mdx", pos)
+            ..setScale(GetRandomReal(0.5, 1.2))
+        
+        doAfter(duration) () ->
+            grass.destr()
+
+    var currentTick = 0
+    doPeriodically(interval) (CallbackPeriodic cb) ->
+        currentTick += 1
+        if currentTick >= maxTicks
+            destroy cb
+        else
+            let pos = center + vec2(GetRandomReal(-radius, radius), GetRandomReal(-radius, radius))
+            addEffect("Abilities\\Spells\\Items\\AIlb\\AIlbTarget.mdl", pos).destr()
+
+    if level >= 2
+        let ysera = createUnit(players[0], YSERA_ID, center + vec2(150, 150), 0 .asAngleDegrees())
+        ysera.setTimedLife(duration)
+        ysera.setAnimation("Birth")
+        addEffect("Abilities\\Spells\\Human\\MassTeleport\\MassTeleportTarget.mdl", ysera.getPos()).destr()
+        ysera.setVertexColor(200, 255, 200, 100)
+        
+    if level >= 3
+        let malorne = createUnit(players[0], MALORNE_ID, center + vec2(-150, -150), 0 .asAngleDegrees())
+        malorne.setTimedLife(duration)
+        malorne.setAnimation("Birth")
+        addEffect("Abilities\\Spells\\Human\\MassTeleport\\MassTeleportTarget.mdl", malorne.getPos()).destr()
+        malorne.setVertexColor(255, 255, 255, 100)
+
+
+init
+    EventListener.onCast(MANIFESTATION_ABIL_ID) (unit caster) ->
+        let level = caster.getAbilityLevel(MANIFESTATION_ABIL_ID)
+        let pos = caster.getPos()
+        let radius = 1000.0 + (level - 1) * 200.0
+        spawnEmeraldDreamVisuals(pos, level, radius)
+        doAfter(1) ->
+            forUnitsInRange(caster.getPos(), radius + 100) (unit u) ->
+                if u.getTypeId() == MALORNE_ID
+                    doPeriodically(1.0) (CallbackPeriodic cb) ->
+                        if u.isAlive()
+                            let targets = CreateGroup()
+                            forUnitsInRange(u.getPos(), 800.0) (unit target) ->
+                                if target.isAllyOf(u.getOwner()) and 
+                                  target.isAlive() and 
+                                  target.getTypeId() != TREE_ID and 
+                                  not target.hasAbility(INVIGORATE_BUFF_ID)
+                                    targets.add(target)
+                            
+                            if targets.size() > 0
+                                let target = targets.getRandom()
+                                let _result = InstantDummyCaster.castTarget(u.getOwner(), INVIGORATE_ID, 1, Orders.rejuvination, target)
+
+                            
+                            targets.destr()
+                        else
+                            destroy cb
+
+            

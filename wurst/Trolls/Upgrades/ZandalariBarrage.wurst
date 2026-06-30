@@ -1,0 +1,25 @@
+package ZandalariBarrage
+
+import ObjectIdGenerator
+import UnitObjEditing
+import UpgradeObjEditing
+import AbilityObjEditing
+import ObjectIds
+
+// Define the upgrade
+public constant ZANDALARI_BARRAGE_UPG_ID = compiletime(UPGD_ID_GEN.next())
+public constant ZANDALARI_BARRAGE_ABIL_ID = compiletime(ABIL_ID_GEN.next())
+
+// MULTI SHOT ICON https://www.hiveworkshop.com/threads/btnmultishot.161082/
+@compiletime function createBarrageUpgrade()
+    new UpgradeDefinition(ZANDALARI_BARRAGE_UPG_ID)
+        ..setName(1, "Rastari Harpoon Volley")
+        ..setLevels(1)
+
+    new AbilityDefinitionRocketAttack(ZANDALARI_BARRAGE_ABIL_ID)
+        ..setName("Anti air")
+        ..setDamagePerTarget(1, 25)
+        ..setMaximumNumberofTargets(1, 6)
+        ..setRequirements(commaList(""))
+        ..setMissileArt("Abilities\\Weapons\\Dryadmissile\\Dryadmissile.mdl") // THERE IS CUSTOM ART IN THE PACK GET LATER
+        

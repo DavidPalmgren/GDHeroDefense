@@ -111,10 +111,6 @@ function executeBloodPact(unit hero, vec2 targetPos, int level)
     // Apply death immunity
     applyDeathImmunity(hero)
 
-    printTimed("|cffff0000[Blood Pact]|r Vol'jin sacrificed "
-        + sacrificed.toString(0) + " HP dealing "
-        + damage.toString(0) + " damage!", 5.)
-
 init
     registerPlayerUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT) ->
         if GetSpellAbilityId() == BLOOD_PACT
