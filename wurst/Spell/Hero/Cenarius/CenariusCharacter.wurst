@@ -22,6 +22,8 @@ public constant CENARIUS_CHARACTER_ID = UnitIds.keeperofthegrove // "Ekee"
 @compiletime function addHeroSpells()
     new HeroDefinition('Ekee', 'Ekee')
         ..setHeroAbilities(commaList(SUMMON_TREANT_ID, SEED_BURST_ID, HEALING_CLOUD_ID, MANIFESTATION_ABIL_ID))
+        ..setStockMaximum(1)
+        ..setStockReplenishInterval(0)
 
 init
     EventListener.onCast(INVIGORATE_ID) (caster) ->

@@ -7,6 +7,7 @@ import Icons
 import ClosureTimers
 import HashMap
 import ObjectIds
+import RegisterEvents
 
 import LinkedList
 
@@ -53,6 +54,16 @@ let currentHealthBonus = new LinkedList<unit>
         ..setItemAbility(false)
 
 init
+    // Prune dead swarmers immediately so these collections don't grow forever —
+    // WC3 recycles unit handle IDs, so a stale entry left behind could also
+    // silently attach to an unrelated future unit that gets the same handle.
+    registerPlayerUnitEvent(EVENT_PLAYER_UNIT_DEATH) ->
+        let u = GetDyingUnit()
+        if u.getTypeId() == QIRAJI_SWARMER_ID
+            currentDamageBonus.remove(u)
+            currentArmorBonus.remove(u)
+            currentHealthBonus.remove(u)
+
     doPeriodically(UPDATE_INTERVAL) cb ->
         let g = CreateGroup()
         g.enumUnitsInRect(bj_mapInitialPlayableArea)

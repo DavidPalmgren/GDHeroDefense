@@ -32,14 +32,22 @@ public constant SEEDLING_TRACKER_ITEM_ID = compiletime(ITEM_ID_GEN.next())
 // Call this after giving Cenarius the item to get a reference
 unit trackerOwner = null
 item trackerItem = null
+CallbackPeriodic trackerCb = null
 
 public function initSeedlingTracker(unit owner)
+    // Guard against stacking a second forever-running timer if this is ever
+    // invoked more than once (e.g. the hero somehow gets retrained) — without
+    // this, every extra call would leave the previous 0.1s loop running forever.
+    if trackerCb != null
+        destroy trackerCb
+        trackerCb = null
+
     trackerOwner = owner
     trackerItem = createItem(SEEDLING_TRACKER_ITEM_ID, owner.getPos())
     owner.addItemHandle(trackerItem)
 
     // Update charges every 0.1s to reflect seedling count
-    doPeriodically(0.1) cb ->
+    trackerCb = doPeriodically(0.1) cb ->
         if trackerItem != null
             trackerItem.setCharges(getSeedlingCount())
 

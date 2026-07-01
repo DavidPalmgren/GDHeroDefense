@@ -64,21 +64,34 @@ constant real ISOLATION_LIMIT = 200. // range from another unit makes the unit b
 
 
 
+// Tracks whether we've ever seen a living Isolation-aura bearer (i.e. Xavius),
+// so the periodic scan below can stop itself once the aura is gone for good
+// instead of running a full-map scan every second for the rest of the match.
+var isolationEverSeenBearer = false
+
 init
-    // kill after xavius dies?
     doPeriodically(ISOLATION_PERIOD) cb ->
         // Create a temporary group of all units on the map
         let g = CreateGroup()
         g.enumUnitsInRect(bj_mapInitialPlayableArea)
-        
+
+        var bearerAlive = false
         for u from g
+            if u.isAlive() and u.hasAbility(ISOLATION_ID)
+                bearerAlive = true
             if u.hasAbility(ISOLATION_BUFF_ID) and not u.hasAbility(NIGHTMARE_BUFF_ID)
                 ENUM_GROUP.enumUnitsInRange(u.getPos(), ISOLATION_LIMIT, null)
                 if not ENUM_GROUP.size() > 1
-                    
+
                     u.damageTarget(u, ISOLATION_DAMAGE, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
                 //ENUM_GROUP.destr()
 
+        if bearerAlive
+            isolationEverSeenBearer = true
+        else if isolationEverSeenBearer
+            // Xavius (or whoever carried the aura) is dead — stop the forever-loop.
+            destroy cb
+
         // Clean up the group to prevent memory leaks
-        doAfter(5.) -> 
+        doAfter(5.) ->
             g.destr()
