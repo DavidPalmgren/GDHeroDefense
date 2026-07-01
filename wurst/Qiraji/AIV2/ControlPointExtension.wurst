@@ -24,7 +24,7 @@ public function listControlPoints()
 public function getControlPointId(unit cp) returns int
     let maxControlPointId = getRegisteredControlPointCount()
     var i = 1
-    while i <= maxControlPointId
+    while i <= 67
         if cpRegistry.get(i) == cp
             return i
         i++
@@ -34,7 +34,7 @@ public function getAllControlPoints() returns LinkedList<unit>
     let points = new LinkedList<unit>()
     let maxControlPointId = getRegisteredControlPointCount()
     var i = 1
-    while i <= maxControlPointId
+    while i <= 67
         let cp = cpRegistry.get(i)
         if cp != null and cp.isAlive()
             points.add(cp)
@@ -45,7 +45,7 @@ public function getEnemyControlPoints(player aiPlayer) returns LinkedList<unit>
     let points = new LinkedList<unit>()
     let maxControlPointId = getRegisteredControlPointCount()
     var i = 1
-    while i <= maxControlPointId
+    while i <= 67
         let cp = cpRegistry.get(i)
         if cp != null and cp.isAlive() and cp.getOwner() != aiPlayer
             points.add(cp)
@@ -66,7 +66,7 @@ public function getClosestControlPointIdToPos(vec2 pos) returns int
     var closestDist = 999999.0
     let maxControlPointId = getRegisteredControlPointCount()
     var i = 1
-    while i <= maxControlPointId
+    while i <= 67
         let cp = cpRegistry.get(i)
         if cp != null
             let dist = pos.distanceTo(cp.getPos())
@@ -80,4 +80,4 @@ init
     // Usage Examples:
     listControlPoints()
     displayControlPointInfo(1)
-    displayControlPointInfo(getRegisteredControlPointCount())
+    displayControlPointInfo(67)

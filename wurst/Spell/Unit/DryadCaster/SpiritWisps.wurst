@@ -79,6 +79,7 @@ init
             for u from g
                 if u.isAlive() and u.getOwner().isAllyOf(caster.getOwner()) and u.getHP() < u.getMaxHP()
                     nearby.add(u)
+            g.destr()
 
             for wisp in wisps
                 unit nearestInjured = null
@@ -125,6 +126,7 @@ init
                 if u.isAlive() and u.getOwner().isAllyOf(caster.getOwner()) and u.getHP() < u.getMaxHP()
                     u.addHP(WISP_HEAL)
                     flashEffect("Abilities\\Spells\\Items\\AIhe\\AIheTarget.mdl", u, "origin")
+            g.destr()
 
         doAfter(WISP_DURATION) ->
             destroy moveTimer
