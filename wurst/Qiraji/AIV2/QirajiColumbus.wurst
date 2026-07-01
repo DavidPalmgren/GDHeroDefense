@@ -143,13 +143,13 @@ public function beginAutomatedMapping()
     
     // Explicit while loops eliminate ANTLR parser crashes completely
     var srcId = 1
-    while srcId <= 66
+    while srcId <= 67
         let srcUnit = cpRegistry.get(srcId)
         if srcUnit != null
             let srcPos = srcUnit.getPos()
             
             var destId = 1
-            while destId <= 66
+            while destId <= 67
                 if srcId != destId
                     let destUnit = cpRegistry.get(destId)
                     if destUnit != null

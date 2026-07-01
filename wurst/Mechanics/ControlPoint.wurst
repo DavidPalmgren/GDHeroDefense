@@ -134,6 +134,7 @@ function setupAllControlPoints()
     addControlPoint(64, udg_mulgoreThunderBluff, 40)
     addControlPoint(65, udg_desolaceRuins, 25)
     addControlPoint(66, udg_stonetalonValley, 25)
+    addControlPoint(67, udg_tanarisOasis, 25)
 
 
 init
