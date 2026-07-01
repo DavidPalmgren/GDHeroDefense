@@ -1,5 +1,6 @@
 package WurstExportedObjects_w3q
 import ObjEditingNatives
+import ObjEditingCommons
 
 // Modified Table (contains all custom objects)
 
@@ -444,7 +445,7 @@ import ObjEditingNatives
 	..setLvlDataString("gar1", 1, 0, "ReplaceableTextures\\CommandButtons\\BTNWitchDoctorAdept.blp")
 	..setLvlDataString("gar1", 2, 0, "ReplaceableTextures\\CommandButtons\\BTNWitchDoctorMaster.blp")
 	..setLvlDataString("greq", 1, 0, "")
-	..setLvlDataString("greq", 2, 0, "x01j")
+	..setLvlDataString("greq", 2, 0, "x01i")
 	..setLvlDataString("gcls", 0, 0, "melee")
 	..setLvlDataString("gnam", 1, 0, "Witch Doctor Adept Training")
 	..setLvlDataString("gnam", 2, 0, "Witch Doctor Master Training")
@@ -497,7 +498,7 @@ import ObjEditingNatives
 	..setLvlDataString("gar1", 1, 0, "ReplaceableTextures\\CommandButtons\\BTNWitchDoctorAdept.blp")
 	..setLvlDataString("gar1", 2, 0, "ReplaceableTextures\\CommandButtons\\BTNWitchDoctorMaster.blp")
 	..setLvlDataString("greq", 1, 0, "")
-	..setLvlDataString("greq", 2, 0, "x01j")
+	..setLvlDataString("greq", 2, 0, "x01i")
 	..setLvlDataString("gcls", 0, 0, "melee")
 	..setLvlDataString("gnam", 1, 0, "Apothecary Adept Training")
 	..setLvlDataString("gnam", 2, 0, "Apothecary License Training")
