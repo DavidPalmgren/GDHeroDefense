@@ -12,8 +12,8 @@ constant int MAX_LEVELS = 4
 constant int MAX_STACKS = 3
 
 constant real array INITIAL_DAMAGE = [45., 75., 115., 165.]
-constant real array BLEED_DAMAGE = [20., 32., 48., 68.]
-constant real array COOLDOWN = [8., 7., 6., 5.]
+constant real array BLEED_DAMAGE = [15., 20., 30., 40.]
+constant real array COOLDOWN = [9., 8., 7., 6.]
 constant int array MANA = [45, 50, 55, 60]
 
 constant real THRASH_RADIUS = 325.

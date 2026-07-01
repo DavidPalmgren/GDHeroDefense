@@ -21,15 +21,6 @@ import BuffObjEditing
 
 @compiletime function create_w3h_BM02()
 	new BuffDefinition('BM02', 'Basl')
-	..setName(1, "Isolation")
-	..setTooltipNormal(1, "Isolation")
-	..setTooltipNormalExtended(1, "This unit is being isolated by the emerald nightmare, keep your friends close.")
-	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNPossession.blp")
-	..setEffect(1, "")
-
-
-@compiletime function create_w3h_BM03()
-	new BuffDefinition('BM03', 'Basl')
 	..setName(1, "Maddening Whispers")
 	..setTooltipNormal(1, "Maddening Whispers")
 	..setTooltipNormalExtended(1, "This unit has been silenced by the Old Gods' whispers and cannot cast spells.")
@@ -38,29 +29,29 @@ import BuffObjEditing
 	..setArtSpecial(1, "")
 
 
-@compiletime function create_w3h_BM04()
-	new BuffDefinition('BM04', 'Babr')
+@compiletime function create_w3h_BM03()
+	new BuffDefinition('BM03', 'Babr')
 	..setName(1, "Trample")
 	..setTooltipNormal(1, "Trampled")
 	..setTooltipNormalExtended(1, "This unit is being crushed underfoot.")
 
 
-@compiletime function create_w3h_BM05()
-	new BuffDefinition('BM05', 'BOae')
+@compiletime function create_w3h_BM04()
+	new BuffDefinition('BM04', 'BOae')
 	..setTooltipNormal(1, "Mother's Love")
 	..setTooltipNormalExtended(1, "This unit is under the protective care of a Swarm Mother, attack and movementspeed are increased. Swarmers grow healtheir.")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNAmuletOftheWild.blp")
 
 
-@compiletime function create_w3h_BM06()
-	new BuffDefinition('BM06', 'Bbsk')
+@compiletime function create_w3h_BM05()
+	new BuffDefinition('BM05', 'Bbsk')
 	..setName(1, "Berserk")
 	..setTooltipNormal(1, "This unit is Enraged, It deals increased damage.")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNUnholyFrenzy.blp")
 
 
-@compiletime function create_w3h_BM07()
-	new BuffDefinition('BM07', 'Basl')
+@compiletime function create_w3h_BM06()
+	new BuffDefinition('BM06', 'Basl')
 	..setName(1, "Invigorate")
 	..setTooltipNormal(1, "Invigorated")
 	..setTooltipNormalExtended(1, "This unit is invigorated, regenerating health and mana.")
@@ -70,16 +61,16 @@ import BuffObjEditing
 	..setTargetAttachmentPoint0(1, "chest")
 
 
-@compiletime function create_w3h_BM08()
-	new BuffDefinition('BM08', 'BUau')
+@compiletime function create_w3h_BM07()
+	new BuffDefinition('BM07', 'BUau')
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNGreenDragon.blp")
 	..setName(1, "Ysera's presence")
 	..setTooltipNormal(1, "Ysera's presence")
 	..setTooltipNormalExtended(1, "Ysera's presence massively increases health regeneration.")
 
 
-@compiletime function create_w3h_BM09()
-	new BuffDefinition('BM09', 'BHad')
+@compiletime function create_w3h_BM08()
+	new BuffDefinition('BM08', 'BHad')
 	..setName(1, "Malorne's presence")
 	..setIconNormal(1, "UI\\Cursor\\BTNAcorn.blp")
 	..setTooltipNormal(1, "Malorne's presence")
@@ -104,8 +95,8 @@ import BuffObjEditing
 	..setTargetAttachmentPoint0(1, "overhead")
 
 
-@compiletime function create_w3h_BM0a()
-	new BuffDefinition('BM0a', 'Basl')
+@compiletime function create_w3h_BM09()
+	new BuffDefinition('BM09', 'Basl')
 	..setName(1, "Moon Warrior")
 	..setTooltipNormal(1, "Moon Warrior")
 	..setTooltipNormalExtended(1, "Tyrande has dismounted, gaining bonus attack speed and damage.")
@@ -114,55 +105,55 @@ import BuffObjEditing
 	..setArtSpecial(1, "")
 
 
-@compiletime function create_w3h_BM0b()
-	new BuffDefinition('BM0b', 'Basl')
+@compiletime function create_w3h_BM0a()
+	new BuffDefinition('BM0a', 'Basl')
 	..setName(1, "Hibernate")
 	..setTooltipNormal(1, "Hibernate")
 	..setTooltipNormalExtended(1, "This unit is hibernating, rapidly regenerating health but unable to act.")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNSleep.blp")
 
 
-@compiletime function create_w3h_BM0c()
-	new BuffDefinition('BM0c', 'BNso')
+@compiletime function create_w3h_BM0b()
+	new BuffDefinition('BM0b', 'BNso')
 	..setName(1, "Mauled")
 	..setTooltipNormal(1, "Mauled")
 	..setTooltipNormalExtended(1, "This unit has been charged by Ursoc and is stunned.")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNStun.blp")
 
 
-@compiletime function create_w3h_BM0d()
-	new BuffDefinition('BM0d', 'Basl')
+@compiletime function create_w3h_BM0c()
+	new BuffDefinition('BM0c', 'Basl')
 	..setName(1, "Spirit Wisps")
 	..setTooltipNormal(1, "Spirit Wisps")
 	..setTooltipNormalExtended(1, "This unit is accompanied by healing spirit wisps.")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNWisp.blp")
 
 
-@compiletime function create_w3h_BM0e()
-	new BuffDefinition('BM0e', 'Basl')
+@compiletime function create_w3h_BM0d()
+	new BuffDefinition('BM0d', 'Basl')
 	..setName(1, "Iron Skin")
 	..setTooltipNormal(1, "Iron Skin")
 	..setTooltipNormalExtended(1, "Increases armor by 4 and has a 25% chance to retaliate.")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\UI\\Cursor\\BTNAcorn.blp")
 
 
-@compiletime function create_w3h_BM0f()
-	new BuffDefinition('BM0f', 'Bslo')
+@compiletime function create_w3h_BM0e()
+	new BuffDefinition('BM0e', 'Bslo')
 	..setName(1, "Death's Grasp")
 	..setTooltipNormal(1, "Death's Grasp")
 	..setTooltipNormalExtended(1, "Slowed by the cursed zone.")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNAuraOfDarkness.blp")
 
 
-@compiletime function create_w3h_BM0g()
-	new BuffDefinition('BM0g', 'Bspl')
+@compiletime function create_w3h_BM0f()
+	new BuffDefinition('BM0f', 'Bspl')
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNSacrifice.blp")
 	..setTooltipNormal(1, "Blood Anchor")
 	..setTooltipNormalExtended(1, "This unit's life force is anchored to a blood ritual. If it dies, it will temporarily reanimate as a gore soaked berserker.")
 
 
-@compiletime function create_w3h_BM0h()
-	new BuffDefinition('BM0h', 'Btcg')
+@compiletime function create_w3h_BM0g()
+	new BuffDefinition('BM0g', 'Btcg')
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNAttack.blp")
 	..setTooltipNormal(1, "Maimed (Tendon Cleave)")
 	..setTooltipNormalExtended(1, "This unit's tendons have been severed. Movement speed and attack speed reduced by 20%.")

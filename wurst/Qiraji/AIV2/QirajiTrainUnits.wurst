@@ -28,7 +28,6 @@ public function startQirajiTrainLoop(player aiPlayer)
             u.issueImmediateOrderById(QIRAJI_DRONE_ID)
             u.issueImmediateOrderById(QIRAJI_SPITTER_ID)
 
-public function selectUnitToTrain(player aiPlayer)
   
 // init
 //     EventListener.add(EVENT_PLAYER_UNIT_TRAIN_FINISH, listener) -> 

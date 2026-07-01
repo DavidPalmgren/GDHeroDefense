@@ -36,6 +36,7 @@ class ProbeTracker
         targetPos = target
         timeElapsed = 0.0
         
+        // Player(15) is Neutral Passive
         probeUnit = CreateUnit(Player(15), WISP_UNIT_ID, start.x, start.y, 0.0)
         if probeUnit != null
             probeUnit..setInvulnerable(true)
@@ -78,7 +79,7 @@ function registerPath(int fromId, int toId)
     let neighbors = navigationMap.get(fromId)
     if not neighbors.has(toId)
         neighbors.add(toId)
-        //print("|cff00ffffQirajiColumbus|r Registered subway link: " + fromId.toString() + " -> " + toId.toString())
+        print("|cff00ffffQirajiColumbus|r Registered subway link: " + fromId.toString() + " -> " + toId.toString())
 
 function buildNavigationMapText() returns string
     var output = "Qiraji route graph\n"
@@ -100,20 +101,20 @@ function buildNavigationMapText() returns string
 function printReadableNavigationMap()
     let rendered = buildNavigationMapText()
     if rendered == "Qiraji route graph\n"
-        //print("|cffff0000QirajiColumbus|r No navigation links were recorded yet.")
+        print("|cffff0000QirajiColumbus|r No navigation links were recorded yet.")
         return
 
-    //print("|cff00ffffQirajiColumbus|r Cached route graph:")
+    print("|cff00ffffQirajiColumbus|r Cached route graph:")
     let lines = rendered.split("\n")
     for line in lines
         if line != ""
-            //print(line)
+            print(line)
 
 function saveNavigationMap()
     let output = buildNavigationMapText()
 
     new File(ROUTE_CACHE_FILE)..write(localPlayer, output)..close()
-    //print("|cff00ff00QirajiColumbus|r Saved probe explorer results to " + ROUTE_CACHE_FILE)
+    print("|cff00ff00QirajiColumbus|r Saved probe explorer results to " + ROUTE_CACHE_FILE)
     printReadableNavigationMap()
 
 function loadNavigationMap() returns bool
@@ -135,21 +136,21 @@ function loadNavigationMap() returns bool
                             nodeList.add(neighbor.toInt())
                     navigationMap.put(srcId, nodeList)
 
-    //print("|cff00ff00QirajiColumbus|r Loaded probe explorer results from " + ROUTE_CACHE_FILE)
+    print("|cff00ff00QirajiColumbus|r Loaded probe explorer results from " + ROUTE_CACHE_FILE)
     return true
 
 public function beginAutomatedMapping()
-    //print("|cff00ff00QirajiColumbus: Initializing Subway Mapping Probes...|r")
+    print("|cff00ff00QirajiColumbus: Initializing Subway Mapping Probes...|r")
     
     // Explicit while loops eliminate ANTLR parser crashes completely
     var srcId = 1
-    while srcId <= 56
+    while srcId <= 55
         let srcUnit = cpRegistry.get(srcId)
         if srcUnit != null
             let srcPos = srcUnit.getPos()
             
             var destId = 1
-            while destId <= 56
+            while destId <= 55
                 if srcId != destId
                     let destUnit = cpRegistry.get(destId)
                     if destUnit != null
@@ -162,13 +163,13 @@ public function beginAutomatedMapping()
         srcId++
                 
     if activeProbesCount == 0
-        //print("|cffff0000Mapping failed: No valid control point pairs found within range.|r")
+        print("|cffff0000Mapping failed: No valid control point pairs found within range.|r")
 
 function checkMappingCompletion()
     if activeProbesCount == 0 and not mappingComplete
         mappingComplete = true
-        //print("|cff00ffffSubway Breadcrumb Map Complete! Proceeding to Peasant Test...|r")
-        //print("|cffffaa00QirajiColumbus|r Navigation graph ready: " + navigationMap.size().toString() + " source nodes registered")
+        print("|cff00ffffSubway Breadcrumb Map Complete! Proceeding to Peasant Test...|r")
+        print("|cffffaa00QirajiColumbus|r Navigation graph ready: " + navigationMap.size().toString() + " source nodes registered")
         saveNavigationMap()
         startPeasantPathingTest()
 
@@ -191,17 +192,17 @@ class WaypointNavigator
 
     function startNavigation()
         if pathNodeIds == null or pathNodeIds.isEmpty()
-            //print("|cffff0000QirajiColumbus|r Waypoint navigator started with no path nodes")
+            print("|cffff0000QirajiColumbus|r Waypoint navigator started with no path nodes")
             this.cleanupAndDestroy()
         else
             this.findNextValidTarget()
             
             // Safe alternative to vector '==' operator checking
             if currentTargetPos.x == 0.0 and currentTargetPos.y == 0.0
-                //print("|cffff0000QirajiColumbus|r Waypoint navigator could not resolve a valid target from the path")
+                print("|cffff0000QirajiColumbus|r Waypoint navigator could not resolve a valid target from the path")
                 this.cleanupAndDestroy()
             else
-                //print("|cff00ffffQirajiColumbus|r Starting waypoint navigator for target " + (currentTargetNodeId != -1 ? getControlPointLabel(currentTargetNodeId) : currentTargetPos.toString()))
+                print("|cff00ffffQirajiColumbus|r Starting waypoint navigator for target " + (currentTargetNodeId != -1 ? getControlPointLabel(currentTargetNodeId) : currentTargetPos.toString()))
                 traveler.issuePointOrder("move", currentTargetPos)
                 
                 // Fix 2: Keep the trailing closure fully isolated to a single function delegate call 
@@ -218,10 +219,10 @@ class WaypointNavigator
                 this.findNextValidTarget()
                 
                 if not (currentTargetPos.x == 0.0 and currentTargetPos.y == 0.0)
-                    //print("|cff00ffffQirajiColumbus|r Reached route target, advancing to the next station " + (currentTargetNodeId != -1 ? getControlPointLabel(currentTargetNodeId) : currentTargetPos.toString()))
+                    print("|cff00ffffQirajiColumbus|r Reached route target, advancing to the next station " + (currentTargetNodeId != -1 ? getControlPointLabel(currentTargetNodeId) : currentTargetPos.toString()))
                     traveler.issuePointOrder("move", currentTargetPos)
                 else
-                    //print("|cff00ff00Test Peasant successfully completed the subway circuit!|r")
+                    print("|cff00ff00Test Peasant successfully completed the subway circuit!|r")
                     this.cleanupAndDestroy()
 
     function findNextValidTarget()
@@ -238,7 +239,7 @@ class WaypointNavigator
             if targetUnit != null
                 currentTargetPos = targetUnit.getPos()
                 currentTargetNodeId = nextNodeId
-                //print("|cff00ffffQirajiColumbus|r Route target resolved to " + getControlPointLabel(nextNodeId))
+                print("|cff00ffffQirajiColumbus|r Route target resolved to " + getControlPointLabel(nextNodeId))
                 found = true
 
     function cleanupAndDestroy()
@@ -301,10 +302,14 @@ function startPeasantPathingTest()
     let startTestNode = 41 // Silithus: Cenarion Enclave
     let endTestNode = 32   // Feralas: Feathermoon Stronghold
 
-    //print("|cff00ffffInitiating Direct Subway Route Test (ID: 41 -> ID: 32)...|r")
+    print("|cff00ffffInitiating Direct Subway Route Test (ID: 41 -> ID: 32)...|r")
 
     let path = calculateSubwayPath(startTestNode, endTestNode)
     let startUnit = cpRegistry.get(startTestNode)
+    if path == null
+        print("DEBUG: calculateSubwayPath(41,32) returned null - no route in navigationMap")
+    if startUnit == null
+        print("DEBUG: cpRegistry.get(41) returned null - control point not registered")
 
     if path != null and startUnit != null
         let startPos = startUnit.getPos()
@@ -323,20 +328,77 @@ function startPeasantPathingTest()
                 pathStr = pathStr + " -> "
             idx--
             
-        //print("|cff00ff00Route Calculated:|r " + pathStr)
+        print("|cff00ff00Route Calculated:|r " + pathStr)
         
         // Pass the traveler off to the safe navigator engine
         new WaypointNavigator(peasant, path)
     else
-        //print("|cffff0000Pathing test broken: Navigation network returned null or registry missing anchors.|r")
+        print("|cffff0000Pathing test broken: Navigation network returned null or registry missing anchors.|r")
         if path != null
             destroy path
 
+// --- Chat Command: -route <src> <dest> ---
+
+function printRouteCommand(int srcId, int destId)
+    if not cpRegistry.has(srcId)
+        print("|cffff0000QirajiColumbus|r Unknown source control point ID: " + srcId.toString())
+        return
+
+    if not cpRegistry.has(destId)
+        print("|cffff0000QirajiColumbus|r Unknown destination control point ID: " + destId.toString())
+        return
+
+    if srcId == destId
+        print("|cffffaa00QirajiColumbus|r Source and destination are the same node.")
+        return
+
+    let path = calculateSubwayPath(srcId, destId)
+
+    if path == null
+        print("|cffff0000QirajiColumbus|r No route found from " + srcId.toString() + " to " + destId.toString())
+        return
+
+    var pathStr = srcId.toString()
+    var idx = path.size() - 1
+    while idx >= 0
+        pathStr = pathStr + " -> " + path.get(idx).toString()
+        idx--
+
+    print("|cff00ff00QirajiColumbus Route (" + srcId.toString() + " -> " + destId.toString() + "):|r " + pathStr)
+    destroy path
+
+function onRouteChatCommand()
+    let chatStr = GetEventPlayerChatString()
+    let parts = chatStr.split(" ")
+
+    if parts.size() != 3
+        print("|cffffaa00QirajiColumbus|r Usage: -route <sourceId> <destId>")
+        return
+
+    let srcId = parts.get(1).toInt()
+    let destId = parts.get(2).toInt()
+
+    if srcId == 0 or destId == 0
+        print("|cffff0000QirajiColumbus|r Invalid IDs. Usage: -route <sourceId> <destId>")
+        return
+
+    printRouteCommand(srcId, destId)
+
+function registerRouteChatCommand()
+    let t = CreateTrigger()
+    var i = 0
+    while i < bj_MAX_PLAYERS
+        TriggerRegisterPlayerChatEvent(t, Player(i), "-route", false)
+        i++
+    TriggerAddAction(t, function onRouteChatCommand)
+
 init
     doAfter(1.0) ->
+        registerRouteChatCommand()
         if loadNavigationMap()
             mappingComplete = true
-            //print("|cff00ffffSubway Breadcrumb Map loaded from cache. Skipping probe rerun.|r")
-            //startPeasantPathingTest()
+            print("|cff00ffffSubway Breadcrumb Map loaded from cache. Skipping probe rerun.|r")
+            startPeasantPathingTest()
         else
+            print("Mapping cache not found. Starting probe exploration...")
             beginAutomatedMapping()

@@ -43,7 +43,6 @@ function trainFlyers(player aiPlayer)
 
 public function startQirajiFlyerCheese(player aiPlayer)
     doPeriodically(CHECK_INTERVAL) cb ->
-        // Only activate once we hit tier 2
         if not hasT2(aiPlayer)
             return
 
@@ -51,25 +50,21 @@ public function startQirajiFlyerCheese(player aiPlayer)
         let foodUsed = GetPlayerState(aiPlayer, PLAYER_STATE_RESOURCE_FOOD_USED)
         let flyerCount = countFlyers(aiPlayer)
 
-        // Always maintain minimum flyer count
         if flyerCount < FLYER_MINIMUM and foodUsed < foodCap - 1
             trainFlyers(aiPlayer)
             return
 
-        // Build up to cap before launching
         if not cheeseAttackLaunched
             if flyerCount < FLYER_CAP
                 if foodUsed < foodCap - 1
                     trainFlyers(aiPlayer)
                 return
 
-            // We have 20 flyers — send them at both control points
             cheeseAttackLaunched = true
 
             let target1 = udg_feralasGrotto.getPos()
             let target2 = udg_stonetalonPeak.getPos()
             
-            // Reset state before splitting the attack paths
             sentToFirst = true 
 
             forUnitsOfPlayer(aiPlayer) (unit u) ->
@@ -81,6 +76,5 @@ public function startQirajiFlyerCheese(player aiPlayer)
                         u.issuePointOrder("attack", target2)
                         sentToFirst = true
 
-        // After launch keep training to maintain minimum
         if flyerCount < FLYER_MINIMUM and foodUsed < foodCap - 1
             trainFlyers(aiPlayer)

@@ -75,7 +75,7 @@ init
         let damage = BURST_DAMAGE[level]
         let radius = BURST_RADIUS[level]
 
-        forUnitsInRect(bj_mapInitialPlayableArea) (unit u) ->
+        forUnitsInRange(caster.getPos(), 1500) (unit u) ->
             if u.hasAbility(INVIGORATE_BUFF_ID)
                 detonateSeed(caster, owner, u.getPos(), damage, radius)
                 u.removeAbility(INVIGORATE_BUFF_ID)

@@ -52,48 +52,57 @@ let currentHealthBonus = new LinkedList<unit>
         ..setHeroAbility(false)
         ..setItemAbility(false)
 
+
+function isSwarmerAlive() returns boolean
+    let u = GetFilterUnit()
+    return u.isAlive() and u.getTypeId() == QIRAJI_SWARMER_ID
+
+function isOtherSwarmerAlive() returns boolean
+    let u = GetFilterUnit()
+    return u != GetEnumUnit() and u.isAlive() and u.getTypeId() == QIRAJI_SWARMER_ID
+
 init
+    let swarmerFilter = Condition(function isSwarmerAlive)
+    let neighborFilter = Condition(function isOtherSwarmerAlive)
+
     doPeriodically(UPDATE_INTERVAL) cb ->
         let g = CreateGroup()
-        g.enumUnitsInRect(bj_mapInitialPlayableArea)
+        g.enumUnitsOfType(QIRAJI_SWARMER_ID, swarmerFilter)
 
         for u from g
-            if u.isAlive() and u.getTypeId() == QIRAJI_SWARMER_ID
-                var nearbyCount = 0
-                let g2 = CreateGroup()
-                g2.enumUnitsInRange(u.getPos(), HIVE_RANGE)
-                for other from g2
-                    if other != u and other.isAlive() and other.getTypeId() == QIRAJI_SWARMER_ID
-                        nearbyCount++
-                g2.destr()
+            var nearbyCount = 0
+            let g2 = CreateGroup()
+            g2.enumUnitsInRange(u.getPos(), HIVE_RANGE, neighborFilter)
+            nearbyCount = g2.size()
+            g2.destr()
 
-                let newDamageBonus = DAMAGE_PER_SWARMER * nearbyCount.toReal()
-                let newArmorBonus = ARMOR_PER_SWARMER * nearbyCount
+            let newDamageBonus = DAMAGE_PER_SWARMER * nearbyCount.toReal()
+            let newArmorBonus = ARMOR_PER_SWARMER * nearbyCount
 
-                let oldDamageBonus = currentDamageBonus.has(u) ? currentDamageBonus.get(u) : 0.
-                let oldArmorBonus = currentArmorBonus.has(u) ? currentArmorBonus.get(u) : 0
+            let oldDamageBonus = currentDamageBonus.has(u) ? currentDamageBonus.get(u) : 0.
+            let oldArmorBonus = currentArmorBonus.has(u) ? currentArmorBonus.get(u) : 0
 
-                if u.hasAbility(SWARM_MOTHER_MOTHERS_LOVE_BUFF_ID) and not currentHealthBonus.has(u)
-                    currentHealthBonus.add(u)
-                    let newHitPoints = u.getMaxHP().toInt() + SWARM_MOTHER_MOTHERS_LOVE_HP_BONUS
-                    let hpRatio = u.getHP() / u.getMaxHP()
-                    u.setMaxHP(newHitPoints)
-                    u.setHP(hpRatio * newHitPoints)
+            if u.hasAbility(SWARM_MOTHER_MOTHERS_LOVE_BUFF_ID) and not currentHealthBonus.has(u)
+                currentHealthBonus.add(u)
+                let newHitPoints = u.getMaxHP().toInt() + SWARM_MOTHER_MOTHERS_LOVE_HP_BONUS
+                let hpRatio = u.getHP() / u.getMaxHP()
+                u.setMaxHP(newHitPoints)
+                u.setHP(hpRatio * newHitPoints)
 
-                if not u.hasAbility(SWARM_MOTHER_MOTHERS_LOVE_BUFF_ID) and currentHealthBonus.has(u)
-                    currentHealthBonus.remove(u)
-                    let newHitPoints = u.getMaxHP().toInt() - SWARM_MOTHER_MOTHERS_LOVE_HP_BONUS
-                    let hpRatio = u.getHP() / u.getMaxHP()
-                    u.setMaxHP(newHitPoints)
-                    u.setHP(hpRatio * newHitPoints)
+            if not u.hasAbility(SWARM_MOTHER_MOTHERS_LOVE_BUFF_ID) and currentHealthBonus.has(u)
+                currentHealthBonus.remove(u)
+                let newHitPoints = u.getMaxHP().toInt() - SWARM_MOTHER_MOTHERS_LOVE_HP_BONUS
+                let hpRatio = u.getHP() / u.getMaxHP()
+                u.setMaxHP(newHitPoints)
+                u.setHP(hpRatio * newHitPoints)
 
 
-                if newDamageBonus != oldDamageBonus
-                    u.setBaseDamage(u.getBaseDamage(0) - oldDamageBonus.toInt() + newDamageBonus.toInt(), 0)
-                    currentDamageBonus.put(u, newDamageBonus)
+            if newDamageBonus != oldDamageBonus
+                u.setBaseDamage(u.getBaseDamage(0) - oldDamageBonus.toInt() + newDamageBonus.toInt(), 0)
+                currentDamageBonus.put(u, newDamageBonus)
 
-                if newArmorBonus != oldArmorBonus
-                    u.setArmor(u.getArmor() - oldArmorBonus + newArmorBonus)
-                    currentArmorBonus.put(u, newArmorBonus)
+            if newArmorBonus != oldArmorBonus
+                u.setArmor(u.getArmor() - oldArmorBonus + newArmorBonus)
+                currentArmorBonus.put(u, newArmorBonus)
 
         g.destr()

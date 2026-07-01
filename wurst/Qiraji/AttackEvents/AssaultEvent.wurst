@@ -39,7 +39,7 @@ public class AssaultEvent
         tunnel.setAnimation("birth")
 
         doAfter(tunnelDelay) ->
-            tunnel.setAnimation("decay")
+            tunnel.setAnimation("stand")
             spawnUnits()
 
         doAfter(attackDelay) ->

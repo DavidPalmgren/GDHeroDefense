@@ -55,5 +55,5 @@ public function calculateLongPathDistance(vec2 start, vec2 target, int dummyUnit
                 cb.onCalculated(-1.0) 
             else
                 cb.onCalculated(totalDistance)
-                
+            print("Destroying pathfinding loop")
             destroy cbPeriodic

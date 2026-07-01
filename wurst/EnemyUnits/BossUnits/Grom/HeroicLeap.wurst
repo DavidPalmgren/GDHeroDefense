@@ -111,30 +111,19 @@ function castHeroicLeap()
     let angle = startPos.angleTo(targetPos)
     let duration = distance / LEAP_SPEED
     
-    // 1. SPAWN THE WARNING INDICATOR
-    // It stays alive for the warning delay duration PLUS his flight travel time,
-    // meaning it cleans itself up exactly on impact frame.
     spawnLeapTelegraph(targetPos.withTerrainZ(), AOE_RADIUS, WARNING_DELAY + duration)
-    
-    // 2. GROUND WIND-UP PHASE
-    // Pause Grom safely on the ground and lock him into a dynamic animation
+
     caster.pause()
     caster.setAnimation("stand ready") 
-    
-    // Visual cue on Grom showing he's storing up kinetic explosive force
+
     flashEffect("Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl", caster.getPos())
     
-    // 3. EXECUTE DELAYED JUMP CLOSURE
     doAfter(WARNING_DELAY) ->
-        // Grom takes off! Change animation to his jump slam posture
         caster.setAnimation("attack slam")
-        
-        // Unlock vertical Z-axis restrictions
         caster.addAbility('Amrf')
         caster.removeAbility('Amrf')
 
         var elapsed = 0.0
-
         doPeriodically(0.03) (CallbackPeriodic cb) ->
             elapsed += 0.03
             let progress = elapsed / duration

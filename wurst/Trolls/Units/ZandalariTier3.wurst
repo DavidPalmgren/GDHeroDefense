@@ -96,6 +96,7 @@ public constant ZANDALARI_EXECUTIONER_ID = compiletime(UNIT_ID_GEN.next())
         ..setTooltipExtended("A colossal prehistoric warbeast covered in golden plates. Crushes ground forces underfoot while the Rastari riders hurl heavy barbed harpoons to impale flying enemies.")
         ..setIconGameInterface(Icons.bTNRiderlessKodo)
         ..setModelFile("ThroneOfWar.mdx")
+        ..setUnitSoundSet("AzureDragon")
         
         ..setHitPointsMaximumBase(1100)
         ..setDefenseBase(5)

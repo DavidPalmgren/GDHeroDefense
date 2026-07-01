@@ -13,7 +13,6 @@ public function qirajiSpawnBuildersSetBase(player aiPlayer)
     let tcRect = gg_rct_QirajiTC
     let tcPos = tcRect.getCenter()
     
-    // Create the primary Hive Node directly at the center of the QirajiTC region
     let hiveNode = CreateUnit(aiPlayer, QIRAJI_T1_HIVE_NODE, tcPos.x, tcPos.y, 270.0)
     
     if hiveNode == null
@@ -28,6 +27,5 @@ public function qirajiSpawnBuildersSetBase(player aiPlayer)
         let offsetPos = startPos + vec2(GetRandomReal(-128, 128), GetRandomReal(-128, 128))
         let drone = CreateUnit(aiPlayer, QIRAJI_WORKER_ID, offsetPos.x, offsetPos.y, GetRandomReal(0, 360))
         
-        // Optional: Send the drones to gather resources or rally to the new TC
         if drone != null and hiveNode != null
             drone.issueTargetOrder("smart", hiveNode)

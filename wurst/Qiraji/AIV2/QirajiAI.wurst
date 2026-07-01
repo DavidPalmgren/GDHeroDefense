@@ -6,7 +6,6 @@ import QirajiFarmManagement // Imported: Connects the supply monitor module
 import QirajiT1SetBuildings
 import QirajiTrainUnits
 import QirajiUpgradesManagement
-import QirajiAttackSimple
 import QirajiRatsInChat
 import QirajiNextTier
 import QirajiFlyerControlPointCheese
@@ -27,7 +26,7 @@ init
         // 1 time called throwaways and own loop here
         let qirajiAIPlayer = players[15]
         startQirajiGoldIncome(qirajiAIPlayer) // base income of 100gpm
-        startSubwayAttackSupervisor()
+        startSubwayAttackSupervisor(4.0)
         // [QUEST]
         startSouthernSupremacyMonitor(qirajiAIPlayer) //60s loop check for reserach
         

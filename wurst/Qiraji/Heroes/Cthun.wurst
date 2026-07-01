@@ -1,0 +1,31 @@
+package Cthun
+
+import UnitIds
+import ObjectIdGenerator
+import UnitObjEditing
+import AbilityObjEditing
+import AbilityTooltipGenerator
+import ChannelAbilityPreset
+
+let tgen = new AbilityTooltipGenerator(
+    Targettype.NONE,
+    "description"
+)
+
+public constant CTHUN_UNIT_ID = compiletime(UNIT_ID_GEN.next())
+public constant CTHUN_ABILITY_ID = compiletime(ABIL_ID_GEN.next())
+
+@compiletime function genCthun()
+    new UnitOrBuildingOrHeroDefinition(CTHUN_UNIT_ID, 'hbar')
+        ..setCollisionSize(36.)
+        ..setName("C'Thun")
+        ..setModelFile("CThun.mdx")
+        ..setScalingValue(3.0)
+        ..setAttack1Range(1000)
+        ..setAttack1AttackType(AttackType.Chaos)
+        ..setAttack1DamageBase(125)
+
+    new ChannelAbilityPreset(CTHUN_ABILITY_ID, 1, true, tgen)
+      ..setName("Summon tentacles")
+      ..setTooltipNormal(1,"Summon tentacles")
+      ..setTooltipNormalExtended(1,"Summons tentacles to attack your enemies.")

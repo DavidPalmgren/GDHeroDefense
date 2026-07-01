@@ -16,6 +16,16 @@ public int array playerIncome
 public int array playerCpCount
 int count = 0
 
+public function getRegisteredControlPointCount() returns int
+    var maxId = 0
+    var i = 1
+    while true
+        let cp = cpRegistry.get(i)
+        if cp == null
+            break
+        maxId = i
+        i++
+    return maxId
 
 //Functions
 

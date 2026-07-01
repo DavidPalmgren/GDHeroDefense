@@ -1,0 +1,3 @@
+package QirajiAiPlayerId
+
+public constant qirajiAIPlayer = players[15]

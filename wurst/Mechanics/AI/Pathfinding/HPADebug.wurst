@@ -35,6 +35,7 @@ public function watchUnitFate(unit u, string tag)
     var lastOrder = u.getCurrentOrder()
 
     doPeriodically(0.03) cb ->
+        print("HPA DEBUG")
         ticks++
         let secs = (ticks * 0.03)
         if u == null or GetUnitTypeId(u) == 0

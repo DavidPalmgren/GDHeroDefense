@@ -22,7 +22,6 @@ function isSiteEmpty(rect siteRect, int buildingTypeId, player aiPlayer) returns
 public function manageQirajiBarracksV2(player aiPlayer)
     rect targetSite = null
 
-    // Evaluate structural footprints sequentially
     if isSiteEmpty(gg_rct_Barracks1, QIRAJI_HATCHERY, aiPlayer)
         targetSite = gg_rct_Barracks1
     else if isSiteEmpty(gg_rct_Barracks2, QIRAJI_HATCHERY, aiPlayer)

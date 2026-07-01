@@ -83,7 +83,7 @@ init
         let duration = level * 10.0
         
         let g = CreateGroup()
-        g.enumUnitsInRect(bj_mapInitialPlayableArea, null)
+        g.enumUnitsInRange(caster.getPos(), 1500)
         for u in g
             if u.hasAbility(INVIGORATE_BUFF_ID)
                 spawnCloud(caster.getOwner(), u.getPos(), heal, radius, duration)

@@ -1,6 +1,7 @@
 package QirajiAttackLogic
 
 import ClosureTimers
+import ClosureForGroups
 import ControlPoint
 import AssaultForcePlayer
 
@@ -77,9 +78,16 @@ function issueAttackOrders(group srcGroup, player forPlayer, rect targetArea)
             if u.isAlive()
                 u.issuePointOrder("attack", center)
 
+function isQirajiUnit() returns boolean
+    return GetFilterUnit().getOwner() == QIRAJI_ASSAULT_FORCE_PLAYER and GetFilterUnit().isAlive()
+
 public function startQirajiAttackLogic(rect targetArea)
+    let filter = Condition(function isQirajiUnit)
     doPeriodically(AI_TICK_INTERVAL) (CallbackPeriodic cb) ->
         let forces = CreateGroup()
-        forces.enumUnitsOfPlayer(QIRAJI_ASSAULT_FORCE_PLAYER, null)
-        issueAttackOrders(forces, QIRAJI_ASSAULT_FORCE_PLAYER, targetArea)
+        forces.enumUnitsInRect(targetArea, filter)
+        if forces.isEmpty()
+            destroy cb
+        else
+            issueAttackOrders(forces, QIRAJI_ASSAULT_FORCE_PLAYER, targetArea)
         forces.destr()
