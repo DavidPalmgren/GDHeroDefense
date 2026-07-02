@@ -1,6 +1,5 @@
 package WurstExportedObjects_w3u
 import ObjEditingNatives
-import ObjEditingCommons
 import UnitObjEditing
 
 // Modified Table (contains all custom objects)
@@ -79,22 +78,12 @@ import UnitObjEditing
 	..setAbilitySkinList("A000,Ault")
 	..setNormalAbilities("AM17,AM18,Ault")
 	..setNormalAbilities("AM17,AM18,Ault")
-	..setNormalAbilities("AM17,AM18,Ault")
-	..setNormalAbilities("AM17,AM18,Ault")
-	..setNormalAbilities("AM17,AM18,Ault")
-<<<<<<< HEAD
-	..setNormalAbilities("AM17,AM18,Ault")
-	..setNormalAbilities("AM17,AM18,Ault")
-	..setNormalAbilities("AM17,AM18,Ault")
-	..setNormalAbilities("AM17,AM18,Ault")
-=======
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 
 
 @compiletime function create_w3u_E003()
 	new HeroDefinition('E003', 'Edem')
 	..setHeroAbilities("A002")
-	..setAttack1WeaponSound(WeaponSound.RockHeavyBash)
+	..setAttack1WeaponSound("RockHeavyBash")
 	..setHitPointsRegenerationRate(3.0)
 	..setPrimaryAttribute("STR")
 	..setStartingStrength(25)
@@ -124,50 +113,6 @@ import UnitObjEditing
 	..setButtonPositionY(0)
 	..setButtonPositionX(1)
 	..setHotkey("W")
-	..setHeroAbilities("AM1q,AM1s,AM1p,AM1t")
-	..setNormalAbilities("A001,AInv,Ault")
-	..setStockMaximum(1)
-	..setStockReplenishInterval(0)
-	..setHeroAbilities("AM1q,AM1s,AM1p,AM1t")
-	..setNormalAbilities("A001,AInv,Ault")
-	..setStockMaximum(1)
-	..setStockReplenishInterval(0)
-	..setHeroAbilities("AM1q,AM1s,AM1p,AM1t")
-	..setNormalAbilities("A001,AInv,Ault")
-	..setStockMaximum(1)
-	..setStockReplenishInterval(0)
-	..setHeroAbilities("AM1q,AM1s,AM1p,AM1t")
-	..setNormalAbilities("A001,AInv,Ault")
-	..setStockMaximum(1)
-	..setStockReplenishInterval(0)
-	..setHeroAbilities("AM1q,AM1s,AM1p,AM1t")
-	..setNormalAbilities("A001,AInv,Ault")
-	..setStockMaximum(1)
-	..setStockReplenishInterval(0)
-	..setHeroAbilities("AM1s,AM1r,AM1q,AM1p")
-	..setNormalAbilities("A001,AInv,Ault")
-	..setStockMaximum(1)
-	..setStockReplenishInterval(0)
-	..setHeroAbilities("AM1s,AM1r,AM1q,AM1p")
-	..setNormalAbilities("A001,AInv,Ault")
-	..setStockMaximum(1)
-	..setStockReplenishInterval(0)
-	..setHeroAbilities("AM1s,AM1r,AM1q,AM1p")
-	..setNormalAbilities("A001,AInv,Ault")
-	..setStockMaximum(1)
-	..setStockReplenishInterval(0)
-	..setHeroAbilities("AM1s,AM1r,AM1q,AM1p")
-	..setNormalAbilities("A001,AInv,Ault")
-	..setStockMaximum(1)
-	..setStockReplenishInterval(0)
-	..setHeroAbilities("AM1s,AM1r,AM1q,AM1p")
-	..setNormalAbilities("A001,AInv,Ault")
-	..setStockMaximum(1)
-	..setStockReplenishInterval(0)
-	..setHeroAbilities("AM1s,AM1r,AM1q,AM1p")
-	..setNormalAbilities("A001,AInv,Ault")
-	..setStockMaximum(1)
-	..setStockReplenishInterval(0)
 	..setHeroAbilities("AM1s,AM1r,AM1q,AM1p")
 	..setNormalAbilities("A001,AInv,Ault")
 	..setStockMaximum(1)
@@ -189,7 +134,7 @@ import UnitObjEditing
 	..setManaRegeneration(1.25)
 	..setHitPointsMaximumBase(615)
 	..setNormalAbilities("Ahea,Aadm,Amim,Aspo,Aien,Ault")
-	..setAttack1AttackType(AttackType.Magic)
+	..setAttack1AttackType("magic")
 	..setSpeedBase(340)
 	..setGoldCost(45)
 	..setUpgradesUsed("R005,Resi,Rema,R009,Reuv,Repm")
@@ -211,37 +156,6 @@ import UnitObjEditing
 	..setManaRegeneration(0.67)
 	..setHitPointsMaximumBase(300)
 	..setAttack1DamageBase(15)
-	..setNormalAbilities("AM1v,AInv,Ault,ACm2,Aien,Aspo,AM1w")
-	..setManaRegeneration(0.67)
-	..setHitPointsMaximumBase(300)
-	..setAttack1DamageBase(15)
-	..setNormalAbilities("AM1v,AInv,Ault,ACm2,Aien,Aspo,AM1w")
-	..setManaRegeneration(0.67)
-	..setHitPointsMaximumBase(300)
-	..setAttack1DamageBase(15)
-	..setNormalAbilities("AM1v,AInv,Ault,ACm2,Aien,Aspo,AM1w")
-	..setManaRegeneration(0.67)
-	..setHitPointsMaximumBase(300)
-	..setAttack1DamageBase(15)
-<<<<<<< HEAD
-	..setNormalAbilities("AM1v,AInv,Ault,ACm2,Aien,Aspo,AM1w")
-	..setManaRegeneration(0.67)
-	..setHitPointsMaximumBase(300)
-	..setAttack1DamageBase(15)
-	..setNormalAbilities("AM1v,AInv,Ault,ACm2,Aien,Aspo,AM1w")
-	..setManaRegeneration(0.67)
-	..setHitPointsMaximumBase(300)
-	..setAttack1DamageBase(15)
-	..setNormalAbilities("AM1v,AInv,Ault,ACm2,Aien,Aspo,AM1w")
-	..setManaRegeneration(0.67)
-	..setHitPointsMaximumBase(300)
-	..setAttack1DamageBase(15)
-	..setNormalAbilities("AM1v,AInv,Ault,ACm2,Aien,Aspo,AM1w")
-	..setManaRegeneration(0.67)
-	..setHitPointsMaximumBase(300)
-	..setAttack1DamageBase(15)
-=======
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 
 
 @compiletime function create_w3u_e005()
@@ -708,39 +622,6 @@ import UnitObjEditing
 	..setNormalAbilities("AM0b,AM09")
 	..setLevel(6)
 	..setName("Xavius")
-	..setNormalAbilities("AM0b,AM09")
-	..setLevel(6)
-	..setName("Xavius")
-	..setNormalAbilities("AM0b,AM09")
-	..setLevel(6)
-	..setName("Xavius")
-	..setNormalAbilities("AM0b,AM09")
-	..setLevel(6)
-	..setName("Xavius")
-	..setNormalAbilities("AM0b,AM09")
-	..setLevel(6)
-	..setName("Xavius")
-	..setNormalAbilities("AM0b,AM09")
-	..setLevel(6)
-	..setName("Xavius")
-	..setNormalAbilities("AM0b,AM09")
-	..setLevel(6)
-	..setName("Xavius")
-	..setNormalAbilities("AM0b,AM09")
-	..setLevel(6)
-	..setName("Xavius")
-	..setNormalAbilities("AM0b,AM0c,AM09")
-	..setLevel(6)
-	..setName("Xavius")
-	..setNormalAbilities("AM0b,AM0c,AM09")
-	..setLevel(6)
-	..setName("Xavius")
-	..setNormalAbilities("AM0b,AM0c,AM09")
-	..setLevel(6)
-	..setName("Xavius")
-	..setNormalAbilities("AM0b,AM0c,AM09")
-	..setLevel(6)
-	..setName("Xavius")
 
 
 @compiletime function create_w3u_e00J()
@@ -757,18 +638,18 @@ import UnitObjEditing
 	..setFoodCost(4)
 	..setNormalAbilities("A004")
 	..setManaMaximum(400)
-	..setRace(Race.Nightelf)
+	..setRace("nightelf")
 	..setAttack1Range(600)
 	..setAttack1ProjectileSpeed(1300)
 	..setAttack1ProjectileHomingEnabled(true)
-	..setAttack1WeaponType(WeaponType.Missile)
-	..setAttack1WeaponSound(WeaponSound.Nothing)
+	..setAttack1WeaponType("missile")
+	..setAttack1WeaponSound("")
 	..setAcquisitionRange(600.0)
 	..setHitPointsMaximumBase(700)
 	..setAttack1TargetsAllowed("air,debris,ground,item,structure,ward")
 	..setAttack1DamageBase(39)
 	..setRequirements("etoe,R006")
-	..setAttack1AttackType(AttackType.Magic)
+	..setAttack1AttackType("magic")
 	..setSleeps(false)
 	..setUpgradesUsed("Rema,R009")
 	..setCollisionSize(16.0)
@@ -780,16 +661,6 @@ import UnitObjEditing
 	..setButtonPositionX(3)
 	..setNormalAbilities("A004,AM1z")
 	..setNormalAbilities("A004,AM1z")
-	..setNormalAbilities("A004,AM1z")
-	..setNormalAbilities("A004,AM1z")
-	..setNormalAbilities("A004,AM1z")
-<<<<<<< HEAD
-	..setNormalAbilities("A004,AM1z")
-	..setNormalAbilities("A004,AM1z")
-	..setNormalAbilities("A004,AM1z")
-	..setNormalAbilities("A004,AM1z")
-=======
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 
 
 @compiletime function create_w3u_e00K()
@@ -906,7 +777,7 @@ import UnitObjEditing
 	..setSightRadiusNight(1100)
 	..setUpgradesUsed("R00A,R009,Rema,Reuv")
 	..setNormalAbilities("A00D,A00B,Ault,ACev,ACct")
-	..setRace(Race.Nightelf)
+	..setRace("nightelf")
 	..setSleeps(false)
 	..setCollisionSize(16.0)
 	..setDefenseBase(7)
@@ -944,16 +815,6 @@ import UnitObjEditing
 	..setButtonPositionX(1)
 	..setNormalAbilities("AM1x")
 	..setNormalAbilities("AM1x")
-	..setNormalAbilities("AM1x")
-	..setNormalAbilities("AM1x")
-	..setNormalAbilities("AM1x")
-<<<<<<< HEAD
-	..setNormalAbilities("AM1x")
-	..setNormalAbilities("AM1x")
-	..setNormalAbilities("AM1x")
-	..setNormalAbilities("AM1x")
-=======
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 
 
 @compiletime function create_w3u_E00Q()
@@ -963,21 +824,11 @@ import UnitObjEditing
 	..setModelFile("units\\nightelf\\Archer\\Archer.mdl")
 	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
 	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-<<<<<<< HEAD
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-=======
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 
 
 @compiletime function create_w3u_n009()
 	new UnitDefinition('n009', 'nwlg')
-	..setRace(Race.Nightelf)
+	..setRace("nightelf")
 	..setNormalAbilities("ACev,A00B,ACct,SCae")
 	..setFoodCost(0)
 	..setHitPointsMaximumBase(1500)
@@ -999,7 +850,7 @@ import UnitObjEditing
 	..setRepairLumberCost(0)
 	..setGoldCost(25)
 	..setUpgradesUsed("R009,Rema,Resc,Reuv,Remg,Repm")
-	..setArmorType(ArmorType.Medium)
+	..setArmorType("medium")
 	..setDefenseBase(3)
 	..setRequirements("")
 	..setNormalAbilities("A00C,Aesn,Ashm,Amgl,Aien,Ault")
@@ -1017,16 +868,6 @@ import UnitObjEditing
 	..setModelFile("units\\nightelf\\Archer\\Archer.mdl")
 	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
 	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-<<<<<<< HEAD
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-=======
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 
 
 @compiletime function create_w3u_E00T()
@@ -1036,16 +877,6 @@ import UnitObjEditing
 	..setModelFile("units\\nightelf\\Archer\\Archer.mdl")
 	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
 	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-<<<<<<< HEAD
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-=======
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 
 
 @compiletime function create_w3u_n00A()
@@ -1053,17 +884,17 @@ import UnitObjEditing
 	..setAttack1DamageNumberofDice(3)
 	..setAttack1Range(100)
 	..setAttack1TargetsAllowed("debris,ground,item,structure,ward")
-	..setAttack1WeaponType(WeaponType.Normal)
+	..setAttack1WeaponType("normal")
 	..setAttack1DamageBase(18)
 	..setCollisionSize(16.0)
 	..setSpeedBase(320)
 	..setBuildTime(7)
 	..setGoldCost(60)
 	..setLumberCost(0)
-	..setAttack1AttackType(AttackType.Normal)
+	..setAttack1AttackType("normal")
 	..setTeamColor(24)
 	..setDefenseBase(6)
-	..setArmorType(ArmorType.Hero)
+	..setArmorType("hero")
 	..setHitPointsMaximumBase(600)
 	..setNormalAbilities("A009,ACev,A006,ACss")
 	..setRequirements("e00N")
@@ -1124,7 +955,7 @@ import UnitObjEditing
 	new BuildingDefinition('h002', 'hgtw')
 	..setUpgradesUsed("Rgfo")
 	..setLumberCost(0)
-	..setRace(Race.Nightelf)
+	..setRace("nightelf")
 	..setName("Sentinel Watchtower")
 	..setGroundTexture("EMDA")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNHumanWatchTower.blp")
@@ -1136,7 +967,7 @@ import UnitObjEditing
 @compiletime function create_w3u_h005()
 	new BuildingDefinition('h005', 'hgtw')
 	..setRequirements("nbwd")
-	..setRace(Race.Nightelf)
+	..setRace("nightelf")
 	..setUpgradesUsed("Rgfo")
 	..setBuildTime(30)
 	..setGoldCost(65)
@@ -1815,9 +1646,9 @@ import UnitObjEditing
 	..setManaInitialAmount(1000)
 	..setManaMaximum(1000)
 	..setCollisionSize(0.0)
-	..setRace(Race.Commoner)
+	..setRace("commoner")
 	..setFoodCost(0)
-	..setArmorType(ArmorType.Divine)
+	..setArmorType("divine")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNTemp.blp")
 	..setSpeedBase(522)
 	..setModelFile("dummy.mdl")
@@ -1838,16 +1669,16 @@ import UnitObjEditing
 	..setAttack1AnimationBackswingPoint(0.0)
 	..setAttack1AnimationDamagePoint(0.0)
 	..setAttack1CooldownTime(0.0)
-	..setAttack1AttackType(AttackType.Unknown)
+	..setAttack1AttackType("unknown")
 	..setAttack1DamageBase(-1)
 	..setAttack1DamageNumberofDice(1)
 	..setAttack1DamageSidesperDie(1)
 	..setAttack1ProjectileSpeed(2147483647)
 	..setAttack1Range(2147483647)
 	..setAttack1TargetsAllowed("air,debris,ground,invulnerable,item,structure,vulnerable,ward")
-	..setAttack1WeaponSound(WeaponSound.Nothing)
-	..setAttack1WeaponType(WeaponType.Instant)
-	..setAcquisitionRange(2147483600.0)
+	..setAttack1WeaponSound("Nothing")
+	..setAttack1WeaponType("instant")
+	..setAcquisitionRange(2.1474836E9)
 	..setNormalAbilities("Avul,Aloc,AM06")
 
 
@@ -1868,12 +1699,12 @@ import UnitObjEditing
 	new UnitDefinition('x003', 'ewsp')
 	..setName("Dummy Caster")
 	..setManaMaximum(1000000)
-	..setMovementType(MovementType.Fly)
+	..setMovementType("fly")
 	..setUpgradesUsed("")
 	..setStructuresBuilt("")
-	..setRace(Race.Commoner)
+	..setRace("commoner")
 	..setFoodCost(0)
-	..setArmorType(ArmorType.Divine)
+	..setArmorType("divine")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNtemp.blp")
 	..setSpeedBase(522)
 	..setModelFile("dummy.mdl")
@@ -1973,10 +1804,10 @@ import UnitObjEditing
 	..setTargetedAs("ground")
 	..setHitPointsMaximumBase(425)
 	..setManaMaximum(0)
-	..setArmorType(ArmorType.Medium)
+	..setArmorType("medium")
 	..setDefenseBase(2)
 	..setSpeedBase(285)
-	..setAttack1WeaponType(WeaponType.Missile)
+	..setAttack1WeaponType("missile")
 	..setAttack1ProjectileArt("Abilities\\Weapons\\ChimaeraAcidMissile\\ChimaeraAcidMissile.mdl")
 	..setAttack1ProjectileSpeed(1100)
 	..setAttack1ProjectileArc(0.18)
@@ -1984,7 +1815,7 @@ import UnitObjEditing
 	..setAttack1CooldownTime(1.35)
 	..setAttack1TargetsAllowed("ground,structure,debris,friend,neutral")
 	..setAttack1DamageBase(23)
-	..setAttack1AttackType(AttackType.Pierce)
+	..setAttack1AttackType("pierce")
 	..setAnimationCastBackswing(0.5)
 	..setRequirements("x00b")
 	..setUpgradesUsed("RM02,RM01")
@@ -2026,13 +1857,51 @@ import UnitObjEditing
 
 
 @compiletime function create_w3u_x00o()
-	new UnitDefinition('x00o', 'hmpr')
+	new UnitDefinition('x00o', 'hmtm')
+	..setName("Qiraji Bombarder")
+	..setTooltipBasic("Train Qiraji Bombarder")
+	..setTooltipExtended("Older brother of the Qiraji Spitter, A towering Silithid behemoth that acts as living biological artillery. Lobs massive, highly volatile globs of corrosive green spit across extreme distances to dissolve enemy defensive towers and melt packed crowds.")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCryptFiend.blp")
+	..setModelFile("SilithidScarab_LobstrokkGreenSkin.mdx")
+	..setScalingValue(1.7)
+	..setSelectionScale(2.3)
+	..setCollisionSize(48.0)
+	..setTargetedAs("ground")
+	..setHitPointsMaximumBase(900)
+	..setArmorType("large")
+	..setDefenseBase(3)
+	..setSpeedBase(250)
+	..setFoodCost(4)
+	..setGoldCost(90)
+	..setLumberCost(0)
+	..setUpgradesUsed("RM02,RM01")
+	..setAttack1ProjectileArt("Abilities\\Weapons\\ChimaeraAcidMissile\\ChimaeraAcidMissile.mdl")
+	..setAttack1ProjectileSpeed(900)
+	..setAttack1ProjectileArc(0.75)
+	..setAttack1Range(1100)
+	..setAttack1CooldownTime(3.4)
+	..setAttack1DamageBase(55)
+	..setAttack1DamageNumberofDice(3)
+	..setAttack1DamageSidesperDie(7)
+	..setAttack1AttackType("siege")
+	..setAttack1WeaponType("artillery")
+	..setAttack1AreaofEffectSmallDamage(250)
+	..setAttack1AreaofEffectMediumDamage(150)
+	..setAttack1AreaofEffectFullDamage(75)
+	..setAttack1DamageFactorMedium(0.5)
+	..setAttack1DamageFactorSmall(0.25)
+	..setAttack1AnimationBackswingPoint(0.7)
+	..setAttack1AnimationDamagePoint(0.7)
+
+
+@compiletime function create_w3u_x00p()
+	new UnitDefinition('x00p', 'hmpr')
 	..setName("Qiraji Devout")
 	..setTooltipExtended("Devout followers of Prophet Skeram, they heal those in need and silence any opposition.")
 	..setNormalAbilities("AM0h,AM0i")
 	..setHitPointsMaximumBase(600)
 	..setManaMaximum(400)
-	..setArmorType(ArmorType.Small)
+	..setArmorType("small")
 	..setLevel(8)
 	..setHotkey("Q")
 	..setButtonPositionX(0)
@@ -2044,7 +1913,6 @@ import UnitObjEditing
 	..setScalingValue(0.7)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x00q()
 	new UnitDefinition('x00q', 'nnwa')
 	..setName("Colossus")
@@ -2082,14 +1950,6 @@ import UnitObjEditing
 	..setTooltipBasic("Train |cff00ff00Qiraji Kidnapper|r")
 	..setTooltipExtended("Tier 2 fast striking skirmisher. Specialized in separating target priority units from their squads.")
 	..setNormalAbilities("AM0m")
-=======
-@compiletime function create_w3u_x00p()
-	new UnitDefinition('x00p', 'ugho')
-	..setName("Qiraji Kidnapper")
-	..setTooltipBasic("Train |cff00ff00Qiraji Kidnapper|r")
-	..setTooltipExtended("Tier 2 fast striking skirmisher. Specialized in separating target priority units from their squads.")
-	..setNormalAbilities("AM0n")
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setUpgradesUsed("RM02,RM01")
 	..setRequirements("x006")
 	..setRequirementsLevels("")
@@ -2111,8 +1971,8 @@ import UnitObjEditing
 	..setAttack1DamageNumberofDice(2)
 	..setAttack1DamageSidesperDie(4)
 	..setAttack1CooldownTime(1.35)
-	..setAttack1AttackType(AttackType.Pierce)
-	..setAttack1WeaponType(WeaponType.Normal)
+	..setAttack1AttackType("pierce")
+	..setAttack1WeaponType("normal")
 	..setAttack1Range(128)
 	..setModelFile("HeroNerubianWidow.mdx")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNArachnathid.blp")
@@ -2120,13 +1980,8 @@ import UnitObjEditing
 	..setSelectionScale(1.2)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x00t()
 	new UnitDefinition('x00t', 'uabo')
-=======
-@compiletime function create_w3u_x00q()
-	new UnitDefinition('x00q', 'uabo')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Rotting Devourer")
 	..setHitPointsMaximumBase(500)
 	..setAttack1DamageBase(24)
@@ -2134,11 +1989,7 @@ import UnitObjEditing
 	..setSpeedBase(280)
 	..setGoldBountyAwardedBase(16)
 	..setScalingValue(0.95)
-<<<<<<< HEAD
 	..setNormalAbilities("AM0n")
-=======
-	..setNormalAbilities("AM0o")
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setRequirements("")
 	..setUpgradesUsed("RM01,RM02")
 	..setModelFile("SilithidDevourer.mdx")
@@ -2147,13 +1998,8 @@ import UnitObjEditing
 	..setButtonPositionY(1)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x00u()
 	new UnitDefinition('x00u', 'nspd')
-=======
-@compiletime function create_w3u_x00r()
-	new UnitDefinition('x00r', 'nspd')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Plague Devourer")
 	..setHitPointsMaximumBase(750)
 	..setAttack1DamageBase(26)
@@ -2164,11 +2010,7 @@ import UnitObjEditing
 	..setManaInitialAmount(100)
 	..setManaRegeneration(0.8)
 	..setScalingValue(1.0)
-<<<<<<< HEAD
 	..setNormalAbilities("AM0o,AM0q")
-=======
-	..setNormalAbilities("AM0p,AM0r")
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setRequirements("x006")
 	..setUpgradesUsed("RM01,RM02")
 	..setModelFile("SilithidDevourer.mdx")
@@ -2178,13 +2020,8 @@ import UnitObjEditing
 	..setButtonPositionY(1)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x00v()
 	new UnitDefinition('x00v', 'uabo')
-=======
-@compiletime function create_w3u_x00s()
-	new UnitDefinition('x00s', 'uabo')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Insatiable Gulgothar")
 	..setHitPointsMaximumBase(1125)
 	..setAttack1DamageBase(54)
@@ -2192,11 +2029,7 @@ import UnitObjEditing
 	..setSpeedBase(310)
 	..setGoldBountyAwardedBase(60)
 	..setScalingValue(1.4)
-<<<<<<< HEAD
 	..setNormalAbilities("AM0p,AM0r,AM0s")
-=======
-	..setNormalAbilities("AM0q,AM0s,AM0t")
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setRequirements("x007")
 	..setUpgradesUsed("RM01,RM02")
 	..setModelFile("SilithidDevourer.mdx")
@@ -2205,13 +2038,8 @@ import UnitObjEditing
 	..setButtonPositionY(1)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x00w()
 	new UnitDefinition('x00w', 'nban')
-=======
-@compiletime function create_w3u_x00t()
-	new UnitDefinition('x00t', 'nban')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Shadow Ambusher")
 	..setHitPointsMaximumBase(400)
 	..setAttack1DamageBase(20)
@@ -2219,11 +2047,7 @@ import UnitObjEditing
 	..setSpeedBase(310)
 	..setGoldBountyAwardedBase(12)
 	..setScalingValue(1.0)
-<<<<<<< HEAD
 	..setNormalAbilities("AM0t")
-=======
-	..setNormalAbilities("AM0u")
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setUpgradesUsed("RM01,RM02")
 	..setRequirements("")
 	..setModelFile("BloodBeetle.mdx")
@@ -2232,13 +2056,8 @@ import UnitObjEditing
 	..setButtonPositionY(0)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x00x()
 	new UnitDefinition('x00x', 'nban')
-=======
-@compiletime function create_w3u_x00u()
-	new UnitDefinition('x00u', 'nban')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Shadow Assassin")
 	..setHitPointsMaximumBase(600)
 	..setAttack1DamageBase(30)
@@ -2249,11 +2068,7 @@ import UnitObjEditing
 	..setManaInitialAmount(100)
 	..setManaRegeneration(0.67)
 	..setScalingValue(1.15)
-<<<<<<< HEAD
 	..setNormalAbilities("AM0t,AM0w")
-=======
-	..setNormalAbilities("AM0u,AM0x")
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setRequirements("x006")
 	..setUpgradesUsed("RM01,RM02")
 	..setModelFile("BloodBeetle.mdx")
@@ -2262,13 +2077,8 @@ import UnitObjEditing
 	..setButtonPositionY(0)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x00y()
 	new UnitDefinition('x00y', 'nban')
-=======
-@compiletime function create_w3u_x00v()
-	new UnitDefinition('x00v', 'nban')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Shadow Stalker Captain")
 	..setHitPointsMaximumBase(900)
 	..setAttack1DamageBase(45)
@@ -2276,11 +2086,7 @@ import UnitObjEditing
 	..setSpeedBase(350)
 	..setGoldBountyAwardedBase(40)
 	..setScalingValue(1.35)
-<<<<<<< HEAD
 	..setNormalAbilities("AM0v,AM0y,AM0x")
-=======
-	..setNormalAbilities("AM0w,AM0z,AM0y")
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setRequirements("x007")
 	..setUpgradesUsed("RM01,RM02")
 	..setModelFile("BloodBeetle.mdx")
@@ -2289,7 +2095,6 @@ import UnitObjEditing
 	..setButtonPositionY(0)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_HM01()
 	new HeroDefinition('HM01', 'Ucrl')
 	..setName("Crypt Lord (Burrowed)")
@@ -2318,14 +2123,6 @@ import UnitObjEditing
 	..setTooltipBasic("Train Swarm Mother")
 	..setTooltipExtended("The Swarm Mother excels at rallying her children and, of course, making more.\n|cffbebebe\"Usually is not pleasant for the recipient\" - Anonymous Archaeologist.|r")
 	..setNormalAbilities("AM0},AM0~")
-=======
-@compiletime function create_w3u_x00w()
-	new UnitDefinition('x00w', 'nsbm')
-	..setName("Swarm Mother")
-	..setTooltipBasic("Train Swarm Mother")
-	..setTooltipExtended("The Swarm Mother excels at rallying her children and, of course, making more.\n|cffbebebe\"Usually is not pleasant for the recipient\" - Anonymous Archaeologist.|r")
-	..setNormalAbilities("AM0{,AM0|")
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setManaInitialAmount(75)
 	..setManaMaximum(200)
 	..setManaRegeneration(0.67)
@@ -2340,16 +2137,12 @@ import UnitObjEditing
 	..setGoldCost(60)
 
 
-@compiletime function create_w3u_x00x()
-	new UnitDefinition('x00x', 'nnwa')
+@compiletime function create_w3u_x00|()
+	new UnitDefinition('x00|', 'nnwa')
 	..setName("Qiraji Warrior")
 	..setTooltipBasic("Qiraji Warrior")
 	..setTooltipExtended("Powerfull individuals from the warrior caste, they posses thunderclap and can learn enrage")
-<<<<<<< HEAD
 	..setNormalAbilities("AM1!,AM10")
-=======
-	..setNormalAbilities("AM0},AM0~")
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setModelFile("QuirajGladiator.mdx")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNQirajiWarrior.blp")
 	..setHitPointsMaximumBase(1600)
@@ -2360,60 +2153,18 @@ import UnitObjEditing
 	..setAttack1DamageSidesperDie(7)
 	..setBuildTime(10)
 	..setLumberCost(0)
-	..setArmorType(ArmorType.Medium)
+	..setArmorType("medium")
 	..setUpgradesUsed("RM01,RM02")
 
 
-@compiletime function create_w3u_x00y()
-	new UnitDefinition('x00y', 'hmtm')
-	..setName("Qiraji Bombarder")
-	..setTooltipBasic("Train Qiraji Bombarder")
-	..setTooltipExtended("Older brother of the Qiraji Spitter, A towering Silithid behemoth that acts as living biological artillery. Lobs massive, highly volatile globs of corrosive green spit across extreme distances to dissolve enemy defensive towers and melt packed crowds.")
-	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNCryptFiend.blp")
-	..setModelFile("SilithidScarab_LobstrokkGreenSkin.mdx")
-	..setScalingValue(1.7)
-	..setSelectionScale(2.3)
-	..setCollisionSize(48.0)
-	..setTargetedAs("ground")
-	..setHitPointsMaximumBase(900)
-	..setArmorType(ArmorType.Large)
-	..setDefenseBase(3)
-	..setSpeedBase(250)
-	..setFoodCost(4)
-	..setGoldCost(90)
-	..setLumberCost(0)
-	..setUpgradesUsed("RM02,RM01")
-	..setAttack1ProjectileArt("Abilities\\Weapons\\ChimaeraAcidMissile\\ChimaeraAcidMissile.mdl")
-	..setAttack1ProjectileSpeed(900)
-	..setAttack1ProjectileArc(0.75)
-	..setAttack1Range(1100)
-	..setAttack1CooldownTime(3.4)
-	..setAttack1DamageBase(55)
-	..setAttack1DamageNumberofDice(3)
-	..setAttack1DamageSidesperDie(7)
-	..setAttack1AttackType(AttackType.Siege)
-	..setAttack1WeaponType(WeaponType.Artillery)
-	..setAttack1AreaofEffectSmallDamage(250)
-	..setAttack1AreaofEffectMediumDamage(150)
-	..setAttack1AreaofEffectFullDamage(75)
-	..setAttack1DamageFactorMedium(0.5)
-	..setAttack1DamageFactorSmall(0.25)
-	..setAttack1AnimationBackswingPoint(0.7)
-	..setAttack1AnimationDamagePoint(0.7)
-
-
-@compiletime function create_w3u_x00z()
-	new UnitDefinition('x00z', 'nfot')
+@compiletime function create_w3u_x00}()
+	new UnitDefinition('x00}', 'nfot')
 	..setName("Mind Flayer")
 	..setHitPointsMaximumBase(800)
 	..setAttack1DamageBase(30)
 	..setSpeedBase(290)
 	..setCollisionSize(8.0)
-<<<<<<< HEAD
 	..setNormalAbilities("AM11")
-=======
-	..setNormalAbilities("AM1!")
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setManaMaximum(400)
 	..setManaInitialAmount(400)
 	..setGoldCost(70)
@@ -2421,39 +2172,8 @@ import UnitObjEditing
 	..setBuildTime(9)
 
 
-@compiletime function create_w3u_x00{()
-	new UnitDefinition('x00{', 'nnwa')
-	..setName("Colossus")
-	..setTooltipBasic("Train Colossus")
-	..setTooltipExtended("The Colossus is a linebreaking tank possessing phased movement and trample.")
-	..setHitPointsMaximumBase(1800)
-	..setDefenseBase(4)
-	..setAttack1DamageBase(33)
-	..setSpeedBase(300)
-	..setCollisionSize(0.0)
-	..setNormalAbilities("AM11,Aeth,AM12")
-	..setModelFile("LordKri.mdx")
-	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNNerubian.blp")
-	..setSelectionScale(2.0)
-	..setAttack1Range(300)
-
-
-@compiletime function create_w3u_x00|()
-	new UnitDefinition('x00|', 'ewsp')
-	..setName("Spell Dummy")
-	..setModelFile("Skill_Indicator_Straight.mdx")
-	..setNormalAbilities("Aloc,Avul")
-	..setFoodCost(0)
-	..setCollisionSize(0.0)
-	..setScalingValue(5.0)
-	..setAnimationCastBackswing(0.0)
-	..setAnimationCastPoint(0.0)
-	..setManaMaximum(1000)
-	..setManaInitialAmount(1000)
-
-
-@compiletime function create_w3u_x00}()
-	new UnitDefinition('x00}', 'nggr')
+@compiletime function create_w3u_x00~()
+	new UnitDefinition('x00~', 'nggr')
 	..setName("Anubisath")
 	..setTooltipBasic("Train Anubisath")
 	..setTooltipExtended("The anubisaths are titan-forged giants made of obsidian, unfortunately the curruption of C'thun proved to much for the loyal construct of order.")
@@ -2463,7 +2183,7 @@ import UnitObjEditing
 	..setManaInitialAmount(125)
 	..setManaMaximum(400)
 	..setManaRegeneration(0.67)
-	..setArmorType(ArmorType.Fortified)
+	..setArmorType("fort")
 	..setUpgradesUsed("RM02,RM01")
 	..setNormalAbilities("AM12,ACm2,Advm")
 	..setModelFile("AQanubisath.mdx")
@@ -2480,11 +2200,7 @@ import UnitObjEditing
 	..setRequirements("")
 	..setUpgradesUsed("")
 	..setResearchesAvailable("")
-<<<<<<< HEAD
 	..setUnitsTrained("x00h,x00}")
-=======
-	..setUnitsTrained("x00i,x00z")
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setItemsMade("")
 	..setNormalAbilities("")
 	..setUpgradesTo("x006")
@@ -2612,11 +2328,7 @@ import UnitObjEditing
 	..setUpgradesUsed("")
 	..setUpgradesTo("")
 	..setResearchesAvailable("")
-<<<<<<< HEAD
 	..setUnitsTrained("x00s,x00u,x00x")
-=======
-	..setUnitsTrained("x00p,x00r,x00u")
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setItemsMade("")
 	..setNormalAbilities("")
 
@@ -2633,7 +2345,7 @@ import UnitObjEditing
 	..setUpgradesUsed("")
 	..setUpgradesTo("")
 	..setResearchesAvailable("")
-	..setUnitsTrained("x00o,x00w")
+	..setUnitsTrained("x00p,x00{")
 	..setItemsMade("")
 	..setNormalAbilities("")
 
@@ -2650,7 +2362,7 @@ import UnitObjEditing
 	..setUpgradesUsed("")
 	..setUpgradesTo("")
 	..setResearchesAvailable("")
-	..setUnitsTrained("x00y,x00x,x00{")
+	..setUnitsTrained("x00o,x00|,x00q")
 	..setItemsMade("")
 	..setNormalAbilities("")
 
@@ -2667,7 +2379,7 @@ import UnitObjEditing
 	..setUpgradesUsed("")
 	..setUpgradesTo("")
 	..setResearchesAvailable("")
-	..setUnitsTrained("x00}")
+	..setUnitsTrained("x00~")
 	..setItemsMade("")
 	..setNormalAbilities("")
 
@@ -2717,13 +2429,8 @@ import UnitObjEditing
 	..setUpgradesUsed("RM01,RM02")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x011()
 	new UnitDefinition('x011', 'e002')
-=======
-@compiletime function create_w3u_x01!()
-	new UnitDefinition('x01!', 'e002')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Cenarian Treant")
 	..setNameEditorSuffix("Level 1")
 	..setTooltipBasic("Cenarian Treant")
@@ -2748,13 +2455,8 @@ import UnitObjEditing
 	..setScalingValue(0.9)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x012()
 	new UnitDefinition('x012', 'e002')
-=======
-@compiletime function create_w3u_x010()
-	new UnitDefinition('x010', 'e002')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Cenarian Treant")
 	..setNameEditorSuffix("Level 2")
 	..setTooltipBasic("Cenarian Treant")
@@ -2779,13 +2481,8 @@ import UnitObjEditing
 	..setScalingValue(1.0)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x013()
 	new UnitDefinition('x013', 'e002')
-=======
-@compiletime function create_w3u_x011()
-	new UnitDefinition('x011', 'e002')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Cenarian Treant")
 	..setNameEditorSuffix("Level 3")
 	..setTooltipBasic("Cenarian Treant")
@@ -2810,13 +2507,8 @@ import UnitObjEditing
 	..setScalingValue(1.1)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x014()
 	new UnitDefinition('x014', 'e002')
-=======
-@compiletime function create_w3u_x012()
-	new UnitDefinition('x012', 'e002')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Cenarian Treant")
 	..setNameEditorSuffix("Level 4")
 	..setTooltipBasic("Cenarian Treant")
@@ -2841,73 +2533,53 @@ import UnitObjEditing
 	..setScalingValue(1.22)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x015()
 	new UnitDefinition('x015', 'efon')
-=======
-@compiletime function create_w3u_x013()
-	new UnitDefinition('x013', 'efon')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setSpeedBase(0)
 	..setNormalAbilities("")
 	..setCollisionSize(0.0)
 	..setModelFile("TreeTentacleRE.mdx")
 	..setAttack1Range(250)
 	..setAttack1DamageBase(30)
-	..setArmorSoundType(ArmorSoundType.Wood)
-	..setAttack1WeaponSound(WeaponSound.WoodHeavyBash)
+	..setArmorSoundType("Wood")
+	..setAttack1WeaponSound("WoodHeavyBash")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x016()
 	new UnitDefinition('x016', 'ngrd')
-=======
-@compiletime function create_w3u_x014()
-	new UnitDefinition('x014', 'ngrd')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Ysera the Dreamer")
 	..setHitPointsMaximumBase(800)
 	..setNormalAbilities("Ahea,AM1c")
-	..setAttack1AttackType(AttackType.Chaos)
-	..setArmorType(ArmorType.Hero)
-	..setArmorSoundType(ArmorSoundType.Flesh)
+	..setAttack1AttackType("chaos")
+	..setArmorType("hero")
+	..setArmorSoundType("Flesh")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x017()
 	new UnitDefinition('x017', 'hkni')
-=======
-@compiletime function create_w3u_x015()
-	new UnitDefinition('x015', 'hkni')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Malorne the White Stag")
 	..setHitPointsMaximumBase(1500)
 	..setDefenseBase(8)
 	..setScalingValue(3.0)
-	..setArmorType(ArmorType.Hero)
-	..setArmorSoundType(ArmorSoundType.Flesh)
-	..setAttack1WeaponSound(WeaponSound.WoodHeavyBash)
+	..setArmorType("hero")
+	..setArmorSoundType("Flesh")
+	..setAttack1WeaponSound("WoodHeavyBash")
 	..setPortraitModelFile("units\\critters\\BlackStagMale\\BlackStagMale")
 	..setModelFile("units\\critters\\BlackStagMale\\BlackStagMale")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNStag.blp")
 	..setAttacksEnabled(1)
 	..setAttack1TargetsAllowed("ground,structure,debris,ward")
-	..setAttack1AttackType(AttackType.Chaos)
+	..setAttack1AttackType("chaos")
 	..setAttack1DamageBase(70)
-	..setAttack1WeaponType(WeaponType.Normal)
+	..setAttack1WeaponType("normal")
 	..setAttack1Range(150)
 	..setAttack1CooldownTime(1.5)
 	..setAttack1ProjectileArt("")
 	..setNormalAbilities("AM1d")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x018()
 	new UnitDefinition('x018', 'even')
-=======
-@compiletime function create_w3u_x016()
-	new UnitDefinition('x016', 'even')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Vengeful Spirit")
 	..setNormalAbilities("")
 	..setHitPointsMaximumBase(300)
@@ -2916,19 +2588,14 @@ import UnitObjEditing
 	..setAttack1CooldownTime(1.2)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x01c()
 	new UnitDefinition('x01c', 'ngh1')
-=======
-@compiletime function create_w3u_x01a()
-	new UnitDefinition('x01a', 'ngh1')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Grasp Servant")
 	..setModelFile("MojoMask_v5A.mdx")
 	..setAttack1CooldownTime(1.35)
 	..setAttack1Range(128)
-	..setAttack1WeaponType(WeaponType.Normal)
-	..setAttack1AttackType(AttackType.Chaos)
+	..setAttack1WeaponType("normal")
+	..setAttack1AttackType("chaos")
 	..setSpeedBase(320)
 	..setSelectionScale(1.1)
 	..setScalingValue(1.15)
@@ -2937,13 +2604,8 @@ import UnitObjEditing
 	..setAttack1DamageBase(22)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x01e()
 	new BuildingDefinition('x01e', 'oalt')
-=======
-@compiletime function create_w3u_x01c()
-	new BuildingDefinition('x01c', 'oalt')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Zandalari Altar")
 	..setTooltipBasic("Build [|cffffcc00Zandalari Altar|r]")
 	..setTooltipExtended("A sacred temple of mighty heroes. Summon and resurrect powerful Zandalari Heroes to lead your armies into battle.")
@@ -2952,23 +2614,14 @@ import UnitObjEditing
 	..setGoldCost(50)
 	..setBuildTime(20)
 	..setLumberCost(0)
-<<<<<<< HEAD
 	..setUnitsTrained("x01d")
-=======
-	..setUnitsTrained("x01b")
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setHitPointsMaximumBase(900)
-	..setArmorType(ArmorType.Fortified)
+	..setArmorType("fort")
 	..setDefenseBase(5)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x01g()
 	new BuildingDefinition('x01g', 'ofor')
-=======
-@compiletime function create_w3u_x01e()
-	new BuildingDefinition('x01e', 'ofor')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Mojo Crucible")
 	..setTooltipBasic("Build Mojo Crucible")
 	..setTooltipExtended("The technological and spiritual forge of the empire. Refines tribal alloys and extracts potent mojo to upgrade your forces.")
@@ -2981,13 +2634,8 @@ import UnitObjEditing
 	..setResearchesAvailable("RM01,RM02")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x01f()
 	new UnitDefinition('x01f', 'ogru')
-=======
-@compiletime function create_w3u_x01d()
-	new UnitDefinition('x01d', 'ogru')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Zandalari Vanguard")
 	..setTooltipBasic("Train Zandalari Vanguard")
 	..setTooltipExtended("Frontline heavy infantry of the empire. Armed with a golden broadshield and heavy stone axe to absorb punishment.")
@@ -3004,13 +2652,8 @@ import UnitObjEditing
 	..setUpgradesUsed("RM01,RM02,RM03")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x01h()
 	new UnitDefinition('x01h', 'ohun')
-=======
-@compiletime function create_w3u_x01f()
-	new UnitDefinition('x01f', 'ohun')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Zandalari Headhunter")
 	..setTooltipBasic("Train Zandalari Headhunter")
 	..setTooltipExtended("Savage ranged tracker who hurls deadly, long-range spears coated in sacrificial mojo.")
@@ -3020,19 +2663,11 @@ import UnitObjEditing
 	..setBuildTime(3)
 	..setFoodCost(2)
 	..setUpgradesUsed("RM01,RM02,RM03")
-<<<<<<< HEAD
 	..setRequirements("x01g")
 
 
 @compiletime function create_w3u_x01l()
 	new UnitDefinition('x01l', 'ocat')
-=======
-	..setRequirements("x01e")
-
-
-@compiletime function create_w3u_x01j()
-	new UnitDefinition('x01j', 'ocat')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Thundering Demolisher")
 	..setTooltipBasic("Train Thundering Demolisher")
 	..setTooltipExtended("Heavy armored siege engine reinforced with golden plating. Fires massive, fire-tipped boulders to shatter enemy structures from afar.")
@@ -3042,19 +2677,11 @@ import UnitObjEditing
 	..setBuildTime(5)
 	..setFoodCost(3)
 	..setUpgradesUsed("RM01,RM02,RM03")
-<<<<<<< HEAD
 	..setRequirements("x01g,x01j")
 
 
 @compiletime function create_w3u_x01m()
 	new UnitDefinition('x01m', 'odoc')
-=======
-	..setRequirements("x01e,x01h")
-
-
-@compiletime function create_w3u_x01k()
-	new UnitDefinition('x01k', 'odoc')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Witch Doctor")
 	..setTooltipBasic("Train Witch Doctor")
 	..setTooltipExtended("Spiritual mystic of the council caste. Commands deep voodoo mojo to place healing wards and cast protective enchantments over injured allies.")
@@ -3070,13 +2697,8 @@ import UnitObjEditing
 	..setUpgradesUsed("RM01,RM02,RM03,RM08")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x01n()
 	new UnitDefinition('x01n', 'orai')
-=======
-@compiletime function create_w3u_x01l()
-	new UnitDefinition('x01l', 'orai')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Raptor Outrider")
 	..setTooltipBasic("Train Raptor Outrider")
 	..setTooltipExtended("Blistering fast skirmish cavalry mounted on a vicious Zandalari raptor. Specializes in flanking maneuvers and tracking fleeing targets.")
@@ -3091,13 +2713,8 @@ import UnitObjEditing
 	..setUpgradesUsed("RM01,RM02,RM03")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x01o()
 	new UnitDefinition('x01o', 'owyv')
-=======
-@compiletime function create_w3u_x01m()
-	new UnitDefinition('x01m', 'owyv')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Pterrodax Rider")
 	..setTooltipBasic("Train Pterrodax Rider")
 	..setTooltipExtended("Swoops over the battlefield to rain down explosive jars of burning resin. Masters of aerial reconnaissance. Can only attack ground units.")
@@ -3111,29 +2728,17 @@ import UnitObjEditing
 	..setBuildTime(4)
 	..setFoodCost(3)
 	..setUpgradesUsed("RM01,RM02,RM03")
-<<<<<<< HEAD
 	..setRequirements("x01g")
 
 
 @compiletime function create_w3u_x01p()
 	new BuildingDefinition('x01p', 'obar')
-=======
-	..setRequirements("x01e")
-
-
-@compiletime function create_w3u_x01n()
-	new BuildingDefinition('x01n', 'obar')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Rastari War-Pit")
 	..setTooltipBasic("Build Rastari War-Pit")
 	..setTooltipExtended("The martial heart of the empire. Trains Zandalari Vanguards and Headhunters to expand your territory.")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNRuinsBarracks.blp")
 	..setModelFile("BarracksGurubashiV1.01.mdx")
-<<<<<<< HEAD
 	..setUnitsTrained("x01f,x01h,x01l")
-=======
-	..setUnitsTrained("x01d,x01f,x01j")
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setGoldCost(50)
 	..setLumberCost(0)
 	..setBuildTime(20)
@@ -3141,13 +2746,8 @@ import UnitObjEditing
 	..setResearchesAvailable("RM03,RM07")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x01q()
 	new UnitDefinition('x01q', 'hwt3')
-=======
-@compiletime function create_w3u_x01o()
-	new UnitDefinition('x01o', 'hwt3')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Blood Elemental")
 	..setScalingValue(1.25)
 	..setTintingColorRed(255)
@@ -3161,13 +2761,8 @@ import UnitObjEditing
 	..setAttack1CooldownTime(1.35)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x01r()
 	new UnitDefinition('x01r', 'oshm')
-=======
-@compiletime function create_w3u_x01p()
-	new UnitDefinition('x01p', 'oshm')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Mojo Apothecary")
 	..setTooltipBasic("Train Mojo Apothecary")
 	..setTooltipExtended("An alchemical doctor who carries volatile vats of bubbling brew. Throws healing elixirs to allies and corrosive acid cocktails to melt enemy armor strips.")
@@ -3188,13 +2783,8 @@ import UnitObjEditing
 	..setUpgradesUsed("RM01,RM02,RM03,RM0a")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x01s()
 	new UnitDefinition('x01s', 'ospw')
-=======
-@compiletime function create_w3u_x01q()
-	new UnitDefinition('x01q', 'ospw')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Zanchul Blood-Weaver")
 	..setTooltipBasic("Train Zanchul Blood-Weaver")
 	..setTooltipExtended("A sinister practitioner of sacrificial voodoo magic. Channels forbidden rituals to siphon enemy vitality or links allied souls to this world even in death.")
@@ -3217,13 +2807,8 @@ import UnitObjEditing
 	..setUpgradesUsed("RM01,RM02,RM03,RM0b")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x01t()
 	new UnitDefinition('x01t', 'hrtt')
-=======
-@compiletime function create_w3u_x01r()
-	new UnitDefinition('x01r', 'hrtt')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Direhorn Ironclad")
 	..setTooltipBasic("Train Direhorn Ironclad")
 	..setTooltipExtended("A colossal prehistoric warbeast covered in golden plates. Crushes ground forces underfoot while the Rastari riders hurl heavy barbed harpoons to impale flying enemies.")
@@ -3234,12 +2819,12 @@ import UnitObjEditing
 	..setDefenseBase(5)
 	..setSpeedBase(290)
 	..setAttack1TargetsAllowed("ground,structure,debris")
-	..setAttack1AttackType(AttackType.Normal)
+	..setAttack1AttackType("normal")
 	..setAttack1DamageBase(42)
 	..setAttack1Range(128)
 	..setAttack2TargetsAllowed("air")
-	..setAttack2AttackType(AttackType.Pierce)
-	..setAttack2WeaponType(WeaponType.Missile)
+	..setAttack2AttackType("pierce")
+	..setAttack2WeaponType("missile")
 	..setAttack2DamageBase(35)
 	..setAttack2Range(550)
 	..setAttack2ProjectileArt("Abilities\\Weapons\\Dryadmissile\\Dryadmissile.mdl")
@@ -3254,19 +2839,11 @@ import UnitObjEditing
 	..setBuildTime(7)
 	..setFoodCost(5)
 	..setUpgradesUsed("RM01,RM02,RM03")
-<<<<<<< HEAD
 	..setRequirements("x01k")
 
 
 @compiletime function create_w3u_x01u()
 	new UnitDefinition('x01u', 'ogru')
-=======
-	..setRequirements("x01i")
-
-
-@compiletime function create_w3u_x01s()
-	new UnitDefinition('x01s', 'ogru')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Rastari Executioner")
 	..setTooltipBasic("Train Rastari Executioner")
 	..setTooltipExtended("Elite heavy shock trooper of the high military caste. Wields a massive, ornate golden executioner's glaive. Natively possesses the Berserk ability to enter a murderous battle frenzy.")
@@ -3275,7 +2852,7 @@ import UnitObjEditing
 	..setUnitSoundSet("IceTroll")
 	..setHitPointsMaximumBase(750)
 	..setDefenseBase(4)
-	..setArmorType(ArmorType.Medium)
+	..setArmorType("medium")
 	..setAttack1DamageBase(38)
 	..setAttack2CooldownTime(1.4)
 	..setScalingValue(1.2)
@@ -3289,45 +2866,27 @@ import UnitObjEditing
 	..setUpgradesUsed("RM01,RM02,RM03")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x01v()
 	new BuildingDefinition('x01v', 'obea')
-=======
-@compiletime function create_w3u_x01t()
-	new BuildingDefinition('x01t', 'obea')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Zandalari Menagerie")
 	..setTooltipBasic("Build [|cffffcc00Zandalari Menagerie|r]")
 	..setTooltipExtended("Breeds and equips the massive prehistoric fauna of Zandalar. Trains Raptor Outriders, Pterrodax Riders, and Direhorn Ironclads.")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNRuinsBeastiary.blp")
 	..setModelFile("BeastiaryGurubashiV1.02.mdx")
 	..setScalingValue(1.1)
-<<<<<<< HEAD
 	..setUnitsTrained("x01n,x01o,x01t")
-=======
-	..setUnitsTrained("x01l,x01m,x01r")
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setGoldCost(60)
 	..setLumberCost(0)
 	..setBuildTime(25)
 	..setHitPointsMaximumBase(1200)
-	..setArmorType(ArmorType.Fortified)
+	..setArmorType("fort")
 	..setDefenseBase(5)
-<<<<<<< HEAD
 	..setRequirements("x01j")
 	..setResearchesAvailable("RM09")
 
 
 @compiletime function create_w3u_x01w()
 	new BuildingDefinition('x01w', 'otrb')
-=======
-	..setRequirements("x01h")
-	..setResearchesAvailable("RM09")
-
-
-@compiletime function create_w3u_x01u()
-	new BuildingDefinition('x01u', 'otrb')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Loa Enclave")
 	..setTooltipBasic("Build Loa Enclave")
 	..setTooltipExtended("Provides tribal food to expand your maximum army capacity. Zandalari workers can garrison inside to unleash ranged mojo attacks against attackers.")
@@ -3344,13 +2903,8 @@ import UnitObjEditing
 	..setAttacksEnabled(0)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x01x()
 	new BuildingDefinition('x01x', 'hwtw')
-=======
-@compiletime function create_w3u_x01v()
-	new BuildingDefinition('x01v', 'hwtw')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Zandalari Monument")
 	..setTooltipBasic("Build [|cffffcc00Zandalari Monument|r]")
 	..setTooltipExtended("A stone foundation erected in honor of the wild gods. Can be upgraded and dedicated to a specific Loa to unlock divine units and forbidden tech pathways.")
@@ -3360,9 +2914,8 @@ import UnitObjEditing
 	..setLumberCost(0)
 	..setBuildTime(30)
 	..setHitPointsMaximumBase(600)
-	..setArmorType(ArmorType.Fortified)
+	..setArmorType("fort")
 	..setDefenseBase(2)
-<<<<<<< HEAD
 	..setRequirements("x01k")
 	..setResearchesAvailable("")
 	..setNormalAbilities("")
@@ -3371,16 +2924,6 @@ import UnitObjEditing
 
 @compiletime function create_w3u_x01y()
 	new BuildingDefinition('x01y', 'hwtw')
-=======
-	..setRequirements("x01i")
-	..setResearchesAvailable("")
-	..setNormalAbilities("")
-	..setUpgradesTo("x01w,x01x,x01y")
-
-
-@compiletime function create_w3u_x01w()
-	new BuildingDefinition('x01w', 'hwtw')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Altar of Rezan")
 	..setTooltipBasic("Dedicate to [|cffffcc00Rezan|r]")
 	..setTooltipExtended("Infuse the monument with the blinding golden light of the Devilsaur Loa. Unlocks high-impact holy melee forces and raw physical combat techniques.")
@@ -3400,13 +2943,8 @@ import UnitObjEditing
 	..setNormalAbilities("")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x01z()
 	new BuildingDefinition('x01z', 'hwtw')
-=======
-@compiletime function create_w3u_x01x()
-	new BuildingDefinition('x01x', 'hwtw')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Altar of Bwonsamdi")
 	..setTooltipBasic("Dedicate to [|cffffcc00Bwonsamdi|r]")
 	..setTooltipExtended("Shroud the stone foundation in the dark, spectral mists of the Loa of Graves. Unlocks soul-manipulating ritualists and shadow manipulation technologies.")
@@ -3425,13 +2963,8 @@ import UnitObjEditing
 	..setNormalAbilities("")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x01{()
 	new BuildingDefinition('x01{', 'hwtw')
-=======
-@compiletime function create_w3u_x01y()
-	new BuildingDefinition('x01y', 'hwtw')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Altar of Gonk")
 	..setTooltipBasic("Dedicate to [|cffffcc00Gonk|r]")
 	..setTooltipExtended("Attune the monolith to the echo of the Great Raptor. Unlocks versatile shape-shifting primal forces and army-wide movement velocity research nodes.")
@@ -3450,119 +2983,76 @@ import UnitObjEditing
 	..setNormalAbilities("")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x01|()
 	new BuildingDefinition('x01|', 'osld')
-=======
-@compiletime function create_w3u_x01z()
-	new BuildingDefinition('x01z', 'osld')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Zanchul Voodoo Hut")
 	..setTooltipBasic("Build [|cffffcc00Zanchul Voodoo Hut|r]")
 	..setTooltipExtended("The mystical heart of the empire. Trains Witch Doctors, Mojo Apothecaries, and Zanchul Blood-Weavers to turn the tide of battle with raw voodoo magic.")
 	..setHotkey("X")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNSpiritLodge.blp")
-<<<<<<< HEAD
 	..setUnitsTrained("x01m,x01r")
-=======
-	..setUnitsTrained("x01k,x01p")
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setGoldCost(130)
 	..setLumberCost(0)
 	..setBuildTime(30)
 	..setHitPointsMaximumBase(1000)
-	..setArmorType(ArmorType.Fortified)
+	..setArmorType("fort")
 	..setDefenseBase(5)
-<<<<<<< HEAD
 	..setRequirements("x01j")
 	..setResearchesAvailable("RM08,RM0a")
 
 
 @compiletime function create_w3u_x01}()
 	new BuildingDefinition('x01}', 'obar')
-=======
-	..setRequirements("x01h")
-	..setResearchesAvailable("RM08,RM0a")
-
-
-@compiletime function create_w3u_x01{()
-	new BuildingDefinition('x01{', 'obar')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Temple of Sacrifice")
 	..setTooltipBasic("Build [|cffffcc00Temple of Sacrifice|r]")
 	..setTooltipExtended("The apex of Zandalari religious devotion. Trains elite Zealots, fanatical Shadow Preachers, and blood-binding ritualists to channel the devastating wrath of the Loa.")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNTempleOfSacrifice.blp")
 	..setModelFile("TempleOfSacrifice.mdx")
-<<<<<<< HEAD
 	..setRequirements("x01k")
 	..setUnitsTrained("x01s,x01u")
-=======
-	..setRequirements("x01i")
-	..setUnitsTrained("x01q,x01s")
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setResearchesAvailable("RM0b")
 	..setGoldCost(80)
 	..setLumberCost(0)
 	..setBuildTime(30)
 	..setHitPointsMaximumBase(1600)
-	..setArmorType(ArmorType.Fortified)
+	..setArmorType("fort")
 	..setDefenseBase(8)
 	..setPlacementRequires("scalable")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x01~()
 	new UnitDefinition('x01~', 'opeo')
-=======
-@compiletime function create_w3u_x01|()
-	new UnitDefinition('x01|', 'opeo')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Zandalari Freeman")
 	..setTooltipBasic("Train Zandalari Freeman")
 	..setTooltipExtended("The fundamental workforce of the empire. Can construct custom tribal structures and repair damaged installations.")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNTrollGatherer(Black).blp")
 	..setModelFile("TrollGathererAlternateV2.mdx")
 	..setNormalAbilities("Arep")
-<<<<<<< HEAD
 	..setStructuresBuilt("x01w,x01g,x01p,x01v,x01|,x01x,x01i,x01e,x01}")
-=======
-	..setStructuresBuilt("x01u,x01e,x01n,x01t,x01z,x01v,x01g,x01c,x01{")
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setGoldCost(25)
 	..setLumberCost(0)
 	..setBuildTime(3)
 	..setFoodCost(1)
 	..setHitPointsMaximumBase(250)
 	..setDefenseBase(0)
-	..setArmorType(ArmorType.Medium)
+	..setArmorType("medium")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x01i()
 	new BuildingDefinition('x01i', 'ogre')
-=======
-@compiletime function create_w3u_x01g()
-	new BuildingDefinition('x01g', 'ogre')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Zocalo Hearth")
 	..setTooltipBasic("Build Zocalo Hearth")
 	..setTooltipExtended("The economic and spiritual foundation of your settlement. Trains workers and accepts resource returns.")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNRuinsFortress.blp")
 	..setModelFile("GreatHallGurubashiV1.04.mdx")
-<<<<<<< HEAD
 	..setUpgradesTo("x01j")
 	..setUnitsTrained("x01~")
-=======
-	..setUpgradesTo("x01h")
-	..setUnitsTrained("x01|")
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setGoldCost(150)
 	..setLumberCost(0)
 	..setBuildTime(60)
 	..setHitPointsMaximumBase(1500)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x01j()
 	new BuildingDefinition('x01j', 'ostr')
 	..setName("Zanchul Sanctum")
@@ -3570,43 +3060,21 @@ import UnitObjEditing
 	..setTooltipExtended("Elevates the settlement into a stone sanctuary. Unlocks mid-tier military structures and tech upgrades.")
 	..setUpgradesTo("x01k")
 	..setUnitsTrained("x01~")
-=======
-@compiletime function create_w3u_x01h()
-	new BuildingDefinition('x01h', 'ostr')
-	..setName("Zanchul Sanctum")
-	..setTooltipBasic("Upgrade to Zanchul Sanctum")
-	..setTooltipExtended("Elevates the settlement into a stone sanctuary. Unlocks mid-tier military structures and tech upgrades.")
-	..setUpgradesTo("x01i")
-	..setUnitsTrained("x01|")
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setGoldCost(200)
 	..setLumberCost(0)
 	..setBuildTime(120)
 	..setHitPointsMaximumBase(2000)
-<<<<<<< HEAD
 	..setRequirements("x01e")
-=======
-	..setRequirements("x01c")
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNRuinsFortress.blp")
 	..setModelFile("GreatHallGurubashiV1.04.mdx")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3u_x01k()
 	new BuildingDefinition('x01k', 'ofrt')
 	..setName("Dazar'alor Ziggurat")
 	..setTooltipBasic("Upgrade to Dazar'alor Ziggurat")
 	..setTooltipExtended("The ultimate golden pinnacle of Zandalari majesty. Unlocks high-tier units, ultimate tier researches, and Heroes.")
 	..setUnitsTrained("x01~")
-=======
-@compiletime function create_w3u_x01i()
-	new BuildingDefinition('x01i', 'ofrt')
-	..setName("Dazar'alor Ziggurat")
-	..setTooltipBasic("Upgrade to Dazar'alor Ziggurat")
-	..setTooltipExtended("The ultimate golden pinnacle of Zandalari majesty. Unlocks high-tier units, ultimate tier researches, and Heroes.")
-	..setUnitsTrained("x01|")
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNRuinsFortress.blp")
 	..setModelFile("GreatHallGurubashiV1.04.mdx")
 	..setUpgradesTo("")
@@ -3614,21 +3082,7 @@ import UnitObjEditing
 	..setLumberCost(0)
 	..setBuildTime(180)
 	..setHitPointsMaximumBase(2500)
-<<<<<<< HEAD
 	..setRequirements("x01e")
-=======
-	..setRequirements("x01c")
-
-
-@compiletime function create_w3u_x01}()
-	new BuildingDefinition('x01}', 'hbar')
-	..setCollisionSize(0.0)
-	..setName("Qiraji Tunnel")
-	..setPathingMap("")
-	..setModelFile("SpawnerCaveDungeonVer2.mdx")
-	..setScalingValue(3.0)
-	..setGroundTexture("")
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 
 
 // Original Table (contains all modified default/melee objects)
@@ -3766,31 +3220,12 @@ import UnitObjEditing
 	..setButtonPositionY(0)
 	..setNormalAbilities("AM15,AInv,Ault")
 	..setHeroAbilities("AM19,AM1a,AM16,AM1b")
-	..setNormalAbilities("AM15,AInv,Ault")
-	..setHeroAbilities("AM19,AM1a,AM16,AM1b")
-	..setNormalAbilities("AM15,AInv,Ault")
-	..setHeroAbilities("AM19,AM1a,AM16,AM1b")
-	..setNormalAbilities("AM15,AInv,Ault")
-	..setHeroAbilities("AM19,AM1a,AM16,AM1b")
-<<<<<<< HEAD
-	..setNormalAbilities("AM15,AInv,Ault")
-	..setHeroAbilities("AM19,AM1a,AM16,AM1b")
-	..setNormalAbilities("AM15,AInv,Ault")
-	..setHeroAbilities("AM19,AM1a,AM16,AM1b")
-	..setNormalAbilities("AM15,AInv,Ault")
-	..setHeroAbilities("AM19,AM1a,AM16,AM1b")
-	..setNormalAbilities("AM15,AInv,Ault")
-	..setHeroAbilities("AM19,AM1a,AM16,AM1b")
-	..setNormalAbilities("AM15,AInv,Ault")
-	..setHeroAbilities("AM19,AM1a,AM16,AM1b")
-=======
 	..setStockMaximum(1)
 	..setStockReplenishInterval(0)
 	..setNormalAbilities("AM15,AInv,Ault")
 	..setHeroAbilities("AM19,AM1a,AM16,AM1b")
 	..setStockMaximum(1)
 	..setStockReplenishInterval(0)
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 
 
 @compiletime function create_w3u_Emoo()
@@ -3802,16 +3237,6 @@ import UnitObjEditing
 	..setProperNames("Tyrande")
 	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
 	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-<<<<<<< HEAD
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-	..setHeroAbilities("AM1n,AM1o,AM1j,AM1k")
-=======
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 
 
 @compiletime function create_w3u_edot()
@@ -3936,7 +3361,7 @@ import UnitObjEditing
 	..setRequirements("e00K")
 	..setUpgradesUsed("R00A,Resm,Rema,Resc,Reuv,Remg,Repm")
 	..setAttack1DamageNumberofDice(2)
-	..setArmorType(ArmorType.Large)
+	..setArmorType("large")
 	..setDefenseBase(5)
 	..setCollisionSize(16.0)
 	..setName("Mounted Huntress")
@@ -3948,7 +3373,7 @@ import UnitObjEditing
 	..setNormalAbilities("Ashm,A008,Adis,Ahea")
 	..setDefaultActiveAbility("Ahea")
 	..setAttack1Range(400)
-	..setAttack1AttackType(AttackType.Magic)
+	..setAttack1AttackType("magic")
 	..setAttack1DamageBase(14)
 	..setAttack1ProjectileHomingEnabled(true)
 	..setAttack1TargetsAllowed("air,debris,ground,item,structure,ward")
@@ -4047,7 +3472,7 @@ import UnitObjEditing
 	..setHitPointsMaximumBase(1400)
 	..setCollisionSize(16.0)
 	..setAttack1DamageBase(35)
-	..setAttack1AttackType(AttackType.Chaos)
+	..setAttack1AttackType("chaos")
 	..setDefaultActiveAbility("ANca")
 
 
@@ -4071,16 +3496,6 @@ import UnitObjEditing
 	..setUpgradesUsed("Reuv,Rema,R009,Redt")
 	..setNormalAbilities("AM1u,Arav,Afa2,Ault")
 	..setNormalAbilities("AM1u,Arav,Afa2,Ault")
-	..setNormalAbilities("AM1u,Arav,Afa2,Ault")
-	..setNormalAbilities("AM1u,Arav,Afa2,Ault")
-	..setNormalAbilities("AM1u,Arav,Afa2,Ault")
-<<<<<<< HEAD
-	..setNormalAbilities("AM1u,Arav,Afa2,Ault")
-	..setNormalAbilities("AM1u,Arav,Afa2,Ault")
-	..setNormalAbilities("AM1u,Arav,Afa2,Ault")
-	..setNormalAbilities("AM1u,Arav,Afa2,Ault")
-=======
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 
 
 @compiletime function create_w3u_obar()
@@ -4176,191 +3591,12 @@ import UnitObjEditing
 	..setAttack1CooldownTime(2.1)
 	..setAttack1Range(128)
 	..setSpeedBase(320)
-	..setHeroAbilities("AM07,AM04,AM03")
-	..setName("Grommash Hellscream")
-	..setProperNames("Chieftain of the Warsong")
-	..setProperNamesUsed(1)
-	..setPrimaryAttribute("STR")
-	..setStartingStrength(40)
-	..setStrengthPerLevel(4.0)
-	..setStartingAgility(25)
-	..setAgilityPerLevel(3.5)
-	..setStartingIntelligence(15)
-	..setIntelligencePerLevel(1.0)
-	..setLevel(10)
-	..setHitPointsMaximumBase(3500)
-	..setHitPointsRegenerationRate(8.5)
-	..setManaMaximum(600)
-	..setManaRegeneration(3.5)
-	..setDefenseBase(12)
-	..setAttack1DamageBase(50)
-	..setAttack1DamageNumberofDice(4)
-	..setAttack1DamageSidesperDie(10)
-	..setAttack1CooldownTime(2.1)
-	..setAttack1Range(128)
-	..setSpeedBase(320)
-	..setHeroAbilities("AM07,AM04,AM03")
-	..setName("Grommash Hellscream")
-	..setProperNames("Chieftain of the Warsong")
-	..setProperNamesUsed(1)
-	..setPrimaryAttribute("STR")
-	..setStartingStrength(40)
-	..setStrengthPerLevel(4.0)
-	..setStartingAgility(25)
-	..setAgilityPerLevel(3.5)
-	..setStartingIntelligence(15)
-	..setIntelligencePerLevel(1.0)
-	..setLevel(10)
-	..setHitPointsMaximumBase(3500)
-	..setHitPointsRegenerationRate(8.5)
-	..setManaMaximum(600)
-	..setManaRegeneration(3.5)
-	..setDefenseBase(12)
-	..setAttack1DamageBase(50)
-	..setAttack1DamageNumberofDice(4)
-	..setAttack1DamageSidesperDie(10)
-	..setAttack1CooldownTime(2.1)
-	..setAttack1Range(128)
-	..setSpeedBase(320)
-	..setHeroAbilities("AM07,AM04,AM03")
-	..setName("Grommash Hellscream")
-	..setProperNames("Chieftain of the Warsong")
-	..setProperNamesUsed(1)
-	..setPrimaryAttribute("STR")
-	..setStartingStrength(40)
-	..setStrengthPerLevel(4.0)
-	..setStartingAgility(25)
-	..setAgilityPerLevel(3.5)
-	..setStartingIntelligence(15)
-	..setIntelligencePerLevel(1.0)
-	..setLevel(10)
-	..setHitPointsMaximumBase(3500)
-	..setHitPointsRegenerationRate(8.5)
-	..setManaMaximum(600)
-	..setManaRegeneration(3.5)
-	..setDefenseBase(12)
-	..setAttack1DamageBase(50)
-	..setAttack1DamageNumberofDice(4)
-	..setAttack1DamageSidesperDie(10)
-	..setAttack1CooldownTime(2.1)
-	..setAttack1Range(128)
-	..setSpeedBase(320)
-<<<<<<< HEAD
-	..setHeroAbilities("AM07,AM04,AM03")
-	..setName("Grommash Hellscream")
-	..setProperNames("Chieftain of the Warsong")
-	..setProperNamesUsed(1)
-	..setPrimaryAttribute("STR")
-	..setStartingStrength(40)
-	..setStrengthPerLevel(4.0)
-	..setStartingAgility(25)
-	..setAgilityPerLevel(3.5)
-	..setStartingIntelligence(15)
-	..setIntelligencePerLevel(1.0)
-	..setLevel(10)
-	..setHitPointsMaximumBase(3500)
-	..setHitPointsRegenerationRate(8.5)
-	..setManaMaximum(600)
-	..setManaRegeneration(3.5)
-	..setDefenseBase(12)
-	..setAttack1DamageBase(50)
-	..setAttack1DamageNumberofDice(4)
-	..setAttack1DamageSidesperDie(10)
-	..setAttack1CooldownTime(2.1)
-	..setAttack1Range(128)
-	..setSpeedBase(320)
-	..setHeroAbilities("AM07,AM04,AM03")
-	..setName("Grommash Hellscream")
-	..setProperNames("Chieftain of the Warsong")
-	..setProperNamesUsed(1)
-	..setPrimaryAttribute("STR")
-	..setStartingStrength(40)
-	..setStrengthPerLevel(4.0)
-	..setStartingAgility(25)
-	..setAgilityPerLevel(3.5)
-	..setStartingIntelligence(15)
-	..setIntelligencePerLevel(1.0)
-	..setLevel(10)
-	..setHitPointsMaximumBase(3500)
-	..setHitPointsRegenerationRate(8.5)
-	..setManaMaximum(600)
-	..setManaRegeneration(3.5)
-	..setDefenseBase(12)
-	..setAttack1DamageBase(50)
-	..setAttack1DamageNumberofDice(4)
-	..setAttack1DamageSidesperDie(10)
-	..setAttack1CooldownTime(2.1)
-	..setAttack1Range(128)
-	..setSpeedBase(320)
-	..setHeroAbilities("AM07,AM04,AM03")
-	..setName("Grommash Hellscream")
-	..setProperNames("Chieftain of the Warsong")
-	..setProperNamesUsed(1)
-	..setPrimaryAttribute("STR")
-	..setStartingStrength(40)
-	..setStrengthPerLevel(4.0)
-	..setStartingAgility(25)
-	..setAgilityPerLevel(3.5)
-	..setStartingIntelligence(15)
-	..setIntelligencePerLevel(1.0)
-	..setLevel(10)
-	..setHitPointsMaximumBase(3500)
-	..setHitPointsRegenerationRate(8.5)
-	..setManaMaximum(600)
-	..setManaRegeneration(3.5)
-	..setDefenseBase(12)
-	..setAttack1DamageBase(50)
-	..setAttack1DamageNumberofDice(4)
-	..setAttack1DamageSidesperDie(10)
-	..setAttack1CooldownTime(2.1)
-	..setAttack1Range(128)
-	..setSpeedBase(320)
-	..setHeroAbilities("AM07,AM04,AM03")
-	..setName("Grommash Hellscream")
-	..setProperNames("Chieftain of the Warsong")
-	..setProperNamesUsed(1)
-	..setPrimaryAttribute("STR")
-	..setStartingStrength(40)
-	..setStrengthPerLevel(4.0)
-	..setStartingAgility(25)
-	..setAgilityPerLevel(3.5)
-	..setStartingIntelligence(15)
-	..setIntelligencePerLevel(1.0)
-	..setLevel(10)
-	..setHitPointsMaximumBase(3500)
-	..setHitPointsRegenerationRate(8.5)
-	..setManaMaximum(600)
-	..setManaRegeneration(3.5)
-	..setDefenseBase(12)
-	..setAttack1DamageBase(50)
-	..setAttack1DamageNumberofDice(4)
-	..setAttack1DamageSidesperDie(10)
-	..setAttack1CooldownTime(2.1)
-	..setAttack1Range(128)
-	..setSpeedBase(320)
-=======
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 
 
 @compiletime function create_w3u_Udre()
 	new HeroDefinition('Udre', 'Udre')
-<<<<<<< HEAD
 	..setHeroAbilities("AM0c")
 	..setHeroAbilities("AM0c")
-	..setHeroAbilities("AM0c")
-	..setHeroAbilities("AM0c")
-	..setHeroAbilities("AM0c")
-	..setHeroAbilities("AM0c")
-	..setHeroAbilities("AM0c")
-	..setHeroAbilities("AM0c")
-	..setHeroAbilities("AM0c")
-=======
-	..setHeroAbilities("AM0d")
-	..setHeroAbilities("AM0d")
-	..setHeroAbilities("AM0d")
-	..setHeroAbilities("AM0d")
-	..setHeroAbilities("AM0d")
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 
 
 @compiletime function create_w3u_Ucrl()
@@ -4413,319 +3649,18 @@ import UnitObjEditing
 	..setAttack1DamageBase(23)
 	..setAttack1CooldownTime(1.9)
 	..setAttack1Range(128)
-	// TODO no wrapper: 	..setString("urq1", "x006")
-	// TODO no wrapper: 	..setString("urq2", "x007")
-	..setName("Crypt Lord")
-	..setProperNames("Sukhesh")
-	..setProperNamesUsed(1)
-	..setTooltipBasic("Summon |cff00ffffCrypt Lord|r")
-	..setTooltipExtended("A massive, heavily armored behemoth. Excellent front-line vanguard.")
-	..setHeroAbilities("AM0z,AUts,AM0{,AM0|")
-	..setUpgradesUsed("Reuv")
-	..setPrimaryAttribute("STR")
-	..setStartingStrength(36)
-	..setStrengthPerLevel(5.2)
-	..setStartingAgility(18)
-	..setAgilityPerLevel(5.1)
-	..setStartingIntelligence(18)
-	..setIntelligencePerLevel(3.8)
-	..setGoldCost(0)
-	..setLumberCost(0)
-	..setFoodCost(5)
-	..setBuildTime(5)
-	..setCollisionSize(16.0)
-	..setDefenseBase(2)
-	..setAttack1DamageBase(23)
-	..setAttack1CooldownTime(1.9)
-	..setAttack1Range(128)
-	// TODO no wrapper: 	..setString("urq1", "x006")
-	// TODO no wrapper: 	..setString("urq2", "x007")
-	..setName("Crypt Lord")
-	..setProperNames("Sukhesh")
-	..setProperNamesUsed(1)
-	..setTooltipBasic("Summon |cff00ffffCrypt Lord|r")
-	..setTooltipExtended("A massive, heavily armored behemoth. Excellent front-line vanguard.")
-	..setHeroAbilities("AM0z,AUts,AM0{,AM0|")
-	..setUpgradesUsed("Reuv")
-	..setPrimaryAttribute("STR")
-	..setStartingStrength(36)
-	..setStrengthPerLevel(5.2)
-	..setStartingAgility(18)
-	..setAgilityPerLevel(5.1)
-	..setStartingIntelligence(18)
-	..setIntelligencePerLevel(3.8)
-	..setGoldCost(0)
-	..setLumberCost(0)
-	..setFoodCost(5)
-	..setBuildTime(5)
-	..setCollisionSize(16.0)
-	..setDefenseBase(2)
-	..setAttack1DamageBase(23)
-	..setAttack1CooldownTime(1.9)
-	..setAttack1Range(128)
-	// TODO no wrapper: 	..setString("urq1", "x006")
-	// TODO no wrapper: 	..setString("urq2", "x007")
-	..setName("Crypt Lord")
-	..setProperNames("Sukhesh")
-	..setProperNamesUsed(1)
-	..setTooltipBasic("Summon |cff00ffffCrypt Lord|r")
-	..setTooltipExtended("A massive, heavily armored behemoth. Excellent front-line vanguard.")
-	..setHeroAbilities("AM0z,AUts,AM0{,AM0|")
-	..setUpgradesUsed("Reuv")
-	..setPrimaryAttribute("STR")
-	..setStartingStrength(36)
-	..setStrengthPerLevel(5.2)
-	..setStartingAgility(18)
-	..setAgilityPerLevel(5.1)
-	..setStartingIntelligence(18)
-	..setIntelligencePerLevel(3.8)
-	..setGoldCost(0)
-	..setLumberCost(0)
-	..setFoodCost(5)
-	..setBuildTime(5)
-	..setCollisionSize(16.0)
-	..setDefenseBase(2)
-	..setAttack1DamageBase(23)
-	..setAttack1CooldownTime(1.9)
-	..setAttack1Range(128)
-	// TODO no wrapper: 	..setString("urq1", "x006")
-	// TODO no wrapper: 	..setString("urq2", "x007")
-	..setName("Crypt Lord")
-	..setProperNames("Sukhesh")
-	..setProperNamesUsed(1)
-	..setTooltipBasic("Summon |cff00ffffCrypt Lord|r")
-	..setTooltipExtended("A massive, heavily armored behemoth. Excellent front-line vanguard.")
-	..setHeroAbilities("AM0z,AUts,AM0{,AM0|")
-	..setUpgradesUsed("Reuv")
-	..setPrimaryAttribute("STR")
-	..setStartingStrength(36)
-	..setStrengthPerLevel(5.2)
-	..setStartingAgility(18)
-	..setAgilityPerLevel(5.1)
-	..setStartingIntelligence(18)
-	..setIntelligencePerLevel(3.8)
-	..setGoldCost(0)
-	..setLumberCost(0)
-	..setFoodCost(5)
-	..setBuildTime(5)
-	..setCollisionSize(16.0)
-	..setDefenseBase(2)
-	..setAttack1DamageBase(23)
-	..setAttack1CooldownTime(1.9)
-	..setAttack1Range(128)
-	// TODO no wrapper: 	..setString("urq1", "x006")
-	// TODO no wrapper: 	..setString("urq2", "x007")
-	..setName("Crypt Lord")
-	..setProperNames("Sukhesh")
-	..setProperNamesUsed(1)
-	..setTooltipBasic("Summon |cff00ffffCrypt Lord|r")
-	..setTooltipExtended("A massive, heavily armored behemoth. Excellent front-line vanguard.")
-	..setHeroAbilities("AM0z,AUts,AM0{,AM0|")
-	..setUpgradesUsed("Reuv")
-	..setPrimaryAttribute("STR")
-	..setStartingStrength(36)
-	..setStrengthPerLevel(5.2)
-	..setStartingAgility(18)
-	..setAgilityPerLevel(5.1)
-	..setStartingIntelligence(18)
-	..setIntelligencePerLevel(3.8)
-	..setGoldCost(0)
-	..setLumberCost(0)
-	..setFoodCost(5)
-	..setBuildTime(5)
-	..setCollisionSize(16.0)
-	..setDefenseBase(2)
-	..setAttack1DamageBase(23)
-	..setAttack1CooldownTime(1.9)
-	..setAttack1Range(128)
-	// TODO no wrapper: 	..setString("urq1", "x006")
-	// TODO no wrapper: 	..setString("urq2", "x007")
-	..setName("Crypt Lord")
-	..setProperNames("Sukhesh")
-	..setProperNamesUsed(1)
-	..setTooltipBasic("Summon |cff00ffffCrypt Lord|r")
-	..setTooltipExtended("A massive, heavily armored behemoth. Excellent front-line vanguard.")
-	..setHeroAbilities("AM0z,AUts,AM0{,AM0|")
-	..setUpgradesUsed("Reuv")
-	..setPrimaryAttribute("STR")
-	..setStartingStrength(36)
-	..setStrengthPerLevel(5.2)
-	..setStartingAgility(18)
-	..setAgilityPerLevel(5.1)
-	..setStartingIntelligence(18)
-	..setIntelligencePerLevel(3.8)
-	..setGoldCost(0)
-	..setLumberCost(0)
-	..setFoodCost(5)
-	..setBuildTime(5)
-	..setCollisionSize(16.0)
-	..setDefenseBase(2)
-	..setAttack1DamageBase(23)
-	..setAttack1CooldownTime(1.9)
-	..setAttack1Range(128)
-	// TODO no wrapper: 	..setString("urq1", "x006")
-	// TODO no wrapper: 	..setString("urq2", "x007")
-	..setName("Crypt Lord")
-	..setProperNames("Sukhesh")
-	..setProperNamesUsed(1)
-	..setTooltipBasic("Summon |cff00ffffCrypt Lord|r")
-	..setTooltipExtended("A massive, heavily armored behemoth. Excellent front-line vanguard.")
-	..setHeroAbilities("AM0z,AUts,AM0{,AM0|")
-	..setUpgradesUsed("Reuv")
-	..setPrimaryAttribute("STR")
-	..setStartingStrength(36)
-	..setStrengthPerLevel(5.2)
-	..setStartingAgility(18)
-	..setAgilityPerLevel(5.1)
-	..setStartingIntelligence(18)
-	..setIntelligencePerLevel(3.8)
-	..setGoldCost(0)
-	..setLumberCost(0)
-	..setFoodCost(5)
-	..setBuildTime(5)
-	..setCollisionSize(16.0)
-	..setDefenseBase(2)
-	..setAttack1DamageBase(23)
-	..setAttack1CooldownTime(1.9)
-	..setAttack1Range(128)
-	// TODO no wrapper: 	..setString("urq1", "x006")
-	// TODO no wrapper: 	..setString("urq2", "x007")
-	..setName("Crypt Lord")
-	..setProperNames("Sukhesh")
-	..setProperNamesUsed(1)
-	..setTooltipBasic("Summon |cff00ffffCrypt Lord|r")
-	..setTooltipExtended("A massive, heavily armored behemoth. Excellent front-line vanguard.")
-	..setHeroAbilities("AM0e,AUts,AM0f,AM0g")
-	..setUpgradesUsed("Reuv")
-	..setPrimaryAttribute("STR")
-	..setStartingStrength(36)
-	..setStrengthPerLevel(5.2)
-	..setStartingAgility(18)
-	..setAgilityPerLevel(5.1)
-	..setStartingIntelligence(18)
-	..setIntelligencePerLevel(3.8)
-	..setGoldCost(0)
-	..setLumberCost(0)
-	..setFoodCost(5)
-	..setBuildTime(5)
-	..setCollisionSize(16.0)
-	..setDefenseBase(2)
-	..setAttack1DamageBase(23)
-	..setAttack1CooldownTime(1.9)
-	..setAttack1Range(128)
-	// TODO no wrapper: 	..setString("urq1", "x006")
-	// TODO no wrapper: 	..setString("urq2", "x007")
-	..setName("Crypt Lord")
-	..setProperNames("Sukhesh")
-	..setProperNamesUsed(1)
-	..setTooltipBasic("Summon |cff00ffffCrypt Lord|r")
-	..setTooltipExtended("A massive, heavily armored behemoth. Excellent front-line vanguard.")
-	..setHeroAbilities("AM0e,AUts,AM0f,AM0g")
-	..setUpgradesUsed("Reuv")
-	..setPrimaryAttribute("STR")
-	..setStartingStrength(36)
-	..setStrengthPerLevel(5.2)
-	..setStartingAgility(18)
-	..setAgilityPerLevel(5.1)
-	..setStartingIntelligence(18)
-	..setIntelligencePerLevel(3.8)
-	..setGoldCost(0)
-	..setLumberCost(0)
-	..setFoodCost(5)
-	..setBuildTime(5)
-	..setCollisionSize(16.0)
-	..setDefenseBase(2)
-	..setAttack1DamageBase(23)
-	..setAttack1CooldownTime(1.9)
-	..setAttack1Range(128)
-	// TODO no wrapper: 	..setString("urq1", "x006")
-	// TODO no wrapper: 	..setString("urq2", "x007")
-	..setName("Crypt Lord")
-	..setProperNames("Sukhesh")
-	..setProperNamesUsed(1)
-	..setTooltipBasic("Summon |cff00ffffCrypt Lord|r")
-	..setTooltipExtended("A massive, heavily armored behemoth. Excellent front-line vanguard.")
-	..setHeroAbilities("AM0e,AUts,AM0f,AM0g")
-	..setUpgradesUsed("Reuv")
-	..setPrimaryAttribute("STR")
-	..setStartingStrength(36)
-	..setStrengthPerLevel(5.2)
-	..setStartingAgility(18)
-	..setAgilityPerLevel(5.1)
-	..setStartingIntelligence(18)
-	..setIntelligencePerLevel(3.8)
-	..setGoldCost(0)
-	..setLumberCost(0)
-	..setFoodCost(5)
-	..setBuildTime(5)
-	..setCollisionSize(16.0)
-	..setDefenseBase(2)
-	..setAttack1DamageBase(23)
-	..setAttack1CooldownTime(1.9)
-	..setAttack1Range(128)
-	// TODO no wrapper: 	..setString("urq1", "x006")
-	// TODO no wrapper: 	..setString("urq2", "x007")
-	..setName("Crypt Lord")
-	..setProperNames("Sukhesh")
-	..setProperNamesUsed(1)
-	..setTooltipBasic("Summon |cff00ffffCrypt Lord|r")
-	..setTooltipExtended("A massive, heavily armored behemoth. Excellent front-line vanguard.")
-	..setHeroAbilities("AM0e,AUts,AM0f,AM0g")
-	..setUpgradesUsed("Reuv")
-	..setPrimaryAttribute("STR")
-	..setStartingStrength(36)
-	..setStrengthPerLevel(5.2)
-	..setStartingAgility(18)
-	..setAgilityPerLevel(5.1)
-	..setStartingIntelligence(18)
-	..setIntelligencePerLevel(3.8)
-	..setGoldCost(0)
-	..setLumberCost(0)
-	..setFoodCost(5)
-	..setBuildTime(5)
-	..setCollisionSize(16.0)
-	..setDefenseBase(2)
-	..setAttack1DamageBase(23)
-	..setAttack1CooldownTime(1.9)
-	..setAttack1Range(128)
 	// TODO no wrapper: 	..setLvlDataString("urq1", 1, 0, "x006")
 	// TODO no wrapper: 	..setLvlDataString("urq2", 1, 0, "x007")
 
 
 @compiletime function create_w3u_Ewar()
 	new HeroDefinition('Ewar', 'Ewar')
-<<<<<<< HEAD
-	..setHeroAbilities("AM1f,AM1h,AM1i,AM1e")
-	..setHeroAbilities("AM1f,AM1h,AM1i,AM1e")
-	..setHeroAbilities("AM1f,AM1h,AM1i,AM1e")
-	..setHeroAbilities("AM1f,AM1h,AM1i,AM1e")
-	..setHeroAbilities("AM1f,AM1h,AM1i,AM1e")
-	..setHeroAbilities("AM1f,AM1h,AM1i,AM1e")
-	..setHeroAbilities("AM1f,AM1h,AM1i,AM1e")
 	..setHeroAbilities("AM1f,AM1h,AM1i,AM1e")
 	..setHeroAbilities("AM1f,AM1h,AM1i,AM1e")
 
 
 @compiletime function create_w3u_x01a()
 	new UnitDefinition('x01a', 'x01a')
-	..setModelFile("TyrandeWhisperwind.mdx")
-	..setModelFile("TyrandeWhisperwind.mdx")
-	..setModelFile("TyrandeWhisperwind.mdx")
-	..setModelFile("TyrandeWhisperwind.mdx")
-=======
-	..setHeroAbilities("AM1e,AM1g,AM1h,AM1i")
-	..setHeroAbilities("AM1e,AM1g,AM1h,AM1i")
-	..setHeroAbilities("AM1e,AM1g,AM1h,AM1i")
-	..setHeroAbilities("AM1e,AM1g,AM1h,AM1i")
-	..setHeroAbilities("AM1e,AM1g,AM1h,AM1i")
-
-
-@compiletime function create_w3u_x018()
-	new UnitDefinition('x018', 'x018')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
-	..setModelFile("TyrandeWhisperwind.mdx")
-	..setModelFile("TyrandeWhisperwind.mdx")
-	..setModelFile("TyrandeWhisperwind.mdx")
 	..setModelFile("TyrandeWhisperwind.mdx")
 	..setModelFile("TyrandeWhisperwind.mdx")
 
@@ -4738,30 +3673,6 @@ import UnitObjEditing
 	..setNormalAbilities("AM1y")
 	..setLevel(6)
 	..setName("Ligga")
-	..setNormalAbilities("AM1y")
-	..setLevel(6)
-	..setName("Ligga")
-	..setNormalAbilities("AM1y")
-	..setLevel(6)
-	..setName("Ligga")
-	..setNormalAbilities("AM1y")
-	..setLevel(6)
-	..setName("Ligga")
-<<<<<<< HEAD
-	..setNormalAbilities("AM1y")
-	..setLevel(6)
-	..setName("Ligga")
-	..setNormalAbilities("AM1y")
-	..setLevel(6)
-	..setName("Ligga")
-	..setNormalAbilities("AM1y")
-	..setLevel(6)
-	..setName("Ligga")
-	..setNormalAbilities("AM1y")
-	..setLevel(6)
-	..setName("Ligga")
-=======
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 
 
 @compiletime function create_w3u_Oshd()
@@ -4783,119 +3694,6 @@ import UnitObjEditing
 	..setAgilityPerLevel(4.0)
 	..setIntelligencePerLevel(3.0)
 	..setStrengthPerLevel(4.0)
-	..setGoldCost(50)
-	..setLumberCost(0)
-	..setBuildTime(5)
-	..setProperNames("Vol'jin")
-	..setProperNamesUsed(1)
-	..setNormalAbilities("AM1}")
-	..setHeroAbilities("AM2!,AM21,AM22,AM24")
-	..setManaRegeneration(20.0)
-	..setAgilityPerLevel(4.0)
-	..setIntelligencePerLevel(3.0)
-	..setStrengthPerLevel(4.0)
-	..setGoldCost(50)
-	..setLumberCost(0)
-	..setBuildTime(5)
-	..setProperNames("Vol'jin")
-	..setProperNamesUsed(1)
-	..setNormalAbilities("AM1}")
-	..setHeroAbilities("AM2!,AM21,AM22,AM24")
-	..setManaRegeneration(20.0)
-	..setAgilityPerLevel(4.0)
-	..setIntelligencePerLevel(3.0)
-	..setStrengthPerLevel(4.0)
-	..setGoldCost(50)
-	..setLumberCost(0)
-	..setBuildTime(5)
-	..setProperNames("Vol'jin")
-	..setProperNamesUsed(1)
-	..setNormalAbilities("AM1}")
-	..setHeroAbilities("AM2!,AM21,AM22,AM24")
-	..setManaRegeneration(20.0)
-	..setAgilityPerLevel(4.0)
-	..setIntelligencePerLevel(3.0)
-	..setStrengthPerLevel(4.0)
-	..setGoldCost(50)
-	..setLumberCost(0)
-	..setBuildTime(5)
-	..setProperNames("Vol'jin")
-	..setProperNamesUsed(1)
-	..setNormalAbilities("AM1}")
-	..setHeroAbilities("AM2!,AM21,AM22,AM24")
-	..setManaRegeneration(20.0)
-	..setAgilityPerLevel(4.0)
-	..setIntelligencePerLevel(3.0)
-	..setStrengthPerLevel(4.0)
-	..setGoldCost(50)
-	..setLumberCost(0)
-	..setBuildTime(5)
-	..setProperNames("Vol'jin")
-	..setProperNamesUsed(1)
-	..setNormalAbilities("AM1}")
-	..setHeroAbilities("AM2!,AM21,AM22,AM24")
-	..setManaRegeneration(20.0)
-	..setAgilityPerLevel(4.0)
-	..setIntelligencePerLevel(3.0)
-	..setStrengthPerLevel(4.0)
-	..setGoldCost(50)
-	..setLumberCost(0)
-	..setBuildTime(5)
-	..setProperNames("Vol'jin")
-	..setProperNamesUsed(1)
-	..setNormalAbilities("AM1}")
-	..setHeroAbilities("AM2!,AM21,AM22,AM24")
-	..setManaRegeneration(20.0)
-	..setAgilityPerLevel(4.0)
-	..setIntelligencePerLevel(3.0)
-	..setStrengthPerLevel(4.0)
-	..setGoldCost(50)
-	..setLumberCost(0)
-	..setBuildTime(5)
-	..setProperNames("Vol'jin")
-	..setProperNamesUsed(1)
-	..setNormalAbilities("AM1}")
-	..setHeroAbilities("AM2!,AM21,AM22,AM24")
-	..setManaRegeneration(20.0)
-	..setAgilityPerLevel(4.0)
-	..setIntelligencePerLevel(3.0)
-	..setStrengthPerLevel(4.0)
-	..setGoldCost(50)
-	..setLumberCost(0)
-	..setBuildTime(5)
-	..setProperNames("Vol'jin")
-	..setProperNamesUsed(1)
-	..setNormalAbilities("AM1}")
-	..setHeroAbilities("AM2!,AM21,AM22,AM24")
-	..setManaInitialAmount(5000)
-	..setManaRegeneration(20.0)
-	..setGoldCost(50)
-	..setLumberCost(0)
-	..setBuildTime(5)
-	..setProperNames("Vol'jin")
-	..setProperNamesUsed(1)
-	..setNormalAbilities("AM1}")
-	..setHeroAbilities("AM2!,AM21,AM22,AM24")
-	..setManaInitialAmount(5000)
-	..setManaRegeneration(20.0)
-	..setGoldCost(50)
-	..setLumberCost(0)
-	..setBuildTime(5)
-	..setProperNames("Vol'jin")
-	..setProperNamesUsed(1)
-	..setNormalAbilities("AM1}")
-	..setHeroAbilities("AM2!,AM21,AM22,AM24")
-	..setManaInitialAmount(5000)
-	..setManaRegeneration(20.0)
-	..setGoldCost(50)
-	..setLumberCost(0)
-	..setBuildTime(5)
-	..setProperNames("Vol'jin")
-	..setProperNamesUsed(1)
-	..setNormalAbilities("AM1}")
-	..setHeroAbilities("AM2!,AM21,AM22,AM24")
-	..setManaInitialAmount(5000)
-	..setManaRegeneration(20.0)
 	..setGoldCost(50)
 	..setLumberCost(0)
 	..setBuildTime(5)

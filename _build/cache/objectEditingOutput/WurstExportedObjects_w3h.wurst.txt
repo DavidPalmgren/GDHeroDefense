@@ -1,6 +1,5 @@
 package WurstExportedObjects_w3h
 import ObjEditingNatives
-import ObjEditingCommons
 import BuffObjEditing
 
 // Modified Table (contains all custom objects)
@@ -30,7 +29,6 @@ import BuffObjEditing
 	..setArtSpecial(1, "")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3h_BM03()
 	new BuffDefinition('BM03', 'Babr')
 	..setName(1, "Trample")
@@ -38,8 +36,6 @@ import BuffObjEditing
 	..setTooltipNormalExtended(1, "This unit is being crushed underfoot.")
 
 
-=======
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 @compiletime function create_w3h_BM04()
 	new BuffDefinition('BM04', 'BOae')
 	..setTooltipNormal(1, "Mother's Love")
@@ -55,18 +51,7 @@ import BuffObjEditing
 
 
 @compiletime function create_w3h_BM06()
-<<<<<<< HEAD
 	new BuffDefinition('BM06', 'Basl')
-=======
-	new BuffDefinition('BM06', 'Babr')
-	..setName(1, "Trample")
-	..setTooltipNormal(1, "Trampled")
-	..setTooltipNormalExtended(1, "This unit is being crushed underfoot.")
-
-
-@compiletime function create_w3h_BM07()
-	new BuffDefinition('BM07', 'Basl')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName(1, "Invigorate")
 	..setTooltipNormal(1, "Invigorated")
 	..setTooltipNormalExtended(1, "This unit is invigorated, regenerating health and mana.")

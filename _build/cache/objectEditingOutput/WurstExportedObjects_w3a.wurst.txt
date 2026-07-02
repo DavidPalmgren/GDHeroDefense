@@ -1,6 +1,5 @@
 package WurstExportedObjects_w3a
 import ObjEditingNatives
-import ObjEditingCommons
 import AbilityObjEditing
 
 // Modified Table (contains all custom objects)
@@ -57,7 +56,7 @@ import AbilityObjEditing
 	..setMissileSpeed(1100)
 	..setRequirements("R001")
 	..setCheckDependencies(true)
-	..setRace(Race.Nightelf)
+	..setRace("nightelf")
 	..setDamageBonus(1, 15.0)
 	..setName("Impetus")
 	..setMissileArt("war3mapImported\\VirgasArc_v1.mdx")
@@ -75,7 +74,7 @@ import AbilityObjEditing
 
 @compiletime function create_w3a_A005()
 	new AbilityDefinitionTinkererDemolishLevel0('A005')
-	..setRace(Race.Nightelf)
+	..setRace("nightelf")
 	..setHeroAbility(false)
 	..setRequirements("R004")
 	..setButtonPositionNormalX(0)
@@ -85,7 +84,7 @@ import AbilityObjEditing
 	new AbilityDefinitionBladeMasterCriticalStrike('A006')
 	..setChancetoCriticalStrike(1, 5.0)
 	..setChancetoCriticalStrike(2, 10.0)
-	..setRace(Race.Nightelf)
+	..setRace("nightelf")
 	..setHeroAbility(false)
 	..setRequirements("R008")
 	..setTooltipNormalExtended(1, "Gives a 5% chance to do 2 times normal damage on an attack.")
@@ -162,75 +161,6 @@ import AbilityObjEditing
 	..setIconNormal("ReplaceableTextures\\PassiveButtons\\PASBTNAnimalWarTraining.blp")
 
 
-@compiletime function create_w3a_$wsl()
-	new AbilityDefinitionIllidanChannel('$wsl')
-	..setLevels(64)
-	..setTooltipNormal(1, " ")
-	..setTooltipNormal(2, " ")
-	..setTooltipNormal(3, " ")
-	..setTooltipNormal(4, " ")
-	..setTooltipNormal(5, " ")
-	..setTooltipNormal(6, " ")
-	..setTooltipNormal(7, " ")
-	..setTooltipNormal(8, " ")
-	..setTooltipNormal(9, " ")
-	..setTooltipNormal(10, " ")
-	..setTooltipNormal(11, " ")
-	..setTooltipNormal(12, " ")
-	..setTooltipNormal(13, " ")
-	..setTooltipNormal(14, " ")
-	..setTooltipNormal(15, " ")
-	..setTooltipNormal(16, " ")
-	..setTooltipNormal(17, " ")
-	..setTooltipNormal(18, " ")
-	..setTooltipNormal(19, " ")
-	..setTooltipNormal(20, " ")
-	..setTooltipNormal(21, " ")
-	..setTooltipNormal(22, " ")
-	..setTooltipNormal(23, " ")
-	..setTooltipNormal(24, " ")
-	..setTooltipNormal(25, " ")
-	..setTooltipNormal(26, " ")
-	..setTooltipNormal(27, " ")
-	..setTooltipNormal(28, " ")
-	..setTooltipNormal(29, " ")
-	..setTooltipNormal(30, " ")
-	..setTooltipNormal(31, " ")
-	..setTooltipNormal(32, " ")
-	..setTooltipNormal(33, " ")
-	..setTooltipNormal(34, " ")
-	..setTooltipNormal(35, " ")
-	..setTooltipNormal(36, " ")
-	..setTooltipNormal(37, " ")
-	..setTooltipNormal(38, " ")
-	..setTooltipNormal(39, " ")
-	..setTooltipNormal(40, " ")
-	..setTooltipNormal(41, " ")
-	..setTooltipNormal(42, " ")
-	..setTooltipNormal(43, " ")
-	..setTooltipNormal(44, " ")
-	..setTooltipNormal(45, " ")
-	..setTooltipNormal(46, " ")
-	..setTooltipNormal(47, " ")
-	..setTooltipNormal(48, " ")
-	..setTooltipNormal(49, " ")
-	..setTooltipNormal(50, " ")
-	..setTooltipNormal(51, " ")
-	..setTooltipNormal(52, " ")
-	..setTooltipNormal(53, " ")
-	..setTooltipNormal(54, " ")
-	..setTooltipNormal(55, " ")
-	..setTooltipNormal(56, " ")
-	..setTooltipNormal(57, " ")
-	..setTooltipNormal(58, " ")
-	..setTooltipNormal(59, " ")
-	..setTooltipNormal(60, " ")
-	..setTooltipNormal(61, " ")
-	..setTooltipNormal(62, " ")
-	..setTooltipNormal(63, " ")
-	..setTooltipNormal(64, " ")
-
-
 @compiletime function create_w3a_AM01()
 	new AbilityDefinitionDreadlordCarrionSwarm('AM01')
 
@@ -241,7 +171,7 @@ import AbilityObjEditing
 	..setEditorSuffix("(OnUnitEnterLeave)")
 	..setArtCaster("")
 	..setIconNormal("")
-	..setRace(Race.Unknown)
+	..setRace("unknown")
 
 
 @compiletime function create_w3a_AM03()
@@ -478,7 +408,6 @@ import AbilityObjEditing
 	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNAdvancedCreatureAttack.blp")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3a_$wsl()
 	new AbilityDefinitionIllidanChannel('$wsl')
 	..setLevels(64)
@@ -550,10 +479,6 @@ import AbilityObjEditing
 
 @compiletime function create_w3a_AM0h()
 	new AbilityDefinitionHeal('AM0h')
-=======
-@compiletime function create_w3a_AM0l()
-	new AbilityDefinitionHeal('AM0l')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Devout Healing")
 	..setTooltipNormal(1, "Devout Healing")
 	..setTooltipNormalExtended(1, "Channels the will of the Old Gods to heal a single ally for 50 health.")
@@ -590,7 +515,6 @@ import AbilityObjEditing
 	..setItemAbility(false)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3a_AM0j()
 	new AbilityDefinitionAuraSlow('AM0j')
 	..setName("Trample")
@@ -616,10 +540,6 @@ import AbilityObjEditing
 
 @compiletime function create_w3a_AM0l()
 	new AbilityDefinitionIllidanChannel('AM0l')
-=======
-@compiletime function create_w3a_AM0n()
-	new AbilityDefinitionIllidanChannel('AM0n')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setLevels(1)
 	..setBaseOrderID(1, "acolyteharvest")
 	..setDisableOtherAbilities(1, false)
@@ -630,7 +550,6 @@ import AbilityObjEditing
 	..setArtEffect("")
 	..setArtSpecial("")
 	..setArtTarget("")
-<<<<<<< HEAD
 	..setName("Charge")
 	..setHeroAbility(false)
 	..setTooltipNormal(1, "Charge")
@@ -653,46 +572,29 @@ import AbilityObjEditing
 	..setArtEffect("")
 	..setArtSpecial("")
 	..setArtTarget("")
-=======
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setCooldown(1, 40.0)
 	..setCastRange(1, 301.0)
 	..setTargetType(1, 1)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3a_AM0n()
 	new AbilityDefinitionPitLordCleavingAttack('AM0n')
-=======
-@compiletime function create_w3a_AM0o()
-	new AbilityDefinitionPitLordCleavingAttack('AM0o')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Flesh Guzzler")
 	..setDistributedDamageFactor(1, 0.2)
 	..setTooltipNormal(1, "Flesh Guzzler")
 	..setTooltipNormalExtended(1, "Attacks deal 20% splash damage to nearby ground enemies.")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3a_AM0o()
 	new AbilityDefinitionPitLordCleavingAttack('AM0o')
-=======
-@compiletime function create_w3a_AM0p()
-	new AbilityDefinitionPitLordCleavingAttack('AM0p')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Gore Feeder")
 	..setDistributedDamageFactor(1, 0.3)
 	..setTooltipNormal(1, "Gore Feeder")
 	..setTooltipNormalExtended(1, "Attacks deal 30% splash damage to nearby ground enemies.")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3a_AM0q()
 	new AbilityDefinitionAlchemistAcidBomb('AM0q')
-=======
-@compiletime function create_w3a_AM0r()
-	new AbilityDefinitionAlchemistAcidBomb('AM0r')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Corrosive Bile")
 	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNAcidBomb.blp")
 	..setHeroAbility(false)
@@ -702,39 +604,24 @@ import AbilityObjEditing
 	..setCastRange(1, 450.0)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3a_AM0p()
 	new AbilityDefinitionPitLordCleavingAttack('AM0p')
-=======
-@compiletime function create_w3a_AM0q()
-	new AbilityDefinitionPitLordCleavingAttack('AM0q')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Soul Devourer")
 	..setDistributedDamageFactor(1, 0.45)
 	..setTooltipNormal(1, "Soul Devourer")
 	..setTooltipNormalExtended(1, "Attacks deal 45% splash damage to nearby ground enemies.")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3a_AM0r()
 	new AbilityDefinitionVampiricAuracreep('AM0r')
-=======
-@compiletime function create_w3a_AM0s()
-	new AbilityDefinitionVampiricAuracreep('AM0s')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Devouring Essence")
 	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNVampiricAura.blp")
 	..setAttackDamageStolen(1, 0.3)
 	..setAreaofEffect(1, 600.0)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3a_AM0s()
 	new AbilityDefinitionUnholyAuracreep('AM0s')
-=======
-@compiletime function create_w3a_AM0t()
-	new AbilityDefinitionUnholyAuracreep('AM0t')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Putrid Regrowth")
 	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNPlagueCloud.blp")
 	..setMovementSpeedIncrease(1, 0.1)
@@ -742,13 +629,8 @@ import AbilityObjEditing
 	..setAreaofEffect(1, 200.0)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3a_AM0t()
 	new AbilityDefinitionCriticalStrikecreep('AM0t')
-=======
-@compiletime function create_w3a_AM0u()
-	new AbilityDefinitionCriticalStrikecreep('AM0u')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Vicious Strike")
 	..setChancetoCriticalStrike(1, 15.0)
 	..setDamageMultiplier(1, 2.0)
@@ -756,13 +638,8 @@ import AbilityObjEditing
 	..setTooltipNormalExtended(1, "Has a 15% chance to deal 2 times normal damage.")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3a_AM0u()
 	new AbilityDefinitionCriticalStrikecreep('AM0u')
-=======
-@compiletime function create_w3a_AM0v()
-	new AbilityDefinitionCriticalStrikecreep('AM0v')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Deadly Strike")
 	..setChancetoCriticalStrike(1, 15.0)
 	..setDamageMultiplier(1, 3.0)
@@ -770,13 +647,8 @@ import AbilityObjEditing
 	..setTooltipNormalExtended(1, "Has a 15% chance to deal 3 times normal damage.")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3a_AM0w()
 	new AbilityDefinitionShadowStrikeCreep('AM0w')
-=======
-@compiletime function create_w3a_AM0x()
-	new AbilityDefinitionShadowStrikeCreep('AM0x')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Shadow Dagger")
 	..setInitialDamage(1, 120.0)
 	..setDecayingDamage(1, 20.0)
@@ -786,13 +658,8 @@ import AbilityObjEditing
 	..setCastRange(1, 500.0)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3a_AM0v()
 	new AbilityDefinitionCriticalStrikecreep('AM0v')
-=======
-@compiletime function create_w3a_AM0w()
-	new AbilityDefinitionCriticalStrikecreep('AM0w')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Lethal Strike")
 	..setChancetoCriticalStrike(1, 15.0)
 	..setDamageMultiplier(1, 4.5)
@@ -800,31 +667,20 @@ import AbilityObjEditing
 	..setTooltipNormalExtended(1, "Has a 15% chance to deal 4.5 times normal damage.")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3a_AM0y()
 	new AbilityDefinitionEvasion('AM0y')
-=======
-@compiletime function create_w3a_AM0z()
-	new AbilityDefinitionEvasion('AM0z')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Shadow Reflexes")
 	..setChancetoEvade(1, 0.3)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3a_AM0x()
 	new AbilityDefinitionAuraCommandCreep('AM0x')
-=======
-@compiletime function create_w3a_AM0y()
-	new AbilityDefinitionAuraCommandCreep('AM0y')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Lead the Hunt")
 	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNAuraOfDarkness.blp")
 	..setAttackDamageIncrease(1, 0.3)
 	..setAreaofEffect(1, 600.0)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3a_AM0z()
 	new AbilityDefinitionBurrow('AM0z')
 	..setRequirements("")
@@ -874,10 +730,6 @@ import AbilityObjEditing
 
 @compiletime function create_w3a_AM0}()
 	new AbilityDefinitionTaurenChieftainEnduranceAura('AM0}')
-=======
-@compiletime function create_w3a_AM0{()
-	new AbilityDefinitionTaurenChieftainEnduranceAura('AM0{')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Mother's Love")
 	..setTooltipNormal(1, "Mother's Love")
 	..setTooltipNormalExtended(1, "Increases friendly units Attack and Movement speed by 10%, If the unit is a swarmer additionaly they receive 40 Max Hit points.")
@@ -889,39 +741,24 @@ import AbilityObjEditing
 	..setBuffs(1, "BM04")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3a_AM0~()
 	new AbilityDefinitionParasite('AM0~')
-=======
-@compiletime function create_w3a_AM0|()
-	new AbilityDefinitionParasite('AM0|')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setName("Incubate")
 	..setTooltipNormal(1, "Incubate")
 	..setTooltipNormalExtended(1, "Pregnancy can be a very painfull experience. The targets of this spell will find that out shortly.")
 	..setUnitType(1, "x00l")
 
 
-<<<<<<< HEAD
 @compiletime function create_w3a_AM1!()
 	new AbilityDefinitionMountainKingThunderClap('AM1!')
-=======
-@compiletime function create_w3a_AM0}()
-	new AbilityDefinitionMountainKingThunderClap('AM0}')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setHeroAbility(false)
 	..setLevels(1)
 	..setAOEDamage(1, 90.0)
 	..setAttackSpeedReduction(1, 0.3)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3a_AM10()
 	new AbilityDefinitionBerserk('AM10')
-=======
-@compiletime function create_w3a_AM0~()
-	new AbilityDefinitionBerserk('AM0~')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setDamageTakenIncrease(1, 0.0)
 	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNUnholyFrenzy.blp")
 	..setName("Enrage")
@@ -933,13 +770,8 @@ import AbilityObjEditing
 	..setCooldown(1, 30.0)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3a_AM11()
 	new AbilityDefinitionIllidanChannel('AM11')
-=======
-@compiletime function create_w3a_AM1!()
-	new AbilityDefinitionIllidanChannel('AM1!')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setLevels(1)
 	..setDisableOtherAbilities(1, false)
 	..setFollowThroughTime(1, 0.0)
@@ -958,58 +790,8 @@ import AbilityObjEditing
 	..setHeroAbility(false)
 
 
-<<<<<<< HEAD
 @compiletime function create_w3a_AM12()
 	new AbilityDefinitionFingerofDeath('AM12')
-=======
-@compiletime function create_w3a_AM10()
-	new AbilityDefinitionAuraSlow('AM10')
-	..setName("Trample")
-	..setTooltipNormal(1, "Trample")
-	..setTooltipNormalExtended(1, "The massive size of the colosus causes it to damage surrounding units with every action.")
-	..setMovementSpeedFactor(1, -0.6)
-	..setAreaofEffect(1, 290.0)
-	..setBuffs(1, "BM06")
-	..setTargetsAllowed(1, "enemies,ground,vulnerable")
-	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNStampede.blp")
-
-
-@compiletime function create_w3a_AM11()
-	new AbilityDefinitionPassiveSimple('AM11')
-	..setName("Phase (internal)")
-	..setEditorSuffix("(Colosus passive)")
-	..setHeroAbility(false)
-	..setItemAbility(false)
-	..setButtonPositionNormalX(0)
-	..setButtonPositionNormalY(0)
-	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNStampede.blp")
-
-
-@compiletime function create_w3a_AM12()
-	new AbilityDefinitionIllidanChannel('AM12')
-	..setLevels(1)
-	..setBaseOrderID(1, "ambush")
-	..setDisableOtherAbilities(1, false)
-	..setFollowThroughTime(1, 0.0)
-	..setArtDuration(1, 0.0)
-	..setOptions(1, 1)
-	..setArtCaster("")
-	..setArtEffect("")
-	..setArtSpecial("")
-	..setArtTarget("")
-	..setName("Charge")
-	..setHeroAbility(false)
-	..setTooltipNormal(1, "Charge")
-	..setTooltipNormalExtended(1, "Ready for a charge after 3s deal massive damage in a line.")
-	..setTargetType(1, 2)
-	..setCastRange(1, 1000.0)
-	..setCooldown(1, 10.0)
-	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNCharge.blp")
-
-
-@compiletime function create_w3a_AM13()
-	new AbilityDefinitionFingerofDeath('AM13')
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setDamage(1, 500.0)
 	..setCooldown(1, 7.0)
 	..setCastRange(1, 400.0)
@@ -1203,15 +985,15 @@ import AbilityObjEditing
 	..setBuffs(3, "")
 	..setBuffs(4, "")
 	..setTooltipLearn("|cffFFCC00Learn|r Summon Treant - [|cffffcc00Level %d|r]")
-	..setTooltipLearnExtended("|cff3B97D3Target Type:|r Instant Cast\n|cff3B97D3Duration:|r 15s/20s/25s/30s\n|cff3B97D3Cooldown:|r 14/12/10/8\n|cff3B97D3Mana Cost:|r 40/55/70/85\n|cff3B97D3Bonus Treants:|r 0/1/2/3\n|cff3B97D3Treant HP:|r 420/575/750/950\n|cff3B97D3Treant Damage:|r 18 + 2d4/26 + 2d6/36 + 3d6/48 + 3d8\n|cff3B97D3Treant Armor:|r 1/3/5/8\n|cff3B97D3Damage Increase (%):|r |cffFFCC000|r \n|cff3B97D3Area of Effect:|r |cffFFCC000|r \n|cff3B97D3Duration - Normal:|r |cffFFCC000|r \n|cff3B97D3Duration - Hero:|r |cffFFCC000|r \n\n|cff919191Summons Treants based on active seedling stacks. Higher levels increase duration and add bonus Treants.|r")
+	..setTooltipLearnExtended("|cff3B97D3Target Type:|r Instant Cast\n|cff3B97D3Duration:|r 15s/20s/25s/30s\n|cff3B97D3Cooldown:|r 14/12/10/8\n|cff3B97D3Mana Cost:|r 40/55/70/85\n|cff3B97D3Bonus Treants:|r 0/1/2/3\n|cff3B97D3Treant HP:|r 420/575/750/950\n|cff3B97D3Treant Damage:|r 18 + 2d4/26 + 2d6/36 + 3d6/48 + 3d8\n|cff3B97D3Treant Armor:|r 1/3/5/8\n|cff3B97D3Damage Increase:|r |cffFFCC000|r \n|cff3B97D3Area of Effect:|r |cffFFCC000|r \n|cff3B97D3Duration Normal:|r |cffFFCC000|r \n|cff3B97D3Duration Hero:|r |cffFFCC000|r \n\n|cff919191Summons Treants based on active seedling stacks. Higher levels increase duration and add bonus Treants.|r")
 	..setTooltipNormal(1, "Summon Treant  - Level 1")
-	..setTooltipNormalExtended(1, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Duration:|r |cffFFCC0015s|r/20s/25s/30s\n|cff3B97D3Cooldown:|r |cffFFCC0014|r/12/10/8\n|cff3B97D3Mana Cost:|r |cffFFCC0040|r/55/70/85\n|cff3B97D3Bonus Treants:|r |cffFFCC000|r/1/2/3\n|cff3B97D3Treant HP:|r |cffFFCC00420|r/575/750/950\n|cff3B97D3Treant Damage:|r |cffFFCC0018 + 2d4|r/26 + 2d6/36 + 3d6/48 + 3d8\n|cff3B97D3Treant Armor:|r |cffFFCC001|r/3/5/8\n|cff3B97D3Damage Increase (%):|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC000|r \n\n|cff919191Summons Treants based on active seedling stacks. Higher levels increase duration and add bonus Treants.|r")
+	..setTooltipNormalExtended(1, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Duration:|r |cffFFCC0015s|r/20s/25s/30s\n|cff3B97D3Cooldown:|r |cffFFCC0014|r/12/10/8\n|cff3B97D3Mana Cost:|r |cffFFCC0040|r/55/70/85\n|cff3B97D3Bonus Treants:|r |cffFFCC000|r/1/2/3\n|cff3B97D3Treant HP:|r |cffFFCC00420|r/575/750/950\n|cff3B97D3Treant Damage:|r |cffFFCC0018 + 2d4|r/26 + 2d6/36 + 3d6/48 + 3d8\n|cff3B97D3Treant Armor:|r |cffFFCC001|r/3/5/8\n|cff3B97D3Damage Increase:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration Hero:|r |cffFFCC00|cffFFCC000|r \n\n|cff919191Summons Treants based on active seedling stacks. Higher levels increase duration and add bonus Treants.|r")
 	..setTooltipNormal(2, "Summon Treant  - Level 2")
-	..setTooltipNormalExtended(2, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Duration:|r 15s/|cffFFCC0020s|r/25s/30s\n|cff3B97D3Cooldown:|r 14/|cffFFCC0012|r/10/8\n|cff3B97D3Mana Cost:|r 40/|cffFFCC0055|r/70/85\n|cff3B97D3Bonus Treants:|r 0/|cffFFCC001|r/2/3\n|cff3B97D3Treant HP:|r 420/|cffFFCC00575|r/750/950\n|cff3B97D3Treant Damage:|r 18 + 2d4/|cffFFCC0026 + 2d6|r/36 + 3d6/48 + 3d8\n|cff3B97D3Treant Armor:|r 1/|cffFFCC003|r/5/8\n|cff3B97D3Damage Increase (%):|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC000|r \n\n|cff919191Summons Treants based on active seedling stacks. Higher levels increase duration and add bonus Treants.|r")
+	..setTooltipNormalExtended(2, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Duration:|r 15s/|cffFFCC0020s|r/25s/30s\n|cff3B97D3Cooldown:|r 14/|cffFFCC0012|r/10/8\n|cff3B97D3Mana Cost:|r 40/|cffFFCC0055|r/70/85\n|cff3B97D3Bonus Treants:|r 0/|cffFFCC001|r/2/3\n|cff3B97D3Treant HP:|r 420/|cffFFCC00575|r/750/950\n|cff3B97D3Treant Damage:|r 18 + 2d4/|cffFFCC0026 + 2d6|r/36 + 3d6/48 + 3d8\n|cff3B97D3Treant Armor:|r 1/|cffFFCC003|r/5/8\n|cff3B97D3Damage Increase:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration Hero:|r |cffFFCC00|cffFFCC000|r \n\n|cff919191Summons Treants based on active seedling stacks. Higher levels increase duration and add bonus Treants.|r")
 	..setTooltipNormal(3, "Summon Treant  - Level 3")
-	..setTooltipNormalExtended(3, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Duration:|r 15s/20s/|cffFFCC0025s|r/30s\n|cff3B97D3Cooldown:|r 14/12/|cffFFCC0010|r/8\n|cff3B97D3Mana Cost:|r 40/55/|cffFFCC0070|r/85\n|cff3B97D3Bonus Treants:|r 0/1/|cffFFCC002|r/3\n|cff3B97D3Treant HP:|r 420/575/|cffFFCC00750|r/950\n|cff3B97D3Treant Damage:|r 18 + 2d4/26 + 2d6/|cffFFCC0036 + 3d6|r/48 + 3d8\n|cff3B97D3Treant Armor:|r 1/3/|cffFFCC005|r/8\n|cff3B97D3Damage Increase (%):|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC000|r \n\n|cff919191Summons Treants based on active seedling stacks. Higher levels increase duration and add bonus Treants.|r")
+	..setTooltipNormalExtended(3, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Duration:|r 15s/20s/|cffFFCC0025s|r/30s\n|cff3B97D3Cooldown:|r 14/12/|cffFFCC0010|r/8\n|cff3B97D3Mana Cost:|r 40/55/|cffFFCC0070|r/85\n|cff3B97D3Bonus Treants:|r 0/1/|cffFFCC002|r/3\n|cff3B97D3Treant HP:|r 420/575/|cffFFCC00750|r/950\n|cff3B97D3Treant Damage:|r 18 + 2d4/26 + 2d6/|cffFFCC0036 + 3d6|r/48 + 3d8\n|cff3B97D3Treant Armor:|r 1/3/|cffFFCC005|r/8\n|cff3B97D3Damage Increase:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration Hero:|r |cffFFCC00|cffFFCC000|r \n\n|cff919191Summons Treants based on active seedling stacks. Higher levels increase duration and add bonus Treants.|r")
 	..setTooltipNormal(4, "Summon Treant  - Level 4")
-	..setTooltipNormalExtended(4, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Duration:|r 15s/20s/25s/|cffFFCC0030s|r\n|cff3B97D3Cooldown:|r 14/12/10/|cffFFCC008|r\n|cff3B97D3Mana Cost:|r 40/55/70/|cffFFCC0085|r\n|cff3B97D3Bonus Treants:|r 0/1/2/|cffFFCC003|r\n|cff3B97D3Treant HP:|r 420/575/750/|cffFFCC00950|r\n|cff3B97D3Treant Damage:|r 18 + 2d4/26 + 2d6/36 + 3d6/|cffFFCC0048 + 3d8|r\n|cff3B97D3Treant Armor:|r 1/3/5/|cffFFCC008|r\n|cff3B97D3Damage Increase (%):|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC000|r \n\n|cff919191Summons Treants based on active seedling stacks. Higher levels increase duration and add bonus Treants.|r")
+	..setTooltipNormalExtended(4, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Duration:|r 15s/20s/25s/|cffFFCC0030s|r\n|cff3B97D3Cooldown:|r 14/12/10/|cffFFCC008|r\n|cff3B97D3Mana Cost:|r 40/55/70/|cffFFCC0085|r\n|cff3B97D3Bonus Treants:|r 0/1/2/|cffFFCC003|r\n|cff3B97D3Treant HP:|r 420/575/750/|cffFFCC00950|r\n|cff3B97D3Treant Damage:|r 18 + 2d4/26 + 2d6/36 + 3d6/|cffFFCC0048 + 3d8|r\n|cff3B97D3Treant Armor:|r 1/3/5/|cffFFCC008|r\n|cff3B97D3Damage Increase:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration Hero:|r |cffFFCC00|cffFFCC000|r \n\n|cff919191Summons Treants based on active seedling stacks. Higher levels increase duration and add bonus Treants.|r")
 
 
 @compiletime function create_w3a_AM1a()
@@ -1286,15 +1068,15 @@ import AbilityObjEditing
 	..setBuffs(3, "")
 	..setBuffs(4, "")
 	..setTooltipLearn("|cffFFCC00Learn|r Seed Burst - [|cffffcc00Level %d|r]")
-	..setTooltipLearnExtended("|cff3B97D3Target Type:|r Instant Cast\n|cff3B97D3Cooldown:|r 12s/10s/8s/6s\n|cff3B97D3Mana Cost:|r 65/80/95/110\n|cff3B97D3Area of Effect:|r 256/300/350/400\n|cff3B97D3Duration - Normal:|r |cffFFCC000|r \n|cff3B97D3Duration - Hero:|r |cffFFCC000|r \n|cff3B97D3Damage:|r 75/110/150/200\n|cff3B97D3Mana:|r 65/80/95/110\n\n|cff919191Consumes Invigorate from all affected units, detonating each seed for area damage.|r")
+	..setTooltipLearnExtended("|cff3B97D3Target Type:|r Instant Cast\n|cff3B97D3Cooldown:|r 12s/10s/8s/6s\n|cff3B97D3Mana Cost:|r 65/80/95/110\n|cff3B97D3Area of Effect:|r 256/300/350/400\n|cff3B97D3Duration Normal:|r |cffFFCC000|r \n|cff3B97D3Duration Hero:|r |cffFFCC000|r \n|cff3B97D3Damage:|r 75/110/150/200\n|cff3B97D3Mana:|r 65/80/95/110\n\n|cff919191Consumes Invigorate from all affected units, detonating each seed for area damage.|r")
 	..setTooltipNormal(1, "Seed Burst  - Level 1")
-	..setTooltipNormalExtended(1, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Cooldown:|r |cffFFCC0012s|r/10s/8s/6s\n|cff3B97D3Mana Cost:|r |cffFFCC0065|r/80/95/110\n|cff3B97D3Area of Effect:|r |cffFFCC00256|r/300/350/400\n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Damage:|r |cffFFCC0075|r/110/150/200\n|cff3B97D3Mana:|r |cffFFCC0065|r/80/95/110\n\n|cff919191Consumes Invigorate from all affected units, detonating each seed for area damage.|r")
+	..setTooltipNormalExtended(1, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Cooldown:|r |cffFFCC0012s|r/10s/8s/6s\n|cff3B97D3Mana Cost:|r |cffFFCC0065|r/80/95/110\n|cff3B97D3Area of Effect:|r |cffFFCC00256|r/300/350/400\n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration Hero:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Damage:|r |cffFFCC0075|r/110/150/200\n|cff3B97D3Mana:|r |cffFFCC0065|r/80/95/110\n\n|cff919191Consumes Invigorate from all affected units, detonating each seed for area damage.|r")
 	..setTooltipNormal(2, "Seed Burst  - Level 2")
-	..setTooltipNormalExtended(2, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Cooldown:|r 12s/|cffFFCC0010s|r/8s/6s\n|cff3B97D3Mana Cost:|r 65/|cffFFCC0080|r/95/110\n|cff3B97D3Area of Effect:|r 256/|cffFFCC00300|r/350/400\n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Damage:|r 75/|cffFFCC00110|r/150/200\n|cff3B97D3Mana:|r 65/|cffFFCC0080|r/95/110\n\n|cff919191Consumes Invigorate from all affected units, detonating each seed for area damage.|r")
+	..setTooltipNormalExtended(2, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Cooldown:|r 12s/|cffFFCC0010s|r/8s/6s\n|cff3B97D3Mana Cost:|r 65/|cffFFCC0080|r/95/110\n|cff3B97D3Area of Effect:|r 256/|cffFFCC00300|r/350/400\n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration Hero:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Damage:|r 75/|cffFFCC00110|r/150/200\n|cff3B97D3Mana:|r 65/|cffFFCC0080|r/95/110\n\n|cff919191Consumes Invigorate from all affected units, detonating each seed for area damage.|r")
 	..setTooltipNormal(3, "Seed Burst  - Level 3")
-	..setTooltipNormalExtended(3, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Cooldown:|r 12s/10s/|cffFFCC008s|r/6s\n|cff3B97D3Mana Cost:|r 65/80/|cffFFCC0095|r/110\n|cff3B97D3Area of Effect:|r 256/300/|cffFFCC00350|r/400\n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Damage:|r 75/110/|cffFFCC00150|r/200\n|cff3B97D3Mana:|r 65/80/|cffFFCC0095|r/110\n\n|cff919191Consumes Invigorate from all affected units, detonating each seed for area damage.|r")
+	..setTooltipNormalExtended(3, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Cooldown:|r 12s/10s/|cffFFCC008s|r/6s\n|cff3B97D3Mana Cost:|r 65/80/|cffFFCC0095|r/110\n|cff3B97D3Area of Effect:|r 256/300/|cffFFCC00350|r/400\n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration Hero:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Damage:|r 75/110/|cffFFCC00150|r/200\n|cff3B97D3Mana:|r 65/80/|cffFFCC0095|r/110\n\n|cff919191Consumes Invigorate from all affected units, detonating each seed for area damage.|r")
 	..setTooltipNormal(4, "Seed Burst  - Level 4")
-	..setTooltipNormalExtended(4, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Cooldown:|r 12s/10s/8s/|cffFFCC006s|r\n|cff3B97D3Mana Cost:|r 65/80/95/|cffFFCC00110|r\n|cff3B97D3Area of Effect:|r 256/300/350/|cffFFCC00400|r\n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Damage:|r 75/110/150/|cffFFCC00200|r\n|cff3B97D3Mana:|r 65/80/95/|cffFFCC00110|r\n\n|cff919191Consumes Invigorate from all affected units, detonating each seed for area damage.|r")
+	..setTooltipNormalExtended(4, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Cooldown:|r 12s/10s/8s/|cffFFCC006s|r\n|cff3B97D3Mana Cost:|r 65/80/95/|cffFFCC00110|r\n|cff3B97D3Area of Effect:|r 256/300/350/|cffFFCC00400|r\n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration Hero:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Damage:|r 75/110/150/|cffFFCC00200|r\n|cff3B97D3Mana:|r 65/80/95/|cffFFCC00110|r\n\n|cff919191Consumes Invigorate from all affected units, detonating each seed for area damage.|r")
 
 
 @compiletime function create_w3a_AM1b()
@@ -1366,7 +1148,6 @@ import AbilityObjEditing
 
 @compiletime function create_w3a_AM1e()
 	new AbilityDefinitionIllidanChannel('AM1e')
-<<<<<<< HEAD
 	..setBaseOrderID(1, "webon")
 	..setBaseOrderID(2, "webon")
 	..setBaseOrderID(3, "webon")
@@ -1437,12 +1218,6 @@ import AbilityObjEditing
 	..setBaseOrderID(2, "weboff")
 	..setBaseOrderID(3, "weboff")
 	..setBaseOrderID(4, "weboff")
-=======
-	..setBaseOrderID(1, "antimagicshell")
-	..setBaseOrderID(2, "antimagicshell")
-	..setBaseOrderID(3, "antimagicshell")
-	..setBaseOrderID(4, "antimagicshell")
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 	..setDisableOtherAbilities(1, false)
 	..setDisableOtherAbilities(2, false)
 	..setDisableOtherAbilities(3, false)
@@ -1512,8 +1287,8 @@ import AbilityObjEditing
 	..setTooltipNormalExtended(4, "|cff3B97D3Target Type: |cffFFCC00Point Target|r\n|cff3B97D3Damage per Second:|r 35/50/65/|cffFFCC0080|r\n|cff3B97D3Movement Slow:|r 30%/35%/40%/|cffFFCC0045%|r\n|cff3B97D3Duration:|r |cffFFCC00|cffFFCC005s|r \n|cff3B97D3Radius:|r |cffFFCC00|cffFFCC00225|r \n|cff3B97D3Mana:|r 90/100/110/|cffFFCC00120|r\n|cff3B97D3Cooldown:|r 12.5s/11.0s/9.5s/|cffFFCC008.0s|r\n\n|cff919191Hurls a massive, spinning glaive in the targeted direction. Upon arrival, the blade zones out the area, continuously grinding and slowing nearby enemies.|r")
 
 
-@compiletime function create_w3a_AM1f()
-	new AbilityDefinitionSlow('AM1f')
+@compiletime function create_w3a_AM1g()
+	new AbilityDefinitionSlow('AM1g')
 	..setHeroAbility(false)
 	..setManaCost(1, 0)
 	..setCooldown(1, 0.0)
@@ -1538,8 +1313,8 @@ import AbilityObjEditing
 	..setDurationHero(4, 1.5)
 
 
-@compiletime function create_w3a_AM1g()
-	new AbilityDefinitionHardenedSkin('AM1g')
+@compiletime function create_w3a_AM1h()
+	new AbilityDefinitionHardenedSkin('AM1h')
 	..setHeroAbility(true)
 	..setLevels(4)
 	..setButtonPositionNormalX(2)
@@ -1586,8 +1361,8 @@ import AbilityObjEditing
 	..setTooltipNormalExtended(4, "|cff3B97D3Passive|r\n|cff3B97D3Threshold:|r 150 damage/130 damage/110 damage/|cffFFCC0090 damage|r\n|cff3B97D3Duration:|r |cffFFCC00|cffFFCC0015s per spirit|r \n\n|cff919191The Warden channels her pain into pure malice. Every time she takes enough damage, a short-lived Vengeful Spirit is spawned to assault nearby enemies.|r")
 
 
-@compiletime function create_w3a_AM1h()
-	new AbilityDefinitionWardenBlink('AM1h')
+@compiletime function create_w3a_AM1i()
+	new AbilityDefinitionWardenBlink('AM1i')
 	..setHeroAbility(true)
 	..setLevels(4)
 	..setButtonPositionNormalX(1)
@@ -1620,72 +1395,6 @@ import AbilityObjEditing
 	..setTooltipNormalExtended(3, "|cff3B97D3Target Type: |cffFFCC00Point Target|r\n|cff3B97D3Range:|r 400/600/|cffFFCC00800|r/1000\n|cff3B97D3Damage:|r 50/85/|cffFFCC00130|r/185\n|cff3B97D3Area of Effect:|r 250/275/|cffFFCC00300|r/325\n|cff3B97D3Cooldown:|r 12s/9s/|cffFFCC006s|r/4s\n|cff3B97D3Mana:|r 50/50/|cffFFCC0045|r/40\n\n|cff919191Blinks to the target location, releasing a burst of blades on arrival that damages nearby enemies.|r")
 	..setTooltipNormal(4, "Blink  - Level 4")
 	..setTooltipNormalExtended(4, "|cff3B97D3Target Type: |cffFFCC00Point Target|r\n|cff3B97D3Range:|r 400/600/800/|cffFFCC001000|r\n|cff3B97D3Damage:|r 50/85/130/|cffFFCC00185|r\n|cff3B97D3Area of Effect:|r 250/275/300/|cffFFCC00325|r\n|cff3B97D3Cooldown:|r 12s/9s/6s/|cffFFCC004s|r\n|cff3B97D3Mana:|r 50/50/45/|cffFFCC0040|r\n\n|cff919191Blinks to the target location, releasing a burst of blades on arrival that damages nearby enemies.|r")
-
-
-@compiletime function create_w3a_AM1i()
-	new AbilityDefinitionIllidanChannel('AM1i')
-	..setBaseOrderID(1, "webon")
-	..setBaseOrderID(2, "webon")
-	..setBaseOrderID(3, "webon")
-	..setDisableOtherAbilities(1, false)
-	..setDisableOtherAbilities(2, false)
-	..setDisableOtherAbilities(3, false)
-	..setFollowThroughTime(1, 0.0)
-	..setFollowThroughTime(2, 0.0)
-	..setFollowThroughTime(3, 0.0)
-	..setArtDuration(1, 0.0)
-	..setArtDuration(2, 0.0)
-	..setArtDuration(3, 0.0)
-	..setArtCaster("")
-	..setArtEffect("")
-	..setArtSpecial("")
-	..setArtTarget("")
-	..setHeroAbility(true)
-	..setLevels(3)
-	..setButtonPositionNormalX(3)
-	..setButtonPositionNormalY(2)
-	..setButtonPositionResearchX(3)
-	..setButtonPositionResearchY(0)
-	..setTargetType(1, 2)
-	..setTargetType(2, 2)
-	..setTargetType(3, 2)
-	..setOptions(1, 3)
-	..setOptions(2, 3)
-	..setOptions(3, 3)
-	..setRequiredLevel(6)
-	..setLevelSkipRequirement(6)
-	..setHotkeyNormal("R")
-	..setHotkeyLearn("R")
-	..setHotkeyTurnOff("R")
-	..setName("Soul Chains")
-	..setCastRange(1, 600.0)
-	..setCastRange(2, 700.0)
-	..setCastRange(3, 800.0)
-	..setCooldown(1, 90.0)
-	..setCooldown(2, 75.0)
-	..setCooldown(3, 60.0)
-	..setManaCost(1, 150)
-	..setManaCost(2, 175)
-	..setManaCost(3, 200)
-	..setAreaofEffect(1, 350.0)
-	..setAreaofEffect(2, 425.0)
-	..setAreaofEffect(3, 500.0)
-	..setDurationNormal(1, 0.0)
-	..setDurationNormal(2, 0.0)
-	..setDurationNormal(3, 0.0)
-	..setDurationHero(1, 0.0)
-	..setDurationHero(2, 0.0)
-	..setDurationHero(3, 0.0)
-	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNArrowChain.blp")
-	..setIconResearch("ReplaceableTextures\\CommandButtons\\BTNArrowChain.blp")
-	..setTooltipLearn("|cffFFCC00Learn|r Soul Chains - [|cffffcc00Level %d|r]")
-	..setTooltipLearnExtended("|cff3B97D3Target Type:|r Point Target\n|cff3B97D3Cast Range:|r 600/700/800\n|cff3B97D3Cooldown:|r 90s/75s/60s\n|cff3B97D3Mana Cost:|r 150/175/200\n|cff3B97D3Area of Effect:|r 350/425/500\n|cff3B97D3Duration - Normal:|r |cffFFCC000|r \n|cff3B97D3Duration - Hero:|r |cffFFCC000|r \n|cff3B97D3Leash:|r |cffFFCC00500 units from Warden|r \n|cff3B97D3Duration:|r |cffFFCC005s|r \n|cff3B97D3Damage:|r |cffFFCC00300|r \n\n|cff919191Binds all enemies in the target area with soul chains, preventing them from moving more than 500 units from the Warden. After 5s the chains detonate, dealing 300 damage and pulling all bound units to the Warden.|r")
-	..setTooltipNormal(1, "Soul Chains  - Level 1")
-	..setTooltipNormalExtended(1, "|cff3B97D3Target Type: |cffFFCC00Point Target|r\n|cff3B97D3Cast Range:|r |cffFFCC00600|r/700/800\n|cff3B97D3Cooldown:|r |cffFFCC0090s|r/75s/60s\n|cff3B97D3Mana Cost:|r |cffFFCC00150|r/175/200\n|cff3B97D3Area of Effect:|r |cffFFCC00350|r/425/500\n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Leash:|r |cffFFCC00|cffFFCC00500 units from Warden|r \n|cff3B97D3Duration:|r |cffFFCC00|cffFFCC005s|r \n|cff3B97D3Damage:|r |cffFFCC00|cffFFCC00300|r \n\n|cff919191Binds all enemies in the target area with soul chains, preventing them from moving more than 500 units from the Warden. After 5s the chains detonate, dealing 300 damage and pulling all bound units to the Warden.|r")
-	..setTooltipNormal(2, "Soul Chains  - Level 2")
-	..setTooltipNormalExtended(2, "|cff3B97D3Target Type: |cffFFCC00Point Target|r\n|cff3B97D3Cast Range:|r 600/|cffFFCC00700|r/800\n|cff3B97D3Cooldown:|r 90s/|cffFFCC0075s|r/60s\n|cff3B97D3Mana Cost:|r 150/|cffFFCC00175|r/200\n|cff3B97D3Area of Effect:|r 350/|cffFFCC00425|r/500\n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Leash:|r |cffFFCC00|cffFFCC00500 units from Warden|r \n|cff3B97D3Duration:|r |cffFFCC00|cffFFCC005s|r \n|cff3B97D3Damage:|r |cffFFCC00|cffFFCC00300|r \n\n|cff919191Binds all enemies in the target area with soul chains, preventing them from moving more than 500 units from the Warden. After 5s the chains detonate, dealing 300 damage and pulling all bound units to the Warden.|r")
-	..setTooltipNormal(3, "Soul Chains  - Level 3")
-	..setTooltipNormalExtended(3, "|cff3B97D3Target Type: |cffFFCC00Point Target|r\n|cff3B97D3Cast Range:|r 600/700/|cffFFCC00800|r\n|cff3B97D3Cooldown:|r 90s/75s/|cffFFCC0060s|r\n|cff3B97D3Mana Cost:|r 150/175/|cffFFCC00200|r\n|cff3B97D3Area of Effect:|r 350/425/|cffFFCC00500|r\n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Leash:|r |cffFFCC00|cffFFCC00500 units from Warden|r \n|cff3B97D3Duration:|r |cffFFCC00|cffFFCC005s|r \n|cff3B97D3Damage:|r |cffFFCC00|cffFFCC00300|r \n\n|cff919191Binds all enemies in the target area with soul chains, preventing them from moving more than 500 units from the Warden. After 5s the chains detonate, dealing 300 damage and pulling all bound units to the Warden.|r")
 
 
 @compiletime function create_w3a_AM1j()
@@ -1923,19 +1632,72 @@ import AbilityObjEditing
 	..setLevelSkipRequirement(2)
 	..setLevels(4)
 	..setTooltipLearn("|cffFFCC00Learn|r Starfall - [|cffffcc00Level %d|r]")
-	..setTooltipLearnExtended("|cff3B97D3Target Type:|r Point Target\n|cff3B97D3Area of Effect:|r |cffFFCC00500|r \n|cff3B97D3Cast Range:|r 1000/1100/1200/1300\n|cff3B97D3Cooldown:|r 40s/35s/30s/25s\n|cff3B97D3Mana Cost:|r 125/150/175/200\n|cff3B97D3Duration - Normal:|r |cffFFCC006|r \n|cff3B97D3Duration - Hero:|r |cffFFCC006|r \n|cff3B97D3Damage:|r 50 per star/75 per star/100 per star/125 per star\n|cff3B97D3Impact AOE:|r |cffFFCC00250|r \n\n|cff919191Calls down stars in the target area. Stars fall faster the longer the spell channels.|r")
+	..setTooltipLearnExtended("|cff3B97D3Target Type:|r Point Target\n|cff3B97D3Area of Effect:|r |cffFFCC00500|r \n|cff3B97D3Cast Range:|r 1000/1100/1200/1300\n|cff3B97D3Cooldown:|r 40s/35s/30s/25s\n|cff3B97D3Mana Cost:|r 125/150/175/200\n|cff3B97D3Duration Normal:|r |cffFFCC006|r \n|cff3B97D3Duration Hero:|r |cffFFCC006|r \n|cff3B97D3Damage:|r 50 per star/75 per star/100 per star/125 per star\n|cff3B97D3Impact AOE:|r |cffFFCC00250|r \n\n|cff919191Calls down stars in the target area. Stars fall faster the longer the spell channels.|r")
 	..setTooltipNormal(1, "Starfall  - Level 1")
-	..setTooltipNormalExtended(1, "|cff3B97D3Target Type: |cffFFCC00Point Target|r\n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Cast Range:|r |cffFFCC001000|r/1100/1200/1300\n|cff3B97D3Cooldown:|r |cffFFCC0040s|r/35s/30s/25s\n|cff3B97D3Mana Cost:|r |cffFFCC00125|r/150/175/200\n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Damage:|r |cffFFCC0050 per star|r/75 per star/100 per star/125 per star\n|cff3B97D3Impact AOE:|r |cffFFCC00|cffFFCC00250|r \n\n|cff919191Calls down stars in the target area. Stars fall faster the longer the spell channels.|r")
+	..setTooltipNormalExtended(1, "|cff3B97D3Target Type: |cffFFCC00Point Target|r\n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Cast Range:|r |cffFFCC001000|r/1100/1200/1300\n|cff3B97D3Cooldown:|r |cffFFCC0040s|r/35s/30s/25s\n|cff3B97D3Mana Cost:|r |cffFFCC00125|r/150/175/200\n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Duration Hero:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Damage:|r |cffFFCC0050 per star|r/75 per star/100 per star/125 per star\n|cff3B97D3Impact AOE:|r |cffFFCC00|cffFFCC00250|r \n\n|cff919191Calls down stars in the target area. Stars fall faster the longer the spell channels.|r")
 	..setTooltipNormal(2, "Starfall  - Level 2")
-	..setTooltipNormalExtended(2, "|cff3B97D3Target Type: |cffFFCC00Point Target|r\n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Cast Range:|r 1000/|cffFFCC001100|r/1200/1300\n|cff3B97D3Cooldown:|r 40s/|cffFFCC0035s|r/30s/25s\n|cff3B97D3Mana Cost:|r 125/|cffFFCC00150|r/175/200\n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Damage:|r 50 per star/|cffFFCC0075 per star|r/100 per star/125 per star\n|cff3B97D3Impact AOE:|r |cffFFCC00|cffFFCC00250|r \n\n|cff919191Calls down stars in the target area. Stars fall faster the longer the spell channels.|r")
+	..setTooltipNormalExtended(2, "|cff3B97D3Target Type: |cffFFCC00Point Target|r\n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Cast Range:|r 1000/|cffFFCC001100|r/1200/1300\n|cff3B97D3Cooldown:|r 40s/|cffFFCC0035s|r/30s/25s\n|cff3B97D3Mana Cost:|r 125/|cffFFCC00150|r/175/200\n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Duration Hero:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Damage:|r 50 per star/|cffFFCC0075 per star|r/100 per star/125 per star\n|cff3B97D3Impact AOE:|r |cffFFCC00|cffFFCC00250|r \n\n|cff919191Calls down stars in the target area. Stars fall faster the longer the spell channels.|r")
 	..setTooltipNormal(3, "Starfall  - Level 3")
-	..setTooltipNormalExtended(3, "|cff3B97D3Target Type: |cffFFCC00Point Target|r\n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Cast Range:|r 1000/1100/|cffFFCC001200|r/1300\n|cff3B97D3Cooldown:|r 40s/35s/|cffFFCC0030s|r/25s\n|cff3B97D3Mana Cost:|r 125/150/|cffFFCC00175|r/200\n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Damage:|r 50 per star/75 per star/|cffFFCC00100 per star|r/125 per star\n|cff3B97D3Impact AOE:|r |cffFFCC00|cffFFCC00250|r \n\n|cff919191Calls down stars in the target area. Stars fall faster the longer the spell channels.|r")
+	..setTooltipNormalExtended(3, "|cff3B97D3Target Type: |cffFFCC00Point Target|r\n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Cast Range:|r 1000/1100/|cffFFCC001200|r/1300\n|cff3B97D3Cooldown:|r 40s/35s/|cffFFCC0030s|r/25s\n|cff3B97D3Mana Cost:|r 125/150/|cffFFCC00175|r/200\n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Duration Hero:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Damage:|r 50 per star/75 per star/|cffFFCC00100 per star|r/125 per star\n|cff3B97D3Impact AOE:|r |cffFFCC00|cffFFCC00250|r \n\n|cff919191Calls down stars in the target area. Stars fall faster the longer the spell channels.|r")
 	..setTooltipNormal(4, "Starfall  - Level 4")
-	..setTooltipNormalExtended(4, "|cff3B97D3Target Type: |cffFFCC00Point Target|r\n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Cast Range:|r 1000/1100/1200/|cffFFCC001300|r\n|cff3B97D3Cooldown:|r 40s/35s/30s/|cffFFCC0025s|r\n|cff3B97D3Mana Cost:|r 125/150/175/|cffFFCC00200|r\n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Damage:|r 50 per star/75 per star/100 per star/|cffFFCC00125 per star|r\n|cff3B97D3Impact AOE:|r |cffFFCC00|cffFFCC00250|r \n\n|cff919191Calls down stars in the target area. Stars fall faster the longer the spell channels.|r")
+	..setTooltipNormalExtended(4, "|cff3B97D3Target Type: |cffFFCC00Point Target|r\n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Cast Range:|r 1000/1100/1200/|cffFFCC001300|r\n|cff3B97D3Cooldown:|r 40s/35s/30s/|cffFFCC0025s|r\n|cff3B97D3Mana Cost:|r 125/150/175/|cffFFCC00200|r\n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Duration Hero:|r |cffFFCC00|cffFFCC006|r \n|cff3B97D3Damage:|r 50 per star/75 per star/100 per star/|cffFFCC00125 per star|r\n|cff3B97D3Impact AOE:|r |cffFFCC00|cffFFCC00250|r \n\n|cff919191Calls down stars in the target area. Stars fall faster the longer the spell channels.|r")
 
 
 @compiletime function create_w3a_AM1p()
-	new AbilityDefinitionIllidanChannel('AM1p')
+	new AbilityDefinitionMountainKingAvatar('AM1p')
+	..setName("Avatar of Ursoc")
+	..setHeroAbility(true)
+	..setItemAbility(false)
+	..setLevels(3)
+	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNAvatar.blp")
+	..setIconResearch("ReplaceableTextures\\CommandButtons\\BTNAvatar.blp")
+	..setButtonPositionNormalX(3)
+	..setButtonPositionNormalY(0)
+	..setButtonPositionResearchX(3)
+	..setButtonPositionResearchY(0)
+	..setRequiredLevel(6)
+	..setLevelSkipRequirement(6)
+	..setRequirements("")
+	..setRequirementsLevels("")
+	..setHotkeyNormal("T")
+	..setHotkeyLearn("T")
+	..setHotkeyTurnOff("T")
+	..setHitPointBonus(1, 450.0)
+	..setHitPointBonus(2, 750.0)
+	..setHitPointBonus(3, 1100.0)
+	..setDamageBonus(1, 18.0)
+	..setDamageBonus(2, 32.0)
+	..setDamageBonus(3, 50.0)
+	..setDefenseBonus(1, 6.0)
+	..setDefenseBonus(2, 10.0)
+	..setDefenseBonus(3, 15.0)
+	..setMagicDamageReduction(1, 0.3)
+	..setMagicDamageReduction(2, 0.4)
+	..setMagicDamageReduction(3, 0.5)
+	..setDurationNormal(1, 20.0)
+	..setDurationNormal(2, 25.0)
+	..setDurationNormal(3, 30.0)
+	..setDurationHero(1, 20.0)
+	..setDurationHero(2, 25.0)
+	..setDurationHero(3, 30.0)
+	..setCooldown(1, 120.0)
+	..setCooldown(2, 100.0)
+	..setCooldown(3, 80.0)
+	..setManaCost(1, 150)
+	..setManaCost(2, 175)
+	..setManaCost(3, 200)
+	..setTooltipLearn("|cffFFCC00Learn|r Avatar of Ursoc - [|cffffcc00Level %d|r]")
+	..setTooltipLearnExtended("|cff3B97D3Target Type:|r Instant Cast\n|cff3B97D3Health:|r +450/+750/+1100\n|cff3B97D3Damage:|r +18/+32/+50\n|cff3B97D3Armor:|r +6/+10/+15\n|cff3B97D3Magic Reduction:|r 30%/40%/50%\n|cff3B97D3Duration:|r 20s/25s/30s\n|cff3B97D3Cooldown:|r 120s/100s/80s\n|cff3B97D3Mana:|r 150/175/200\n\n|cff919191Ursoc channels the ancient bear god, becoming larger, harder to kill, and deadlier in melee.|r")
+	..setTooltipNormal(1, "Avatar of Ursoc  - Level 1")
+	..setTooltipNormalExtended(1, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Health:|r |cffFFCC00+450|r/+750/+1100\n|cff3B97D3Damage:|r |cffFFCC00+18|r/+32/+50\n|cff3B97D3Armor:|r |cffFFCC00+6|r/+10/+15\n|cff3B97D3Magic Reduction:|r |cffFFCC0030%|r/40%/50%\n|cff3B97D3Duration:|r |cffFFCC0020s|r/25s/30s\n|cff3B97D3Cooldown:|r |cffFFCC00120s|r/100s/80s\n|cff3B97D3Mana:|r |cffFFCC00150|r/175/200\n\n|cff919191Ursoc channels the ancient bear god, becoming larger, harder to kill, and deadlier in melee.|r")
+	..setTooltipNormal(2, "Avatar of Ursoc  - Level 2")
+	..setTooltipNormalExtended(2, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Health:|r +450/|cffFFCC00+750|r/+1100\n|cff3B97D3Damage:|r +18/|cffFFCC00+32|r/+50\n|cff3B97D3Armor:|r +6/|cffFFCC00+10|r/+15\n|cff3B97D3Magic Reduction:|r 30%/|cffFFCC0040%|r/50%\n|cff3B97D3Duration:|r 20s/|cffFFCC0025s|r/30s\n|cff3B97D3Cooldown:|r 120s/|cffFFCC00100s|r/80s\n|cff3B97D3Mana:|r 150/|cffFFCC00175|r/200\n\n|cff919191Ursoc channels the ancient bear god, becoming larger, harder to kill, and deadlier in melee.|r")
+	..setTooltipNormal(3, "Avatar of Ursoc  - Level 3")
+	..setTooltipNormalExtended(3, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Health:|r +450/+750/|cffFFCC00+1100|r\n|cff3B97D3Damage:|r +18/+32/|cffFFCC00+50|r\n|cff3B97D3Armor:|r +6/+10/|cffFFCC00+15|r\n|cff3B97D3Magic Reduction:|r 30%/40%/|cffFFCC0050%|r\n|cff3B97D3Duration:|r 20s/25s/|cffFFCC0030s|r\n|cff3B97D3Cooldown:|r 120s/100s/|cffFFCC0080s|r\n|cff3B97D3Mana:|r 150/175/|cffFFCC00200|r\n\n|cff919191Ursoc channels the ancient bear god, becoming larger, harder to kill, and deadlier in melee.|r")
+
+
+@compiletime function create_w3a_AM1q()
+	new AbilityDefinitionIllidanChannel('AM1q')
 	..setLevels(4)
 	..setBaseOrderID(1, "auraunholy")
 	..setBaseOrderID(2, "auraunholy")
@@ -2006,73 +1768,19 @@ import AbilityObjEditing
 	..setBuffs(3, "")
 	..setBuffs(4, "")
 	..setTooltipLearn("|cffFFCC00Learn|r Hibernate - [|cffffcc00Level %d|r]")
-	..setTooltipLearnExtended("|cff3B97D3Passive|r\n|cff3B97D3Mana Cost:|r 50/50/60/70\n|cff3B97D3Cooldown:|r 20s/18s/16s/14s\n|cff3B97D3Duration - Normal:|r |cffFFCC000|r \n|cff3B97D3Duration - Hero:|r |cffFFCC000|r \n|cff3B97D3Area of Effect:|r |cffFFCC000|r \n|cff3B97D3Duration:|r |cffFFCC004s|r \n|cff3B97D3HP Healed:|r 30% max HP + 125/40% max HP + 175/50% max HP + 250/60% max HP + 325\n|cff3B97D3Armor:|r |cffFFCC00+20|r \n|cff3B97D3Mana:|r 50/50/60/70\n\n|cff919191Ursoc enters a deep hibernation, rapidly regenerating health and gaining bonus armor. Cannot act while hibernating.|r")
+	..setTooltipLearnExtended("|cff3B97D3Passive|r\n|cff3B97D3Mana Cost:|r 50/50/60/70\n|cff3B97D3Cooldown:|r 20s/18s/16s/14s\n|cff3B97D3Duration Normal:|r |cffFFCC000|r \n|cff3B97D3Duration Hero:|r |cffFFCC000|r \n|cff3B97D3Area of Effect:|r |cffFFCC000|r \n|cff3B97D3Duration:|r |cffFFCC004s|r \n|cff3B97D3HP Healed:|r 30% max HP + 125/40% max HP + 175/50% max HP + 250/60% max HP + 325\n|cff3B97D3Armor:|r |cffFFCC00+20|r \n|cff3B97D3Mana:|r 50/50/60/70\n\n|cff919191Ursoc enters a deep hibernation, rapidly regenerating health and gaining bonus armor. Cannot act while hibernating.|r")
 	..setTooltipNormal(1, "Hibernate  - Level 1")
-	..setTooltipNormalExtended(1, "|cff3B97D3Passive|r\n|cff3B97D3Mana Cost:|r |cffFFCC0050|r/50/60/70\n|cff3B97D3Cooldown:|r |cffFFCC0020s|r/18s/16s/14s\n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration:|r |cffFFCC00|cffFFCC004s|r \n|cff3B97D3HP Healed:|r |cffFFCC0030% max HP + 125|r/40% max HP + 175/50% max HP + 250/60% max HP + 325\n|cff3B97D3Armor:|r |cffFFCC00|cffFFCC00+20|r \n|cff3B97D3Mana:|r |cffFFCC0050|r/50/60/70\n\n|cff919191Ursoc enters a deep hibernation, rapidly regenerating health and gaining bonus armor. Cannot act while hibernating.|r")
+	..setTooltipNormalExtended(1, "|cff3B97D3Passive|r\n|cff3B97D3Mana Cost:|r |cffFFCC0050|r/50/60/70\n|cff3B97D3Cooldown:|r |cffFFCC0020s|r/18s/16s/14s\n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration Hero:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration:|r |cffFFCC00|cffFFCC004s|r \n|cff3B97D3HP Healed:|r |cffFFCC0030% max HP + 125|r/40% max HP + 175/50% max HP + 250/60% max HP + 325\n|cff3B97D3Armor:|r |cffFFCC00|cffFFCC00+20|r \n|cff3B97D3Mana:|r |cffFFCC0050|r/50/60/70\n\n|cff919191Ursoc enters a deep hibernation, rapidly regenerating health and gaining bonus armor. Cannot act while hibernating.|r")
 	..setTooltipNormal(2, "Hibernate  - Level 2")
-	..setTooltipNormalExtended(2, "|cff3B97D3Passive|r\n|cff3B97D3Mana Cost:|r 50/|cffFFCC0050|r/60/70\n|cff3B97D3Cooldown:|r 20s/|cffFFCC0018s|r/16s/14s\n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration:|r |cffFFCC00|cffFFCC004s|r \n|cff3B97D3HP Healed:|r 30% max HP + 125/|cffFFCC0040% max HP + 175|r/50% max HP + 250/60% max HP + 325\n|cff3B97D3Armor:|r |cffFFCC00|cffFFCC00+20|r \n|cff3B97D3Mana:|r 50/|cffFFCC0050|r/60/70\n\n|cff919191Ursoc enters a deep hibernation, rapidly regenerating health and gaining bonus armor. Cannot act while hibernating.|r")
+	..setTooltipNormalExtended(2, "|cff3B97D3Passive|r\n|cff3B97D3Mana Cost:|r 50/|cffFFCC0050|r/60/70\n|cff3B97D3Cooldown:|r 20s/|cffFFCC0018s|r/16s/14s\n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration Hero:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration:|r |cffFFCC00|cffFFCC004s|r \n|cff3B97D3HP Healed:|r 30% max HP + 125/|cffFFCC0040% max HP + 175|r/50% max HP + 250/60% max HP + 325\n|cff3B97D3Armor:|r |cffFFCC00|cffFFCC00+20|r \n|cff3B97D3Mana:|r 50/|cffFFCC0050|r/60/70\n\n|cff919191Ursoc enters a deep hibernation, rapidly regenerating health and gaining bonus armor. Cannot act while hibernating.|r")
 	..setTooltipNormal(3, "Hibernate  - Level 3")
-	..setTooltipNormalExtended(3, "|cff3B97D3Passive|r\n|cff3B97D3Mana Cost:|r 50/50/|cffFFCC0060|r/70\n|cff3B97D3Cooldown:|r 20s/18s/|cffFFCC0016s|r/14s\n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration:|r |cffFFCC00|cffFFCC004s|r \n|cff3B97D3HP Healed:|r 30% max HP + 125/40% max HP + 175/|cffFFCC0050% max HP + 250|r/60% max HP + 325\n|cff3B97D3Armor:|r |cffFFCC00|cffFFCC00+20|r \n|cff3B97D3Mana:|r 50/50/|cffFFCC0060|r/70\n\n|cff919191Ursoc enters a deep hibernation, rapidly regenerating health and gaining bonus armor. Cannot act while hibernating.|r")
+	..setTooltipNormalExtended(3, "|cff3B97D3Passive|r\n|cff3B97D3Mana Cost:|r 50/50/|cffFFCC0060|r/70\n|cff3B97D3Cooldown:|r 20s/18s/|cffFFCC0016s|r/14s\n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration Hero:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration:|r |cffFFCC00|cffFFCC004s|r \n|cff3B97D3HP Healed:|r 30% max HP + 125/40% max HP + 175/|cffFFCC0050% max HP + 250|r/60% max HP + 325\n|cff3B97D3Armor:|r |cffFFCC00|cffFFCC00+20|r \n|cff3B97D3Mana:|r 50/50/|cffFFCC0060|r/70\n\n|cff919191Ursoc enters a deep hibernation, rapidly regenerating health and gaining bonus armor. Cannot act while hibernating.|r")
 	..setTooltipNormal(4, "Hibernate  - Level 4")
-	..setTooltipNormalExtended(4, "|cff3B97D3Passive|r\n|cff3B97D3Mana Cost:|r 50/50/60/|cffFFCC0070|r\n|cff3B97D3Cooldown:|r 20s/18s/16s/|cffFFCC0014s|r\n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration:|r |cffFFCC00|cffFFCC004s|r \n|cff3B97D3HP Healed:|r 30% max HP + 125/40% max HP + 175/50% max HP + 250/|cffFFCC0060% max HP + 325|r\n|cff3B97D3Armor:|r |cffFFCC00|cffFFCC00+20|r \n|cff3B97D3Mana:|r 50/50/60/|cffFFCC0070|r\n\n|cff919191Ursoc enters a deep hibernation, rapidly regenerating health and gaining bonus armor. Cannot act while hibernating.|r")
+	..setTooltipNormalExtended(4, "|cff3B97D3Passive|r\n|cff3B97D3Mana Cost:|r 50/50/60/|cffFFCC0070|r\n|cff3B97D3Cooldown:|r 20s/18s/16s/|cffFFCC0014s|r\n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration Hero:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration:|r |cffFFCC00|cffFFCC004s|r \n|cff3B97D3HP Healed:|r 30% max HP + 125/40% max HP + 175/50% max HP + 250/|cffFFCC0060% max HP + 325|r\n|cff3B97D3Armor:|r |cffFFCC00|cffFFCC00+20|r \n|cff3B97D3Mana:|r 50/50/60/|cffFFCC0070|r\n\n|cff919191Ursoc enters a deep hibernation, rapidly regenerating health and gaining bonus armor. Cannot act while hibernating.|r")
 
 
-@compiletime function create_w3a_AM1q()
-	new AbilityDefinitionMountainKingThunderBolt('AM1q')
-	..setHeroAbility(true)
-	..setItemAbility(false)
-	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNCharge.blp")
-	..setIconResearch("ReplaceableTextures\\CommandButtons\\BTNCharge.blp")
-	..setIconTurnOff("ReplaceableTextures\\CommandButtonsDisabled\\DISBTNCharge.blp")
-	..setButtonPositionNormalX(0)
-	..setButtonPositionNormalY(0)
-	..setRequirements("")
-	..setRequirementsLevels("")
-	..setRequiredLevel(1)
-	..setLevelSkipRequirement(2)
-	..setLevels(4)
-	..setCooldown(1, 12.0)
-	..setManaCost(1, 60)
-	..setDamage(1, 100.0)
-	..setDurationNormal(1, 2.0)
-	..setDurationHero(1, 1.0)
-	..setCastRange(1, 700.0)
-	..setBuffs(1, "BM0c")
-	..setCooldown(2, 10.0)
-	..setManaCost(2, 70)
-	..setDamage(2, 175.0)
-	..setDurationNormal(2, 3.0)
-	..setDurationHero(2, 1.5)
-	..setCastRange(2, 800.0)
-	..setBuffs(2, "BM0c")
-	..setCooldown(3, 8.0)
-	..setManaCost(3, 80)
-	..setDamage(3, 250.0)
-	..setDurationNormal(3, 4.0)
-	..setDurationHero(3, 2.0)
-	..setCastRange(3, 900.0)
-	..setBuffs(3, "BM0c")
-	..setCooldown(4, 6.0)
-	..setManaCost(4, 90)
-	..setDamage(4, 350.0)
-	..setDurationNormal(4, 5.0)
-	..setDurationHero(4, 2.5)
-	..setCastRange(4, 1000.0)
-	..setBuffs(4, "BM0c")
-	..setTooltipLearn("|cffFFCC00Learn|r Mauling Charge - [|cffffcc00Level %d|r]")
-	..setTooltipLearnExtended("|cff3B97D3Target Type:|r Unit Target\n|cff3B97D3Damage:|r 100/175/250/350\n|cff3B97D3Stun:|r 2s (1.0s vs heroes)/3s (1.5s vs heroes)/4s (2.0s vs heroes)/5s (2.5s vs heroes)\n|cff3B97D3Range:|r 700/800/900/1000\n|cff3B97D3Cooldown:|r 12s/10s/8s/6s\n|cff3B97D3Mana:|r 60/70/80/90\n\n|cff919191Ursoc charges at the target enemy, dealing damage and stunning them on impact. Stun duration is halved on heroes.|r")
-	..setTooltipNormal(1, "Mauling Charge  - Level 1")
-	..setTooltipNormalExtended(1, "|cff3B97D3Target Type: |cffFFCC00Unit Target|r\n|cff3B97D3Damage:|r |cffFFCC00100|r/175/250/350\n|cff3B97D3Stun:|r |cffFFCC002s (1.0s vs heroes)|r/3s (1.5s vs heroes)/4s (2.0s vs heroes)/5s (2.5s vs heroes)\n|cff3B97D3Range:|r |cffFFCC00700|r/800/900/1000\n|cff3B97D3Cooldown:|r |cffFFCC0012s|r/10s/8s/6s\n|cff3B97D3Mana:|r |cffFFCC0060|r/70/80/90\n\n|cff919191Ursoc charges at the target enemy, dealing damage and stunning them on impact. Stun duration is halved on heroes.|r")
-	..setTooltipNormal(2, "Mauling Charge  - Level 2")
-	..setTooltipNormalExtended(2, "|cff3B97D3Target Type: |cffFFCC00Unit Target|r\n|cff3B97D3Damage:|r 100/|cffFFCC00175|r/250/350\n|cff3B97D3Stun:|r 2s (1.0s vs heroes)/|cffFFCC003s (1.5s vs heroes)|r/4s (2.0s vs heroes)/5s (2.5s vs heroes)\n|cff3B97D3Range:|r 700/|cffFFCC00800|r/900/1000\n|cff3B97D3Cooldown:|r 12s/|cffFFCC0010s|r/8s/6s\n|cff3B97D3Mana:|r 60/|cffFFCC0070|r/80/90\n\n|cff919191Ursoc charges at the target enemy, dealing damage and stunning them on impact. Stun duration is halved on heroes.|r")
-	..setTooltipNormal(3, "Mauling Charge  - Level 3")
-	..setTooltipNormalExtended(3, "|cff3B97D3Target Type: |cffFFCC00Unit Target|r\n|cff3B97D3Damage:|r 100/175/|cffFFCC00250|r/350\n|cff3B97D3Stun:|r 2s (1.0s vs heroes)/3s (1.5s vs heroes)/|cffFFCC004s (2.0s vs heroes)|r/5s (2.5s vs heroes)\n|cff3B97D3Range:|r 700/800/|cffFFCC00900|r/1000\n|cff3B97D3Cooldown:|r 12s/10s/|cffFFCC008s|r/6s\n|cff3B97D3Mana:|r 60/70/|cffFFCC0080|r/90\n\n|cff919191Ursoc charges at the target enemy, dealing damage and stunning them on impact. Stun duration is halved on heroes.|r")
-	..setTooltipNormal(4, "Mauling Charge  - Level 4")
-	..setTooltipNormalExtended(4, "|cff3B97D3Target Type: |cffFFCC00Unit Target|r\n|cff3B97D3Damage:|r 100/175/250/|cffFFCC00350|r\n|cff3B97D3Stun:|r 2s (1.0s vs heroes)/3s (1.5s vs heroes)/4s (2.0s vs heroes)/|cffFFCC005s (2.5s vs heroes)|r\n|cff3B97D3Range:|r 700/800/900/|cffFFCC001000|r\n|cff3B97D3Cooldown:|r 12s/10s/8s/|cffFFCC006s|r\n|cff3B97D3Mana:|r 60/70/80/|cffFFCC0090|r\n\n|cff919191Ursoc charges at the target enemy, dealing damage and stunning them on impact. Stun duration is halved on heroes.|r")
-
-
-@compiletime function create_w3a_AM1s()
-	new AbilityDefinitionIllidanChannel('AM1s')
+@compiletime function create_w3a_AM1r()
+	new AbilityDefinitionIllidanChannel('AM1r')
 	..setLevels(4)
 	..setBaseOrderID(1, "auravampiric")
 	..setBaseOrderID(2, "auravampiric")
@@ -2139,7 +1847,6 @@ import AbilityObjEditing
 	..setDurationHero(3, 0.0)
 	..setDurationHero(4, 0.0)
 	..setTooltipLearn("|cffFFCC00Learn|r Thrash - [|cffffcc00Level %d|r]")
-<<<<<<< HEAD
 	..setTooltipLearnExtended("|cff3B97D3Target Type:|r Instant Cast\n|cff3B97D3Mana Cost:|r 45/50/55/60\n|cff3B97D3Cooldown:|r 9s/8s/7s/6s\n|cff3B97D3Area of Effect:|r |cffFFCC00325|r \n|cff3B97D3Duration Normal:|r |cffFFCC000|r \n|cff3B97D3Duration Hero:|r |cffFFCC000|r \n|cff3B97D3Initial Damage:|r 45/75/115/165\n|cff3B97D3Bleed:|r 15 every 2s/20 every 2s/30 every 2s/40 every 2s\n|cff3B97D3Stacks:|r |cffFFCC003|r \n|cff3B97D3Duration:|r |cffFFCC0012s|r \n|cff3B97D3Mana:|r 45/50/55/60\n\n|cff919191Ursoc thrashes nearby enemies, dealing immediate damage and leaving a stacking bleed.|r")
 	..setTooltipNormal(1, "Thrash  - Level 1")
 	..setTooltipNormalExtended(1, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Mana Cost:|r |cffFFCC0045|r/50/55/60\n|cff3B97D3Cooldown:|r |cffFFCC009s|r/8s/7s/6s\n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC00325|r \n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration Hero:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Initial Damage:|r |cffFFCC0045|r/75/115/165\n|cff3B97D3Bleed:|r |cffFFCC0015 every 2s|r/20 every 2s/30 every 2s/40 every 2s\n|cff3B97D3Stacks:|r |cffFFCC00|cffFFCC003|r \n|cff3B97D3Duration:|r |cffFFCC00|cffFFCC0012s|r \n|cff3B97D3Mana:|r |cffFFCC0045|r/50/55/60\n\n|cff919191Ursoc thrashes nearby enemies, dealing immediate damage and leaving a stacking bleed.|r")
@@ -2149,36 +1856,19 @@ import AbilityObjEditing
 	..setTooltipNormalExtended(3, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Mana Cost:|r 45/50/|cffFFCC0055|r/60\n|cff3B97D3Cooldown:|r 9s/8s/|cffFFCC007s|r/6s\n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC00325|r \n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration Hero:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Initial Damage:|r 45/75/|cffFFCC00115|r/165\n|cff3B97D3Bleed:|r 15 every 2s/20 every 2s/|cffFFCC0030 every 2s|r/40 every 2s\n|cff3B97D3Stacks:|r |cffFFCC00|cffFFCC003|r \n|cff3B97D3Duration:|r |cffFFCC00|cffFFCC0012s|r \n|cff3B97D3Mana:|r 45/50/|cffFFCC0055|r/60\n\n|cff919191Ursoc thrashes nearby enemies, dealing immediate damage and leaving a stacking bleed.|r")
 	..setTooltipNormal(4, "Thrash  - Level 4")
 	..setTooltipNormalExtended(4, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Mana Cost:|r 45/50/55/|cffFFCC0060|r\n|cff3B97D3Cooldown:|r 9s/8s/7s/|cffFFCC006s|r\n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC00325|r \n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration Hero:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Initial Damage:|r 45/75/115/|cffFFCC00165|r\n|cff3B97D3Bleed:|r 15 every 2s/20 every 2s/30 every 2s/|cffFFCC0040 every 2s|r\n|cff3B97D3Stacks:|r |cffFFCC00|cffFFCC003|r \n|cff3B97D3Duration:|r |cffFFCC00|cffFFCC0012s|r \n|cff3B97D3Mana:|r 45/50/55/|cffFFCC0060|r\n\n|cff919191Ursoc thrashes nearby enemies, dealing immediate damage and leaving a stacking bleed.|r")
-=======
-	..setTooltipLearnExtended("|cff3B97D3Target Type:|r Instant Cast\n|cff3B97D3Mana Cost:|r 45/50/55/60\n|cff3B97D3Cooldown:|r 8s/7s/6s/5s\n|cff3B97D3Area of Effect:|r |cffFFCC00325|r \n|cff3B97D3Duration - Normal:|r |cffFFCC000|r \n|cff3B97D3Duration - Hero:|r |cffFFCC000|r \n|cff3B97D3Initial Damage:|r 45/75/115/165\n|cff3B97D3Bleed:|r 20 every 2s/32 every 2s/48 every 2s/68 every 2s\n|cff3B97D3Stacks:|r |cffFFCC003|r \n|cff3B97D3Duration:|r |cffFFCC0012s|r \n|cff3B97D3Mana:|r 45/50/55/60\n\n|cff919191Ursoc thrashes nearby enemies, dealing immediate damage and leaving a stacking bleed.|r")
-	..setTooltipNormal(1, "Thrash  - Level 1")
-	..setTooltipNormalExtended(1, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Mana Cost:|r |cffFFCC0045|r/50/55/60\n|cff3B97D3Cooldown:|r |cffFFCC008s|r/7s/6s/5s\n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC00325|r \n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Initial Damage:|r |cffFFCC0045|r/75/115/165\n|cff3B97D3Bleed:|r |cffFFCC0020 every 2s|r/32 every 2s/48 every 2s/68 every 2s\n|cff3B97D3Stacks:|r |cffFFCC00|cffFFCC003|r \n|cff3B97D3Duration:|r |cffFFCC00|cffFFCC0012s|r \n|cff3B97D3Mana:|r |cffFFCC0045|r/50/55/60\n\n|cff919191Ursoc thrashes nearby enemies, dealing immediate damage and leaving a stacking bleed.|r")
-	..setTooltipNormal(2, "Thrash  - Level 2")
-	..setTooltipNormalExtended(2, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Mana Cost:|r 45/|cffFFCC0050|r/55/60\n|cff3B97D3Cooldown:|r 8s/|cffFFCC007s|r/6s/5s\n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC00325|r \n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Initial Damage:|r 45/|cffFFCC0075|r/115/165\n|cff3B97D3Bleed:|r 20 every 2s/|cffFFCC0032 every 2s|r/48 every 2s/68 every 2s\n|cff3B97D3Stacks:|r |cffFFCC00|cffFFCC003|r \n|cff3B97D3Duration:|r |cffFFCC00|cffFFCC0012s|r \n|cff3B97D3Mana:|r 45/|cffFFCC0050|r/55/60\n\n|cff919191Ursoc thrashes nearby enemies, dealing immediate damage and leaving a stacking bleed.|r")
-	..setTooltipNormal(3, "Thrash  - Level 3")
-	..setTooltipNormalExtended(3, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Mana Cost:|r 45/50/|cffFFCC0055|r/60\n|cff3B97D3Cooldown:|r 8s/7s/|cffFFCC006s|r/5s\n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC00325|r \n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Initial Damage:|r 45/75/|cffFFCC00115|r/165\n|cff3B97D3Bleed:|r 20 every 2s/32 every 2s/|cffFFCC0048 every 2s|r/68 every 2s\n|cff3B97D3Stacks:|r |cffFFCC00|cffFFCC003|r \n|cff3B97D3Duration:|r |cffFFCC00|cffFFCC0012s|r \n|cff3B97D3Mana:|r 45/50/|cffFFCC0055|r/60\n\n|cff919191Ursoc thrashes nearby enemies, dealing immediate damage and leaving a stacking bleed.|r")
-	..setTooltipNormal(4, "Thrash  - Level 4")
-	..setTooltipNormalExtended(4, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Mana Cost:|r 45/50/55/|cffFFCC0060|r\n|cff3B97D3Cooldown:|r 8s/7s/6s/|cffFFCC005s|r\n|cff3B97D3Area of Effect:|r |cffFFCC00|cffFFCC00325|r \n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC000|r \n|cff3B97D3Initial Damage:|r 45/75/115/|cffFFCC00165|r\n|cff3B97D3Bleed:|r 20 every 2s/32 every 2s/48 every 2s/|cffFFCC0068 every 2s|r\n|cff3B97D3Stacks:|r |cffFFCC00|cffFFCC003|r \n|cff3B97D3Duration:|r |cffFFCC00|cffFFCC0012s|r \n|cff3B97D3Mana:|r 45/50/55/|cffFFCC0060|r\n\n|cff919191Ursoc thrashes nearby enemies, dealing immediate damage and leaving a stacking bleed.|r")
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 
 
-@compiletime function create_w3a_AM1t()
-	new AbilityDefinitionMountainKingAvatar('AM1t')
-	..setName("Avatar of Ursoc")
+@compiletime function create_w3a_AM1s()
+	new AbilityDefinitionMountainKingThunderBolt('AM1s')
 	..setHeroAbility(true)
 	..setItemAbility(false)
-	..setLevels(3)
-	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNAvatar.blp")
-	..setIconResearch("ReplaceableTextures\\CommandButtons\\BTNAvatar.blp")
-	..setButtonPositionNormalX(3)
+	..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNCharge.blp")
+	..setIconResearch("ReplaceableTextures\\CommandButtons\\BTNCharge.blp")
+	..setIconTurnOff("ReplaceableTextures\\CommandButtonsDisabled\\DISBTNCharge.blp")
+	..setButtonPositionNormalX(0)
 	..setButtonPositionNormalY(0)
-	..setButtonPositionResearchX(3)
-	..setButtonPositionResearchY(0)
-	..setRequiredLevel(6)
-	..setLevelSkipRequirement(6)
 	..setRequirements("")
 	..setRequirementsLevels("")
-<<<<<<< HEAD
 	..setRequiredLevel(1)
 	..setLevelSkipRequirement(2)
 	..setLevels(4)
@@ -2220,43 +1910,6 @@ import AbilityObjEditing
 	..setTooltipNormalExtended(3, "|cff3B97D3Target Type: |cffFFCC00Unit Target|r\n|cff3B97D3Damage:|r 100/175/|cffFFCC00250|r/350\n|cff3B97D3Stun:|r 2s (1.0s vs heroes)/3s (1.5s vs heroes)/|cffFFCC004s (2.0s vs heroes)|r/5s (2.5s vs heroes)\n|cff3B97D3Range:|r 700/800/|cffFFCC00900|r/1000\n|cff3B97D3Cooldown:|r 12s/10s/|cffFFCC008s|r/6s\n|cff3B97D3Mana:|r 60/70/|cffFFCC0080|r/90\n\n|cff919191Ursoc charges at the target enemy, dealing damage and stunning them on impact. Stun duration is halved on heroes.|r")
 	..setTooltipNormal(4, "Mauling Charge  - Level 4")
 	..setTooltipNormalExtended(4, "|cff3B97D3Target Type: |cffFFCC00Unit Target|r\n|cff3B97D3Damage:|r 100/175/250/|cffFFCC00350|r\n|cff3B97D3Stun:|r 2s (1.0s vs heroes)/3s (1.5s vs heroes)/4s (2.0s vs heroes)/|cffFFCC005s (2.5s vs heroes)|r\n|cff3B97D3Range:|r 700/800/900/|cffFFCC001000|r\n|cff3B97D3Cooldown:|r 12s/10s/8s/|cffFFCC006s|r\n|cff3B97D3Mana:|r 60/70/80/|cffFFCC0090|r\n\n|cff919191Ursoc charges at the target enemy, dealing damage and stunning them on impact. Stun duration is halved on heroes.|r")
-=======
-	..setHotkeyNormal("T")
-	..setHotkeyLearn("T")
-	..setHotkeyTurnOff("T")
-	..setHitPointBonus(1, 450.0)
-	..setHitPointBonus(2, 750.0)
-	..setHitPointBonus(3, 1100.0)
-	..setDamageBonus(1, 18.0)
-	..setDamageBonus(2, 32.0)
-	..setDamageBonus(3, 50.0)
-	..setDefenseBonus(1, 6.0)
-	..setDefenseBonus(2, 10.0)
-	..setDefenseBonus(3, 15.0)
-	..setMagicDamageReduction(1, 0.3)
-	..setMagicDamageReduction(2, 0.4)
-	..setMagicDamageReduction(3, 0.5)
-	..setDurationNormal(1, 20.0)
-	..setDurationNormal(2, 25.0)
-	..setDurationNormal(3, 30.0)
-	..setDurationHero(1, 20.0)
-	..setDurationHero(2, 25.0)
-	..setDurationHero(3, 30.0)
-	..setCooldown(1, 120.0)
-	..setCooldown(2, 100.0)
-	..setCooldown(3, 80.0)
-	..setManaCost(1, 150)
-	..setManaCost(2, 175)
-	..setManaCost(3, 200)
-	..setTooltipLearn("|cffFFCC00Learn|r Avatar of Ursoc - [|cffffcc00Level %d|r]")
-	..setTooltipLearnExtended("|cff3B97D3Target Type:|r Instant Cast\n|cff3B97D3Health:|r +450/+750/+1100\n|cff3B97D3Damage:|r +18/+32/+50\n|cff3B97D3Armor:|r +6/+10/+15\n|cff3B97D3Magic Reduction:|r 30%/40%/50%\n|cff3B97D3Duration:|r 20s/25s/30s\n|cff3B97D3Cooldown:|r 120s/100s/80s\n|cff3B97D3Mana:|r 150/175/200\n\n|cff919191Ursoc channels the ancient bear god, becoming larger, harder to kill, and deadlier in melee.|r")
-	..setTooltipNormal(1, "Avatar of Ursoc  - Level 1")
-	..setTooltipNormalExtended(1, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Health:|r |cffFFCC00+450|r/+750/+1100\n|cff3B97D3Damage:|r |cffFFCC00+18|r/+32/+50\n|cff3B97D3Armor:|r |cffFFCC00+6|r/+10/+15\n|cff3B97D3Magic Reduction:|r |cffFFCC0030%|r/40%/50%\n|cff3B97D3Duration:|r |cffFFCC0020s|r/25s/30s\n|cff3B97D3Cooldown:|r |cffFFCC00120s|r/100s/80s\n|cff3B97D3Mana:|r |cffFFCC00150|r/175/200\n\n|cff919191Ursoc channels the ancient bear god, becoming larger, harder to kill, and deadlier in melee.|r")
-	..setTooltipNormal(2, "Avatar of Ursoc  - Level 2")
-	..setTooltipNormalExtended(2, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Health:|r +450/|cffFFCC00+750|r/+1100\n|cff3B97D3Damage:|r +18/|cffFFCC00+32|r/+50\n|cff3B97D3Armor:|r +6/|cffFFCC00+10|r/+15\n|cff3B97D3Magic Reduction:|r 30%/|cffFFCC0040%|r/50%\n|cff3B97D3Duration:|r 20s/|cffFFCC0025s|r/30s\n|cff3B97D3Cooldown:|r 120s/|cffFFCC00100s|r/80s\n|cff3B97D3Mana:|r 150/|cffFFCC00175|r/200\n\n|cff919191Ursoc channels the ancient bear god, becoming larger, harder to kill, and deadlier in melee.|r")
-	..setTooltipNormal(3, "Avatar of Ursoc  - Level 3")
-	..setTooltipNormalExtended(3, "|cff3B97D3Target Type: |cffFFCC00Instant Cast|r\n|cff3B97D3Health:|r +450/+750/|cffFFCC00+1100|r\n|cff3B97D3Damage:|r +18/+32/|cffFFCC00+50|r\n|cff3B97D3Armor:|r +6/+10/|cffFFCC00+15|r\n|cff3B97D3Magic Reduction:|r 30%/40%/|cffFFCC0050%|r\n|cff3B97D3Duration:|r 20s/25s/|cffFFCC0030s|r\n|cff3B97D3Cooldown:|r 120s/100s/|cffFFCC0080s|r\n|cff3B97D3Mana:|r 150/175/|cffFFCC00200|r\n\n|cff919191Ursoc channels the ancient bear god, becoming larger, harder to kill, and deadlier in melee.|r")
->>>>>>> a3bbd79bc595bd8a5a949fa570cdc224b45c5598
 
 
 @compiletime function create_w3a_AM1u()
@@ -2635,15 +2288,15 @@ import AbilityObjEditing
 	..setDurationHero(3, 1.0)
 	..setDurationHero(4, 1.0)
 	..setTooltipLearn("|cffFFCC00Learn|r Death's Grasp - [|cffffcc00Level %d|r]")
-	..setTooltipLearnExtended("|cff3B97D3Target Type:|r Point Target\n|cff3B97D3Cast Range:|r |cffFFCC00500|r \n|cff3B97D3Mana Cost:|r 110/125/140/155\n|cff3B97D3Cooldown:|r 24s/21s/18s/15s\n|cff3B97D3Area of Effect:|r 300/350/400/450\n|cff3B97D3Duration - Normal:|r |cffFFCC001|r \n|cff3B97D3Duration - Hero:|r |cffFFCC001|r \n|cff3B97D3Duration:|r 12s/14s/16s/18s\n|cff3B97D3Slow:|r 20%/30%/40%/50%\n|cff3B97D3Servant HP:|r 600/850/1150/1400\n|cff3B97D3Servant Damage:|r 22/36/52/70\n\n|cff919191Conjures a cursed zone at the target location, spawning an ethereal servant tethered to its center. Enemies inside are slowed and the servant cannot escape the boundary edge.|r")
+	..setTooltipLearnExtended("|cff3B97D3Target Type:|r Point Target\n|cff3B97D3Cast Range:|r |cffFFCC00500|r \n|cff3B97D3Mana Cost:|r 110/125/140/155\n|cff3B97D3Cooldown:|r 24s/21s/18s/15s\n|cff3B97D3Area of Effect:|r 300/350/400/450\n|cff3B97D3Duration Normal:|r |cffFFCC001|r \n|cff3B97D3Duration:|r 12s/14s/16s/18s\n|cff3B97D3Slow:|r 20%/30%/40%/50%\n|cff3B97D3Servant HP:|r 600/850/1150/1400\n|cff3B97D3Servant Damage:|r 22/36/52/70\n\n|cff919191Conjures a cursed zone at the target location, spawning an ethereal servant tethered to its center. Enemies inside are slowed and the servant cannot escape the boundary edge.|r")
 	..setTooltipNormal(1, "Death's Grasp  - Level 1")
-	..setTooltipNormalExtended(1, "|cff3B97D3Target Type: |cffFFCC00Point Target|r\n|cff3B97D3Cast Range:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Mana Cost:|r |cffFFCC00110|r/125/140/155\n|cff3B97D3Cooldown:|r |cffFFCC0024s|r/21s/18s/15s\n|cff3B97D3Area of Effect:|r |cffFFCC00300|r/350/400/450\n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC001|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC001|r \n|cff3B97D3Duration:|r |cffFFCC0012s|r/14s/16s/18s\n|cff3B97D3Slow:|r |cffFFCC0020%|r/30%/40%/50%\n|cff3B97D3Servant HP:|r |cffFFCC00600|r/850/1150/1400\n|cff3B97D3Servant Damage:|r |cffFFCC0022|r/36/52/70\n\n|cff919191Conjures a cursed zone at the target location, spawning an ethereal servant tethered to its center. Enemies inside are slowed and the servant cannot escape the boundary edge.|r")
+	..setTooltipNormalExtended(1, "|cff3B97D3Target Type: |cffFFCC00Point Target|r\n|cff3B97D3Cast Range:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Mana Cost:|r |cffFFCC00110|r/125/140/155\n|cff3B97D3Cooldown:|r |cffFFCC0024s|r/21s/18s/15s\n|cff3B97D3Area of Effect:|r |cffFFCC00300|r/350/400/450\n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC001|r \n|cff3B97D3Duration:|r |cffFFCC0012s|r/14s/16s/18s\n|cff3B97D3Slow:|r |cffFFCC0020%|r/30%/40%/50%\n|cff3B97D3Servant HP:|r |cffFFCC00600|r/850/1150/1400\n|cff3B97D3Servant Damage:|r |cffFFCC0022|r/36/52/70\n\n|cff919191Conjures a cursed zone at the target location, spawning an ethereal servant tethered to its center. Enemies inside are slowed and the servant cannot escape the boundary edge.|r")
 	..setTooltipNormal(2, "Death's Grasp  - Level 2")
-	..setTooltipNormalExtended(2, "|cff3B97D3Target Type: |cffFFCC00Point Target|r\n|cff3B97D3Cast Range:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Mana Cost:|r 110/|cffFFCC00125|r/140/155\n|cff3B97D3Cooldown:|r 24s/|cffFFCC0021s|r/18s/15s\n|cff3B97D3Area of Effect:|r 300/|cffFFCC00350|r/400/450\n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC001|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC001|r \n|cff3B97D3Duration:|r 12s/|cffFFCC0014s|r/16s/18s\n|cff3B97D3Slow:|r 20%/|cffFFCC0030%|r/40%/50%\n|cff3B97D3Servant HP:|r 600/|cffFFCC00850|r/1150/1400\n|cff3B97D3Servant Damage:|r 22/|cffFFCC0036|r/52/70\n\n|cff919191Conjures a cursed zone at the target location, spawning an ethereal servant tethered to its center. Enemies inside are slowed and the servant cannot escape the boundary edge.|r")
+	..setTooltipNormalExtended(2, "|cff3B97D3Target Type: |cffFFCC00Point Target|r\n|cff3B97D3Cast Range:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Mana Cost:|r 110/|cffFFCC00125|r/140/155\n|cff3B97D3Cooldown:|r 24s/|cffFFCC0021s|r/18s/15s\n|cff3B97D3Area of Effect:|r 300/|cffFFCC00350|r/400/450\n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC001|r \n|cff3B97D3Duration:|r 12s/|cffFFCC0014s|r/16s/18s\n|cff3B97D3Slow:|r 20%/|cffFFCC0030%|r/40%/50%\n|cff3B97D3Servant HP:|r 600/|cffFFCC00850|r/1150/1400\n|cff3B97D3Servant Damage:|r 22/|cffFFCC0036|r/52/70\n\n|cff919191Conjures a cursed zone at the target location, spawning an ethereal servant tethered to its center. Enemies inside are slowed and the servant cannot escape the boundary edge.|r")
 	..setTooltipNormal(3, "Death's Grasp  - Level 3")
-	..setTooltipNormalExtended(3, "|cff3B97D3Target Type: |cffFFCC00Point Target|r\n|cff3B97D3Cast Range:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Mana Cost:|r 110/125/|cffFFCC00140|r/155\n|cff3B97D3Cooldown:|r 24s/21s/|cffFFCC0018s|r/15s\n|cff3B97D3Area of Effect:|r 300/350/|cffFFCC00400|r/450\n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC001|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC001|r \n|cff3B97D3Duration:|r 12s/14s/|cffFFCC0016s|r/18s\n|cff3B97D3Slow:|r 20%/30%/|cffFFCC0040%|r/50%\n|cff3B97D3Servant HP:|r 600/850/|cffFFCC001150|r/1400\n|cff3B97D3Servant Damage:|r 22/36/|cffFFCC0052|r/70\n\n|cff919191Conjures a cursed zone at the target location, spawning an ethereal servant tethered to its center. Enemies inside are slowed and the servant cannot escape the boundary edge.|r")
+	..setTooltipNormalExtended(3, "|cff3B97D3Target Type: |cffFFCC00Point Target|r\n|cff3B97D3Cast Range:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Mana Cost:|r 110/125/|cffFFCC00140|r/155\n|cff3B97D3Cooldown:|r 24s/21s/|cffFFCC0018s|r/15s\n|cff3B97D3Area of Effect:|r 300/350/|cffFFCC00400|r/450\n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC001|r \n|cff3B97D3Duration:|r 12s/14s/|cffFFCC0016s|r/18s\n|cff3B97D3Slow:|r 20%/30%/|cffFFCC0040%|r/50%\n|cff3B97D3Servant HP:|r 600/850/|cffFFCC001150|r/1400\n|cff3B97D3Servant Damage:|r 22/36/|cffFFCC0052|r/70\n\n|cff919191Conjures a cursed zone at the target location, spawning an ethereal servant tethered to its center. Enemies inside are slowed and the servant cannot escape the boundary edge.|r")
 	..setTooltipNormal(4, "Death's Grasp  - Level 4")
-	..setTooltipNormalExtended(4, "|cff3B97D3Target Type: |cffFFCC00Point Target|r\n|cff3B97D3Cast Range:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Mana Cost:|r 110/125/140/|cffFFCC00155|r\n|cff3B97D3Cooldown:|r 24s/21s/18s/|cffFFCC0015s|r\n|cff3B97D3Area of Effect:|r 300/350/400/|cffFFCC00450|r\n|cff3B97D3Duration - Normal:|r |cffFFCC00|cffFFCC001|r \n|cff3B97D3Duration - Hero:|r |cffFFCC00|cffFFCC001|r \n|cff3B97D3Duration:|r 12s/14s/16s/|cffFFCC0018s|r\n|cff3B97D3Slow:|r 20%/30%/40%/|cffFFCC0050%|r\n|cff3B97D3Servant HP:|r 600/850/1150/|cffFFCC001400|r\n|cff3B97D3Servant Damage:|r 22/36/52/|cffFFCC0070|r\n\n|cff919191Conjures a cursed zone at the target location, spawning an ethereal servant tethered to its center. Enemies inside are slowed and the servant cannot escape the boundary edge.|r")
+	..setTooltipNormalExtended(4, "|cff3B97D3Target Type: |cffFFCC00Point Target|r\n|cff3B97D3Cast Range:|r |cffFFCC00|cffFFCC00500|r \n|cff3B97D3Mana Cost:|r 110/125/140/|cffFFCC00155|r\n|cff3B97D3Cooldown:|r 24s/21s/18s/|cffFFCC0015s|r\n|cff3B97D3Area of Effect:|r 300/350/400/|cffFFCC00450|r\n|cff3B97D3Duration Normal:|r |cffFFCC00|cffFFCC001|r \n|cff3B97D3Duration:|r 12s/14s/16s/|cffFFCC0018s|r\n|cff3B97D3Slow:|r 20%/30%/40%/|cffFFCC0050%|r\n|cff3B97D3Servant HP:|r 600/850/1150/|cffFFCC001400|r\n|cff3B97D3Servant Damage:|r 22/36/52/|cffFFCC0070|r\n\n|cff919191Conjures a cursed zone at the target location, spawning an ethereal servant tethered to its center. Enemies inside are slowed and the servant cannot escape the boundary edge.|r")
 
 
 @compiletime function create_w3a_AM23()

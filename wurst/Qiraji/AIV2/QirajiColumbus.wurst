@@ -9,7 +9,7 @@ import FileIO
 import StringUtils
 
 // --- Configuration Constants ---
-let PROBE_MAX_RANGE = 5500.0
+let PROBE_MAX_RANGE = 8500.0
 let ARRIVAL_THRESHOLD = 92.0
 let PROBE_TIMEOUT = 120.0
 let WISP_UNIT_ID = 'ewsp'    
@@ -395,10 +395,12 @@ function registerRouteChatCommand()
 init
     doAfter(1.0) ->
         registerRouteChatCommand()
-        if loadNavigationMap()
-            mappingComplete = true
-            print("|cff00ffffSubway Breadcrumb Map loaded from cache. Skipping probe rerun.|r")
-            startPeasantPathingTest()
-        else
-            print("Mapping cache not found. Starting probe exploration...")
-            beginAutomatedMapping()
+        beginAutomatedMapping()
+
+        // if loadNavigationMap()
+        //     mappingComplete = true
+        //     print("|cff00ffffSubway Breadcrumb Map loaded from cache. Skipping probe rerun.|r")
+        //     startPeasantPathingTest()
+        // else
+        //     print("Mapping cache not found. Starting probe exploration...")
+        //     beginAutomatedMapping()
