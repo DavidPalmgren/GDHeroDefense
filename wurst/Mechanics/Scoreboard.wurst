@@ -43,6 +43,15 @@ function setupPlayerColors()
 // create a multiboard to display player income and control point ownership
 multiboard incomeBoard
 
+// timer tracking total elapsed game time, used for the multiboard's elapsed-time row
+timer elapsedTimer = CreateTimer()
+
+// format a whole number of seconds as M:SS
+function formatElapsedTime(int totalSeconds) returns string
+    let minutes = totalSeconds div 60
+    let seconds = totalSeconds mod 60
+    return minutes.toString() + ":" + (seconds < 10 ? "0" + seconds.toString() : seconds.toString())
+
 // function to get the number of active players in the game
 public function getActivePlayers() returns int
     var count = 0
@@ -83,7 +92,7 @@ public function setupMultiboard()
     let playerCount = getActivePlayers()
     // set column and row count, and title
     MultiboardSetColumnCount(incomeBoard, 3)
-    MultiboardSetRowCount(incomeBoard, playerCount + 1) // +1 for header row
+    MultiboardSetRowCount(incomeBoard, playerCount + 3) // +1 for header row, +1 for blank spacer row, +1 for elapsed time row
     MultiboardSetTitleText(incomeBoard, "Statistics")
 
     // manually set header row
@@ -106,6 +115,21 @@ public function setupMultiboard()
     MultiboardReleaseItem(h0)
     MultiboardReleaseItem(h1)
     MultiboardReleaseItem(h2)
+
+    // blank spacer row between the player rows and the elapsed time row
+    let blankRow = playerCount + 1
+    for col = 0 to 2
+        let blankItem = MultiboardGetItem(incomeBoard, blankRow, col)
+        MultiboardSetItemValue(blankItem, "")
+        MultiboardSetItemStyle(blankItem, false, false)
+        MultiboardReleaseItem(blankItem)
+
+    // hide the unused column to the right of the elapsed time row
+    let timeRow = playerCount + 2
+    let emptyItem = MultiboardGetItem(incomeBoard, timeRow, 2)
+    MultiboardSetItemValue(emptyItem, "")
+    MultiboardSetItemStyle(emptyItem, false, false)
+    MultiboardReleaseItem(emptyItem)
 
     MultiboardDisplay(incomeBoard, true)
     MultiboardMinimize(incomeBoard, false)
@@ -134,6 +158,26 @@ public function updateMultiboard()
             MultiboardReleaseItem(item3)
             row++
 
+    updateElapsedTimeRow()
+
+// function to update just the elapsed-time row, called every second
+public function updateElapsedTimeRow()
+    let row = getActivePlayers() + 2 // skip past the player rows and the blank spacer row
+    let labelItem = MultiboardGetItem(incomeBoard, row, 0)
+    let valueItem = MultiboardGetItem(incomeBoard, row, 1)
+    // widths match the player name column (0.08) and combined CP+Income columns (0.05+0.05)
+    // so the time value lines up under the same columns as the player stat rows
+    MultiboardSetItemWidth(labelItem, 0.08)
+    MultiboardSetItemWidth(valueItem, 0.10)
+    MultiboardSetItemStyle(labelItem, true, false)
+    MultiboardSetItemStyle(valueItem, true, false)
+    MultiboardSetItemValue(labelItem, "Elapsed")
+    MultiboardSetItemValue(valueItem, formatElapsedTime(TimerGetElapsed(elapsedTimer).toInt()))
+    MultiboardReleaseItem(labelItem)
+    MultiboardReleaseItem(valueItem)
+
 
 init
     setupPlayerColors()
+    TimerStart(elapsedTimer, 999999., false, null)
+    TimerStart(CreateTimer(), 1., true, function updateElapsedTimeRow)
