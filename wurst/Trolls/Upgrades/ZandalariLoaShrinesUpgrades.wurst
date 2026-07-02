@@ -21,7 +21,7 @@ public constant UPG_REZAN_GOLDEN_TRIBUTE = compiletime(UPGD_ID_GEN.next())
         ..setIcon(1, Icons.bTNChestOfGold)
         
         // Cost Matrix (0-Lumber Rule Enforced)
-        ..setGoldCostBase(200)
+        ..setGoldCostBase(100)
         ..setGoldCostIncrement(0)
         ..setLumberCostBase(0)
         ..setLumberCostIncrement(0)

@@ -1,0 +1,89 @@
+package V3FoolsAttack
+
+import ClosureTimers
+import ClosureForGroups
+import LinkedList
+import HashMap
+import ControlPoint
+import ControlPointExtension
+import QirajiAiPlayerId
+import QirajiColumbus
+import QirajiWorker
+import UnitIds
+
+let DISPATCH_TICK_INTERVAL = 0.1   // how often we pop one unit off the queue
+let SWEEP_INTERVAL = 10.0          // how often we refill the queue with new candidates
+
+// NEW: queue + O(1) membership check, replacing the old bursty doAfter loop    
+let pendingDispatch = new LinkedList<unit>()
+let pendingSet = new HashMap<unit, bool>()
+
+function shouldDispatch(unit u) returns bool
+    if u == null or not u.isAlive()
+        return false
+    if u.getOwner() != qirajiAIPlayer
+        return false
+    if u.isType(UNIT_TYPE_STRUCTURE)
+        return false
+
+    let typeId = u.getTypeId()
+    return typeId != QIRAJI_WORKER_ID and typeId != UnitIds.peasant and typeId != 'hpea'
+
+function chooseObjective(unit u) returns unit
+    unit chosen = null
+    var bestDistance = 999999999.0
+
+    for cp in controlPoints
+        if cp == null or not cp.isAlive()
+            continue
+        if cp.getOwner() == qirajiAIPlayer
+            continue
+
+        let distance = u.getPos().distanceToSq(cp.getPos())
+        if distance < bestDistance
+            bestDistance = distance
+            chosen = cp
+
+    return chosen
+
+function dispatchUnit(unit u)
+    if not shouldDispatch(u) // still alive/valid by the time its turn comes up
+        return
+
+    let objective = chooseObjective(u)
+    if objective == null
+        return
+
+    let startNode = getClosestControlPointIdToPos(u.getPos())
+    let targetNode = getControlPointId(objective)
+    if startNode != -1 and targetNode != -1
+        let path = calculateSubwayPath(startNode, targetNode)
+        if path != null
+            destroy path
+
+    u.issueTargetOrder("attack", objective)
+
+// NEW: cheap enumeration only — just enqueues candidates, does no heavy work
+function sweepAttackWave()
+    forUnitsOfPlayer(qirajiAIPlayer) (unit u) ->
+        if shouldDispatch(u) and not pendingSet.has(u)
+            pendingDispatch.add(u)
+            pendingSet.put(u, true)
+
+// NEW: trickle processor — does exactly one unit's worth of heavy work per tick
+function processDispatchQueue()
+    if pendingDispatch.isEmpty()
+        return
+
+    let u = pendingDispatch.get(0)
+    pendingDispatch.removeAt(0)
+    pendingSet.remove(u)
+
+    dispatchUnit(u)
+
+init
+    doPeriodically(SWEEP_INTERVAL) cb ->
+        sweepAttackWave()
+
+    doPeriodically(DISPATCH_TICK_INTERVAL) cb ->
+        processDispatchQueue()

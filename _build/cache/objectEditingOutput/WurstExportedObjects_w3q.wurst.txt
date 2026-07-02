@@ -545,7 +545,7 @@ import ObjEditingNatives
 	..setLvlDataString("gtp1", 1, 0, "Research Golden Tribute of Rezan")
 	..setLvlDataString("gub1", 1, 0, "Establishes a direct blood-tithe to the Great Devilsaur. Grants a permanent blessing that generates |cffffcc0030 Gold Per Minute|r independently.")
 	..setLvlDataString("gar1", 1, 0, "ReplaceableTextures\\CommandButtons\\BTNChestOfGold.blp")
-	..setLvlDataInt("gglb", 0, 0, 200)
+	..setLvlDataInt("gglb", 0, 0, 100)
 	..setLvlDataInt("gglm", 0, 0, 0)
 	..setLvlDataInt("glmb", 0, 0, 0)
 	..setLvlDataInt("glmm", 0, 0, 0)

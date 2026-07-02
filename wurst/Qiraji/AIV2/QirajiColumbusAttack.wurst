@@ -38,7 +38,7 @@ public function getClosestControlPointId(vec2 pos) returns int
     var minDistSq = 999999999.0
     
     var i = 1
-    while i <= 55
+    while i <= 67
         let cpUnit = cpRegistry.get(i)
         if cpUnit != null
             let distSq = pos.distanceToSq(cpUnit.getPos())
@@ -133,7 +133,7 @@ function assignNewStrategicTarget(Squad sq)
     var bestDistSq = 999999999.0
 
     var i = 1
-    while i <= 55
+    while i <= 67
         let cpUnit = cpRegistry.get(i)
         if cpUnit != null and cpUnit.getOwner() != sq.ownerPlayer
             let distSq = squadCenter.distanceToSq(cpUnit.getPos())
@@ -204,5 +204,8 @@ public function startSubwayAttackSupervisor(real interval)
             
             // Branch B: Squad has reached its goal and is sitting idle—assign new coordinates
             else
-                print("|cff00ffff[Supervisor]|r Detected active unassigned squad. Passing context to Strategic Target Generator.")
-                assignNewStrategicTarget(sq)
+                if sq.isReadyToAttack()
+                    print("|cff00ffff[Supervisor]|r Detected active unassigned squad. Passing context to Strategic Target Generator.")
+                    assignNewStrategicTarget(sq)
+                else
+                    print("|cffaaaaaa[Supervisor]|r Squad below minimum attack size (" + sq.members.size().toString() + "/" + MIN_ATTACK_SQUAD_SIZE.toString() + "). Holding for reinforcements.")

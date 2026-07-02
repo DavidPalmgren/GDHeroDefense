@@ -1,0 +1,69 @@
+package CryptLordRespawn
+
+import ClosureTimers
+import ClosureForGroups
+import ClosureEvents
+import QirajiAiPlayerId
+import QirajiBuildingIds
+import UnitIds
+import CryptLord
+
+let CRYPT_LORD_CHECK_INTERVAL = 3.0
+let CRYPT_LORD_TRAIN_TIMEOUT = 8.0
+
+bool cryptLordTrainingPending = false
+
+// NEW: mutable boxes to work around closure-captured variable restrictions
+class UnitBox
+    unit value = null
+
+class BoolBox
+    bool value = false
+
+function findAltar() returns unit
+    let box = new UnitBox()
+    forUnitsOfPlayer(qirajiAIPlayer) (unit u) ->
+        if box.value == null and u.isAlive() and u.getTypeId() == QIRAJI_ALTAR_OF_THE_OLD
+            box.value = u
+    let result = box.value
+    destroy box
+    return result
+
+function hasLivingCryptLord() returns bool
+    let box = new BoolBox()
+    forUnitsOfPlayer(qirajiAIPlayer) (unit u) ->
+        if u.isAlive() and u.getTypeId() == CRYPT_LORD_HERO_ID
+            box.value = true
+    let result = box.value
+    destroy box
+    return result
+
+function tryTrainCryptLord()
+    if cryptLordTrainingPending
+        return
+    if hasLivingCryptLord()
+        return
+
+    let altar = findAltar()
+    if altar == null
+        //print("|cffff0000[CryptLordRespawn]|r No living Altar of the Old found for Qiraji AI player - cannot train Crypt Lord.")
+        return
+
+    IssueImmediateOrderById(altar, CRYPT_LORD_HERO_ID)
+    cryptLordTrainingPending = true
+    //print("|cff00ffff[CryptLordRespawn]|r Attempting to train Crypt Lord from the Altar...")
+
+    doAfter(CRYPT_LORD_TRAIN_TIMEOUT) ->
+        if cryptLordTrainingPending and not hasLivingCryptLord()
+            //print("|cffffaa00[CryptLordRespawn]|r Training did not complete in time (likely insufficient gold or food) - will retry.")
+            cryptLordTrainingPending = false
+
+init
+    EventListener.add(EVENT_PLAYER_UNIT_TRAIN_FINISH) () ->
+        let trained = GetTrainedUnit()
+        if trained.getTypeId() == CRYPT_LORD_HERO_ID and trained.getOwner() == qirajiAIPlayer
+            cryptLordTrainingPending = false
+            //print("|cff00ff00[CryptLordRespawn]|r Crypt Lord training complete.")
+
+    doPeriodically(CRYPT_LORD_CHECK_INTERVAL) cb ->
+        tryTrainCryptLord()

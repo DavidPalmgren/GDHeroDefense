@@ -8,6 +8,7 @@ import HashMap
 import QirajiWorker
 
 public constant MAX_SQUAD_SIZE = 12 
+public constant MIN_ATTACK_SQUAD_SIZE = 10
 public let activeSquads = new LinkedList<Squad>()
 public let unitEffects = new HashMap<unit, effect>()
 // O(1) Lookup for squad tracking
@@ -45,6 +46,11 @@ public class Squad
         unitEffects.put(u, fx)
         
         updateUnitSettings(u)
+    
+
+    // NEW: gate for whether this squad is allowed to be dispatched
+    function isReadyToAttack() returns boolean
+        return members.size() >= MIN_ATTACK_SQUAD_SIZE
 
     // Keeps unit behavior aligned with current squad role
     function updateUnitSettings(unit u)
@@ -108,7 +114,7 @@ public class Squad
                 doAfter(delay) ->
                     if combatant.isAlive() // Async safety check
                         let spread = targetPos.polarOffset(GetRandomReal(0, 360).fromDeg(), GetRandomReal(0, 300))
-                        combatant.issuePointOrder("attack", spread)
+                        combatant.issuePointOrder("attackground", spread)
             delay += 0.1
 
     ondestroy
@@ -144,11 +150,16 @@ public function consolidateSquads()
 
     for i = activeSquads.size() - 1 downto 1
         let squadA = activeSquads.get(i)
+        
+        // FIX: If squadA is already full and ready to rock, leave it alone!
+        if squadA.isFull()
+            continue
+
         for j = 0 to i - 1
             let squadB = activeSquads.get(j)
             if squadA.ownerPlayer == squadB.ownerPlayer and not squadB.isFull()
                 squadB.merge(squadA)
-                break // break inner loop if squadA was successfully emptied/destroyed
+                break
 
 public function startRecruitmentLoop(player aiPlayer)
     // Clean dead units and consolidate empty squad spaces periodically

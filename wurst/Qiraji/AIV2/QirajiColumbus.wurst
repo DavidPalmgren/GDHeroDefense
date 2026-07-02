@@ -10,14 +10,17 @@ import StringUtils
 
 // --- Configuration Constants ---
 let PROBE_MAX_RANGE = 8500.0
-let ARRIVAL_THRESHOLD = 92.0
+let ARRIVAL_THRESHOLD = 150.0
 let PROBE_TIMEOUT = 120.0
 let WISP_UNIT_ID = 'ewsp'    
 let PEASANT_UNIT_ID = 'hpea' 
+let PROBE_PLAYER_COUNT = 4              // NEW: how many player slots to spread probes across
+int probePlayerCycle = 0  
 let ROUTE_CACHE_FILE = "wurst/Qiraji/AIV2/QirajiRouteCache.txt"
 
 // --- Navigation Map Storage ---
 public let navigationMap = new HashMap<int, LinkedList<int>>()
+public let navigationWeights = new HashMap<int, HashMap<int, real>>()   // NEW: edge travel-time weights
 
 int activeProbesCount = 0
 bool mappingComplete = false
@@ -37,7 +40,7 @@ class ProbeTracker
         timeElapsed = 0.0
         
         // Player(15) is Neutral Passive
-        probeUnit = CreateUnit(Player(15), WISP_UNIT_ID, start.x, start.y, 0.0)
+        probeUnit = CreateUnit(getNextProbePlayer(), WISP_UNIT_ID, start.x, start.y, 0.0)
         if probeUnit != null
             probeUnit..setInvulnerable(true)
                      ..setMoveSpeed(522)
@@ -52,13 +55,18 @@ class ProbeTracker
                 this.cleanup()
                 destroy cb
                 destroy this
+            
+    function getNextProbePlayer() returns player
+        let p = players[17 + probePlayerCycle]
+        probePlayerCycle = (probePlayerCycle + 1) mod PROBE_PLAYER_COUNT
+        return p
 
     function checkStatus() returns bool
         if probeUnit == null or not probeUnit.isAlive()
             return true 
             
         if probeUnit.getPos().distanceToSq(targetPos) <= ARRIVAL_THRESHOLD * ARRIVAL_THRESHOLD
-            registerPath(sourceId, targetId)
+            registerPath(sourceId, targetId, timeElapsed)   // CHANGED: pass real travel time as weight
             return true
             
         return false
@@ -72,25 +80,32 @@ class ProbeTracker
 
 // --- Core Mapping Logic ---
 
-function registerPath(int fromId, int toId)
+function registerPath(int fromId, int toId, real weight)   // CHANGED: added weight param
     if not navigationMap.has(fromId)
         navigationMap.put(fromId, new LinkedList<int>())
+        navigationWeights.put(fromId, new HashMap<int, real>())   // NEW
     
     let neighbors = navigationMap.get(fromId)
+    let weights = navigationWeights.get(fromId)                  // NEW
     if not neighbors.has(toId)
         neighbors.add(toId)
-        print("|cff00ffffQirajiColumbus|r Registered subway link: " + fromId.toString() + " -> " + toId.toString())
+        weights.put(toId, weight)                                 // NEW
+        print("|cff00ffffQirajiColumbus|r Registered subway link: " + fromId.toString() + " -> " + toId.toString() + " (" + weight.toString() + "s)")
+    else if weight < weights.get(toId)                           // NEW: if re-probed faster, keep the better time
+        weights.put(toId, weight)
 
 function buildNavigationMapText() returns string
     var output = "Qiraji route graph\n"
     var srcId = 1
-    while srcId <= 55
+    while srcId <= 67
         let neighbors = navigationMap.get(srcId)
+        let weights = navigationWeights.get(srcId)              // NEW
         if neighbors != null and not neighbors.isEmpty()
             output += srcId.toString() + ":"
             var idx = 0
             while idx < neighbors.size()
-                output += neighbors.get(idx).toString()
+                let n = neighbors.get(idx)
+                output += n.toString() + "=" + weights.get(n).toString()   // CHANGED: neighbor=weight
                 if idx < neighbors.size() - 1
                     output += ","
                 idx++
@@ -128,13 +143,20 @@ function loadNavigationMap() returns bool
             let parts = line.split(":")
             if parts.size() == 2
                 let srcId = parts.get(0).toInt()
-                let neighbors = parts.get(1).split(",")
+                let entries = parts.get(1).split(",")
                 if srcId > 0
                     let nodeList = new LinkedList<int>()
-                    for neighbor in neighbors
-                        if neighbor != ""
-                            nodeList.add(neighbor.toInt())
+                    let weightMap = new HashMap<int, real>()      // NEW
+                    for entry in entries
+                        if entry != ""
+                            let kv = entry.split("=")             // NEW: split "neighbor=weight"
+                            if kv.size() == 2
+                                let neighborId = kv.get(0).toInt()
+                                let weight = kv.get(1).toReal()
+                                nodeList.add(neighborId)
+                                weightMap.put(neighborId, weight)
                     navigationMap.put(srcId, nodeList)
+                    navigationWeights.put(srcId, weightMap)       // NEW
 
     print("|cff00ff00QirajiColumbus|r Loaded probe explorer results from " + ROUTE_CACHE_FILE)
     return true
@@ -186,7 +208,6 @@ class WaypointNavigator
         traveler = u
         pathNodeIds = path
         
-        // Fix: Remove the parameter wrapper entirely
         doAfter(0.05) ->
             this.startNavigation()
 
@@ -197,7 +218,6 @@ class WaypointNavigator
         else
             this.findNextValidTarget()
             
-            // Safe alternative to vector '==' operator checking
             if currentTargetPos.x == 0.0 and currentTargetPos.y == 0.0
                 print("|cffff0000QirajiColumbus|r Waypoint navigator could not resolve a valid target from the path")
                 this.cleanupAndDestroy()
@@ -205,16 +225,13 @@ class WaypointNavigator
                 print("|cff00ffffQirajiColumbus|r Starting waypoint navigator for target " + (currentTargetNodeId != -1 ? getControlPointLabel(currentTargetNodeId) : currentTargetPos.toString()))
                 traveler.issuePointOrder("move", currentTargetPos)
                 
-                // Fix 2: Keep the trailing closure fully isolated to a single function delegate call 
                 movementTimer = doPeriodically(0.5) (CallbackPeriodic cb) ->
                     this.onTimerTick()
 
-    // Fix 3: Logic completely flattened into a standalone function block
     function onTimerTick()
         if traveler == null or not traveler.isAlive()
             this.cleanupAndDestroy()
         else
-            // Refactored to avoid 'else if' layout parser parsing traps
             if traveler.getPos().distanceToSq(currentTargetPos) <= ARRIVAL_THRESHOLD * ARRIVAL_THRESHOLD
                 this.findNextValidTarget()
                 
@@ -248,47 +265,69 @@ class WaypointNavigator
             movementTimer = null
         destroy this
 
-    // Fix 4: Must use all-lowercase 'ondestroy' keyword
     ondestroy
         if pathNodeIds != null
             destroy pathNodeIds
             pathNodeIds = null
 
+// CHANGED: Dijkstra's algorithm (was BFS) - now finds the fastest route by total travel time, not fewest hops
 public function calculateSubwayPath(int startId, int endId) returns LinkedList<int>
-    let queue = new LinkedList<int>()..add(startId)
+    let dist = new HashMap<int, real>()
     let parentMap = new HashMap<int, int>()
-    let visited = new LinkedList<int>()..add(startId)
+    let visited = new HashMap<int, bool>()
+    let frontier = new LinkedList<int>()..add(startId)
+    dist.put(startId, 0.0)
     var pathFound = false
 
-    while not queue.isEmpty()
-        // Changed from 'current' to 'currentNodeId'
-        let currentNodeId = queue.get(0)
-        queue.removeAt(0)
-        
-        if currentNodeId == endId
+    while not frontier.isEmpty()
+        // Pick the unvisited frontier node with the smallest known distance
+        var bestIdx = 0
+        var bestId = frontier.get(0)
+        var bestDist = dist.get(bestId)
+        var idx = 1
+        while idx < frontier.size()
+            let candidate = frontier.get(idx)
+            let candidateDist = dist.get(candidate)
+            if candidateDist < bestDist
+                bestDist = candidateDist
+                bestId = candidate
+                bestIdx = idx
+            idx++
+        frontier.removeAt(bestIdx)
+
+        if visited.has(bestId)
+            continue
+        visited.put(bestId, true)
+
+        if bestId == endId
             pathFound = true
             break
 
-        let neighbors = navigationMap.get(currentNodeId)
+        let neighbors = navigationMap.get(bestId)
+        let weights = navigationWeights.get(bestId)
         if neighbors != null
-            var idx = 0
-            while idx < neighbors.size()
-                let neighbor = neighbors.get(idx)
+            var nIdx = 0
+            while nIdx < neighbors.size()
+                let neighbor = neighbors.get(nIdx)
                 if not visited.has(neighbor)
-                    visited.add(neighbor)
-                    parentMap.put(neighbor, currentNodeId)
-                    queue.add(neighbor)
-                idx++
+                    let edgeWeight = weights.get(neighbor)
+                    let newDist = bestDist + edgeWeight
+                    if not dist.has(neighbor) or newDist < dist.get(neighbor)
+                        dist.put(neighbor, newDist)
+                        parentMap.put(neighbor, bestId)
+                        if not frontier.has(neighbor)
+                            frontier.add(neighbor)
+                nIdx++
 
-    destroy queue
+    destroy frontier
     destroy visited
+    destroy dist
 
     if not pathFound
         destroy parentMap
         return null
 
     let path = new LinkedList<int>()
-    // Changed from 'current' to 'backtrackId' to completely dodge shadowing
     var backtrackId = endId
     while backtrackId != startId
         path.add(backtrackId) 
@@ -298,7 +337,6 @@ public function calculateSubwayPath(int startId, int endId) returns LinkedList<i
     return path
 
 function startPeasantPathingTest()
-    // Directly targeted indices from setupAllControlPoints
     let startTestNode = 41 // Silithus: Cenarion Enclave
     let endTestNode = 32   // Feralas: Feathermoon Stronghold
 
@@ -314,28 +352,99 @@ function startPeasantPathingTest()
     if path != null and startUnit != null
         let startPos = startUnit.getPos()
         
-        // Spawn the test peasant at the enclave's exact vector coordinates
         let peasant = CreateUnit(Player(15), PEASANT_UNIT_ID, startPos.x, startPos.y, 0.0)
         peasant..setInvulnerable(true)
-               ..setMoveSpeed(522.0) // Give him max speed for rapid testing
+               ..setMoveSpeed(522.0)
         
-        // Build a scannable string log of the node path array
+        // CHANGED: build path string + total ETA using stored edge weights
+        var totalTime = 0.0
         var pathStr = ""
+        var prevId = startTestNode
         var idx = path.size() - 1
         while idx >= 0
-            pathStr = pathStr + path.get(idx).toString()
+            let nodeId = path.get(idx)
+            totalTime += navigationWeights.get(prevId).get(nodeId)
+            pathStr = pathStr + nodeId.toString()
             if idx > 0
                 pathStr = pathStr + " -> "
+            prevId = nodeId
             idx--
             
-        print("|cff00ff00Route Calculated:|r " + pathStr)
+        print("|cff00ff00Route Calculated:|r " + pathStr + " |cffaaaaaa[~" + R2S(totalTime) + "s]|r")
         
-        // Pass the traveler off to the safe navigator engine
         new WaypointNavigator(peasant, path)
     else
         print("|cffff0000Pathing test broken: Navigation network returned null or registry missing anchors.|r")
         if path != null
             destroy path
+
+// --- Chat Command: -proute <src> <dest> ---
+
+function spawnPeasantRoute(int srcId, int destId)
+    if not cpRegistry.has(srcId)
+        print("|cffff0000QirajiColumbus|r Unknown source control point ID: " + srcId.toString())
+        return
+
+    if not cpRegistry.has(destId)
+        print("|cffff0000QirajiColumbus|r Unknown destination control point ID: " + destId.toString())
+        return
+
+    if srcId == destId
+        print("|cffffaa00QirajiColumbus|r Source and destination are the same node.")
+        return
+
+    let path = calculateSubwayPath(srcId, destId)
+    let startUnit = cpRegistry.get(srcId)
+
+    if path == null
+        print("|cffff0000QirajiColumbus|r No route found from " + srcId.toString() + " to " + destId.toString())
+        return
+
+    let startPos = startUnit.getPos()
+    let peasant = CreateUnit(Player(15), PEASANT_UNIT_ID, startPos.x, startPos.y, 0.0)
+    peasant..setInvulnerable(true)
+           ..setMoveSpeed(522.0)
+
+    var totalTime = 0.0
+    var pathStr = srcId.toString()
+    var prevId = srcId
+    var idx = path.size() - 1
+    while idx >= 0
+        let nodeId = path.get(idx)
+        totalTime += navigationWeights.get(prevId).get(nodeId)
+        pathStr = pathStr + " -> " + nodeId.toString()
+        prevId = nodeId
+        idx--
+
+    print("|cff00ff00QirajiColumbus|r Dispatching peasant " + srcId.toString() + " -> " + destId.toString() + 
+          " |cffaaaaaa[~" + R2S(totalTime) + "s]|r : " + pathStr)
+
+    new WaypointNavigator(peasant, path)
+
+function onProuteChatCommand()
+    let chatStr = GetEventPlayerChatString()
+    let parts = chatStr.split(" ")
+
+    if parts.size() != 3
+        print("|cffffaa00QirajiColumbus|r Usage: -proute <sourceId> <destId>")
+        return
+
+    let srcId = parts.get(1).toInt()
+    let destId = parts.get(2).toInt()
+
+    if srcId == 0 or destId == 0
+        print("|cffff0000QirajiColumbus|r Invalid IDs. Usage: -proute <sourceId> <destId>")
+        return
+
+    spawnPeasantRoute(srcId, destId)
+
+function registerProuteChatCommand()
+    let t = CreateTrigger()
+    var i = 0
+    while i < bj_MAX_PLAYERS
+        TriggerRegisterPlayerChatEvent(t, Player(i), "-proute", false)
+        i++
+    TriggerAddAction(t, function onProuteChatCommand)
 
 // --- Chat Command: -route <src> <dest> ---
 
@@ -358,13 +467,20 @@ function printRouteCommand(int srcId, int destId)
         print("|cffff0000QirajiColumbus|r No route found from " + srcId.toString() + " to " + destId.toString())
         return
 
+    // CHANGED: include total ETA
+    var totalTime = 0.0
     var pathStr = srcId.toString()
+    var prevId = srcId
     var idx = path.size() - 1
     while idx >= 0
-        pathStr = pathStr + " -> " + path.get(idx).toString()
+        let nodeId = path.get(idx)
+        totalTime += navigationWeights.get(prevId).get(nodeId)
+        pathStr = pathStr + " -> " + nodeId.toString()
+        prevId = nodeId
         idx--
 
-    print("|cff00ff00QirajiColumbus Route (" + srcId.toString() + " -> " + destId.toString() + "):|r " + pathStr)
+    print("|cff00ff00QirajiColumbus Route (" + srcId.toString() + " -> " + destId.toString() + 
+          "):|r " + pathStr + " |cffaaaaaa[~" + R2S(totalTime) + "s]|r")
     destroy path
 
 function onRouteChatCommand()
@@ -392,15 +508,21 @@ function registerRouteChatCommand()
         i++
     TriggerAddAction(t, function onRouteChatCommand)
 
+
+// For any fool that wishes to touch this, loadnavigation map loads a LOCAL cache file not any file inside the actual map or these directorys.
+// If you want to update the pathing map you will have to comment out the loadNavigationMap and call beginAutomatedMapping.
+// For online play we will instead hardcode a built map manually. Look at the file inside your wc3 document custom map data folder, look for wurst/qiraji/aiv2/qirajiroutecache.txt and you will see the map that was generated. You can edit it manually if you want to add/remove links, but be careful as it is easy to break the pathing if you do not know what you are doing.
+// This will be a fucking mess if used online currently and it's not meant to be anything but developer scaffholding.
 init
     doAfter(1.0) ->
         registerRouteChatCommand()
-        beginAutomatedMapping()
+        registerProuteChatCommand()
+        //beginAutomatedMapping()
 
-        // if loadNavigationMap()
-        //     mappingComplete = true
-        //     print("|cff00ffffSubway Breadcrumb Map loaded from cache. Skipping probe rerun.|r")
-        //     startPeasantPathingTest()
-        // else
-        //     print("Mapping cache not found. Starting probe exploration...")
-        //     beginAutomatedMapping()
+        if loadNavigationMap()
+            mappingComplete = true
+            print("|cff00ffffSubway Breadcrumb Map loaded from cache. Skipping probe rerun.|r")
+            startPeasantPathingTest()
+        else
+            print("Mapping cache not found. Starting probe exploration...")
+            beginAutomatedMapping()
