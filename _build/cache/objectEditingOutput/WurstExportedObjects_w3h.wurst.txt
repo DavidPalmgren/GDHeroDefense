@@ -31,24 +31,24 @@ import BuffObjEditing
 
 
 @compiletime function create_w3h_BM03()
-	new BuffDefinition('BM03', 'BOae')
+	new BuffDefinition('BM03', 'Babr')
+	..setName(1, "Trample")
+	..setTooltipNormal(1, "Trampled")
+	..setTooltipNormalExtended(1, "This unit is being crushed underfoot.")
+
+
+@compiletime function create_w3h_BM04()
+	new BuffDefinition('BM04', 'BOae')
 	..setTooltipNormal(1, "Mother's Love")
 	..setTooltipNormalExtended(1, "This unit is under the protective care of a Swarm Mother, attack and movementspeed are increased. Swarmers grow healtheir.")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNAmuletOftheWild.blp")
 
 
-@compiletime function create_w3h_BM04()
-	new BuffDefinition('BM04', 'Bbsk')
+@compiletime function create_w3h_BM05()
+	new BuffDefinition('BM05', 'Bbsk')
 	..setName(1, "Berserk")
 	..setTooltipNormal(1, "This unit is Enraged, It deals increased damage.")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNUnholyFrenzy.blp")
-
-
-@compiletime function create_w3h_BM05()
-	new BuffDefinition('BM05', 'Babr')
-	..setName(1, "Trample")
-	..setTooltipNormal(1, "Trampled")
-	..setTooltipNormalExtended(1, "This unit is being crushed underfoot.")
 
 
 @compiletime function create_w3h_BM06()
@@ -78,8 +78,8 @@ import BuffObjEditing
 	..setTooltipNormalExtended(1, "Malorne's presence invigorates nearby allies healing them and providing protection increasing armor")
 
 
-@compiletime function create_w3h_AM1k()
-	new BuffDefinition('AM1k', 'Bspo')
+@compiletime function create_w3h_AM1l()
+	new BuffDefinition('AM1l', 'Bspo')
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNMoonStone.blp")
 	..setTooltipNormal(1, "Lunar Anchor")
 	..setTooltipNormalExtended(1, "This unit's magic resistance is shattered. Taking increased damage from spells.")
@@ -87,8 +87,8 @@ import BuffObjEditing
 	..setTargetAttachmentPoint0(1, "overhead")
 
 
-@compiletime function create_w3h_AM1l()
-	new BuffDefinition('AM1l', 'Bshp')
+@compiletime function create_w3h_AM1m()
+	new BuffDefinition('AM1m', 'Bshp')
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNMoonStone.blp")
 	..setTooltipNormal(1, "Lunar Anchor")
 	..setTooltipNormalExtended(1, "This hero's magic resistance is shattered. Taking increased damage from spells.")

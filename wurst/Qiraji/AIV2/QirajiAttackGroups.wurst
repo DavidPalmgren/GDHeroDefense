@@ -1,176 +1,176 @@
-package QirajiAttackGroups
+// package QirajiAttackGroups
 
-import ClosureTimers
-import ClosureForGroups
-import LinkedList
-import OrderIds
-import HashMap
-import QirajiWorker
+// import ClosureTimers
+// import ClosureForGroups
+// import LinkedList
+// import OrderIds
+// import HashMap
+// import QirajiWorker
 
-public constant MAX_SQUAD_SIZE = 12 
-public constant MIN_ATTACK_SQUAD_SIZE = 10
-public let activeSquads = new LinkedList<Squad>()
-public let unitEffects = new HashMap<unit, effect>()
-// O(1) Lookup for squad tracking
-public let unitSquadMap = new HashMap<unit, Squad>()
+// public constant MAX_SQUAD_SIZE = 12 
+// public constant MIN_ATTACK_SQUAD_SIZE = 10
+// public let activeSquads = new LinkedList<Squad>()
+// public let unitEffects = new HashMap<unit, effect>()
+// // O(1) Lookup for squad tracking
+// public let unitSquadMap = new HashMap<unit, Squad>()
 
-public let squadVisuals = new LinkedList<string>()
-    ..add("Abilities\\Spells\\Other\\TalkToMe\\TalkToMe.mdl")                  
-    ..add("Abilities\\Spells\\Human\\InnerFire\\InnerFireTarget.mdl")         
-    ..add("Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl")           
-    ..add("Abilities\\Spells\\Undead\\UnholyFrenzy\\UnholyFrenzyTarget.mdl")   
-    ..add("Abilities\\Spells\\NightElf\\ShadowStrike\\ShadowStrikeTarget.mdl") 
+// public let squadVisuals = new LinkedList<string>()
+//     ..add("Abilities\\Spells\\Other\\TalkToMe\\TalkToMe.mdl")                  
+//     ..add("Abilities\\Spells\\Human\\InnerFire\\InnerFireTarget.mdl")         
+//     ..add("Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl")           
+//     ..add("Abilities\\Spells\\Undead\\UnholyFrenzy\\UnholyFrenzyTarget.mdl")   
+//     ..add("Abilities\\Spells\\NightElf\\ShadowStrike\\ShadowStrikeTarget.mdl") 
 
-public enum SquadRole
-    KOS      
-    SIEGE    
-    RESERVE  
+// public enum SquadRole
+//     KOS      
+//     SIEGE    
+//     RESERVE  
 
-public class Squad
-    LinkedList<unit> members = new LinkedList<unit>()
-    unit targetCP = null
-    string fxPath = ""
-    SquadRole role = SquadRole.KOS 
-    player ownerPlayer = null // Track which AI player this squad belongs to
+// public class Squad
+//     LinkedList<unit> members = new LinkedList<unit>()
+//     unit targetCP = null
+//     string fxPath = ""
+//     SquadRole role = SquadRole.KOS 
+//     player ownerPlayer = null // Track which AI player this squad belongs to
 
-    construct(player owner)
-        this.ownerPlayer = owner
-        let index = activeSquads.size() mod squadVisuals.size()
-        fxPath = squadVisuals.get(index)
+//     construct(player owner)
+//         this.ownerPlayer = owner
+//         let index = activeSquads.size() mod squadVisuals.size()
+//         fxPath = squadVisuals.get(index)
     
-    function addUnit(unit u)
-        members.add(u)
-        unitSquadMap.put(u, this) // Track globally
+//     function addUnit(unit u)
+//         members.add(u)
+//         unitSquadMap.put(u, this) // Track globally
         
-        let fx = u.addEffect(fxPath, "overhead")
-        unitEffects.put(u, fx)
+//         let fx = u.addEffect(fxPath, "overhead")
+//         unitEffects.put(u, fx)
         
-        updateUnitSettings(u)
+//         updateUnitSettings(u)
     
 
-    // NEW: gate for whether this squad is allowed to be dispatched
-    function isReadyToAttack() returns boolean
-        return members.size() >= MIN_ATTACK_SQUAD_SIZE
+//     // NEW: gate for whether this squad is allowed to be dispatched
+//     function isReadyToAttack() returns boolean
+//         return members.size() >= MIN_ATTACK_SQUAD_SIZE
 
-    // Keeps unit behavior aligned with current squad role
-    function updateUnitSettings(unit u)
-        if role == SquadRole.KOS
-            u.setAcquireRange(1200.)
-        else
-            u.setAcquireRange(600.)
+//     // Keeps unit behavior aligned with current squad role
+//     function updateUnitSettings(unit u)
+//         if role == SquadRole.KOS
+//             u.setAcquireRange(1200.)
+//         else
+//             u.setAcquireRange(600.)
 
-    function isFull() returns boolean
-        return members.size() >= MAX_SQUAD_SIZE
+//     function isFull() returns boolean
+//         return members.size() >= MAX_SQUAD_SIZE
         
-    function merge(Squad otherSquad)
-        let iter = otherSquad.members.iterator()
-        while iter.hasNext() and not this.isFull()
-            let u = iter.next()
+//     function merge(Squad otherSquad)
+//         let iter = otherSquad.members.iterator()
+//         while iter.hasNext() and not this.isFull()
+//             let u = iter.next()
             
-            iter.remove()
-            if unitEffects.has(u)
-                unitEffects.get(u).destr()
-                unitEffects.remove(u)
-            unitSquadMap.remove(u)
+//             iter.remove()
+//             if unitEffects.has(u)
+//                 unitEffects.get(u).destr()
+//                 unitEffects.remove(u)
+//             unitSquadMap.remove(u)
                 
-            this.addUnit(u)
-        iter.close()
+//             this.addUnit(u)
+//         iter.close()
         
-        if otherSquad.members.isEmpty()
-            activeSquads.remove(otherSquad)
-            destroy otherSquad
+//         if otherSquad.members.isEmpty()
+//             activeSquads.remove(otherSquad)
+//             destroy otherSquad
 
-    function cleanDead()
-        let iter = members.iterator()
-        while iter.hasNext()
-            let u = iter.next()
-            // Dynamically checks against the squad's assigned AI player
-            if not u.isAlive() or u.getOwner() != ownerPlayer
-                if unitEffects.has(u)
-                    unitEffects.get(u).destr()
-                    unitEffects.remove(u)
-                unitSquadMap.remove(u)
-                iter.remove()
-        iter.close()
+//     function cleanDead()
+//         let iter = members.iterator()
+//         while iter.hasNext()
+//             let u = iter.next()
+//             // Dynamically checks against the squad's assigned AI player
+//             if not u.isAlive() or u.getOwner() != ownerPlayer
+//                 if unitEffects.has(u)
+//                     unitEffects.get(u).destr()
+//                     unitEffects.remove(u)
+//                 unitSquadMap.remove(u)
+//                 iter.remove()
+//         iter.close()
 
-    function getStrength() returns int
-        var totalLevel = 0
-        for u in members
-            if u.isAlive()
-                totalLevel += u.getLevel()
-        return totalLevel
+//     function getStrength() returns int
+//         var totalLevel = 0
+//         for u in members
+//             if u.isAlive()
+//                 totalLevel += u.getLevel()
+//         return totalLevel
 
-    function orderAttack()
-        if role == SquadRole.RESERVE or targetCP == null or not targetCP.isAlive()
-            return
+//     function orderAttack()
+//         if role == SquadRole.RESERVE or targetCP == null or not targetCP.isAlive()
+//             return
             
-        var delay = 0.0
-        let targetPos = targetCP.getPos()
+//         var delay = 0.0
+//         let targetPos = targetCP.getPos()
         
-        for u in members
-            let combatant = u
-            let order = combatant.getCurrentOrder()
-            if order == 0 or order == OrderIds.stop
-                doAfter(delay) ->
-                    if combatant.isAlive() // Async safety check
-                        let spread = targetPos.polarOffset(GetRandomReal(0, 360).fromDeg(), GetRandomReal(0, 300))
-                        combatant.issuePointOrder("attackground", spread)
-            delay += 0.1
+//         for u in members
+//             let combatant = u
+//             let order = combatant.getCurrentOrder()
+//             if order == 0 or order == OrderIds.stop
+//                 doAfter(delay) ->
+//                     if combatant.isAlive() // Async safety check
+//                         let spread = targetPos.polarOffset(GetRandomReal(0, 360).fromDeg(), GetRandomReal(0, 300))
+//                         combatant.issuePointOrder("attackground", spread)
+//             delay += 0.1
 
-    ondestroy
-        for u in members
-            if unitEffects.has(u)
-                unitEffects.get(u).destr()
-                unitEffects.remove(u)
-            unitSquadMap.remove(u)
-        destroy members
+//     ondestroy
+//         for u in members
+//             if unitEffects.has(u)
+//                 unitEffects.get(u).destr()
+//                 unitEffects.remove(u)
+//             unitSquadMap.remove(u)
+//         destroy members
 
-// --- RECRUITMENT LOGIC ---
+// // --- RECRUITMENT LOGIC ---
 
-public function assignToSquad(unit u, player aiPlayer)
-    Squad targetSquad = null
+// public function assignToSquad(unit u, player aiPlayer)
+//     Squad targetSquad = null
 
-    // 1. Look for an existing squad belonging to this player with open space
-    for sq in activeSquads
-        if sq.ownerPlayer == aiPlayer and not sq.isFull()
-            targetSquad = sq
-            break
+//     // 1. Look for an existing squad belonging to this player with open space
+//     for sq in activeSquads
+//         if sq.ownerPlayer == aiPlayer and not sq.isFull()
+//             targetSquad = sq
+//             break
 
-    // 2. If no available squad fits, spin up a new one
-    if targetSquad == null
-        targetSquad = new Squad(aiPlayer)
-        activeSquads.add(targetSquad)
+//     // 2. If no available squad fits, spin up a new one
+//     if targetSquad == null
+//         targetSquad = new Squad(aiPlayer)
+//         activeSquads.add(targetSquad)
 
-    targetSquad.addUnit(u)
+//     targetSquad.addUnit(u)
 
-// Periodic consolidation to merge underfilled squads cleanly outside allocation loops
-public function consolidateSquads()
-    if activeSquads.size() <= 1
-        return
+// // Periodic consolidation to merge underfilled squads cleanly outside allocation loops
+// public function consolidateSquads()
+//     if activeSquads.size() <= 1
+//         return
 
-    for i = activeSquads.size() - 1 downto 1
-        let squadA = activeSquads.get(i)
+//     for i = activeSquads.size() - 1 downto 1
+//         let squadA = activeSquads.get(i)
         
-        // FIX: If squadA is already full and ready to rock, leave it alone!
-        if squadA.isFull()
-            continue
+//         // FIX: If squadA is already full and ready to rock, leave it alone!
+//         if squadA.isFull()
+//             continue
 
-        for j = 0 to i - 1
-            let squadB = activeSquads.get(j)
-            if squadA.ownerPlayer == squadB.ownerPlayer and not squadB.isFull()
-                squadB.merge(squadA)
-                break
+//         for j = 0 to i - 1
+//             let squadB = activeSquads.get(j)
+//             if squadA.ownerPlayer == squadB.ownerPlayer and not squadB.isFull()
+//                 squadB.merge(squadA)
+//                 break
 
-public function startRecruitmentLoop(player aiPlayer)
-    // Clean dead units and consolidate empty squad spaces periodically
-    doPeriodically(5.0) cb ->
-        for sq in activeSquads
-            sq.cleanDead()
-        consolidateSquads()
+// public function startRecruitmentLoop(player aiPlayer)
+//     // Clean dead units and consolidate empty squad spaces periodically
+//     doPeriodically(5.0) cb ->
+//         for sq in activeSquads
+//             sq.cleanDead()
+//         consolidateSquads()
 
-    // Allocation loop
-    doPeriodically(10.0) cb ->
-        forUnitsOfPlayer(aiPlayer) (unit u) ->
-            if u.isAlive() and not u.isType(UNIT_TYPE_STRUCTURE) and not unitSquadMap.has(u)
-                if u.getTypeId() != QIRAJI_WORKER_ID
-                    assignToSquad(u, aiPlayer)
+//     // Allocation loop
+//     doPeriodically(10.0) cb ->
+//         forUnitsOfPlayer(aiPlayer) (unit u) ->
+//             if u.isAlive() and not u.isType(UNIT_TYPE_STRUCTURE) and not unitSquadMap.has(u)
+//                 if u.getTypeId() != QIRAJI_WORKER_ID
+//                     assignToSquad(u, aiPlayer)

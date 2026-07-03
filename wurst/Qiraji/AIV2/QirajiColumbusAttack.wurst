@@ -1,211 +1,211 @@
-package QirajiColumbusAttack
+// package QirajiColumbusAttack
 
-import ControlPoint
-import ControlPointExtension
-import HashMap
-import LinkedList
-import ClosureTimers
-import QirajiAttackGroups
-import QirajiColumbus
+// import ControlPoint
+// import ControlPointExtension
+// import HashMap
+// import LinkedList
+// import ClosureTimers
+// //import QirajiAttackGroups
+// import QirajiColumbus
 
-// --- Configuration Constants ---
-let SQUAD_ARRIVAL_THRESHOLD = 350.0
+// // --- Configuration Constants ---
+// let SQUAD_ARRIVAL_THRESHOLD = 350.0
 
-// --- Strategic Path Memory Maps ---
-public let squadPaths = new HashMap<Squad, LinkedList<int>>()
-public let squadFinalTargets = new HashMap<Squad, int>()
+// // --- Strategic Path Memory Maps ---
+// public let squadPaths = new HashMap<Squad, LinkedList<int>>()
+// public let squadFinalTargets = new HashMap<Squad, int>()
 
-// --- Utilities & Math Helpers ---
+// // --- Utilities & Math Helpers ---
 
-/** Calculates the geographic center of mass for all living squad members */
-public function getSquadCenter(Squad sq) returns vec2
-    var center = vec2(0, 0)
-    var count = 0
-    for u in sq.members
-        if u.isAlive()
-            center += u.getPos()
-            count++
+// /** Calculates the geographic center of mass for all living squad members */
+// public function getSquadCenter(Squad sq) returns vec2
+//     var center = vec2(0, 0)
+//     var count = 0
+//     for u in sq.members
+//         if u.isAlive()
+//             center += u.getPos()
+//             count++
     
-    if count > 0
-        return center * (1.0 / count)
+//     if count > 0
+//         return center * (1.0 / count)
         
-    print("|cffff0000[QirajiAttack]|r WARNING: getSquadCenter failed. Squad has 0 living members!")
-    return vec2(0, 0)
+//     print("|cffff0000[QirajiAttack]|r WARNING: getSquadCenter failed. Squad has 0 living members!")
+//     return vec2(0, 0)
 
-/** Sweeps across map indices to resolve the nearest topological Control Point ID */
-public function getClosestControlPointId(vec2 pos) returns int
-    var closestId = -1
-    var minDistSq = 999999999.0
+// /** Sweeps across map indices to resolve the nearest topological Control Point ID */
+// public function getClosestControlPointId(vec2 pos) returns int
+//     var closestId = -1
+//     var minDistSq = 999999999.0
     
-    var i = 1
-    while i <= 67
-        let cpUnit = cpRegistry.get(i)
-        if cpUnit != null
-            let distSq = pos.distanceToSq(cpUnit.getPos())
-            if distSq < minDistSq
-                minDistSq = distSq
-                closestId = i
-        i++
+//     var i = 1
+//     while i <= 67
+//         let cpUnit = cpRegistry.get(i)
+//         if cpUnit != null
+//             let distSq = pos.distanceToSq(cpUnit.getPos())
+//             if distSq < minDistSq
+//                 minDistSq = distSq
+//                 closestId = i
+//         i++
         
-    if closestId == -1
-        print("|cffff0000[QirajiAttack]|r ERROR: Could not resolve closest Control Point ID for vector " + pos.toString())
-    return closestId
+//     if closestId == -1
+//         print("|cffff0000[QirajiAttack]|r ERROR: Could not resolve closest Control Point ID for vector " + pos.toString())
+//     return closestId
 
-// --- Core Routing Mechanics ---
+// // --- Core Routing Mechanics ---
 
-/** Pulls the next node off the calculated stack path and updates squad execution targets */
-function advanceSquadToNextWaypoint(Squad sq)
-    if not squadPaths.has(sq)
-        print("|cffffaa00[QirajiAttack]|r advanceSquadToNextWaypoint called, but squad has no registered path map.")
-        return
+// /** Pulls the next node off the calculated stack path and updates squad execution targets */
+// function advanceSquadToNextWaypoint(Squad sq)
+//     if not squadPaths.has(sq)
+//         print("|cffffaa00[QirajiAttack]|r advanceSquadToNextWaypoint called, but squad has no registered path map.")
+//         return
 
-    let path = squadPaths.get(sq)
-    if path == null or path.isEmpty()
-        let finalDest = squadFinalTargets.has(sq) ? squadFinalTargets.get(sq).toString() : "Unknown"
-        print("|cff00ff00[QirajiAttack]|r SUCCESS: Squad reached final objective Node [" + finalDest + "]. Path cleared.")
-        if path != null
-            destroy path
-        squadPaths.remove(sq)
-        squadFinalTargets.remove(sq)
-        return
+//     let path = squadPaths.get(sq)
+//     if path == null or path.isEmpty()
+//         let finalDest = squadFinalTargets.has(sq) ? squadFinalTargets.get(sq).toString() : "Unknown"
+//         print("|cff00ff00[QirajiAttack]|r SUCCESS: Squad reached final objective Node [" + finalDest + "]. Path cleared.")
+//         if path != null
+//             destroy path
+//         squadPaths.remove(sq)
+//         squadFinalTargets.remove(sq)
+//         return
 
-    // Path lists target at index 0; immediate local steps reside at the tail end
-    let lastIdx = path.size() - 1
-    let nextNodeId = path.get(lastIdx)
-    path.removeAt(lastIdx)
+//     // Path lists target at index 0; immediate local steps reside at the tail end
+//     let lastIdx = path.size() - 1
+//     let nextNodeId = path.get(lastIdx)
+//     path.removeAt(lastIdx)
 
-    let nextCpUnit = cpRegistry.get(nextNodeId)
-    if nextCpUnit != null
-        sq.targetCP = nextCpUnit
-        print("|cff00ffff[QirajiAttack]|r Path update: Squad heading to interim station [" + nextNodeId.toString() + "] " + getControlPointLabel(nextNodeId))
-        sq.orderAttack()
-    else
-        print("|cffffaa00[QirajiAttack]|r WARNING: Node [" + nextNodeId.toString() + "] missing from cpRegistry! Skipping to next waypoint.")
-        advanceSquadToNextWaypoint(sq)
+//     let nextCpUnit = cpRegistry.get(nextNodeId)
+//     if nextCpUnit != null
+//         sq.targetCP = nextCpUnit
+//         print("|cff00ffff[QirajiAttack]|r Path update: Squad heading to interim station [" + nextNodeId.toString() + "] " + getControlPointLabel(nextNodeId))
+//         sq.orderAttack()
+//     else
+//         print("|cffffaa00[QirajiAttack]|r WARNING: Node [" + nextNodeId.toString() + "] missing from cpRegistry! Skipping to next waypoint.")
+//         advanceSquadToNextWaypoint(sq)
 
-/** Plots a multi-stage path from a squad's current location to a destination node */
-public function issueSquadSubwayOrder(Squad sq, int targetCpId)
-    let squadCenter = getSquadCenter(sq)
-    if squadCenter.x == 0.0 and squadCenter.y == 0.0
-        print("|cffff0000[QirajiAttack]|r Order aborted: Squad center is invalid (0,0).")
-        return
+// /** Plots a multi-stage path from a squad's current location to a destination node */
+// public function issueSquadSubwayOrder(Squad sq, int targetCpId)
+//     let squadCenter = getSquadCenter(sq)
+//     if squadCenter.x == 0.0 and squadCenter.y == 0.0
+//         print("|cffff0000[QirajiAttack]|r Order aborted: Squad center is invalid (0,0).")
+//         return
 
-    let startNodeId = getClosestControlPointId(squadCenter)
-    if startNodeId == -1
-        print("|cffff0000[QirajiAttack]|r Order aborted: Unable to find an origin node mapping near squad.")
-        return
+//     let startNodeId = getClosestControlPointId(squadCenter)
+//     if startNodeId == -1
+//         print("|cffff0000[QirajiAttack]|r Order aborted: Unable to find an origin node mapping near squad.")
+//         return
 
-    // Clean up preexisting running path memory allocations
-    if squadPaths.has(sq)
-        print("|cffffaa00[QirajiAttack]|r Overwriting old unfinished path route for Squad.")
-        let oldPath = squadPaths.get(sq)
-        if oldPath != null
-            destroy oldPath
-        squadPaths.remove(sq)
+//     // Clean up preexisting running path memory allocations
+//     if squadPaths.has(sq)
+//         print("|cffffaa00[QirajiAttack]|r Overwriting old unfinished path route for Squad.")
+//         let oldPath = squadPaths.get(sq)
+//         if oldPath != null
+//             destroy oldPath
+//         squadPaths.remove(sq)
 
-    print("|cffffaa00[QirajiAttack]|r Calculating path for Squad from Node [" + startNodeId.toString() + "] -> Target Node [" + targetCpId.toString() + "]...")
-    let newPath = calculateSubwayPath(startNodeId, targetCpId)
+//     print("|cffffaa00[QirajiAttack]|r Calculating path for Squad from Node [" + startNodeId.toString() + "] -> Target Node [" + targetCpId.toString() + "]...")
+//     let newPath = calculateSubwayPath(startNodeId, targetCpId)
     
-    if newPath != null and not newPath.isEmpty()
-        print("|cff00ff00[QirajiAttack]|r Path successfully generated! Total steps: " + newPath.size().toString())
-        squadPaths.put(sq, newPath)
-        squadFinalTargets.put(sq, targetCpId)
-        advanceSquadToNextWaypoint(sq)
-    else
-        print("|cffff0000[QirajiAttack]|r PATHFINDING FAILED: Subway route graph cannot bridge Node [" + startNodeId.toString() + "] to [" + targetCpId.toString() + "]!")
-        if newPath != null
-            destroy newPath
+//     if newPath != null and not newPath.isEmpty()
+//         print("|cff00ff00[QirajiAttack]|r Path successfully generated! Total steps: " + newPath.size().toString())
+//         squadPaths.put(sq, newPath)
+//         squadFinalTargets.put(sq, targetCpId)
+//         advanceSquadToNextWaypoint(sq)
+//     else
+//         print("|cffff0000[QirajiAttack]|r PATHFINDING FAILED: Subway route graph cannot bridge Node [" + startNodeId.toString() + "] to [" + targetCpId.toString() + "]!")
+//         if newPath != null
+//             destroy newPath
 
-// --- Strategic AI Objectives ---
+// // --- Strategic AI Objectives ---
 
-/** Selects an eligible enemy/neutral node and builds a valid subway routing array */
-function assignNewStrategicTarget(Squad sq)
-    let squadCenter = getSquadCenter(sq)
-    if squadCenter.x == 0.0 and squadCenter.y == 0.0
-        return
+// /** Selects an eligible enemy/neutral node and builds a valid subway routing array */
+// function assignNewStrategicTarget(Squad sq)
+//     let squadCenter = getSquadCenter(sq)
+//     if squadCenter.x == 0.0 and squadCenter.y == 0.0
+//         return
 
-    let startNodeId = getClosestControlPointId(squadCenter)
-    if startNodeId == -1
-        return
+//     let startNodeId = getClosestControlPointId(squadCenter)
+//     if startNodeId == -1
+//         return
 
-    print("|cff00ffff[QirajiAttack]|r Squad is currently idle. Scanning map for hostile control points near Node [" + startNodeId.toString() + "]...")
-    var bestTargetId = -1
-    var bestDistSq = 999999999.0
+//     print("|cff00ffff[QirajiAttack]|r Squad is currently idle. Scanning map for hostile control points near Node [" + startNodeId.toString() + "]...")
+//     var bestTargetId = -1
+//     var bestDistSq = 999999999.0
 
-    var i = 1
-    while i <= 67
-        let cpUnit = cpRegistry.get(i)
-        if cpUnit != null and cpUnit.getOwner() != sq.ownerPlayer
-            let distSq = squadCenter.distanceToSq(cpUnit.getPos())
-            if distSq < bestDistSq
-                let testPath = calculateSubwayPath(startNodeId, i)
-                if testPath != null
-                    destroy testPath
-                    bestDistSq = distSq
-                    bestTargetId = i
-        i++
+//     var i = 1
+//     while i <= 67
+//         let cpUnit = cpRegistry.get(i)
+//         if cpUnit != null and cpUnit.getOwner() != sq.ownerPlayer
+//             let distSq = squadCenter.distanceToSq(cpUnit.getPos())
+//             if distSq < bestDistSq
+//                 let testPath = calculateSubwayPath(startNodeId, i)
+//                 if testPath != null
+//                     destroy testPath
+//                     bestDistSq = distSq
+//                     bestTargetId = i
+//         i++
 
-    if bestTargetId != -1
-        print("|cff00ff00[QirajiAttack]|r Strategic target locked! Best choice: Node [" + bestTargetId.toString() + "] " + getControlPointLabel(bestTargetId))
-        issueSquadSubwayOrder(sq, bestTargetId)
-    else
-        print("|cffff0000[QirajiAttack]|r Strategic Scan Error: No enemy or neutral nodes with valid route solutions found on the entire map!")
+//     if bestTargetId != -1
+//         print("|cff00ff00[QirajiAttack]|r Strategic target locked! Best choice: Node [" + bestTargetId.toString() + "] " + getControlPointLabel(bestTargetId))
+//         issueSquadSubwayOrder(sq, bestTargetId)
+//     else
+//         print("|cffff0000[QirajiAttack]|r Strategic Scan Error: No enemy or neutral nodes with valid route solutions found on the entire map!")
 
-// --- Supervisor Engine ---
+// // --- Supervisor Engine ---
 
-/** Runs a background monitor loop guiding active combat squads safely step-by-step */
-public function startSubwayAttackSupervisor(real interval)
-    print("|cff00ff00[QirajiAttack]|r Subway Attack Supervisor Engine Engine Online.")
+// /** Runs a background monitor loop guiding active combat squads safely step-by-step */
+// public function startSubwayAttackSupervisor(real interval)
+//     print("|cff00ff00[QirajiAttack]|r Subway Attack Supervisor Engine Engine Online.")
     
-    doPeriodically(interval) cb ->
-        // Step 1: Memory leaks protection—purge tracking records for disbanded/dead squads
-        let activeIter = activeSquads.iterator()
-        while activeIter.hasNext()
-            let sq = activeIter.next()
-            if sq.members.isEmpty()
-                if squadPaths.has(sq)
-                    print("|cffffaa00[QirajiAttack]|r Cleaning up leaked path allocations for a dead/disbanded Squad.")
-                    let path = squadPaths.get(sq)
-                    if path != null
-                        destroy path
-                    squadPaths.remove(sq)
-                squadFinalTargets.remove(sq)
-        activeIter.close()
+//     doPeriodically(interval) cb ->
+//         // Step 1: Memory leaks protection—purge tracking records for disbanded/dead squads
+//         let activeIter = activeSquads.iterator()
+//         while activeIter.hasNext()
+//             let sq = activeIter.next()
+//             if sq.members.isEmpty()
+//                 if squadPaths.has(sq)
+//                     print("|cffffaa00[QirajiAttack]|r Cleaning up leaked path allocations for a dead/disbanded Squad.")
+//                     let path = squadPaths.get(sq)
+//                     if path != null
+//                         destroy path
+//                     squadPaths.remove(sq)
+//                 squadFinalTargets.remove(sq)
+//         activeIter.close()
 
-        // Step 2: Path progression updates
-        for sq in activeSquads
-            if sq.role == SquadRole.RESERVE
-                continue
+//         // Step 2: Path progression updates
+//         for sq in activeSquads
+//             if sq.role == SquadRole.RESERVE
+//                 continue
                 
-            if sq.members.isEmpty()
-                continue
+//             if sq.members.isEmpty()
+//                 continue
 
-            let center = getSquadCenter(sq)
+//             let center = getSquadCenter(sq)
             
-            // Branch A: Squad is actively moving through calculated node targets
-            if squadPaths.has(sq)
-                let currentInterimTarget = sq.targetCP
-                if currentInterimTarget != null and currentInterimTarget.isAlive()
-                    let distSq = center.distanceToSq(currentInterimTarget.getPos())
+//             // Branch A: Squad is actively moving through calculated node targets
+//             if squadPaths.has(sq)
+//                 let currentInterimTarget = sq.targetCP
+//                 if currentInterimTarget != null and currentInterimTarget.isAlive()
+//                     let distSq = center.distanceToSq(currentInterimTarget.getPos())
                     
-                    // Log current distance tracking to screen every 4 seconds for analysis
-                    let currentTargetId = squadFinalTargets.has(sq) ? squadFinalTargets.get(sq).toString() : "?"
-                    print("[Supervisor Log] Squad moving to interim node. Distance remaining: " + SquareRoot(distSq).toString() + " | Final Goal: Node [" + currentTargetId + "]")
+//                     // Log current distance tracking to screen every 4 seconds for analysis
+//                     let currentTargetId = squadFinalTargets.has(sq) ? squadFinalTargets.get(sq).toString() : "?"
+//                     print("[Supervisor Log] Squad moving to interim node. Distance remaining: " + SquareRoot(distSq).toString() + " | Final Goal: Node [" + currentTargetId + "]")
                     
-                    if distSq <= SQUAD_ARRIVAL_THRESHOLD * SQUAD_ARRIVAL_THRESHOLD
-                        print("|cff00ff00[Supervisor]|r Squad center penetrated arrival radius threshold. Advancing node status.")
-                        advanceSquadToNextWaypoint(sq)
-                    else
-                        // Issue attack refresh order
-                        sq.orderAttack()
-                else
-                    print("|cffffaa00[Supervisor]|r Current target CP vanished, died, or went unassigned mid-route. Forcing advancement.")
-                    advanceSquadToNextWaypoint(sq)
+//                     if distSq <= SQUAD_ARRIVAL_THRESHOLD * SQUAD_ARRIVAL_THRESHOLD
+//                         print("|cff00ff00[Supervisor]|r Squad center penetrated arrival radius threshold. Advancing node status.")
+//                         advanceSquadToNextWaypoint(sq)
+//                     else
+//                         // Issue attack refresh order
+//                         sq.orderAttack()
+//                 else
+//                     print("|cffffaa00[Supervisor]|r Current target CP vanished, died, or went unassigned mid-route. Forcing advancement.")
+//                     advanceSquadToNextWaypoint(sq)
             
-            // Branch B: Squad has reached its goal and is sitting idle—assign new coordinates
-            else
-                if sq.isReadyToAttack()
-                    print("|cff00ffff[Supervisor]|r Detected active unassigned squad. Passing context to Strategic Target Generator.")
-                    assignNewStrategicTarget(sq)
-                else
-                    print("|cffaaaaaa[Supervisor]|r Squad below minimum attack size (" + sq.members.size().toString() + "/" + MIN_ATTACK_SQUAD_SIZE.toString() + "). Holding for reinforcements.")
+//             // Branch B: Squad has reached its goal and is sitting idle—assign new coordinates
+//             else
+//                 if sq.isReadyToAttack()
+//                     print("|cff00ffff[Supervisor]|r Detected active unassigned squad. Passing context to Strategic Target Generator.")
+//                     assignNewStrategicTarget(sq)
+//                 else
+//                     print("|cffaaaaaa[Supervisor]|r Squad below minimum attack size (" + sq.members.size().toString() + "/" + MIN_ATTACK_SQUAD_SIZE.toString() + "). Holding for reinforcements.")

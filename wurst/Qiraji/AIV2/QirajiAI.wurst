@@ -9,8 +9,8 @@ import QirajiUpgradesManagement
 import QirajiRatsInChat
 import QirajiNextTier
 import QirajiFlyerControlPointCheese
-import QirajiAttackGroups
-import QirajiColumbusAttack
+//import QirajiAttackGroups
+//import QirajiColumbusAttack
 import QirajiSouthernSupremacy
 
 import V2QirajiBuild
@@ -18,7 +18,6 @@ import V2QirajiBuild
 public function startQirajiGoldIncome(player aiPlayer)
     doPeriodically(60.0) cb ->
         aiPlayer.addGold(100)
-        printTimed("[QirajiIncome] +300 gold delivered. Total: " + aiPlayer.getGold().toString(), 5.)
 
 init
     
@@ -36,13 +35,12 @@ init
         //startQirajiBaseDefense(qirajiAIPlayer)
         //startQirajiAttackLoop(qirajiAIPlayer)
         //startRecruitmentLoop(qirajiAIPlayer)
-        doPeriodically(5.0) (CallbackPeriodic cb) ->
-            startQirajiTrainLoop(qirajiAIPlayer)
+        startQirajiTrainLoop(qirajiAIPlayer, 7.0)
+        
             
         // Centralized monitoring loops
-        doPeriodically(10.0) (CallbackPeriodic cb) ->
+        doPeriodically(30.0) (CallbackPeriodic cb) ->
             manageQirajiBarracksV2(qirajiAIPlayer)
-            manageQirajiAltar(qirajiAIPlayer)
             manageQirajiBlacksmithsV2(qirajiAIPlayer)
             manageQirajiAltarV2(qirajiAIPlayer)
             manageBlacksmithResearch(qirajiAIPlayer)
@@ -54,4 +52,4 @@ init
                 manageQirajiSupply(qirajiAIPlayer)
             
             // T2
-            startQirajiFlyerCheese(qirajiAIPlayer)
+            //startQirajiFlyerCheese(qirajiAIPlayer)

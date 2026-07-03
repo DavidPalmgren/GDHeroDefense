@@ -2,33 +2,60 @@ package QirajiTrainUnits
 
 import ClosureTimers
 import ClosureForGroups
+import ClosureEvents
+import LinkedList
 import QirajiBuildingIds
 import QirajiTank
 import QirajiDrone
 import QirajiSpitter
-import ClosureEvents
 
-// Which unit each production building trains
+// --- Hatchery Registry ---
+public let hatcheryRegistry = new LinkedList<unit>()
 
+let unitTypesToTrain = new LinkedList<int>()
+    ..add(QIRAJI_TANK_ID)
+    ..add(QIRAJI_DRONE_ID)
+    ..add(QIRAJI_SPITTER_ID)
 
-public function startQirajiTrainLoop(player aiPlayer)
-    let foodCap  = GetPlayerState(aiPlayer, PLAYER_STATE_RESOURCE_FOOD_CAP)
-    let foodUsed = GetPlayerState(aiPlayer, PLAYER_STATE_RESOURCE_FOOD_USED)
+int trainCycleIndex = 0
 
-    // Stop training if we are at or near the food cap
-    if foodUsed >= foodCap - 20
-        return
+function registerHatchery(unit u)
+    if not hatcheryRegistry.has(u)
+        hatcheryRegistry.add(u)
 
-    // Issue train order to every idle hatchery
-    forUnitsOfPlayer(aiPlayer) (unit u) ->
-        if u.isAlive()
-            and u.getTypeId() == QIRAJI_HATCHERY
-            and u.getCurrentOrder() == 0
-            u.issueImmediateOrderById(QIRAJI_TANK_ID)
-            u.issueImmediateOrderById(QIRAJI_DRONE_ID)
-            u.issueImmediateOrderById(QIRAJI_SPITTER_ID)
+function unregisterHatchery(unit u)
+    hatcheryRegistry.remove(u)
 
-  
-// init
-//     EventListener.add(EVENT_PLAYER_UNIT_TRAIN_FINISH, listener) -> 
-        
+public function startQirajiTrainLoop(player aiPlayer, real interval)
+    doPeriodically(interval) cb ->
+        let foodCap  = GetPlayerState(aiPlayer, PLAYER_STATE_RESOURCE_FOOD_CAP)
+        let foodUsed = GetPlayerState(aiPlayer, PLAYER_STATE_RESOURCE_FOOD_USED)
+
+        if foodUsed >= foodCap - 20
+            return
+
+        // Clean dead/invalid hatcheries out of the registry as we go
+        let iter = hatcheryRegistry.iterator()
+        while iter.hasNext()
+            let u = iter.next()
+            if u == null or not u.isAlive() or u.getOwner() != aiPlayer
+                iter.remove()
+            else if u.getCurrentOrder() == 0
+                // Round-robin which unit type gets trained next, instead of
+                // issuing all 3 orders back to back (which silently overwrites
+                // the first two and only ever trains the last one)
+                let typeToTrain = unitTypesToTrain.get(trainCycleIndex)
+                u.issueImmediateOrderById(typeToTrain)
+                trainCycleIndex = (trainCycleIndex + 1) mod unitTypesToTrain.size()
+        iter.close()
+
+init
+    EventListener.add(EVENT_PLAYER_UNIT_CONSTRUCT_FINISH) () ->
+        let u = GetConstructedStructure()
+        if u.getTypeId() == QIRAJI_HATCHERY
+            registerHatchery(u)
+
+    EventListener.add(EVENT_PLAYER_UNIT_DEATH) () ->
+        let u = GetTriggerUnit()
+        if u.getTypeId() == QIRAJI_HATCHERY
+            unregisterHatchery(u)

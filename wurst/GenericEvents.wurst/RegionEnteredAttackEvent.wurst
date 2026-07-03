@@ -1,0 +1,129 @@
+// package RegionEnteredAttackEvent
+
+// import ClosureTimers
+// import ClosureForGroups
+// import LinkedList
+
+
+// // --- Spawn Entry: one unit type + how many to spawn ---
+// class UnitSpawnEntry
+//     int unitId
+//     int count
+
+//     construct(int unitId, int count)
+//         this.unitId = unitId
+//         this.count = count
+
+// // --- Reusable Region Ambush Trigger ---
+// public class RegionAmbush
+//     region triggerRegion
+//     LinkedList<UnitSpawnEntry> spawns = new LinkedList<UnitSpawnEntry>()
+//     vec2 spawnPoint
+//     vec2 attackTarget
+//     bool chaseTriggeringUnit = false   // if true, ignores attackTarget and chases whoever entered
+//     player owner
+//     bool repeatable = false
+//     bool consumed = false
+//     real cooldown = 0.0
+//     real lastTriggerTime = -999999.0
+//     trigger regionTrigger = null
+
+//     construct(region r, vec2 spawnAt)
+//         triggerRegion = r
+//         spawnPoint = spawnAt
+//         attackTarget = spawnAt   // sane default until overridden
+
+//     // --- Builder-style config methods ---
+
+//     function addSpawn(int unitId, int count) returns RegionAmbush
+//         spawns.add(new UnitSpawnEntry(unitId, count))
+//         return this
+
+//     function setAttackTarget(vec2 target) returns RegionAmbush
+//         attackTarget = target
+//         chaseTriggeringUnit = false
+//         return this
+
+//     function setChaseTriggeringUnit(bool value) returns RegionAmbush
+//         chaseTriggeringUnit = value
+//         return this
+
+//     function setOwner(player p) returns RegionAmbush
+//         owner = p
+//         return this
+
+//     function setRepeatable(bool value, real cooldownSeconds) returns RegionAmbush
+//         repeatable = value
+//         cooldown = cooldownSeconds
+//         return this
+
+//     // --- Core Trigger Logic ---
+
+//     function canFire() returns bool
+//         if consumed and not repeatable
+//             return false
+//         if TimerGetElapsed() - lastTriggerTime < cooldown
+//             return false
+//         return true
+
+//     function onRegionEnter()
+//         let triggeringUnit = GetTriggerUnit()
+//         if triggeringUnit == null or not triggeringUnit.isAlive()
+//             return
+//         if not IsUnitEnemy(triggeringUnit, owner) // only fires for actual enemies of the ambush owner
+//             return
+//         if not canFire()
+//             return
+
+//         consumed = true
+//         lastTriggerTime = TimerGetElapsed()
+
+//         // Spawn the configured composition
+//         let spawnedUnits = new LinkedList<unit>()
+//         for entry in spawns
+//             var i = 0
+//             while i < entry.count
+//                 let u = CreateUnit(owner, entry.unitId, spawnPoint.x, spawnPoint.y, bj_UNIT_FACING)
+//                 spawnedUnits.add(u)
+//                 i++
+
+//         // Determine the actual attack destination
+//         let finalTarget = chaseTriggeringUnit ? triggeringUnit.getPos() : attackTarget
+
+//         var delay = 0.0
+//         for u in spawnedUnits
+//             let combatant = u
+//             doAfter(delay) ->
+//                 if combatant.isAlive()
+//                     if chaseTriggeringUnit and triggeringUnit.isAlive()
+//                         combatant.issueTargetOrder("attack", triggeringUnit)
+//                     else
+//                         combatant.issuePointOrder("attack", finalTarget)
+//             delay += 0.1
+
+//         destroy spawnedUnits
+
+//         print("|cffff0000[RegionAmbush]|r Triggered: spawned " + spawnedUnits.size().toString() + " units to attack.")
+
+//     /** Call this once configuration is complete to arm the ambush. */
+//     function activate() returns RegionAmbush
+//         regionTrigger = CreateTrigger()
+//         regionTrigger.registerEnterRegion(triggerRegion, null)
+//         regionTrigger.addAction(() -> this.onRegionEnter())
+//         return this
+
+//     ondestroy
+//         if regionTrigger != null
+//             DestroyTrigger(regionTrigger)
+//         destroy spawns
+
+// init
+//     let ambushRegion = gg_rct_SilithusAmbushZone   // a region placed in the World Editor
+
+//     new RegionAmbush(ambushRegion, vec2(1024, -512))
+//         ..addSpawn(QIRAJI_TANK_ID, 3)
+//         ..addSpawn(QIRAJI_SPITTER_ID, 5)
+//         ..setOwner(qirajiAIPlayer)
+//         ..setChaseTriggeringUnit(true)   // swarm chases whoever tripped it
+//         ..setRepeatable(true, 60.0)      // can re-trigger every 60s
+//         ..activate()

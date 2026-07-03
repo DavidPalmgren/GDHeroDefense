@@ -27,7 +27,6 @@ public function manageQirajiBarracksV2(player aiPlayer)
     else if isSiteEmpty(gg_rct_Barracks2, QIRAJI_HATCHERY, aiPlayer)
         targetSite = gg_rct_Barracks2
 
-    // If both slots are successfully filled, exit macro thread
     if targetSite == null
         return
 
@@ -37,16 +36,15 @@ public function manageQirajiBarracksV2(player aiPlayer)
 
     let buildSite = targetSite.getCenter()
     
-    // Clear out any stray units blocking the exact coordinate placement zone
     scatterIdleUnitsNear(buildSite, builder, aiPlayer, 256.0)
     builder.issuePointOrderById(QIRAJI_HATCHERY, buildSite)
+    RemoveRect(targetSite)
 
 // ============================================================================
 public function manageQirajiBlacksmithsV2(player aiPlayer)
     rect targetSite = null
 
-    // FIX: Changed from Altar to Forge ID. 
-    // (Note: Replace QIRAJI_FORGE with whatever your actual blacksmith rawcode ID is!)
+
     if isSiteEmpty(gg_rct_Smith1, QIRAJI_CARAPACE_CHAMBER, aiPlayer)
         targetSite = gg_rct_Smith1
     else if isSiteEmpty(gg_rct_Smith2, QIRAJI_CARAPACE_CHAMBER, aiPlayer)
@@ -63,6 +61,7 @@ public function manageQirajiBlacksmithsV2(player aiPlayer)
     
     scatterIdleUnitsNear(buildSite, builder, aiPlayer, 256.0)
     builder.issuePointOrderById(QIRAJI_CARAPACE_CHAMBER, buildSite)
+    RemoveRect(targetSite)
 
 // ============================================================================
 public function manageQirajiAltarV2(player aiPlayer)
@@ -83,3 +82,4 @@ public function manageQirajiAltarV2(player aiPlayer)
     
     scatterIdleUnitsNear(buildSite, builder, aiPlayer, 256.0)
     builder.issuePointOrderById(QIRAJI_ALTAR_OF_THE_OLD, buildSite)
+    RemoveRect(targetSite)

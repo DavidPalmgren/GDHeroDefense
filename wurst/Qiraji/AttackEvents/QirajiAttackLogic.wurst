@@ -5,7 +5,7 @@ import ClosureForGroups
 import ControlPoint
 import AssaultForcePlayer
 
-constant real AI_TICK_INTERVAL = 5.
+constant real AI_TICK_INTERVAL = 10.
 constant real CLUSTER_SCAN_RADIUS = 800.
 
 function isEnemyOf(unit u, player forPlayer) returns boolean
@@ -51,7 +51,7 @@ function findEnemyControlPoint(rect r, player forPlayer) returns unit
     for cp in controlPoints
         if RectContainsCoords(r, cp.getX(), cp.getY())
             let owner = cpOwners.get(cp)
-            if owner != forPlayer
+            if owner != null and IsPlayerEnemy(forPlayer, owner)   // CHANGED: actual enemy check, not just "not me"
                 let dist = center.distanceTo(cp.getPos())
                 if dist < bestDist
                     bestDist = dist
@@ -72,11 +72,11 @@ function issueAttackOrders(group srcGroup, player forPlayer, rect targetArea)
         for u in srcGroup
             if u.isAlive()
                 u.issueTargetOrder("attack", target)
-    else
-        let center = targetArea.getCenter()
-        for u in srcGroup
-            if u.isAlive()
-                u.issuePointOrder("attack", center)
+    // else
+    //     let center = targetArea.getCenter()
+    //     for u in srcGroup
+    //         if u.isAlive()
+    //             u.issuePointOrder("attack", center)
 
 function isQirajiUnit() returns boolean
     return GetFilterUnit().getOwner() == QIRAJI_ASSAULT_FORCE_PLAYER and GetFilterUnit().isAlive()

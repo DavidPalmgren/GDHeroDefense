@@ -81,8 +81,8 @@ public function manageQirajiAltar(player aiPlayer)
         return
 
 // printTimed("Issuing build order to: " + builder.getName() + " typeId: " + builder.getTypeId().toString(), 8.)
-    scatterIdleUnitsNear(buildSite, builder, aiPlayer, 300.0)
-    let orderResult = builder.issuePointOrderById(QIRAJI_ALTAR_OF_THE_OLD, buildSite)
+    //scatterIdleUnitsNear(buildSite, builder, aiPlayer, 300.0)
+    //let orderResult = builder.issuePointOrderById(QIRAJI_ALTAR_OF_THE_OLD, buildSite)
 // printTimed("Order result: " + orderResult.toString(), 8.)
 // printTimed("Builder owner: " + builder.getOwner().getName(), 8.)
 // printTimed("aiPlayer: " + aiPlayer.getName(), 8.)

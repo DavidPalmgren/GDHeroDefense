@@ -9,8 +9,9 @@ import SilithidWasp
 constant int  FLYER_ID          = QIRAJI_WASP_ID
 constant int  FLYER_CAP         = 20  // How many we want before attacking
 constant int  FLYER_MINIMUM     = 10  // Minimum to maintain at all times
-constant real CHECK_INTERVAL    = 5.0
-
+constant real CHECK_INTERVAL    = 15.0 
+// this script causes lag on 15s(interval) mark this script will be unused for now
+// fix logic before reapplying this.
 var cheeseAttackLaunched = false
 
 // Moving this to package level makes it mutable inside closures!

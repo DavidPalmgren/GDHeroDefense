@@ -7,6 +7,7 @@ import LinkedList
 import ClosureTimers
 import FileIO
 import StringUtils
+import QirajiRouteCache   // NEW: add this import
 
 // --- Configuration Constants ---
 let PROBE_MAX_RANGE = 8500.0
@@ -517,12 +518,11 @@ init
     doAfter(1.0) ->
         registerRouteChatCommand()
         registerProuteChatCommand()
-        //beginAutomatedMapping()
 
-        if loadNavigationMap()
-            mappingComplete = true
-            print("|cff00ffffSubway Breadcrumb Map loaded from cache. Skipping probe rerun.|r")
-            startPeasantPathingTest()
-        else
-            print("Mapping cache not found. Starting probe exploration...")
-            beginAutomatedMapping()
+        loadHardcodedRouteData()          // CHANGED: hardcoded, works online
+        mappingComplete = true
+        startPeasantPathingTest()
+
+        // Dev-only alternatives, kept for reference:
+        // beginAutomatedMapping()               -- regenerate the graph via probes
+        // loadNavigationMap()                   -- load from local file cache (dev machine only)

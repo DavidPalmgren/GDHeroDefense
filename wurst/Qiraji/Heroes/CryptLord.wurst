@@ -49,7 +49,7 @@ int CRYPT_LORD_ATK_CNT = 0
         ..setIntelligencePerLevel(3.8)
         ..setGoldCost(0)
         ..setLumberCost(0)
-        ..setFoodCost(5)
+        ..setFoodCost(0)
         ..setBuildTime(5)
         ..setCollisionSize(16)
         ..setDefenseBase(2)

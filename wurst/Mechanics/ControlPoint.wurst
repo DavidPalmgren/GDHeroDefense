@@ -4,6 +4,9 @@ import HashMap
 import ClosureTimers
 import AssignBuildings
 
+import QirajiAiPlayerId
+import AssaultForcePlayer
+
 // create Variables and Hashmaps
 public unit target = null
 public group controlPoints = CreateGroup()
@@ -57,7 +60,9 @@ function setupCaptureOnHalf(unit target)
         let hp = GetUnitState(u, UNIT_STATE_LIFE)
         let maxHp = GetUnitState(u, UNIT_STATE_MAX_LIFE)
         if hp / maxHp <= 0.5
-            let newOwner = attacker.getOwner()
+            var newOwner = attacker.getOwner()
+            if newOwner == QIRAJI_ASSAULT_FORCE_PLAYER // This transfer Qiraji event control points to Qiraji Player instead, since even player wont use gold.
+                newOwner = qirajiAIPlayer
             if cpOwners.get(u) != newOwner 
                 cpOwners.put(u, newOwner)
                 SetUnitOwner(u, newOwner, true)
