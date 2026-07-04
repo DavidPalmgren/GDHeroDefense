@@ -14,7 +14,7 @@ import QirajiBuildingIds
 public constant QIRAJI_WORKER_ID = compiletime(UNIT_ID_GEN.next())
 
 @compiletime function genQirajiWorker()
-  new UnitDefinition(QIRAJI_WORKER_ID, UnitIds.peasant)
+  new UnitDefinition(QIRAJI_WORKER_ID, UnitIds.acolyte)
     ..setName("Silithid Hive Tender")
     ..setTooltipBasic("Train Silithid Hive Tender")
     ..setTooltipExtended("The basic workforce of the Qiraji swarm.")
@@ -22,6 +22,9 @@ public constant QIRAJI_WORKER_ID = compiletime(UNIT_ID_GEN.next())
     ..setModelFile("NerubianWorkerV2.mdx")
     ..setCollisionSize(8)
     ..setGoldCost(10)
+    ..setSpeedBase(350)
+    ..setBuildTime(3)
+    ..setHitPointsMaximumBase(300)
     
     // --- LINKING THE BUILDINGS ---
     // Excludes Swarm Core and Hive Imperial since those are mutated directly from the Hive Node

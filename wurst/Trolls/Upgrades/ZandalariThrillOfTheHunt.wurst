@@ -50,7 +50,6 @@ init
             let sfx = killer.addEffect("Abilities\\Spells\\Items\\HealingSalve\\HealingSalveTarget.mdl", "head")
             doAfter(5.0) ->
                 sfx.destr()
-                print("The burning debuff has faded.")
 
 
           

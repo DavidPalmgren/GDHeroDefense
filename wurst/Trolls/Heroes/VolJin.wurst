@@ -4,6 +4,7 @@ import ObjectIdGenerator
 import ObjectIds
 import UnitIds
 import UnitObjEditing
+import AbilityIds
 
 import HexingStrike
 import HealingWave
@@ -15,7 +16,7 @@ public constant VOLJIN_ID = compiletime(UNIT_ID_GEN.next())
 
 @compiletime function gen()
   new HeroDefinition(UnitIds.shadowhunter, UnitIds.shadowhunter)
-    ..setNormalAbilities(commaList(HEXING_STRIKE_ABIL ))
+    ..setNormalAbilities(commaList(HEXING_STRIKE_ABIL, AbilityIds.inventory ))
     ..setHeroAbilities(commaList(HEALING_WAVE, BERSERKERS_FURY, DEATHS_GRASP, BLOOD_PACT))
     ..setManaRegeneration(20)
     ..setAgilityPerLevel(4)

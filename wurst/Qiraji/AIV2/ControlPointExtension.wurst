@@ -30,6 +30,14 @@ public function getControlPointId(unit cp) returns int
         i++
     return -1
 
+public function getControlPointPos(int id) returns vec2
+    let cp = cpRegistry.get(id)
+    if cp != null
+        return cp.getPos()
+    
+    print("|cffff0000[ControlPointExtension]|r ERROR: Attempted to get position for non-existent CP ID: " + id.toString())
+    return vec2(0, 0)
+
 public function getAllControlPoints() returns LinkedList<unit>
     let points = new LinkedList<unit>()
     let maxControlPointId = getRegisteredControlPointCount()

@@ -1,7 +1,8 @@
 package V2QirajiBuild
 
 import QirajiBuildingIds
-import QirajiWorkersUnion 
+import QirajiWorkersUnion
+import ClosureTimers
 
 /** Helper utility to check if a specific World Editor region is already 
     occupied by a living building of a specific type. */
@@ -38,7 +39,7 @@ public function manageQirajiBarracksV2(player aiPlayer)
     
     scatterIdleUnitsNear(buildSite, builder, aiPlayer, 256.0)
     builder.issuePointOrderById(QIRAJI_HATCHERY, buildSite)
-    RemoveRect(targetSite)
+
 
 // ============================================================================
 public function manageQirajiBlacksmithsV2(player aiPlayer)
@@ -61,7 +62,7 @@ public function manageQirajiBlacksmithsV2(player aiPlayer)
     
     scatterIdleUnitsNear(buildSite, builder, aiPlayer, 256.0)
     builder.issuePointOrderById(QIRAJI_CARAPACE_CHAMBER, buildSite)
-    RemoveRect(targetSite)
+
 
 // ============================================================================
 public function manageQirajiAltarV2(player aiPlayer)
@@ -82,4 +83,4 @@ public function manageQirajiAltarV2(player aiPlayer)
     
     scatterIdleUnitsNear(buildSite, builder, aiPlayer, 256.0)
     builder.issuePointOrderById(QIRAJI_ALTAR_OF_THE_OLD, buildSite)
-    RemoveRect(targetSite)
+

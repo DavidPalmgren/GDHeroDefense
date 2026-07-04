@@ -1,0 +1,97 @@
+package CargoQuest
+
+import ItemObjEditing
+import ObjectIdGenerator
+import ClosureTimers
+import ClosureEvents
+import ClosureForGroups
+import Unit
+
+
+public constant int CARGO_ITEM_ID = compiletime(ITEM_ID_GEN.next())
+let CARGO_TURN_IN_REGION = gg_rct_TradePrinceTurnInTanaris
+let CARGO_REWARD_GOLD = 200
+let CARGO_SHOP_UNIT_ID = 'n00G'
+let CARGO_RESTOCK_DELAY = 600.0   // 10 minutes
+
+@compiletime function genCargoItem()
+    new ItemDefinition(CARGO_ITEM_ID, 'I001')
+        ..setName("Cargo")
+        ..setDescription("A heavy, sealed crate of trade goods. Someone in Tanaris is likely expecting this.")
+        ..setTooltipBasic("Cargo")
+        ..setTooltipExtended("A heavy, sealed crate of trade goods. Someone in Tanaris is likely expecting this.")
+        ..setInterfaceIcon("ReplaceableTextures\\CommandButtons\\BTNBarrel.blp")
+        ..setClassification("Miscellaneous")
+        ..setActivelyUsed(false)
+        ..setCanBeDropped(true)
+        ..setDroppedWhenCarrierDies(true)
+        ..setGoldCost(30)   // TODO: set to whatever price the shop should sell it for
+
+function unitHasCargo(unit u) returns item
+    for i = 0 to bj_MAX_INVENTORY - 1
+        let slotItem = UnitItemInSlot(u, i)
+        if slotItem != null and slotItem.getTypeId() == CARGO_ITEM_ID
+            return slotItem
+    return null
+
+function rectToRegion(rect r) returns region
+    let reg = CreateRegion()
+    RegionAddRect(reg, r)
+    return reg
+
+function onCargoTurnIn()
+    let u = GetTriggerUnit()
+    if u == null or not u.isAlive()
+        return
+
+    let cargo = unitHasCargo(u)
+    if cargo == null
+        return
+
+    let owner = u.getOwner()
+    cargo.remove()
+    owner.setGold(owner.getGold() + CARGO_REWARD_GOLD)
+    printTimedToPlayer("|cff00ff00Delivery Complete:|r You have delivered the Cargo to Tanaris. |cffffcc00(+" +
+        CARGO_REWARD_GOLD.toString() + " gold)|r", 5.0, owner)
+
+// CHANGED: uses AddItemToStock (the native behind "Neutral Building - Add Item to Neutral Building")
+// instead of UnitAddItemById, so it properly registers as shop stock with a real current/max count
+function stockCargo(unit shop)
+    if shop.isAlive()
+        AddItemToStock(shop, CARGO_ITEM_ID, 1, 1)
+
+function onSellItem()
+    let seller = GetTriggerUnit()
+    if seller.getTypeId() != CARGO_SHOP_UNIT_ID
+        return
+
+    let soldItem = GetSoldItem()
+    if soldItem.getTypeId() != CARGO_ITEM_ID
+        return
+
+    print("Deliver this cargo to Gadgetzan for a reward of " + CARGO_REWARD_GOLD.toString() + " gold!")
+    doAfter(CARGO_RESTOCK_DELAY) ->
+        stockCargo(seller)
+
+function stockAllExistingShops()
+    let g = CreateGroup()
+    g.enumUnitsOfPlayer(players[27], null)   // TODO: adjust owner filter if shops belong to a different player
+    for u in g
+        //print("n25 unit," + u.getName() + "," + u.getTypeId().toString())
+        if u.getTypeId() == CARGO_SHOP_UNIT_ID
+            stockCargo(u)
+    g.destr()
+
+init
+    doAfter(3) -> 
+      
+        let t = CreateTrigger()
+        t.registerEnterRegion(rectToRegion(CARGO_TURN_IN_REGION), null)
+        t.addAction(function onCargoTurnIn)
+
+        let sellTrigger = CreateTrigger()
+        for i = 0 to bj_MAX_PLAYER_SLOTS - 1
+            TriggerRegisterPlayerUnitEvent(sellTrigger, players[i], EVENT_PLAYER_UNIT_SELL_ITEM, null)
+        sellTrigger.addAction(function onSellItem)
+
+        stockAllExistingShops()

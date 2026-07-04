@@ -1,0 +1,24 @@
+package RunedScroll
+
+import Item
+import ItemIds
+import ItemObjEditing
+import ObjectIdGenerator
+
+
+public constant int RUNED_SCROLL_ID = compiletime(ITEM_ID_GEN.next())
+
+@compiletime function gen()
+  new ItemDefinition(RUNED_SCROLL_ID, ItemIds.cheese)
+    ..setName("[ Quest ] Runed Scroll")
+    ..setDescription("The official-looking scroll is wrapped tightly with a silvery ribbon. You're sure someone would be interested in seeing this.")
+    ..setTooltipBasic("[Quest] Runed Scroll")
+    ..setTooltipExtended("The official-looking scroll is wrapped tightly with a silvery ribbon. You're sure someone would be interested in seeing this.")
+    ..setInterfaceIcon("ReplaceableTextures\\CommandButtons\\BTNScrollOfProtection.blp")
+    ..setClassification("Permanent")
+    ..setActivelyUsed(false)
+    ..setCanBeDropped(true)
+    ..setDroppedWhenCarrierDies(true)
+    ..setGoldCost(10)
+    ..setHitPoints(150)
+    

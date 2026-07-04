@@ -7,18 +7,15 @@ import QirajiWorkersUnion
 constant int FOOD_BUFFER = 30 
 constant int MAP_MAX_FOOD = 200     
 
-
+// BUGGY, REWORK LATER AND REMOVE THIS COMMENT
 
 public function manageQirajiSupply(player aiPlayer)
-
     let foodUsed = aiPlayer.getCurrentSupply()
     let foodCap = aiPlayer.getMaxSupply()
-    //print("Food used: " + foodUsed.toString())
-    //print("Food Cap: " + foodCap.toString())
 
-    // 80 < 100 |                  80 -67 = 13 <= 30
     if foodCap < MAP_MAX_FOOD and (foodCap - foodUsed) <= FOOD_BUFFER
-        let baseCenter = gg_rct_QirajiSpawn.getCenter()
+        // Shift your search root to the center of your designated FarmArea rect
+        let farmAreaCenter = gg_rct_FarmArea.getCenter()
         
         var firstFarmSite = ZERO2
         var farmsOrdered = 0
@@ -28,18 +25,28 @@ public function manageQirajiSupply(player aiPlayer)
             let builder = getAvailableQirajiWorker(aiPlayer)
             
             if builder != null
-                let searchOrigin = (farmsOrdered == 0) ? baseCenter : firstFarmSite + vec2(352.0, 352.0)
+                // If it's the second farm, offset slightly from the center to avoid building overlaps
+                let searchOrigin = (farmsOrdered == 0) ? farmAreaCenter : farmAreaCenter + vec2(256.0, 0.0)
                 
-                var buildSite = findValidBuildSite(searchOrigin, 2, 2, 1024.0, 128.0)
+                // Find a valid build site centered around our FarmArea
+                var buildSite = findValidBuildSite(searchOrigin, 2, 2, 512.0, 128.0)
                 
-                if farmsOrdered == 1 and buildSite.distanceTo(firstFarmSite) < 352.0
-                    let alternateOrigin = firstFarmSite + vec2(-352.0, -352.0)
-                    buildSite = findValidBuildSite(alternateOrigin, 2, 2, 1024.0, 128.0)
+                // Extra safety check: Ensure the found site actually landed inside the FarmArea bounds
+                if not gg_rct_FarmArea.contains(buildSite)
+                    // If the pathing search leaked out of the rect, force a random location explicitly inside the rect
+                    let minX = gg_rct_FarmArea.getMinX() + 128.0
+                    let maxX = gg_rct_FarmArea.getMaxX() - 128.0
+                    let minY = gg_rct_FarmArea.getMinY() + 128.0
+                    let maxY = gg_rct_FarmArea.getMaxY() - 128.0
+                    buildSite = vec2(GetRandomReal(minX, maxX), GetRandomReal(minY, maxY))
                 
-                // Validate that a clean site was actually discovered
-                if buildSite != baseCenter and (farmsOrdered == 0 or buildSite.distanceTo(firstFarmSite) >= 352.0)
-                    // printTimed("|cffffcc00QIRAJI AI:|r Low food capacity! Creating FARM [" + i.toString() + "].", 4.)
-                    
+                // Double check second farm distance to prevent stacking issues
+                if farmsOrdered == 1 and buildSite.distanceTo(firstFarmSite) < 256.0
+                    let alternateOrigin = farmAreaCenter + vec2(-256.0, 0.0)
+                    buildSite = findValidBuildSite(alternateOrigin, 2, 2, 512.0, 128.0)
+                
+                // Validate and command the builder
+                if buildSite != ZERO2
                     scatterIdleUnitsNear(buildSite, builder, aiPlayer, 300.0)
                     builder.issuePointOrderById(QIRAJI_SPAWNING_SAC, buildSite)
                     
@@ -47,4 +54,3 @@ public function manageQirajiSupply(player aiPlayer)
                         firstFarmSite = buildSite
                         
                     farmsOrdered++
-                    

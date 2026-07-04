@@ -1,0 +1,187 @@
+package CentaurCharge
+
+import AbilityObjEditing
+import UnitObjEditing
+import ObjectIdGenerator
+import ClosureTimers
+import ClosureForGroups
+import ClosureEvents
+import HashMap
+import ObjectIds
+import UnitIds
+
+import QirajiColosus
+
+public constant int CENTAUR_CHARGE_ID = compiletime(ABIL_ID_GEN.next())
+public constant int HOOFSTOMP_INDICATOR_ID = compiletime(UNIT_ID_GEN.next())
+
+constant real WINDUP_DURATION = 3
+constant real CHARGE_SPEED = 1400.0
+constant real IMPACT_RANGE = 100.0
+constant real KNOCKBACK_DISTANCE = 250.0
+constant real KNOCKBACK_DURATION = 0.35
+constant real CHARGE_DAMAGE = 150.0
+constant real CHARGE_AOE_RADIUS = 300.0
+constant real CHARGE_AOE_DAMAGE = 75.0
+constant real CHARGE_MAX_DURATION = 5.0          // NEW: hard safety cap, in case something else goes wrong
+
+constant real HOOFSTOMP_RADIUS = 500.0
+constant int  HOOFSTOMP_MIN_TARGETS = 5
+constant real HOOFSTOMP_DAMAGE = 100.0
+constant real HOOFSTOMP_DELAY = 1.0
+constant real HOOFSTOMP_INDICATOR_SCALE = 10.0    // NEW: tune this empirically, see note below
+constant string HOOFSTOMP_EFFECT = "Abilities\\Spells\\Orc\\WarStomp\\WarStompCaster.mdl"
+
+class BoolBox
+    bool value = false
+
+class IntBox
+    int value = 0
+
+class PosBox                      // NEW: needed to freeze the destination once target dies
+    vec2 value
+
+class RealBox                     // NEW: tracks elapsed time for the safety timeout
+    real value = 0.0
+
+@compiletime function gen()
+  new AbilityDefinitionFireBolt(CENTAUR_CHARGE_ID)
+    ..setName("Charge")
+    ..setTooltipNormal(1, "Charge at the enemy, knocking them back.")
+    ..setTooltipNormalExtended(1, "The Centaur charges at the enemy, knocking them back and dealing damage.")
+    ..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNCharge.blp")
+
+  new UnitDefinition(HOOFSTOMP_INDICATOR_ID, 'nfac')
+    ..setModelFile("Skill_Indicator_Circle.mdx")
+    ..setNormalAbilities(commaList('Aloc', 'Avul'))
+    ..setFoodCost(0)
+    ..setCollisionSize(0.0)
+    ..setScalingValue(1.0)   // CHANGED: baseline of 1.0 - all actual sizing now controlled at runtime via setScale, so the two mechanisms don't fight each other
+    ..setAnimationCastBackswing(0.0)
+    ..setAnimationCastPoint(0.0)
+    ..setManaMaximum(1000)
+    ..setManaInitialAmount(1000)
+
+function applyKnockback(unit victim, angle knockbackAngle)
+    victim.setPathing(false)
+    let totalTicks = (KNOCKBACK_DURATION / 0.03).toInt()
+    let distancePerTick = KNOCKBACK_DISTANCE / totalTicks
+
+    doPeriodicallyTimed(ANIMATION_PERIOD, KNOCKBACK_DURATION, (cb) -> begin
+        if victim.isAlive()
+            let nextPos = victim.getPos().polarOffset(knockbackAngle, distancePerTick)
+            victim.setPos(nextPos)
+        if cb.isLast()
+            victim.setPathing(true)
+    end)
+
+function damageNearbyEnemies(unit caster, vec2 pos, HashMap<unit, bool> alreadyHit)
+    forUnitsInRange(pos, CHARGE_AOE_RADIUS) (unit u) ->
+        if u.isAlive() and u.isEnemyOf(caster.getOwner()) and not u.isType(UNIT_TYPE_STRUCTURE)
+            if not alreadyHit.has(u)
+                alreadyHit.put(u, true)
+                caster.damageTarget(u, CHARGE_AOE_DAMAGE, false, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS)
+
+function countNearbyEnemies(unit caster, vec2 pos, real radius) returns int
+    let box = new IntBox()
+    forUnitsInRange(pos, radius) (unit u) ->
+        if u.isAlive() and u.isEnemyOf(caster.getOwner()) and not u.isType(UNIT_TYPE_STRUCTURE)
+            box.value++
+    let result = box.value
+    destroy box
+    return result
+
+function doHoofstompDamage(unit caster)
+    if not caster.isAlive()
+        return
+
+    let pos = caster.getPos()
+    let eff = addEffect(HOOFSTOMP_EFFECT, pos)
+        ..setScale(2.0)
+    eff.destr()
+
+    forUnitsInRange(pos, HOOFSTOMP_RADIUS) (unit u) ->
+        if u.isAlive() and u.isEnemyOf(caster.getOwner()) and not u.isType(UNIT_TYPE_STRUCTURE)
+            caster.damageTarget(u, HOOFSTOMP_DAMAGE, false, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS)
+
+function hoofstomp(unit caster)
+    let pos = caster.getPos()
+    let indicator = createUnit(caster.getOwner(), HOOFSTOMP_INDICATOR_ID, pos)
+        ..setScale(HOOFSTOMP_INDICATOR_SCALE)   // CHANGED: restored the runtime scale call, driven by the tunable constant
+
+    doAfter(HOOFSTOMP_DELAY) ->
+        indicator.remove()
+        doHoofstompDamage(caster)
+
+init
+  EventListener.onTargetCast(CENTAUR_CHARGE_ID) (unit caster, unit target) ->
+    caster.pause()
+
+    let startPos = caster.getPos()
+    let angle = startPos.angleTo(target.getPos())
+    let effectUnit = createUnit(caster.getOwner(), QIRAJI_COLOSUS_CHARGE_INDICATOR_ID, startPos, angle)
+
+    doAfter(WINDUP_DURATION) ->
+        effectUnit.remove()
+
+        if not caster.isAlive()
+            caster.unpause()
+            return
+
+        caster.unpause()
+        caster.setPathing(false)
+
+        let distancePerTick = CHARGE_SPEED * ANIMATION_PERIOD
+        let impactBox = new BoolBox()
+        let hitUnits = new HashMap<unit, bool>()
+        let destBox = new PosBox()
+        destBox.value = target.getPos()   // NEW: frozen destination, updates while target lives
+        let elapsedBox = new RealBox()                        // NEW: safety timeout tracker
+
+        doPeriodically(ANIMATION_PERIOD) (CallbackPeriodic cb) ->
+            elapsedBox.value += ANIMATION_PERIOD
+
+            if not caster.isAlive() or impactBox.value
+                destroy cb
+                return
+
+            // NEW: hard safety cutoff - guarantees the charge always terminates no matter what
+            if elapsedBox.value >= CHARGE_MAX_DURATION
+                impactBox.value = true
+                destroy cb
+                caster.setPathing(true)
+                return
+
+            let currentPos = caster.getPos()
+
+            // CHANGED: only track the target's live position while it's alive.
+            // Once it dies, destBox.value stays frozen at its last known position instead
+            // of being recalculated relative to the caster every tick (which was the bug -
+            // that recalculation made the destination retreat at the same speed the caster
+            // approached it, so distToTarget never shrank and the charge never ended).
+            if target.isAlive()
+                destBox.value = target.getPos()
+
+            let targetPos = destBox.value
+            let distToTarget = currentPos.distanceTo(targetPos)
+
+            damageNearbyEnemies(caster, currentPos, hitUnits)
+
+            if distToTarget <= IMPACT_RANGE
+                impactBox.value = true
+                destroy cb
+                caster.setPathing(true)
+
+                if target.isAlive()
+                    let hitAngle = caster.getPos().angleTo(target.getPos())
+                    caster.damageTarget(target, CHARGE_DAMAGE, false, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS)
+                    applyKnockback(target, hitAngle)
+
+                if caster.isAlive()
+                    let nearbyCount = countNearbyEnemies(caster, caster.getPos(), HOOFSTOMP_RADIUS)
+                    if nearbyCount >= HOOFSTOMP_MIN_TARGETS
+                        hoofstomp(caster)
+            else
+                let chargeAngle = currentPos.angleTo(targetPos)
+                let nextPos = currentPos.polarOffset(chargeAngle, distancePerTick)
+                caster.setPos(nextPos)

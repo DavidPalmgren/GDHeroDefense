@@ -1,0 +1,7 @@
+package CentaurID
+
+import ObjectIdGenerator
+
+public constant int CENTAUR_HERO_ID = compiletime(UNIT_ID_GEN.next())
+public constant int CENTAUR_MELEE_ID = compiletime(UNIT_ID_GEN.next())
+public constant int CENTAUR_RANGED_ID = compiletime(UNIT_ID_GEN.next())

@@ -1,0 +1,119 @@
+package RunedScrollQuest
+
+import RunedScroll
+import ClosureEvents
+import HashMap
+import ClosureForGroups
+import LinkedList
+
+let FEATHERMOON_REGION = gg_rct_FeathermoonTurnIn
+let OGRIMMAR_REGION = gg_rct_OgrimmarTurnIn
+let SCROLL_REWARD_GOLD = 200
+
+let turnInLookup = new HashMap<trigger, TurnInRegion>()
+
+// NEW: the possible Feathermoon Stronghold guardian unit type IDs
+let FEATHERMOON_GUARDIAN_IDS = new LinkedList<int>()
+    ..add('e00M')
+    ..add('e00H')
+    ..add('e00N')
+
+class BoolBox
+    bool value = false
+
+function unitHasRunedScroll(unit u) returns item
+    for i = 0 to bj_MAX_INVENTORY - 1
+        let slotItem = UnitItemInSlot(u, i)
+        if slotItem != null and slotItem.getTypeId() == RUNED_SCROLL_ID
+            return slotItem
+    return null
+
+function rectToRegion(rect r) returns region
+    let reg = CreateRegion()
+    RegionAddRect(reg, r)
+    return reg
+
+// NEW: checks whether any living Feathermoon guardian unit exists inside the given rect
+function isFeathermoonAlive(rect r) returns bool
+    let box = new BoolBox()
+    let g = CreateGroup()
+    g.enumUnitsInRect(r, null)
+
+    for u in g
+        if u.isAlive() and FEATHERMOON_GUARDIAN_IDS.has(u.getTypeId())
+            box.value = true
+
+    g.destr()
+    let result = box.value
+    destroy box
+    return result
+
+class TurnInRegion
+    race requiredRace
+    string destinationName
+    rect checkRect          // NEW: rect to verify the stronghold is still standing, null if not required
+    trigger regionTrigger
+
+    construct(rect r, race requiredRace, string destinationName, rect checkRect)   // CHANGED: added checkRect param
+        this.requiredRace = requiredRace
+        this.destinationName = destinationName
+        this.checkRect = checkRect
+
+        regionTrigger = CreateTrigger()
+        regionTrigger.registerEnterRegion(rectToRegion(r), null)
+        turnInLookup.put(regionTrigger, this)
+        regionTrigger.addAction(function onTurnInTrigger)
+
+    function onEnter()
+        let u = GetTriggerUnit()
+        if u == null or not u.isAlive()
+            return
+
+        let scroll = unitHasRunedScroll(u)
+        if scroll == null
+            return
+
+        let owner = u.getOwner()
+        if GetPlayerRace(owner) != requiredRace
+            printTimedToPlayer("The scroll seems out of place here...", 4.0, owner)
+            return
+
+        // NEW: verify the stronghold guardian is still alive before allowing turn-in
+        if checkRect != null and not isFeathermoonAlive(checkRect)
+            printTimedToPlayer("|cffff0000Feathermoon Stronghold has fallen...|r There is no one left here to receive the scroll.", 5.0, owner)
+            return
+
+        scroll.remove()
+        owner.setGold(owner.getGold() + SCROLL_REWARD_GOLD)
+        printTimedToPlayer("|cff00ff00Quest Complete:|r You have delivered the Runed Scroll to " + destinationName +
+            ". |cffffcc00(+" + SCROLL_REWARD_GOLD.toString() + " gold)|r", 5.0, owner)
+
+function onTurnInTrigger()
+    let firedTrigger = GetTriggeringTrigger()
+    let config = turnInLookup.get(firedTrigger)
+    if config != null
+        config.onEnter()
+
+function onPickupItem()
+    let pickedItem = GetManipulatedItem()
+    if pickedItem.getTypeId() != RUNED_SCROLL_ID
+        return
+
+    let u = GetTriggerUnit()
+    let owner = u.getOwner()
+
+    if GetPlayerRace(owner) == RACE_NIGHTELF
+        printTimedToPlayer("|cffffcc00Quest:|r This scroll should be returned to Feathermoon Stronghold.", 6.0, owner)
+    else if GetPlayerRace(owner) == RACE_ORC
+        printTimedToPlayer("|cffffcc00Quest:|r This scroll should be returned to Ogrimmar.", 6.0, owner)
+    else
+        printTimedToPlayer("|cffffcc00Quest:|r This scroll seems important to someone... but you're not sure who.", 6.0, owner)
+
+init
+    new TurnInRegion(FEATHERMOON_REGION, RACE_NIGHTELF, "Feathermoon Stronghold", FEATHERMOON_REGION)   // CHANGED: passes its own rect as the check
+    new TurnInRegion(OGRIMMAR_REGION, RACE_ORC, "Ogrimmar ", null)   // CHANGED: no guardian check for Ogrimmar
+
+    let pickupTrigger = CreateTrigger()
+    for i = 0 to bj_MAX_PLAYER_SLOTS - 1
+        TriggerRegisterPlayerUnitEvent(pickupTrigger, players[i], EVENT_PLAYER_UNIT_PICKUP_ITEM, null)
+    pickupTrigger.addAction(function onPickupItem)

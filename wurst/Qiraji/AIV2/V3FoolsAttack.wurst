@@ -67,7 +67,7 @@ function dispatchUnit(unit u)
         if path != null
             destroy path
 
-    u.issueTargetOrder("attack", objective)
+    u.issuePointOrder("attack", objective.getPos())
 
 // NEW: cheap enumeration only — just enqueues candidates, does no heavy work
 function sweepAttackWave()

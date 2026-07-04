@@ -1,0 +1,44 @@
+package AOPatrol
+
+import ClosureTimers
+import ControlPointExtension
+import ClosureForGroups
+import ItemIds
+import RunedScroll
+
+
+import AOUnitDefinition
+import CentaurPatrol   // reuse SquadPatrol
+
+// TODO: replace with the player who should own these units
+constant player AO_OWNER = players[22]
+
+// TODO: replace with your actual patrol endpoint control point IDs
+constant vec2 AO_SPAWN_CP = gg_rct_AOPatrol1.getCenter()
+constant vec2 AO_TARGET_CP = gg_rct_AOPatrol2.getCenter()
+
+init
+    let spawnPos = AO_SPAWN_CP
+    let targetPos = AO_TARGET_CP
+
+    let ao_unit0 = CreateUnit(AO_OWNER, AO1_UNIT_ID, spawnPos.x, spawnPos.y, bj_UNIT_FACING)
+    let ao_unit1 = CreateUnit(AO_OWNER, AO2_UNIT_ID, spawnPos.x, spawnPos.y, bj_UNIT_FACING)
+    let ao_unit2 = CreateUnit(AO_OWNER, AO3_UNIT_ID, spawnPos.x, spawnPos.y, bj_UNIT_FACING)
+    let ao_unit3 = CreateUnit(AO_OWNER, AO4_UNIT_ID, spawnPos.x, spawnPos.y, bj_UNIT_FACING)
+
+    ao_unit2.addItemById(ItemIds.alleriasFluteofAccuracy)
+    ao_unit2.addItemById(RUNED_SCROLL_ID)
+
+
+    doAfter(5.0) ->
+        RemoveGuardPosition(ao_unit0)
+        RemoveGuardPosition(ao_unit1)
+        RemoveGuardPosition(ao_unit2)
+        RemoveGuardPosition(ao_unit3)
+
+        let patrol = new SquadPatrol(spawnPos, targetPos)
+            ..addMember(ao_unit0)
+            ..addMember(ao_unit1)
+            ..addMember(ao_unit2)
+            ..addMember(ao_unit3)
+        patrol.start()

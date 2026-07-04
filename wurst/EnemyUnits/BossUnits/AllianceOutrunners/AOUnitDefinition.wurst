@@ -1,0 +1,69 @@
+package AOUnitDefinition
+
+import UnitObjEditing
+import ObjectIdGenerator
+import AbilityIds
+import Player
+import ObjectIds
+
+public constant int AO1_UNIT_ID = compiletime(UNIT_ID_GEN.next())
+public constant int AO2_UNIT_ID = compiletime(UNIT_ID_GEN.next())
+public constant int AO3_UNIT_ID = compiletime(UNIT_ID_GEN.next())
+public constant int AO4_UNIT_ID = compiletime(UNIT_ID_GEN.next())
+
+
+@compiletime function gen()
+  new UnitDefinition(AO1_UNIT_ID, 'esen')
+    ..setName("Thora Feathermoon")
+    ..setSpeedBase(300)
+    ..setAttack1DamageBase(50)
+    ..setAttack1AttackType(AttackType.Normal)
+    ..setHitPointsMaximumBase(900)
+    ..setHitPointsRegenerationRate(5)
+    ..setSleeps(false)
+    ..setCollisionSize(8)
+    ..setAttack1DamageBase(50)
+    ..setNormalAbilities(commaList(AbilityIds.moonGlaive))
+
+
+  new UnitDefinition(AO2_UNIT_ID, 'esen')
+    ..setName("Hannah Bladeleaf")
+    ..setSleeps(false)
+    ..setSpeedBase(300)
+    ..setCollisionSize(8)
+    ..setHitPointsMaximumBase(900)
+    ..setHitPointsRegenerationRate(5)
+    ..setAttack1DamageBase(50)
+    ..setNormalAbilities(commaList(AbilityIds.moonGlaive))
+  
+  new UnitDefinition(AO3_UNIT_ID, 'esen')
+    ..setName("Aean Swiftriver")
+    ..setModelFile("units\\nightelf\\HeroMoonPriestess\\HeroMoonPriestess.mdl")
+    ..setUnitSoundSet("HeroMoonPriestess")
+    ..setAttack1ProjectileArt("Abilities\\Weapons\\MoonPriestessMissile\\MoonPriestessMissile.mdl")
+    ..setAttack1CooldownTime(1)
+    ..setSpeedBase(300)
+    ..setHitPointsMaximumBase(1400)
+    ..setHitPointsRegenerationRate(7)
+    ..setAttack1AttackType(AttackType.Hero)
+    ..setCollisionSize(8)
+    ..setArmorType(ArmorType.Normal)
+    ..setDefenseBase(5)
+    ..setAttack1DamageBase(60)
+    ..setNormalAbilities(commaList(AbilityIds.searingArrows, AbilityIds.inventory))
+    ..setCanDropItemsOnDeath(true)
+
+  new UnitDefinition(AO4_UNIT_ID, 'nhym')
+    ..setName("Marcus Bel")
+    ..setSpeedBase(300)
+    ..setSleeps(false)
+    ..setCollisionSize(8)
+    ..setAttack1DamageBase(40)
+    ..setHitPointsMaximumBase(800)
+    ..setManaRegeneration(5)
+
+
+
+
+init
+  SetPlayerTechResearched(players[22], 'Remg', 1)

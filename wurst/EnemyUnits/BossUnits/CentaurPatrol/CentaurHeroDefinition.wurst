@@ -1,0 +1,37 @@
+package CentaurHeroDefinition
+
+import UnitObjEditing
+import ObjectIds
+import AbilityIds
+import ItemIds
+import Item
+import ItemObjEditing
+
+import CentaurCharge
+import CentaurID
+
+@compiletime function gen()
+  new UnitDefinition(CENTAUR_HERO_ID, 'ncnk')
+    ..setName("Plight of the Plaines")
+    ..setSpeedBase(360)
+    ..setAttack1DamageBase(50)
+
+    ..setAttack1AttackType(AttackType.Chaos)
+    ..setHitPointsMaximumBase(2300)
+    ..setHitPointsRegenerationRate(5)
+    ..setSleeps(false)
+    ..setCollisionSize(16)
+
+    ..setNormalAbilities(commaList(CENTAUR_CHARGE_ID, AbilityIds.commandAura, AbilityIds.thornyShieldDragonTurtle, AbilityIds.inventory))
+  
+  new UnitDefinition(CENTAUR_MELEE_ID, 'ncen')
+    ..setSleeps(false)
+    ..setSpeedBase(360)
+    ..setCollisionSize(8)
+
+
+  new UnitDefinition(CENTAUR_RANGED_ID, 'ncim')
+    ..setSleeps(false)
+    ..setSpeedBase(360)
+    ..setCollisionSize(8)
+

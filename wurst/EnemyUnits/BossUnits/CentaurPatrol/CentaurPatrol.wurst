@@ -1,0 +1,100 @@
+package CentaurPatrol
+
+import Orders
+import OrderIds
+import OrderStringFactory
+import ClosureTimers
+import ControlPointExtension
+import UnitIndexer
+import LinkedList
+
+import CentaurID
+import ClosureForGroups
+
+import Item
+import ItemIds
+
+constant player CENTAUR_OWNER = players[23]
+constant real PATROL_ARRIVAL_THRESHOLD = 450.0
+constant real PATROL_WAIT_DURATION = 30.0
+constant real PATROL_CHECK_INTERVAL = 10
+
+// --- Synchronized Squad Patrol Controller ---
+public class SquadPatrol
+    LinkedList<unit> members = new LinkedList<unit>()
+    vec2 pointA
+    vec2 pointB
+    vec2 currentDest
+    bool waiting = false
+
+    construct(vec2 a, vec2 b)
+        pointA = a
+        pointB = b
+        currentDest = b   // first leg heads toward B
+
+    function addMember(unit u) returns SquadPatrol
+        members.add(u)
+        return this
+
+    function allArrived() returns bool
+        for u in members
+            if u.isAlive() and u.getPos().distanceTo(currentDest) > PATROL_ARRIVAL_THRESHOLD
+                return false
+        return true
+
+    function issueMoveToAll(vec2 dest)
+        for u in members
+            if u.isAlive()
+                u.issuePointOrderById(OrderIds.attack, dest)
+
+    function start()
+        issueMoveToAll(currentDest)
+
+        doPeriodically(PATROL_CHECK_INTERVAL) (CallbackPeriodic cb) ->
+            var anyAlive = false
+            for u in members
+                if u.isAlive()
+                    anyAlive = true
+            if not anyAlive
+                destroy cb
+                return
+
+            if not waiting and this.allArrived()
+                waiting = true
+                doAfter(PATROL_WAIT_DURATION) ->
+                    currentDest = (currentDest == pointA) ? pointB : pointA
+                    this.issueMoveToAll(currentDest)
+                    waiting = false
+
+init
+    let spawnPos = getControlPointPos(27)
+    let targetPos = getControlPointPos(54)
+
+    SetPlayerAlliance(CENTAUR_OWNER, players[24], ALLIANCE_PASSIVE, true)
+    SetPlayerAlliance(CENTAUR_OWNER, players[24], ALLIANCE_SHARED_VISION, true)
+    SetPlayerAlliance(players[24], CENTAUR_OWNER, ALLIANCE_PASSIVE, true)
+    SetPlayerAlliance(players[24], CENTAUR_OWNER, ALLIANCE_SHARED_VISION, true)
+
+    let centaur_hero   = CreateUnit(CENTAUR_OWNER, CENTAUR_HERO_ID, spawnPos.x, spawnPos.y, bj_UNIT_FACING)
+    let centaur_unit0  = CreateUnit(CENTAUR_OWNER, CENTAUR_MELEE_ID, spawnPos.x, spawnPos.y, bj_UNIT_FACING)
+    let centaur_unit1  = CreateUnit(CENTAUR_OWNER, CENTAUR_MELEE_ID, spawnPos.x, spawnPos.y, bj_UNIT_FACING)
+    let centaur_unit2  = CreateUnit(CENTAUR_OWNER, CENTAUR_RANGED_ID, spawnPos.x, spawnPos.y, bj_UNIT_FACING)
+    let centaur_unit3  = CreateUnit(CENTAUR_OWNER, CENTAUR_RANGED_ID, spawnPos.x, spawnPos.y, bj_UNIT_FACING)
+
+    centaur_hero.addItemById(ItemIds.ancientJanggoofEndurance)
+
+    doAfter(5.0) ->
+        RemoveGuardPosition(centaur_hero)
+        RemoveGuardPosition(centaur_unit0)
+        RemoveGuardPosition(centaur_unit1)
+        RemoveGuardPosition(centaur_unit2)
+        RemoveGuardPosition(centaur_unit3)
+
+        // CHANGED: replaced native patrol orders with the synchronized controller
+        let patrol = new SquadPatrol(spawnPos, targetPos)
+            ..addMember(centaur_hero)
+            ..addMember(centaur_unit0)
+            ..addMember(centaur_unit1)
+            ..addMember(centaur_unit2)
+            ..addMember(centaur_unit3)
+        patrol.start()

@@ -1,0 +1,94 @@
+package TradePrince
+
+import UnitObjEditing
+import AbilityObjEditing
+import ObjectIdGenerator
+import UnitIds
+import AbilityIds
+import Item
+import Icons
+import OrderIds
+import ClosureEvents
+
+
+//goblin worker so cool https://www.hiveworkshop.com/threads/goblinclobber.263164/
+// this also so good like pog https://www.hiveworkshop.com/threads/day-laborer.241876/
+
+
+public constant int TRADE_PRINCE_HERO_ID = compiletime(HERO_ID_GEN.next())
+public constant int GOBLIN_SHOOTER = compiletime(UNIT_ID_GEN.next())
+
+let ENFORCER_SPAWN_COUNT = 6
+let ENFORCER_SPAWN_SPREAD = 200.0
+var tradePrinceTurned = false
+
+@compiletime function createTradePrinceHero()
+    new HeroDefinition(TRADE_PRINCE_HERO_ID, UnitIds.tinker)
+        ..setName("Trade Prince")
+        ..setProperNames("Bobby Kotick")
+        ..setProperNamesUsed(1)
+        ..setModelFile("GoblinEmperorV2.mdx")
+        ..setTooltipBasic("Summon |cffffcc00Trade Prince|r")
+        ..setTooltipExtended("A cunning goblin magnate who has clawed his way to the top through gold, gadgets, and ruthless ambition.")
+        //..setHeroAbilities(commaList(AbilityIds.roboGoblin, AbilityIds.clusterRockets, AbilityIds.pocketFactory, AbilityIds.tinkerUltimate))
+        ..setPrimaryAttribute("INT")
+        ..setArmorType(ArmorType.Fortified)
+        ..setStartingStrength(20)
+        ..setStrengthPerLevel(2.8)
+        ..setStartingAgility(16)
+        ..setHitPointsMaximumBase(2250)
+        ..setAgilityPerLevel(1.8)
+        ..setStartingIntelligence(24)
+        ..setIntelligencePerLevel(3.4)
+        ..setGoldCost(0)
+        ..setLumberCost(0)
+        ..setFoodCost(5)
+        ..setBuildTime(5)
+        ..setCollisionSize(16)
+        ..setDefenseBase(2)
+        ..setAttack1DamageBase(20)
+        ..setAttack1CooldownTime(1.70)
+        ..setAttack1Range(600)
+
+    new UnitDefinition(GOBLIN_SHOOTER, 'hrif')
+        ..setName("Goblin Shooter")
+        ..setModelFile("GoblinShooter.mdx")
+        ..setSpeedBase(300)
+        ..setHitPointsMaximumBase(600)
+        ..setHitPointsRegenerationRate(1)
+        ..setAttack1DamageBase(55)
+        ..setAttack1CooldownTime(1.2)
+        ..setAttack1Range(400)
+        ..setCollisionSize(8)
+
+// NEW: spawns the Trade Prince at the TradePrince rect, owned by Neutral Passive
+function onTradePrinceAttacked()
+    let victim = GetTriggerUnit()
+    if victim.getTypeId() != TRADE_PRINCE_HERO_ID
+        return
+    if tradePrinceTurned
+        return
+
+    tradePrinceTurned = true
+
+    let hostilePlayer = Player(24)   // Neutral Hostile
+    let pos = victim.getPos()
+
+    SetUnitOwner(victim, hostilePlayer, true)
+    printTimedToPlayer("|cffff0000The Trade Prince turns hostile!|r His goblin enforcers rush to his defense.", 5.0, GetTriggerPlayer())
+
+    var spawned = 0
+    while spawned < ENFORCER_SPAWN_COUNT
+        let offsetAngle = GetRandomReal(0, 360).fromDeg()
+        let offsetDist = GetRandomReal(0, ENFORCER_SPAWN_SPREAD)
+        let spawnPos = pos.polarOffset(offsetAngle, offsetDist)
+        let enforcer = CreateUnit(hostilePlayer, GOBLIN_SHOOTER, spawnPos.x, spawnPos.y, bj_UNIT_FACING)
+        enforcer.issuePointOrderById(OrderIds.attack, pos)   // rally toward the Trade Prince's position
+        spawned++
+
+init
+    let spawnPos = gg_rct_TradePrince.getCenter()
+    let tradePrince = CreateUnit(players[27], TRADE_PRINCE_HERO_ID, spawnPos.x, spawnPos.y, bj_UNIT_FACING) // Neutral passive
+
+    EventListener.add(EVENT_PLAYER_UNIT_DAMAGED) () ->
+        onTradePrinceAttacked()

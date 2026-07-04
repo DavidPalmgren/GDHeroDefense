@@ -1,0 +1,19 @@
+package PondTint
+
+let POND_REGION = gg_rct_SludgeFen   // place a rect over the specific pond in the World Editor
+let FELWOOD_POND = gg_rct_FelwoodRiver
+let POND_COLOR_R = 32
+let POND_COLOR_G = 15
+let POND_COLOR_B = 40
+let POND_PLANE_MODEL = "FluidPlaneFel.mdx"   // TODO: swap for a flat/plane-shaped model that matches the pond's shape
+// FluidPlaneFel.mdx
+init
+    let center = POND_REGION.getCenter()
+    let centerfelwood = FELWOOD_POND.getCenter()
+    let tint = addEffect(POND_PLANE_MODEL, center)
+        ..setColor(POND_COLOR_R, POND_COLOR_G, POND_COLOR_B)
+        ..setScale(2.0)
+    let felwoodtint = addEffect(POND_PLANE_MODEL, centerfelwood)
+        //..setColor(POND_COLOR_R, POND_COLOR_G, POND_COLOR_B)
+        ..setAlpha(125)
+        ..setScale(2.8)
