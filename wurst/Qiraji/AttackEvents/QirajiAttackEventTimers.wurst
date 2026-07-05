@@ -25,11 +25,11 @@ public function startEventCountdown(string title, real eventFiresAt, CallbackSin
             onComplete.call()
 
 init
-    startEventCountdown("Silithus Assault:", 800.) ->
+    startEventCountdown("Silithus Assault:", 1200.) ->
         initSilithusEvent()
 
-    startEventCountdown("Ungoro Assault:", 800.) ->
+    startEventCountdown("Ungoro Assault:", 1100.) ->
         initUngoroEvent()
 
-    startEventCountdown("Tanaris Assault:", 600.) ->
+    startEventCountdown("Tanaris Assault:", 1000.) ->
         initTanarisEvent()

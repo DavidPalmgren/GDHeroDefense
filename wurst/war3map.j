@@ -142,9 +142,22 @@ globals
     rect                    gg_rct_TradePrinceTurnInTanaris = null
     rect                    gg_rct_SludgeFen           = null
     rect                    gg_rct_FelwoodRiver        = null
+    rect                    gg_rct_Theramore           = null
+    rect                    gg_rct_TheramoreColorOverride = null
+    rect                    gg_rct_Cthun               = null
+    rect                    gg_rct_CthunGW1            = null
+    rect                    gg_rct_CthunGW2            = null
+    rect                    gg_rct_TrollSpawn          = null
+    rect                    gg_rct_TrollBarracks       = null
+    rect                    gg_rct_TrollBurrow1        = null
+    rect                    gg_rct_TrollBurrow2        = null
+    sound                   gg_snd_BoatAttack1         = null
     trigger                 gg_trg_Untitled_Trigger_002 = null
     trigger                 gg_trg_testGate            = null
     trigger                 gg_trg_heroLimits          = null
+    trigger                 gg_trg_Cthulu              = null
+    trigger                 gg_trg_Untitled_Trigger_003 = null
+    trigger                 gg_trg_InitThereamoreNavyBattleShip = null
     trigger                 gg_trg_enemyForcesInit     = null
     trigger                 gg_trg_Untitled_Trigger_001 = null
     trigger                 gg_trg_XaviusKilled        = null
@@ -262,6 +275,7 @@ globals
     unit                    gg_unit_h01F_0717          = null
     unit                    gg_unit_h01G_0718          = null
     unit                    gg_unit_h01H_0719          = null
+    unit                    gg_unit_nbld_1013          = null
     unit                    gg_unit_h025_0937          = null
     unit                    gg_unit_h024_0936          = null
     unit                    gg_unit_h020_0797          = null
@@ -273,23 +287,9 @@ globals
     unit                    gg_unit_h01Z_0803          = null
     unit                    gg_unit_h022_0877          = null
     unit                    gg_unit_h023_0878          = null
+    unit                    gg_unit_h027_0971          = null
     destructable            gg_dest_LTe2_0270          = null
     destructable            gg_dest_LTg2_15693         = null
-    rect                    gg_rct_Theramore           = null
-    trigger                 gg_trg_InitThereamoreNavyBattleShip = null
-    unit                    gg_unit_h027_0971          = null
-    sound                   gg_snd_BoatAttack1         = null
-    rect                    gg_rct_TheramoreColorOverride = null
-    rect                    gg_rct_Cthun               = null
-    rect                    gg_rct_CthunGW1            = null
-    rect                    gg_rct_CthunGW2            = null
-    trigger                 gg_trg_Untitled_Trigger_003 = null
-    trigger                 gg_trg_Cthulu              = null
-    unit                    gg_unit_nbld_1013          = null
-    rect                    gg_rct_TrollSpawn          = null
-    rect                    gg_rct_TrollBarracks       = null
-    rect                    gg_rct_TrollBurrow1        = null
-    rect                    gg_rct_TrollBurrow2        = null
 endglobals
 
 function InitGlobals takes nothing returns nothing
@@ -591,10 +591,7 @@ function CreateBuildingsForPlayer2 takes nothing returns nothing
     local real life
 
     set u = BlzCreateUnitWithSkin( p, 'o006', 2752.0, -13696.0, 270.000, 'o006' )
-    set u = BlzCreateUnitWithSkin( p, 'ogre', 4032.0, -2112.0, 270.000, 'ogre' )
-    set u = BlzCreateUnitWithSkin( p, 'otrb', 4128.0, -2464.0, 270.000, 'otrb' )
-    set u = BlzCreateUnitWithSkin( p, 'otrb', 4576.0, -2784.0, 270.000, 'otrb' )
-    set u = BlzCreateUnitWithSkin( p, 'obar', 4288.0, -1664.0, 270.000, 'obar' )
+    set u = BlzCreateUnitWithSkin( p, 'o006', 4032.0, -448.0, 270.000, 'o006' )
 endfunction
 
 //===========================================================================
