@@ -1,0 +1,25 @@
+package CthunSpawnTentacle
+
+import ObjectIdGenerator
+import AbilityObjEditing
+import AbilityIds
+import ObjectIds
+
+import CthunUnitIDs
+
+
+public constant CTHUN_SUMMON_TENTACLE = compiletime(ABIL_ID_GEN.next())
+public constant int CTHUN_CHARM_ID = compiletime(ABIL_ID_GEN.next())
+
+@compiletime function gen()
+  new AbilityDefinitionSerpentWardtentacleForgottenone(CTHUN_SUMMON_TENTACLE)
+    ..setSummonedUnitType(1, CTHUN_TENTACLE_UNIT_ID.toRawCode())
+
+
+
+  new AbilityDefinitionCharm(CTHUN_CHARM_ID)
+    ..setName("Charm")
+    ..setTooltipNormal(1, "Charm")
+    ..setTooltipNormalExtended(1, "Permanently takes control of a non-hero enemy unit.")
+    ..setCooldown(1, 10.0)   // NEW: 10s cooldown, overriding the native default
+    ..setLevels(1)

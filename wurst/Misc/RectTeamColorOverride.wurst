@@ -1,0 +1,12 @@
+package RectTeamColorOverride
+
+public constant TARGET_RECT = gg_rct_TheramoreColorOverride   // TODO: replace with your actual rect global name
+
+init
+    let targetColor = GetPlayerColor(players[22])
+
+    let g = CreateGroup()
+    g.enumUnitsInRect(TARGET_RECT, null)
+    for u in g
+        SetUnitColor(u, targetColor)
+    g.destr()

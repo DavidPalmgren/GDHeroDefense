@@ -35,3 +35,5 @@ init
     players[0].setLumber(5000)
     players[1].setGold(500)
     players[1].setLumber(5000)
+    players[2].setGold(500)
+    players[2].setLumber(5000)

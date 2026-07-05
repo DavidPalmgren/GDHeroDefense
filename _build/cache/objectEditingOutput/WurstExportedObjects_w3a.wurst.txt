@@ -163,16 +163,16 @@ import AbilityObjEditing
 
 
 @compiletime function create_w3a_AM01()
-	new AbilityDefinitionDefend('AM01')
+	new AbilityDefinitionDreadlordCarrionSwarm('AM01')
+
+
+@compiletime function create_w3a_AM02()
+	new AbilityDefinitionDefend('AM02')
 	..setName("Leave Detect")
 	..setEditorSuffix("(OnUnitEnterLeave)")
 	..setArtCaster("")
 	..setIconNormal("")
 	..setRace(Race.Unknown)
-
-
-@compiletime function create_w3a_AM02()
-	new AbilityDefinitionDreadlordCarrionSwarm('AM02')
 
 
 @compiletime function create_w3a_AM03()
@@ -458,7 +458,7 @@ import AbilityObjEditing
 	..setLeashRange(1, 2000.0)
 	..setMissileArt("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl")
 	..setMissileSpeed(500)
-	..setFactoryUnitID(1, "x00r")
+	..setFactoryUnitID(1, "x00s")
 	..setLevelSkipRequirement(5)
 	..setLevels(1)
 	..setRequiredLevel(6)
@@ -755,7 +755,7 @@ import AbilityObjEditing
 	..setName("Incubate")
 	..setTooltipNormal(1, "Incubate")
 	..setTooltipNormalExtended(1, "Pregnancy can be a very painfull experience. The targets of this spell will find that out shortly.")
-	..setUnitType(1, "x00w")
+	..setUnitType(1, "x00x")
 
 
 @compiletime function create_w3a_AM10()
@@ -2526,6 +2526,36 @@ import AbilityObjEditing
 	..setMaximumNumberofTargets(1, 6)
 	..setRequirements("")
 	..setMissileArt("Abilities\\Weapons\\Dryadmissile\\Dryadmissile.mdl")
+
+
+@compiletime function create_w3a_AM2g()
+	new AbilityDefinitionSerpentWardtentacleForgottenone('AM2g')
+	..setSummonedUnitType(1, "x02a")
+
+
+@compiletime function create_w3a_AM2h()
+	new AbilityDefinitionCharm('AM2h')
+	..setName("Charm")
+	..setTooltipNormal(1, "Charm")
+	..setTooltipNormalExtended(1, "Permanently takes control of a non-hero enemy unit.")
+	..setCooldown(1, 10.0)
+	..setLevels(1)
+
+
+@compiletime function create_w3a_AM2i()
+	new AbilityDefinitionBloodMageFlameStrike('AM2i')
+	..setName("Laser Beam")
+	..setTooltipNormal(1, "Laser Beam")
+	..setTooltipNormalExtended(1, "Fires a devastating beam that sweeps a full circle, disintegrating everything in its path.")
+	..setCooldown(1, 5.0)
+	..setManaCost(1, 0)
+	..setLevels(1)
+	..setCastRange(1, 1000.0)
+	..setEffects(1, "")
+	..setBuffs(1, "")
+	..setArtEffect("")
+	..setArtTarget("")
+	..setArtSpecial("")
 
 
 // Original Table (contains all modified default/melee objects)

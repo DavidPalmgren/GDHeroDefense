@@ -1,0 +1,224 @@
+package NavalSupportFire
+
+import UnitObjEditing
+import ObjectIdGenerator
+import ClosureTimers
+import Playercolor
+import ClosureForGroups
+import ClosureEvents
+import HashMap
+import ObjectIds
+import LinkedList
+import Sound
+import Orders
+
+public constant int NAVAL_INDICATOR_ID = compiletime(UNIT_ID_GEN.next())
+
+let NAVAL_SHIP_TYPE_ID = 'h027'
+let NAVAL_SHIP_OWNER = players[24]
+let NAVAL_REGION_RECT = gg_rct_Theramore
+let NAVAL_GUARDIAN_TYPE_ID = 'h01L'         // NEW: if this unit is dead, the ship flees
+
+let NAVAL_TRIGGER_DELAY = 5.0
+let NAVAL_TARGET_COUNT = 3
+let NAVAL_WINDUP_DURATION = 3.0
+let NAVAL_AOE_RADIUS = 200.0
+let NAVAL_DAMAGE = 200.0
+let NAVAL_INDICATOR_SCALE = 3.0
+let NAVAL_VOLLEY_COOLDOWN = 4.0             // NEW: gap between consecutive volleys while enemies remain
+let NAVAL_FLEE_DISTANCE = 1000.0            // NEW
+
+let CANNON_SOUND_MIN_DISTANCE = 300.0
+let CANNON_SOUND_MAX_DISTANCE = 2500.0   // audible range - matches "heard from 1500 units away"
+let CANNON_SOUND_VOLUME = 127            // max volume, range is 0-127
+let CANNON_LAYER_STAGGER = 0.08 
+
+let CANNON_SOUND_PATH = "Abilities\\Weapons\\BoatMissile\\BoatAttack1.flac"
+let IMPACT_EFFECT_MODEL = "CannonballD.mdx"
+
+var navalFireInProgress = false
+var shipHasFled = false                     // NEW: once true, stop everything permanently
+
+class UnitBox
+    unit value = null
+
+class IntBox
+    int value = 0
+
+@compiletime function genIndicator()
+    new UnitDefinition(NAVAL_INDICATOR_ID, 'hpea')
+        ..setModelFile("Skill_Indicator_Circle.mdx")
+        ..setNormalAbilities(commaList('Aloc', 'Avul'))
+        ..setFoodCost(0)
+        ..setCollisionSize(0.0)
+        ..setScalingValue(1.0)
+        ..setSpeedBase(0)
+
+function rectToRegion(rect r) returns region
+    let reg = CreateRegion()
+    RegionAddRect(reg, r)
+    return reg
+
+function findLivingShip() returns unit
+    let box = new UnitBox()
+    let g = CreateGroup()
+    g.enumUnitsInRect(NAVAL_REGION_RECT, null)
+    for u in g
+        if box.value == null and u.isAlive() and u.getTypeId() == NAVAL_SHIP_TYPE_ID and u.getOwner() == NAVAL_SHIP_OWNER
+            box.value = u
+    g.destr()
+    let result = box.value
+    destroy box
+    return result
+
+// NEW: checks whether the guardian unit is alive anywhere in the rect
+function isGuardianAlive() returns bool
+    let box = new UnitBox()
+    let g = CreateGroup()
+    g.enumUnitsInRect(NAVAL_REGION_RECT, null)
+    for u in g
+        if box.value == null and u.isAlive() and u.getTypeId() == NAVAL_GUARDIAN_TYPE_ID
+            box.value = u
+    g.destr()
+    let result = box.value != null
+    destroy box
+    return result
+
+function collectEnemiesInRegion() returns LinkedList<unit>
+    let list = new LinkedList<unit>()
+    let g = CreateGroup()
+    g.enumUnitsInRect(NAVAL_REGION_RECT, null)
+    for u in g
+        if u.isAlive() and u.isEnemyOf(NAVAL_SHIP_OWNER) and not u.isType(UNIT_TYPE_STRUCTURE)
+            list.add(u)
+    g.destr()
+    return list
+
+function pickRandom(LinkedList<unit> pool, int count) returns LinkedList<unit>
+    let picked = new LinkedList<unit>()
+    var remaining = pool.size()
+    var toPick = count
+
+    for u in pool
+        if toPick <= 0
+            break
+        let chance = toPick.toReal() / remaining.toReal()
+        if GetRandomReal(0, 1) <= chance
+            picked.add(u)
+            toPick--
+        remaining--
+
+    return picked
+
+function playSingleCannonSound(unit ship)
+    let snd = CreateSound(CANNON_SOUND_PATH, false, true, true, 10, 10, "DefaultEAXON")
+    SetSoundPosition(snd, ship.getPos().x, ship.getPos().y, 0)
+    SetSoundDistances(snd, CANNON_SOUND_MIN_DISTANCE, CANNON_SOUND_MAX_DISTANCE)   // NEW: controls audible falloff range
+    SetSoundVolume(snd, CANNON_SOUND_VOLUME)                                       // NEW: max out volume
+    StartSound(snd)
+    KillSoundWhenDone(snd)
+
+// CHANGED: now fires 3 staggered layers of the same sound per call
+function playCannonSound(unit ship)
+    playSingleCannonSound(ship)
+
+    doAfter(CANNON_LAYER_STAGGER) ->
+        playSingleCannonSound(ship)
+
+    doAfter(CANNON_LAYER_STAGGER * 2) ->
+        playSingleCannonSound(ship)
+
+function doNavalStrike(vec2 pos)
+    let impact = addEffect(IMPACT_EFFECT_MODEL, pos)
+    impact.destr()
+
+    forUnitsInRange(pos, NAVAL_AOE_RADIUS) (unit u) ->
+        if u.isAlive() and u.isEnemyOf(NAVAL_SHIP_OWNER) and not u.isType(UNIT_TYPE_STRUCTURE)
+            let dummy = CreateUnit(NAVAL_SHIP_OWNER, 'hpea', pos.x, pos.y, 0)
+            dummy.damageTarget(u, NAVAL_DAMAGE, false, false, ATTACK_TYPE_SIEGE, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS)
+            dummy.remove()
+
+// NEW: sends the ship fleeing 1000 yards due east and permanently stops further firing
+function fleeShip(unit ship)
+    shipHasFled = true
+    let pos = ship.getPos()
+    let fleePos = vec2(pos.x + NAVAL_FLEE_DISTANCE, pos.y)   // due east = +X
+    ship.issuePointOrderById(OrderIds.move, fleePos)
+    doAfter(3) ->
+        ship.remove() 
+        
+
+function runNavalSupportFire()
+    if shipHasFled   // NEW: never fire again once fled
+        return
+    if navalFireInProgress
+        return
+
+    let ship = findLivingShip()
+    if ship == null
+        return
+
+    // NEW: guardian check takes priority over firing
+    if not isGuardianAlive()
+        fleeShip(ship)
+        return
+
+    let enemies = collectEnemiesInRegion()
+    if enemies.isEmpty()
+        destroy enemies
+        return
+
+    navalFireInProgress = true
+
+    let targets = pickRandom(enemies, NAVAL_TARGET_COUNT)
+    destroy enemies
+
+    for target in targets
+        let strikePos = target.getPos()
+
+        ship.setAnimation("attack")
+        playCannonSound(ship)
+
+        let indicator = CreateUnit(NAVAL_SHIP_OWNER, NAVAL_INDICATOR_ID, strikePos.x, strikePos.y, 0)
+            ..setScale(NAVAL_INDICATOR_SCALE)
+
+        doAfter(NAVAL_WINDUP_DURATION) ->
+            indicator.remove()
+            doNavalStrike(strikePos)
+
+    destroy targets
+
+    doAfter(NAVAL_WINDUP_DURATION + 0.1) ->
+        navalFireInProgress = false
+
+        // NEW: continuous fire - after this volley ends, re-check conditions and fire again if enemies remain
+        if not shipHasFled
+            let stillShip = findLivingShip()
+            if stillShip != null
+                if not isGuardianAlive()
+                    fleeShip(stillShip)
+                else
+                    doAfter(NAVAL_VOLLEY_COOLDOWN) ->
+                        let enemiesRemaining = collectEnemiesInRegion()
+                        let hasEnemies = not enemiesRemaining.isEmpty()
+                        destroy enemiesRemaining
+                        if hasEnemies
+                            runNavalSupportFire()
+
+function onRegionEnter()
+    let u = GetTriggerUnit()
+    if u == null or not u.isAlive()
+        return
+    if not u.isEnemyOf(NAVAL_SHIP_OWNER)
+        return
+
+    doAfter(NAVAL_TRIGGER_DELAY) ->
+        let ship = findLivingShip()
+        let enemiesNow = collectEnemiesInRegion()
+        if ship != null and not enemiesNow.isEmpty()
+            runNavalSupportFire()
+
+init
+    let t = CreateTrigger()
+    t.registerEnterRegion(rectToRegion(NAVAL_REGION_RECT), null)
+    t.addAction(function onRegionEnter)
