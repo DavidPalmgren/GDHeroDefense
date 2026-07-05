@@ -1,0 +1,7 @@
+package CthunUnitIDs
+
+import ObjectIdGenerator
+
+public constant int CTHUN_UNIT_ID = compiletime(UNIT_ID_GEN.next())
+public constant int CTHUN_TENTACLE_UNIT_ID = compiletime(UNIT_ID_GEN.next())
+public constant int CTHUN_TENTACLE_EYE_UNIT_ID = compiletime(UNIT_ID_GEN.next())

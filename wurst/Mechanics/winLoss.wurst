@@ -28,15 +28,35 @@ function setupDefeatCondition()
             print("The |cff9eff9eSentinels|r have fallen!")
             CustomDefeatBJ(players[1], "Thanks for playing!")
 
+// Helper function to establish bidirectional full alliance properties
+function makeAllies(player p1, player p2)
+    SetPlayerAlliance(p1, p2, ALLIANCE_PASSIVE, true)
+    SetPlayerAlliance(p1, p2, ALLIANCE_HELP_REQUEST, true)
+    SetPlayerAlliance(p1, p2, ALLIANCE_HELP_RESPONSE, true)
+    SetPlayerAlliance(p1, p2, ALLIANCE_SHARED_XP, true)
+    SetPlayerAlliance(p1, p2, ALLIANCE_SHARED_SPELLS, true)
+    SetPlayerAlliance(p1, p2, ALLIANCE_SHARED_VISION, true)
+    
+    SetPlayerAlliance(p2, p1, ALLIANCE_PASSIVE, true)
+    SetPlayerAlliance(p2, p1, ALLIANCE_HELP_REQUEST, true)
+    SetPlayerAlliance(p2, p1, ALLIANCE_HELP_RESPONSE, true)
+    SetPlayerAlliance(p2, p1, ALLIANCE_SHARED_XP, true)
+    SetPlayerAlliance(p2, p1, ALLIANCE_SHARED_SPELLS, true)
+    SetPlayerAlliance(p2, p1, ALLIANCE_SHARED_VISION, true)
+
 init
     setupDefeatCondition()
     // setupVictoryCondition()
-    players[0].setGold(300)
-    players[0].setLumber(0)
-
-    players[1].setGold(300)
-    players[1].setLumber(0)
-  
-    players[2].setGold(300)
-    players[2].setLumber(0)
     
+    // Resource Initialization
+    players[0].setGold(300)
+    players[0].setLumber(5000)
+    players[1].setGold(300)
+    players[1].setLumber(5000)
+    players[2].setGold(300)
+    players[2].setLumber(5000)
+
+    // --- NEW: Alliance Setup ---
+    makeAllies(players[0], players[1])
+    makeAllies(players[0], players[2])
+    makeAllies(players[1], players[2])

@@ -78,8 +78,8 @@ import BuffObjEditing
 	..setTooltipNormalExtended(1, "Malorne's presence invigorates nearby allies healing them and providing protection increasing armor")
 
 
-@compiletime function create_w3h_AM1m()
-	new BuffDefinition('AM1m', 'Bspo')
+@compiletime function create_w3h_AM1p()
+	new BuffDefinition('AM1p', 'Bspo')
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNMoonStone.blp")
 	..setTooltipNormal(1, "Lunar Anchor")
 	..setTooltipNormalExtended(1, "This unit's magic resistance is shattered. Taking increased damage from spells.")
@@ -87,8 +87,8 @@ import BuffObjEditing
 	..setTargetAttachmentPoint0(1, "overhead")
 
 
-@compiletime function create_w3h_AM1n()
-	new BuffDefinition('AM1n', 'Bshp')
+@compiletime function create_w3h_AM1q()
+	new BuffDefinition('AM1q', 'Bshp')
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNMoonStone.blp")
 	..setTooltipNormal(1, "Lunar Anchor")
 	..setTooltipNormalExtended(1, "This hero's magic resistance is shattered. Taking increased damage from spells.")

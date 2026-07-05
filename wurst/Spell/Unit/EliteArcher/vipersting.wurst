@@ -4,12 +4,12 @@ import ClosureEvents
 import OrderIds
 import ChannelAbilityPreset
 import DummyCaster
-
-
-
-import Projectile 
+import Projectile
 
 public constant VIPER_STING_ID = compiletime(ABIL_ID_GEN.next())
+
+let VIPER_STING_MAX_TOTAL_DAMAGE = 200.0   // NEW: hard cap per cast, shared across every unit the projectile hits
+let VIPER_STING_BASE_DAMAGE = 80.0
 
 @compiletime function genViperSting()
     new ChannelAbilityPreset(VIPER_STING_ID,1, true)
@@ -27,25 +27,42 @@ public constant VIPER_STING_ID = compiletime(ABIL_ID_GEN.next())
     new UnitDefinition('e00P', 'e00P')
         ..setNormalAbilities(commaList(VIPER_STING_ID))
 
+// NEW: shared mutable budget tracker, one instance created per cast
+class DamageBudgetBox
+    real remaining = VIPER_STING_MAX_TOTAL_DAMAGE
 
 function applyPoison(unit source, unit target)
     new DummyCaster()
         ..origin(target.getPos())
         ..owner(source.getOwner())
-        ..delay(1.5) 
+        ..delay(1.5)
         ..castTarget(AbilityIds.shadowStrike, 1, OrderIds.shadowstrike, target)
-
 
 init
     EventListener.onPointCast(VIPER_STING_ID) (caster, targetPos) ->
         let casterPos = caster.getPos()
-        
+
         let speed = 1400.0
         let radius = 90.0
         let maxRange = 1100.0
         let poisonArrowModel = "Abilities\\Weapons\\PoisonArrow\\PoisonArrowMissile.mdl"
 
+        // NEW: one shared budget for this specific cast, consumed as the projectile hits units
+        let budget = new DamageBudgetBox()
+
         new PortableProjectile(caster, casterPos, targetPos, speed, radius, maxRange, poisonArrowModel) target ->
 
-            dealDamage(caster, target, 80.0, ATTACK_TYPE_PIERCE, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WOOD_LIGHT_BASH)
-            applyPoison(caster, target)
+            if budget.remaining <= 0.0
+                return   // NEW: cast has already dealt its full 200 damage - no more hits do anything
+
+            // NEW: clamp this hit's damage to whatever budget remains, never exceeding the shared cap
+            let thisHitDamage = budget.remaining < VIPER_STING_BASE_DAMAGE ? budget.remaining : VIPER_STING_BASE_DAMAGE
+            budget.remaining -= thisHitDamage
+
+            dealDamage(caster, target, thisHitDamage, ATTACK_TYPE_PIERCE, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WOOD_LIGHT_BASH)
+
+            // NEW: only apply the poison DoT if there's still meaningful budget left -
+            // otherwise a 5th/6th target hit for near-zero direct damage would still get
+            // full poison damage on top, quietly blowing past the cap anyway
+            if budget.remaining > 0.0
+                applyPoison(caster, target)

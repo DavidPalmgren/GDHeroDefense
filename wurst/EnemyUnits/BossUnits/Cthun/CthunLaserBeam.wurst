@@ -1,0 +1,165 @@
+package CthunLaserBeam
+
+import AbilityObjEditing
+import ObjectIdGenerator
+import ClosureTimers
+import ClosureForGroups
+import ClosureEvents
+import AbilityIds
+import Lightning
+import LinkedList
+import Destructable
+import Doodads
+
+import CthunUnitIDs
+
+public constant int CTHUN_LASER_BEAM_ID = compiletime(ABIL_ID_GEN.next())
+
+let LASER_LENGTH = 2400.0
+let LASER_HALF_WIDTH_DEGREES = 8.0
+let ROTATION_DURATION = 9.0
+let TICK_INTERVAL = 0.15
+let LASER_DAMAGE_PER_TICK = 150.0
+let LASER_LIGHTNING_TYPE = "AFOD"
+
+let BEAM_STRAND_OFFSET = 45.0        // NEW: perpendicular spacing between parallel bolts, fakes a thicker beam
+let BEAM_STRAND_COUNT = 3            // NEW: odd number so one strand sits exactly on the true beam line
+
+let WINDUP_DURATION = 3.0            // NEW: delay before the beam actually starts rotating/damaging
+let WINDUP_TICK_INTERVAL = 0.1       // NEW: how often the reddening color updates during windup
+
+let AIM_INDICATOR_ID = 'LOar'
+let AIM_INDICATOR_MODEL = "Skill_Indicator_Straight2.mdx"
+let AIM_INDICATOR_SCALE = 13.0
+let AIM_INDICATOR_HEIGHT = 150.0 
+
+class EffectBox
+    effect value = null
+
+class DestructableBox
+    destructable value = null
+
+class RealBox
+    real value = 0.0
+
+class LightningListBox
+    LinkedList<lightning> value = new LinkedList<lightning>()
+
+@compiletime function gen()
+    new AbilityDefinitionBloodMageFlameStrike(CTHUN_LASER_BEAM_ID)
+        ..setName("Laser Beam")
+        ..setTooltipNormal(1, "Laser Beam")
+        ..setTooltipNormalExtended(1, "Fires a devastating beam that sweeps a full circle, disintegrating everything in its path.")
+        ..setCooldown(1, 5.0)
+        ..setManaCost(1, 0)
+        ..setLevels(1)
+        ..setCastRange(1, 1000)
+        ..setEffects(1,"")
+        ..setBuffs(1, "")
+        ..setArtEffect("")
+        ..setArtTarget("")
+        ..setArtSpecial("")
+
+function damageAlongBeam(unit caster, angle beamAngle)
+    forUnitsInRange(caster.getPos(), LASER_LENGTH) (unit u) ->
+        if u.isAlive() and u.isEnemyOf(caster.getOwner()) and not u.isType(UNIT_TYPE_STRUCTURE)
+            let angleToUnit = caster.getPos().angleTo(u.getPos())
+            var diff = (angleToUnit.degrees() - beamAngle.degrees())
+            while diff > 180.0
+                diff -= 360.0
+            while diff < -180.0
+                diff += 360.0
+
+            if diff.abs() <= LASER_HALF_WIDTH_DEGREES
+                caster.damageTarget(u, LASER_DAMAGE_PER_TICK, false, false, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS)
+
+// NEW: destroys all strands in the box and clears it
+function clearStrands(LightningListBox box)
+    for strand in box.value
+        DestroyLightning(strand)
+    box.value.clear()
+
+// NEW: draws BEAM_STRAND_COUNT parallel lightning bolts to visually thicken the beam
+function drawThickBeam(LightningListBox box, vec2 origin, angle beamAngle, real length)
+    clearStrands(box)
+
+    let endPoint = origin.polarOffset(beamAngle, length)
+    let perpAngle = (beamAngle.degrees() + 90.0).fromDeg()
+
+    let half = (BEAM_STRAND_COUNT - 1) / 2
+    var i = -half
+    while i <= half
+        let offset = i * BEAM_STRAND_OFFSET // i should be real by default
+        let strandStart = origin.polarOffset(perpAngle, offset)
+        let strandEnd = endPoint.polarOffset(perpAngle, offset)
+
+        let strand = AddLightningEx(LASER_LIGHTNING_TYPE, true,
+            strandStart.x, strandStart.y, 100,
+            strandEnd.x, strandEnd.y, 100)
+        box.value.add(strand)
+        i++
+
+function getTerrainZ(real x, real y) returns real
+    let loc = Location(x, y)
+    let z = GetLocationZ(loc)
+    RemoveLocation(loc)
+    return z
+
+init
+    EventListener.onPointCast(CTHUN_LASER_BEAM_ID) (unit caster, vec2 targetPos) ->
+        let startAngle = caster.getPos().angleTo(targetPos)
+        let strandBox = new LightningListBox()
+
+        // NEW: simple effect-only indicator, no destructible/prop involved
+        let indicatorBox = new EffectBox()
+        let terrainZ = getTerrainZ(caster.getPos().x, caster.getPos().y)
+        let indicatorPos = vec3(caster.getPos().x, caster.getPos().y, terrainZ + AIM_INDICATOR_HEIGHT)
+        indicatorBox.value = addEffect(AIM_INDICATOR_MODEL, indicatorPos)
+            ..setScale(AIM_INDICATOR_SCALE)
+        BlzSetSpecialEffectOrientation(indicatorBox.value, startAngle.radians(), 0, 0)
+
+        let windupElapsed = new RealBox()
+        doPeriodically(WINDUP_TICK_INTERVAL) (CallbackPeriodic windupCb) ->
+            if not caster.isAlive()
+                caster.setVertexColor(255, 255, 255, 255)
+                if indicatorBox.value != null
+                    indicatorBox.value.destr()   // CHANGED: destr() instead of RemoveDestructable
+                destroy windupCb
+                return
+
+            windupElapsed.value += WINDUP_TICK_INTERVAL
+            let windupProgress = windupElapsed.value / WINDUP_DURATION
+
+            if windupProgress >= 1.0
+                caster.setVertexColor(255, 60, 60, 255)
+                if indicatorBox.value != null
+                    indicatorBox.value.destr()   // CHANGED
+                destroy windupCb
+                return
+
+            let channel = (255 - windupProgress * (255 - 60)).toInt()
+            caster.setVertexColor(255, channel, channel, 255)
+
+        doAfter(WINDUP_DURATION) ->
+            let elapsedBox = new RealBox()
+
+            doPeriodically(TICK_INTERVAL) (CallbackPeriodic cb) ->
+                if not caster.isAlive()
+                    clearStrands(strandBox)
+                    caster.setVertexColor(255, 255, 255, 255)
+                    destroy cb
+                    return
+
+                elapsedBox.value += TICK_INTERVAL
+                let progress = elapsedBox.value / ROTATION_DURATION
+
+                if progress >= 1.0
+                    clearStrands(strandBox)
+                    caster.setVertexColor(255, 255, 255, 255)
+                    destroy cb
+                    return
+
+                let currentAngle = (startAngle.degrees() + progress * 360.0).fromDeg()
+                drawThickBeam(strandBox, caster.getPos(), currentAngle, LASER_LENGTH)
+
+                damageAlongBeam(caster, currentAngle)

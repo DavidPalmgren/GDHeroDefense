@@ -1,0 +1,48 @@
+package CthunUnitDefinition
+
+import UnitObjEditing
+import ObjectIdGenerator
+import UnitIds
+import ObjectIds
+
+import CthunUnitIDs
+import CthunSpawnTentacle
+import CthunLaserBeam
+
+let TENTACLE_SPAWN_RADIUS = 600.0
+let TENTACLE_SPAWN_COUNT = 4
+
+@compiletime function gen()
+  new UnitDefinition(CTHUN_UNIT_ID,UnitIds.forgottenone)
+    ..setHitPointsMaximumBase(8666)
+    ..setAttack1DamageBase(125)
+    ..setAttack1CooldownTime(1.1)
+    ..setAttack1AttackType(AttackType.Chaos)
+    ..setScalingValue(2.0)
+    ..setModelFile("Cthun.mdx")
+    ..setNormalAbilities(commaList(CTHUN_SUMMON_TENTACLE, CTHUN_LASER_BEAM_ID, CTHUN_CHARM_ID))
+
+
+  new UnitDefinition(CTHUN_TENTACLE_EYE_UNIT_ID, UnitIds.tentacle)
+    ..setModelFile("CthunTentacleEye.mdx")
+
+  new UnitDefinition(CTHUN_TENTACLE_UNIT_ID, UnitIds.tentacle)
+    ..setModelFile("CthunTentacle.mdx")
+
+init
+  let center = gg_rct_Cthun.getCenter()
+  createUnit(players[15], CTHUN_UNIT_ID, center)
+
+  // NEW: 4 tentacles spread evenly at 0/90/180/270 degrees
+  var angle = 0.0
+  while angle < 360.0
+    let pos = center.polarOffset(angle.fromDeg(), TENTACLE_SPAWN_RADIUS)
+    createUnit(players[15], CTHUN_TENTACLE_UNIT_ID, pos)
+    angle += 360.0 / TENTACLE_SPAWN_COUNT
+
+  // NEW: 4 tentacle eyes spread evenly, offset by 45 degrees so they interleave between the regular tentacles
+  var eyeAngle = 45.0
+  while eyeAngle < 360.0 + 45.0
+    let pos = center.polarOffset(eyeAngle.fromDeg(), TENTACLE_SPAWN_RADIUS)
+    createUnit(players[15], CTHUN_TENTACLE_EYE_UNIT_ID, pos)
+    eyeAngle += 360.0 / TENTACLE_SPAWN_COUNT

@@ -400,6 +400,34 @@ import DoodadObjEditing
 	..setModel(0, "buildings\\orc\\SpiritLodge\\SpiritLodge.mdl")
 
 
+@compiletime function create_w3d_D01C()
+	new DoodadDefinition('D01C', 'OOal')
+	..setName(0, "Acid")
+	..setPathTexture(0, "")
+	..setModel(0, "FluidPlaneFel.mdl")
+	// TODO no wrapper: 	..setLvlDataUnreal("dvis", 0, 0, 500.0)
+	// TODO no wrapper: 	..setLvlDataInt("dflt", 0, 0, 1)
+	// TODO no wrapper: 	..setLvlDataString("dcat", 0, 0, "W")
+	// TODO no wrapper: 	..setLvlDataInt("dwlk", 0, 0, 1)
+	..setMaximumScale(0, 10.0)
+
+
+@compiletime function create_w3d_D01D()
+	new DoodadDefinition('D01D', 'OOal')
+	..setName(0, "SkillIndicatorLine")
+	..setModel(0, "Skill_Indicator_Straight.mdl")
+	// TODO no wrapper: 	..setLvlDataInt("dwlk", 0, 0, 1)
+	..setPathTexture(0, "")
+	..setMinimumScale(0, 1.0)
+	..setMaximumScale(0, 10.0)
+	// TODO no wrapper: 	..setLvlDataUnreal("dsel", 0, 0, 10.0)
+	// TODO no wrapper: 	..setLvlDataInt("duch", 0, 0, 1)
+	// TODO no wrapper: 	..setLvlDataUnreal("dvis", 0, 0, 2000.0)
+	// TODO no wrapper: 	..setLvlDataInt("dshd", 0, 0, 0)
+	// TODO no wrapper: 	..setLvlDataInt("danf", 0, 0, 1)
+	// TODO no wrapper: 	..setLvlDataInt("dcpr", 0, 0, 0)
+
+
 // Original Table (contains all modified default/melee objects)
 // These are emitted when createObjectDefinition uses the same base/new id.
 
@@ -546,5 +574,10 @@ import DoodadObjEditing
 @compiletime function create_w3d_BOtt()
 	new DoodadDefinition('BOtt', 'BOtt')
 	..setMaximumScale(0, 3.0)
+
+
+@compiletime function create_w3d_OOal()
+	new DoodadDefinition('OOal', 'OOal')
+	..setMaximumScale(0, 5.0)
 
 

@@ -94,6 +94,12 @@ import DestructableObjEditing
 	..setMaximumScale(1.0)
 
 
+@compiletime function create_w3b_B009()
+	new DestructableDefinition('B009', 'DTes')
+	..setName("EB")
+	..setModel("CannonballD.mdl")
+
+
 // Original Table (contains all modified default/melee objects)
 // These are emitted when createObjectDefinition uses the same base/new id.
 

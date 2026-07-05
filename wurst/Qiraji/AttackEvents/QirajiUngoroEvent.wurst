@@ -11,9 +11,9 @@ import AssaultTunnel
 
 public function initUngoroEvent()
     let ungoroEvent = new AssaultEvent(gg_rct_QirajiEventUngoro, gg_rct_QirajiEventUngoroAtkMap, TUNNEL_UNIT_ID)
-        ..addUnit(QIRAJI_DRONE_ID, 10)
-        ..addUnit(QIRAJI_TANK_ID, 10)
-        ..addUnit(QIRAJI_SPITTER_ID, 15)
+        ..addUnit(QIRAJI_DRONE_ID, 8)
+        ..addUnit(QIRAJI_TANK_ID, 6)
+        ..addUnit(QIRAJI_SPITTER_ID, 6)
         ..addUnit(QIRAJI_DEVOUT_ID, 4)
     ungoroEvent.launch(5., 1.) ->
         startQirajiAttackLogic(gg_rct_QirajiEventUngoroAtkMap)

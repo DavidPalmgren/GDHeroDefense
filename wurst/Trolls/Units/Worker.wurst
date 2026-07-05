@@ -45,7 +45,8 @@ public constant ZANDALARI_WORKER_ID = compiletime(UNIT_ID_GEN.next())
             ZANDALARI_MONUMENT_ID,        // Zandalari Monument (Foundation Shrines)
             ZANDALARI_T1_ID,               // TOWN HALL
             ZANDALARI_ALTAR_ID,
-            ZANDALARI_TEMPLE_SACRIFICE_ID
+            ZANDALARI_TEMPLE_SACRIFICE_ID,
+            'o006'
         ))
         
         // Economy Configuration (0-Lumber Rule Applied)
@@ -68,8 +69,9 @@ init
         
         // 2. Define Player Red (Index 0)
         let playerRed = players[0]
+        let playerTeal = players[2]
         
         // 3. Spawn the custom Zandalari Freeman at the location facing south (270 degrees)
-        CreateUnit(playerRed, ZANDALARI_WORKER_ID, x, y, 270.0)
-        CreateUnit(playerRed, ZANDALARI_BLOOD_MAGE_ID, x, y, 270.0)
-        CreateUnit(playerRed, ZANDALARI_DINO_TANK_ID, x,y, 270.0)
+        CreateUnit(playerTeal, ZANDALARI_WORKER_ID, x, y, 270.0)
+        //CreateUnit(playerRed, ZANDALARI_BLOOD_MAGE_ID, x, y, 270.0)
+        //CreateUnit(playerRed, ZANDALARI_DINO_TANK_ID, x,y, 270.0)

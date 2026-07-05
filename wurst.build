@@ -35,7 +35,7 @@ buildMapData:
     fixedStartLoc: false
   - id: 2
     name: Player 3
-    race: HUMAN
+    race: ORC
     controller: USER
     fixedStartLoc: false
   - id: 3

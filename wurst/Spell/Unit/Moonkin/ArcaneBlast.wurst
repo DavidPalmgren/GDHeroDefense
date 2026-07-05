@@ -2,11 +2,17 @@ package ArcaneBlast
 
 import ClosureEvents
 import ChannelAbilityPreset
+import ClosureTimers
 
 import Projectile 
 
 public constant ARCANE_BLAST_ID = compiletime(ABIL_ID_GEN.next())
 constant DAMAGE = 150.0
+
+let VIPER_STING_MAX_TOTAL_DAMAGE = 250.0   // NEW: hard cap per cast, shared across every unit the projectile hits
+let VIPER_STING_BASE_DAMAGE = 70.0
+let projectileModel = "Abilities\\Spells\\NightElf\\Blink\\BlinkTarget.mdl"
+let explosionModel = "Abilities\\Spells\\Human\\DispelMagic\\DispelMagicTarget.mdl"
 
 @compiletime function genArcaneBlast()
     new ChannelAbilityPreset(ARCANE_BLAST_ID,3, true)
@@ -25,17 +31,30 @@ constant DAMAGE = 150.0
     new UnitDefinition('n004', 'n004')
         ..setNormalAbilities(commaList('A004', ARCANE_BLAST_ID))
 
+class DamageBudgetBox
+    real remaining = VIPER_STING_MAX_TOTAL_DAMAGE
+
 init
-    EventListener.onPointCast(ARCANE_BLAST_ID) (caster, targetPos) ->
+    EventListener.onPointCast(ARCANE_BLAST_ID) (caster, targetPos) -> // MIGHT HAVE STUFF FROM VIPERSTING FIX LATER
         let casterPos = caster.getPos()
+
         let speed = 950.0
         let radius = 120.0
-        // let projectileModel = "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBolt.mdl"
-        let projectileModel = "Abilities\\Spells\\NightElf\\Blink\\BlinkTarget.mdl"
-        let explosionModel = "Abilities\\Spells\\Human\\DispelMagic\\DispelMagicTarget.mdl"
+        let maxRange = 1100.0
 
-        // Adding 900.0 tells Wurst to use the fixed-range constructor:
-        new PortableProjectile(caster, casterPos, targetPos, speed, radius, 900.0, projectileModel) target ->
-            dealDamage(caster, target, DAMAGE, ATTACK_TYPE_MAGIC, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+        // NEW: one shared budget for this specific cast, consumed as the projectile hits units
+        let budget = new DamageBudgetBox()
 
+        new PortableProjectile(caster, casterPos, targetPos, speed, radius, maxRange, projectileModel) target ->
+
+            if budget.remaining <= 0.0
+                return   // NEW: cast has already dealt its full 200 damage - no more hits do anything
+
+            // NEW: clamp this hit's damage to whatever budget remains, never exceeding the shared cap
+            let thisHitDamage = budget.remaining < VIPER_STING_BASE_DAMAGE ? budget.remaining : VIPER_STING_BASE_DAMAGE
+            budget.remaining -= thisHitDamage
+
+            dealDamage(caster, target, thisHitDamage, ATTACK_TYPE_MAGIC, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
             flashEffect(explosionModel, target.getPos())
+
+                

@@ -1,0 +1,29 @@
+package TrollSpawn
+
+import ZandalariBurrow
+import ZandalariBarracks
+import ZandalariTownHallID
+
+// Your defined regions mapped from the editor
+let bu1 = gg_rct_TrollBurrow1
+let bu2 = gg_rct_TrollBurrow2
+let th = gg_rct_TrollSpawn
+let ba = gg_rct_TrollBarracks
+
+// --- PLACEHOLDER BUILDING IDs ---
+// Replace 'o000' with your actual 4-character object editor rawcodes (e.g., 'otrb')
+let BURROW_ID   = ZANDALARI_BURROW_ID
+let SPAWN_TH_ID = ZANDALARI_T1_ID
+let BARRACKS_ID = ZANDALARI_BARRACKS_ID
+
+/** Spawns all structures at their respective region centers for the specified player */
+public function spawnTrollBuildings(player owner)
+    // createUnit takes: (player owner, int unitId, vec2 position, angle facing)
+    createUnit(owner, BURROW_ID, bu1.getCenter(), (270.0).asAngleDegrees())
+    createUnit(owner, BURROW_ID, bu2.getCenter(), (270.0).asAngleDegrees())
+    createUnit(owner, SPAWN_TH_ID, th.getCenter(), (270.0).asAngleDegrees())
+    createUnit(owner, BARRACKS_ID, ba.getCenter(), (270.0).asAngleDegrees())
+
+init
+    // Un-comment the line below if you want them to spawn automatically when the map loads:
+    spawnTrollBuildings(players[2])
