@@ -98,7 +98,7 @@ function registerPath(int fromId, int toId, real weight)   // CHANGED: added wei
 function buildNavigationMapText() returns string
     var output = "Qiraji route graph\n"
     var srcId = 1
-    while srcId <= 67
+    while srcId <= 68
         let neighbors = navigationMap.get(srcId)
         let weights = navigationWeights.get(srcId)              // NEW
         if neighbors != null and not neighbors.isEmpty()
@@ -167,7 +167,7 @@ public function beginAutomatedMapping()
     
     // Explicit while loops eliminate ANTLR parser crashes completely
     var srcId = 1
-    while srcId <= 67
+    while srcId <= 68
         let srcUnit = cpRegistry.get(srcId)
         if srcUnit != null
             let srcPos = srcUnit.getPos()
