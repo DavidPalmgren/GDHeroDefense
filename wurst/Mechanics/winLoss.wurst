@@ -31,7 +31,12 @@ function setupDefeatCondition()
 init
     setupDefeatCondition()
     // setupVictoryCondition()
-    players[0].setGold(500)
-    players[0].setLumber(5000)
-    players[1].setGold(500)
-    players[1].setLumber(5000)
+    players[0].setGold(300)
+    players[0].setLumber(0)
+
+    players[1].setGold(300)
+    players[1].setLumber(0)
+  
+    players[2].setGold(300)
+    players[2].setLumber(0)
+    

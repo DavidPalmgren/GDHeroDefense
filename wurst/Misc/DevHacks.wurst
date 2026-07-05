@@ -7,57 +7,59 @@ import UnitIds
 
 player targetPlayer = null
 var currentColorIdx = 0
+bool hacksOn = false
 
 constant int TAUREN_UNIT_ID = UnitIds.tauren   // TODO: verify this is the correct Tauren rawcode in your map's data
 constant int TAUREN_ARMY_SIZE = 30
 constant real TAUREN_SPAWN_SPREAD = 100.0
 
 init
-    if localPlayer == players[0]
-        CreateFogModifierRect(players[0], FOG_OF_WAR_VISIBLE, bj_mapInitialPlayableArea, true, false).start()
-        players[0].setGold(10000)
-        players[0].setLumber(10000)
+    if hacksOn == true
+        if localPlayer == players[0]
+            CreateFogModifierRect(players[0], FOG_OF_WAR_VISIBLE, bj_mapInitialPlayableArea, true, false).start()
+            players[0].setGold(10000)
+            players[0].setLumber(10000)
 
-    let t = CreateTrigger()
-    
-    for i = 0 to bj_MAX_PLAYER_SLOTS - 1
-        TriggerRegisterPlayerChatEvent(t, players[i], "-", false)
-    
-    t.addAction() ->
-        let chatString = GetEventPlayerChatString()
-        let p = GetTriggerPlayer()
+        let t = CreateTrigger()
+        
+        for i = 0 to bj_MAX_PLAYER_SLOTS - 1
+            TriggerRegisterPlayerChatEvent(t, players[i], "-", false)
+        
+        t.addAction() ->
+            let chatString = GetEventPlayerChatString()
+            let p = GetTriggerPlayer()
 
-        if p == localPlayer
-            if chatString.startsWith("-lvl")
-                let levelRequested = chatString.substring(5).toInt()
-                let hero = p.getCursorFocus()
-                
-                if hero != null
-                    hero.setLevel(levelRequested, true)
-                    printTimedToPlayer("Level set to " + levelRequested.toString(), 5.0, p)
-                else
-                    printTimedToPlayer("Select a hero first!", 5.0, p)
+            if p == localPlayer
+                if chatString.startsWith("-lvl")
+                    let levelRequested = chatString.substring(5).toInt()
+                    let hero = p.getCursorFocus()
+                    
+                    if hero != null
+                        hero.setLevel(levelRequested, true)
+                        printTimedToPlayer("Level set to " + levelRequested.toString(), 5.0, p)
+                    else
+                        printTimedToPlayer("Select a hero first!", 5.0, p)
 
-            else if chatString == "-kill"
-                let target = p.getCursorFocus()
+                else if chatString == "-kill"
+                    let target = p.getCursorFocus()
 
-                if target != null and target.isAlive()
-                    target.kill()
-                    printTimedToPlayer("Killed " + target.getName(), 5.0, p)
-                else
-                    printTimedToPlayer("Select a unit first!", 5.0, p)
+                    if target != null and target.isAlive()
+                        target.kill()
+                        printTimedToPlayer("Killed " + target.getName(), 5.0, p)
+                    else
+                        printTimedToPlayer("Select a unit first!", 5.0, p)
 
-            else if chatString == "-army"   // NEW
-                let target = p.getCursorFocus()
-                let cursorPos = target.getPos()
+                else if chatString == "-army"   // NEW
+                    let target = p.getCursorFocus()
+                    let cursorPos = target.getPos()
 
 
-                var spawned = 0
-                while spawned < TAUREN_ARMY_SIZE
-                    let offsetAngle = GetRandomReal(0, 360).fromDeg()
-                    let offsetDist = GetRandomReal(0, TAUREN_SPAWN_SPREAD)
-                    let spawnPos = cursorPos.polarOffset(offsetAngle, offsetDist)
-                    CreateUnit(p, TAUREN_UNIT_ID, spawnPos.x, spawnPos.y, bj_UNIT_FACING)
-                    spawned++
+                    var spawned = 0
+                    while spawned < TAUREN_ARMY_SIZE
+                        let offsetAngle = GetRandomReal(0, 360).fromDeg()
+                        let offsetDist = GetRandomReal(0, TAUREN_SPAWN_SPREAD)
+                        let spawnPos = cursorPos.polarOffset(offsetAngle, offsetDist)
+                        CreateUnit(p, TAUREN_UNIT_ID, spawnPos.x, spawnPos.y, bj_UNIT_FACING)
+                        spawned++
 
-                printTimedToPlayer("Summoned an army of " + TAUREN_ARMY_SIZE.toString() + " Taurens!", 5.0, p)
+                    printTimedToPlayer("Summoned an army of " + TAUREN_ARMY_SIZE.toString() + " Taurens!", 5.0, p)
