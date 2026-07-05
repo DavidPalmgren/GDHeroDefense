@@ -581,9 +581,3 @@ import DoodadObjEditing
 	..setMaximumScale(0, 5.0)
 
 
-@compiletime function create_w3d_LOar()
-	new DoodadDefinition('LOar', 'LOar')
-	..setMaximumScale(0, 15.0)
-	..setMinimumScale(0, 10.0)
-
-

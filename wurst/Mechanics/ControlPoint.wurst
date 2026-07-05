@@ -45,7 +45,7 @@ public function incomeTimer()
     let d = countdown.createTimerDialog()
     TimerDialogSetTitle(d, "Income")
     TimerDialogDisplay(d, true)
-    TimerStart(countdown, 60., true, function income)
+    TimerStart(countdown, 30., true, function income)
 
 function setupMultiboardTimer()
     TimerStart(CreateTimer(), 2., true, function updateMultiboard)

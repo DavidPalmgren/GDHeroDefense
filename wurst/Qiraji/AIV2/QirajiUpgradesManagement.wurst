@@ -2,6 +2,8 @@ package QirajiUpgradesManagement
 
 import ClosureForGroups
 import LinkedList
+// NEW: Import GameTimer to get access to 'currentTime' (in seconds)
+import GameTimer 
 
 import QirajiPlacement
 import QirajiWorkersUnion
@@ -15,6 +17,11 @@ constant int COOLDOWN_TICKS      = 4
 
 int blacksmithBuildCooldown  = 0
 int consecutiveFailures      = 0
+
+// NEW: Cooldown tracking variables (Initialized to -300 so level 1 can start immediately)
+real lastDamageUpgradeTime = -300.0
+real lastArmorUpgradeTime  = -300.0
+constant real COOLDOWN_WAIT_TIME = 300.0 // 5 minutes * 60 seconds
 
 public function manageQirajiBlacksmiths(player aiPlayer)
     if blacksmithBuildCooldown > 0
@@ -60,13 +67,21 @@ public function manageBlacksmithResearch(player aiPlayer)
             and u.getCurrentOrder() == 0
             smiths.add(u)
 
+    // Manage Damage Upgrades (Checks if 5 minutes passed since last damage upgrade order)
     if smiths.size() >= 1
-        if GetPlayerTechCount(aiPlayer, ZANDALARI_DAMAGE_UPG_ID, true) < 5
+        if GetPlayerTechCount(aiPlayer, ZANDALARI_DAMAGE_UPG_ID, true) < 5 
+            and currentTime - lastDamageUpgradeTime >= COOLDOWN_WAIT_TIME
+            
             smiths.get(0).issueImmediateOrderById(ZANDALARI_DAMAGE_UPG_ID)
+            lastDamageUpgradeTime = currentTime // Update timestamp
 
+    // Manage Armor Upgrades (Checks if 5 minutes passed since last armor upgrade order)
     if smiths.size() >= 2
-        if GetPlayerTechCount(aiPlayer, ZANDALARI_ARMOR_UPG_ID, true) < 5
+        if GetPlayerTechCount(aiPlayer, ZANDALARI_ARMOR_UPG_ID, true) < 5 
+            and currentTime - lastArmorUpgradeTime >= COOLDOWN_WAIT_TIME
+            
             smiths.get(1).issueImmediateOrderById(ZANDALARI_ARMOR_UPG_ID)
+            lastArmorUpgradeTime = currentTime // Update timestamp
 
     destroy smiths
 

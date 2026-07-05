@@ -11,9 +11,9 @@ import AssaultTunnel
 
 public function initTanarisEvent()
     let silithusEvent = new AssaultEvent(gg_rct_QirajiEventTanaris, gg_rct_QirajiEventTanarisAtkMap, TUNNEL_UNIT_ID)
-        ..addUnit(QIRAJI_BOMBARDER_ID, 3)
-        ..addUnit(QIRAJI_TANK_ID, 25)
-        ..addUnit(QIRAJI_DRONE_ID, 10)
+        ..addUnit(QIRAJI_BOMBARDER_ID, 2)
+        ..addUnit(QIRAJI_TANK_ID, 8)
+        ..addUnit(QIRAJI_DRONE_ID, 8)
         ..addUnit(QIRAJI_WASP_ID, 8)
     silithusEvent.launch(5., 1.) ->
         startQirajiAttackLogic(gg_rct_QirajiEventTanarisAtkMap)

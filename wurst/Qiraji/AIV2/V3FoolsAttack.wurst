@@ -89,7 +89,7 @@ function processDispatchQueue()
 
 init
 
-    doAfter(320.0) -> 
+    doAfter(1000.0) -> 
         
         doPeriodically(SWEEP_INTERVAL) cb ->
             sweepAttackWave()
