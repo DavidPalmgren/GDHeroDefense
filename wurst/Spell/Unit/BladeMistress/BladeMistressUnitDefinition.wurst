@@ -1,0 +1,31 @@
+package BladeMistressUnitDefinition
+
+import UnitIds
+import UnitObjEditing
+import ObjectIdGenerator
+import ObjectIds
+
+import PiercingStrike
+import BladeDance
+
+public constant BLADE_MISTRESS_UNIT_ID = compiletime(UNIT_ID_GEN.next())
+
+@compiletime function gen()
+  new UnitDefinition(BLADE_MISTRESS_UNIT_ID,UnitIds.naisha)
+    ..setUnitSoundSet("Naisha")
+    ..setName("Blade mistress")
+    ..setTooltipBasic("Blade mistress")
+    ..setTooltipExtended("Blade mistress extended tooltip")
+    ..setAttack1WeaponSound(WeaponSound.MetalLightSlice)
+    ..setModelFile("BlademistressNE2.mdx")
+    ..setAttack1Range(100)
+    ..setAttack1DamageBase(31)
+    ..setAttack1ProjectileSpeed(0)
+    ..setAttack1WeaponType(WeaponType.Normal)
+    ..setNormalAbilities(commaList(PIERCING_STRIKE,BLADE_DANCE))
+    ..setFoodCost(5)
+    ..setGoldCost(70)
+    ..setLumberCost(0)
+
+init
+  createUnit(players[0],BLADE_MISTRESS_UNIT_ID, gg_rct_TrollParty.getCenter())

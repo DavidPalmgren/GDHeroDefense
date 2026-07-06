@@ -21,13 +21,18 @@ let TENTACLE_SPAWN_COUNT = 4
     ..setScalingValue(2.0)
     ..setModelFile("Cthun.mdx")
     ..setNormalAbilities(commaList(CTHUN_SUMMON_TENTACLE, CTHUN_LASER_BEAM_ID, CTHUN_CHARM_ID))
+    ..setFoodCost(0)
 
 
   new UnitDefinition(CTHUN_TENTACLE_EYE_UNIT_ID, UnitIds.tentacle)
     ..setModelFile("CthunTentacleEye.mdx")
+    ..setFoodCost(0)
+
 
   new UnitDefinition(CTHUN_TENTACLE_UNIT_ID, UnitIds.tentacle)
     ..setModelFile("CthunTentacle.mdx")
+    ..setFoodCost(0)
+
 
 init
   let center = gg_rct_Cthun.getCenter()

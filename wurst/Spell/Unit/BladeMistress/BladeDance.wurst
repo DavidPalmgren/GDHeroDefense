@@ -1,0 +1,61 @@
+package BladeDance
+
+import ObjectIdGenerator
+import AbilityObjEditing
+import ClosureForGroups
+import DamageEvent
+import Unit
+import HashMap // STDLIB COLLECTION
+
+public constant BLADE_DANCE = compiletime(ABIL_ID_GEN.next())
+constant real DAMAGE_RADIUS = 175.0
+constant real DAMAGE_PERCENT = 0.80
+
+// MULTIPLAYER GUARD: Tracks exactly which individual units are currently processing a cleave
+let activeCleaves = new HashMap<unit, bool>()
+
+@compiletime function gen()
+    new AbilityDefinitionPassiveSimple(BLADE_DANCE)
+        ..setName("Blade dance")
+        ..setTooltipNormal(1, "Blade dance")
+        ..setTooltipNormalExtended(1, "The Blade Mistress cleaves to all nearby enemies for 80% of damage done.")
+        ..setIconNormal("ReplaceableTextures/PassiveButtons/PASLethalTwist.blp")
+
+init
+    DamageEvent.addListener() ->
+        let attacker = DamageEvent.getSource()
+        let target = DamageEvent.getTarget()
+        
+        // 1. Performance optimization: Only check the HashMap if the unit actually has the skill
+        if DamageEvent.getType() == DamageType.ATTACK and attacker.hasAbility(BLADE_DANCE)
+            
+            // 2. Check if THIS SPECIFIC UNIT is already in the middle of a cleave loop
+            if not activeCleaves.has(attacker)
+                
+                // Lock only this attacker
+                activeCleaves.put(attacker, true)
+
+                let baseDamage = DamageEvent.getAmount()
+                let cleaveDamage = baseDamage * DAMAGE_PERCENT
+                let attackerPos = attacker.getPos()
+                let owner = attacker.getOwner()
+
+                forUnitsInRange(attackerPos, DAMAGE_RADIUS) (unit u) ->
+                    if u != attacker 
+                    and u != target 
+                    and u.isAlive() 
+                    and u.isEnemyOf(owner) 
+                    and not u.isType(UNIT_TYPE_STRUCTURE)
+                        
+                        attacker.damageTarget(
+                            u, 
+                            cleaveDamage, 
+                            false, 
+                            false, 
+                            ATTACK_TYPE_HERO, 
+                            DAMAGE_TYPE_UNIVERSAL, 
+                            WEAPON_TYPE_WHOKNOWS
+                        )
+
+                // 3. Release the lock for this specific attacker
+                activeCleaves.remove(attacker)

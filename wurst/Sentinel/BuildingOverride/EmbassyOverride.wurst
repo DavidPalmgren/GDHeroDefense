@@ -1,0 +1,11 @@
+package EmbassyOverride
+
+import UnitObjEditing
+import OrderIds
+import BladeMistressUnitDefinition
+import ObjectIds
+
+
+@compiletime function gen()
+  new BuildingDefinition('e00C', 'e00C')
+    ..setUnitsTrained(commaList('n00A','e00P',BLADE_MISTRESS_UNIT_ID))

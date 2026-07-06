@@ -1,0 +1,59 @@
+package PiercingStrike
+
+import ClosureEvents
+import ObjectIdGenerator
+import AbilityObjEditing
+import ClosureForGroups
+import Unit
+import ChannelAbilityPreset
+import Icons
+import ClosureTimers
+
+public constant PIERCING_STRIKE = compiletime(ABIL_ID_GEN.next())
+public constant SEARCH_RADIUS = 175.0
+constant DAMAGE = 110.0
+
+@compiletime function gen()
+    new ChannelAbilityPreset(PIERCING_STRIKE, 1, true)
+        ..setCooldown(1, 15)
+        ..setManaCost(1, 0)
+        ..setAnimationNames("Walk cinematic")
+        ..setName("Piercing strike")
+        ..setTooltipNormal(1, "Piercing strike")
+        ..setTooltipNormalExtended(1, "Launches a piercing strike at the closest enemy unit, dealing 150 piercing damage.")
+        ..setIconNormal(Icons.bTNImprovedStrengthOfTheMoon)
+
+init
+    EventListener.onCast(PIERCING_STRIKE) (unit caster) ->
+        let casterPos = caster.getPos()
+        let owner = caster.getOwner()
+        
+        // CRITICAL: Use references to safely bypass Wurst's closure "capture by value" limitation
+        let closestRef = reference<unit>(null)
+        let minDistanceSqRef = reference<real>(SEARCH_RADIUS * SEARCH_RADIUS)
+
+        forUnitsInRange(casterPos, SEARCH_RADIUS) (unit u) ->
+            if u != caster and u.isAlive() and u.isEnemyOf(owner) and not u.isType(UNIT_TYPE_STRUCTURE)
+                let distSq = casterPos.distanceToSq(u.getPos())
+                if distSq < minDistanceSqRef.val
+                    minDistanceSqRef.val = distSq
+                    closestRef.val = u
+
+        // Extract the found unit from our reference container
+        let closestUnit = closestRef.val
+
+        // MANUAL LIFETIME CLEANUP: Always destroy references immediately to prevent memory leaks
+        destroy closestRef
+        destroy minDistanceSqRef
+
+        // Run your logic on the closest unit
+        if closestUnit != null
+            caster.setFacing(casterPos.angleTo(closestUnit.getPos()))
+            caster.damageTarget(closestUnit, DAMAGE, true, false, ATTACK_TYPE_PIERCE, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_METAL_HEAVY_STAB)
+        else
+            // COOLDOWN REFUND: Reset the specific ability cooldown instantly
+            doAfter(1.0) -> 
+                
+                caster.endAbilityCooldown(PIERCING_STRIKE)
+
+                //owner.print("|cffFF5050No targets in range! Cooldown refunded.|r")

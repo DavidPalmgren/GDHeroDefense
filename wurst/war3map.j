@@ -289,6 +289,11 @@ globals
     unit                    gg_unit_h027_0971          = null
     destructable            gg_dest_LTe2_0270          = null
     destructable            gg_dest_LTg2_15693         = null
+    rect                    gg_rct_DevHackConsole      = null
+    rect                    gg_rct_Egg1                = null
+    rect                    gg_rct_Egg2                = null
+    rect                    gg_rct_Egg3                = null
+    rect                    gg_rct_Egg4                = null
 endglobals
 
 function InitGlobals takes nothing returns nothing
@@ -449,6 +454,7 @@ function CreateUnitsForPlayer0 takes nothing returns nothing
 
     set u = BlzCreateUnitWithSkin( p, 'n004', 708.9, 17492.8, 38.728, 'n004' )
     set u = BlzCreateUnitWithSkin( p, 'n004', 882.9, 17512.4, 30.807, 'n004' )
+    set u = BlzCreateUnitWithSkin( p, 'enec', 537.7, 18422.0, 3.735, 'enec' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', 1349.8, 15825.5, 126.588, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'Ewar', 10.3, 18417.5, 90.508, 'Ewar' )
     set u = BlzCreateUnitWithSkin( p, 'e00P', 739.1, 18031.5, 156.351, 'e00P' )
@@ -564,6 +570,8 @@ function CreateUnitsForPlayer0 takes nothing returns nothing
     set u = BlzCreateUnitWithSkin( p, 'h00J', 678.4, 17233.9, 217.953, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', 1180.8, 18009.3, 324.766, 'h00J' )
     set u = BlzCreateUnitWithSkin( p, 'h00J', 1461.3, 18325.8, 126.610, 'h00J' )
+    set u = BlzCreateUnitWithSkin( p, 'ensh', 417.2, 18506.7, 220.722, 'ensh' )
+    set u = BlzCreateUnitWithSkin( p, 'e00L', 20501.0, 4634.0, 63.657, 'e00L' )
 endfunction
 
 //===========================================================================
@@ -2123,6 +2131,11 @@ function CreateRegions takes nothing returns nothing
     set gg_rct_TrollBarracks = Rect( 4096.0, -1856.0, 4448.0, -1504.0 )
     set gg_rct_TrollBurrow1 = Rect( 4032.0, -2560.0, 4224.0, -2368.0 )
     set gg_rct_TrollBurrow2 = Rect( 4480.0, -2880.0, 4672.0, -2688.0 )
+    set gg_rct_DevHackConsole = Rect( -26688.0, -31072.0, -26336.0, -30752.0 )
+    set gg_rct_Egg1 = Rect( -13248.0, -18688.0, -12992.0, -18432.0 )
+    set gg_rct_Egg2 = Rect( -12928.0, -18688.0, -12672.0, -18432.0 )
+    set gg_rct_Egg3 = Rect( -12352.0, -18816.0, -12096.0, -18560.0 )
+    set gg_rct_Egg4 = Rect( -13632.0, -19424.0, -13376.0, -19168.0 )
 endfunction
 
 //***************************************************************************

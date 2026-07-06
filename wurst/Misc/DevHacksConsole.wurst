@@ -1,0 +1,67 @@
+package DevHacksConsole
+
+import Icons
+import ObjectIds
+import ClosureForGroups
+import ClosureEvents
+import AbilityObjEditing
+import ObjectIdGenerator
+import ChannelAbilityPreset
+import QirajiAiPlayerId
+import UnitObjEditing
+import QirajiWorker
+public constant DEV_HACK_QIRAJI_ATTACK_SPELL = compiletime(ABIL_ID_GEN.next())
+public constant DEV_HACK_QIRAJI_POP_SPELL = compiletime(ABIL_ID_GEN.next())
+
+public constant CONSOLE_UNIT = compiletime(UNIT_ID_GEN.next())
+
+@compiletime function gen()
+  new ChannelAbilityPreset(DEV_HACK_QIRAJI_ATTACK_SPELL, 1, true)
+    ..setTooltipNormal(1, "Attack")
+    ..setTooltipNormalExtended(1, "Forces Qiraji Player to Attack location.")
+    ..setCastRange(1, 999999999)
+    ..setCooldown(1, 1)
+    ..presetTargetTypes(Targettype.POINT)
+    ..setHotkeyNormal("Q")
+    ..setButtonPositionNormalX(0)
+    ..setButtonPositionNormalY(2)
+    ..setIconNormal(Icons.bTNAttackGround)
+
+  new ChannelAbilityPreset(DEV_HACK_QIRAJI_POP_SPELL, 1, true)
+    ..setTooltipNormal(1, "Supply")
+    ..setTooltipNormalExtended(1, "Show current and max supply of Qiraji player.")
+    ..setCastRange(1, 999999999)
+    ..setCooldown(1, 1)
+    ..presetTargetTypes(Targettype.NONE)
+    ..setHotkeyNormal("W")
+    ..setButtonPositionNormalX(1)
+    ..setButtonPositionNormalY(2)
+    ..setIconNormal(Icons.bTNMonsterLure)
+
+  new UnitDefinition(CONSOLE_UNIT, 'hfoo')
+    ..setName("Console")
+    ..setSpeedBase(0)
+    ..setMovementType(MovementType.Fly)
+    ..setNormalAbilities(commaList(DEV_HACK_QIRAJI_ATTACK_SPELL,DEV_HACK_QIRAJI_POP_SPELL))
+
+init
+  createUnit(localPlayer, CONSOLE_UNIT, gg_rct_DevHackConsole.getCenter())
+
+  //ATK
+  EventListener.onPointCast(DEV_HACK_QIRAJI_ATTACK_SPELL) (unit caster, vec2 target) ->
+    let refCnt = reference(-8)
+    forUnitsOfPlayer(qirajiAIPlayer) (unit u) ->
+      if u.getTypeId() != QIRAJI_WORKER_ID and not u.isType(UNIT_TYPE_STRUCTURE)
+        refCnt.val++
+        u.issuePointOrder("attack", target)
+    
+    let str_text = refCnt.val.toString() + " Units ordered to attack!"
+    printTimedToPlayer(str_text, 10.0, localPlayer)
+    destroy refCnt
+    
+  //POP
+  EventListener.onCast(DEV_HACK_QIRAJI_POP_SPELL) (unit caster) ->
+    let qiraji_pop = qirajiAIPlayer.getCurrentSupply()
+    let qiraji_pop_max = qirajiAIPlayer.getMaxSupply()
+    let str_text = "Current: " + qiraji_pop.toString() + ", Max: " + qiraji_pop_max.toString()
+    printTimedToPlayer(str_text, 10.0, localPlayer)

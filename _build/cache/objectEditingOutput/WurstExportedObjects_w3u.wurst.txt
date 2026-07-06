@@ -541,6 +541,7 @@ import UnitObjEditing
 	..setTooltipBasic("Create Hall of Champions")
 	..setTooltipExtended("Trains the most prestigous units available to the sentinels in the Vault Guardians and Elite Archers")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNNightElfCaptureFlag.blp")
+	..setUnitsTrained("n00A,e00P,x02c")
 
 
 @compiletime function create_w3u_e00G()
@@ -2399,7 +2400,8 @@ import UnitObjEditing
 	..setModelFile("Doodads\\Dungeon\\Terrain\\EggSack\\EggSack1.mdl")
 	..setGroundTexture("ESMA")
 	..setScalingValue(1.5)
-	..setGoldCost(25)
+	..setFoodProduced(10)
+	..setGoldCost(35)
 	..setLumberCost(0)
 	..setRequirements("")
 	..setUpgradesUsed("")
@@ -3283,16 +3285,42 @@ import UnitObjEditing
 	..setScalingValue(2.0)
 	..setModelFile("Cthun.mdx")
 	..setNormalAbilities("AM2h,AM2j,AM2i")
+	..setFoodCost(0)
 
 
 @compiletime function create_w3u_x02b()
 	new UnitDefinition('x02b', 'nfgt')
 	..setModelFile("CthunTentacleEye.mdx")
+	..setFoodCost(0)
 
 
 @compiletime function create_w3u_x02a()
 	new UnitDefinition('x02a', 'nfgt')
 	..setModelFile("CthunTentacle.mdx")
+	..setFoodCost(0)
+
+
+@compiletime function create_w3u_x02c()
+	new UnitDefinition('x02c', 'ensh')
+	..setUnitSoundSet("Naisha")
+	..setName("Blade mistress")
+	..setTooltipBasic("Blade mistress")
+	..setTooltipExtended("Blade mistress extended tooltip")
+	..setAttack1WeaponSound(WeaponSound.MetalLightSlice)
+	..setModelFile("BlademistressNE2.mdx")
+	..setAttack1Range(100)
+	..setAttack1DamageBase(31)
+	..setAttack1ProjectileSpeed(0)
+	..setAttack1WeaponType(WeaponType.Normal)
+	..setNormalAbilities("AM2k,AM2l")
+
+
+@compiletime function create_w3u_x02d()
+	new UnitDefinition('x02d', 'hfoo')
+	..setName("Console")
+	..setSpeedBase(0)
+	..setMovementType(MovementType.Fly)
+	..setNormalAbilities("AM2m,AM2n")
 
 
 // Original Table (contains all modified default/melee objects)
@@ -3758,10 +3786,14 @@ import UnitObjEditing
 	..setName("Maeiv Shadowsong")
 	..setProperNames("Warden")
 	..setProperNamesUsed(1)
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNWarden2.blp")
+	..setAgilityPerLevel(4.0)
 	..setHeroAbilities("AM1g,AM1i,AM1j,AM1f")
 	..setName("Maeiv Shadowsong")
 	..setProperNames("Warden")
 	..setProperNamesUsed(1)
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNWarden2.blp")
+	..setAgilityPerLevel(4.0)
 
 
 @compiletime function create_w3u_Ogrh()
@@ -3838,9 +3870,9 @@ import UnitObjEditing
 	..setAgilityPerLevel(5.1)
 	..setStartingIntelligence(18)
 	..setIntelligencePerLevel(3.8)
-	..setGoldCost(0)
+	..setGoldCost(50)
 	..setLumberCost(0)
-	..setFoodCost(0)
+	..setFoodCost(5)
 	..setBuildTime(5)
 	..setCollisionSize(16.0)
 	..setDefenseBase(2)
@@ -3863,9 +3895,9 @@ import UnitObjEditing
 	..setAgilityPerLevel(5.1)
 	..setStartingIntelligence(18)
 	..setIntelligencePerLevel(3.8)
-	..setGoldCost(0)
+	..setGoldCost(50)
 	..setLumberCost(0)
-	..setFoodCost(0)
+	..setFoodCost(5)
 	..setBuildTime(5)
 	..setCollisionSize(16.0)
 	..setDefenseBase(2)
@@ -3916,5 +3948,10 @@ import UnitObjEditing
 	..setBuildTime(5)
 	..setProperNames("Vol'jin")
 	..setProperNamesUsed(1)
+
+
+@compiletime function create_w3u_e00c()
+	new UnitDefinition('e00c', 'e00c')
+	// TODO no wrapper: 	..setString("utra", "n00A,e00P,x02c")
 
 

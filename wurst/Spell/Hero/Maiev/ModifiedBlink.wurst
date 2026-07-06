@@ -70,4 +70,4 @@ init
                         DAMAGE_TYPE_MAGIC,
                         WEAPON_TYPE_WHOKNOWS
                     )
-                    flashEffect("Abilities\\Spells\\NightElf\\FanOfKnives\\FanOfKnivesTarget.mdl", target, "origin")
+                    flashEffect("Abilities\\Spells\\NightElf\\FanOfKnives\\FanOfKnivesMissile.mdl", target, "origin")
