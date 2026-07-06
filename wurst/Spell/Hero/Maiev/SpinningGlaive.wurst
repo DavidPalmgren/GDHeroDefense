@@ -3,6 +3,7 @@ package SpinningGlaive
 import ClosureTimers
 import ClosureForGroups
 import DummyCaster
+import InstantDummyCaster
 import Orders
 import AbilityTooltipGenerator
 import ClosureEvents
@@ -24,7 +25,7 @@ constant real ZONE_DURATION = 5.
 constant real ZONE_TICK_INTERVAL = 1.
 constant real DAMAGE_RADIUS = 225.
 constant real SLOW_DURATION = 1.5
-constant string GLAIVE_MODEL = "Abilities\\Weapons\\SentinelMissile\\SentinelMissile.mdl"
+constant string GLAIVE_MODEL = "dagger.mdx"//"Abilities\\Weapons\\SentinelMissile\\SentinelMissile.mdl"
 
 let tgen = new AbilityTooltipGenerator(
     Targettype.POINT,
@@ -72,31 +73,40 @@ let tgen = new AbilityTooltipGenerator(
 
 init
     EventListener.onPointCast(SPINNING_GLAIVE_ID) (caster, targetPos) ->
+        let tdist = caster.getPos().distanceTo(targetPos)
         let level = caster.getAbilityLevel(SPINNING_GLAIVE_ID)
         let owner = caster.getOwner()
         let startPos = caster.getPos()
         let castAngle = startPos.angleTo(targetPos)
-        let endPos = startPos.polarOffset(castAngle, TRAVEL_DISTANCE)
+        let endPos = startPos.polarOffset(castAngle, tdist)
         let glaiveFx = addEffect(GLAIVE_MODEL, startPos)
-        let travelDuration = TRAVEL_DISTANCE / TRAVEL_SPEED
+        let travelDuration = tdist / TRAVEL_SPEED
         let distancePerTick = TRAVEL_SPEED * TICK_INTERVAL
         let tickDamage = DAMAGE_PER_SECOND[level - 1]
         var currentPos = startPos
 
+        // A slight visual offset (e.g., 50.0 units) so the blade hovers cleanly over grass/pathing
+        let hoverHeight = 50.0 
+
+        // Set the initial 3D position immediately to prevent visual snapping
+        glaiveFx.setPos(vec3(startPos.x, startPos.y, startPos.getTerrainZ() + hoverHeight))
         glaiveFx.setScale(3.0)
         glaiveFx.setYaw(castAngle.radians())
 
         doPeriodicallyTimed(TICK_INTERVAL, travelDuration) travelTimer ->
             currentPos = currentPos.polarOffset(castAngle, distancePerTick)
-            glaiveFx.setPos(currentPos)
+            
+            // CRITICAL FIX: Update Z dynamically based on the local terrain data on each tick
+            glaiveFx.setPos(vec3(currentPos.x, currentPos.y, currentPos.getTerrainZ() + hoverHeight))
 
             if travelTimer.isLast()
                 doPeriodicallyTimed(ZONE_TICK_INTERVAL, ZONE_DURATION) zoneTimer ->
                     forUnitsInRange(endPos, DAMAGE_RADIUS) targetUnit ->
                         if targetUnit.isAlive() and targetUnit.isEnemyOf(owner) and not targetUnit.isType(UNIT_TYPE_STRUCTURE) and not targetUnit.isType(UNIT_TYPE_FLYING)
                             caster.damageTarget(targetUnit, tickDamage, false, false, ATTACK_TYPE_MAGIC, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-                            new DummyCaster()
-                                ..castTarget(DUMMY_SLOW_ID, level, OrderIds.slow, targetUnit)
+                            
+                            // STDLIB OPTIMIZATION: Swapped out 'new DummyCaster()' instantiation to prevent performance drops 
+                            InstantDummyCaster.castTarget(owner, DUMMY_SLOW_ID, level, OrderIds.slow, targetUnit)
 
                     if zoneTimer.isLast()
                         glaiveFx.destr()

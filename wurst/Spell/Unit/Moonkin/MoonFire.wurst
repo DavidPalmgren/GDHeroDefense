@@ -1,0 +1,48 @@
+package MoonFire
+
+import ClosureTimers
+import ClosureEvents
+import AbilityObjEditing
+import ObjectIdGenerator
+import BuffObjEditing
+import BuffIds
+import ObjectIds
+
+
+public constant MOONFIRE = compiletime(ABIL_ID_GEN.next())
+public constant MOONFIRE_BUFF = compiletime(BUFF_ID_GEN.next())
+
+public constant DAMAGE = 100
+public constant DURATION = 10
+public constant INTERVAL = 2
+public constant DAMAGE_PER_TICK = DAMAGE / (DURATION / INTERVAL)
+
+
+@compiletime function gen()
+  new BuffDefinition(MOONFIRE_BUFF, BuffIds.faerieFire)
+    ..setName("Moonfire")
+    ..setTooltipNormal("Moonfire")
+    ..setTooltipNormalExtended("Suffering from moonfire, taking damage over time.")
+    ..setIcon("ReplaceableTextures\\CommandButtons\\BTNSpell_Nature_MoonGlow.blp")
+
+  new AbilityDefinitionFaerieFire(MOONFIRE)
+    ..setName("Moonfire")
+    ..setTooltipNormal(1, "Moonfire")
+    ..setTooltipNormalExtended(1, "Fires a lunar beam burns the enemy for a total of 100 dmg over 10s")
+    ..setCooldown(1,5)
+    ..setManaCost(1, 50)
+    ..setArtTarget("moonfire_impact_base.mdx")
+    ..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNSpell_Nature_MoonGlow.blp")
+    ..setDefenseReduction(1, 0)
+    ..setBuffs(1, MOONFIRE_BUFF.toRawCode())
+    ..setDurationHero(1, 5)
+    ..setDurationNormal(1, 10)
+
+init
+  EventListener.onTargetCast(MOONFIRE) (unit caster, unit target) ->
+    doPeriodicallyCounted(2.0, 5) (CallbackCounted cb) ->
+      caster.damageTarget(target, DAMAGE_PER_TICK, false, true, ATTACK_TYPE_MAGIC, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+      // let eff = target.addEffect("moonfire_impact_base", "chest")
+      // doAfter(3.0) ->
+      //   eff.destr() 
+        

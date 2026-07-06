@@ -21,25 +21,26 @@ public constant GROM_HERO_ID = 'Ogrh'
     ..setPrimaryAttribute("STR")
     
     // --- Attribute Allocation (Heavy Boss Growth) ---
-    ..setStartingStrength(40)
+    ..setStartingStrength(20)
     ..setStrengthPerLevel(4.0)       // Gives him substantial health scaling if he levels up
     ..setStartingAgility(25)
     ..setAgilityPerLevel(3.5)        // Keeps his baseline armor scaling low (we set base armor explicitly instead)
     ..setStartingIntelligence(15)
     ..setIntelligencePerLevel(1.0)   // Ensures he has enough mana pool depth for long boss fights¨
     ..setLevel(10)
+    ..setCollisionSize(16)
     
     // --- Survivability & Health Pool ---
     ..setHitPointsMaximumBase(3500)   // Massive baseline health cushion for a party to chew through
     ..setHitPointsRegenerationRate(8.5) // Passive regeneration to counter minor player damage over time
     ..setManaMaximum(600)
     ..setManaRegeneration(3.5)       // Fast mana recovery so he never runs out of mana for Heroic Leap
-    ..setDefenseBase(12)             // High damage reduction baseline
+    ..setDefenseBase(0)             // High damage reduction baseline
     
     // --- Attack Profile (Slow, Devastating Swings) ---
-    ..setAttack1DamageBase(50)       // High starting physical flat crunch
-    ..setAttack1DamageNumberofDice(4)
-    ..setAttack1DamageSidesperDie(10) // Combines with base for a heavy ~124-160 swing variance before STR modifiers
+    ..setAttack1DamageBase(10)       
+    ..setAttack1DamageNumberofDice(2)
+    ..setAttack1DamageSidesperDie(6) // Combines with base for a heavy ~124-160 swing variance before STR modifiers
     ..setAttack1CooldownTime(2.10)   // Slower attack speed means each swing feels incredibly heavy and impactful
     ..setAttack1Range(128)           // Standard melee engagement range
     

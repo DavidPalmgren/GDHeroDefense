@@ -4,7 +4,8 @@ import ClosureEvents
 import ChannelAbilityPreset
 import ClosureTimers
 
-import Projectile 
+import Projectile
+import MoonFire
 
 public constant ARCANE_BLAST_ID = compiletime(ABIL_ID_GEN.next())
 constant DAMAGE = 150.0
@@ -29,7 +30,7 @@ let explosionModel = "Abilities\\Spells\\Human\\DispelMagic\\DispelMagicTarget.m
 
 @compiletime function giveAbilToHero()
     new UnitDefinition('n004', 'n004')
-        ..setNormalAbilities(commaList('A004', ARCANE_BLAST_ID))
+        ..setNormalAbilities(commaList('A004', ARCANE_BLAST_ID, MOONFIRE))
 
 class DamageBudgetBox
     real remaining = VIPER_STING_MAX_TOTAL_DAMAGE

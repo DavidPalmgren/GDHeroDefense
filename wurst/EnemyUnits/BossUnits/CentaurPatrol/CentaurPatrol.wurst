@@ -7,6 +7,7 @@ import ClosureTimers
 import ControlPointExtension
 import UnitIndexer
 import LinkedList
+import ControlPoint
 
 import CentaurID
 import ClosureForGroups
@@ -67,8 +68,8 @@ public class SquadPatrol
                     waiting = false
 
 init
-    let spawnPos = getControlPointPos(27)
-    let targetPos = getControlPointPos(54)
+    let spawnPos = getControlPointPos(29)
+    let targetPos = getControlPointPos(66)
 
     SetPlayerAlliance(CENTAUR_OWNER, players[24], ALLIANCE_PASSIVE, true)
     SetPlayerAlliance(CENTAUR_OWNER, players[24], ALLIANCE_SHARED_VISION, true)

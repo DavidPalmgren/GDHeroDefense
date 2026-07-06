@@ -13,11 +13,11 @@ import CentaurID
 @compiletime function gen()
   new UnitDefinition(CENTAUR_HERO_ID, 'ncnk')
     ..setName("Plight of the Plaines")
-    ..setSpeedBase(360)
-    ..setAttack1DamageBase(50)
+    ..setSpeedBase(310)
+    ..setAttack1DamageBase(30)
 
     ..setAttack1AttackType(AttackType.Chaos)
-    ..setHitPointsMaximumBase(2300)
+    ..setHitPointsMaximumBase(1700)
     ..setHitPointsRegenerationRate(5)
     ..setSleeps(false)
     ..setCollisionSize(16)
@@ -26,12 +26,12 @@ import CentaurID
   
   new UnitDefinition(CENTAUR_MELEE_ID, 'ncen')
     ..setSleeps(false)
-    ..setSpeedBase(360)
+    ..setSpeedBase(310)
     ..setCollisionSize(8)
 
 
   new UnitDefinition(CENTAUR_RANGED_ID, 'ncim')
     ..setSleeps(false)
-    ..setSpeedBase(360)
+    ..setSpeedBase(310)
     ..setCollisionSize(8)
 
