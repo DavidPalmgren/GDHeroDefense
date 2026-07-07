@@ -144,6 +144,10 @@ import ObjEditingCommons
 	..setLvlDataString("gtp1", 3, 0, "Upgrade Critical Strike")
 	..setLvlDataString("gub1", 2, 0, "Upgrade Critical Strike, increases critical strike chance by 5% and critical strike damage by 100%")
 	..setLvlDataString("gub1", 3, 0, "Upgrade Critical Strike, increases critical strike chance by 5% and critical strike damage by 100%")
+	..setLvlDataInt("gbpx", 0, 0, 2)
+	..setLvlDataString("ghk1", 1, 0, "E")
+	..setLvlDataString("ghk1", 2, 0, "E")
+	..setLvlDataString("ghk1", 3, 0, "E")
 
 
 @compiletime function create_w3q_R009()
@@ -194,7 +198,7 @@ import ObjEditingCommons
 	..setLvlDataString("gar1", 1, 0, "ReplaceableTextures\\CommandButtons\\BTNAnimalWarTraining.blp")
 	..setLvlDataString("gtp1", 1, 0, "Research Nightsaber Taming")
 	..setLvlDataString("gub1", 1, 0, "Trains Nightsabers to allow Huntresses to mount them. This allows them to synergize gaining greater strength.")
-	..setLvlDataString("ghk1", 1, 0, "N")
+	..setLvlDataString("ghk1", 1, 0, "Z")
 
 
 @compiletime function create_w3q_R00B()
@@ -612,6 +616,7 @@ import ObjEditingCommons
 	..setLvlDataInt("glmb", 0, 0, 0)
 	..setLvlDataString("greq", 1, 0, "nbwd")
 	..setLvlDataInt("gglb", 0, 0, 100)
+	..setLvlDataString("ghk1", 1, 0, "X")
 
 
 @compiletime function create_w3q_Reib()
@@ -624,6 +629,8 @@ import ObjEditingCommons
 	let def = createObjectDefinition("w3q", 'Remg', 'Remg')
 	..setLvlDataString("greq", 1, 0, "")
 	..setLvlDataInt("gglb", 0, 0, 50)
+	..setLvlDataInt("glmb", 0, 0, 0)
+	..setLvlDataInt("gtib", 0, 0, 20)
 
 
 @compiletime function create_w3q_Rews()
@@ -636,6 +643,7 @@ import ObjEditingCommons
 	let def = createObjectDefinition("w3q", 'Reuv', 'Reuv')
 	..setLvlDataInt("gglb", 0, 0, 35)
 	..setLvlDataInt("glmb", 0, 0, 0)
+	..setLvlDataString("ghk1", 1, 0, "E")
 
 
 @compiletime function create_w3q_Redc()
@@ -688,6 +696,7 @@ import ObjEditingCommons
 @compiletime function create_w3q_Repm()
 	let def = createObjectDefinition("w3q", 'Repm', 'Repm')
 	..setLvlDataInt("glmb", 0, 0, 0)
+	..setLvlDataString("ghk1", 1, 0, "R")
 
 
 @compiletime function create_w3q_Rers()

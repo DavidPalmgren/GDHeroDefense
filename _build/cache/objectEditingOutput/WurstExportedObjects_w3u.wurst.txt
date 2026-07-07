@@ -78,6 +78,7 @@ import UnitObjEditing
 	..setHotkey("Q")
 	..setAbilitySkinList("A000,Ault")
 	..setNormalAbilities("AM1i,AM1j,Ault")
+	..setNormalAbilities("AM1i,AM1j,Ault")
 
 
 @compiletime function create_w3u_E003()
@@ -117,6 +118,10 @@ import UnitObjEditing
 	..setNormalAbilities("A001,AInv,Ault")
 	..setStockMaximum(1)
 	..setStockReplenishInterval(0)
+	..setHeroAbilities("AM1~,AM1},AM1|,AM1{")
+	..setNormalAbilities("A001,AInv,Ault")
+	..setStockMaximum(1)
+	..setStockReplenishInterval(0)
 
 
 @compiletime function create_w3u_e004()
@@ -148,6 +153,10 @@ import UnitObjEditing
 	..setManaRegeneration(0.67)
 	..setHitPointsMaximumBase(300)
 	..setAttack1DamageBase(15)
+	..setNormalAbilities("AM21,AInv,Ault,ACm2,Aien,Aspo,AM22")
+	..setManaRegeneration(0.67)
+	..setHitPointsMaximumBase(300)
+	..setAttack1DamageBase(15)
 
 
 @compiletime function create_w3u_e005()
@@ -163,7 +172,7 @@ import UnitObjEditing
 	..setTooltipBasic("Create Sentinel Embassy")
 	..setTooltipExtended("Trains the Warden and Cleric units")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNNightElfFishingVillage.blp")
-	..setHotkey("E")
+	..setHotkey("D")
 	..setButtonPositionY(1)
 
 
@@ -537,6 +546,7 @@ import UnitObjEditing
 	..setButtonPositionX(0)
 	..setHotkey("Z")
 	..setUnitsTrained("n00A,e00P,x01f,x01g")
+	..setUnitsTrained("n00A,e00P,x01f,x01g")
 
 
 @compiletime function create_w3u_e00G()
@@ -617,6 +627,9 @@ import UnitObjEditing
 	..setNormalAbilities("AM0i,AM0g")
 	..setLevel(6)
 	..setName("Xavius")
+	..setNormalAbilities("AM0i,AM0g")
+	..setLevel(6)
+	..setName("Xavius")
 
 
 @compiletime function create_w3u_e00J()
@@ -654,12 +667,13 @@ import UnitObjEditing
 	..setHotkey("R")
 	..setButtonPositionX(3)
 	..setNormalAbilities("A004,AM26,AM25")
+	..setNormalAbilities("A004,AM26,AM25")
 
 
 @compiletime function create_w3u_e00K()
 	new BuildingDefinition('e00K', 'edob')
 	..setUnitsTrained("esen,earc,e00R,ebal")
-	..setResearchesAvailable("Remg,Reib,Remk,R008")
+	..setResearchesAvailable("Remg,Reib,Remk")
 	..setRequirements("")
 	..setGoldCost(50)
 	..setLumberCost(0)
@@ -685,7 +699,7 @@ import UnitObjEditing
 @compiletime function create_w3u_e00L()
 	new UnitDefinition('e00L', 'enec')
 	..setNormalAbilities("Ault,Arep")
-	..setStructuresBuilt("nbwd,e00U,e00C,h005,e00M,e005,e00K,e00O,e00A")
+	..setStructuresBuilt("e00V,nbwd,e00U,e00C,h005,e00M,e005,e00K,e00O,e00A,e00J")
 	..setBuildTime(3)
 	..setSpeedBase(280)
 	..setHitPointsMaximumBase(210)
@@ -701,6 +715,7 @@ import UnitObjEditing
 	..setTooltipExtended("Builds all sentinel buildings")
 	..setHotkey("Q")
 	..setModelFile("Night Elf Villager.mdl")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNnightelfarcher_by_NEB.blp")
 
 
 @compiletime function create_w3u_e00N()
@@ -719,6 +734,9 @@ import UnitObjEditing
 	..setTooltipBasic("Upgrade to Sanctuary (Tier 3)")
 	..setTooltipExtended("The main building of the sentinels can train Nightelf Engineers and contains upgrades for Ultravision and Backpack.")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNArcaneObservatory.blp")
+	..setButtonPositionY(2)
+	..setButtonPositionX(0)
+	..setHotkey("Z")
 
 
 @compiletime function create_w3u_e00H()
@@ -738,6 +756,9 @@ import UnitObjEditing
 	..setTooltipBasic("Upgrade to Sanctuary (Tier 2)")
 	..setTooltipExtended("The main building of the sentinels can train Nightelf Engineers and contains upgrades for Ultravision and Backpack.")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNArcaneObservatory.blp")
+	..setButtonPositionY(2)
+	..setButtonPositionX(0)
+	..setHotkey("Z")
 
 
 @compiletime function create_w3u_e00M()
@@ -767,17 +788,17 @@ import UnitObjEditing
 	..setAttack1DamageNumberofDice(2)
 	..setAttack1Range(100)
 	..setSpeedBase(360)
-	..setBuildTime(5)
+	..setBuildTime(3)
 	..setGoldCost(35)
 	..setLumberCost(0)
 	..setSightRadiusNight(1100)
 	..setUpgradesUsed("R00A,R009,Rema,Reuv")
-	..setNormalAbilities("A00D,A00B,Ault,ACev,ACct")
+	..setNormalAbilities("A00D,A00B,Ault")
 	..setRace(Race.Nightelf)
 	..setSleeps(false)
 	..setCollisionSize(16.0)
-	..setDefenseBase(7)
 	..setRequirements("e00H")
+	..setFoodCost(2)
 	..setName("Nightsaber")
 	..setIconGameInterface("war3mapImported\\BTNPanther.blp")
 	..setModelFile("war3mapImported\\Panther.mdl")
@@ -785,7 +806,7 @@ import UnitObjEditing
 	..setSelectionScale(2.0)
 	..setTooltipBasic("Train Nightsaber")
 	..setTooltipExtended("Medium melee unit with Critical Strike, Evasion and Prowl. Able to learn pick up huntress. |n|n|cffffcc00Attacks land units.|r")
-	..setHotkey("Q")
+	..setHotkey("W")
 
 
 @compiletime function create_w3u_e00O()
@@ -795,6 +816,7 @@ import UnitObjEditing
 	..setGoldCost(40)
 	..setName("Altar of Elune")
 	..setTooltipBasic("Create Altar of Elune")
+	..setHotkey("S")
 
 
 @compiletime function create_w3u_e00P()
@@ -811,6 +833,7 @@ import UnitObjEditing
 	..setHotkey("W")
 	..setButtonPositionX(1)
 	..setNormalAbilities("AM23")
+	..setNormalAbilities("AM23")
 
 
 @compiletime function create_w3u_E00Q()
@@ -818,6 +841,7 @@ import UnitObjEditing
 	..setAttack1DamageBase(30)
 	..setName("TyrandeMoonWarrior 2")
 	..setModelFile("units\\nightelf\\Archer\\Archer.mdl")
+	..setHeroAbilities("AM1y,AM1z,AM1u,AM1v")
 	..setHeroAbilities("AM1y,AM1z,AM1u,AM1v")
 
 
@@ -853,6 +877,7 @@ import UnitObjEditing
 	..setCollisionSize(8.0)
 	..setModelFile("war3mapImported\\DismountedHuntress.mdl")
 	..setAbilitySkinList("A00C,Aesn,Ashm,Amgl,Aien,Ault,Amgi")
+	..setHotkey("W")
 
 
 @compiletime function create_w3u_E00S()
@@ -862,6 +887,7 @@ import UnitObjEditing
 	..setName("TyrandeMoonWarrior 1")
 	..setModelFile("units\\nightelf\\Archer\\Archer.mdl")
 	..setHeroAbilities("AM1y,AM1z,AM1u,AM1v")
+	..setHeroAbilities("AM1y,AM1z,AM1u,AM1v")
 
 
 @compiletime function create_w3u_E00T()
@@ -869,6 +895,7 @@ import UnitObjEditing
 	..setAttack1DamageBase(30)
 	..setName("TyrandeMoonWarrior 3")
 	..setModelFile("units\\nightelf\\Archer\\Archer.mdl")
+	..setHeroAbilities("AM1y,AM1z,AM1u,AM1v")
 	..setHeroAbilities("AM1y,AM1z,AM1u,AM1v")
 
 
@@ -938,14 +965,24 @@ import UnitObjEditing
 
 
 @compiletime function create_w3u_e00V()
-	new BuildingDefinition('e00V', 'eden')
-	..setGoldCost(20)
-	..setName("Ancient Curios")
-	..setTooltipBasic("Build Ancient Curios")
-	..setModelFile("buildings\\other\\Marketplace\\Marketplace.mdl")
-	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNBlackMarket.blp")
-	..setButtonPositionX(1)
-	..setHotkey("X")
+	let def = createObjectDefinition("w3u", 'e00V', 'eden')
+	..setInt("ugol", 20)
+	..setString("uabi", "Abds,Aall,Apit")
+	..setUnreal("ua1c", 0.0)
+	..setInt("ua1b", 0)
+	..setInt("ua1d", 0)
+	..setInt("ua1s", 0)
+	..setInt("utc1", 0)
+	..setInt("ua1r", 0)
+	..setString("ua1g", "")
+	..setString("ucs1", "")
+	..setString("ua1w", "")
+	..setString("utyp", "mechanical")
+	..setString("unam", "Ancient Curios")
+	..setString("utip", "Build Ancient Curios")
+	..setString("umdl", "buildings\\other\\Marketplace\\Marketplace.mdl")
+	..setString("uico", "ReplaceableTextures\\CommandButtons\\BTNBlackMarket.blp")
+	..setString("uhot", "X")
 
 
 @compiletime function create_w3u_h002()
@@ -968,8 +1005,12 @@ import UnitObjEditing
 	..setUpgradesUsed("Rgfo")
 	..setBuildTime(30)
 	..setGoldCost(65)
+	..setLumberCost(0)
+	..setNormalAbilities("Abds")
 	..setName("Sentinel Outpost")
 	..setModelFile("war3mapImported\\NETByQ1.mdl")
+	..setHotkey("X")
+	..setButtonPositionX(1)
 
 
 @compiletime function create_w3u_h00J()
@@ -2650,9 +2691,9 @@ import UnitObjEditing
 @compiletime function create_w3u_x01f()
 	new UnitDefinition('x01f', 'ensh')
 	..setUnitSoundSet("Naisha")
-	..setName("Blade mistress")
-	..setTooltipBasic("Blade mistress")
-	..setTooltipExtended("Blade mistress extended tooltip")
+	..setName("Blade Dancer")
+	..setTooltipBasic("Train Blade Dancer")
+	..setTooltipExtended("Deadly frontliner specializing in dealing heavy damage in a small area. Has Blade dance making all damage cleave as she dances on the battle field. Can cast piercing Strike dealing heavy piercing damage, blade dance is applied.")
 	..setAttack1WeaponSound(WeaponSound.MetalLightSlice)
 	..setModelFile("BlademistressNE2.mdx")
 	..setAttack1Range(100)
@@ -2663,12 +2704,21 @@ import UnitObjEditing
 	..setFoodCost(5)
 	..setGoldCost(70)
 	..setLumberCost(0)
+	..setBuildTime(10)
+	..setHotkey("E")
+	..setButtonPositionX(2)
+	..setButtonPositionY(0)
 
 
 @compiletime function create_w3u_x01g()
 	new UnitDefinition('x01g', 'hsor')
 	..setName("High Priestess")
+	..setTooltipBasic("Train High Priestess")
+	..setTooltipExtended("Versatile spellcaster, can cast Elusive Blessing on allies increasing attack speed and dodge rating, can also cast Gravity Flow damaging enemies and tossing them toward the center of the cast.")
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNSinduDZ.blp")
+	..setHotkey("R")
+	..setButtonPositionX(3)
+	..setButtonPositionY(0)
 	..setModelFile("SinduDZ.mdx")
 	..setHitPointsMaximumBase(450)
 	..setAttack1DamageBase(25)
@@ -2676,6 +2726,9 @@ import UnitObjEditing
 	..setManaMaximum(375)
 	..setAttack1AttackType(AttackType.Magic)
 	..setAttack1WeaponType(WeaponType.Instant)
+	..setGoldCost(70)
+	..setLumberCost(0)
+	..setBuildTime(10)
 
 
 @compiletime function create_w3u_x01h()
@@ -3471,6 +3524,10 @@ import UnitObjEditing
 	..setHeroAbilities("AM1k,AM1l,AM1h,AM1m")
 	..setStockMaximum(1)
 	..setStockReplenishInterval(0)
+	..setNormalAbilities("AM1g,AInv,Ault")
+	..setHeroAbilities("AM1k,AM1l,AM1h,AM1m")
+	..setStockMaximum(1)
+	..setStockReplenishInterval(0)
 
 
 @compiletime function create_w3u_Emoo()
@@ -3480,6 +3537,7 @@ import UnitObjEditing
 	..setLumberCost(0)
 	..setIntelligencePerLevel(2.9)
 	..setProperNames("Tyrande")
+	..setHeroAbilities("AM1y,AM1z,AM1u,AM1v")
 	..setHeroAbilities("AM1y,AM1z,AM1u,AM1v")
 
 
@@ -3592,6 +3650,7 @@ import UnitObjEditing
 	..setCollisionSize(8.0)
 	..setLumberCost(0)
 	..setAbilitySkinList("A006,Aco2,Ashm,Aien,Ault,Aegr,Aeib,Aemk")
+	..setHotkey("Q")
 
 
 @compiletime function create_w3u_esen()
@@ -3608,6 +3667,9 @@ import UnitObjEditing
 	..setCollisionSize(16.0)
 	..setName("Mounted Huntress")
 	..setTooltipBasic("Train Mounted Huntress")
+	..setButtonPositionX(2)
+	..setHotkey("E")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNMountedNightElfHuntress_by_NEB.blp")
 
 
 @compiletime function create_w3u_nwat()
@@ -3629,6 +3691,7 @@ import UnitObjEditing
 	..setHotkey("Q")
 	..setTooltipBasic("Train Cleric")
 	..setTooltipExtended("The Cleric provides relief to those injured in battle also comes with dispel magic and siphon mana. |n|n|cffffcc00Attacks land and air units.|r")
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNNightElfRunner.blp")
 
 
 @compiletime function create_w3u_nssn()
@@ -3657,7 +3720,7 @@ import UnitObjEditing
 
 @compiletime function create_w3u_nbwd()
 	new BuildingDefinition('nbwd', 'nbwd')
-	..setResearchesAvailable("Reuv,Rema,R009")
+	..setResearchesAvailable("R008,Rema,R009")
 	..setGoldCost(50)
 	..setBuildTime(45)
 	..setRepairGoldCost(50)
@@ -3690,6 +3753,8 @@ import UnitObjEditing
 	new UnitDefinition('ebal', 'ebal')
 	..setRequirements("nbwd")
 	..setLumberCost(0)
+	..setHotkey("R")
+	..setButtonPositionX(3)
 
 
 @compiletime function create_w3u_efon()
@@ -3727,6 +3792,7 @@ import UnitObjEditing
 @compiletime function create_w3u_eshy()
 	new BuildingDefinition('eshy', 'eshy')
 	..setUnitsTrained("etrs")
+	..setHotkey("R")
 
 
 @compiletime function create_w3u_ucs3()
@@ -3737,6 +3803,7 @@ import UnitObjEditing
 @compiletime function create_w3u_edtm()
 	new UnitDefinition('edtm', 'edtm')
 	..setUpgradesUsed("Reuv,Rema,R009,Redt")
+	..setNormalAbilities("AM20,Arav,Afa2,Ault")
 	..setNormalAbilities("AM20,Arav,Afa2,Ault")
 
 
@@ -3794,10 +3861,40 @@ import UnitObjEditing
 	..setProperNamesUsed(1)
 	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNWarden2.blp")
 	..setAgilityPerLevel(4.0)
+	..setHeroAbilities("AM1q,AM1s,AM1t,AM1p")
+	..setName("Maeiv Shadowsong")
+	..setProperNames("Warden")
+	..setProperNamesUsed(1)
+	..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNWarden2.blp")
+	..setAgilityPerLevel(4.0)
 
 
 @compiletime function create_w3u_Ogrh()
 	new HeroDefinition('Ogrh', 'Ogrh')
+	..setHeroAbilities("AM0e,AM0d,AM0c")
+	..setName("Grommash Hellscream")
+	..setProperNames("Chieftain of the Warsong")
+	..setProperNamesUsed(1)
+	..setPrimaryAttribute("STR")
+	..setStartingStrength(20)
+	..setStrengthPerLevel(4.0)
+	..setStartingAgility(25)
+	..setAgilityPerLevel(3.5)
+	..setStartingIntelligence(15)
+	..setIntelligencePerLevel(1.0)
+	..setLevel(10)
+	..setCollisionSize(16.0)
+	..setHitPointsMaximumBase(3500)
+	..setHitPointsRegenerationRate(8.5)
+	..setManaMaximum(600)
+	..setManaRegeneration(3.5)
+	..setDefenseBase(0)
+	..setAttack1DamageBase(10)
+	..setAttack1DamageNumberofDice(2)
+	..setAttack1DamageSidesperDie(6)
+	..setAttack1CooldownTime(2.1)
+	..setAttack1Range(128)
+	..setSpeedBase(320)
 	..setHeroAbilities("AM0e,AM0d,AM0c")
 	..setName("Grommash Hellscream")
 	..setProperNames("Chieftain of the Warsong")
@@ -3827,10 +3924,36 @@ import UnitObjEditing
 @compiletime function create_w3u_Udre()
 	new HeroDefinition('Udre', 'Udre')
 	..setHeroAbilities("AM0l")
+	..setHeroAbilities("AM0l")
 
 
 @compiletime function create_w3u_Ucrl()
 	new HeroDefinition('Ucrl', 'Ucrl')
+	..setName("Crypt Lord")
+	..setProperNames("Sukhesh")
+	..setProperNamesUsed(1)
+	..setTooltipBasic("Summon |cff00ffffCrypt Lord|r")
+	..setTooltipExtended("A massive, heavily armored behemoth. Excellent front-line vanguard.")
+	..setHeroAbilities("AM0m,AUts,AM0n,AM0o")
+	..setUpgradesUsed("Reuv")
+	..setPrimaryAttribute("STR")
+	..setStartingStrength(36)
+	..setStrengthPerLevel(5.2)
+	..setStartingAgility(18)
+	..setAgilityPerLevel(5.1)
+	..setStartingIntelligence(18)
+	..setIntelligencePerLevel(3.8)
+	..setGoldCost(50)
+	..setLumberCost(0)
+	..setFoodCost(5)
+	..setBuildTime(5)
+	..setCollisionSize(16.0)
+	..setDefenseBase(2)
+	..setAttack1DamageBase(23)
+	..setAttack1CooldownTime(1.9)
+	..setAttack1Range(128)
+	// TODO no wrapper: 	..setString("urq1", "x00j")
+	// TODO no wrapper: 	..setString("urq2", "x00k")
 	..setName("Crypt Lord")
 	..setProperNames("Sukhesh")
 	..setProperNamesUsed(1)
@@ -3861,6 +3984,7 @@ import UnitObjEditing
 @compiletime function create_w3u_x01q()
 	new UnitDefinition('x01q', 'x01q')
 	..setModelFile("TyrandeWhisperwind.mdx")
+	..setModelFile("TyrandeWhisperwind.mdx")
 
 
 @compiletime function create_w3u_Hblm()
@@ -3868,10 +3992,24 @@ import UnitObjEditing
 	..setNormalAbilities("AM24")
 	..setLevel(6)
 	..setName("Ligga")
+	..setNormalAbilities("AM24")
+	..setLevel(6)
+	..setName("Ligga")
 
 
 @compiletime function create_w3u_Oshd()
 	new HeroDefinition('Oshd', 'Oshd')
+	..setNormalAbilities("AM29,AInv")
+	..setHeroAbilities("AM2b,AM2d,AM2e,AM2g")
+	..setManaRegeneration(20.0)
+	..setAgilityPerLevel(4.0)
+	..setIntelligencePerLevel(3.0)
+	..setStrengthPerLevel(4.0)
+	..setGoldCost(50)
+	..setLumberCost(0)
+	..setBuildTime(5)
+	..setProperNames("Vol'jin")
+	..setProperNamesUsed(1)
 	..setNormalAbilities("AM29,AInv")
 	..setHeroAbilities("AM2b,AM2d,AM2e,AM2g")
 	..setManaRegeneration(20.0)
