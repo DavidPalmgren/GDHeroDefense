@@ -1,0 +1,46 @@
+package GravityFlow
+
+import AbilityObjEditing
+import ClosureEvents
+import ClosureForGroups
+import Knockback3
+import ChannelAbilityPreset
+
+public constant int ABIL_GRAVITY_FLOW = compiletime(ABIL_ID_GEN.next())
+
+constant real CAST_RANGE = 800.
+constant int MANA_COST = 100
+constant real COOLDOWN = 40.
+
+constant real PULL_RADIUS = 350.
+constant real PULL_DURATION = 0.8
+constant real DAMAGE = 75.0
+
+@compiletime function createGravityFlow()
+    new ChannelAbilityPreset(ABIL_GRAVITY_FLOW, 1, true)
+        ..setName("Gravity Flow")
+        ..setTooltipNormal(1, "Gravity Flow")
+        ..setTooltipNormalExtended(1, "Pulls all nearby units toward the target point.")
+        ..setManaCost(1, MANA_COST)
+        ..setCooldown(1, COOLDOWN)
+        ..setCastRange(1, CAST_RANGE)
+        ..setAreaofEffect(1, PULL_RADIUS)
+        ..setArtTarget("Abilities\\Spells\\Human\\DispelMagic\\DispelMagicTarget.mdl")
+        ..setArtCaster("")
+        ..setArtEffect("GravityStorm.mdx")
+        ..setArtSpecial("GravityStorm.mdx")
+        ..setRequirements("")
+        ..presetTargetTypes(Targettype.POINT)
+        ..presetOption(Option.TARGETIMAGE, true)
+        ..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNGravity.blp")
+
+init
+    EventListener.onPointCast(ABIL_GRAVITY_FLOW) (unit caster, vec2 point) ->
+        forUnitsInRange(point, PULL_RADIUS) (unit u) ->
+            if u.isAlive() and not u.isType(UNIT_TYPE_STRUCTURE) and not u.isType(UNIT_TYPE_MAGIC_IMMUNE) and u != caster
+                let uPos = u.getPos()
+                let dist = uPos.distanceTo(point)
+                
+                if dist > 10.
+                    Knockback3.add(u, point, 500.)
+                    caster.damageTarget(u, DAMAGE, false, false, ATTACK_TYPE_MAGIC, DAMAGE_TYPE_FORCE, WEAPON_TYPE_WHOKNOWS)

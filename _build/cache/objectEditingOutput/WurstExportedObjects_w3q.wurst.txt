@@ -411,7 +411,7 @@ import ObjEditingCommons
 	..setLvlDataString("gef1", 0, 0, "rlev")
 	..setLvlDataUnreal("gba1", 0, 0, 1.0)
 	..setLvlDataUnreal("gmo1", 0, 0, 1.0)
-	..setLvlDataString("gco1", 0, 0, "AM2g")
+	..setLvlDataString("gco1", 0, 0, "AM2h")
 	..setLvlDataString("gar1", 1, 0, "ReplaceableTextures\\CommandButtons\\PASInto_The_Fray.blp")
 	..setLvlDataString("greq", 1, 0, "")
 	..setLvlDataString("gcls", 0, 0, "melee")

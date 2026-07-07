@@ -52,7 +52,15 @@ import BuffObjEditing
 
 
 @compiletime function create_w3h_BM06()
-	new BuffDefinition('BM06', 'Basl')
+	new BuffDefinition('BM06', 'Binf')
+	..setName(1, "Elusive Blessing")
+	..setTooltipNormal(1, "Elusive Blessing")
+	..setTooltipNormalExtended(1, "This blessing provides a chance to dodge attacks and increases attack speed.")
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNNature'sBlessing.blp")
+
+
+@compiletime function create_w3h_BM07()
+	new BuffDefinition('BM07', 'Basl')
 	..setName(1, "Invigorate")
 	..setTooltipNormal(1, "Invigorated")
 	..setTooltipNormalExtended(1, "This unit is invigorated, regenerating health and mana.")
@@ -62,24 +70,24 @@ import BuffObjEditing
 	..setTargetAttachmentPoint0(1, "chest")
 
 
-@compiletime function create_w3h_BM07()
-	new BuffDefinition('BM07', 'BUau')
+@compiletime function create_w3h_BM08()
+	new BuffDefinition('BM08', 'BUau')
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNGreenDragon.blp")
 	..setName(1, "Ysera's presence")
 	..setTooltipNormal(1, "Ysera's presence")
 	..setTooltipNormalExtended(1, "Ysera's presence massively increases health regeneration.")
 
 
-@compiletime function create_w3h_BM08()
-	new BuffDefinition('BM08', 'BHad')
+@compiletime function create_w3h_BM09()
+	new BuffDefinition('BM09', 'BHad')
 	..setName(1, "Malorne's presence")
 	..setIconNormal(1, "UI\\Cursor\\BTNAcorn.blp")
 	..setTooltipNormal(1, "Malorne's presence")
 	..setTooltipNormalExtended(1, "Malorne's presence invigorates nearby allies healing them and providing protection increasing armor")
 
 
-@compiletime function create_w3h_AM1t()
-	new BuffDefinition('AM1t', 'Bspo')
+@compiletime function create_w3h_AM1w()
+	new BuffDefinition('AM1w', 'Bspo')
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNMoonStone.blp")
 	..setTooltipNormal(1, "Lunar Anchor")
 	..setTooltipNormalExtended(1, "This unit's magic resistance is shattered. Taking increased damage from spells.")
@@ -87,8 +95,8 @@ import BuffObjEditing
 	..setTargetAttachmentPoint0(1, "overhead")
 
 
-@compiletime function create_w3h_AM1u()
-	new BuffDefinition('AM1u', 'Bshp')
+@compiletime function create_w3h_AM1x()
+	new BuffDefinition('AM1x', 'Bshp')
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNMoonStone.blp")
 	..setTooltipNormal(1, "Lunar Anchor")
 	..setTooltipNormalExtended(1, "This hero's magic resistance is shattered. Taking increased damage from spells.")
@@ -96,8 +104,8 @@ import BuffObjEditing
 	..setTargetAttachmentPoint0(1, "overhead")
 
 
-@compiletime function create_w3h_BM09()
-	new BuffDefinition('BM09', 'Basl')
+@compiletime function create_w3h_BM0a()
+	new BuffDefinition('BM0a', 'Basl')
 	..setName(1, "Moon Warrior")
 	..setTooltipNormal(1, "Moon Warrior")
 	..setTooltipNormalExtended(1, "Tyrande has dismounted, gaining bonus attack speed and damage.")
@@ -106,36 +114,28 @@ import BuffObjEditing
 	..setArtSpecial(1, "")
 
 
-@compiletime function create_w3h_BM0a()
-	new BuffDefinition('BM0a', 'Basl')
+@compiletime function create_w3h_BM0b()
+	new BuffDefinition('BM0b', 'Basl')
 	..setName(1, "Hibernate")
 	..setTooltipNormal(1, "Hibernate")
 	..setTooltipNormalExtended(1, "This unit is hibernating, rapidly regenerating health but unable to act.")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNSleep.blp")
 
 
-@compiletime function create_w3h_BM0b()
-	new BuffDefinition('BM0b', 'BNso')
+@compiletime function create_w3h_BM0c()
+	new BuffDefinition('BM0c', 'BNso')
 	..setName(1, "Mauled")
 	..setTooltipNormal(1, "Mauled")
 	..setTooltipNormalExtended(1, "This unit has been charged by Ursoc and is stunned.")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNStun.blp")
 
 
-@compiletime function create_w3h_BM0c()
-	new BuffDefinition('BM0c', 'Basl')
+@compiletime function create_w3h_BM0d()
+	new BuffDefinition('BM0d', 'Basl')
 	..setName(1, "Spirit Wisps")
 	..setTooltipNormal(1, "Spirit Wisps")
 	..setTooltipNormalExtended(1, "This unit is accompanied by healing spirit wisps.")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNWisp.blp")
-
-
-@compiletime function create_w3h_BM0d()
-	new BuffDefinition('BM0d', 'Binf')
-	..setName(1, "Elusive Blessing")
-	..setTooltipNormal(1, "Elusive Blessing")
-	..setTooltipNormalExtended(1, "This blessing provides a chance to dodge attacks and increases attack speed.")
-	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNNature'sBlessing.blp")
 
 
 @compiletime function create_w3h_BM0e()

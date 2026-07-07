@@ -6,6 +6,7 @@ import AbilityObjEditing
 import ObjectIds
 import ObjectIdGenerator
 
+import GravityFlow
 import ElusiveBlessing
 
 public constant HIGH_PRIESTESS_UNIT_ID = compiletime(UNIT_ID_GEN.next())
@@ -17,8 +18,10 @@ public constant HIGH_PRIESTESS_UNIT_ID = compiletime(UNIT_ID_GEN.next())
     ..setModelFile("SinduDZ.mdx")
     ..setHitPointsMaximumBase(450)
     ..setAttack1DamageBase(25)
-    ..setNormalAbilities(commaList(ABIL_ELUSIVE_BLESSING))
+    ..setNormalAbilities(commaList(ABIL_ELUSIVE_BLESSING, ABIL_GRAVITY_FLOW))
     ..setManaMaximum(375)
+    ..setAttack1AttackType(AttackType.Magic)
+    ..setAttack1WeaponType(WeaponType.Instant)
 
 init
   createUnit(localPlayer, HIGH_PRIESTESS_UNIT_ID, gg_rct_TrollParty.getCenter())

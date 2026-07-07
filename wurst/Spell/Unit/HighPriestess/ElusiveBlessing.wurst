@@ -11,15 +11,12 @@ import ObjectIds
 import HashMap
 import Icons
 
-// Base: Inner Fire (melee ability). Chosen because it already ships as an
-// autocast, single-friendly-unit-target buff with a native attack-speed
-// bonus field. Inherited baggage (defense bonus, tooltip/icon/buff text)
-// is explicitly overwritten below rather than left as Inner Fire's values.
+
 public constant int ABIL_ELUSIVE_BLESSING = compiletime(ABIL_ID_GEN.next())
 constant int BUFF_ELUSIVE_BLESSING = compiletime(BUFF_ID_GEN.next())
 constant int ABIL_EVASION_BLESSING = compiletime(ABIL_ID_GEN.next())
 
-constant real DODGE_CHANCE = 0.50
+constant real DODGE_CHANCE = 0.20
 constant real ATTACK_SPEED_INC = 0.20
 constant real DURATION = 30.0
 
@@ -39,9 +36,10 @@ let blessingGen = new HashMap<unit, int>
 		..setDurationHero(1, DURATION)
 		..setDefenseIncrease(1, 0)
 		..setDamageIncrease(1, 0)
-		..setButtonPositionNormalX(0)
-		..setButtonPositionNormalY(0)
-		..setIconNormal("ReplaceableTextures\\CommandButtons\\ATCNature'sBlessing.blp") // placeholder icon, swap for your own art
+		..setButtonPositionNormalX(2)
+		..setButtonPositionNormalY(2)
+		..setIconNormal("ReplaceableTextures\\CommandButtons\\ATCNature'sBlessing.blp")
+		..setIconTurnOff("ReplaceableTextures\\CommandButtons\\ATCNature'sBlessing.blp")
 		..setArtTarget("Abilities\\Spells\\Human\\InnerFire\\InnerFireTarget.mdl")
 		..setArtCaster("")
 		..setArtEffect("")
@@ -73,7 +71,6 @@ init
 			target.setAttackCooldown(preSpeedMap.get(target) * (1.0 - ATTACK_SPEED_INC), 0)
 
 		doAfter(DURATION) ->
-			// Only the most recent cast's timer is allowed to clean up.
 			if blessingGen.get(target) == myGen
 				target.removeAbility(ABIL_EVASION_BLESSING)
 				target.setAttackCooldown(preSpeedMap.get(target), 0)
