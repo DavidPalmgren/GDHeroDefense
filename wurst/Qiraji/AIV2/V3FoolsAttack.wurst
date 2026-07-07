@@ -90,12 +90,12 @@ function processDispatchQueue()
 
     dispatchUnit(u)
 
-// init
+init
 
-//     doAfter(1000.0) -> 
+    doAfter(10.0) -> 
         
-//         doPeriodically(SWEEP_INTERVAL) cb ->
-//             sweepAttackWave()
+        doPeriodically(SWEEP_INTERVAL) cb ->
+            sweepAttackWave()
 
-//         doPeriodically(DISPATCH_TICK_INTERVAL) cb ->
-//             processDispatchQueue()
+        doPeriodically(DISPATCH_TICK_INTERVAL) cb ->
+            processDispatchQueue()

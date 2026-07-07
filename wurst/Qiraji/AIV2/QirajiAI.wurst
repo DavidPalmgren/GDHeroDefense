@@ -46,8 +46,8 @@ init
             manageBlacksmithResearch(qirajiAIPlayer)
             if qirajiAIPlayer.getMaxSupply() >= 200 and qirajiAIPlayer.getCurrentSupply() >= 200
                 // Clean up loop handle if the AI completely maxes its capabilities
-                print("Destroying the loop")
-                destroy cb
+                //print("Destroying the loop")
+                //destroy cb meaningless destroy
             else
                 manageQirajiSupply(qirajiAIPlayer)
             

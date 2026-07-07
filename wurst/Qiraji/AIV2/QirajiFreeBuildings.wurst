@@ -1,0 +1,17 @@
+package QirajiFreeBuildings
+
+import ClosureTimers
+import QirajiAiPlayerId
+import QirajiBuildingIds
+import LinkedList
+constant int QIRAJI_BUILDING_ID = QIRAJI_SPAWNING_SAC
+
+init
+    let eggRects = new LinkedList<rect>()
+      ..add(gg_rct_Egg1)
+      ..add(gg_rct_Egg2)
+      ..add(gg_rct_Egg3)
+      ..add(gg_rct_Egg4)
+    for r in eggRects
+        let pos = r.getCenter()
+        createUnit(qirajiAIPlayer, QIRAJI_BUILDING_ID, pos, angle(0))
