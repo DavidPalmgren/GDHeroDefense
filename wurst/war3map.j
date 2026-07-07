@@ -151,6 +151,11 @@ globals
     rect                    gg_rct_TrollBarracks       = null
     rect                    gg_rct_TrollBurrow1        = null
     rect                    gg_rct_TrollBurrow2        = null
+    rect                    gg_rct_DevHackConsole      = null
+    rect                    gg_rct_Egg1                = null
+    rect                    gg_rct_Egg2                = null
+    rect                    gg_rct_Egg3                = null
+    rect                    gg_rct_Egg4                = null
     sound                   gg_snd_BoatAttack1         = null
     trigger                 gg_trg_Untitled_Trigger_002 = null
     trigger                 gg_trg_testGate            = null
@@ -289,11 +294,6 @@ globals
     unit                    gg_unit_h027_0971          = null
     destructable            gg_dest_LTe2_0270          = null
     destructable            gg_dest_LTg2_15693         = null
-    rect                    gg_rct_DevHackConsole      = null
-    rect                    gg_rct_Egg1                = null
-    rect                    gg_rct_Egg2                = null
-    rect                    gg_rct_Egg3                = null
-    rect                    gg_rct_Egg4                = null
 endglobals
 
 function InitGlobals takes nothing returns nothing

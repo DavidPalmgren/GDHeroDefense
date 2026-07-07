@@ -1,0 +1,81 @@
+package ElusiveBlessing
+import AbilityObjEditing
+import ObjEditingNatives
+import DamageEvent
+import ClosureEvents
+import ObjectIdGenerator
+import BuffObjEditing
+import BuffIds
+import ClosureTimers
+import ObjectIds
+import HashMap
+import Icons
+
+// Base: Inner Fire (melee ability). Chosen because it already ships as an
+// autocast, single-friendly-unit-target buff with a native attack-speed
+// bonus field. Inherited baggage (defense bonus, tooltip/icon/buff text)
+// is explicitly overwritten below rather than left as Inner Fire's values.
+public constant int ABIL_ELUSIVE_BLESSING = compiletime(ABIL_ID_GEN.next())
+constant int BUFF_ELUSIVE_BLESSING = compiletime(BUFF_ID_GEN.next())
+constant int ABIL_EVASION_BLESSING = compiletime(ABIL_ID_GEN.next())
+
+constant real DODGE_CHANCE = 0.50
+constant real ATTACK_SPEED_INC = 0.20
+constant real DURATION = 30.0
+
+let preSpeedMap = new HashMap<unit, real>
+let blessingGen = new HashMap<unit, int>
+
+@compiletime function createElusiveBlessing()
+	new AbilityDefinitionInnerFire(ABIL_ELUSIVE_BLESSING)
+		..setName("Elusive Blessing")
+		..setTooltipNormal(1,"Elusive Blessing")
+		..setTooltipNormal(1, "Elusive Blessing")
+		..setTooltipNormalExtended(1, "Blesses the target unit, increasing its attack speed by 20% and granting a 20% chance to dodge incoming attacks.")
+		..setManaCost(1, 30)
+		..setCooldown(1, 4.)
+		..setCastRange(1, 700.)
+		..setDurationNormal(1, DURATION)
+		..setDurationHero(1, DURATION)
+		..setDefenseIncrease(1, 0)
+		..setDamageIncrease(1, 0)
+		..setButtonPositionNormalX(0)
+		..setButtonPositionNormalY(0)
+		..setIconNormal("ReplaceableTextures\\CommandButtons\\ATCNature'sBlessing.blp") // placeholder icon, swap for your own art
+		..setArtTarget("Abilities\\Spells\\Human\\InnerFire\\InnerFireTarget.mdl")
+		..setArtCaster("")
+		..setArtEffect("")
+		..setArtSpecial("")
+		..setBuffs(1, BUFF_ELUSIVE_BLESSING.toRawCode())
+		..setRequirements("")
+
+	new AbilityDefinitionEvasioncreep(ABIL_EVASION_BLESSING)
+		..setName("Evasion")
+		..setIconNormal("")
+		..setChancetoEvade(1, DODGE_CHANCE)
+
+	new BuffDefinition(BUFF_ELUSIVE_BLESSING, BuffIds.innerFire)
+		..setName(1, "Elusive Blessing")
+		..setTooltipNormal(1, "Elusive Blessing")
+		..setTooltipNormalExtended("This blessing provides a chance to dodge attacks and increases attack speed.")
+		..setIcon("ReplaceableTextures\\CommandButtons\\BTNNature'sBlessing.blp")
+
+
+init
+	EventListener.onTargetCast(ABIL_ELUSIVE_BLESSING) (unit caster, unit target) ->
+		let myGen = (blessingGen.has(target) ? blessingGen.get(target) : 0) + 1
+		blessingGen.put(target, myGen)
+
+		if not target.hasAbility(ABIL_EVASION_BLESSING)
+			target.addAbility(ABIL_EVASION_BLESSING)
+			BlzUnitDisableAbility(target, ABIL_EVASION_BLESSING, false, true)
+			preSpeedMap.put(target, target.getAttackCooldown(0))
+			target.setAttackCooldown(preSpeedMap.get(target) * (1.0 - ATTACK_SPEED_INC), 0)
+
+		doAfter(DURATION) ->
+			// Only the most recent cast's timer is allowed to clean up.
+			if blessingGen.get(target) == myGen
+				target.removeAbility(ABIL_EVASION_BLESSING)
+				target.setAttackCooldown(preSpeedMap.get(target), 0)
+				preSpeedMap.remove(target)
+				blessingGen.remove(target)

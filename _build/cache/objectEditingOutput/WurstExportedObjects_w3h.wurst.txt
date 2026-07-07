@@ -78,8 +78,8 @@ import BuffObjEditing
 	..setTooltipNormalExtended(1, "Malorne's presence invigorates nearby allies healing them and providing protection increasing armor")
 
 
-@compiletime function create_w3h_AM1m()
-	new BuffDefinition('AM1m', 'Bspo')
+@compiletime function create_w3h_AM1t()
+	new BuffDefinition('AM1t', 'Bspo')
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNMoonStone.blp")
 	..setTooltipNormal(1, "Lunar Anchor")
 	..setTooltipNormalExtended(1, "This unit's magic resistance is shattered. Taking increased damage from spells.")
@@ -87,8 +87,8 @@ import BuffObjEditing
 	..setTargetAttachmentPoint0(1, "overhead")
 
 
-@compiletime function create_w3h_AM1n()
-	new BuffDefinition('AM1n', 'Bshp')
+@compiletime function create_w3h_AM1u()
+	new BuffDefinition('AM1u', 'Bshp')
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNMoonStone.blp")
 	..setTooltipNormal(1, "Lunar Anchor")
 	..setTooltipNormalExtended(1, "This hero's magic resistance is shattered. Taking increased damage from spells.")
@@ -131,38 +131,46 @@ import BuffObjEditing
 
 
 @compiletime function create_w3h_BM0d()
-	new BuffDefinition('BM0d', 'Bfae')
+	new BuffDefinition('BM0d', 'Binf')
+	..setName(1, "Elusive Blessing")
+	..setTooltipNormal(1, "Elusive Blessing")
+	..setTooltipNormalExtended(1, "This blessing provides a chance to dodge attacks and increases attack speed.")
+	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNNature'sBlessing.blp")
+
+
+@compiletime function create_w3h_BM0e()
+	new BuffDefinition('BM0e', 'Bfae')
 	..setName(1, "Moonfire")
 	..setTooltipNormal(1, "Moonfire")
 	..setTooltipNormalExtended(1, "Suffering from moonfire, taking damage over time.")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNSpell_Nature_MoonGlow.blp")
 
 
-@compiletime function create_w3h_BM0e()
-	new BuffDefinition('BM0e', 'Basl')
+@compiletime function create_w3h_BM0f()
+	new BuffDefinition('BM0f', 'Basl')
 	..setName(1, "Iron Skin")
 	..setTooltipNormal(1, "Iron Skin")
 	..setTooltipNormalExtended(1, "Increases armor by 4 and has a 25% chance to retaliate.")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\UI\\Cursor\\BTNAcorn.blp")
 
 
-@compiletime function create_w3h_BM0f()
-	new BuffDefinition('BM0f', 'Bslo')
+@compiletime function create_w3h_BM0g()
+	new BuffDefinition('BM0g', 'Bslo')
 	..setName(1, "Death's Grasp")
 	..setTooltipNormal(1, "Death's Grasp")
 	..setTooltipNormalExtended(1, "Slowed by the cursed zone.")
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNAuraOfDarkness.blp")
 
 
-@compiletime function create_w3h_BM0g()
-	new BuffDefinition('BM0g', 'Bspl')
+@compiletime function create_w3h_BM0h()
+	new BuffDefinition('BM0h', 'Bspl')
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNSacrifice.blp")
 	..setTooltipNormal(1, "Blood Anchor")
 	..setTooltipNormalExtended(1, "This unit's life force is anchored to a blood ritual. If it dies, it will temporarily reanimate as a gore soaked berserker.")
 
 
-@compiletime function create_w3h_BM0h()
-	new BuffDefinition('BM0h', 'Btcg')
+@compiletime function create_w3h_BM0i()
+	new BuffDefinition('BM0i', 'Btcg')
 	..setIconNormal(1, "ReplaceableTextures\\CommandButtons\\BTNAttack.blp")
 	..setTooltipNormal(1, "Maimed (Tendon Cleave)")
 	..setTooltipNormalExtended(1, "This unit's tendons have been severed. Movement speed and attack speed reduced by 20%.")

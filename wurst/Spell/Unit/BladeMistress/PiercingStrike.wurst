@@ -17,11 +17,13 @@ constant DAMAGE = 110.0
     new ChannelAbilityPreset(PIERCING_STRIKE, 1, true)
         ..setCooldown(1, 15)
         ..setManaCost(1, 0)
-        ..setAnimationNames("Walk cinematic")
         ..setName("Piercing strike")
         ..setTooltipNormal(1, "Piercing strike")
         ..setTooltipNormalExtended(1, "Launches a piercing strike at the closest enemy unit, dealing 150 piercing damage.")
         ..setIconNormal(Icons.bTNImprovedStrengthOfTheMoon)
+        ..setHotkeyNormal("Q")
+        ..setButtonPositionNormalX(0)
+        ..setButtonPositionNormalY(2)
 
 init
     EventListener.onCast(PIERCING_STRIKE) (unit caster) ->

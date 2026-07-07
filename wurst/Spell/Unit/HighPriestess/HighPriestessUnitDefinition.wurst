@@ -1,0 +1,24 @@
+package HighPriestessUnitDefinition
+
+import UnitIds
+import Icons
+import AbilityObjEditing
+import ObjectIds
+import ObjectIdGenerator
+
+import ElusiveBlessing
+
+public constant HIGH_PRIESTESS_UNIT_ID = compiletime(UNIT_ID_GEN.next())
+
+@compiletime function gen()
+  new UnitDefinition(HIGH_PRIESTESS_UNIT_ID, UnitIds.sorceress)
+    ..setName("High Priestess")
+    ..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNSinduDZ.blp")
+    ..setModelFile("SinduDZ.mdx")
+    ..setHitPointsMaximumBase(450)
+    ..setAttack1DamageBase(25)
+    ..setNormalAbilities(commaList(ABIL_ELUSIVE_BLESSING))
+    ..setManaMaximum(375)
+
+init
+  createUnit(localPlayer, HIGH_PRIESTESS_UNIT_ID, gg_rct_TrollParty.getCenter())

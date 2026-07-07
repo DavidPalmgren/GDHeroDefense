@@ -329,7 +329,7 @@ import ObjEditingCommons
 	..setLvlDataString("gef1", 0, 0, "rlev")
 	..setLvlDataUnreal("gba1", 0, 0, 1.0)
 	..setLvlDataUnreal("gmo1", 0, 0, 1.0)
-	..setLvlDataString("gco1", 0, 0, "AM0k")
+	..setLvlDataString("gco1", 0, 0, "AM0p")
 	..setLvlDataString("gef2", 0, 0, "rmov")
 	..setLvlDataUnreal("gba2", 0, 0, 0.2)
 	..setLvlDataUnreal("gmo2", 0, 0, 0.2)
@@ -353,7 +353,7 @@ import ObjEditingCommons
 	..setLvlDataString("gef1", 0, 0, "rlev")
 	..setLvlDataUnreal("gba1", 0, 0, 1.0)
 	..setLvlDataUnreal("gmo1", 0, 0, 1.0)
-	..setLvlDataString("gco1", 0, 0, "AM0m")
+	..setLvlDataString("gco1", 0, 0, "AM0r")
 	..setLvlDataString("gef2", 0, 0, "rhpx")
 	..setLvlDataUnreal("gba2", 0, 0, 100.0)
 	..setLvlDataUnreal("gmo2", 0, 0, 100.0)
@@ -411,7 +411,7 @@ import ObjEditingCommons
 	..setLvlDataString("gef1", 0, 0, "rlev")
 	..setLvlDataUnreal("gba1", 0, 0, 1.0)
 	..setLvlDataUnreal("gmo1", 0, 0, 1.0)
-	..setLvlDataString("gco1", 0, 0, "AM27")
+	..setLvlDataString("gco1", 0, 0, "AM2g")
 	..setLvlDataString("gar1", 1, 0, "ReplaceableTextures\\CommandButtons\\PASInto_The_Fray.blp")
 	..setLvlDataString("greq", 1, 0, "")
 	..setLvlDataString("gcls", 0, 0, "melee")
@@ -445,7 +445,7 @@ import ObjEditingCommons
 	..setLvlDataString("gar1", 1, 0, "ReplaceableTextures\\CommandButtons\\BTNWitchDoctorAdept.blp")
 	..setLvlDataString("gar1", 2, 0, "ReplaceableTextures\\CommandButtons\\BTNWitchDoctorMaster.blp")
 	..setLvlDataString("greq", 1, 0, "")
-	..setLvlDataString("greq", 2, 0, "x01u")
+	..setLvlDataString("greq", 2, 0, "x01{")
 	..setLvlDataString("gcls", 0, 0, "melee")
 	..setLvlDataString("gnam", 1, 0, "Witch Doctor Adept Training")
 	..setLvlDataString("gnam", 2, 0, "Witch Doctor Master Training")
@@ -498,7 +498,7 @@ import ObjEditingCommons
 	..setLvlDataString("gar1", 1, 0, "ReplaceableTextures\\CommandButtons\\BTNWitchDoctorAdept.blp")
 	..setLvlDataString("gar1", 2, 0, "ReplaceableTextures\\CommandButtons\\BTNWitchDoctorMaster.blp")
 	..setLvlDataString("greq", 1, 0, "")
-	..setLvlDataString("greq", 2, 0, "x01u")
+	..setLvlDataString("greq", 2, 0, "x01{")
 	..setLvlDataString("gcls", 0, 0, "melee")
 	..setLvlDataString("gnam", 1, 0, "Apothecary Adept Training")
 	..setLvlDataString("gnam", 2, 0, "Apothecary License Training")
@@ -629,6 +629,7 @@ import ObjEditingCommons
 @compiletime function create_w3q_Rews()
 	let def = createObjectDefinition("w3q", 'Rews', 'Rews')
 	..setLvlDataInt("gglb", 0, 0, 25)
+	..setLvlDataInt("glmb", 0, 0, 0)
 
 
 @compiletime function create_w3q_Reuv()
@@ -647,5 +648,50 @@ import ObjEditingCommons
 	let def = createObjectDefinition("w3q", 'Redt', 'Redt')
 	..setLvlDataInt("glmb", 0, 0, 0)
 	..setLvlDataInt("glmm", 0, 0, 0)
+
+
+@compiletime function create_w3q_Repb()
+	let def = createObjectDefinition("w3q", 'Repb', 'Repb')
+	..setLvlDataInt("glmb", 0, 0, 0)
+
+
+@compiletime function create_w3q_Resc()
+	let def = createObjectDefinition("w3q", 'Resc', 'Resc')
+	..setLvlDataInt("glmb", 0, 0, 0)
+
+
+@compiletime function create_w3q_Renb()
+	let def = createObjectDefinition("w3q", 'Renb', 'Renb')
+	..setLvlDataInt("glmb", 0, 0, 0)
+
+
+@compiletime function create_w3q_Reeb()
+	let def = createObjectDefinition("w3q", 'Reeb', 'Reeb')
+	..setLvlDataInt("glmb", 0, 0, 0)
+
+
+@compiletime function create_w3q_Reec()
+	let def = createObjectDefinition("w3q", 'Reec', 'Reec')
+	..setLvlDataInt("glmb", 0, 0, 0)
+
+
+@compiletime function create_w3q_Rehs()
+	let def = createObjectDefinition("w3q", 'Rehs', 'Rehs')
+	..setLvlDataInt("glmb", 0, 0, 0)
+
+
+@compiletime function create_w3q_Recb()
+	let def = createObjectDefinition("w3q", 'Recb', 'Recb')
+	..setLvlDataInt("glmb", 0, 0, 0)
+
+
+@compiletime function create_w3q_Repm()
+	let def = createObjectDefinition("w3q", 'Repm', 'Repm')
+	..setLvlDataInt("glmb", 0, 0, 0)
+
+
+@compiletime function create_w3q_Rers()
+	let def = createObjectDefinition("w3q", 'Rers', 'Rers')
+	..setLvlDataInt("glmb", 0, 0, 0)
 
 
