@@ -5,7 +5,7 @@ import ClosureForGroups
 import ControlPoint
 import AssaultForcePlayer
 
-constant real AI_TICK_INTERVAL = 10.
+constant real AI_TICK_INTERVAL = 13.
 constant real CLUSTER_SCAN_RADIUS = 800.
 
 function isEnemyOf(unit u, player forPlayer) returns boolean

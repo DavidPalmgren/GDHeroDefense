@@ -10,8 +10,11 @@ import ChannelAbilityPreset
 import QirajiAiPlayerId
 import UnitObjEditing
 import QirajiWorker
+import QirajiDrone
+
 public constant DEV_HACK_QIRAJI_ATTACK_SPELL = compiletime(ABIL_ID_GEN.next())
 public constant DEV_HACK_QIRAJI_POP_SPELL = compiletime(ABIL_ID_GEN.next())
+public constant DEV_HACK_QIRAJI_ARMY_SPELL = compiletime(ABIL_ID_GEN.next())
 
 public constant CONSOLE_UNIT = compiletime(UNIT_ID_GEN.next())
 
@@ -38,11 +41,22 @@ public constant CONSOLE_UNIT = compiletime(UNIT_ID_GEN.next())
     ..setButtonPositionNormalY(2)
     ..setIconNormal(Icons.bTNMonsterLure)
 
+  new ChannelAbilityPreset(DEV_HACK_QIRAJI_ARMY_SPELL, 1, true)
+    ..setTooltipNormal(1, "Army")
+    ..setTooltipNormalExtended(1, "Spawn 20 Units (drones) for Qiraji player.")
+    ..setCastRange(1, 999999999)
+    ..setCooldown(1, 1)
+    ..presetTargetTypes(Targettype.POINT)
+    ..setHotkeyNormal("E")
+    ..setButtonPositionNormalX(2)
+    ..setButtonPositionNormalY(2)
+    ..setIconNormal(Icons.bTNBattleStations)
+
   new UnitDefinition(CONSOLE_UNIT, 'hfoo')
     ..setName("Console")
     ..setSpeedBase(0)
     ..setMovementType(MovementType.Fly)
-    ..setNormalAbilities(commaList(DEV_HACK_QIRAJI_ATTACK_SPELL,DEV_HACK_QIRAJI_POP_SPELL))
+    ..setNormalAbilities(commaList(DEV_HACK_QIRAJI_ATTACK_SPELL,DEV_HACK_QIRAJI_POP_SPELL,DEV_HACK_QIRAJI_ARMY_SPELL))
 
 init
   createUnit(localPlayer, CONSOLE_UNIT, gg_rct_DevHackConsole.getCenter())
@@ -65,3 +79,9 @@ init
     let qiraji_pop_max = qirajiAIPlayer.getMaxSupply()
     let str_text = "Current: " + qiraji_pop.toString() + ", Max: " + qiraji_pop_max.toString()
     printTimedToPlayer(str_text, 10.0, localPlayer)
+
+
+  //ARMY
+  EventListener.onPointCast(DEV_HACK_QIRAJI_ARMY_SPELL) (unit caster, vec2 target) ->
+    for i = 0 to 19
+      createUnit(qirajiAIPlayer,QIRAJI_DRONE_ID , target)

@@ -1,4 +1,4 @@
-package V3FoolsAttack
+package RetardsAttack
 
 import ClosureTimers
 import ClosureForGroups
@@ -63,13 +63,6 @@ function dispatchUnit(unit u)
     if objective == null
         return
 
-    let startNode = getClosestControlPointIdToPos(u.getPos())
-    let targetNode = getControlPointId(objective)
-    if startNode != -1 and targetNode != -1
-        let path = calculateSubwayPath(startNode, targetNode)
-        if path != null
-            destroy path
-
     u.issuePointOrder("attack", objective.getPos())
 
 // NEW: cheap enumeration only — just enqueues candidates, does no heavy work
@@ -90,12 +83,12 @@ function processDispatchQueue()
 
     dispatchUnit(u)
 
-// init
+init
 
-//     doAfter(1000.0) -> 
+    doAfter(10.0) -> 
         
-//         doPeriodically(SWEEP_INTERVAL) cb ->
-//             sweepAttackWave()
+        doPeriodically(SWEEP_INTERVAL) cb ->
+            sweepAttackWave()
 
-//         doPeriodically(DISPATCH_TICK_INTERVAL) cb ->
-//             processDispatchQueue()
+        doPeriodically(DISPATCH_TICK_INTERVAL) cb ->
+            processDispatchQueue()
