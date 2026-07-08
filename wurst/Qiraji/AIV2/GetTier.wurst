@@ -1,0 +1,16 @@
+package GetTier
+
+import QirajiBuildingIds
+
+public function player.getTier() returns int
+  if GetPlayerTechCount(this, QIRAJI_T3_HIVE_IMPERIAL, true) > 0      // Castle
+    print("t3")
+    return 3
+  else if GetPlayerTechCount(this, QIRAJI_T2_SWARM_CORE, true) > 0 // Keep
+    print("t2")
+    return 2
+  else if GetPlayerTechCount(this, QIRAJI_T1_HIVE_NODE, true) > 0 // Town Hall
+    print("t1")
+    return 1
+  print("t1")
+  return 1

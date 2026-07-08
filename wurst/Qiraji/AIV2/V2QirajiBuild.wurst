@@ -84,3 +84,24 @@ public function manageQirajiAltarV2(player aiPlayer)
     scatterIdleUnitsNear(buildSite, builder, aiPlayer, 256.0)
     builder.issuePointOrderById(QIRAJI_ALTAR_OF_THE_OLD, buildSite)
 
+// 
+//  T2
+// RESECTION MILL
+//
+public function manageResectionMill(player aiPlayer)
+    rect targetSite = null
+
+    if isSiteEmpty(gg_rct_QirajiMill, QIRAJI_RESECTION_MILL, aiPlayer)
+        targetSite = gg_rct_Barracks1
+
+    if targetSite == null
+        return
+
+    let builder = getAvailableQirajiWorker(aiPlayer)
+    if builder == null
+        return
+
+    let buildSite = targetSite.getCenter()
+    
+    scatterIdleUnitsNear(buildSite, builder, aiPlayer, 256.0)
+    builder.issuePointOrderById(QIRAJI_RESECTION_MILL, buildSite)

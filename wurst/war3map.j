@@ -294,6 +294,7 @@ globals
     unit                    gg_unit_h027_0971          = null
     destructable            gg_dest_LTe2_0270          = null
     destructable            gg_dest_LTg2_15693         = null
+    rect                    gg_rct_QirajiMill          = null
 endglobals
 
 function InitGlobals takes nothing returns nothing
@@ -2078,6 +2079,7 @@ function CreateRegions takes nothing returns nothing
     set gg_rct_Egg2 = Rect( -12928.0, -18688.0, -12672.0, -18432.0 )
     set gg_rct_Egg3 = Rect( -12352.0, -18816.0, -12096.0, -18560.0 )
     set gg_rct_Egg4 = Rect( -13632.0, -19424.0, -13376.0, -19168.0 )
+    set gg_rct_QirajiMill = Rect( -10944.0, -17536.0, -10624.0, -17216.0 )
 endfunction
 
 //***************************************************************************

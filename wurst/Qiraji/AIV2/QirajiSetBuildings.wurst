@@ -1,0 +1,61 @@
+package QirajiSetBuildings
+
+import QirajiBuildingIds
+import QirajiPlacement
+import QirajiWorkersUnion // Imported: Protecting busy drones
+
+constant int DESIRED_BARRACKS = 2
+constant int DESIRED_ALTARS = 1
+
+
+public function manageQirajiBarracks(player aiPlayer)
+
+    var currentBarracksCount = 0
+    let colonyUnits = CreateGroup()
+    colonyUnits.enumUnitsOfPlayer(aiPlayer, null)
+    
+    for u from colonyUnits
+        if u.getTypeId() == QIRAJI_HATCHERY and u.isAlive()
+            currentBarracksCount++
+    colonyUnits.destr()
+
+    if currentBarracksCount >= DESIRED_BARRACKS
+        return
+
+    let builder = getAvailableQirajiWorker(aiPlayer)
+    if builder == null
+        return
+
+    let baseCenter = gg_rct_QirajiSpawn.getCenter()
+    let buildSite = findValidBuildSite(baseCenter, 4, 4, 3024.0, 64.0)
+
+    if buildSite.x == -1.0
+        return
+
+    scatterIdleUnitsNear(buildSite, builder, aiPlayer, 300.0)
+    let orderResult = builder.issuePointOrderById(QIRAJI_HATCHERY, buildSite)
+
+
+public function manageQirajiAltar(player aiPlayer)
+
+    var currentAltarCount = 0
+    let colonyUnits = CreateGroup()
+    colonyUnits.enumUnitsOfPlayer(aiPlayer, null)
+    
+    for u from colonyUnits
+        if u.getTypeId() == QIRAJI_ALTAR_OF_THE_OLD and u.isAlive()
+            currentAltarCount++
+    colonyUnits.destr()
+
+    if currentAltarCount >= DESIRED_ALTARS
+        return
+
+    let builder = getAvailableQirajiWorker(aiPlayer)
+    if builder == null
+        return
+
+    let baseCenter = gg_rct_QirajiSpawn.getCenter()
+    let buildSite = findValidBuildSite(baseCenter, 4, 4, 2024.0, 128.0)
+
+    if buildSite.x == -1.0
+        return

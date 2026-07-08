@@ -5,17 +5,28 @@ import ClosureForGroups
 import ClosureEvents
 import LinkedList
 import QirajiBuildingIds
+
 import QirajiTank
 import QirajiDrone
 import QirajiSpitter
 
+import QirajiKidnapper
+import Devourer
+import Ambusher
+
 // --- Hatchery Registry ---
 public let hatcheryRegistry = new LinkedList<unit>()
+public let millRegistry = new LinkedList<unit>()
 
 let unitTypesToTrain = new LinkedList<int>()
     ..add(QIRAJI_TANK_ID)
     ..add(QIRAJI_DRONE_ID)
     ..add(QIRAJI_SPITTER_ID)
+
+let unitTypesToTrainMill = new LinkedList<int>()
+    ..add(QIRAJI_KIDNAPPER_ID)
+    ..add(DEVOURER_T2_ID)
+    ..add(AMBUSHER_T2_ID)
 
 int trainCycleIndex = 0
 
@@ -23,8 +34,15 @@ function registerHatchery(unit u)
     if not hatcheryRegistry.has(u)
         hatcheryRegistry.add(u)
 
+function registerMill(unit u)
+    if not millRegistry.has(u)
+        millRegistry.add(u)
+
 function unregisterHatchery(unit u)
     hatcheryRegistry.remove(u)
+
+function unregisterMill(unit u)
+    millRegistry.remove(u)
 
 public function startQirajiTrainLoop(player aiPlayer, real interval)
     doPeriodically(interval) cb ->
@@ -54,6 +72,8 @@ init
         let u = GetConstructedStructure()
         if u.getTypeId() == QIRAJI_HATCHERY
             registerHatchery(u)
+        if u.getTypeId() == QIRAJI_RESECTION_MILL
+            registerMill(u)
 
     EventListener.add(EVENT_PLAYER_UNIT_DEATH) () ->
         let u = GetTriggerUnit()
